@@ -1,0 +1,190 @@
+import pandas_datareader.data as web
+import pandas as pd
+import numpy as np
+import datetime
+import plotly.graph_objects as go
+import plotly.offline as pyo
+from plotly.subplots import make_subplots
+
+# Define tickers using only non-ETF, Stooq-available instruments
+tickers = {
+    "SPX": "SPY.US",
+    "DAX": "EWG.US",
+    "NIKKEI": "EWJ.US",
+    "EMEQ": "EEM.US",
+    "HYG": "HYG.US",
+    "LQD": "LQD.US",
+    "TLT": "TLT.US",
+    "VIX": "VIXY.US",
+    "DBC": "DBC.US",
+    "GLD": "GLD.US",
+    "USO": "USO.US",
+    "CPER": "CPER.US",
+    "VNQ": "VNQ.US",
+    "UUP": "UUP.US"
+}
+
+descriptions = {
+    "SPY.US": "S&P 500 Index proxy (SPDR S&P 500 ETF)",
+    "EWG.US": "German stock market proxy (iShares MSCI Germany ETF)",
+    "EWJ.US": "Japanese stock market proxy (iShares MSCI Japan ETF)",
+    "EEM.US": "Emerging markets equity proxy (iShares MSCI Emerging Markets ETF)",
+    "HYG.US": "High yield corporate bond proxy (iShares iBoxx $ High Yield Corporate Bond ETF)",
+    "LQD.US": "Investment-grade corporate bond proxy (iShares iBoxx $ Investment Grade Corporate Bond ETF)",
+    "TLT.US": "Long-duration U.S. Treasury bond proxy (iShares 20+ Year Treasury Bond ETF)",
+    "VIXY.US": "Short-term VIX futures proxy (ProShares VIX Short-Term Futures ETF)",
+    "DBC.US": "Broad commodities index proxy (Invesco DB Commodity Index Tracking Fund)",
+    "GLD.US": "Gold price proxy (SPDR Gold Shares)",
+    "USO.US": "Crude oil price proxy (United States Oil Fund)",
+    "CPER.US": "Copper price proxy (United States Copper Index Fund)",
+    "VNQ.US": "U.S. real estate proxy (Vanguard Real Estate ETF)",
+    "UUP.US": "U.S. Dollar Index proxy (Invesco DB US Dollar Index Bullish Fund)"
+}
+
+invert_list = ["VIX", "TLT", "GLD", "UUP"]
+start = datetime.datetime(2002, 1, 1)
+end = datetime.datetime.today()
+
+# Download and align data
+data = {}
+for name, ticker in tickers.items():
+    try:
+        df = web.DataReader(ticker, "stooq", start, end)
+        df = df[::-1]  # Newest to oldest → oldest to newest
+        data[name] = df["Close"]
+        print(f"Successfully loaded {name} ({ticker})")
+    except Exception as e:
+        print(f"Failed to load {name} ({ticker}): {e}")
+
+# Combine and drop missing
+df_all = pd.concat(data.values(), axis=1)
+df_all.columns = data.keys()
+df_all.dropna(inplace=True)
+print(f"Combined data shape: {df_all.shape}")
+print("Last 5 rows of raw data:")
+print(df_all.tail())
+
+# Calculate z-scores of distance from moving average
+z_scores = pd.DataFrame(index=df_all.index)
+n_day = 100
+n_smooth = 20
+
+for col in df_all.columns:
+    price = df_all[col]
+    ma_period = price.rolling(n_day).mean()
+    std = price.rolling(90).std()
+    
+    z = (price - ma_period) / std
+    
+    # Invert for assets where lower value = more risk-on
+    if col in invert_list:
+        z = -z
+    
+    z_scores[col] = z
+
+# Composite Risk Regime Score
+z_scores["Risk_Regime_Score"] = z_scores.median(axis=1)
+z_scores["Risk_Regime_Score_Smoothed"] = z_scores["Risk_Regime_Score"].rolling(n_smooth).mean()
+
+# Show last few results
+print("\nLast 10 Risk Regime Scores:")
+print(z_scores[["Risk_Regime_Score", "Risk_Regime_Score_Smoothed"]].tail(10))
+
+# Get current regime
+current_score = z_scores["Risk_Regime_Score_Smoothed"].iloc[-1]
+if current_score > 1:
+    current_regime = "RISK-ON"
+    regime_color = "green"
+elif current_score < -1:
+    current_regime = "RISK-OFF" 
+    regime_color = "red"
+else:
+    current_regime = "NEUTRAL"
+    regime_color = "orange"
+
+print(f"\nCurrent Risk Regime: {current_regime} (Score: {current_score:.2f})")
+
+# Create enhanced figure
+fig = make_subplots(
+    rows=2, cols=1,
+    subplot_titles=('Risk Regime Indicator', 'Individual Asset Z-Scores (Last 252 Days)'),
+    vertical_spacing=0.1,
+    row_heights=[0.7, 0.3]
+)
+
+# Main risk regime chart
+fig.add_trace(go.Scatter(
+    x=z_scores.index,
+    y=z_scores["Risk_Regime_Score"],
+    mode="lines",
+    name="Risk Regime Score",
+    line=dict(width=1, color='lightblue'),
+    opacity=0.6
+), row=1, col=1)
+
+# Smoothed regime score
+fig.add_trace(go.Scatter(
+    x=z_scores.index,
+    y=z_scores["Risk_Regime_Score_Smoothed"],
+    mode="lines",
+    name=f"Smoothed ({n_smooth}days)",
+    line=dict(width=3, color='darkblue')
+), row=1, col=1)
+
+# Add threshold lines to main chart
+fig.add_hline(y=1, line_dash="dash", line_color="green", 
+              annotation_text="Risk-On Threshold", annotation_position="top right", row=1)
+fig.add_hline(y=0, line_dash="dash", line_color="gray", 
+              annotation_text="Neutral", annotation_position="top right", row=1)
+fig.add_hline(y=-1, line_dash="dash", line_color="red", 
+              annotation_text="Risk-Off Threshold", annotation_position="bottom right", row=1)
+
+# Individual asset z-scores (last year only for clarity)
+recent_data = z_scores.iloc[-252:] if len(z_scores) > 252 else z_scores
+for col in df_all.columns:
+    fig.add_trace(go.Scatter(
+        x=recent_data.index,
+        y=recent_data[col],
+        mode="lines",
+        name=col,
+        line=dict(width=1),
+        opacity=0.7,
+        showlegend=False
+    ), row=2, col=1)
+
+# Update layout
+fig.update_layout(
+    title=dict(
+        text=f"<b>Risk Regime Dashboard</b><br><sub>Current Status: <span style='color:{regime_color}'>{current_regime}</span> | Score: {current_score:.2f} | Updated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}</sub>",
+        font=dict(size=20)
+    ),
+    height=800,
+    width=1200,
+    template="plotly_white",
+    hovermode='x unified'
+)
+
+fig.update_xaxes(title_text="Date", row=2, col=1)
+fig.update_yaxes(title_text="Z-Score", row=1, col=1)
+fig.update_yaxes(title_text="Z-Score", row=2, col=1)
+
+# Save as standalone HTML file for GitHub Pages
+output_filename = "index.html"
+pyo.plot(fig, filename=output_filename, auto_open=False)
+
+print(f"\n✅ Chart saved as '{output_filename}'")
+print("📁 Upload this file to your GitHub repository to publish on GitHub Pages!")
+
+# Also create a simple data export
+summary_data = {
+    'Date': z_scores.index[-30:].strftime('%Y-%m-%d').tolist(),
+    'Risk_Score': z_scores["Risk_Regime_Score_Smoothed"].iloc[-30:].round(3).tolist(),
+    'Regime': ['Risk-On' if x > 1 else 'Risk-Off' if x < -1 else 'Neutral' 
+              for x in z_scores["Risk_Regime_Score_Smoothed"].iloc[-30:]]
+}
+
+import json
+with open('data.json', 'w') as f:
+    json.dump(summary_data, f, indent=2)
+
+print("📊 Recent data also saved as 'data.json'")
