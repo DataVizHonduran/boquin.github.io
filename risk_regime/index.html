@@ -155,8 +155,8 @@ for col in df_all.columns:
 # Update layout
 fig.update_layout(
     title=dict(
-        text=f"<b>Risk Regime Dashboard</b><br><sub>Current Status: <span style='color:{regime_color}'>{current_regime}</span> | Score: {current_score:.2f} | Updated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}</sub>",
-        font=dict(size=20)
+        text=f"Risk Regime Dashboard - Current Status: {current_regime} | Score: {current_score:.2f} | Updated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
+        font=dict(size=16)
     ),
     height=800,
     width=1200,
