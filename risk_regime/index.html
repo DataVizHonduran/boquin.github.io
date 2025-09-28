@@ -153,9 +153,12 @@ for col in df_all.columns:
     ), row=2, col=1)
 
 # Update layout
+current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+title_text = f"Risk Regime Dashboard - Current Status: {current_regime} | Score: {current_score:.2f} | Updated: {current_time}"
+
 fig.update_layout(
     title=dict(
-        text=f"Risk Regime Dashboard - Current Status: {current_regime} | Score: {current_score:.2f} | Updated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
+        text=title_text,
         font=dict(size=16)
     ),
     height=800,
