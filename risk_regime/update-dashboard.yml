@@ -27,7 +27,7 @@ jobs:
     - name: Run risk regime analysis
       run: |
         cd risk_regime
-        python scripts/risk_regime_generator.py
+        python risk_regime_generator.py
         
     - name: Commit and push changes
       run: |
