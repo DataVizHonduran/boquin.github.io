@@ -2,236 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataVizHonduran - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #4F46E5;
-            --gray-950: #0A0A0A;
-            --gray-900: #111;
-            --gray-700: #333;
-            --gray-500: #666;
-            --gray-200: #E5E7EB;
-            --gray-50: #F7F7F7;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-700);
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        header {
-            padding: 120px 0 80px;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--gray-950);
-            margin-bottom: 16px;
-        }
-
-        .subtitle {
-            font-size: 1.125rem;
-            color: var(--gray-500);
-            font-weight: 400;
-            margin-bottom: 40px;
-        }
-
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--gray-950);
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9375rem;
-            transition: opacity 150ms ease-out;
-        }
-
-        .github-link:hover {
-            opacity: 0.8;
-        }
-
-        .repos-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            padding-bottom: 120px;
-        }
-
-        .repo-card {
-            grid-column: span 12;
-            background: white;
-            padding: 40px;
-            border-top: 2px solid var(--gray-200);
-            transition: border-color 150ms ease-out;
-        }
-
-        .repo-card:hover {
-            border-top-color: var(--accent);
-        }
-
-        .repo-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gray-950);
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
-        }
-
-        .repo-description {
-            color: var(--gray-500);
-            margin-bottom: 24px;
-            font-size: 0.9375rem;
-            line-height: 1.7;
-        }
-
-        .repo-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.875rem;
-            transition: opacity 150ms ease-out;
-        }
-
-        .repo-link:hover {
-            opacity: 0.7;
-        }
-
-        footer {
-            padding: 48px 0;
-            border-top: 1px solid var(--gray-200);
-            text-align: center;
-            color: var(--gray-500);
-            font-size: 0.875rem;
-        }
-
-        @media (min-width: 768px) {
-            .repo-card {
-                grid-column: span 6;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .repo-card {
-                grid-column: span 4;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>Data Dashboards</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>DataVizHonduran</h1>
-            <p class="subtitle">Data Visualization & Analytics Projects</p>
-            <a href="https://github.com/DataVizHonduran" class="github-link">
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                </svg>
-                GitHub Profile
-            </a>
+            <h1>Data Dashboards</h1>
+            <p>Interactive financial data analysis tools</p>
         </header>
-
-        <div class="repos-grid">
-            <div class="repo-card">
-                <h2 class="repo-title">r-dataisbeautiful</h2>
-                <p class="repo-description">
-                    Code to create data visualizations for r/dataisbeautiful subreddit. A collection of beautiful and insightful data visualizations created for one of Reddit's most popular data visualization communities.
-                </p>
-                <a href="https://datavizhonduran.github.io/r-dataisbeautiful/" class="repo-link">
-                    View Project →
-                </a>
+        <main class="projects">
+            <div class="project">
+                <h2>📊 Bond ETF Dashboard</h2>
+                <p>Interactive treemap of emerging markets bond holdings with daily updates</p>
+                <div class="links">
+                    <a href="https://datavizhonduran.github.io/EMBI_dashboards" class="btn primary">View Dashboard</a>
+                    <a href="https://github.com/datavizhonduran/EMBI_dashboards" class="btn secondary">Code</a>
+                </div>
             </div>
-
-            <div class="repo-card">
-                <h2 class="repo-title">EMBI_dashboards</h2>
-                <p class="repo-description">
-                    Code to create a dashboard for EMBI countries and bonds. Interactive dashboards tracking Emerging Markets Bond Index data across different countries and securities.
-                </p>
-                <a href="https://datavizhonduran.github.io/EMBI_dashboards/" class="repo-link">
-                    View Project →
-                </a>
+            <div class="project">
+                <h2>📈 US Risk Regime Indicator</h2>
+                <p>Multi-asset z-score analysis to identify risk-on/risk-off market conditions in US markets</p>
+                <div class="links">
+                    <a href="https://datavizhonduran.github.io/risk_regimes/us_regime.html" class="btn primary">View Dashboard</a>
+                    <a href="https://github.com/datavizhonduran/risk_regimes" class="btn secondary">Code</a>
+                </div>
             </div>
-
-            <div class="repo-card">
-                <h2 class="repo-title">boquin.github.io</h2>
-                <p class="repo-description">
-                    Hosts a list of all the different data viz projects I want people to see. A curated portfolio website showcasing the best data visualization work and projects.
-                </p>
-                <a href="https://boquin.github.io/" class="repo-link">
-                    View Project →
-                </a>
+            <div class="project">
+                <h2>🇨🇳 China Growth Regime Indicator</h2>
+                <p>Comprehensive growth regime analysis using China-focused equities, commodities, and regional indicators</p>
+                <div class="links">
+                    <a href="https://datavizhonduran.github.io/risk_regimes/china_growth.html" class="btn primary">View Dashboard</a>
+                    <a href="https://github.com/datavizhonduran/risk_regimes" class="btn secondary">Code</a>
+                </div>
             </div>
-
-            <div class="repo-card">
-                <h2 class="repo-title">risk_regimes</h2>
-                <p class="repo-description">
-                    Analysis and visualization of different risk regimes in financial markets. Tools and dashboards for identifying and tracking market risk conditions across various asset classes.
-                </p>
-                <a href="https://datavizhonduran.github.io/risk_regimes/" class="repo-link">
-                    View Project →
-                </a>
+            <div class="project">
+                <h2>💱 FX Fair Value Dashboard</h2>
+                <p>Multi-currency fair value analysis using equity sector performance as predictors with interactive dropdown</p>
+                <div class="links">
+                    <a href="https://datavizhonduran.github.io/fx_fair_value_dashboard/fx_fair_value.html" class="btn primary">View Dashboard</a>
+                    <a href="https://github.com/datavizhonduran/fx_fair_value_dashboard" class="btn secondary">Code</a>
+                </div>
             </div>
-
-            <div class="repo-card">
-                <h2 class="repo-title">fx_fair_value_dashboard</h2>
-                <p class="repo-description">
-                    Interactive dashboard for analyzing foreign exchange fair value metrics. Visual tools for tracking currency valuations and identifying potential trading opportunities in forex markets.
-                </p>
-                <a href="https://datavizhonduran.github.io/fx_fair_value_dashboard/" class="repo-link">
-                    View Project →
-                </a>
-            </div>
-
-            <div class="repo-card">
-                <h2 class="repo-title">us-leading-indicators</h2>
-                <p class="repo-description">
-                    Dashboard tracking key US economic leading indicators. Comprehensive visualization of forward-looking economic metrics to help predict US economic trends and turning points.
-                </p>
-                <a href="https://datavizhonduran.github.io/us-leading-indicators/" class="repo-link">
-                    View Project →
-                </a>
-            </div>
-        </div>
-
-        <footer>
-            <p>© 2025 DataVizHonduran</p>
-        </footer>
+        </main>
     </div>
 </body>
 </html>
