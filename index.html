@@ -1,164 +1,95 @@
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-/* Header styles */
-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-header p {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-}
-
-/* Grid layout for projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Project card styles */
-.project-card {
-    aspect-ratio: 1; /* Makes the cards square */
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.project-content {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-}
-
-.project-content h2 {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-bottom: 0.8rem;
-    line-height: 1.3;
-}
-
-.project-content p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1rem;
-    flex-grow: 1;
-}
-
-/* Button styles */
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: auto;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.btn.primary {
-    background-color: #3498db;
-    color: white;
-}
-
-.btn.primary:hover {
-    background-color: #2980b9;
-    transform: translateY(-1px);
-}
-
-.btn.secondary {
-    background-color: transparent;
-    color: #3498db;
-    border-color: #3498db;
-}
-
-.btn.secondary:hover {
-    background-color: #3498db;
-    color: white;
-    transform: translateY(-1px);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .container {
-        padding: 1rem;
-    }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .project-content {
-        padding: 1.2rem;
-    }
-    
-    .project-content h2 {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .project-content h2 {
-        font-size: 1rem;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Dashboards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Dashboards</h1>
+            <p>Interactive financial data analysis tools</p>
+        </header>
+        <main class="projects-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>📈 Global Risk Regime Indicator</h2>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/risk_regimes/us_regime.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/risk_regimes" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>🇨🇳 China Growth Regime Indicator</h2>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/risk_regimes/china_growth.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/risk_regimes" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>🏛️ Treasury Market Analysis</h2>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/treasury_dashboard/treasury_analysis_plotly.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/treasury_dashboard" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>🌍 Emerging Markets Economic Dashboard</h2>
+                    <p>IMF World Economic Outlook data baseball cards</p>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/WEO_EMBI_data/" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/WEO_EMBI_data" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>💱 FX Mean Reversion and Trend Grid</h2>
+                    <p>Classifies markets based on trend and mean reversion, highlights key pairs</p>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/fx_zscores_grid/fx_ratio_explorer.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/DataVizHonduran/fx_zscores_grid" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>💱 FX Fair Value Dashboard</h2>
+                    <p>Multi-currency fair value analysis using equity sector performance</p>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/fx_fair_value_dashboard/fx_fair_value.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/fx_fair_value_dashboard" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>📊 Bond ETF Dashboard</h2>
+                    <p>Interactive treemap of emerging markets bond holdings with daily updates</p>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/EMBI_dashboards" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/EMBI_dashboards" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h2>🌍 EM Spreads vs Ratings</h2>
+                    <div class="links">
+                        <a href="https://datavizhonduran.github.io/EM_spreads_vs_ratings/em_bonds_analysis.html" class="btn primary">View Dashboard</a>
+                        <a href="https://github.com/datavizhonduran/EM_spreads_vs_ratings" class="btn secondary">Code</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
