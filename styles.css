@@ -79,7 +79,7 @@ header p {
 .project-content p {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0rem;
     flex-grow: 0;
 }
 
