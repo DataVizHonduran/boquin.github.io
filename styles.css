@@ -39,7 +39,7 @@ header p {
 }
 /* Project card styles */
 .project-card {
-    aspect-ratio: 1;
+    aspect-ratio: 1; /* Makes the cards square */
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -53,7 +53,7 @@ header p {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 .project-content {
-    padding: 1.5rem 1.5rem 0.8rem 1.5rem;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -62,13 +62,13 @@ header p {
 .project-content h2 {
     font-size: 1.3rem;
     color: #2c3e50;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0rem;
     line-height: 1.3;
 }
 .project-content p {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0rem;
     flex-grow: 0;
 }
 /* Button styles */
@@ -76,7 +76,6 @@ header p {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-top: auto;
 }
 .btn {
     display: inline-block;
