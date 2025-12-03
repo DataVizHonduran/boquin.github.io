@@ -94,7 +94,7 @@
                 const reportsDiv = document.getElementById('reports');
                 reportsDiv.innerHTML = '';
 
-                mdFiles.sort((a, b) => b.name.localeCompare(a.name)).forEach(file => {
+                mdFiles.sort((a, b) => a.name.localeCompare(b.name)).forEach(file => {
                     const parts = file.name.replace('.md', '').split('-');
                     const ticker = parts[0];
                     const date = parts.slice(1).join('-');
