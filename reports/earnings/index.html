@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings Reports Archive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .stats {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .report-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .report-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .ticker {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        .date {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .last-updated {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Earnings Reports Archive</h1>
+
+    <div class="stats">
+        <strong>Total Reports:</strong> <span id="report-count">Loading...</span><br>
+        <span class="last-updated">Last Updated: <span id="last-updated">Loading...</span></span>
+    </div>
+
+    <div class="report-grid" id="reports">
+        Loading reports...
+    </div>
+
+    <script>
+        async function loadReports() {
+            try {
+                const response = await fetch('https://api.github.com/repos/DataVizHonduran/boquin.github.io/contents/reports/earnings');
+                const files = await response.json();
+
+                const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== 'index.html');
+
+                document.getElementById('report-count').textContent = mdFiles.length;
+                document.getElementById('last-updated').textContent = new Date().toLocaleString();
+
+                const reportsDiv = document.getElementById('reports');
+                reportsDiv.innerHTML = '';
+
+                mdFiles.sort((a, b) => b.name.localeCompare(a.name)).forEach(file => {
+                    const parts = file.name.replace('.md', '').split('-');
+                    const ticker = parts[0];
+                    const date = parts.slice(1).join('-');
+
+                    const card = document.createElement('div');
+                    card.className = 'report-card';
+                    card.innerHTML = `
+                        <div class="ticker">${ticker}</div>
+                        <div class="date">Report Date: ${date}</div>
+                        <a href="${file.name}" class="link">View Report →</a>
+                    `;
+                    reportsDiv.appendChild(card);
+                });
+            } catch (error) {
+                document.getElementById('reports').innerHTML = '<p>Error loading reports. Please try again later.</p>';
+                console.error('Error loading reports:', error);
+            }
+        }
+
+        loadReports();
+    </script>
+</body>
+</html>
