@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastRun": "2025-12-05T12:06:59.237650Z",
+    "totalItems": 9
+  },
+  "items": {
+    "2a77d2bebd0840af8381a1217775bcef057494eb92ba1869f514280a2a32736b": {
+      "title": "The Future of Payment Infrastructure Could Be Permissionless",
+      "url": "https://libertystreeteconomics.newyorkfed.org/2025/11/the-future-of-payment-infrastructure-could-be-permissionless/",
+      "district": "New York Fed",
+      "districtCode": "NY",
+      "contentType": "blog",
+      "publicationDate": "2025-11-25",
+      "authors": [
+        "Rod Garratt",
+        "Michael Junho Lee"
+      ],
+      "summary": "Examines how payment stablecoins may drive widespread adoption through permissionless blockchains rather than their similarity to digital cash.",
+      "firstSeen": "2025-12-05T12:06:59.237390Z",
+      "lastChecked": "2025-12-05T12:06:59.237594Z"
+    },
+    "b58c9ba9132dcc6322551c785e58b15a1df542296df4556e065d3bfe7ed4212a": {
+      "title": "How Businesses Set Prices\u2014In Their Own Words",
+      "url": "https://libertystreeteconomics.newyorkfed.org/2025/11/how-businesses-set-prices-in-their-own-words/",
+      "district": "New York Fed",
+      "districtCode": "NY",
+      "contentType": "blog",
+      "publicationDate": "2025-11-24",
+      "authors": [
+        "W\u00e4ndi Bruine de Bruin",
+        "Keshav Dogra",
+        "Sebastian Heise",
+        "Edward S. Knotek II",
+        "Brent H. Meyer",
+        "Robert W. Rich",
+        "Raphael S. Schoenle",
+        "Giorgio Topa",
+        "Wilbert van der Klaauw"
+      ],
+      "summary": "Qualitative interviews with corporate decision-makers reveal diverse pricing strategies firms employ when responding to cost shocks.",
+      "firstSeen": "2025-12-05T12:06:59.237608Z",
+      "lastChecked": "2025-12-05T12:06:59.237610Z"
+    },
+    "fac057cf45f97dbe23028649e1a1c38a80e85a413c7b8dc6be2ab3941f316698": {
+      "title": "How Immigration Rules Shape Firm Dynamics in the US Technology Sector",
+      "url": "https://www.atlantafed.org/blogs/macroblog/2025/11/25/how-immigration-rules-shape-firm-dynamics-in-us-technology-sector",
+      "district": "Atlanta Fed",
+      "districtCode": "ATL",
+      "contentType": "blog",
+      "publicationDate": "2025-11-25",
+      "authors": [
+        "Federico Mandelman"
+      ],
+      "summary": "Examines how H-1B visa restrictions affect startup formation and survival, showing removing barriers could increase firm entry by 65%.",
+      "firstSeen": "2025-12-05T12:06:59.237615Z",
+      "lastChecked": "2025-12-05T12:06:59.237616Z"
+    },
+    "2db17aa8d20c1ad839256c9ab2419b8b5a4196e549978173a2c05e9f3a165d91": {
+      "title": "Consumption Concentration and Economic Fragility",
+      "url": "https://www.dallasfed.org/research/economics/2025/1125-yang-consume",
+      "district": "Dallas Fed",
+      "districtCode": "DAL",
+      "contentType": "research",
+      "publicationDate": "2025-11-25",
+      "authors": [
+        "Benjamin Hoham",
+        "Fang Yang"
+      ],
+      "summary": "Examines how the large share of total U.S. spending attributable to the very highest earners may increase economic vulnerability.",
+      "firstSeen": "2025-12-05T12:06:59.237619Z",
+      "lastChecked": "2025-12-05T12:06:59.237620Z"
+    },
+    "fbbd4fd37a1b6ec5ede2f3c010d247c26cef11832d454e5ef942af6ae47f9eaf": {
+      "title": "The Economic Effects of Tariffs",
+      "url": "https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/11/economic-effects-of-tariffs/",
+      "district": "San Francisco Fed",
+      "districtCode": "SF",
+      "contentType": "research",
+      "publicationDate": "2025-11-24",
+      "authors": [
+        "Naomi Halbersleben",
+        "Oscar Jorda",
+        "Fernanda Nechio"
+      ],
+      "summary": "Analyzes how tariff changes affect both supply and demand, finding unemployment initially rises while inflation falls.",
+      "firstSeen": "2025-12-05T12:06:59.237623Z",
+      "lastChecked": "2025-12-05T12:06:59.237625Z"
+    },
+    "9ae56623ee3e50598e45f98e9ccbe41f2fddeb72202842633fcfec4c00f2f9b6": {
+      "title": "Not All Inflation Is the Same: State-Dependent Transmission of Monetary Policy",
+      "url": "https://www.frbsf.org/research-and-insights/publications/working-papers/2025/11/not-all-inflation-is-the-same-state-dependent-transmission-of-monetary-policy/",
+      "district": "San Francisco Fed",
+      "districtCode": "SF",
+      "contentType": "research",
+      "publicationDate": "2025-11-24",
+      "authors": [
+        "Rami Najjar",
+        "Adam Shapiro"
+      ],
+      "summary": "Shows inflation sources significantly affect how financial markets perceive monetary policy persistence.",
+      "firstSeen": "2025-12-05T12:06:59.237627Z",
+      "lastChecked": "2025-12-05T12:06:59.237628Z"
+    },
+    "ba78ac80de20e24d81668f3730c54f82de6e823e07ba08949e5dc3e1f524b710": {
+      "title": "Cohabitation, Child Development, and College Costs",
+      "url": "https://www.minneapolisfed.org/research/institute-working-papers/cohabitation-child-development-and-college-costs",
+      "district": "Minneapolis Fed",
+      "districtCode": "MIN",
+      "contentType": "research",
+      "publicationDate": "2025-11-26",
+      "authors": [
+        "Effrosyni Adamopoulou",
+        "Anne Hannusch",
+        "Karen A. Kopecky",
+        "Tim Obermeier"
+      ],
+      "summary": "Examines the relationship between family living arrangements, child developmental outcomes, and educational expenses.",
+      "firstSeen": "2025-12-05T12:06:59.237631Z",
+      "lastChecked": "2025-12-05T12:06:59.237632Z"
+    },
+    "474afb073ecb37b7dc4a9bcd76be20e6a082e317e1d8a5e13a7a173f5dc1c624": {
+      "title": "The Early Labor Market Impacts of Minnesota's 2023 Non-Compete Enforcement Ban",
+      "url": "https://www.minneapolisfed.org/research/community-development-working-papers/the-early-labor-market-impacts-of-minnesotas-2023-non-compete-enforcement-ban",
+      "district": "Minneapolis Fed",
+      "districtCode": "MIN",
+      "contentType": "research",
+      "publicationDate": "2025-11-26",
+      "authors": [
+        "Ayushi Narayan",
+        "Ryan Nunn"
+      ],
+      "summary": "Analysis of employment effects following Minnesota's policy change restricting non-compete agreements.",
+      "firstSeen": "2025-12-05T12:06:59.237635Z",
+      "lastChecked": "2025-12-05T12:06:59.237636Z"
+    },
+    "d48d5aa62a2fd818ff091bee95126b2b16c02763433ab1d693c3aff8ddad3d21": {
+      "title": "Economists Should Be Studying Monopoly Much More Extensively",
+      "url": "https://www.minneapolisfed.org/research/staff-reports/economists-should-be-studying-monopoly-much-more-extensively-how-our-interest-in-monopoly-waned-after-we-began-thinking-about-monopoly-all-wrong",
+      "district": "Minneapolis Fed",
+      "districtCode": "MIN",
+      "contentType": "research",
+      "publicationDate": "2025-11-26",
+      "authors": [
+        "James A. Schmitz, Jr."
+      ],
+      "summary": "Argues for increased economic research focus on monopolistic market structures and competitive dynamics.",
+      "firstSeen": "2025-12-05T12:06:59.237640Z",
+      "lastChecked": "2025-12-05T12:06:59.237641Z"
+    }
+  }
+}
