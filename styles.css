@@ -87,9 +87,8 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    /* CHANGE THIS LINE */
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 1rem; /* Suggest reducing gap from 2rem to 1rem to save space */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
 }
 
 .dashboard-card {
