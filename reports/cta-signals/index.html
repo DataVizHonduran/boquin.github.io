@@ -4,423 +4,314 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTA Exhaustion Signals</title>
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
         }
+
         h1 {
             color: #333;
             border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
+
         .info-box {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            margin: 20px 0;
+            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .info-grid {
+
+        .methodology {
+            background: #e7f3ff;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .methodology h3 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+        }
+
+        .methodology p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn:hover {
+            background: #e7f3ff;
+        }
+
+        .mode-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .chart-wrapper {
+            display: none;
+        }
+
+        .chart-wrapper.active {
+            display: block;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
-        .info-item {
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 4px;
-        }
-        .info-label {
-            font-weight: bold;
-            color: #666;
-            font-size: 0.9em;
-        }
-        .info-value {
-            font-size: 1.2em;
-            color: #333;
-            margin-top: 5px;
-        }
-        .currency-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .currency-card {
-            background: white;
+
+        .stat-item {
             padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .currency-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .currency-name {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        .position-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .position-bar {
-            flex: 1;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-        .position-fill {
-            height: 100%;
-            transition: width 0.3s;
-        }
-        .position-long {
-            background: linear-gradient(90deg, #28a745, #20c997);
-        }
-        .position-short {
-            background: linear-gradient(90deg, #dc3545, #e83e8c);
-        }
-        .position-value {
-            font-weight: bold;
-            min-width: 50px;
-            text-align: right;
-        }
-        .position-positive {
-            color: #28a745;
-        }
-        .position-negative {
-            color: #dc3545;
-        }
-        .last-updated {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
             text-align: center;
         }
-        .methodology {
-            background: #e7f3ff;
-            padding: 15px;
-            border-left: 4px solid #007bff;
-            margin: 20px 0;
-            border-radius: 4px;
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
         }
-        .methodology h3 {
-            margin-top: 0;
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        .currency-list {
+            margin-top: 20px;
+        }
+
+        .currency-list h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .currency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .currency-link {
+            display: block;
+            padding: 10px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-decoration: none;
             color: #007bff;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .currency-link:hover {
+            background: #e7f3ff;
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,123,255,0.2);
+        }
+
+        .position-badge {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .position-long {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .position-short {
+            background: #f8d7da;
+            color: #721c24;
         }
     </style>
 </head>
 <body>
-    <h1>📊 CTA Exhaustion Signals</h1>
+    <div class="container">
+        <h1>📊 CTA Exhaustion Signals</h1>
 
-    <div class="info-box">
-        <div class="info-grid">
-            <div class="info-item">
-                <div class="info-label">CTA Model</div>
-                <div class="info-value">FAST</div>
+        <div class="info-box">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Currencies Tracked</div>
+                    <div class="stat-value">25</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Fast Mode Windows</div>
+                    <div class="stat-value">20/50/100</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Slow Mode Windows</div>
+                    <div class="stat-value">50/100/200</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Last Updated</div>
+                    <div class="stat-value">2025-12-09</div>
+                </div>
             </div>
-            <div class="info-item">
-                <div class="info-label">EMA Windows</div>
-                <div class="info-value">20/50/100</div>
+        </div>
+
+        <div class="methodology">
+            <h3>How It Works</h3>
+            <p><strong>CTA Positioning:</strong> Measures momentum-following positioning using triple EMA convergence.
+            Values range from -50 (max short) to +50 (max long).</p>
+            <p><strong>Fast Mode:</strong> Uses 20/50/100 day EMAs for more responsive signals.</p>
+            <p><strong>Slow Mode:</strong> Uses 50/100/200 day EMAs for longer-term trends.</p>
+            <p><strong>Exhaustion Signals:</strong> Red markers on charts indicate when extreme positioning unwinds,
+            suggesting potential trend exhaustion and reversal opportunities.</p>
+        </div>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="showMode('fast')">FAST Mode (20/50/100)</button>
+            <button class="mode-btn" onclick="showMode('slow')">SLOW Mode (50/100/200)</button>
+        </div>
+
+        <div class="chart-container">
+            <div id="fast-chart-wrapper" class="chart-wrapper active">
+                <html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>                            <div id="fast-chart" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("fast-chart")) {                    Plotly.newPlot(                        "fast-chart",                        [{"customdata":["JPY","KRW","INR","PHP","TRY","IDR","CAD","SGD","AUD","NOK","EUR","CHF","GBP","BRL","PLN","MXN","SEK","THB","ZAR","CZK","CLP","NZD","COP","HUF","PEN"],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003ePosition: %{y:.1f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545"],"line":{"color":"rgba(0,0,0,0.3)","width":1}},"x":["JPY","KRW","INR","PHP","TRY","IDR","CAD","SGD","AUD","NOK","EUR","CHF","GBP","BRL","PLN","MXN","SEK","THB","ZAR","CZK","CLP","NZD","COP","HUF","PEN"],"y":[24.923430912509996,24.495432659079057,19.984501573672947,16.414852439264067,13.14075652519993,4.131892701863682,4.004581728161724,3.7421839925308946,2.6429990242991126,1.499048410838696,0.0,0.0,-2.715808584546505,-3.8980130992948268,-3.9214795419476935,-4.173357432019242,-6.628403732003245,-6.928869884629223,-6.962445342220798,-7.365856055667049,-9.553066126628412,-10.072486120211739,-13.345192330068736,-20.834252114084688,-24.151774004079982],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#333"},"text":"CTA FAST Mode - Current Positioning","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":11},"title":{"text":"Currency"},"showgrid":false,"tickangle":-45},"yaxis":{"title":{"text":"Position Size"},"showgrid":true,"gridcolor":"#e9ecef","zeroline":true,"zerolinecolor":"#333","zerolinewidth":2,"range":[-55,55]},"margin":{"b":100},"plot_bgcolor":"white","height":500,"hovermode":"closest"},                        {"responsive": true}                    )                };            </script>        </div>
+</body>
+</html>
             </div>
-            <div class="info-item">
-                <div class="info-label">Currencies Tracked</div>
-                <div class="info-value">25</div>
+            <div id="slow-chart-wrapper" class="chart-wrapper">
+                <html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>                            <div id="slow-chart" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("slow-chart")) {                    Plotly.newPlot(                        "slow-chart",                        [{"customdata":["JPY","KRW","INR","PHP","TRY","IDR","CAD","SGD","AUD","NOK","EUR","CHF","GBP","BRL","PLN","MXN","SEK","THB","ZAR","CZK","CLP","NZD","COP","HUF","PEN"],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003ePosition: %{y:.1f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#dc3545","#28a745","#28a745","#28a745","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545"],"line":{"color":"rgba(0,0,0,0.3)","width":1}},"x":["JPY","KRW","INR","PHP","TRY","IDR","CAD","SGD","AUD","NOK","EUR","CHF","GBP","BRL","PLN","MXN","SEK","THB","ZAR","CZK","CLP","NZD","COP","HUF","PEN"],"y":[15.623124651842915,17.06037275236892,22.602041636336352,13.953822126401782,25.257679305105242,11.098475071984415,6.2331905351983075,0.0,5.590072478701067,0.7538632220976588,15.453525551953549,-22.215820027024936,0.0,-8.146524223027694,-4.486440449926828,-9.084093158971053,-11.78069084562232,-12.918494887606824,-11.334742688791891,-16.97733230676592,-7.708461543108661,-11.177201116152782,-19.252638117122228,-21.096849326773746,-31.21265752580226],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#333"},"text":"CTA SLOW Mode - Current Positioning","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":11},"title":{"text":"Currency"},"showgrid":false,"tickangle":-45},"yaxis":{"title":{"text":"Position Size"},"showgrid":true,"gridcolor":"#e9ecef","zeroline":true,"zerolinecolor":"#333","zerolinewidth":2,"range":[-55,55]},"margin":{"b":100},"plot_bgcolor":"white","height":500,"hovermode":"closest"},                        {"responsive": true}                    )                };            </script>        </div>
+</body>
+</html>
             </div>
-            <div class="info-item">
-                <div class="info-label">Last Updated</div>
-                <div class="info-value">2025-12-09</div>
+        </div>
+
+        <div class="currency-list">
+            <h3>View Individual Currency Charts</h3>
+            <div class="currency-grid" id="currency-grid">
             </div>
+        </div>
+
+        <div class="last-updated">
+            Last updated: 2025-12-09 14:33 UTC
         </div>
     </div>
 
-    <div class="methodology">
-        <h3>How It Works</h3>
-        <p><strong>CTA Positioning:</strong> Measures momentum-following positioning using triple EMA convergence.
-        Values range from -50 (max short) to +50 (max long).</p>
-        <p><strong>Exhaustion Signals:</strong> Red markers indicate when extreme positioning unwinds,
-        suggesting potential trend exhaustion and reversal opportunities.</p>
-    </div>
-
-    <h2>Currency Pairs</h2>
-    <div class="currency-grid">
-
-        <a href="JPY_exhaustion.html" class="currency-card">
-            <div class="currency-name">JPY</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 24.923430912509996%"></div>
-                </div>
-                <div class="position-value position-positive">24.9</div>
-            </div>
-        </a>
-
-        <a href="KRW_exhaustion.html" class="currency-card">
-            <div class="currency-name">KRW</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 24.495432659079057%"></div>
-                </div>
-                <div class="position-value position-positive">24.5</div>
-            </div>
-        </a>
-
-        <a href="INR_exhaustion.html" class="currency-card">
-            <div class="currency-name">INR</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 19.984501573672947%"></div>
-                </div>
-                <div class="position-value position-positive">20.0</div>
-            </div>
-        </a>
-
-        <a href="PHP_exhaustion.html" class="currency-card">
-            <div class="currency-name">PHP</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 16.414852439264067%"></div>
-                </div>
-                <div class="position-value position-positive">16.4</div>
-            </div>
-        </a>
-
-        <a href="TRY_exhaustion.html" class="currency-card">
-            <div class="currency-name">TRY</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 13.14075652519993%"></div>
-                </div>
-                <div class="position-value position-positive">13.1</div>
-            </div>
-        </a>
-
-        <a href="IDR_exhaustion.html" class="currency-card">
-            <div class="currency-name">IDR</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 4.131892701863682%"></div>
-                </div>
-                <div class="position-value position-positive">4.1</div>
-            </div>
-        </a>
-
-        <a href="CAD_exhaustion.html" class="currency-card">
-            <div class="currency-name">CAD</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 4.004581728161724%"></div>
-                </div>
-                <div class="position-value position-positive">4.0</div>
-            </div>
-        </a>
-
-        <a href="SGD_exhaustion.html" class="currency-card">
-            <div class="currency-name">SGD</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 3.7421839925308946%"></div>
-                </div>
-                <div class="position-value position-positive">3.7</div>
-            </div>
-        </a>
-
-        <a href="AUD_exhaustion.html" class="currency-card">
-            <div class="currency-name">AUD</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 2.6429990242991126%"></div>
-                </div>
-                <div class="position-value position-positive">2.6</div>
-            </div>
-        </a>
-
-        <a href="NOK_exhaustion.html" class="currency-card">
-            <div class="currency-name">NOK</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-long" style="margin-left: 50%; width: 1.499048410838696%"></div>
-                </div>
-                <div class="position-value position-positive">1.5</div>
-            </div>
-        </a>
-
-        <a href="CHF_exhaustion.html" class="currency-card">
-            <div class="currency-name">CHF</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 50%; width: 0.0%"></div>
-                </div>
-                <div class="position-value position-negative">0.0</div>
-            </div>
-        </a>
-
-        <a href="EUR_exhaustion.html" class="currency-card">
-            <div class="currency-name">EUR</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 50%; width: 0.0%"></div>
-                </div>
-                <div class="position-value position-negative">0.0</div>
-            </div>
-        </a>
-
-        <a href="GBP_exhaustion.html" class="currency-card">
-            <div class="currency-name">GBP</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 47.28419141545349%; width: 2.715808584546505%"></div>
-                </div>
-                <div class="position-value position-negative">-2.7</div>
-            </div>
-        </a>
-
-        <a href="BRL_exhaustion.html" class="currency-card">
-            <div class="currency-name">BRL</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 46.10198690070517%; width: 3.8980130992948268%"></div>
-                </div>
-                <div class="position-value position-negative">-3.9</div>
-            </div>
-        </a>
-
-        <a href="PLN_exhaustion.html" class="currency-card">
-            <div class="currency-name">PLN</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 46.07852045805231%; width: 3.9214795419476935%"></div>
-                </div>
-                <div class="position-value position-negative">-3.9</div>
-            </div>
-        </a>
-
-        <a href="MXN_exhaustion.html" class="currency-card">
-            <div class="currency-name">MXN</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 45.826642567980755%; width: 4.173357432019242%"></div>
-                </div>
-                <div class="position-value position-negative">-4.2</div>
-            </div>
-        </a>
-
-        <a href="SEK_exhaustion.html" class="currency-card">
-            <div class="currency-name">SEK</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 43.37159626799676%; width: 6.628403732003245%"></div>
-                </div>
-                <div class="position-value position-negative">-6.6</div>
-            </div>
-        </a>
-
-        <a href="THB_exhaustion.html" class="currency-card">
-            <div class="currency-name">THB</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 43.07113011537078%; width: 6.928869884629223%"></div>
-                </div>
-                <div class="position-value position-negative">-6.9</div>
-            </div>
-        </a>
-
-        <a href="ZAR_exhaustion.html" class="currency-card">
-            <div class="currency-name">ZAR</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 43.037554657779204%; width: 6.962445342220798%"></div>
-                </div>
-                <div class="position-value position-negative">-7.0</div>
-            </div>
-        </a>
-
-        <a href="CZK_exhaustion.html" class="currency-card">
-            <div class="currency-name">CZK</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 42.63414394433295%; width: 7.365856055667049%"></div>
-                </div>
-                <div class="position-value position-negative">-7.4</div>
-            </div>
-        </a>
-
-        <a href="CLP_exhaustion.html" class="currency-card">
-            <div class="currency-name">CLP</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 40.44693387337159%; width: 9.553066126628412%"></div>
-                </div>
-                <div class="position-value position-negative">-9.6</div>
-            </div>
-        </a>
-
-        <a href="NZD_exhaustion.html" class="currency-card">
-            <div class="currency-name">NZD</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 39.927513879788265%; width: 10.072486120211739%"></div>
-                </div>
-                <div class="position-value position-negative">-10.1</div>
-            </div>
-        </a>
-
-        <a href="COP_exhaustion.html" class="currency-card">
-            <div class="currency-name">COP</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 36.654807669931266%; width: 13.345192330068736%"></div>
-                </div>
-                <div class="position-value position-negative">-13.3</div>
-            </div>
-        </a>
-
-        <a href="HUF_exhaustion.html" class="currency-card">
-            <div class="currency-name">HUF</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 29.165747885915312%; width: 20.834252114084688%"></div>
-                </div>
-                <div class="position-value position-negative">-20.8</div>
-            </div>
-        </a>
-
-        <a href="PEN_exhaustion.html" class="currency-card">
-            <div class="currency-name">PEN</div>
-            <div class="position-info">
-                <div class="position-bar">
-                    <div class="position-fill position-short" style="margin-left: 25.848225995920018%; width: 24.151774004079982%"></div>
-                </div>
-                <div class="position-value position-negative">-24.2</div>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="last-updated">
-        Generated on 2025-12-09 14:26:07 UTC
-    </div>
-
     <script>
-        // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                window.location.href = 'index.html';
-            }
+        let currentMode = 'fast';
+
+        const fastPositions = {"JPY": 24.923430912509996, "KRW": 24.495432659079057, "INR": 19.984501573672947, "PHP": 16.414852439264067, "TRY": 13.14075652519993, "IDR": 4.131892701863682, "CAD": 4.004581728161724, "SGD": 3.7421839925308946, "AUD": 2.6429990242991126, "NOK": 1.499048410838696, "EUR": 0.0, "CHF": 0.0, "GBP": -2.715808584546505, "BRL": -3.8980130992948268, "PLN": -3.9214795419476935, "MXN": -4.173357432019242, "SEK": -6.628403732003245, "THB": -6.928869884629223, "ZAR": -6.962445342220798, "CZK": -7.365856055667049, "CLP": -9.553066126628412, "NZD": -10.072486120211739, "COP": -13.345192330068736, "HUF": -20.834252114084688, "PEN": -24.151774004079982};
+        const slowPositions = {"TRY": 25.257679305105242, "INR": 22.602041636336352, "KRW": 17.06037275236892, "JPY": 15.623124651842915, "EUR": 15.453525551953549, "PHP": 13.953822126401782, "IDR": 11.098475071984415, "CAD": 6.2331905351983075, "AUD": 5.590072478701067, "NOK": 0.7538632220976588, "GBP": 0.0, "SGD": 0.0, "PLN": -4.486440449926828, "CLP": -7.708461543108661, "BRL": -8.146524223027694, "MXN": -9.084093158971053, "NZD": -11.177201116152782, "ZAR": -11.334742688791891, "SEK": -11.78069084562232, "THB": -12.918494887606824, "CZK": -16.97733230676592, "COP": -19.252638117122228, "HUF": -21.096849326773746, "CHF": -22.215820027024936, "PEN": -31.21265752580226};
+        const sortedCurrencies = ["JPY", "KRW", "INR", "PHP", "TRY", "IDR", "CAD", "SGD", "AUD", "NOK", "EUR", "CHF", "GBP", "BRL", "PLN", "MXN", "SEK", "THB", "ZAR", "CZK", "CLP", "NZD", "COP", "HUF", "PEN"];
+
+        function showMode(mode) {
+            currentMode = mode;
+
+            // Update buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update charts
+            document.querySelectorAll('.chart-wrapper').forEach(wrapper => {
+                wrapper.classList.remove('active');
+            });
+            document.getElementById(mode + '-chart-wrapper').classList.add('active');
+
+            // Update currency links
+            updateCurrencyGrid();
+        }
+
+        function updateCurrencyGrid() {
+            const positions = currentMode === 'fast' ? fastPositions : slowPositions;
+            const grid = document.getElementById('currency-grid');
+
+            grid.innerHTML = sortedCurrencies.map(ccy => {
+                const pos = positions[ccy];
+                const badge = pos > 0
+                    ? `<span class="position-badge position-long">+${pos.toFixed(1)}</span>`
+                    : `<span class="position-badge position-short">${pos.toFixed(1)}</span>`;
+
+                return `<a href="${ccy}_exhaustion_${currentMode}.html" class="currency-link">
+                    ${ccy}${badge}
+                </a>`;
+            }).join('');
+        }
+
+        // Add click handler to bars
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrencyGrid();
+
+            // Add click handlers to Plotly charts
+            const charts = document.querySelectorAll('[id$="-chart"]');
+            charts.forEach(chart => {
+                chart.on('plotly_click', function(data) {
+                    const ccy = data.points[0].x;
+                    window.location.href = `${ccy}_exhaustion_${currentMode}.html`;
+                });
+            });
         });
     </script>
 </body>
