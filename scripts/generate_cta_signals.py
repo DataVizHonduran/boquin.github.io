@@ -38,7 +38,7 @@ df_fx[euroy] = df_fx[euroy].multiply(df_fx["EUR"], axis=0)
 inverse_display = ["EURUSD", "GBPUSD", "AUDUSD", "NZDUSD"]
 df_display = df_fx.copy()
 df_display[inverse] = 1 / df_display[inverse]
-df_display = df_display.tail(252 * 11)  # Last 11 years
+# Show full history (not just last 11 years)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
