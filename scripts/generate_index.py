@@ -355,7 +355,16 @@ html_content = f"""<!DOCTYPE html>
             document.querySelectorAll('.chart-wrapper').forEach(wrapper => {{
                 wrapper.classList.remove('active');
             }});
-            document.getElementById(mode + '-chart-wrapper').classList.add('active');
+            const activeWrapper = document.getElementById(mode + '-chart-wrapper');
+            activeWrapper.classList.add('active');
+
+            // Force Plotly to resize the chart after it becomes visible
+            setTimeout(() => {{
+                const chartDiv = activeWrapper.querySelector('[id$="-chart"]');
+                if (chartDiv && window.Plotly) {{
+                    window.Plotly.Plots.resize(chartDiv);
+                }}
+            }}, 50);
 
             // Update currency links
             updateCurrencyGrid();
