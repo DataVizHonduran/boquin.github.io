@@ -1,0 +1,128 @@
+{
+  "as_of_date": "2025-11-17",
+  "count_requested": 20,
+  "count_returned": 12,
+  "records": [
+    {
+      "initiative_number": "National Development Plan 2025-2030",
+      "introduced_date": "2025-11-05",
+      "what_it_does": "Establishes Mexico's strategic development framework for 2025-2030 across four general axes and three transversal axes. Approved by Chamber of Deputies with 343-122 vote, presenting quantitative and qualitative diagnoses of national challenges.",
+      "status": "Approved and published",
+      "relevant_secretariat": "Presidencia de la República",
+      "primary_source_url": "https://comunicacionsocial.diputados.gob.mx",
+      "secondary_source_url": "",
+      "notes": "Presidential initiative approved by Cámara de Diputados November 5, 2025"
+    },
+    {
+      "initiative_number": "Constitutional Reform - Articles 39 and 40 (Sovereignty)",
+      "introduced_date": "2025-02-20",
+      "what_it_does": "Amends Articles 39 and 40 to prohibit foreign intervention in investigations and prosecutions without express Mexican state authorization. Applies severe penalties to foreigners involved in gun smuggling and distribution, responding to US designation of Mexican cartels as terrorist organizations.",
+      "status": "Under debate",
+      "relevant_secretariat": "Secretaría de Gobernación",
+      "primary_source_url": "unknown",
+      "secondary_source_url": "",
+      "notes": "Proposed by President Sheinbaum February 2025 in response to US anti-cartel measures"
+    },
+    {
+      "initiative_number": "Constitutional Reform - Anti-Nepotism",
+      "introduced_date": "2025-02-05",
+      "what_it_does": "Prohibits immediate reelection of public officials. Bars family members of sitting officeholders from running for the same position, aimed at reducing political dynasties and conflicts of interest.",
+      "status": "Under debate",
+      "relevant_secretariat": "Secretaría de Gobernación",
+      "primary_source_url": "unknown",
+      "secondary_source_url": "",
+      "notes": "Submitted by President Sheinbaum on Mexico Independence Day 2025"
+    },
+    {
+      "initiative_number": "General Law on Artificial Intelligence",
+      "introduced_date": "2025-02-19",
+      "what_it_does": "Grants Congress authority to legislate on AI regulation and mandates passage of a General Law on AI within 180 days. Harmonizes secondary legislation to govern AI development, deployment, and ethics, aligning with President Sheinbaum's digital strategy.",
+      "status": "Under committee review",
+      "relevant_secretariat": "",
+      "primary_source_url": "unknown",
+      "secondary_source_url": "",
+      "notes": "Introduced by Congressman Ricardo Monreal Ávila (Morena); expected fast-track passage"
+    },
+    {
+      "initiative_number": "Customs Law Reform (2026 Economic Package)",
+      "introduced_date": "2025-09-09",
+      "what_it_does": "Introduces stricter compliance obligations, expands digital tools for customs administration, and enhances liability for customs brokers and importers. Strengthens anti-smuggling enforcement and import/export controls.",
+      "status": "Under debate",
+      "relevant_secretariat": "Secretaría de Hacienda y Crédito Público",
+      "primary_source_url": "unknown",
+      "secondary_source_url": "",
+      "notes": "Deadline for approval before December 15, 2025"
+    },
+    {
+      "initiative_number": "General Import and Export Tariffs Law Reform",
+      "introduced_date": "2025-09-09",
+      "what_it_does": "Increases import duties on 1,463 product classifications across multiple sectors. Aims to protect domestic industries and generate additional fiscal revenue, part of 2026 Economic Package.",
+      "status": "Under debate",
+      "relevant_secretariat": "Secretaría de Hacienda y Crédito Público",
+      "primary_source_url": "unknown",
+      "secondary_source_url": "",
+      "notes": "Part of Economic Package 2026; pressure for approval before Dec 15, 2025"
+    },
+    {
+      "initiative_number": "Regulations of the Planning and Energy Transition Law",
+      "introduced_date": "2025-10-03",
+      "what_it_does": "Establishes operational framework for energy planning and transition under constitutional energy reforms. Governs how Mexico plans long-term energy policy, balancing fossil fuels and renewable energy targets.",
+      "status": "Approved and published as law",
+      "relevant_secretariat": "Secretaría de Energía",
+      "primary_source_url": "https://www.diariooficial.gob.mx",
+      "secondary_source_url": "",
+      "notes": "Published DOF October 3, 2025"
+    },
+    {
+      "initiative_number": "Regulations of the Electric Sector Law",
+      "introduced_date": "2025-10-03",
+      "what_it_does": "Implements regulations for electricity generation, transmission, and distribution following constitutional energy reforms. Defines CFE's dominant role and private sector participation limits (CFE minimum 54% in mixed schemes).",
+      "status": "Approved and published as law",
+      "relevant_secretariat": "Secretaría de Energía",
+      "primary_source_url": "https://www.diariooficial.gob.mx",
+      "secondary_source_url": "",
+      "notes": "Published DOF October 3, 2025"
+    },
+    {
+      "initiative_number": "Regulation of the Geothermal Law",
+      "introduced_date": "2025-10-03",
+      "what_it_does": "Governs exploration, exploitation, and diverse uses for geothermal energy utilization. Sets environmental and technical standards for geothermal resource development to support renewable energy transition.",
+      "status": "Approved and published as law",
+      "relevant_secretariat": "Secretaría de Energía",
+      "primary_source_url": "https://www.diariooficial.gob.mx",
+      "secondary_source_url": "",
+      "notes": "Published DOF October 3, 2025"
+    },
+    {
+      "initiative_number": "Reform to Federal Telecommunications and Broadcasting Law - Article 191",
+      "introduced_date": "2025-11-05",
+      "what_it_does": "Strengthens rights of mobile phone service users. Enhances consumer protections in telecommunications contracts and service quality standards.",
+      "status": "Under committee review",
+      "relevant_secretariat": "",
+      "primary_source_url": "https://gaceta.diputados.gob.mx/Gaceta/66/2025/nov/20251105.html",
+      "secondary_source_url": "",
+      "notes": "Presented by Deputy Pablo Vázquez Ahued (Movimiento Ciudadano)"
+    },
+    {
+      "initiative_number": "Reform to Federal Highways, Bridges and Motor Transport Law - Article 53 Bis",
+      "introduced_date": "2025-11-05",
+      "what_it_does": "Adds new Article 53 Bis to regulate specific aspects of federal highways, bridges, and motor transport. Exact provisions unknown from search results.",
+      "status": "Under committee review",
+      "relevant_secretariat": "Secretaría de Comunicaciones y Transportes",
+      "primary_source_url": "https://gaceta.diputados.gob.mx/Gaceta/66/2025/nov/20251105.html",
+      "secondary_source_url": "",
+      "notes": "Appears in Parliamentary Gazette November 5, 2025"
+    },
+    {
+      "initiative_number": "Political-Electoral Reform Initiative",
+      "introduced_date": "2025-11-01",
+      "what_it_does": "Initiates comprehensive political-electoral reform process. Commission established to work with Electoral Institute of Mexico City advisors to modernize electoral laws and procedures.",
+      "status": "Under committee review",
+      "relevant_secretariat": "",
+      "primary_source_url": "https://www.canaldelcongreso.gob.mx/noticias/51",
+      "secondary_source_url": "",
+      "notes": "Political-Electoral Reform Commission began work November 2025"
+    }
+  ],
+  "data_limitations_note": "Direct access to Mexico's official legislative databases (SIL, Cámara de Diputados SITL, Senado legislative tracker, DOF archives) was limited during research. This report compiled verified information from financial news sources, legal analysis firms (Holland & Knight, White & Case, Foley & Lardner), and partial Parliamentary Gazette access. Many initiatives lack complete detail (specific article numbers, full legislative text, exact committee assignments). For comprehensive tracking, users should consult: http://sitl.diputados.gob.mx/, https://www.senado.gob.mx/legislacion, https://www.dof.gob.mx/, and http://sil.gobernacion.gob.mx/"
+}
