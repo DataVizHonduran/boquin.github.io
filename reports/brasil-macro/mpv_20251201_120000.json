@@ -1,0 +1,187 @@
+{
+  "as_of_date": "2025-12-01",
+  "count_requested": 20,
+  "count_returned": 18,
+  "records": [
+    {
+      "mpv_number": "MPV 1325/2025",
+      "introduced_date": "2025-11-23",
+      "what_it_does": "Opens extraordinary credit of R$ 190 million to the Ministry of Agrarian Development and Family Agriculture. Funds emergency actions supporting family agriculture.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Desenvolvimento Agrário e Agricultura Familiar",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/171722",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1324/2025",
+      "introduced_date": "2025-11-06",
+      "what_it_does": "Opens extraordinary credit of R$ 230.38 million to the Ministry of Development and Social Assistance. Funds food and nutritional security actions for families affected by emergency or public calamity situations.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Desenvolvimento e Assistência Social",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/171529",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1323/2025",
+      "introduced_date": "2025-11-05",
+      "what_it_does": "Modifies Law 10,779/2003 regarding unemployment insurance for artisanal fishermen during closed fishing seasons. Transfers administration of benefits from INSS to Ministry of Labor and Employment.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Trabalho e Emprego",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/171467",
+      "secondary_source_url": "https://www.planalto.gov.br/ccivil_03/_Ato2023-2026/2025/Mpv/mpv1323.htm",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1322/2025",
+      "introduced_date": "2025-10-31",
+      "what_it_does": "Authorizes extension of fixed-term employment contracts within IBGE Foundation. Also covers Ministry of Management and Innovation in Public Services.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Gestão e da Inovação em Serviços Públicos",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/171408",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1321/2025",
+      "introduced_date": "2025-10-21",
+      "what_it_does": "Opens extraordinary credit of R$ 2.5 million to Ministry of Agriculture and Livestock. Combats cassava crop disease known as witches' broom or descending death plague.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Agricultura e Pecuária",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/171113",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1320/2025",
+      "introduced_date": "2025-09-25",
+      "what_it_does": "Opens extraordinary credit for combating cassava witches' broom disease affecting indigenous peoples and quilombola communities. Targets family farmers in states of Amapá and Pará.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Agricultura e Pecuária",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170630",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1319/2025",
+      "introduced_date": "2025-09-17",
+      "what_it_does": "Modifies Law 15,211 regarding effective date of Digital Child and Adolescent Statute. Adjusts implementation timeline for digital protection regulations.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170522",
+      "secondary_source_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/Mpv/mpv1319.htm",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1318/2025",
+      "introduced_date": "2025-09-17",
+      "what_it_does": "Institutes Special Tax Regime for Datacenter Services (REDATA). Creates tax incentives for datacenter infrastructure development in Brazil.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170521",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1317/2025",
+      "introduced_date": "2025-09-17",
+      "what_it_does": "Amends regulations to establish National Data Protection Agency (ANPD). Strengthens data privacy governance framework.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170520",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1316/2025",
+      "introduced_date": "2025-09-16",
+      "what_it_does": "Opens extraordinary credit of R$ 12 billion for official credit operations. Creates rural credit line for debt settlement and amortization.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Fazenda",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170500",
+      "secondary_source_url": "http://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/Mpv/mpv1316.htm",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1315/2025",
+      "introduced_date": "2025-09-16",
+      "what_it_does": "Expands tax depreciation benefit limits for maritime vessels. Covers tanker ships and offshore support vessels.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170467",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1314/2025",
+      "introduced_date": "2025-09-05",
+      "what_it_does": "Authorizes use of financial surplus as resources for rural credit lines. Enables debt settlement or amortization for rural producers affected by adverse events.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Fazenda",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170380",
+      "secondary_source_url": "https://www.planalto.gov.br/ccivil_03/_Ato2023-2026/2025/Mpv/mpv1314.htm",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1313/2025",
+      "introduced_date": "2025-09-04",
+      "what_it_does": "Changes denomination of Auxílio Gás and establishes new operational mode. Adjusts gas subsidy program for low-income families.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Desenvolvimento e Assistência Social",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170360",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1312/2025",
+      "introduced_date": "2025-09-02",
+      "what_it_does": "Opens extraordinary credit for agricultural emergency prevention and combat. Funds Ministry of Agriculture phytosanitary response programs.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério da Agricultura e Pecuária",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170228",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1311/2025",
+      "introduced_date": "2025-09-02",
+      "what_it_does": "Opens extraordinary credit of R$ 30.59 million for phytosanitary emergency response. Addresses plant health crises in states of Amapá and Pará.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Desenvolvimento e Assistência Social",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170227",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1310/2025",
+      "introduced_date": "2025-09-02",
+      "what_it_does": "Opens extraordinary credit of R$ 30 billion for Union financial charges. Allocates funds for Sovereign Brazil Plan (Plano Brasil Soberano) infrastructure investments.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/170226",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1309/2025",
+      "introduced_date": "2025-08-13",
+      "what_it_does": "Establishes committee for Sovereign Brazil Plan (Plano Brasil Soberano). Creates framework for managing commercial relations with United States.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/169893",
+      "secondary_source_url": "",
+      "notes": ""
+    },
+    {
+      "mpv_number": "MPV 1308/2025",
+      "introduced_date": "2025-08-08",
+      "what_it_does": "Institutes Special Environmental Licensing (LAE) framework for strategic activities and enterprises. Streamlines approval process for infrastructure projects classified as strategic national interest.",
+      "approved_by_congress": "In process",
+      "relevant_ministry": "Ministério do Meio Ambiente",
+      "primary_source_url": "https://www.congressonacional.leg.br/materias/medidas-provisorias/-/mpv/169777",
+      "secondary_source_url": "",
+      "notes": ""
+    }
+  ]
+}

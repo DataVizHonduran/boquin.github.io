@@ -30,6 +30,10 @@
             border-left: 4px solid #007bff;
             border-radius: 4px;
         }
+        .publication.new {
+            background: #e8f4f8;
+            border-left: 4px solid #28a745;
+        }
         .publication-title {
             font-size: 1.1em;
             font-weight: bold;
@@ -42,6 +46,16 @@
         .publication-title a:hover {
             text-decoration: underline;
         }
+        .new-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 8px;
+            font-weight: normal;
+        }
         .authors { color: #666; font-size: 0.9em; margin: 5px 0; }
         .summary { margin-top: 8px; }
         .back-link {
@@ -51,11 +65,17 @@
             text-decoration: none;
         }
         .back-link:hover { text-decoration: underline; }
-        .executive-summary {
-            background: #e7f3ff;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #007bff;
+        .district-header {
+            margin-top: 35px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 6px;
+        }
+        .stats {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
             margin: 20px 0;
         }
     </style>
@@ -66,31 +86,41 @@
         <h1>🏛️ Federal Reserve District Monitor</h1>
         <div class="meta">
             <strong>Report Date:</strong> December 5, 2025<br>
-            <strong>Mode:</strong> All Publications<br>
-            <strong>Coverage Period:</strong> Last 30 days (November 5 - December 5, 2025)<br>
-            <strong>Districts Monitored:</strong> NY, RIC, ATL, STL, DAL, SF, MIN<br>
-            <strong>Total Publications:</strong> 27
+            <strong>Coverage Period:</strong> November 5 - December 5, 2025 (30 days)<br>
+            <strong>Districts Monitored:</strong> NY, RIC, ATL, STL, DAL, SF, MIN
         </div>
 
-        <div class="executive-summary">
-            <h2>Executive Summary</h2>
-            <p>Federal Reserve district research over the past 30 days reveals critical themes for macro investors: <strong>monetary policy transmission mechanisms</strong>, <strong>labor market structural changes</strong>, and <strong>trade policy implications</strong>.</p>
-
-            <p>The <strong>San Francisco Fed</strong> produced groundbreaking research showing inflation's origins (demand vs. supply-driven) fundamentally alter how markets interpret monetary policy persistence. Their tariff analysis reveals a complex sequential trade-off: unemployment initially rises while inflation falls, then reverses—complicating the Fed's dual mandate navigation. The <strong>St. Louis Fed's</strong> heterogeneous-agent model demonstrates employer-to-employer transitions significantly shape inflation dynamics during recoveries.</p>
-
-            <p><strong>Structural labor market shifts</strong> emerged across districts: the <strong>Minneapolis Fed</strong> provided early evidence on Minnesota's non-compete ban effects, the <strong>Atlanta Fed</strong> quantified how H-1B restrictions suppress tech entrepreneurship (65% potential firm entry increase if removed), and pandemic retirement patterns show persistent 3pp labor force participation deficit among 65+ workers. The <strong>Dallas Fed</strong> flagged consumption concentration among top earners as an underappreciated economic vulnerability, while <strong>New York Fed</strong> research revealed heterogeneous business pricing strategies that challenge standard macro models.</p>
+        <div class="stats">
+            <strong>Summary Statistics:</strong><br>
+            • Total publications tracked: 32<br>
+            • New since last run: 6<br>
+            • Total cache size: 33 items
         </div>
 
-        <h2>New York Fed (2nd District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Liberty Street Economics Blog | <strong>Publications:</strong> 6</p>
+        <h2>Executive Summary</h2>
+        <p>This report covers Federal Reserve district research publications from November 5 to December 5, 2025. During this period, 32 publications were released across seven Fed districts, with 6 new items since the last monitoring run on December 2nd.</p>
+        
+        <p><strong>Key themes emerging across districts:</strong></p>
+        <ul>
+            <li><strong>Trade Policy & Tariffs:</strong> Multiple districts (SF, STL) published research on tariff impacts, with SF Fed finding that tariffs initially raise unemployment while reducing inflation, but patterns reverse over time.</li>
+            <li><strong>Immigration & Labor Markets:</strong> Both SF Fed and ATL Fed examined immigration's economic effects, with SF Fed projecting net migration drops to ~500K in 2025 and ATL Fed showing H-1B lottery wins significantly boost tech startup survival.</li>
+            <li><strong>Monetary Policy Transmission:</strong> NY Fed, SF Fed, and STL Fed all published work on monetary policy mechanics, including seasonal patterns in rate decisions and how inflation sources shape policy expectations.</li>
+            <li><strong>Banking Structure Evolution:</strong> NY Fed's two-part series revealed U.S. banks have developed significant nonbank subsidiaries to manage liquidity, challenging traditional banking characterizations.</li>
+            <li><strong>Inequality & Economic Fragility:</strong> Dallas Fed warned that consumption concentration among high earners creates K-shaped growth patterns, while Minneapolis Fed provided updated wealth inequality data through 2022.</li>
+        </ul>
 
-        <div class="publication">
+        <div class="district-header">
+            <h2>New York Fed (2nd District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Liberty Street Economics Blog | <strong>Publications:</strong> 6 | <strong>New:</strong> 2</p>
+        </div>
+
+        <div class="publication new">
             <div class="publication-title">
-                <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/the-future-of-payment-infrastructure-could-be-permissionless/" target="_blank">The Future of Payment Infrastructure Could Be Permissionless →</a>
+                <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/the-future-of-payment-infrastructure-could-be-permissionless/" target="_blank">The Future of Payment Infrastructure Could Be Permissionless →</a><span class="new-badge">🆕 NEW</span>
             </div>
             <div class="authors">Authors: Rod Garratt, Michael Junho Lee</div>
-            <div class="meta">Published: November 25, 2025</div>
-            <div class="summary">Following recent U.S. legislation, payment stablecoins are poised for wider adoption due to their transfer mechanism via global, open-access, peer-to-peer permissionless blockchains.</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">Following recent U.S. legislation, payment stablecoins are positioned for broader adoption. The post argues their growth driver is the permissionless blockchain infrastructure enabling peer-to-peer transfers rather than their resemblance to digital cash.</div>
         </div>
 
         <div class="publication">
@@ -98,8 +128,8 @@
                 <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/how-businesses-set-prices-in-their-own-words/" target="_blank">How Businesses Set Prices—In Their Own Words →</a>
             </div>
             <div class="authors">Authors: Wändi Bruine de Bruin, Keshav Dogra, Sebastian Heise, Edward S. Knotek II, Brent H. Meyer, Robert W. Rich, Raphael S. Schoenle, Giorgio Topa, Wilbert van der Klaauw</div>
-            <div class="meta">Published: November 24, 2025</div>
-            <div class="summary">Based on open-ended interviews with senior decision-makers, reveals businesses use a nuanced approach balancing competing objectives while monitoring demand conditions and competitor behavior.</div>
+            <div class="meta">Published: 2025-11-24</div>
+            <div class="summary">This analysis draws from qualitative interviews with senior business decision-makers to explore pricing strategies in response to various economic shocks, revealing a nuanced approach balancing demand and competitive factors.</div>
         </div>
 
         <div class="publication">
@@ -107,8 +137,8 @@
                 <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/is-monetary-policy-still-seasonal/" target="_blank">Is Monetary Policy Still Seasonal? →</a>
             </div>
             <div class="authors">Authors: Richard Crump, Keshav Dogra, Dennis Kongoli</div>
-            <div class="meta">Published: November 19, 2025</div>
-            <div class="summary">Revisits 2012 analysis on seasonal patterns in Federal Reserve interest rate decisions, finding the pattern persists but can now be explained by FOMC calendar timing.</div>
+            <div class="meta">Published: 2025-11-19</div>
+            <div class="summary">Revisiting a 2012 analysis, researchers confirm that seasonal patterns in Federal Reserve policy decisions persist, though they can now be explained by FOMC calendar timing.</div>
         </div>
 
         <div class="publication">
@@ -116,8 +146,8 @@
                 <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/banks-develop-a-nonbank-footprint-to-better-manage-liquidity-needs/" target="_blank">Banks Develop a Nonbank Footprint to Better Manage Liquidity Needs →</a>
             </div>
             <div class="authors">Authors: Nicola Cetorelli, Saketh Prazad</div>
-            <div class="meta">Published: November 18, 2025</div>
-            <div class="summary">Demonstrates how U.S. banks have expanded into nonbank activities to efficiently manage liquidity.</div>
+            <div class="meta">Published: 2025-11-18</div>
+            <div class="summary">Demonstrates how banks have incorporated nonbank subsidiaries as part of their organizational evolution to efficiently manage liquidity requirements.</div>
         </div>
 
         <div class="publication">
@@ -125,20 +155,31 @@
                 <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/u-s-banks-have-developed-a-significant-nonbank-footprint/" target="_blank">U.S. Banks Have Developed a Significant Nonbank Footprint →</a>
             </div>
             <div class="authors">Authors: Nicola Cetorelli, Saketh Prazad</div>
-            <div class="meta">Published: November 18, 2025</div>
-            <div class="summary">Argues that nonbank financial institution growth has occurred within banking firm boundaries rather than replacing traditional bank-led intermediation.</div>
+            <div class="meta">Published: 2025-11-18</div>
+            <div class="summary">This post challenges the traditional deposit-and-loan characterization of banking, showing that significant NBFI growth has occurred within banking firm boundaries.</div>
         </div>
 
-        <h2>Richmond Fed (5th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Economic Briefs | <strong>Publications:</strong> 2</p>
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2025/11/how-has-treasury-market-liquidity-fared-in-2025/" target="_blank">How Has Treasury Market Liquidity Fared in 2025? →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Michael J. Fleming</div>
+            <div class="meta">Published: 2025-11-12</div>
+            <div class="summary">Assessing Treasury market functioning amid rate cuts and policy uncertainty, the analysis finds liquidity temporarily worsened during tariff announcements but maintained stable relationships with volatility.</div>
+        </div>
+
+        <div class="district-header">
+            <h2>Richmond Fed (5th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Economic Briefs | <strong>Publications:</strong> 2 | <strong>New:</strong> 0</p>
+        </div>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.richmondfed.org/publications/research/economic_brief/2025/eb_25-43" target="_blank">Sea Level Rise and Effects on House Prices →</a>
             </div>
             <div class="authors">Authors: Toan Phan, Nick Weitzel</div>
-            <div class="meta">Published: November 15, 2025</div>
-            <div class="summary">Examines how rising sea levels are influencing property valuations across U.S. coastal regions.</div>
+            <div class="meta">Published: 2025-11-15</div>
+            <div class="summary">Examines how rising sea levels are starting to influence property valuations along U.S. coastlines through recent economic research findings.</div>
         </div>
 
         <div class="publication">
@@ -146,41 +187,36 @@
                 <a href="https://www.richmondfed.org/publications/research/economic_brief/2025/eb_25-42" target="_blank">Noise Bargaining: A New Perspective on Single Proposers, Negotiation and Delays →</a>
             </div>
             <div class="authors">Authors: Grey Gordon</div>
-            <div class="meta">Published: November 15, 2025</div>
-            <div class="summary">Presents novel framework for understanding negotiation dynamics when one party makes proposals and how information asymmetries create delays.</div>
+            <div class="meta">Published: 2025-11-15</div>
+            <div class="summary">Presents a novel analytical framework for understanding negotiation dynamics when a single party makes proposals and discusses resulting timing delays.</div>
         </div>
 
-        <h2>Atlanta Fed (6th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Macroblog | <strong>Publications:</strong> 2</p>
+        <div class="district-header">
+            <h2>Atlanta Fed (6th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Macroblog | <strong>Publications:</strong> 1 | <strong>New:</strong> 0</p>
+        </div>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.atlantafed.org/blogs/macroblog/2025/11/25/how-immigration-rules-shape-firm-dynamics-in-us-technology-sector" target="_blank">How Immigration Rules Shape Firm Dynamics in the US Technology Sector →</a>
             </div>
             <div class="authors">Authors: Federico Mandelman</div>
-            <div class="meta">Published: November 25, 2025</div>
-            <div class="summary">Examines how H-1B visa restrictions impact startup survival and innovation in tech sectors, showing winning the lottery significantly increases young firm survival likelihood.</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">This post examines how H-1B visa restrictions affect startup survival and innovation in tech sectors. The research demonstrates that winning visa lottery access substantially increases survival odds for young firms.</div>
         </div>
 
-        <div class="publication">
-            <div class="publication-title">
-                <a href="https://www.atlantafed.org/blogs/macroblog/2025/11/20/aftermath-of-pandemic-retirement-boom" target="_blank">The Aftermath of the Pandemic Retirement Boom →</a>
-            </div>
-            <div class="authors">Authors: Lei Fang, Paul Mohnen, David Lee</div>
-            <div class="meta">Published: November 20, 2025</div>
-            <div class="summary">Examines how COVID-19 accelerated retirement among Americans 65+, with labor force participation remaining nearly 3 pp below prepandemic levels.</div>
+        <div class="district-header">
+            <h2>St. Louis Fed (8th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Working Papers | <strong>Publications:</strong> 4 | <strong>New:</strong> 1</p>
         </div>
-
-        <h2>St. Louis Fed (8th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Working Papers | <strong>Publications:</strong> 3</p>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.stlouisfed.org/item/fedlwp/94640/102106" target="_blank">Labor Market Shocks and Monetary Policy →</a>
             </div>
             <div class="authors">Authors: Serdar Birinci, Fatih Karahan, Yusuf Mercan, Kurt See</div>
-            <div class="meta">Published: November 17, 2025</div>
-            <div class="summary">Develops heterogeneous-agent model incorporating employer-to-employer transitions to examine how labor market dynamics shape inflation and optimal monetary policy responses.</div>
+            <div class="meta">Published: 2025-11-17</div>
+            <div class="summary">A heterogeneous-agent New Keynesian model examining how employer-to-employer transitions affect macroeconomic outcomes and optimal monetary policy responses to labor market dynamics.</div>
         </div>
 
         <div class="publication">
@@ -188,8 +224,8 @@
                 <a href="https://www.stlouisfed.org/item/fedlwp/101999/102107" target="_blank">Earnings Misperceptions and Household Distress →</a>
             </div>
             <div class="authors">Authors: Juan M. Sanchez, Stefan Song</div>
-            <div class="meta">Published: November 12, 2025</div>
-            <div class="summary">Quantifies how households' tendency to overweight recent income changes contributes to financial distress, accounting for approximately half of delinquencies and one-third of bankruptcies.</div>
+            <div class="meta">Published: 2025-11-12</div>
+            <div class="summary">This paper develops a quantitative model showing how households' diagnostic expectations about income changes drive financial distress, accounting for roughly half of delinquencies.</div>
         </div>
 
         <div class="publication">
@@ -197,20 +233,31 @@
                 <a href="https://www.stlouisfed.org/item/fedlwp/102108/original" target="_blank">A Strategic Analysis of Narcoterrorism →</a>
             </div>
             <div class="authors">Authors: Todd Sandler, Subhayu Bandyopadhyay</div>
-            <div class="meta">Published: November 12, 2025</div>
-            <div class="summary">Strategic framework examining how terrorist groups finance operations through drug farmer extortion and how counterterrorism efforts affect illicit drug markets.</div>
+            <div class="meta">Published: 2025-11-12</div>
+            <div class="summary">Strategic analysis of narcoterrorism examining terrorist extortion of drug farmers and counterterrorism policies in an international context.</div>
         </div>
 
-        <h2>Dallas Fed (11th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Economics Publications | <strong>Publications:</strong> 3</p>
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://www.stlouisfed.org/item/fedlwp/97907/102053" target="_blank">Trade Risk and Food Security →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Tasso Adamopoulos, Fernando Leibovici</div>
+            <div class="meta">Published: 2025-11-05</div>
+            <div class="summary">Explores how trade disruption risks affect food security globally, with evidence from the Ukraine-Russia war's impact on Ethiopian districts.</div>
+        </div>
+
+        <div class="district-header">
+            <h2>Dallas Fed (11th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Economics Publications | <strong>Publications:</strong> 3 | <strong>New:</strong> 0</p>
+        </div>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.dallasfed.org/research/economics/2025/1125-yang-consume" target="_blank">Consumption Concentration and Economic Fragility →</a>
             </div>
             <div class="authors">Authors: Benjamin Hoham, Fang Yang</div>
-            <div class="meta">Published: November 25, 2025</div>
-            <div class="summary">High earners account for large share of total U.S. spending, and K-shaped growth patterns may increase economic vulnerability by concentrating activity among wealthy consumers.</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">Researchers examine how spending concentration among high earners may create K-shaped growth with divergent economic activity, potentially increasing fragility.</div>
         </div>
 
         <div class="publication">
@@ -218,8 +265,8 @@
                 <a href="https://www.dallasfed.org/research/economics/2025/1120-barrett-solar" target="_blank">Expiring Solar Tax Credits Shine a Light on Benefit Inequities →</a>
             </div>
             <div class="authors">Authors: Cameron Barrett</div>
-            <div class="meta">Published: November 20, 2025</div>
-            <div class="summary">Examines how tax credit expiration may create unequal access to solar benefits in residential sector.</div>
+            <div class="meta">Published: 2025-11-20</div>
+            <div class="summary">Analysis of how the One Big Beautiful Bill Act's provisions negatively impact the residential solar industry through expiring tax credits.</div>
         </div>
 
         <div class="publication">
@@ -227,20 +274,22 @@
                 <a href="https://www.dallasfed.org/research/economics/2025/1118" target="_blank">Transfer Payments, Household Savings Play Key Roles in Growing U.S. Deficit →</a>
             </div>
             <div class="authors">Authors: J. Scott Davis, Lillian Derr</div>
-            <div class="meta">Published: November 18, 2025</div>
-            <div class="summary">Government borrowing remains elevated while private savings stay high, resulting in stable overall U.S. economy-wide borrowing.</div>
+            <div class="meta">Published: 2025-11-18</div>
+            <div class="summary">Examination of government borrowing trends alongside private savings levels affecting overall U.S. economy borrowing patterns.</div>
         </div>
 
-        <h2>San Francisco Fed (12th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Economic Letters & Working Papers | <strong>Publications:</strong> 6</p>
+        <div class="district-header">
+            <h2>San Francisco Fed (12th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Economic Letters & Working Papers | <strong>Publications:</strong> 7 | <strong>New:</strong> 1</p>
+        </div>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/11/economic-effects-of-tariffs/" target="_blank">The Economic Effects of Tariffs →</a>
             </div>
             <div class="authors">Authors: Naomi Halbersleben, Oscar Jorda, Fernanda Nechio</div>
-            <div class="meta">Published: November 24, 2025</div>
-            <div class="summary">Examines how tariff changes affect supply and demand, showing unemployment initially rises while inflation declines, but patterns reverse over time.</div>
+            <div class="meta">Published: 2025-11-24</div>
+            <div class="summary">This analysis examines how tariff changes affect both supply and demand sides of the economy. Using four decades of international data, researchers find that tariffs initially raise unemployment while reducing inflation.</div>
         </div>
 
         <div class="publication">
@@ -248,8 +297,8 @@
                 <a href="https://www.frbsf.org/research-and-insights/publications/working-papers/2025/11/not-all-inflation-is-the-same-state-dependent-transmission-of-monetary-policy/" target="_blank">Not All Inflation Is the Same: State-Dependent Transmission of Monetary Policy →</a>
             </div>
             <div class="authors">Authors: Rami Najjar, Adam Shapiro</div>
-            <div class="meta">Published: November 24, 2025</div>
-            <div class="summary">Demonstrates that inflation source shapes how financial markets perceive monetary policy effectiveness, with demand-driven inflation leading to expectations of more persistent tightening.</div>
+            <div class="meta">Published: 2025-11-24</div>
+            <div class="summary">The research demonstrates that inflation's underlying source affects how financial markets perceive monetary policy persistence, with demand-driven inflation generating expectations of more sustained tightening.</div>
         </div>
 
         <div class="publication">
@@ -257,8 +306,8 @@
                 <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/11/immigration-and-changes-in-labor-force-demographics/" target="_blank">Immigration and Changes in Labor Force Demographics →</a>
             </div>
             <div class="authors">Authors: Evgeniya Duzhak, Addie New-Schmidt</div>
-            <div class="meta">Published: November 19, 2025</div>
-            <div class="summary">Projected declines in immigration flows to significantly reduce U.S. working-age population, with net migration dropping from 2.2M in 2024 to ~500K in 2025.</div>
+            <div class="meta">Published: 2025-11-19</div>
+            <div class="summary">This letter explores demographic shifts in the labor force driven by immigration patterns and their broader economic implications for the region.</div>
         </div>
 
         <div class="publication">
@@ -266,8 +315,8 @@
                 <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/11/modern-central-banking-monetary-policy-implementation-and-communication/" target="_blank">Modern Central Banking: Monetary Policy Implementation and Communication →</a>
             </div>
             <div class="authors">Authors: Mary C. Daly</div>
-            <div class="meta">Published: November 17, 2025</div>
-            <div class="summary">Examines contemporary approaches to monetary policy execution and central bank communication strategies.</div>
+            <div class="meta">Published: 2025-11-17</div>
+            <div class="summary">The letter discusses contemporary approaches to central bank policy execution and public communication strategies in the current economic environment.</div>
         </div>
 
         <div class="publication">
@@ -275,8 +324,8 @@
                 <a href="https://www.frbsf.org/research-and-insights/publications/working-papers/2025/11/optimal-foreign-reserve-intervention-and-financial-development/" target="_blank">Optimal Foreign Reserve Intervention and Financial Development →</a>
             </div>
             <div class="authors">Authors: Kevin X.D. Huang, Zheng Liu, Mark M. Spiegel</div>
-            <div class="meta">Published: November 13, 2025</div>
-            <div class="summary">Documents U-shaped relationship between financial development and foreign exchange reserve adjustments after U.S. rate increases.</div>
+            <div class="meta">Published: 2025-11-13</div>
+            <div class="summary">The paper reveals a U-shaped relationship between financial development and foreign exchange reserve adjustments in response to U.S. interest rate changes.</div>
         </div>
 
         <div class="publication">
@@ -284,20 +333,31 @@
                 <a href="https://www.frbsf.org/research-and-insights/publications/working-papers/2025/11/what-is-a-tariff-shock-insights-from-150-years-of-tariff-policy/" target="_blank">What Is a Tariff Shock? Insights from 150 years of Tariff Policy →</a>
             </div>
             <div class="authors">Authors: Regis Barnichon, Aayush Singh</div>
-            <div class="meta">Published: November 13, 2025</div>
-            <div class="summary">Using 150 years of U.S. tariff history, examines short-run macroeconomic effects revealing no systematic correlation with business cycle conditions.</div>
+            <div class="meta">Published: 2025-11-13</div>
+            <div class="summary">Using 150 years of U.S. tariff history, this study estimates short-run macroeconomic effects of tariff changes, finding no systematic relationship between the business cycle phase and tariff policy direction.</div>
         </div>
 
-        <h2>Minneapolis Fed (9th District)</h2>
-        <p class="meta"><strong>Content Type:</strong> Mixed Research | <strong>Publications:</strong> 5</p>
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/11/how-much-are-banks-exposed-to-trade-policy-changes/" target="_blank">How Much Are Banks Exposed to Trade Policy Changes? →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Simon H. Kwan</div>
+            <div class="meta">Published: 2025-11-10</div>
+            <div class="summary">This analysis evaluates banking sector vulnerability to shifts in trade policy and potential financial system implications.</div>
+        </div>
+
+        <div class="district-header">
+            <h2>Minneapolis Fed (9th District)</h2>
+            <p class="meta"><strong>Content Type:</strong> Mixed Research Publications | <strong>Publications:</strong> 9 | <strong>New:</strong> 3</p>
+        </div>
 
         <div class="publication">
             <div class="publication-title">
                 <a href="https://www.minneapolisfed.org/research/staff-reports/economists-should-be-studying-monopoly-much-more-extensively-how-our-interest-in-monopoly-waned-after-we-began-thinking-about-monopoly-all-wrong" target="_blank">Economists Should Be Studying Monopoly Much More Extensively →</a>
             </div>
             <div class="authors">Authors: James A. Schmitz, Jr.</div>
-            <div class="meta">Published: November 26, 2025</div>
-            <div class="summary">Examines why economists have reduced focus on monopoly research despite its importance, tracing how changing theoretical approaches affected scholarly interest.</div>
+            <div class="meta">Published: 2025-11-26</div>
+            <div class="summary">Staff report discussing the evolution of monopoly research in economics and advocacy for renewed scholarly attention.</div>
         </div>
 
         <div class="publication">
@@ -305,8 +365,8 @@
                 <a href="https://www.minneapolisfed.org/research/institute-working-papers/cohabitation-child-development-and-college-costs" target="_blank">Cohabitation, Child Development, and College Costs →</a>
             </div>
             <div class="authors">Authors: Effrosyni Adamopoulou, Anne Hannusch, Karen A. Kopecky, Tim Obermeier</div>
-            <div class="meta">Published: November 26, 2025</div>
-            <div class="summary">Analyzes relationships between cohabitation patterns, child developmental outcomes, and educational expenses within American households.</div>
+            <div class="meta">Published: 2025-11-26</div>
+            <div class="summary">Institute working paper examining relationships between family structure, child developmental outcomes, and higher education expenses.</div>
         </div>
 
         <div class="publication">
@@ -314,8 +374,35 @@
                 <a href="https://www.minneapolisfed.org/research/community-development-working-papers/the-early-labor-market-impacts-of-minnesotas-2023-non-compete-enforcement-ban" target="_blank">The Early Labor Market Impacts of Minnesota's 2023 Non-Compete Enforcement Ban →</a>
             </div>
             <div class="authors">Authors: Ayushi Narayan, Ryan Nunn</div>
-            <div class="meta">Published: November 26, 2025</div>
-            <div class="summary">Evaluates employment and labor market effects following Minnesota's prohibition on non-compete enforcement agreements.</div>
+            <div class="meta">Published: 2025-11-26</div>
+            <div class="summary">Community development working paper analyzing employment effects following Minnesota's prohibition on non-compete agreements.</div>
+        </div>
+
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://www.minneapolisfed.org/research/quarterly-review/ramsey-plan-for-calvos-model" target="_blank">Ramsey Plan for Calvo's Model →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Thomas J. Sargent, Ziyue Yang</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">Quarterly Review article applying optimal taxation theory to macroeconomic modeling frameworks.</div>
+        </div>
+
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://www.minneapolisfed.org/research/quarterly-review/income-and-wealth-inequality-in-the-united-states-an-update-including-the-2022-wave" target="_blank">Income and Wealth Inequality in the United States: An Update Including the 2022 Wave →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Moritz Kuhn, José-Víctor Ríos-Rull</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">Updated analysis of distributional trends using the latest available household financial data through 2022.</div>
+        </div>
+
+        <div class="publication new">
+            <div class="publication-title">
+                <a href="https://www.minneapolisfed.org/research/institute-working-papers/assessing-maximum-employment" target="_blank">Assessing Maximum Employment →</a><span class="new-badge">🆕 NEW</span>
+            </div>
+            <div class="authors">Authors: Christopher Foote, Shigeru Fujita, Amanda Michaud, Joshua Montes</div>
+            <div class="meta">Published: 2025-11-25</div>
+            <div class="summary">Economists examine definitions and measurement of maximum employment levels. The research evaluates approaches to understanding full employment conditions within labor markets.</div>
         </div>
 
         <div class="publication">
@@ -323,7 +410,7 @@
                 <a href="https://www.minneapolisfed.org/research/institute-working-papers/americas-rise-in-human-capital-mobility" target="_blank">America's Rise in Human Capital Mobility →</a>
             </div>
             <div class="authors">Authors: Lukas Althoff, Harriet Brookes Gray, Hugo Reichardt</div>
-            <div class="meta">Published: November 20, 2025</div>
+            <div class="meta">Published: 2025-11-20</div>
             <div class="summary">Examines increased human capital mobility in America, analyzing patterns of how individuals with education and skills are relocating across regions.</div>
         </div>
 
@@ -332,7 +419,7 @@
                 <a href="https://www.minneapolisfed.org/research/working-papers/portfolio-choice-and-settlement-frictions-a-theory-of-endogenous-convenience-yields" target="_blank">Portfolio Choice and Settlement Frictions: A Theory of Endogenous Convenience Yields →</a>
             </div>
             <div class="authors">Authors: Javier Bianchi, Saki Bigio</div>
-            <div class="meta">Published: November 19, 2025</div>
+            <div class="meta">Published: 2025-11-19</div>
             <div class="summary">Develops theory on how settlement frictions in financial markets create convenience yields in portfolio selection decisions.</div>
         </div>
 
@@ -341,51 +428,112 @@
                 <a href="https://www.minneapolisfed.org/research/institute-working-papers/the-landscape-of-parental-leavetaking-in-the-united-states" target="_blank">The Landscape of Parental Leave-Taking in the United States →</a>
             </div>
             <div class="authors">Authors: Rebecca Jack, Daniel Tannenbaum, Brenden Timpe</div>
-            <div class="meta">Published: November 18, 2025</div>
+            <div class="meta">Published: 2025-11-18</div>
             <div class="summary">Maps parental leave usage patterns across the U.S., examining how families navigate leave-taking options.</div>
         </div>
 
+        <h2>Thematic Analysis: Key Findings Across Districts</h2>
+        
+        <h3>Trade Policy & Economic Impacts</h3>
+        <ul>
+            <li><strong>SF Fed:</strong> Tariffs initially raise unemployment while reducing inflation, but over time unemployment normalizes as inflation increases (4 decades of international data).</li>
+            <li><strong>SF Fed:</strong> 150 years of U.S. tariff history reveals no systematic relationship between business cycle phase and tariff policy direction.</li>
+            <li><strong>SF Fed:</strong> Banking sector faces vulnerability to trade policy shifts with potential financial system implications.</li>
+            <li><strong>STL Fed:</strong> Trade disruption risks from Ukraine-Russia war demonstrated impact on food security in Ethiopian districts.</li>
+        </ul>
+        
+        <h3>Immigration & Labor Market Dynamics</h3>
+        <ul>
+            <li><strong>SF Fed:</strong> Projected immigration decline will significantly reduce U.S. working-age population, with net migration dropping from 2.2M (2024) to ~500K (2025).</li>
+            <li><strong>ATL Fed:</strong> H-1B visa lottery winners show substantially higher startup survival rates in tech sectors, with modeling suggesting 65% boost in firm entry if barriers removed.</li>
+            <li><strong>STL Fed:</strong> New heterogeneous-agent model incorporates employer-to-employer transitions to examine labor market dynamics and optimal monetary policy responses.</li>
+            <li><strong>MIN Fed:</strong> Research on maximum employment definitions and measurement approaches in labor markets.</li>
+        </ul>
+        
+        <h3>Monetary Policy & Inflation Transmission</h3>
+        <ul>
+            <li><strong>NY Fed:</strong> Seasonal patterns in Fed rate decisions persist but can now be explained by FOMC calendar timing (revisiting 2012 analysis).</li>
+            <li><strong>SF Fed:</strong> Inflation's source (demand vs supply) shapes how financial markets perceive monetary policy persistence, with demand-driven inflation generating expectations of more sustained tightening.</li>
+            <li><strong>SF Fed:</strong> Mary C. Daly discusses contemporary approaches to central bank policy execution and communication strategies.</li>
+            <li><strong>SF Fed:</strong> U-shaped relationship between financial development and foreign exchange reserve adjustments after U.S. rate increases.</li>
+        </ul>
+        
+        <h3>Banking System Evolution & Financial Markets</h3>
+        <ul>
+            <li><strong>NY Fed:</strong> U.S. banks have developed significant nonbank footprints, with NBFI growth occurring within banking firm boundaries rather than replacing traditional bank intermediation.</li>
+            <li><strong>NY Fed:</strong> Banks incorporate nonbank subsidiaries to efficiently manage liquidity requirements.</li>
+            <li><strong>NY Fed:</strong> Payment stablecoins positioned for broader adoption due to permissionless blockchain infrastructure enabling peer-to-peer transfers.</li>
+            <li><strong>NY Fed:</strong> Treasury market liquidity temporarily worsened during tariff announcements but maintained stable relationships with volatility.</li>
+        </ul>
+        
+        <h3>Household Financial Distress & Inequality</h3>
+        <ul>
+            <li><strong>DAL Fed:</strong> Consumption concentration among high earners creates K-shaped growth with divergent economic activity, potentially increasing economic fragility.</li>
+            <li><strong>STL Fed:</strong> Households' tendency to overweight recent income changes accounts for approximately half of delinquencies and one-third of bankruptcies.</li>
+            <li><strong>MIN Fed:</strong> Updated wealth inequality analysis through 2022 wave shows continued distributional trends.</li>
+            <li><strong>DAL Fed:</strong> Government borrowing remains elevated while private savings stay high, resulting in stable overall economy-wide borrowing.</li>
+        </ul>
+        
+        <h3>Regional Economic Analysis & Policy</h3>
+        <ul>
+            <li><strong>RIC Fed:</strong> Rising sea levels influencing property valuations across U.S. coastal regions.</li>
+            <li><strong>DAL Fed:</strong> Expiring solar tax credits create unequal access to renewable energy benefits in residential sector.</li>
+            <li><strong>MIN Fed:</strong> Minnesota's 2023 non-compete ban shows early labor market impacts on employment patterns.</li>
+            <li><strong>MIN Fed:</strong> Increased human capital mobility patterns showing how educated/skilled individuals relocate across regions.</li>
+        </ul>
+        
+        <h3>Business Pricing & Economic Behavior</h3>
+        <ul>
+            <li><strong>NY Fed:</strong> Qualitative interviews reveal businesses use nuanced pricing approaches balancing demand conditions and competitor behavior.</li>
+            <li><strong>MIN Fed:</strong> Advocacy for renewed monopoly research in economics after field's interest waned due to changing theoretical approaches.</li>
+        </ul>
+
         <h2>Notable Highlights for Investors</h2>
-        <div class="publication" style="border-left-color: #28a745;">
-            <div class="publication-title" style="color: #28a745;">
-                <strong>San Francisco Fed</strong> - The Economic Effects of Tariffs
-            </div>
-            <div class="summary">Critical for positioning ahead of potential Trump administration tariff policy—unemployment/inflation sequencing matters for bond vs. equity allocation timing.</div>
-        </div>
+        
+        <p><strong>🆕 New Publications Since Last Run (Dec 2):</strong></p>
+        <ul>
+            <li><strong>NY Fed - Payment Infrastructure:</strong> Permissionless blockchain infrastructure could drive stablecoin adoption following recent U.S. legislation, creating opportunities in digital payment infrastructure.</li>
+            <li><strong>NY Fed - Treasury Liquidity:</strong> Treasury market liquidity maintained stability despite tariff policy uncertainty, suggesting resilience in fixed income markets.</li>
+            <li><strong>SF Fed - Bank Trade Exposure:</strong> Banking sector vulnerability to trade policy shifts requires monitoring as tariff discussions intensify.</li>
+            <li><strong>STL Fed - Food Security:</strong> Trade disruption risks demonstrated real-world impacts on food security, relevant for agricultural commodities.</li>
+            <li><strong>MIN Fed - Maximum Employment:</strong> New frameworks for understanding full employment conditions could influence Fed policy expectations.</li>
+            <li><strong>MIN Fed - Inequality Update:</strong> Latest wealth inequality data through 2022 provides context for consumption patterns and market dynamics.</li>
+            <li><strong>MIN Fed - Optimal Taxation:</strong> Ramsey Plan application to Calvo's model advances macroeconomic policy frameworks.</li>
+        </ul>
+        
+        <p><strong>Key Investment Themes:</strong></p>
+        <ul>
+            <li><strong>Tariff Policy Uncertainty:</strong> SF Fed's historical analysis shows tariffs have complex, time-varying effects on unemployment and inflation—monitor trade-sensitive sectors.</li>
+            <li><strong>Immigration Impact:</strong> Projected 75% drop in net migration (2.2M to 500K) will constrain labor supply and potentially boost wage pressures in tight labor markets.</li>
+            <li><strong>K-Shaped Recovery Risks:</strong> Dallas Fed warns consumption concentration among high earners creates fragility—diversify exposure across income segments.</li>
+            <li><strong>Banking Evolution:</strong> NY Fed research shows banks' nonbank subsidiaries are key liquidity management tools—watch for regulatory developments.</li>
+            <li><strong>Monetary Policy Nuance:</strong> SF Fed shows inflation source matters for policy persistence expectations—demand-driven inflation likely triggers more sustained tightening.</li>
+            <li><strong>Climate Risk Pricing:</strong> Richmond Fed confirms sea level rise influencing coastal property values—relevant for REITs and mortgage portfolios.</li>
+        </ul>
 
-        <div class="publication" style="border-left-color: #28a745;">
-            <div class="publication-title" style="color: #28a745;">
-                <strong>San Francisco Fed</strong> - Not All Inflation Is the Same
-            </div>
-            <div class="summary">Refines Fed reaction function expectations—demand-driven CPI prints may trigger greater hawkishness than supply-driven equivalent readings, affecting rate path pricing.</div>
-        </div>
+        <h2>Cache Update Summary</h2>
+        <ul>
+            <li><strong>Items added this run:</strong> 6</li>
+            <li><strong>Items already cached:</strong> 26</li>
+            <li><strong>Total cache size:</strong> 33 items</li>
+            <li><strong>Cache file:</strong> <code>.claude/cache/fed-district-monitor.json</code></li>
+            <li><strong>Last run:</strong> 2025-12-05</li>
+            <li><strong>Previous run:</strong> 2025-12-02</li>
+        </ul>
 
-        <div class="publication" style="border-left-color: #28a745;">
-            <div class="publication-title" style="color: #28a745;">
-                <strong>Dallas Fed</strong> - Consumption Concentration and Economic Fragility
-            </div>
-            <div class="summary">Validates defensive positioning in consumer discretionary sectors vulnerable to top-income-earner sentiment shifts; K-shaped recovery fragility underappreciated.</div>
-        </div>
-
-        <div class="publication" style="border-left-color: #28a745;">
-            <div class="publication-title" style="color: #28a745;">
-                <strong>Atlanta Fed</strong> - How Immigration Rules Shape Firm Dynamics
-            </div>
-            <div class="summary">Quantifies policy tail risk for venture capital and growth equity portfolios—immigration restrictions represent structural headwind for innovation economy (65% firm entry differential).</div>
-        </div>
-
-        <div class="publication" style="border-left-color: #28a745;">
-            <div class="publication-title" style="color: #28a745;">
-                <strong>St. Louis Fed</strong> - Labor Market Shocks and Monetary Policy
-            </div>
-            <div class="summary">Employer-to-employer transitions significantly shaped inflation during pandemic recovery—framework suggests job-to-job mobility metrics matter more than headline unemployment for Fed tightening cycles.</div>
-        </div>
-
-        <div class="meta" style="margin-top: 40px; text-align: center; border-top: 1px solid #ddd; padding-top: 20px;">
-            <p><strong>Report generated:</strong> December 5, 2025</p>
-            <p>Data sources: Federal Reserve District Websites</p>
-            <p>All URLs verified and clickable</p>
-        </div>
+        <h2>Usage Tips</h2>
+        <ul>
+            <li>Run daily with <code>--mode since-last-run</code> to see only new content</li>
+            <li>Filter specific districts with <code>--districts NY,SF,MIN</code></li>
+            <li>Adjust lookback period with <code>--days 14</code> or <code>--days 60</code></li>
+            <li>Default mode <code>--mode all</code> shows comprehensive recent research (best for web publishing)</li>
+        </ul>
+        
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+        <p class="meta" style="text-align: center;">
+            Generated by Federal Reserve District Monitor<br>
+            Report Date: {report_date} | Coverage: {coverage_period}
+        </p>
     </div>
 </body>
 </html>
