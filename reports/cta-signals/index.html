@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTA Exhaustion Signals</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .info-value {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 5px;
+        }
+        .currency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .currency-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .currency-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .currency-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .position-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .position-bar {
+            flex: 1;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .position-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        .position-long {
+            background: linear-gradient(90deg, #28a745, #20c997);
+        }
+        .position-short {
+            background: linear-gradient(90deg, #dc3545, #e83e8c);
+        }
+        .position-value {
+            font-weight: bold;
+            min-width: 50px;
+            text-align: right;
+        }
+        .position-positive {
+            color: #28a745;
+        }
+        .position-negative {
+            color: #dc3545;
+        }
+        .last-updated {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .methodology {
+            background: #e7f3ff;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .methodology h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 CTA Exhaustion Signals</h1>
+
+    <div class="info-box">
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">CTA Model</div>
+                <div class="info-value">FAST</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">EMA Windows</div>
+                <div class="info-value">20/50/100</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Currencies Tracked</div>
+                <div class="info-value">25</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Last Updated</div>
+                <div class="info-value">2025-12-09</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="methodology">
+        <h3>How It Works</h3>
+        <p><strong>CTA Positioning:</strong> Measures momentum-following positioning using triple EMA convergence.
+        Values range from -50 (max short) to +50 (max long).</p>
+        <p><strong>Exhaustion Signals:</strong> Red markers indicate when extreme positioning unwinds,
+        suggesting potential trend exhaustion and reversal opportunities.</p>
+    </div>
+
+    <h2>Currency Pairs</h2>
+    <div class="currency-grid">
+
+        <a href="JPY_exhaustion.html" class="currency-card">
+            <div class="currency-name">JPY</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 24.923430912509996%"></div>
+                </div>
+                <div class="position-value position-positive">24.9</div>
+            </div>
+        </a>
+
+        <a href="KRW_exhaustion.html" class="currency-card">
+            <div class="currency-name">KRW</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 24.495432659079057%"></div>
+                </div>
+                <div class="position-value position-positive">24.5</div>
+            </div>
+        </a>
+
+        <a href="INR_exhaustion.html" class="currency-card">
+            <div class="currency-name">INR</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 19.984501573672947%"></div>
+                </div>
+                <div class="position-value position-positive">20.0</div>
+            </div>
+        </a>
+
+        <a href="PHP_exhaustion.html" class="currency-card">
+            <div class="currency-name">PHP</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 16.414852439264067%"></div>
+                </div>
+                <div class="position-value position-positive">16.4</div>
+            </div>
+        </a>
+
+        <a href="TRY_exhaustion.html" class="currency-card">
+            <div class="currency-name">TRY</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 13.14075652519993%"></div>
+                </div>
+                <div class="position-value position-positive">13.1</div>
+            </div>
+        </a>
+
+        <a href="IDR_exhaustion.html" class="currency-card">
+            <div class="currency-name">IDR</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 4.131892701863682%"></div>
+                </div>
+                <div class="position-value position-positive">4.1</div>
+            </div>
+        </a>
+
+        <a href="CAD_exhaustion.html" class="currency-card">
+            <div class="currency-name">CAD</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 4.004581728161724%"></div>
+                </div>
+                <div class="position-value position-positive">4.0</div>
+            </div>
+        </a>
+
+        <a href="SGD_exhaustion.html" class="currency-card">
+            <div class="currency-name">SGD</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 3.7421839925308946%"></div>
+                </div>
+                <div class="position-value position-positive">3.7</div>
+            </div>
+        </a>
+
+        <a href="AUD_exhaustion.html" class="currency-card">
+            <div class="currency-name">AUD</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 2.6429990242991126%"></div>
+                </div>
+                <div class="position-value position-positive">2.6</div>
+            </div>
+        </a>
+
+        <a href="NOK_exhaustion.html" class="currency-card">
+            <div class="currency-name">NOK</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-long" style="margin-left: 50%; width: 1.499048410838696%"></div>
+                </div>
+                <div class="position-value position-positive">1.5</div>
+            </div>
+        </a>
+
+        <a href="CHF_exhaustion.html" class="currency-card">
+            <div class="currency-name">CHF</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 50%; width: 0.0%"></div>
+                </div>
+                <div class="position-value position-negative">0.0</div>
+            </div>
+        </a>
+
+        <a href="EUR_exhaustion.html" class="currency-card">
+            <div class="currency-name">EUR</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 50%; width: 0.0%"></div>
+                </div>
+                <div class="position-value position-negative">0.0</div>
+            </div>
+        </a>
+
+        <a href="GBP_exhaustion.html" class="currency-card">
+            <div class="currency-name">GBP</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 47.28419141545349%; width: 2.715808584546505%"></div>
+                </div>
+                <div class="position-value position-negative">-2.7</div>
+            </div>
+        </a>
+
+        <a href="BRL_exhaustion.html" class="currency-card">
+            <div class="currency-name">BRL</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 46.10198690070517%; width: 3.8980130992948268%"></div>
+                </div>
+                <div class="position-value position-negative">-3.9</div>
+            </div>
+        </a>
+
+        <a href="PLN_exhaustion.html" class="currency-card">
+            <div class="currency-name">PLN</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 46.07852045805231%; width: 3.9214795419476935%"></div>
+                </div>
+                <div class="position-value position-negative">-3.9</div>
+            </div>
+        </a>
+
+        <a href="MXN_exhaustion.html" class="currency-card">
+            <div class="currency-name">MXN</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 45.826642567980755%; width: 4.173357432019242%"></div>
+                </div>
+                <div class="position-value position-negative">-4.2</div>
+            </div>
+        </a>
+
+        <a href="SEK_exhaustion.html" class="currency-card">
+            <div class="currency-name">SEK</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 43.37159626799676%; width: 6.628403732003245%"></div>
+                </div>
+                <div class="position-value position-negative">-6.6</div>
+            </div>
+        </a>
+
+        <a href="THB_exhaustion.html" class="currency-card">
+            <div class="currency-name">THB</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 43.07113011537078%; width: 6.928869884629223%"></div>
+                </div>
+                <div class="position-value position-negative">-6.9</div>
+            </div>
+        </a>
+
+        <a href="ZAR_exhaustion.html" class="currency-card">
+            <div class="currency-name">ZAR</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 43.037554657779204%; width: 6.962445342220798%"></div>
+                </div>
+                <div class="position-value position-negative">-7.0</div>
+            </div>
+        </a>
+
+        <a href="CZK_exhaustion.html" class="currency-card">
+            <div class="currency-name">CZK</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 42.63414394433295%; width: 7.365856055667049%"></div>
+                </div>
+                <div class="position-value position-negative">-7.4</div>
+            </div>
+        </a>
+
+        <a href="CLP_exhaustion.html" class="currency-card">
+            <div class="currency-name">CLP</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 40.44693387337159%; width: 9.553066126628412%"></div>
+                </div>
+                <div class="position-value position-negative">-9.6</div>
+            </div>
+        </a>
+
+        <a href="NZD_exhaustion.html" class="currency-card">
+            <div class="currency-name">NZD</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 39.927513879788265%; width: 10.072486120211739%"></div>
+                </div>
+                <div class="position-value position-negative">-10.1</div>
+            </div>
+        </a>
+
+        <a href="COP_exhaustion.html" class="currency-card">
+            <div class="currency-name">COP</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 36.654807669931266%; width: 13.345192330068736%"></div>
+                </div>
+                <div class="position-value position-negative">-13.3</div>
+            </div>
+        </a>
+
+        <a href="HUF_exhaustion.html" class="currency-card">
+            <div class="currency-name">HUF</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 29.165747885915312%; width: 20.834252114084688%"></div>
+                </div>
+                <div class="position-value position-negative">-20.8</div>
+            </div>
+        </a>
+
+        <a href="PEN_exhaustion.html" class="currency-card">
+            <div class="currency-name">PEN</div>
+            <div class="position-info">
+                <div class="position-bar">
+                    <div class="position-fill position-short" style="margin-left: 25.848225995920018%; width: 24.151774004079982%"></div>
+                </div>
+                <div class="position-value position-negative">-24.2</div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="last-updated">
+        Generated on 2025-12-09 14:16:55 UTC
+    </div>
+
+    <script>
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
