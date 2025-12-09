@@ -38,7 +38,8 @@ df_fx[euroy] = df_fx[euroy].multiply(df_fx["EUR"], axis=0)
 inverse_display = ["EURUSD", "GBPUSD", "AUDUSD", "NZDUSD"]
 df_display = df_fx.copy()
 df_display[inverse] = 1 / df_display[inverse]
-# Show full history (not just last 11 years)
+# Filter to start from 2016
+df_display = df_display[df_display.index >= '2016-01-01']
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -124,8 +125,11 @@ def create_exhaustion_chart(df, ccy, currency, positions_df, signals_df, mode, w
         name='Price', line=dict(color='teal', width=2), yaxis='y1'
     ))
 
+    # Filter positioning to match price data timeframe
+    pos_filtered = positions_df[positions_df.index.isin(df.index)]
+
     fig.add_trace(go.Scatter(
-        x=positions_df.index, y=positions_df[currency], mode='lines',
+        x=pos_filtered.index, y=pos_filtered[currency], mode='lines',
         name='CTA Positioning', line=dict(color='orange', width=1.5),
         yaxis='y2', opacity=0.6
     ))
