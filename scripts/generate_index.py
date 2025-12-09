@@ -18,13 +18,12 @@ with open(os.path.join(OUTPUT_DIR, 'summary.json'), 'r') as f:
 fast_positions = all_summaries['fast']['latest_positions']
 slow_positions = all_summaries['slow']['latest_positions']
 
-# Sort currencies by position (most long to most short) - use fast mode for sorting
-sorted_currencies = sorted(fast_positions.keys(), key=lambda x: fast_positions[x], reverse=True)
-
 # Create bar charts for both modes
 def create_position_bar_chart(positions, mode):
     """Create interactive bar chart of current positions"""
-    currencies = [ccy for ccy in sorted_currencies]
+    # Sort currencies by position for THIS mode (most long to most short)
+    sorted_currencies = sorted(positions.keys(), key=lambda x: positions[x], reverse=True)
+    currencies = sorted_currencies
     values = [positions[ccy] for ccy in currencies]
 
     # Color bars based on position
@@ -337,7 +336,11 @@ html_content = f"""<!DOCTYPE html>
 
         const fastPositions = {json.dumps(fast_positions)};
         const slowPositions = {json.dumps(slow_positions)};
-        const sortedCurrencies = {json.dumps(sorted_currencies)};
+
+        function getSortedCurrencies(positions) {{
+            // Sort currencies by position (most long to most short)
+            return Object.keys(positions).sort((a, b) => positions[b] - positions[a]);
+        }}
 
         function showMode(mode) {{
             currentMode = mode;
@@ -360,6 +363,7 @@ html_content = f"""<!DOCTYPE html>
 
         function updateCurrencyGrid() {{
             const positions = currentMode === 'fast' ? fastPositions : slowPositions;
+            const sortedCurrencies = getSortedCurrencies(positions);
             const grid = document.getElementById('currency-grid');
 
             grid.innerHTML = sortedCurrencies.map(ccy => {{
@@ -396,6 +400,6 @@ html_content = f"""<!DOCTYPE html>
 with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w') as f:
     f.write(html_content)
 
-print(f"✅ Generated index.html with bar charts for {len(sorted_currencies)} currencies")
+print(f"✅ Generated index.html with bar charts for {len(fast_positions)} currencies")
 print(f"   - FAST mode chart with {all_summaries['fast']['windows']} windows")
 print(f"   - SLOW mode chart with {all_summaries['slow']['windows']} windows")
