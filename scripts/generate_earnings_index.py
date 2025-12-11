@@ -22,17 +22,19 @@ def parse_earnings_report(filepath):
     headline_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     headline = headline_match.group(1) if headline_match else "No headline"
 
+    # Extract filename first (format: TICKER-YYYY-MM-DD.md)
+    filename = os.path.basename(filepath)
+
     # Extract ticker and quarter from headline (e.g., "GEV Q3 2025 Review: ...")
     ticker_match = re.search(r'^([A-Z]+)\s+Q(\d)\s+(\d{4})', headline)
     if ticker_match:
         ticker = ticker_match.group(1)
         quarter = f"Q{ticker_match.group(2)} {ticker_match.group(3)}"
     else:
-        ticker = "Unknown"
+        # Fallback: extract ticker from filename (TICKER-YYYY-MM-DD.md)
+        filename_ticker_match = re.search(r'^([A-Z0-9]+)-\d{4}-\d{2}-\d{2}\.md$', filename)
+        ticker = filename_ticker_match.group(1) if filename_ticker_match else "Unknown"
         quarter = "Unknown"
-
-    # Extract filename date (format: TICKER-YYYY-MM-DD.md)
-    filename = os.path.basename(filepath)
     date_match = re.search(r'(\d{4}-\d{2}-\d{2})', filename)
     report_date = date_match.group(1) if date_match else "Unknown"
 
