@@ -25,16 +25,9 @@ def parse_earnings_report(filepath):
     # Extract filename first (format: TICKER-YYYY-MM-DD.md)
     filename = os.path.basename(filepath)
 
-    # Extract ticker and quarter from headline (e.g., "GEV Q3 2025 Review: ...")
-    ticker_match = re.search(r'^([A-Z]+)\s+Q(\d)\s+(\d{4})', headline)
-    if ticker_match:
-        ticker = ticker_match.group(1)
-        quarter = f"Q{ticker_match.group(2)} {ticker_match.group(3)}"
-    else:
-        # Fallback: extract ticker from filename (TICKER-YYYY-MM-DD.md)
-        filename_ticker_match = re.search(r'^([A-Z0-9]+)-\d{4}-\d{2}-\d{2}\.md$', filename)
-        ticker = filename_ticker_match.group(1) if filename_ticker_match else "Unknown"
-        quarter = "Unknown"
+    # Extract ticker from filename (TICKER-YYYY-MM-DD.md)
+    filename_ticker_match = re.search(r'^([A-Z0-9]+)-\d{4}-\d{2}-\d{2}\.md$', filename)
+    ticker = filename_ticker_match.group(1) if filename_ticker_match else "Unknown"
     date_match = re.search(r'(\d{4}-\d{2}-\d{2})', filename)
     report_date = date_match.group(1) if date_match else "Unknown"
 
@@ -61,7 +54,6 @@ def parse_earnings_report(filepath):
 
     return {
         'ticker': ticker,
-        'quarter': quarter,
         'headline': headline,
         'summary': summary[:150] + '...' if len(summary) > 150 else summary,
         'report_date': report_date,
@@ -79,14 +71,24 @@ for file in Path(OUTPUT_DIR).glob('*.md'):
     try:
         report_data = parse_earnings_report(file)
         reports.append(report_data)
-        print(f"  ✓ Parsed {report_data['ticker']} {report_data['quarter']}")
+        print(f"  ✓ Parsed {report_data['ticker']}")
     except Exception as e:
         print(f"  ✗ Failed to parse {file.name}: {e}")
 
 # Sort reports by report_date (newest first)
 reports.sort(key=lambda x: x['report_date'], reverse=True)
 
-print(f"\nFound {len(reports)} earnings reports")
+# Deduplicate: keep only the most recent report per ticker
+seen_tickers = set()
+deduplicated_reports = []
+for report in reports:
+    if report['ticker'] not in seen_tickers:
+        deduplicated_reports.append(report)
+        seen_tickers.add(report['ticker'])
+
+reports = deduplicated_reports
+
+print(f"\nFound {len(reports)} earnings reports (deduplicated by ticker)")
 
 # Generate HTML content
 html_content = f"""<!DOCTYPE html>
@@ -285,10 +287,6 @@ html_content = f"""<!DOCTYPE html>
                     <div class="stat-label">Most Recent</div>
                     <div class="stat-value">{reports[0]['ticker'] if reports else 'N/A'}</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">Latest Quarter</div>
-                    <div class="stat-value">{reports[0]['quarter'] if reports else 'N/A'}</div>
-                </div>
             </div>
         </div>
 
@@ -301,10 +299,9 @@ html_content = f"""<!DOCTYPE html>
                 <thead>
                     <tr>
                         <th onclick="sortTable(0)">Ticker</th>
-                        <th onclick="sortTable(1)">Quarter</th>
-                        <th onclick="sortTable(2)">Headline</th>
-                        <th onclick="sortTable(3)">Report Date</th>
-                        <th onclick="sortTable(4)">Earnings Date</th>
+                        <th onclick="sortTable(1)">Headline</th>
+                        <th onclick="sortTable(2)">Report Date</th>
+                        <th onclick="sortTable(3)">Earnings Date</th>
                     </tr>
                 </thead>
                 <tbody id="reportsBody">
@@ -315,7 +312,6 @@ for report in reports:
     html_content += f"""
                     <tr>
                         <td class="ticker">{report['ticker']}</td>
-                        <td><span class="quarter">{report['quarter']}</span></td>
                         <td><a href="{report['filename']}" class="report-link">{report['summary']}</a></td>
                         <td class="date">{report['report_date']}</td>
                         <td class="date">{report['earnings_date']}</td>
@@ -365,7 +361,7 @@ html_content += f"""
                 const bText = b.cells[columnIndex].textContent.trim();
 
                 // Try to parse as date for date columns
-                if (columnIndex === 3 || columnIndex === 4) {{
+                if (columnIndex === 2 || columnIndex === 3) {{
                     const aDate = new Date(aText);
                     const bDate = new Date(bText);
                     if (!isNaN(aDate) && !isNaN(bDate)) {{
