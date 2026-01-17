@@ -1,0 +1,39 @@
+name: Update Crypto CTA Signals
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Run daily at 6:00 AM UTC (after crypto markets have full day data)
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-crypto-cta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Crypto CTA signals
+        run: |
+          cd scripts
+          python generate_crypto_cta_signals.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/crypto-cta-signals/
+          git diff --staged --quiet || git commit -m "Update Crypto CTA signals - $(date +'%Y-%m-%d')
+
+          🤖 Automated daily update" && git push
