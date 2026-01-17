@@ -29,6 +29,11 @@ jobs:
           cd scripts
           python generate_crypto_cta_signals.py
 
+      - name: Generate index page
+        run: |
+          cd scripts
+          python generate_crypto_index.py
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
