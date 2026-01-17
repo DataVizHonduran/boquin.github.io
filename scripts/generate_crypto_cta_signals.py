@@ -46,10 +46,9 @@ CRYPTO_SYMBOLS = {
 STABLECOINS = ['tether', 'usdc']
 
 
-def fetch_crypto_data(crypto_id: str, days: int = 1825) -> pd.DataFrame:
+def fetch_crypto_data(crypto_id: str, days: int = 1825, max_retries: int = 3) -> pd.DataFrame:
     """
-    Fetch historical price data from CoinGecko API
-    Max days for free tier is 365, but we try to get more with market_chart
+    Fetch historical price data from CoinGecko API with retry logic
     """
     url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart"
     params = {
@@ -58,31 +57,51 @@ def fetch_crypto_data(crypto_id: str, days: int = 1825) -> pd.DataFrame:
         'interval': 'daily'
     }
 
-    try:
-        response = requests.get(url, params=params, timeout=30)
-        response.raise_for_status()
-        data = response.json()
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, params=params, timeout=30)
 
-        prices = data.get('prices', [])
-        if not prices:
+            # Handle rate limiting specifically
+            if response.status_code == 429:
+                wait_time = 60 * (attempt + 1)  # 60s, 120s, 180s
+                print(f"    Rate limited. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
+                time.sleep(wait_time)
+                continue
+
+            response.raise_for_status()
+            data = response.json()
+
+            prices = data.get('prices', [])
+            if not prices:
+                return pd.DataFrame()
+
+            df = pd.DataFrame(prices, columns=['timestamp', 'price'])
+            df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+            df.set_index('timestamp', inplace=True)
+            df.index = df.index.normalize()  # Remove time component
+            df = df[~df.index.duplicated(keep='first')]  # Remove duplicate dates
+
+            return df
+
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 429 and attempt < max_retries - 1:
+                continue
+            print(f"Error fetching {crypto_id}: {e}")
+            return pd.DataFrame()
+        except Exception as e:
+            print(f"Error fetching {crypto_id}: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(10 * (attempt + 1))
+                continue
             return pd.DataFrame()
 
-        df = pd.DataFrame(prices, columns=['timestamp', 'price'])
-        df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-        df.set_index('timestamp', inplace=True)
-        df.index = df.index.normalize()  # Remove time component
-        df = df[~df.index.duplicated(keep='first')]  # Remove duplicate dates
-
-        return df
-
-    except Exception as e:
-        print(f"Error fetching {crypto_id}: {e}")
-        return pd.DataFrame()
+    return pd.DataFrame()
 
 
 def fetch_all_crypto_data() -> pd.DataFrame:
     """Fetch data for all top 20 cryptos and combine into single DataFrame"""
     print("Fetching cryptocurrency data from CoinGecko...")
+    print("Note: Using conservative rate limiting to avoid 429 errors")
 
     all_data = {}
     cryptos_to_analyze = [c for c in TOP_20_CRYPTOS if c not in STABLECOINS]
@@ -94,9 +113,14 @@ def fetch_all_crypto_data() -> pd.DataFrame:
         df = fetch_crypto_data(crypto_id)
         if not df.empty:
             all_data[symbol] = df['price']
+            print(f"    ✓ Got {len(df)} days of data")
+        else:
+            print(f"    ✗ No data retrieved")
 
-        # Rate limiting - CoinGecko free tier allows ~10-30 calls/minute
-        time.sleep(2)
+        # Conservative rate limiting - CoinGecko free tier is strict
+        # 10-30 calls/minute, so 6 seconds between calls is safe
+        if i < len(cryptos_to_analyze) - 1:  # Don't sleep after last request
+            time.sleep(6)
 
     if not all_data:
         raise ValueError("No data fetched from CoinGecko")
