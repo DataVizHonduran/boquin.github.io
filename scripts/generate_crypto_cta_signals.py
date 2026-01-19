@@ -41,39 +41,44 @@ CRYPTO_SYMBOLS = {
 }
 
 def fetch_crypto_data(crypto_id: str, days: int = 1825, max_retries: int = 3) -> pd.DataFrame:
-    """Fetches historical price data from CoinGecko with API Key support."""
+    """Fetches historical price data with explicit status logging."""
     url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart"
-    
-    # Get API key from GitHub Secrets environment variable
     api_key = os.environ.get('COINGECKO_API_KEY')
     headers = {'x-cg-demo-api-key': api_key} if api_key else {}
-    
-    params = {
-        'vs_currency': 'usd',
-        'days': days,
-        'interval': 'daily'
-    }
+    params = {'vs_currency': 'usd', 'days': days, 'interval': 'daily'}
     
     for attempt in range(max_retries):
         try:
-            response = requests.get(url, params=params, headers=headers, timeout=30)
+            print(f"  --> Fetching {crypto_id} (Attempt {attempt + 1})...")
+            # Reduced timeout to 15s to fail faster and retry
+            response = requests.get(url, params=params, headers=headers, timeout=15)
+            
+            if response.status_code == 429:
+                print(f"  !! Rate Limited (429) for {crypto_id}. Waiting 60s...")
+                time.sleep(60)
+                continue
+                
             response.raise_for_status()
             data = response.json()
             
+            print(f"  ok: {crypto_id} data received.")
             df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
             df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
             df.set_index('date', inplace=True)
             return df['price']
             
+        except requests.exceptions.Timeout:
+            print(f"  !! Timeout error for {crypto_id}.")
         except Exception as e:
-            if attempt < max_retries - 1:
-                wait_time = (attempt + 1) * 30  # Exponential backoff
-                print(f"Error fetching {crypto_id}: {e}. Retrying in {wait_time}s...")
-                time.sleep(wait_time)
-            else:
-                print(f"Failed to fetch data for {crypto_id} after {max_retries} attempts.")
-                return None
-
+            print(f"  !! Error fetching {crypto_id}: {e}")
+            
+        if attempt < max_retries - 1:
+            wait_time = (attempt + 1) * 20
+            print(f"  Retrying in {wait_time}s...")
+            time.sleep(wait_time)
+            
+    return None
+    
 def calculate_cta_position(prices: pd.Series, mode: str = 'fast') -> pd.Series:
     """Calculates CTA positioning based on moving average crossovers."""
     config = CTA_MODES[mode]
