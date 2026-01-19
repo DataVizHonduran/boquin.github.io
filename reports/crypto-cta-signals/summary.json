@@ -1,0 +1,16 @@
+{
+    "fast": {
+        "latest_positions": {},
+        "cryptocurrencies": 0,
+        "windows": "20/50/100",
+        "generated_at": "2026-01-19T14:57:27.047770",
+        "recent_signals_30d": {}
+    },
+    "slow": {
+        "latest_positions": {},
+        "cryptocurrencies": 0,
+        "windows": "50/100/200",
+        "generated_at": "2026-01-19T14:57:27.047779",
+        "recent_signals_30d": {}
+    }
+}
