@@ -2,13 +2,12 @@ name: Update Crypto CTA Signals
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Run daily at 6:00 AM UTC (after crypto markets have full day data)
-  workflow_dispatch:  # Allow manual trigger
+    - cron: '0 6 * * *'  # Run daily at 6:00 AM UTC
+  workflow_dispatch:      # Allow manual trigger
 
 jobs:
   update-crypto-cta:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,6 +24,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate Crypto CTA signals
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
         run: |
           cd scripts
           python generate_crypto_cta_signals.py
@@ -39,6 +40,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/crypto-cta-signals/
-          git diff --staged --quiet || git commit -m "Update Crypto CTA signals - $(date +'%Y-%m-%d')
-
-          🤖 Automated daily update" && git push
+          # Check for changes, then pull and rebase before pushing
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "Update Crypto CTA signals - $(date +'%Y-%m-%d') 🤖 Automated daily update"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No changes to commit"
+          fi
