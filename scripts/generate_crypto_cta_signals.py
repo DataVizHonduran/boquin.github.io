@@ -120,7 +120,7 @@ def fetch_all_crypto_data() -> pd.DataFrame:
         # Conservative rate limiting - CoinGecko free tier is strict
         # 10-30 calls/minute, so 6 seconds between calls is safe
         if i < len(cryptos_to_analyze) - 1:  # Don't sleep after last request
-            time.sleep(6)
+            time.sleep(10)
 
     if not all_data:
         raise ValueError("No data fetched from CoinGecko")
