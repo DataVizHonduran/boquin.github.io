@@ -92,45 +92,54 @@ def calculate_cta_position(prices: pd.Series, mode: str = 'fast') -> pd.Series:
 def generate_signals():
     """Main execution function to generate signals for all cryptos."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    summary_data = []
-    
+
+    # Initialize data structure expected by generate_crypto_index.py
+    summary_data = {
+        'fast': {
+            'latest_positions': {},
+            'cryptocurrencies': 0,
+            'windows': '20/50/100',
+            'generated_at': datetime.now().isoformat(),
+            'recent_signals_30d': {}
+        },
+        'slow': {
+            'latest_positions': {},
+            'cryptocurrencies': 0,
+            'windows': '50/100/200',
+            'generated_at': datetime.now().isoformat(),
+            'recent_signals_30d': {}
+        }
+    }
+
     for i, crypto_id in enumerate(TOP_20_CRYPTOS):
         print(f"Processing {crypto_id} ({i+1}/{len(TOP_20_CRYPTOS)})...")
-        
+
         prices = fetch_crypto_data(crypto_id)
         if prices is None or len(prices) < 200:
             continue
-            
-        # Calculate fast and slow positions
+
+        symbol = CRYPTO_SYMBOLS.get(crypto_id, crypto_id.upper())
+
+        # Calculate fast and slow positions separately
         pos_fast = calculate_cta_position(prices, 'fast')
         pos_slow = calculate_cta_position(prices, 'slow')
-        
-        # Combined position (-1 to +1)
-        combined_pos = (pos_fast + pos_slow) / 2
-        current_pos = combined_pos.iloc[-1]
-        
-        # Determine Signal
-        signal = "NEUTRAL"
-        if current_pos > 0.8: signal = "MAX LONG"
-        elif current_pos < -0.8: signal = "MAX SHORT"
-        
-        summary_data.append({
-            'id': crypto_id,
-            'symbol': CRYPTO_SYMBOLS.get(crypto_id, crypto_id.upper()),
-            'price': round(prices.iloc[-1], 4),
-            'position': round(current_pos, 2),
-            'signal': signal,
-            'last_updated': datetime.now().strftime("%Y-%m-%d %H:%M")
-        })
-        
+
+        # Store positions scaled to -50 to +50 range for chart display
+        summary_data['fast']['latest_positions'][symbol] = round(pos_fast.iloc[-1] * 50, 1)
+        summary_data['slow']['latest_positions'][symbol] = round(pos_slow.iloc[-1] * 50, 1)
+
         # Rate limiting: 10 seconds between calls for CoinGecko Demo API safety
         if i < len(TOP_20_CRYPTOS) - 1:
             time.sleep(10)
 
+    # Update crypto counts
+    summary_data['fast']['cryptocurrencies'] = len(summary_data['fast']['latest_positions'])
+    summary_data['slow']['cryptocurrencies'] = len(summary_data['slow']['latest_positions'])
+
     # Save summary
     with open(f"{OUTPUT_DIR}/summary.json", 'w') as f:
         json.dump(summary_data, f, indent=4)
-    print("Update complete.")
+    print(f"Update complete. Processed {summary_data['fast']['cryptocurrencies']} cryptocurrencies.")
 
 if __name__ == "__main__":
     generate_signals()
