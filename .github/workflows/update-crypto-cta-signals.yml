@@ -40,11 +40,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/crypto-cta-signals/
-          # Check for changes, then pull and rebase before pushing
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git commit -m "Update Crypto CTA signals - $(date +'%Y-%m-%d') 🤖 Automated daily update"
-            git pull --rebase origin main
-            git push
-          else
-            echo "No changes to commit"
-          fi
+          git diff --staged --quiet || git commit -m "Update Crypto CTA signals - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git push
