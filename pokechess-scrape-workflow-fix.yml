@@ -1,0 +1,50 @@
+name: Daily Scrape
+
+on:
+  schedule:
+    # 6 AM EST = 11:00 UTC (EST is UTC-5)
+    - cron: '0 11 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager
+
+      - name: Run scraper
+        run: |
+          python scraper.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet public/players.json || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add public/players.json
+          git commit -m "Daily scrape: Update player data $(date +'%Y-%m-%d')"
+          git push
