@@ -8,10 +8,14 @@ on:
 jobs:
   update-earnings:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,6 +38,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/earnings/
-          git diff --staged --quiet || git commit -m "Update earnings reports - $(date +'%Y-%m-%d')
-
-          🤖 Automated daily update" && git push
+          git diff --staged --quiet || git commit -m "Update earnings reports - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git push
