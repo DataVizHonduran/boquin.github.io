@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federal Reserve District Monitor - February 2, 2026</title>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+
+        .card h3 {
+            color: var(--fed-blue);
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .card.highlight {
+            border-left-color: var(--fed-gold);
+            background: #fffbf0;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .themes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .theme-card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .theme-card h4 {
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .theme-card ul {
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .theme-card li {
+            margin-bottom: 5px;
+        }
+
+        .district-section {
+            margin-bottom: 30px;
+        }
+
+        .district-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .district-badge {
+            background: var(--fed-blue);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .publication-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .publication {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--fed-blue);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .publication:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .publication.new {
+            border-left-color: var(--fed-gold);
+            background: #fffbf0;
+        }
+
+        .publication .date {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .publication .title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .publication .title a {
+            color: var(--fed-blue);
+            text-decoration: none;
+        }
+
+        .publication .title a:hover {
+            text-decoration: underline;
+        }
+
+        .publication .authors {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .publication .summary {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .new-badge {
+            display: inline-block;
+            background: var(--fed-gold);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--fed-blue);
+            color: white;
+        }
+
+        tr:hover {
+            background: var(--light-bg);
+        }
+
+        .highlight-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .highlight-section h3 {
+            color: var(--fed-blue);
+            margin-bottom: 15px;
+        }
+
+        .highlight-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--fed-gold);
+        }
+
+        .highlight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-item .district {
+            font-size: 0.8rem;
+            color: var(--fed-blue);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .highlight-item .title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .highlight-item .title a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .highlight-item .title a:hover {
+            color: var(--fed-blue);
+        }
+
+        .highlight-item .description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .summary-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Federal Reserve District Monitor</h1>
+        <p class="subtitle">Research & Blog Publications Tracker | February 2, 2026</p>
+    </header>
+
+    <div class="summary-cards">
+        <div class="card">
+            <h3>77</h3>
+            <p>Total Publications</p>
+        </div>
+        <div class="card highlight">
+            <h3>27</h3>
+            <p>New Since Jan 6</p>
+        </div>
+        <div class="card">
+            <h3>7</h3>
+            <p>Districts Tracked</p>
+        </div>
+        <div class="card">
+            <h3>24</h3>
+            <p>NY Fed (Most Active)</p>
+        </div>
+    </div>
+
+    <section>
+        <h2>Key Themes This Period</h2>
+        <div class="themes">
+            <div class="theme-card">
+                <h4>Labor Markets & Demographics</h4>
+                <ul>
+                    <li>Immigration's impact on labor force growth</li>
+                    <li>Disability in the labor market (earnings gaps)</li>
+                    <li>Older workers' employment trends</li>
+                    <li>Labor market tightness indicators updated</li>
+                </ul>
+            </div>
+            <div class="theme-card">
+                <h4>Trade & Tariffs</h4>
+                <ul>
+                    <li>Historical tariff shock analysis</li>
+                    <li>EU Carbon Border Adjustment Mechanism</li>
+                    <li>Carbon tax circumvention by firms</li>
+                    <li>Trade cost measurement methods</li>
+                </ul>
+            </div>
+            <div class="theme-card">
+                <h4>Monetary Policy & Finance</h4>
+                <ul>
+                    <li>Data revisions impact on policy</li>
+                    <li>Central bank credibility & inflation</li>
+                    <li>Interest rate sensitivity to oil</li>
+                    <li>Bank resilience to CRE losses</li>
+                </ul>
+            </div>
+            <div class="theme-card">
+                <h4>Emerging Risks</h4>
+                <ul>
+                    <li>China manufacturing overcapacity</li>
+                    <li>Rising "zombie" firms in China</li>
+                    <li>AI impact on young workers</li>
+                    <li>Dollar's reserve status challenges</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Must-Read for Macro Investors</h2>
+        <div class="highlight-section">
+            <div class="highlight-item">
+                <div class="district">San Francisco Fed</div>
+                <div class="title"><a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2026/01/what-can-history-tell-us-about-tariff-shocks/">What Can History Tell Us About Tariff Shocks?</a></div>
+                <div class="description">2025's tariff increase is the largest in the modern era. Historical analysis shows tariffs correlate with higher unemployment, lower activity, and lower inflation. Uncertainty may suppress aggregate demand and produce deflationary pressure.</div>
+            </div>
+            <div class="highlight-item">
+                <div class="district">San Francisco Fed</div>
+                <div class="title"><a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2026/01/recent-slowdown-in-labor-supply-and-demand/">The Recent Slowdown in Labor Supply and Demand</a></div>
+                <div class="description">Slowing labor force growth coinciding with slowdown in job growth. Important for understanding Fed's dual mandate considerations.</div>
+            </div>
+            <div class="highlight-item">
+                <div class="district">Dallas Fed</div>
+                <div class="title"><a href="https://www.dallasfed.org/research/economics/2026/0106-ai">Young workers' employment drops in occupations with high AI exposure</a></div>
+                <div class="description">AI adoption correlating with rising joblessness among younger demographics. Structural implications for labor markets.</div>
+            </div>
+            <div class="highlight-item">
+                <div class="district">New York Fed</div>
+                <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/measuring-labor-market-tightness-data-update-and-new-web-feature/">Measuring Labor Market Tightness: Data Update</a></div>
+                <div class="description">Updated indicator through 2025. Highlighted as best predictor of wage inflation.</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>New Publications by District</h2>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>New York Fed</h3>
+                <span class="district-badge">9 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">January 14, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/understating-rising-quality-means-import-price-inflation-is-overstated/">Understating Rising Quality Means Import Price Inflation Is Overstated</a></div>
+                    <div class="authors">Danial Lashkari</div>
+                    <div class="summary">Examines how quality improvements in imported goods aren't properly captured in official price indices, suggesting import inflation has been overstated.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 12, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/disability-in-the-labor-market-earnings/">Disability in the Labor Market: Earnings</a></div>
+                    <div class="authors">Rajashri Chakrabarti, Thu Pham, Beck Pierce, Maxim L. Pinkovskiy</div>
+                    <div class="summary">Analyzes earnings disparities between workers with and without disabilities, finding significantly lower weekly earnings for disabled workers.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 12, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/disability-in-the-labor-market-employment-and-participation/">Disability in the Labor Market: Employment and Participation</a></div>
+                    <div class="authors">Rajashri Chakrabarti, Thu Pham, Beck Pierce, Maxim L. Pinkovskiy</div>
+                    <div class="summary">First in companion series examining how workers with disabilities participate in labor markets at lower rates than their counterparts.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 8, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/measuring-labor-market-tightness-data-update-and-new-web-feature/">Measuring Labor Market Tightness: Data Update and New Web Feature</a></div>
+                    <div class="authors">Sebastian Heise, Jeremy Pearce, Jacob P. Weber</div>
+                    <div class="summary">Updates labor market tightness indicator through 2025; highlights it as the best predictor of wage inflation.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 7, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/what-is-a-carbon-tariff-and-why-is-the-eu-imposing-one/">What Is a Carbon Tariff and Why Is the EU Imposing One?</a></div>
+                    <div class="authors">Pierre Coster, Julian di Giovanni, Isabelle Mejean</div>
+                    <div class="summary">Explores the EU's Carbon Border Adjustment Mechanism, explaining its purpose in addressing carbon leakage.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 7, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/what-can-undermine-a-carbon-tax/">What Can Undermine a Carbon Tax?</a></div>
+                    <div class="authors">Pierre Coster, Julian di Giovanni, Isabelle Mejean</div>
+                    <div class="summary">Companion post demonstrating how firms circumvent carbon taxes through increased imports of high-emission inputs.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 5, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2026/01/which-entrepreneurs-boost-productivity/">Which Entrepreneurs Boost Productivity?</a></div>
+                    <div class="authors">Ufuk Akcigit, Harun Alp, Jeremy Pearce, Marta Prato</div>
+                    <div class="summary">Analyzes Danish entrepreneurship data, identifying 'transformative' entrepreneurs as primary drivers of productivity gains.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 22, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2025/12/a-new-public-data-source-call-reports-from-1959-to-2025/">A New Public Data Source: Call Reports from 1959 to 2025</a></div>
+                    <div class="authors">Sergio Correia, Tiffany Fermin, Stephan Luck, Emil Verner</div>
+                    <div class="summary">Announces newly available time-consistent banking balance sheet and income statement data spanning decades.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 17, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://libertystreeteconomics.newyorkfed.org/2025/12/letters-of-recommendation-in-the-phd-job-market-lessons-from-specialized-banks/">Letters of Recommendation in the PhD Job Market: Lessons from Specialized Banks</a></div>
+                    <div class="authors">Kristian S. Blickle, Cecilia Parlatore</div>
+                    <div class="summary">Applies banking specialization concepts to academic hiring, analyzing how recommendation letters function as quality signals.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>Dallas Fed</h3>
+                <span class="district-badge">6 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">January 15, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2026/0115">Real-time house price model shows U.S. housing market firming</a></div>
+                    <div class="authors">Tryg Aanenson, Erik Andres Escayola, Enrique Martínez García, et al.</div>
+                    <div class="summary">Examines how residential property valuations connect to consumer behavior and broader economic patterns using real-time modeling.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 13, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2026/0113">New data show intensifying unauthorized immigration decline</a></div>
+                    <div class="authors">Daniel Wilson, Xiaoqing Zhou</div>
+                    <div class="summary">Analyzes demographic shifts in undocumented migration patterns and their effects on workforce dynamics.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 6, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2026/0106-ai">Young workers' employment drops in occupations with high AI exposure</a></div>
+                    <div class="authors">Tyler Atkinson, Shane Yamco</div>
+                    <div class="summary">Investigates whether artificial intelligence adoption correlates with rising joblessness among younger demographics.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 31, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2025/1231">Global Institute presentation: Steve Kamin on the dollar's status</a></div>
+                    <div class="authors">Enrique Martínez García, Mark Wynne</div>
+                    <div class="summary">Discusses challenges to U.S. currency's international reserve position amid trade policy shifts.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 30, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2025/1230">China manufacturing overcapacity boosts output, stagnation fears</a></div>
+                    <div class="authors">Brendan Kelly, J. Scott Davis</div>
+                    <div class="summary">Examines sustainability of Chinese industrial production amid widespread firm losses.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 23, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.dallasfed.org/research/economics/2025/1223">China debt overhang leads to rising share of 'zombie' firms</a></div>
+                    <div class="authors">J. Scott Davis, Brendan Kelly</div>
+                    <div class="summary">Analyzes credit expansion effects on non-viable enterprises in China's private sector.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>Richmond Fed</h3>
+                <span class="district-badge">5 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">January 15, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-03">How Does the Foreign-Born Population Affect Labor Force Growth?</a></div>
+                    <div class="authors">Santiago Pinto</div>
+                    <div class="summary">Examines the role of immigration in driving U.S. labor force growth and its demographic implications.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 10, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-02">Home Health Care and Aging in Place</a></div>
+                    <div class="authors">John Bailey Jones, Yue Li, Urvi Neelakantan</div>
+                    <div class="summary">Examines home health care services and their role in enabling older Americans to age in their homes.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 5, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-01">How Data Revisions and Uncertainty Affect Monetary Policy</a></div>
+                    <div class="authors">Thomas A. Lubik, Jacob Titcomb</div>
+                    <div class="summary">Analyzes how economic data revisions and measurement uncertainty complicate monetary policy decisions.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 20, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.richmondfed.org/publications/research/economic_brief/2025/eb_25-46">How Secondary Trade Affects Social Welfare in an Over-the-Counter Market</a></div>
+                    <div class="authors">Nicholas Trachter, Spencer Cooper-Ohm</div>
+                    <div class="summary">Examines how secondary market trading in OTC markets affects overall social welfare.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 15, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.richmondfed.org/publications/research/economic_brief/2025/eb_25-45">The Value of Government Services: Evidence From Flight Delays During the 2025 Shutdown</a></div>
+                    <div class="authors">Russell Wong</div>
+                    <div class="summary">Quantifies the economic cost of reduced government services using flight delay data from the 2025 government shutdown.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>Minneapolis Fed</h3>
+                <span class="district-badge">4 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">January 30, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.minneapolisfed.org/research/institute-working-papers/why-do-households-save-and-work">Why Do Households Save and Work?</a></div>
+                    <div class="authors">Margherita Borella, Mariacristina De Nardi, Johanna Torres Chain, Fang Yang</div>
+                    <div class="summary">Examines household motivations for savings and labor supply decisions.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 30, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.minneapolisfed.org/research/staff-reports/a-macroeconomic-perspective-on-stock-market-valuation-ratios">A Macroeconomic Perspective on Stock Market Valuation Ratios</a></div>
+                    <div class="authors">Andrew Atkeson, Jonathan Heathcote, Fabrizio Perri</div>
+                    <div class="summary">Analyzes stock market valuations from a macroeconomic framework perspective.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 16, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.minneapolisfed.org/research/community-development-working-papers/understanding-eligibility-and-take-up-in-state-unemployment-insurance-programs">Understanding Eligibility and Take-Up in State Unemployment Insurance Programs</a></div>
+                    <div class="authors">Juliet Cramer, Ryan Nunn</div>
+                    <div class="summary">Examines factors affecting unemployment insurance eligibility and participation rates across states.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">January 16, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.minneapolisfed.org/research/institute-working-papers/intergenerational-welfare-assessments">Intergenerational Welfare Assessments</a></div>
+                    <div class="authors">Sergi Barcons, Eduardo Dávila, Andreas Schaab</div>
+                    <div class="summary">Develops framework for evaluating welfare across generations.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>San Francisco Fed</h3>
+                <span class="district-badge">2 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">January 12, 2026 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2026/01/recent-slowdown-in-labor-supply-and-demand/">The Recent Slowdown in Labor Supply and Demand</a></div>
+                    <div class="authors">Leila Bengali, Ingrid Chen, Addie New-Schmidt, Nicolas Petrosky-Nadeau</div>
+                    <div class="summary">Examines how slowing labor force growth coincided with a slowdown in job growth.</div>
+                </div>
+                <div class="publication new">
+                    <div class="date">December 15, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2025/12/changing-sensitivity-of-interest-rates-to-oil-supply-news/">The Changing Sensitivity of Interest Rates to Oil Supply News</a></div>
+                    <div class="authors">Wataru Miyamoto, Rami Najjar, Thuy Lan Nguyen, Dmitriy Sergeyev</div>
+                    <div class="summary">Analyzes how interest rate responses to oil supply shocks have evolved over time.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="district-section">
+            <div class="district-header">
+                <h3>Atlanta Fed</h3>
+                <span class="district-badge">1 new</span>
+            </div>
+            <div class="publication-list">
+                <div class="publication new">
+                    <div class="date">December 4, 2025 <span class="new-badge">NEW</span></div>
+                    <div class="title"><a href="https://www.atlantafed.org/economy-matters/inside-the-fed/2025/12/04/economic-life-of-our-country-talking-about-payments-with-claire-greene">The Economic Life of Our Country: Talking About Payments with Claire Greene</a></div>
+                    <div class="authors">David Pendered</div>
+                    <div class="summary">Profiles Atlanta Fed researcher Claire Greene who examines how new technology and shifting consumer preferences shape the payments ecosystem.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Publications by District (All Time)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>District</th>
+                    <th>Total</th>
+                    <th>Blog</th>
+                    <th>Research</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>New York Fed</td>
+                    <td>24</td>
+                    <td>24</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Minneapolis Fed</td>
+                    <td>18</td>
+                    <td>0</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>Dallas Fed</td>
+                    <td>17</td>
+                    <td>0</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td>San Francisco Fed</td>
+                    <td>11</td>
+                    <td>0</td>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>Richmond Fed</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>St. Louis Fed</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Atlanta Fed</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Report generated by Claude Code on February 2, 2026</p>
+        <p>Cache contains 77 publications from 7 Fed districts</p>
+        <p>Data sources: Liberty Street Economics, Richmond Fed Economic Briefs, Atlanta Fed Macroblog, Dallas Fed Economics, SF Fed Economic Letters, Minneapolis Fed Research</p>
+    </footer>
+</body>
+</html>
