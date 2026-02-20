@@ -55,7 +55,7 @@ def pull_data(series_dict, years=16):
 # ── Configuration ─────────────────────────────────────────────────────────────
 OUTPUT_DIR           = "reports/treasury-cta-signals"
 GAP                  = 3              # Hysteresis band (smaller than FX; yields move in tighter ranges)
-WINDOW               = 2500           # Rolling window for position normalization
+WINDOW               = 750            # Rolling window for position normalization (~3 years)
 ROLLING_PCT_WINDOW   = 500            # ~2 years rolling window for percentile thresholds (P2)
 ROLLING_PCT_MINPERIODS = 252          # Minimum days before rolling percentile is valid
 RSI_PERIOD           = 14             # RSI lookback for positioning series (P5)
@@ -129,7 +129,7 @@ def calculate_positions(df, short_window, mid_window, long_window):
         d['ema_convergence'] = d['ema_short'] - d['ema_long']
 
         rolling_max_abs = (d['ema_convergence'].abs()
-                           .rolling(window=WINDOW, min_periods=1).max()
+                           .rolling(window=WINDOW, min_periods=1).quantile(0.95)
                            .replace(0, np.nan).bfill().ffill())
         raw_pos = (d['ema_convergence'] / rolling_max_abs) * 50
 
