@@ -120,11 +120,6 @@ def create_dashboard():
         horizontal_spacing=0.08,
     )
 
-    # Make subplot titles larger and darker
-    for ann in fig.layout.annotations:
-        ann.font.size = 13
-        ann.font.color = '#1a1a2e'
-
     # ── Chart 1: Payrolls Diffusion Index ────────────────────────────────────
     print("Chart 1: Payrolls Diffusion Index...")
     payroll_ids = [
@@ -200,15 +195,19 @@ def create_dashboard():
         showlegend=False,
         template='plotly_white',
         margin=dict(t=100, l=55, r=40, b=60),
-        annotations=[dict(
-            text=(f'Last Updated: {update_time} | '
-                  'Source: FRED (St. Louis Fed) | Gray shading = NBER recessions'),
-            xref='paper', yref='paper',
-            x=0.5, y=-0.02,
-            showarrow=False,
-            font=dict(size=11, color='gray'),
-        )]
     )
+    # Add footer separately — avoids overwriting subplot title annotations
+    fig.add_annotation(
+        text=(f'Last Updated: {update_time} | '
+              'Source: FRED (St. Louis Fed) | Gray shading = NBER recessions'),
+        xref='paper', yref='paper',
+        x=0.5, y=-0.02,
+        showarrow=False,
+        font=dict(size=11, color='gray'),
+    )
+    # Make subplot titles larger
+    fig.update_annotations(font=dict(size=13, color='#1a1a2e'),
+                           selector=dict(xref='paper', yref='paper'))
     fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
     fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
 
