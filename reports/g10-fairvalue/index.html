@@ -319,22 +319,25 @@ function renderFVView(pair) {
 
   if (fv && fv.last_year_dates && fv.last_year_dates.length) {
     const n = fv.last_year_dates.length;
+    // ±2σ outer band — amber tint with visible border
     traces.push({
       x: [...fv.last_year_dates, ...fv.last_year_dates.slice().reverse()],
       y: [...Array(n).fill(fv.upper2), ...Array(n).fill(fv.lower2)],
-      fill: 'toself', fillcolor: 'rgba(148,163,184,0.07)',
-      line: { color: 'transparent' }, name: '±2σ', showlegend: true,
+      fill: 'toself', fillcolor: 'rgba(245,158,11,0.12)',
+      line: { color: 'rgba(245,158,11,0.5)', width: 1 }, name: '±2σ', showlegend: true,
     });
+    // ±1σ inner band — teal tint with visible border
     traces.push({
       x: [...fv.last_year_dates, ...fv.last_year_dates.slice().reverse()],
       y: [...Array(n).fill(fv.upper1), ...Array(n).fill(fv.lower1)],
-      fill: 'toself', fillcolor: 'rgba(148,163,184,0.14)',
-      line: { color: 'transparent' }, name: '±1σ', showlegend: true,
+      fill: 'toself', fillcolor: 'rgba(20,184,166,0.18)',
+      line: { color: 'rgba(20,184,166,0.6)', width: 1 }, name: '±1σ', showlegend: true,
     });
+    // Mean fair value — bright solid line
     traces.push({
       x: fv.last_year_dates,
       y: Array(n).fill(fv.mean_fv),
-      mode: 'lines', line: { color: '#f59e0b', width: 1.5, dash: 'dash' },
+      mode: 'lines', line: { color: '#facc15', width: 2 },
       name: 'Mean Fair Value',
     });
   }
@@ -344,6 +347,7 @@ function renderFVView(pair) {
     title: { text: pair + ' · Annual Fair Value Bands (current year)', font: { size: 13 } },
     margin: { l: 55, r: 20, t: 45, b: 40 },
     legend: { ...LAYOUT_BASE.legend, orientation: 'h', y: 1.08 },
+    xaxis: { ...LAYOUT_BASE.xaxis, range: ['2016-01-01', all_dates[all_dates.length - 1]] },
   }, CFG);
 }
 
