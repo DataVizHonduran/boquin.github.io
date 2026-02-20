@@ -75,7 +75,7 @@ def add_recession_shading(fig, recession, row, col, y0, y1):
 
 
 def plot_series(fig, row, col, series, recession, y0, y1,
-                color='#1f77b4', quantile_line=0.2):
+                color='#1f77b4', quantile_line=0.2, y_label=''):
     """Plot a series with optional 20th-pct dashed line and recession shading."""
     series = series.dropna()
 
@@ -90,11 +90,14 @@ def plot_series(fig, row, col, series, recession, y0, y1,
         fig.add_trace(go.Scatter(
             x=series.index, y=[q] * len(series),
             mode='lines', showlegend=False,
+            name=f'{int(quantile_line*100)}th pct',
             line=dict(dash='dash', color='gray', width=1),
         ), row=row, col=col)
 
     add_recession_shading(fig, recession, row, col, y0, y1)
-    fig.update_yaxes(range=[y0, y1], row=row, col=col)
+    fig.update_yaxes(range=[y0, y1], title_text=y_label,
+                     title_font=dict(size=11), row=row, col=col)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=row, col=col)
 
 
 def create_dashboard():
@@ -117,6 +120,11 @@ def create_dashboard():
         horizontal_spacing=0.08,
     )
 
+    # Make subplot titles larger and darker
+    for ann in fig.layout.annotations:
+        ann.font.size = 13
+        ann.font.color = '#1a1a2e'
+
     # ── Chart 1: Payrolls Diffusion Index ────────────────────────────────────
     print("Chart 1: Payrolls Diffusion Index...")
     payroll_ids = [
@@ -128,38 +136,38 @@ def create_dashboard():
     df1 = get_fred_multi(payroll_ids, years=100)
     rising = df1.diff().gt(0).astype(int)
     diffusion1 = (rising.sum(axis=1) / rising.shape[1] * 100).rolling(3).mean().dropna()
-    plot_series(fig, 1, 1, diffusion1, recession, 0, 100)
+    plot_series(fig, 1, 1, diffusion1, recession, 0, 100, y_label='% of Industries Rising')
 
     # ── Chart 2: EPOP from 24-month high ─────────────────────────────────────
     print("Chart 2: Employment-to-Population Ratio...")
     epop = get_fred("EMRATIO", years=100)
     epop_rel = (epop - epop.rolling(24).max()).dropna()
-    plot_series(fig, 1, 2, epop_rel, recession, -4, 0)
+    plot_series(fig, 1, 2, epop_rel, recession, -4, 0, y_label='pp vs 24M High')
 
     # ── Chart 3: Continuing Claims (inverted) ─────────────────────────────────
     print("Chart 3: Continuing Claims...")
     cc = get_fred("CCSA", years=100)
     cc_rel = (100 - 100 * (cc / cc.rolling(156).min() - 1)).dropna()
-    plot_series(fig, 2, 1, cc_rel, recession, 0, 100)
+    plot_series(fig, 2, 1, cc_rel, recession, 0, 100, y_label='% Above 3Y Low (Inverted)')
 
     # ── Chart 4: New Orders from 24-month high ────────────────────────────────
     print("Chart 4: New Orders...")
     no = get_fred("NEWORDER", years=50)
     no_rel = (no / no.rolling(24).max()).dropna()
-    plot_series(fig, 2, 2, no_rel, recession, 0.65, 1.02, quantile_line=None)
+    plot_series(fig, 2, 2, no_rel, recession, 0.65, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
 
     # ── Chart 5: Building Permits ─────────────────────────────────────────────
     print("Chart 5: Building Permits...")
     permits = get_fred("PERMIT", years=50)
     permits_rel = (permits / permits.rolling(24).max()).dropna()
-    plot_series(fig, 3, 1, permits_rel, recession, 0.4, 1.02, quantile_line=None)
+    plot_series(fig, 3, 1, permits_rel, recession, 0.4, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
 
     # ── Chart 6: Mfg Orders-to-Inventories ───────────────────────────────────
     print("Chart 6: Mfg Orders-to-Inventories...")
     mfg = get_fred_multi(["AMTMNO", "AMTMTI"], years=50)
     ratio = mfg["AMTMNO"] / mfg["AMTMTI"]
     ratio_rel = (ratio / ratio.rolling(24).max()).dropna()
-    plot_series(fig, 3, 2, ratio_rel, recession, 0.7, 1.02, quantile_line=None)
+    plot_series(fig, 3, 2, ratio_rel, recession, 0.7, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
 
     # ── Chart 7: Consumer & Activity Diffusion Index ─────────────────────────
     # YoY % change > 0 across 8 consumer/activity series = broad spending health
@@ -178,7 +186,7 @@ def create_dashboard():
     con_yoy = con_df.pct_change(12) * 100
     diffusion7 = ((con_yoy > 0).sum(axis=1) / con_yoy.count(axis=1) * 100
                   ).rolling(3).mean().dropna()
-    plot_series(fig, 4, 1, diffusion7, recession, 0, 100)
+    plot_series(fig, 4, 1, diffusion7, recession, 0, 100, y_label='% of Series with Positive YoY')
 
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
