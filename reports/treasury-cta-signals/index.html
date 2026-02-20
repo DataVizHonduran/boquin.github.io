@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasury CTA Exhaustion Signals</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+  :root {
+    --navy:  #1a1a2e;
+    --teal:  #16213e;
+    --blue:  #0f3460;
+    --accent:#e94560;
+    --green: #28a745;
+    --red:   #dc3545;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+  }
+  header {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: white;
+    padding: 28px 40px;
+  }
+  header h1 { font-size: 2rem; margin-bottom: 4px; }
+  header p  { opacity: 0.75; font-size: 0.95rem; }
+  .badge-row { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+  }
+  main { max-width: 1300px; margin: 0 auto; padding: 30px 24px; }
+  h2 {
+    font-size: 1.25rem; color: var(--navy);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px; margin-bottom: 18px;
+  }
+  /* ── Yield snapshot ── */
+  .yield-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 32px;
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .yield-table th, .yield-table td {
+    padding: 12px 16px; text-align: center; font-size: 0.9rem;
+  }
+  .yield-table th {
+    background: var(--navy); color: white; font-weight: 600;
+  }
+  .yield-table tr:nth-child(even) { background: #f9f9f9; }
+  /* ── Bar charts ── */
+  .charts-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin-bottom: 32px;
+  }
+  .chart-box {
+    background: white; border-radius: 10px; padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  /* ── Mode tabs ── */
+  .tab-bar {
+    display: flex; gap: 8px; margin-bottom: 14px;
+  }
+  .tab-btn {
+    padding: 7px 20px; border-radius: 20px; cursor: pointer;
+    border: 2px solid var(--navy); background: white;
+    font-weight: 600; color: var(--navy); font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--navy); color: white; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  /* ── Chart card links ── */
+  .chart-cards {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;
+  }
+  .chart-card {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center;
+    width: 110px; height: 80px;
+    background: white; border-radius: 10px;
+    border: 2px solid #ddd;
+    text-decoration: none; color: var(--navy);
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+  .chart-card:hover {
+    border-color: var(--accent); box-shadow: 0 4px 12px rgba(233,69,96,0.2);
+    transform: translateY(-2px);
+  }
+  .chart-tenor { font-size: 1.1rem; font-weight: 700; }
+  .chart-mode  { font-size: 0.72rem; color: #888; text-transform: uppercase; }
+  /* ── Signal tables ── */
+  .signal-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 32px;
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .signal-table th, .signal-table td {
+    padding: 10px 14px; text-align: center; font-size: 0.87rem;
+  }
+  .signal-table th   { background: var(--navy); color: white; font-weight: 600; }
+  .signal-table tr:nth-child(even) { background: #f9f9f9; }
+  .dir-long  { color: var(--green); font-weight: 600; }
+  .dir-short { color: var(--red);   font-weight: 600; }
+  .mode-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .mode-fast { background: #fff3cd; color: #856404; }
+  .mode-slow { background: #cce5ff; color: #004085; }
+  .score-high { color: #155724; font-weight: 700; }
+  .score-mid  { color: #856404; font-weight: 600; }
+  .score-low  { color: #888;    font-weight: 400; }
+  .score-cell { font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+  .peak-cell  { font-variant-numeric: tabular-nums; }
+  .consensus-badge {
+    background: #d4edda; color: #155724;
+    border-radius: 10px; padding: 1px 6px; font-size: 0.75rem;
+    margin-left: 4px;
+  }
+  /* ── Stats cards ── */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: white; border-radius: 10px; padding: 18px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: center;
+  }
+  .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+  .stat-label { font-size: 0.8rem; color: #888; margin-top: 4px; }
+  footer {
+    text-align: center; padding: 28px;
+    color: #aaa; font-size: 0.82rem; margin-top: 20px;
+  }
+  @media (max-width: 768px) {
+    .charts-grid { grid-template-columns: 1fr; }
+    .stats-row   { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏛️ Treasury CTA Exhaustion Signals</h1>
+  <p>Trend-following positioning model applied to 2Y / 5Y / 10Y / 30Y US Treasury yields</p>
+  <div class="badge-row">
+    <span class="badge">Data as of 2026-02-18</span>
+    <span class="badge">Generated 2026-02-20 15:16</span>
+    <span class="badge">FRED: DGS2 · DGS5 · DGS10 · DGS30</span>
+    <span class="badge">Fast (20/50/100) + Slow (50/100/200)</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Stat cards ── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">113</div>
+      <div class="stat-label">Fast Signals (all-time)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">82</div>
+      <div class="stat-label">Slow Signals (all-time)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Fast High-Conviction (≥60)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Slow High-Conviction (≥60)</div>
+    </div>
+  </div>
+
+  <!-- ── Current yield snapshot ── -->
+  <h2>Current Treasury Yield Snapshot</h2>
+  <table class="yield-table">
+    <thead>
+      <tr>
+        <th>Tenor</th>
+        <th>Yield</th>
+        <th>Fast Position</th>
+        <th>Slow Position</th>
+        <th>CTA Lean</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>2Y</strong></td><td>3.47%</td><td>-3.4</td><td>-6.0</td><td class="">Neutral</td></tr>
+<tr><td><strong>5Y</strong></td><td>3.66%</td><td>-1.2</td><td>-3.3</td><td class="">Neutral</td></tr>
+<tr><td><strong>10Y</strong></td><td>4.09%</td><td>-1.0</td><td>-1.9</td><td class="">Neutral</td></tr>
+<tr><td><strong>30Y</strong></td><td>4.71%</td><td>+0.0</td><td>+2.3</td><td class="">Neutral</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ── Positioning bar charts ── -->
+  <h2>CTA Positioning by Mode</h2>
+  <div class="charts-grid">
+    <div class="chart-box"><div>                            <div id="64f119c9-c1e0-4f53-89a4-8a36c881321a" class="plotly-graph-div" style="height:380px; width:540px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("64f119c9-c1e0-4f53-89a4-8a36c881321a")) {                    Plotly.newPlot(                        "64f119c9-c1e0-4f53-89a4-8a36c881321a",                        [{"marker":{"color":["#dc3545","#dc3545","#dc3545","#dc3545"]},"text":["-3.4","-1.2","-1.0","+0.0"],"textfont":{"color":"#333","size":14},"textposition":"outside","x":["2Y","5Y","10Y","30Y"],"y":[-3.444481150317217,-1.1597358365811352,-0.9914525978263939,0.0],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":16,"color":"#1a1a2e"},"text":"CTA Positioning — FAST Mode","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":13},"title":{"text":"Tenor"}},"yaxis":{"tickfont":{"size":12},"title":{"text":"Position Score"},"range":[-55,55],"zeroline":true,"zerolinecolor":"black","zerolinewidth":1.5},"margin":{"t":60,"b":60,"l":60,"r":30},"plot_bgcolor":"white","width":540,"height":380,"showlegend":false,"annotations":[{"font":{"color":"grey","size":11},"showarrow":false,"text":"+ = Long Duration \u002f − = Short Duration","x":0.5,"xref":"paper","y":-0.17,"yref":"paper"}]},                        {"responsive": true}                    )                };            </script>        </div></div>
+    <div class="chart-box"><div>                            <div id="42d8f76f-d8bb-492e-9bb3-011662a34bf9" class="plotly-graph-div" style="height:380px; width:540px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("42d8f76f-d8bb-492e-9bb3-011662a34bf9")) {                    Plotly.newPlot(                        "42d8f76f-d8bb-492e-9bb3-011662a34bf9",                        [{"marker":{"color":["#dc3545","#dc3545","#dc3545","#28a745"]},"text":["-6.0","-3.3","-1.9","+2.3"],"textfont":{"color":"#333","size":14},"textposition":"outside","x":["2Y","5Y","10Y","30Y"],"y":[-6.002582417640358,-3.2522269005430955,-1.8669917551653863,2.3365509810733607],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":16,"color":"#1a1a2e"},"text":"CTA Positioning — SLOW Mode","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":13},"title":{"text":"Tenor"}},"yaxis":{"tickfont":{"size":12},"title":{"text":"Position Score"},"range":[-55,55],"zeroline":true,"zerolinecolor":"black","zerolinewidth":1.5},"margin":{"t":60,"b":60,"l":60,"r":30},"plot_bgcolor":"white","width":540,"height":380,"showlegend":false,"annotations":[{"font":{"color":"grey","size":11},"showarrow":false,"text":"+ = Long Duration \u002f − = Short Duration","x":0.5,"xref":"paper","y":-0.17,"yref":"paper"}]},                        {"responsive": true}                    )                };            </script>        </div></div>
+  </div>
+
+  <!-- ── Chart links ── -->
+  <h2>Individual Tenor Charts</h2>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('fast', this)">Fast Mode (20/50/100)</button>
+    <button class="tab-btn"       onclick="switchTab('slow', this)">Slow Mode (50/100/200)</button>
+  </div>
+  <div id="tab-fast" class="tab-pane active">
+    <div class="chart-cards"><a href="2Y_exhaustion_fast.html" class="chart-card"><div class="chart-tenor">2Y</div><div class="chart-mode">FAST</div></a> <a href="5Y_exhaustion_fast.html" class="chart-card"><div class="chart-tenor">5Y</div><div class="chart-mode">FAST</div></a> <a href="10Y_exhaustion_fast.html" class="chart-card"><div class="chart-tenor">10Y</div><div class="chart-mode">FAST</div></a> <a href="30Y_exhaustion_fast.html" class="chart-card"><div class="chart-tenor">30Y</div><div class="chart-mode">FAST</div></a></div>
+  </div>
+  <div id="tab-slow" class="tab-pane">
+    <div class="chart-cards"><a href="2Y_exhaustion_slow.html" class="chart-card"><div class="chart-tenor">2Y</div><div class="chart-mode">SLOW</div></a> <a href="5Y_exhaustion_slow.html" class="chart-card"><div class="chart-tenor">5Y</div><div class="chart-mode">SLOW</div></a> <a href="10Y_exhaustion_slow.html" class="chart-card"><div class="chart-tenor">10Y</div><div class="chart-mode">SLOW</div></a> <a href="30Y_exhaustion_slow.html" class="chart-card"><div class="chart-tenor">30Y</div><div class="chart-mode">SLOW</div></a></div>
+  </div>
+
+  <!-- ── Recent signal history ── -->
+  <h2>Recent Signal History</h2>
+  <table class="signal-table">
+    <thead>
+      <tr>
+        <th>Date</th><th>Tenor</th><th>Direction</th>
+        <th>Mode</th><th>Strength</th><th>Peak Pos.</th>
+      </tr>
+    </thead>
+    <tbody><tr><td>2026-01-21</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">2</td><td class="peak-cell">-10.4</td></tr>
+<tr><td>2026-01-06</td><td><strong>30Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">2</td><td class="peak-cell">0.0</td></tr>
+<tr><td>2026-01-05</td><td><strong>10Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">2</td><td class="peak-cell">-8.6</td></tr>
+<tr><td>2025-12-24</td><td><strong>5Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">1</td><td class="peak-cell">-10.6</td></tr>
+<tr><td>2025-11-11</td><td><strong>30Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-low">7</td><td class="peak-cell">-11.6</td></tr>
+<tr><td>2025-11-05</td><td><strong>10Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-low">10</td><td class="peak-cell">-11.9</td></tr>
+<tr><td>2025-06-11</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">1</td><td class="peak-cell">-9.8</td></tr>
+<tr><td>2025-05-16</td><td><strong>10Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-low">28</td><td class="peak-cell">0.0</td></tr>
+<tr><td>2025-02-03</td><td><strong>30Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-low">13</td><td class="peak-cell">24.7</td></tr>
+<tr><td>2025-01-30</td><td><strong>10Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-low">14</td><td class="peak-cell">23.1</td></tr>
+<tr><td>2025-01-28</td><td><strong>5Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-low">11</td><td class="peak-cell">18.6</td></tr>
+<tr><td>2024-12-25</td><td><strong>5Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-mid">55</td><td class="peak-cell">-19.1</td></tr></tbody>
+  </table>
+
+  <!-- ── High-conviction signals ── -->
+  <h2>High-Conviction Signals (Score ≥ 60)</h2>
+  <table class="signal-table"><thead><tr><th>Date</th><th>Tenor</th><th>Direction</th><th>Mode</th><th>Strength</th><th>Peak Pos.</th></tr></thead><tbody><tr><td>2016-01-26</td><td><strong>2Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">77</td><td class="peak-cell">48.4</td></tr>
+<tr><td>2022-11-16</td><td><strong>10Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">75</td><td class="peak-cell">50.0</td></tr>
+<tr><td>2016-03-11</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">75</td><td class="peak-cell">-19.2</td></tr>
+<tr><td>2024-03-21</td><td><strong>10Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">71</td><td class="peak-cell">-20.1</td></tr>
+<tr><td>2023-06-09</td><td><strong>5Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">70</td><td class="peak-cell">-12.6</td></tr>
+<tr><td>2023-05-31</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">69</td><td class="peak-cell">-10.9</td></tr>
+<tr><td>2014-12-29</td><td><strong>5Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">68</td><td class="peak-cell">-11.1</td></tr>
+<tr><td>2016-03-08</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-high">65</td><td class="peak-cell">0.0</td></tr>
+<tr><td>2022-11-18</td><td><strong>30Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">63</td><td class="peak-cell">50.0</td></tr>
+<tr><td>2022-11-14</td><td><strong>5Y</strong></td><td class="dir-long">▲ Long Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">62</td><td class="peak-cell">49.7</td></tr>
+<tr><td>2019-09-17</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">62</td><td class="peak-cell">-50.0</td></tr>
+<tr><td>2015-11-02</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">62</td><td class="peak-cell">-7.0</td></tr>
+<tr><td>2016-08-19</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration</td><td><span class="mode-badge mode-fast">FAST</span></td><td class="score-cell score-high">62</td><td class="peak-cell">-31.7</td></tr>
+<tr><td>2024-03-21</td><td><strong>10Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-high">60</td><td class="peak-cell">0.0</td></tr>
+<tr><td>2023-05-31</td><td><strong>2Y</strong></td><td class="dir-short">▼ Short Duration <span class="consensus-badge">✓ Consensus</span></td><td><span class="mode-badge mode-slow">SLOW</span></td><td class="score-cell score-high">60</td><td class="peak-cell">0.0</td></tr></tbody></table>
+
+</main>
+
+<footer>
+  Data sourced from FRED (Federal Reserve Bank of St. Louis) · DGS2, DGS5, DGS10, DGS30<br>
+  CTA exhaustion model: dual-mode EMA positioning with rolling percentile thresholds, ROC filter, RSI confirmation, and strength scoring.<br>
+  Positive position = long duration (falling yields) · Negative position = short duration (rising yields)
+</footer>
+
+<script>
+function switchTab(mode, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + mode).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

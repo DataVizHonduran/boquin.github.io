@@ -1,0 +1,40 @@
+name: Update Treasury CTA Signals
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 5:00 AM UTC daily (after FX at 2am, G10 at 3am, crypto at 4am)
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  update-treasury-cta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Treasury CTA signals
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python scripts/generate_treasury_cta_signals.py
+
+      - name: Generate index page
+        run: python scripts/generate_treasury_index.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/treasury-cta-signals/
+          git diff --staged --quiet || (git commit -m "Update Treasury CTA signals - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase && git push)
