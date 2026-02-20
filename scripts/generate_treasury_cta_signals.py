@@ -25,8 +25,11 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from fredapi import Fred
 
-# ── FRED API key (set FRED_API_KEY env var in GitHub Actions; fallback for local) ─
-FRED_API_KEY = os.environ.get('FRED_API_KEY', 'a360aed8a89d4033c63596eed9abec9e')
+# ── FRED API key — set FRED_API_KEY environment variable ─────────────────────
+FRED_API_KEY = os.environ.get('FRED_API_KEY')
+if not FRED_API_KEY:
+    raise EnvironmentError("FRED_API_KEY environment variable is not set. "
+                           "Export it before running: export FRED_API_KEY=your_key")
 
 
 def pull_data(series_dict, years=16):
