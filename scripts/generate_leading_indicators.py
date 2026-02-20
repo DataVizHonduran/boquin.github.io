@@ -196,7 +196,9 @@ def create_dashboard():
         template='plotly_white',
         margin=dict(t=100, l=55, r=40, b=60),
     )
-    # Add footer separately — avoids overwriting subplot title annotations
+    # Resize all subplot titles (must run before add_annotation for footer)
+    fig.update_annotations(font_size=13, font_color='#1a1a2e')
+    # Add footer last so it isn't affected by the bulk update above
     fig.add_annotation(
         text=(f'Last Updated: {update_time} | '
               'Source: FRED (St. Louis Fed) | Gray shading = NBER recessions'),
@@ -205,9 +207,6 @@ def create_dashboard():
         showarrow=False,
         font=dict(size=11, color='gray'),
     )
-    # Make subplot titles larger
-    fig.update_annotations(font=dict(size=13, color='#1a1a2e'),
-                           selector=dict(xref='paper', yref='paper'))
     fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
     fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
 
