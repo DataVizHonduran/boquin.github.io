@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Credit Analysis Archive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #1a5276;
+            padding-bottom: 10px;
+        }
+        .description {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.6;
+        }
+        .stats {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .report-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid #1a5276;
+        }
+        .report-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .report-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+        }
+        .date {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        .framework {
+            color: #444;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            background: #eaf0fb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #1a5276;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .link:hover {
+            background-color: #1a5276;
+            color: white;
+        }
+        .last-updated {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1a5276;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .empty-state {
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+
+    <h1>🌍 Sovereign Credit Analysis Archive</h1>
+
+    <div class="description">
+        <p><strong>What is this?</strong> Sovereign credit notes modeled after Moody's and Fitch rating agency reports, using an IMF Debt Sustainability Analysis (DSA) framework. Each note covers ability to pay, willingness to pay, scenario analysis, and ESG considerations.</p>
+
+        <p><strong>Framework:</strong></p>
+        <ul>
+            <li>IMF-DSA Pillars: Debt/GDP trajectory, primary balance, reserves, spreads, current account</li>
+            <li>Willingness-to-Pay: Governance (WGI), fiscal credibility, central bank independence, track record</li>
+            <li>Scenario Analysis: Base / Downside / Upside rating triggers</li>
+            <li>Peer Comparison: Comparable-rated sovereign peers</li>
+            <li>ESG Considerations: Environmental, social, and governance factors</li>
+        </ul>
+
+        <p><strong>Why it matters:</strong> Sovereign credit quality drives EM bond spreads, FX reserve adequacy, and investment risk premia. These notes provide institutional-grade credit analysis for fixed-income portfolio managers covering emerging and frontier markets.</p>
+    </div>
+
+    <div class="stats">
+        <strong>Total Reports:</strong> <span id="report-count">Loading...</span><br>
+        <span class="last-updated">Last Updated: <span id="last-updated">Loading...</span></span>
+    </div>
+
+    <div class="report-grid" id="reports">
+        Loading reports...
+    </div>
+
+    <script>
+        // Country name formatter: "south-africa" → "South Africa"
+        function formatCountry(slug) {
+            return slug
+                .split('-')
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+        }
+
+        async function loadReports() {
+            try {
+                const response = await fetch('https://api.github.com/repos/DataVizHonduran/boquin.github.io/contents/reports/sovereign');
+                const files = await response.json();
+
+                const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== 'README.md');
+
+                document.getElementById('report-count').textContent = mdFiles.length;
+                document.getElementById('last-updated').textContent = new Date().toLocaleString();
+
+                const reportsDiv = document.getElementById('reports');
+                reportsDiv.innerHTML = '';
+
+                // Sort by date (newest first)
+                mdFiles.sort((a, b) => b.name.localeCompare(a.name)).forEach(file => {
+                    // Parse filename: {country-slug}-YYYY-MM-DD.md
+                    const dateMatch = file.name.match(/(\d{4}-\d{2}-\d{2})/);
+                    const reportDate = dateMatch ? dateMatch[1] : 'Unknown date';
+
+                    // Country slug is everything before the date
+                    const countrySlug = file.name.replace(/-\d{4}-\d{2}-\d{2}\.md$/, '');
+                    const countryName = formatCountry(countrySlug);
+
+                    const card = document.createElement('div');
+                    card.className = 'report-card';
+                    card.innerHTML = `
+                        <div class="report-title">${countryName}</div>
+                        <div class="date">Report Date: ${reportDate}</div>
+                        <div class="framework">IMF-DSA Framework · Moody's/Fitch Style</div>
+                        <br>
+                        <a href="${file.name}" class="link">View Report →</a>
+                    `;
+                    reportsDiv.appendChild(card);
+                });
+
+                if (mdFiles.length === 0) {
+                    reportsDiv.innerHTML = '<p class="empty-state">No reports available yet. Check back soon!</p>';
+                }
+            } catch (error) {
+                document.getElementById('reports').innerHTML = '<p class="empty-state">Error loading reports. Please try again later.</p>';
+                console.error('Error loading reports:', error);
+            }
+        }
+
+        loadReports();
+    </script>
+</body>
+</html>
