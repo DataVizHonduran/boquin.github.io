@@ -1,6 +1,6 @@
 {
   "fast": {
-    "generated_at": "2026-02-21T05:44:57.565254",
+    "generated_at": "2026-02-22T05:54:22.289871",
     "mode": "fast",
     "windows": "20/50/100",
     "tenors": 4,
@@ -1610,7 +1610,7 @@
     ]
   },
   "slow": {
-    "generated_at": "2026-02-21T05:45:00.408166",
+    "generated_at": "2026-02-22T05:54:24.981614",
     "mode": "slow",
     "windows": "50/100/200",
     "tenors": 4,
