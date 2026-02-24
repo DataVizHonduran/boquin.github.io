@@ -1010,19 +1010,21 @@ def main():
   <p style="margin:0 0 12px;">
     Mexico's <strong>IGAE</strong> (Indicador Global de la Actividad Económica) is INEGI's
     monthly proxy for GDP, published with a ~45-day lag. This nowcaster bridges that gap
-    using three <strong>OLS bridge equations</strong> fitted on quarterly data since 2016:
+    using four <strong>OLS bridge equations</strong> fitted on quarterly data since 2016:
   </p>
   <ul style="margin:0 0 12px; padding-left:20px;">
     <li><strong>Activity bridge</strong> — IMEF Manufacturing and Non-Manufacturing PMI
         (3-month moving averages), capturing domestic business-cycle momentum.</li>
     <li><strong>External bridge</strong> — US Industrial Production YoY, WTI crude oil YoY,
-        and US manufacturing employment YoY, reflecting the tight Mexico–US trade linkage.</li>
+        and IMAI Manufacturing Index YoY, reflecting Mexico&rsquo;s trade and industrial linkages.</li>
     <li><strong>Financial bridge</strong> — USD/MXN YoY and IPC Bolsa Mexicana YoY,
         incorporating real-time financial-market signals.</li>
+    <li><strong>Construction bridge</strong> — IMAI Construction Index YoY, directly capturing
+        the fiscal/public-investment channel (the primary driver of Mexico&rsquo;s 2025 slowdown).</li>
   </ul>
   <p style="margin:0 0 12px;">
     Each bridge is validated with an <strong>expanding-window out-of-sample test</strong>
-    (train from 2016, evaluate 2018–2023). Bridges are combined using
+    (train from 2016, evaluate 2018–2025, excluding COVID quarters). Bridges are combined using
     <strong>inverse-RMSE ensemble weights</strong> — better-fitting bridges receive higher
     weight. The current-quarter estimate (red star, plotted at today&rsquo;s date) uses only
     the months of data available so far &mdash; it updates each month as new data arrives.
