@@ -377,6 +377,10 @@ def build_feature_matrix(raw: dict) -> pd.DataFrame:
     if "igae_total_yoy" in df.columns:
         df["igae_yoy"] = df["igae_total_yoy"]
 
+    # Smoothed display series: 3mma of IGAE level → YoY% (display only, not used in model)
+    if "igae_total" in df.columns:
+        df["igae_3mma_yoy"] = df["igae_total"].rolling(3).mean().pct_change(12) * 100
+
     # Forward fill up to 3 months (handles ~45-day IGAE publication lag)
     df = df.ffill(limit=3)
 
@@ -716,12 +720,12 @@ def create_dashboard(
     # Last complete quarter fully covered by released data
     last_released_q_end = igae_cutoff.to_period("Q").to_timestamp(how="end")
 
-    # ── IGAE YoY% actual (monthly, clipped to release cutoff) ─────────────────
-    if "igae_yoy" in df.columns:
-        s = df["igae_yoy"].loc[:igae_cutoff].dropna()
+    # ── IGAE 3mma YoY% (smoothed display line, clipped to release cutoff) ───────
+    if "igae_3mma_yoy" in df.columns:
+        s = df["igae_3mma_yoy"].loc[:igae_cutoff].dropna()
         fig.add_trace(go.Scatter(
             x=s.index, y=s.values,
-            mode="lines", name="IGAE YoY% (monthly)",
+            mode="lines", name="IGAE YoY% (3mma)",
             line=dict(color="#1f77b4", width=2),
         ))
 
