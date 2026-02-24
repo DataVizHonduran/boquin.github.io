@@ -1,0 +1,47 @@
+name: Update Eurozone GDP Nowcaster
+
+on:
+  schedule:
+    # 20th of each month at 08:00 UTC — after Eurostat GDP/IPI flash release
+    - cron: "0 8 20 * *"
+    # 5th of each month at 08:00 UTC — after S&P Global PMI final release
+    - cron: "0 8 5 * *"
+  workflow_dispatch:   # manual trigger any time
+
+jobs:
+  update-eurozone-nowcast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pandas numpy statsmodels plotly requests fredapi \
+                      yfinance python-dateutil
+
+      - name: Run Eurozone nowcaster
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          cd ${{ github.workspace }}
+          python scripts/generate_eurozone_nowcast.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/eurozone-nowcast/index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update: Eurozone GDP Nowcaster $(date +'%Y-%m-%d')"
+            git push
+          fi
