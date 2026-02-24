@@ -690,39 +690,29 @@ def create_dashboard(
     bridge_rmses: dict,
     recession: "pd.Series | None",
 ) -> go.Figure:
-    """Build 6-panel Mexico nowcast dashboard."""
+    """Build single-panel Mexico IGAE nowcast chart."""
 
-    fig = make_subplots(
-        rows=3, cols=2,
-        subplot_titles=[
-            "IGAE YoY% — Actual vs Ensemble Nowcast",
-            "IMEF Manuf PMI (3mma) vs US ISM Manufacturing",
-            "IMEF Non-Manufacturing PMI (3mma)",
-            "Mexico Exports YoY% & Remittances YoY%",
-            "IPC Mexico YoY% & USD/MXN YoY%",
-            "WTI Oil YoY% & IMSS Employment YoY%",
-        ],
-        vertical_spacing=0.10,
-        horizontal_spacing=0.08,
-    )
+    fig = go.Figure()
 
-    # ── Panel [1,1]: IGAE YoY + Ensemble Nowcast ──────────────────────────────
+    # ── IGAE YoY% actual (monthly) ────────────────────────────────────────────
     if "igae_yoy" in df.columns:
         s = df["igae_yoy"].dropna()
         fig.add_trace(go.Scatter(
             x=s.index, y=s.values,
             mode="lines", name="IGAE YoY% (monthly)",
             line=dict(color="#1f77b4", width=2),
-        ), row=1, col=1)
+        ))
 
+    # ── Quarterly actual dots ─────────────────────────────────────────────────
     if "actual" in hist.columns:
         ha = hist["actual"].dropna()
         fig.add_trace(go.Scatter(
             x=ha.index, y=ha.values,
             mode="markers", name="Quarterly Actual",
             marker=dict(color="#1f77b4", size=7, symbol="circle-open", line=dict(width=2)),
-        ), row=1, col=1)
+        ))
 
+    # ── Historical ensemble nowcast ───────────────────────────────────────────
     if "nowcast" in hist.columns:
         hn = hist["nowcast"].dropna()
         fig.add_trace(go.Scatter(
@@ -730,9 +720,9 @@ def create_dashboard(
             mode="lines+markers", name="Ensemble Nowcast (hist.)",
             line=dict(color="#ff7f0e", width=2, dash="dash"),
             marker=dict(size=5),
-        ), row=1, col=1)
+        ))
 
-    # Current quarter point + CI error bar
+    # ── Current quarter point estimate + 90% CI error bar ────────────────────
     if point is not None:
         today   = pd.Timestamp.today()
         q_end   = today.to_period("Q").to_timestamp(how="end")
@@ -743,129 +733,32 @@ def create_dashboard(
             x=[q_end], y=[point],
             mode="markers",
             name=f"{q_label} Nowcast: {point:.1f}%",
-            marker=dict(color="#d62728", size=12, symbol="star"),
+            marker=dict(color="#d62728", size=14, symbol="star"),
             error_y=dict(
                 type="data", symmetric=False,
                 array=[err_hi], arrayminus=[err_lo],
                 visible=True, color="#d62728",
             ),
-        ), row=1, col=1)
+        ))
 
+    # ── Recession shading ─────────────────────────────────────────────────────
     add_recession_shading(fig, recession, 1, 1)
-    fig.add_hline(y=0, line_dash="dot", line_color="gray", line_width=1, row=1, col=1)
-    fig.update_yaxes(title_text="YoY %", row=1, col=1)
+    fig.add_hline(y=0, line_dash="dot", line_color="gray", line_width=1)
 
-    # Nowcast annotation box
+    # ── Nowcast annotation box ────────────────────────────────────────────────
     if point is not None:
         ci_txt = f"90% CI: [{ci[0]:.1f}%, {ci[1]:.1f}%]" if ci else ""
         fig.add_annotation(
             text=f"<b>{q_label} Nowcast: {point:.1f}%</b><br>{ci_txt}",
             xref="paper", yref="paper",
-            x=0.02, y=0.99,
+            x=0.02, y=0.97,
             xanchor="left", yanchor="top",
             showarrow=False,
             bgcolor="rgba(255,127,14,0.15)",
             bordercolor="#ff7f0e",
             borderwidth=1,
-            font=dict(size=12, color="#ff7f0e"),
+            font=dict(size=13, color="#d62728"),
         )
-
-    # ── Panel [1,2]: IMEF Manuf PMI vs US ISM ────────────────────────────────
-    if "imef_manuf_3mma" in df.columns:
-        s = df["imef_manuf_3mma"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="IMEF Manuf PMI (3mma)",
-            line=dict(color="#2ca02c", width=2),
-        ), row=1, col=2)
-
-    if "ism_manuf_3mma" in df.columns:
-        s = df["ism_manuf_3mma"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="US ISM Manuf (3mma)",
-            line=dict(color="#9467bd", width=2, dash="dash"),
-        ), row=1, col=2)
-
-    fig.add_hline(y=50, line_dash="dash", line_color="red", line_width=1.2, row=1, col=2)
-    add_recession_shading(fig, recession, 1, 2)
-    fig.update_yaxes(title_text="PMI Index", row=1, col=2)
-
-    # ── Panel [2,1]: IMEF Non-Manufacturing PMI ───────────────────────────────
-    if "imef_nonmanuf_3mma" in df.columns:
-        s = df["imef_nonmanuf_3mma"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="IMEF Non-Manuf PMI (3mma)",
-            line=dict(color="#17becf", width=2),
-        ), row=2, col=1)
-
-    fig.add_hline(y=50, line_dash="dash", line_color="red", line_width=1.2, row=2, col=1)
-    add_recession_shading(fig, recession, 2, 1)
-    fig.update_yaxes(title_text="PMI Index", row=2, col=1)
-
-    # ── Panel [2,2]: Exports YoY + Remittances YoY ───────────────────────────
-    if "exports_yoy" in df.columns:
-        s = df["exports_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="Exports YoY%",
-            line=dict(color="#e377c2", width=2),
-        ), row=2, col=2)
-
-    if "remittances_yoy" in df.columns:
-        s = df["remittances_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="Remittances YoY%",
-            line=dict(color="#bcbd22", width=2, dash="dash"),
-        ), row=2, col=2)
-
-    fig.add_hline(y=0, line_dash="dot", line_color="gray", line_width=1, row=2, col=2)
-    add_recession_shading(fig, recession, 2, 2)
-    fig.update_yaxes(title_text="YoY %", row=2, col=2)
-
-    # ── Panel [3,1]: IPC YoY + USD/MXN YoY ──────────────────────────────────
-    if "ipc_mexico_yoy" in df.columns:
-        s = df["ipc_mexico_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="IPC Mexico YoY%",
-            line=dict(color="#8c564b", width=2),
-        ), row=3, col=1)
-
-    if "usdmxn_yoy" in df.columns:
-        s = df["usdmxn_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="USD/MXN YoY% (depreciation+)",
-            line=dict(color="#d62728", width=2, dash="dash"),
-        ), row=3, col=1)
-
-    fig.add_hline(y=0, line_dash="dot", line_color="gray", line_width=1, row=3, col=1)
-    add_recession_shading(fig, recession, 3, 1)
-    fig.update_yaxes(title_text="YoY %", row=3, col=1)
-
-    # ── Panel [3,2]: WTI Oil YoY + IMSS Employment YoY ───────────────────────
-    if "wti_oil_yoy" in df.columns:
-        s = df["wti_oil_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="WTI Oil YoY%",
-            line=dict(color="#ff7f0e", width=2),
-        ), row=3, col=2)
-
-    if "employment_imss_yoy" in df.columns:
-        s = df["employment_imss_yoy"].dropna()
-        fig.add_trace(go.Scatter(
-            x=s.index, y=s.values,
-            mode="lines", name="IMSS Employment YoY%",
-            line=dict(color="#1f77b4", width=2, dash="dash"),
-        ), row=3, col=2)
-
-    fig.add_hline(y=0, line_dash="dot", line_color="gray", line_width=1, row=3, col=2)
-    add_recession_shading(fig, recession, 3, 2)
-    fig.update_yaxes(title_text="YoY %", row=3, col=2)
 
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime("%Y-%m-%d %H:%M UTC")
@@ -876,7 +769,7 @@ def create_dashboard(
     wt_parts = [f"{n} w={v:.2f}" for n, v in weights.items()]
     footer = (
         f"Updated: {update_time}  ·  "
-        f"Sources: INEGI, Banxico SIE, IMEF (seed), FRED (NAPM/INDPRO/WTI), yfinance (IPC)  ·  "
+        f"Sources: INEGI BIE-BISE, Banxico SIE, IMEF PMI, FRED (INDPRO/WTI/MANEMP), yfinance (IPC)  ·  "
         f"Gray shading = NBER recessions  ·  "
         + " | ".join(rmse_parts)
         + "  ·  Weights: " + " | ".join(wt_parts)
@@ -884,24 +777,24 @@ def create_dashboard(
 
     fig.update_layout(
         title=dict(
-            text="Mexico GDP Nowcaster — IGAE Bridge Equation Model",
+            text="Mexico IGAE — Actual vs Ensemble Nowcast (YoY %)",
             x=0.5, xanchor="center",
-            font=dict(size=22, color="#1a1a2e"),
+            font=dict(size=20, color="#1a1a2e"),
         ),
-        height=1500,
+        height=550,
         showlegend=True,
         legend=dict(
-            orientation="h", yanchor="bottom", y=1.01,
-            xanchor="right", x=1, font=dict(size=10),
+            orientation="h", yanchor="bottom", y=1.02,
+            xanchor="right", x=1, font=dict(size=11),
         ),
+        yaxis_title="YoY %",
         template="plotly_white",
-        margin=dict(t=130, l=60, r=40, b=90),
+        margin=dict(t=100, l=60, r=40, b=80),
     )
-    fig.update_annotations(font_size=13, font_color="#1a1a2e")
     fig.add_annotation(
         text=footer,
         xref="paper", yref="paper",
-        x=0.5, y=-0.05,
+        x=0.5, y=-0.13,
         showarrow=False,
         font=dict(size=10, color="gray"),
         align="center",
@@ -1044,10 +937,93 @@ def main():
     # ── Dashboard ──────────────────────────────────────────────────────────────
     print("\n  Building dashboard...")
     fig = create_dashboard(df, hist, point_est, ci, weights, bridge_rmses, recession)
-    fig.write_html(
-        OUTPUT_PATH,
+
+    chart_div = fig.to_html(
+        full_html=False,
+        include_plotlyjs="cdn",
         config={"displayModeBar": True, "displaylogo": False},
     )
+
+    rmse_parts = [
+        f"<b>{n}</b>: {v:.2f}% OOS RMSE" if v is not None else f"<b>{n}</b>: N/A"
+        for n, v in bridge_rmses.items()
+    ]
+    wt_parts = [f"<b>{n}</b>: {v:.0%}" for n, v in weights.items()]
+    update_time = datetime.now().strftime("%Y-%m-%d %H:%M UTC")
+
+    methodology_html = f"""
+<div style="max-width:900px; margin:0 auto 32px; padding:0 24px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size:15px; line-height:1.7; color:#333;">
+  <h2 style="font-size:18px; font-weight:600; margin-bottom:10px; color:#1a1a2e;">
+    How the nowcast works
+  </h2>
+  <p style="margin:0 0 12px;">
+    Mexico's <strong>IGAE</strong> (Indicador Global de la Actividad Económica) is INEGI's
+    monthly proxy for GDP, published with a ~45-day lag. This nowcaster bridges that gap
+    using three <strong>OLS bridge equations</strong> fitted on quarterly data since 2016:
+  </p>
+  <ul style="margin:0 0 12px; padding-left:20px;">
+    <li><strong>Activity bridge</strong> — IMEF Manufacturing and Non-Manufacturing PMI
+        (3-month moving averages), capturing domestic business-cycle momentum.</li>
+    <li><strong>External bridge</strong> — US Industrial Production YoY, WTI crude oil YoY,
+        and US manufacturing employment YoY, reflecting the tight Mexico–US trade linkage.</li>
+    <li><strong>Financial bridge</strong> — USD/MXN YoY and IPC Bolsa Mexicana YoY,
+        incorporating real-time financial-market signals.</li>
+  </ul>
+  <p style="margin:0 0 12px;">
+    Each bridge is validated with an <strong>expanding-window out-of-sample test</strong>
+    (train from 2016, evaluate 2018–2023). Bridges are combined using
+    <strong>inverse-RMSE ensemble weights</strong> — better-fitting bridges receive higher
+    weight. The current-quarter estimate uses all available monthly data for the quarter;
+    the <strong>90% confidence interval</strong> comes from 1,000 residual bootstrap
+    iterations.
+  </p>
+  <p style="margin:0; font-size:13px; color:#666;">
+    Bridge performance: {" &nbsp;|&nbsp; ".join(rmse_parts)}.
+    Ensemble weights: {" &nbsp;|&nbsp; ".join(wt_parts)}.
+    Last updated: {update_time}.
+  </p>
+</div>
+"""
+
+    full_html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mexico GDP Nowcaster</title>
+  <style>
+    body {{ margin: 0; padding: 32px 16px 48px; background: #fff; }}
+    h1 {{
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 26px; font-weight: 700; color: #1a1a2e;
+      margin: 0 auto 8px; max-width: 900px;
+    }}
+    .subtitle {{
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px; color: #666; margin: 0 auto 28px; max-width: 900px;
+    }}
+    .chart-wrap {{ max-width: 960px; margin: 0 auto 36px; }}
+  </style>
+</head>
+<body>
+  <h1>Mexico GDP Nowcaster</h1>
+  <p class="subtitle">
+    Real-time estimate of Mexico IGAE/GDP growth — updated monthly as new data arrives
+  </p>
+  <div class="chart-wrap">
+    {chart_div}
+  </div>
+  {methodology_html}
+</body>
+</html>"""
+
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as fh:
+        fh.write(full_html)
+
     print(f"\n✅ Dashboard saved → {OUTPUT_PATH}")
 
 
