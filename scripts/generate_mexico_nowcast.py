@@ -45,7 +45,7 @@ OUTPUT_PATH = "reports/mexico-nowcast/index.html"
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
 # ── API Keys & Tokens ─────────────────────────────────────────────────────────
-FRED_API_KEY  = os.environ.get("FRED_API_KEY", "a68d4b16dd1984d0c8455381a79a8b6e")
+FRED_API_KEY  = os.environ.get("FRED_API_KEY")
 INEGI_TOKEN   = os.environ.get("INEGI_TOKEN")
 BANXICO_TOKEN = os.environ.get("BANXICO_TOKEN")
 
