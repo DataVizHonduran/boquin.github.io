@@ -723,16 +723,20 @@ def create_dashboard(
         ))
 
     # ── Current quarter point estimate + 90% CI error bar ────────────────────
+    # Plot at today's date (not quarter-end) so it is clear this is a
+    # real-time estimate for an in-progress quarter, not a released figure.
     if point is not None:
         today   = pd.Timestamp.today()
-        q_end   = today.to_period("Q").to_timestamp(how="end")
         q_label = f"Q{today.quarter} {today.year}"
+        # Count how many months of the current quarter have elapsed
+        months_in_q = today.month - 3 * ((today.month - 1) // 3)
+        partial_note = f"({months_in_q}/3 months)"
         err_lo  = abs(point - ci[0]) if ci else 1.5
         err_hi  = abs(ci[1] - point) if ci else 1.5
         fig.add_trace(go.Scatter(
-            x=[q_end], y=[point],
+            x=[today], y=[point],
             mode="markers",
-            name=f"{q_label} Nowcast: {point:.1f}%",
+            name=f"{q_label} Nowcast {partial_note}: {point:.1f}%",
             marker=dict(color="#d62728", size=14, symbol="star"),
             error_y=dict(
                 type="data", symmetric=False,
@@ -749,7 +753,7 @@ def create_dashboard(
     if point is not None:
         ci_txt = f"90% CI: [{ci[0]:.1f}%, {ci[1]:.1f}%]" if ci else ""
         fig.add_annotation(
-            text=f"<b>{q_label} Nowcast: {point:.1f}%</b><br>{ci_txt}",
+            text=f"<b>{q_label} Nowcast {partial_note}: {point:.1f}%</b><br>{ci_txt}",
             xref="paper", yref="paper",
             x=0.02, y=0.97,
             xanchor="left", yanchor="top",
@@ -975,9 +979,11 @@ def main():
     Each bridge is validated with an <strong>expanding-window out-of-sample test</strong>
     (train from 2016, evaluate 2018–2023). Bridges are combined using
     <strong>inverse-RMSE ensemble weights</strong> — better-fitting bridges receive higher
-    weight. The current-quarter estimate uses all available monthly data for the quarter;
-    the <strong>90% confidence interval</strong> comes from 1,000 residual bootstrap
-    iterations.
+    weight. The current-quarter estimate (red star, plotted at today&rsquo;s date) uses only
+    the months of data available so far &mdash; it updates each month as new data arrives.
+    The <strong>90% confidence interval</strong> comes from 1,000 residual bootstrap
+    iterations. Because the quarter is still in progress, treat the estimate as
+    directional rather than precise.
   </p>
   <p style="margin:0; font-size:13px; color:#666;">
     Bridge performance: {" &nbsp;|&nbsp; ".join(rmse_parts)}.
