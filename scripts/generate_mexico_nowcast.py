@@ -59,10 +59,16 @@ fred = Fred(api_key=FRED_API_KEY)
 #   TOPIC 603595 (5 series, first = total) = Actividades Secundarias
 #   TOPIC 603601 (15 series, first = total) = Actividades Terciarias
 INEGI_SERIES = {
-    "igae_total":     "737121",
-    "igae_primary":   "737122",
-    "igae_secondary": "737125",
-    "igae_tertiary":  "737130",
+    "igae_total":        "737121",
+    "igae_primary":      "737122",
+    "igae_secondary":    "737125",
+    "igae_tertiary":     "737130",
+    # IMAI (Índice Mensual de Actividad Industrial) components
+    # Identified via BIE-BISE API scan; confirmed by matching 2025 YoY% values:
+    #   741030 → Construction index  (YoY approx -12% in Nov 2025 ✓)
+    #   741020 → Manufacturing index (YoY approx  -6% in Nov 2025 ✓)
+    "imai_construction": "741030",
+    "imai_manufacturing": "741020",
 }
 
 # ── Banxico Series IDs ────────────────────────────────────────────────────────
@@ -348,6 +354,7 @@ _RAW_LEVEL_COLS = {
     "exports", "remittances", "employment_imss", "wti_oil",
     "ipc_mexico", "us_indpro", "us_mfg_emp", "usdmxn",
     "imef_manuf", "imef_nonmanuf", "ism_manuf",
+    "imai_construction", "imai_manufacturing",
 }
 
 
@@ -366,6 +373,7 @@ def build_feature_matrix(raw: dict) -> pd.DataFrame:
         "igae_total", "igae_primary", "igae_secondary", "igae_tertiary",
         "exports", "remittances", "employment_imss",
         "wti_oil", "ipc_mexico", "us_indpro", "us_mfg_emp", "usdmxn",
+        "imai_construction", "imai_manufacturing",
     ]
     for col in level_cols:
         if col in df.columns:
@@ -918,9 +926,10 @@ def main():
     print("\n[4/5] Fitting bridge equations...")
     TARGET = "igae_yoy"
     bridge_defs = {
-        "Activity": ["imef_manuf_3mma",  "imef_nonmanuf_3mma"],
-        "External": ["us_indpro_yoy",    "wti_oil_yoy", "us_mfg_emp_yoy"],
-        "Financial":["usdmxn_yoy",       "ipc_mexico_yoy"],
+        "Activity":     ["imef_manuf_3mma",     "imef_nonmanuf_3mma"],
+        "External":     ["us_indpro_yoy",        "wti_oil_yoy", "imai_manufacturing_yoy"],
+        "Financial":    ["usdmxn_yoy",           "ipc_mexico_yoy"],
+        "Construction": ["imai_construction_yoy"],
     }
 
     # Exclude COVID crash/rebound quarters from OLS estimation.
