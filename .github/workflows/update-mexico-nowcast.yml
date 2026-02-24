@@ -1,0 +1,41 @@
+name: Update Mexico GDP Nowcast
+
+on:
+  schedule:
+    - cron: '0 13 5 * *'   # 5th of every month at 13:00 UTC (after IMEF PMI release)
+    - cron: '0 13 20 * *'  # 20th of every month at 13:00 UTC (after IGAE release)
+  workflow_dispatch:        # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install yfinance
+
+      - name: Generate nowcast dashboard
+        env:
+          INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
+          BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python scripts/generate_mexico_nowcast.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/mexico-nowcast/index.html
+          git diff --staged --quiet || (git commit -m "Update Mexico GDP Nowcast - $(date +'%Y-%m-%d') [automated]" && git pull --rebase && git push)
