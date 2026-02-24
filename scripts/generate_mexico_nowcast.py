@@ -453,14 +453,15 @@ def expanding_window_rmse(
     predictors: list,
     train_start: str = "2016-01-01",
     val_start:   str = "2018-01-01",
-    val_end:     str = "2023-12-31",
+    val_end:     str = "2025-12-31",
     min_train:   int = 8,
     exclude_periods: "list[tuple] | None" = None,
 ) -> "float | None":
     """
     Expanding-window OOS RMSE for a bridge equation.
     Train from train_start, validate from val_start to val_end.
-    exclude_periods: list of (start, end) date strings to drop from training data.
+    exclude_periods: list of (start, end) date strings to drop from both
+    training data and the validation index (so COVID distorts neither).
     """
     available = [p for p in predictors if p in q_df.columns]
     if not available or target not in q_df.columns:
@@ -469,6 +470,10 @@ def expanding_window_rmse(
     data    = q_df[[target] + available].dropna()
     data    = data[data.index >= train_start]
     val_idx = data.index[(data.index >= val_start) & (data.index <= val_end)]
+    # Also exclude the same periods from the validation set
+    if exclude_periods:
+        for start, end in exclude_periods:
+            val_idx = val_idx[(val_idx < start) | (val_idx > end)]
 
     if len(val_idx) < 4:
         return None
@@ -929,7 +934,7 @@ def main():
         oos = expanding_window_rmse(q_df, TARGET, preds, exclude_periods=COVID_EXCLUDE)
         bridge_rmses[name] = oos
         if oos is not None:
-            print(f"      OOS RMSE (2018-2023, ex-COVID): {oos:.2f}%")
+            print(f"      OOS RMSE (2018-2025, ex-COVID): {oos:.2f}%")
 
     if all(b is None for b in bridges.values()):
         raise RuntimeError("No bridge equations could be fit — check data availability")
@@ -1010,9 +1015,9 @@ def main():
     directional rather than precise.
   </p>
   <p style="margin:0; font-size:13px; color:#666;">
-    Bridge performance (ex-COVID): {" &nbsp;|&nbsp; ".join(rmse_parts)}.
+    Bridge performance (OOS 2018&ndash;2025, ex-COVID): {" &nbsp;|&nbsp; ".join(rmse_parts)}.
     Ensemble weights: {" &nbsp;|&nbsp; ".join(wt_parts)}.
-    COVID quarters (2020 Q2 &ndash; 2021 Q2) excluded from model estimation.
+    COVID quarters (2020 Q2 &ndash; 2021 Q2) excluded from estimation and validation.
     Last updated: {update_time}.
   </p>
 </div>
