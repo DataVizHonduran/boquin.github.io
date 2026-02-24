@@ -406,10 +406,12 @@ def fit_bridge_equation(
     target: str,
     predictors: list,
     min_obs: int = 8,
+    exclude_periods: "list[tuple] | None" = None,
 ) -> "dict | None":
     """
     Fit an OLS bridge equation: target ~ predictors.
     Returns dict with model, rmse, etc., or None if insufficient data.
+    exclude_periods: list of (start, end) date strings to drop from estimation.
     """
     available = [p for p in predictors if p in q_df.columns]
     if not available:
@@ -418,6 +420,9 @@ def fit_bridge_equation(
         return None
 
     data = q_df[[target] + available].dropna()
+    if exclude_periods:
+        for start, end in exclude_periods:
+            data = data.loc[(data.index < start) | (data.index > end)]
     if len(data) < min_obs:
         return None
 
@@ -450,10 +455,12 @@ def expanding_window_rmse(
     val_start:   str = "2018-01-01",
     val_end:     str = "2023-12-31",
     min_train:   int = 8,
+    exclude_periods: "list[tuple] | None" = None,
 ) -> "float | None":
     """
     Expanding-window OOS RMSE for a bridge equation.
     Train from train_start, validate from val_start to val_end.
+    exclude_periods: list of (start, end) date strings to drop from training data.
     """
     available = [p for p in predictors if p in q_df.columns]
     if not available or target not in q_df.columns:
@@ -469,6 +476,9 @@ def expanding_window_rmse(
     errors = []
     for vdate in val_idx:
         train = data[data.index < vdate]
+        if exclude_periods:
+            for start, end in exclude_periods:
+                train = train.loc[(train.index < start) | (train.index > end)]
         if len(train) < min_train:
             continue
         try:
@@ -901,20 +911,25 @@ def main():
         "Financial":["usdmxn_yoy",       "ipc_mexico_yoy"],
     }
 
+    # Exclude COVID crash/rebound quarters from OLS estimation.
+    # 2020 Q2 – 2021 Q2 had IGAE swings of ±15-30pp that dominate the fit
+    # and inflate OOS RMSE in normal growth environments.
+    COVID_EXCLUDE = [("2020-04-01", "2021-06-30")]
+
     bridges      = {}
     bridge_rmses = {}
     for name, preds in bridge_defs.items():
-        b = fit_bridge_equation(q_df, TARGET, preds)
+        b = fit_bridge_equation(q_df, TARGET, preds, exclude_periods=COVID_EXCLUDE)
         if b is None:
             print(f"  ✗ {name}: insufficient data or fit failed")
         else:
             print(f"  ✓ {name}: R²={b['r_squared']:.3f}, in-sample RMSE={b['rmse']:.2f}%")
         bridges[name] = b
 
-        oos = expanding_window_rmse(q_df, TARGET, preds)
+        oos = expanding_window_rmse(q_df, TARGET, preds, exclude_periods=COVID_EXCLUDE)
         bridge_rmses[name] = oos
         if oos is not None:
-            print(f"      OOS RMSE (2018-2023): {oos:.2f}%")
+            print(f"      OOS RMSE (2018-2023, ex-COVID): {oos:.2f}%")
 
     if all(b is None for b in bridges.values()):
         raise RuntimeError("No bridge equations could be fit — check data availability")
@@ -995,8 +1010,9 @@ def main():
     directional rather than precise.
   </p>
   <p style="margin:0; font-size:13px; color:#666;">
-    Bridge performance: {" &nbsp;|&nbsp; ".join(rmse_parts)}.
+    Bridge performance (ex-COVID): {" &nbsp;|&nbsp; ".join(rmse_parts)}.
     Ensemble weights: {" &nbsp;|&nbsp; ".join(wt_parts)}.
+    COVID quarters (2020 Q2 &ndash; 2021 Q2) excluded from model estimation.
     Last updated: {update_time}.
   </p>
 </div>
