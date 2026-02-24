@@ -69,8 +69,8 @@ CI_LEVEL        = 0.90
 # ── Raw columns to exclude from quarterly aggregation feature set ─────────────
 _RAW_LEVEL_COLS_EUR = {
     "eurmfg_pmi", "eurocomp_pmi",
-    "us_indpro", "brent_oil",
-    "eurusd", "stoxx50", "ipi",
+    "china_m1", "copper",
+    "eurusd", "stoxx50", "mfg_ipi",
 }
 
 # ── Eurozone PMI Seed Data ────────────────────────────────────────────────────
@@ -386,11 +386,19 @@ def _parse_eurostat_jsonstat(data: dict, freq: str = "M") -> "pd.Series | None":
             if lbl is None:
                 continue
             try:
-                if freq == "M" and "M" in lbl:        # "2023M01"
-                    year  = int(lbl[:4])
-                    month = int(lbl[5:])
-                    dt    = pd.Timestamp(year=year, month=month, day=1) + pd.offsets.MonthEnd(0)
-                elif freq == "Q" and "Q" in lbl:       # "2023-Q1"
+                if freq == "M":
+                    # Eurostat uses both "YYYYMmm" (e.g. "2023M01") and
+                    # "YYYY-MM" (e.g. "2023-01") depending on the dataset.
+                    if len(lbl) >= 7 and lbl[4] == "M":   # "2023M01"
+                        year  = int(lbl[:4])
+                        month = int(lbl[5:])
+                    elif len(lbl) == 7 and lbl[4] == "-": # "2023-01"
+                        year  = int(lbl[:4])
+                        month = int(lbl[5:])
+                    else:
+                        continue
+                    dt = pd.Timestamp(year=year, month=month, day=1) + pd.offsets.MonthEnd(0)
+                elif freq == "Q" and "Q" in lbl:           # "2023-Q1"
                     year  = int(lbl[:4])
                     qnum  = int(lbl[-1])
                     month = qnum * 3
@@ -455,13 +463,24 @@ def fetch_eurostat_gdp() -> "pd.Series | None":
     return None
 
 
-def fetch_eurostat_ipi() -> "pd.Series | None":
+def fetch_eurostat_mfg_ipi() -> "pd.Series | None":
     """
-    Fetch Euro Area monthly Industrial Production Index (2015=100, SCA) from Eurostat.
-    nace_r2=B-D_F covers total industry including construction.
+    Fetch Euro Area Manufacturing Production Index (2015=100, SCA) from Eurostat.
+    nace_r2=C = Manufacturing only (NACE Rev.2 section C), excludes construction.
+
+    NOTE: The Eurostat API does not publish the EA aggregate for nace=C or B-D
+    (returns zero non-null values despite a valid structure). This is a known
+    Eurostat API limitation for some EA aggregates.
+
+    Fallback strategy:
+      Germany manufacturing IPI (geo=DE, nace=C) is used as a proxy.
+      Germany accounts for ~28% of Euro Area manufacturing output and has
+      ~0.95 correlation with the EA manufacturing cycle. Updated through
+      current month (T-45 days) from Eurostat.
     """
+    # Priority 1: EA aggregate (typically unavailable via this endpoint)
     for geo in ("EA", "EA19", "EA20"):
-        for nace in ("B-D_F", "B-D"):
+        for nace in ("C", "B-D"):
             url = (
                 "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
                 "sts_inpr_m"
@@ -474,12 +493,38 @@ def fetch_eurostat_ipi() -> "pd.Series | None":
                 data = resp.json()
                 s = _parse_eurostat_jsonstat(data, freq="M")
                 if s is not None and len(s) > 24:
-                    print(f"  ✓ Eurostat IPI ({geo}, {nace}): {len(s)} months  "
-                          f"{s.index[0].date()} → {s.index[-1].date()}")
+                    label = "Manufacturing" if nace == "C" else "Industry ex-Construction"
+                    print(f"  ✓ Eurostat MFG IPI ({geo}, nace={nace}, {label}): "
+                          f"{len(s)} months  {s.index[0].date()} → {s.index[-1].date()}")
                     return s.dropna()
             except Exception as e:
-                print(f"  ✗ Eurostat IPI ({geo}, {nace}): {e}")
+                print(f"  ✗ Eurostat MFG IPI ({geo}, {nace}): {e}")
                 continue
+
+    # Priority 2: Germany manufacturing IPI as proxy
+    # Eurostat EA aggregate unavailable via API — use Germany (DE, nace=C) as fallback.
+    # Germany ≈ 28% of EA manufacturing; correlation with EA manufacturing ~0.95.
+    print("  ⚠️  EA manufacturing IPI unavailable via Eurostat — falling back to Germany (DE) as proxy")
+    for nace in ("C", "B-D"):
+        url = (
+            "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+            "sts_inpr_m"
+            f"?geo=DE&unit=I15&s_adj=SCA&nace_r2={nace}&freq=M"
+        )
+        try:
+            resp = requests.get(url, timeout=30)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            s = _parse_eurostat_jsonstat(data, freq="M")
+            if s is not None and len(s) > 24:
+                label = "Manufacturing" if nace == "C" else "Industry ex-Construction"
+                print(f"  ✓ Eurostat MFG IPI (DE proxy, nace={nace}, {label}): "
+                      f"{len(s)} months  {s.index[0].date()} → {s.index[-1].date()}")
+                return s.dropna()
+        except Exception as e:
+            print(f"  ✗ Eurostat MFG IPI DE ({nace}): {e}")
+            continue
     return None
 
 
@@ -548,7 +593,7 @@ def build_feature_matrix(raw: dict) -> pd.DataFrame:
     df = pd.DataFrame(frames).sort_index()
 
     # YoY % change for level series
-    level_cols = ["us_indpro", "brent_oil", "eurusd", "stoxx50", "ipi"]
+    level_cols = ["china_m1", "copper", "eurusd", "stoxx50", "mfg_ipi"]
     for col in level_cols:
         if col in df.columns:
             df[f"{col}_yoy"] = df[col].pct_change(12) * 100
@@ -915,7 +960,7 @@ def create_dashboard(
     wt_parts = [f"{n} w={v:.2f}" for n, v in weights.items()]
     footer   = (
         f"Updated: {update_time}  ·  "
-        "Sources: Eurostat (GDP, IPI), S&amp;P Global PMI, FRED (INDPRO/Brent), yfinance (Stoxx50/EURUSD)  ·  "
+        "Sources: Eurostat (GDP, Mfg IPI), S&amp;P Global PMI, FRED (China M1/Copper/USREC), yfinance (Stoxx50/EURUSD)  ·  "
         "Gray shading = NBER recessions  ·  "
         + " | ".join(rmse_parts)
         + "  ·  Weights: " + " | ".join(wt_parts)
@@ -975,21 +1020,25 @@ def main():
     # Monthly raw series (used to build feature matrix)
     raw = {}
 
-    print("  Fetching Eurostat IPI (monthly)...")
-    ipi = fetch_eurostat_ipi()
-    if ipi is not None:
-        raw["ipi"] = ipi
+    print("  Fetching Eurostat Manufacturing IPI (monthly, ex-construction)...")
+    mfg_ipi = fetch_eurostat_mfg_ipi()
+    if mfg_ipi is not None:
+        raw["mfg_ipi"] = mfg_ipi
 
     print("  Fetching FRED series...")
-    indpro = fetch_fred_monthly("INDPRO", years=22)
-    if indpro is not None:
-        raw["us_indpro"] = indpro
-        print(f"    FRED INDPRO: {len(indpro)} obs")
+    # China M1 (narrow money supply) — proxy for Chinese domestic demand,
+    # key driver of Eurozone exports (especially German capital goods)
+    china_m1 = fetch_fred_monthly("MYAGM1CNM189N", years=22)
+    if china_m1 is not None:
+        raw["china_m1"] = china_m1
+        print(f"    FRED China M1: {len(china_m1)} obs")
 
-    brent = fetch_fred_monthly("DCOILBRENTEU", years=22)
-    if brent is not None:
-        raw["brent_oil"] = brent
-        print(f"    FRED Brent: {len(brent)} obs")
+    # Copper price — global industrial activity barometer,
+    # highly correlated with Eurozone manufacturing cycles
+    copper = fetch_fred_monthly("PCOPPUSDM", years=22)
+    if copper is not None:
+        raw["copper"] = copper
+        print(f"    FRED Copper: {len(copper)} obs")
 
     recession = fetch_fred_monthly("USREC", years=30)
 
@@ -1001,12 +1050,6 @@ def main():
     eurusd = fetch_yfinance_monthly("EURUSD=X", years=22)
     if eurusd is not None:
         raw["eurusd"] = eurusd
-
-    # Brent fallback from yfinance
-    if raw.get("brent_oil") is None:
-        brent_yf = fetch_yfinance_monthly("BZ=F", years=22)
-        if brent_yf is not None:
-            raw["brent_oil"] = brent_yf
 
     print("  Building Eurozone PMI series...")
     pmi_mfg, pmi_comp = build_eurozone_pmi_series()
@@ -1038,9 +1081,9 @@ def main():
 
     bridge_defs = {
         "Activity":   ["eurmfg_pmi_3mma",  "eurocomp_pmi_3mma"],
-        "External":   ["us_indpro_yoy",     "brent_oil_yoy"],
-        "Financial":  ["eurusd_yoy",        "stoxx50_yoy"],
-        "Industrial": ["ipi_yoy"],
+        "External":   ["china_m1_yoy",     "copper_yoy"],
+        "Financial":  ["eurusd_yoy",       "stoxx50_yoy"],
+        "Industrial": ["mfg_ipi_yoy"],
     }
 
     bridges      = {}
@@ -1129,14 +1172,18 @@ def main():
     <li><strong>Activity bridge</strong> &mdash; S&amp;P Global Euro Area Manufacturing PMI
         and Composite PMI (3-month moving averages), capturing real-time business-cycle
         momentum across manufacturing and services.</li>
-    <li><strong>External bridge</strong> &mdash; US Industrial Production YoY and
-        Brent crude oil YoY, reflecting global demand and the Eurozone&rsquo;s
-        sensitivity to energy prices.</li>
+    <li><strong>External bridge</strong> &mdash; China M1 money supply YoY and
+        global copper price YoY. China M1 captures Chinese domestic demand, the
+        key driver of Eurozone (especially German) capital-goods exports. Copper is
+        a real-time barometer of global industrial activity and highly correlated
+        with the Eurozone manufacturing cycle.</li>
     <li><strong>Financial bridge</strong> &mdash; EUR/USD YoY and Euro Stoxx&nbsp;50 YoY,
         incorporating real-time financial-market signals.</li>
-    <li><strong>Industrial bridge</strong> &mdash; Eurozone Industrial Production Index
-        YoY (Eurostat, seasonally adjusted), directly tracking the manufacturing and
-        construction output channel.</li>
+    <li><strong>Industrial bridge</strong> &mdash; Germany Manufacturing Production Index
+        YoY (Eurostat, NACE&nbsp;C, seasonally adjusted), used as a high-correlation proxy
+        for Euro Area manufacturing (Germany ≈ 28% of EA manufacturing output;
+        correlation ~0.95 with EA cycle). The Eurostat API does not expose the EA
+        aggregate for this NACE breakdown.</li>
   </ul>
   <p style="margin:0 0 12px;">
     Each bridge is validated with an <strong>expanding-window out-of-sample test</strong>
@@ -1149,12 +1196,12 @@ def main():
   </p>
   <p style="margin:0 0 8px; font-size:13px; color:#666;">
     <strong>Known model blind spots:</strong>
-    (1) Energy price shocks (2022 Russia-Ukraine gas crisis) can break the historical
-    relationship in the External bridge &mdash; the model will underpredict severity.
+    (1) China data quality &mdash; PBOC M1 figures can be revised significantly; the
+    China M1 channel is most useful as a 6-12 month leading indicator.
     (2) The sovereign debt crisis (2011-2013) introduced structural breaks in peripheral
     Euro Area countries not fully captured at the aggregate level.
     (3) OLS bridges cannot predict idiosyncratic country-level fiscal shocks (e.g., German
-    industrial policy, Italian fiscal stress).
+    industrial policy, Italian fiscal stress, French pension reforms).
     COVID quarters (2020 Q2 &ndash; 2021 Q2) are excluded from estimation and validation.
   </p>
   <p style="margin:0; font-size:13px; color:#666;">
