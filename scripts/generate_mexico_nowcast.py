@@ -689,23 +689,30 @@ def create_dashboard(
     weights: dict,
     bridge_rmses: dict,
     recession: "pd.Series | None",
+    last_igae_date: "pd.Timestamp | None" = None,
 ) -> go.Figure:
     """Build single-panel Mexico IGAE nowcast chart."""
 
     fig = go.Figure()
 
-    # ── IGAE YoY% actual (monthly) ────────────────────────────────────────────
+    # Clip to last officially released IGAE month so forward-filled data
+    # beyond the release cutoff doesn't appear as actual observations.
+    igae_cutoff = last_igae_date if last_igae_date is not None else pd.Timestamp.today()
+    # Last complete quarter fully covered by released data
+    last_released_q_end = igae_cutoff.to_period("Q").to_timestamp(how="end")
+
+    # ── IGAE YoY% actual (monthly, clipped to release cutoff) ─────────────────
     if "igae_yoy" in df.columns:
-        s = df["igae_yoy"].dropna()
+        s = df["igae_yoy"].loc[:igae_cutoff].dropna()
         fig.add_trace(go.Scatter(
             x=s.index, y=s.values,
             mode="lines", name="IGAE YoY% (monthly)",
             line=dict(color="#1f77b4", width=2),
         ))
 
-    # ── Quarterly actual dots ─────────────────────────────────────────────────
+    # ── Quarterly actual dots (only fully-released quarters) ──────────────────
     if "actual" in hist.columns:
-        ha = hist["actual"].dropna()
+        ha = hist["actual"].loc[:last_released_q_end].dropna()
         fig.add_trace(go.Scatter(
             x=ha.index, y=ha.values,
             mode="markers", name="Quarterly Actual",
@@ -940,7 +947,9 @@ def main():
 
     # ── Dashboard ──────────────────────────────────────────────────────────────
     print("\n  Building dashboard...")
-    fig = create_dashboard(df, hist, point_est, ci, weights, bridge_rmses, recession)
+    last_igae_date = raw["igae_total"].index[-1]
+    fig = create_dashboard(df, hist, point_est, ci, weights, bridge_rmses, recession,
+                           last_igae_date=last_igae_date)
 
     chart_div = fig.to_html(
         full_html=False,
