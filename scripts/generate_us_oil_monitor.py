@@ -59,10 +59,34 @@ CURRENT_YEAR = date.today().year
 
 
 # ── Fetch EIA v2 ──────────────────────────────────────────────────────────────
+# ── Fetch EIA via DNAV Excel (no API key required) ────────────────────────────
+# EIA publishes weekly petroleum series as public Excel files at:
+#   https://www.eia.gov/dnav/pet/hist_xls/{SERIES_ID}w.xls
+# No authentication required.
+def fetch_eia_dnav(series_id: str) -> pd.Series:
+    import io
+    url = f"https://www.eia.gov/dnav/pet/hist_xls/{series_id}w.xls"
+    resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+    resp.raise_for_status()
+    # Sheet 1 = "Data 1"; row 0 = series ID, row 1 = column headers; data from row 2
+    df = pd.read_excel(
+        io.BytesIO(resp.content),
+        sheet_name=1,
+        skiprows=2,
+        header=None,
+        names=["date", "value"],
+        engine="xlrd",
+    )
+    df = df.dropna(subset=["date", "value"])
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df.dropna(subset=["date"]).set_index("date")
+    s = df["value"].astype(float).sort_index()
+    s.name = series_id
+    return s
+
+
 # ── Fetch from FRED ───────────────────────────────────────────────────────────
-# FRED carries EIA petroleum supply weekly series with the same series IDs.
-# No EIA API key required.
-def fetch_fred_series(series_id: str, start: str = "2015-01-01") -> pd.Series:
+def fetch_fred_series(series_id: str, start: str = "2018-01-01") -> pd.Series:
     from fredapi import Fred
     _fred = Fred(api_key=FRED_API_KEY)
     s = _fred.get_series(series_id, observation_start=start)
@@ -667,13 +691,12 @@ def main():
     from fredapi import Fred
     _fred = Fred(api_key=FRED_API_KEY)
 
-    # 1. EIA petroleum weekly data via FRED
-    # FRED aggregates EIA Petroleum Supply Weekly series under the same series IDs.
-    print("Fetching EIA petroleum weekly data via FRED...")
+    # 1. EIA petroleum weekly data via public DNAV Excel files (no API key)
+    print("Fetching EIA petroleum weekly data via DNAV Excel files...")
     eia = {}
     for name, sid in EIA_SERIES.items():
         try:
-            eia[name] = fetch_fred_series(sid, start="2015-01-01")
+            eia[name] = fetch_eia_dnav(sid)
             print(f"  ✓ {name} ({sid}): {len(eia[name])} rows, latest {eia[name].index[-1].date()}")
         except Exception as e:
             print(f"  ✗ {name} ({sid}): {e}")
