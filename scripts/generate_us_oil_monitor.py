@@ -1,16 +1,15 @@
 """
 US Oil Supply/Demand Monitor
 Sources:
-  - EIA v1 API (weekly petroleum data)
-  - FRED API (WTI, Brent spot prices, Baker Hughes rig count)
+  - FRED API (EIA petroleum weekly series + WTI/Brent prices)
+    FRED carries EIA petroleum supply weekly data with the same series IDs.
   - yfinance (futures prices for 3-2-1 crack spread)
 
 Required env vars:
-  EIA_API_KEY
   FRED_API_KEY
 
 Run from repo root:
-    EIA_API_KEY=xxx FRED_API_KEY=xxx python3 scripts/generate_us_oil_monitor.py
+    FRED_API_KEY=xxx python3 scripts/generate_us_oil_monitor.py
 """
 
 import os
@@ -25,15 +24,12 @@ from pathlib import Path
 warnings.filterwarnings("ignore")
 
 # ── Config ────────────────────────────────────────────────────────────────────
-EIA_API_KEY = os.environ.get("EIA_API_KEY")
-if not EIA_API_KEY:
-    raise EnvironmentError("EIA_API_KEY environment variable is not set.")
-
 FRED_API_KEY = os.environ.get("FRED_API_KEY")
 if not FRED_API_KEY:
     raise EnvironmentError("FRED_API_KEY environment variable is not set.")
 
-EIA_V2_BASE = "https://api.eia.gov/v2/seriesid/"
+# EIA petroleum weekly series — FRED carries these with the same series IDs
+# Source: EIA Petroleum Supply Weekly (PSW), published via FRED
 EIA_SERIES = {
     "crude_stocks":        "WCESTUS1",
     "cushing_stocks":      "WCSSTUS1",
@@ -52,7 +48,7 @@ FRED_SERIES = {
     "brent": "DCOILBRENTEU",
 }
 # Baker Hughes rig count — try these FRED series IDs in order
-RIG_COUNT_SERIES_IDS = ["DRIGFES05USD", "RIGFETOTALUS", "RIGFES"]
+RIG_COUNT_SERIES_IDS = ["DRIGFES05USD", "RIGFETOTALUS", "RIGFES", "DRIGFES05USS"]
 
 OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "us-oil-monitor"
 OUTPUT_FILE = OUTPUT_DIR / "index.html"
@@ -63,46 +59,13 @@ CURRENT_YEAR = date.today().year
 
 
 # ── Fetch EIA v2 ──────────────────────────────────────────────────────────────
-def fetch_eia_series(series_id: str, num: int = 400) -> pd.Series:
-    """Fetch EIA v2 seriesid API; return pd.Series with DatetimeIndex."""
-    resp = requests.get(
-        f"{EIA_V2_BASE}{series_id}",
-        params={
-            "api_key": EIA_API_KEY,
-            "data[]": "value",
-            "length": num,
-            "sort[0][column]": "period",
-            "sort[0][direction]": "desc",
-        },
-        timeout=30,
-    )
-    resp.raise_for_status()
-    data = resp.json()
-    rows = data.get("response", {}).get("data", [])
-    if not rows:
-        raise ValueError(f"No data returned for {series_id}")
-
-    records = {}
-    for row in rows:
-        period = row.get("period", "")
-        val = row.get("value")
-        if val is None or val == "":
-            continue
-        try:
-            records[pd.Timestamp(period)] = float(val)
-        except Exception:
-            pass
-
-    s = pd.Series(records).sort_index()
-    s.name = series_id
-    return s
-
-
-# ── Fetch FRED ────────────────────────────────────────────────────────────────
-def fetch_fred_series(series_id: str, start: str = "2018-01-01") -> pd.Series:
+# ── Fetch from FRED ───────────────────────────────────────────────────────────
+# FRED carries EIA petroleum supply weekly series with the same series IDs.
+# No EIA API key required.
+def fetch_fred_series(series_id: str, start: str = "2015-01-01") -> pd.Series:
     from fredapi import Fred
-    fred = Fred(api_key=FRED_API_KEY)
-    s = fred.get_series(series_id, observation_start=start)
+    _fred = Fred(api_key=FRED_API_KEY)
+    s = _fred.get_series(series_id, observation_start=start)
     s = s.dropna().sort_index()
     s.name = series_id
     return s
@@ -169,6 +132,8 @@ def compute_crack_spread(wti: pd.Series, rbob: pd.Series, ho: pd.Series) -> pd.S
 # ── Serialization helpers ─────────────────────────────────────────────────────
 def to_payload(series: pd.Series, decimals: int = 2) -> dict:
     s = series.dropna()
+    if not isinstance(s.index, pd.DatetimeIndex) or len(s) == 0:
+        return {"dates": [], "values": []}
     return {
         "dates":  s.index.strftime("%Y-%m-%d").tolist(),
         "values": [round(float(v), decimals) for v in s],
@@ -176,6 +141,8 @@ def to_payload(series: pd.Series, decimals: int = 2) -> dict:
 
 
 def band_to_payload(band: pd.DataFrame) -> dict:
+    if band.empty or "ref_date" not in band.columns:
+        return {"dates": [], "min": [], "max": [], "mean": []}
     b = band.dropna(subset=["ref_date"])
     return {
         "dates": b["ref_date"].dt.strftime("%Y-%m-%d").tolist(),
@@ -697,22 +664,24 @@ renderOverview();
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # 1. EIA weekly data
-    print("Fetching EIA weekly petroleum data...")
+    from fredapi import Fred
+    _fred = Fred(api_key=FRED_API_KEY)
+
+    # 1. EIA petroleum weekly data via FRED
+    # FRED aggregates EIA Petroleum Supply Weekly series under the same series IDs.
+    print("Fetching EIA petroleum weekly data via FRED...")
     eia = {}
     for name, sid in EIA_SERIES.items():
         try:
-            eia[name] = fetch_eia_series(sid, num=400)
+            eia[name] = fetch_fred_series(sid, start="2015-01-01")
             print(f"  ✓ {name} ({sid}): {len(eia[name])} rows, latest {eia[name].index[-1].date()}")
         except Exception as e:
             print(f"  ✗ {name} ({sid}): {e}")
             eia[name] = pd.Series(dtype=float)
 
-    # 2. FRED daily data
-    print("\nFetching FRED data...")
+    # 2. FRED price data
+    print("\nFetching FRED price data...")
     fred = {}
-    from fredapi import Fred
-    _fred = Fred(api_key=FRED_API_KEY)
     for name, sid in FRED_SERIES.items():
         try:
             s = _fred.get_series(sid, observation_start="2018-01-01")
