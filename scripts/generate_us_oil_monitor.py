@@ -33,7 +33,7 @@ FRED_API_KEY = os.environ.get("FRED_API_KEY")
 if not FRED_API_KEY:
     raise EnvironmentError("FRED_API_KEY environment variable is not set.")
 
-EIA_BASE = "https://api.eia.gov/series/"
+EIA_V2_BASE = "https://api.eia.gov/v2/seriesid/"
 EIA_SERIES = {
     "crude_stocks":        "WCESTUS1",
     "cushing_stocks":      "WCSSTUS1",
@@ -48,10 +48,11 @@ EIA_SERIES = {
 }
 
 FRED_SERIES = {
-    "wti":       "DCOILWTICO",
-    "brent":     "DCOILBRENTEU",
-    "rig_count": "RIGFES",
+    "wti":   "DCOILWTICO",
+    "brent": "DCOILBRENTEU",
 }
+# Baker Hughes rig count — try these FRED series IDs in order
+RIG_COUNT_SERIES_IDS = ["DRIGFES05USD", "RIGFETOTALUS", "RIGFES"]
 
 OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "us-oil-monitor"
 OUTPUT_FILE = OUTPUT_DIR / "index.html"
@@ -61,33 +62,36 @@ SCALE_PROD   = 1 / 1000   # thousand bbl/d → million bbl/d (MMBbl/d)
 CURRENT_YEAR = date.today().year
 
 
-# ── Fetch EIA v1 ──────────────────────────────────────────────────────────────
+# ── Fetch EIA v2 ──────────────────────────────────────────────────────────────
 def fetch_eia_series(series_id: str, num: int = 400) -> pd.Series:
-    """Fetch EIA v1 weekly series; return pd.Series with DatetimeIndex."""
+    """Fetch EIA v2 seriesid API; return pd.Series with DatetimeIndex."""
     resp = requests.get(
-        EIA_BASE,
-        params={"series_id": series_id, "api_key": EIA_API_KEY, "num": num},
+        f"{EIA_V2_BASE}{series_id}",
+        params={
+            "api_key": EIA_API_KEY,
+            "data[]": "value",
+            "length": num,
+            "sort[0][column]": "period",
+            "sort[0][direction]": "desc",
+        },
         timeout=30,
     )
     resp.raise_for_status()
     data = resp.json()
-    series_data = data.get("series", [])
-    if not series_data:
-        raise ValueError(f"No series returned for {series_id}")
-    rows = series_data[0].get("data", [])
+    rows = data.get("response", {}).get("data", [])
+    if not rows:
+        raise ValueError(f"No data returned for {series_id}")
 
     records = {}
-    for period, val in rows:
-        if val is None:
+    for row in rows:
+        period = row.get("period", "")
+        val = row.get("value")
+        if val is None or val == "":
             continue
-        period_str = str(period).strip()
-        for fmt in ("%Y%m%d", "%Y-%m-%d"):
-            try:
-                dt = pd.Timestamp(datetime.strptime(period_str, fmt))
-                records[dt] = float(val)
-                break
-            except ValueError:
-                pass
+        try:
+            records[pd.Timestamp(period)] = float(val)
+        except Exception:
+            pass
 
     s = pd.Series(records).sort_index()
     s.name = series_id
@@ -718,6 +722,18 @@ def main():
             print(f"  ✗ {name}: {e}")
             fred[name] = pd.Series(dtype=float)
 
+    # Baker Hughes rig count — try multiple FRED series IDs
+    rig_count = pd.Series(dtype=float)
+    for rig_sid in RIG_COUNT_SERIES_IDS:
+        try:
+            s = _fred.get_series(rig_sid, observation_start="2018-01-01")
+            rig_count = s.dropna().sort_index()
+            print(f"  ✓ rig_count ({rig_sid}): {len(rig_count)} rows, latest {rig_count.index[-1].date()}")
+            break
+        except Exception as e:
+            print(f"  ✗ rig_count ({rig_sid}): {e}")
+    fred["rig_count"] = rig_count
+
     # 3. yfinance futures
     print("\nFetching futures data from yfinance...")
     start_2yr = (datetime.today() - timedelta(days=730)).strftime("%Y-%m-%d")
@@ -749,14 +765,17 @@ def main():
 
     # Production 4W MA
     prod_raw = eia.get("production", pd.Series()) * SCALE_PROD
-    prod_ma  = prod_raw.rolling(4).mean().dropna()
+    prod_ma  = prod_raw.rolling(4).mean().dropna() if isinstance(prod_raw.index, pd.DatetimeIndex) else pd.Series(dtype=float)
 
     # Gasoline current vs prior year 4W MA
     gas_raw = eia.get("gasoline_supplied", pd.Series()) * SCALE_PROD
-    gas_curr = gas_raw[gas_raw.index.year == CURRENT_YEAR].rolling(4, min_periods=1).mean()
-    gas_prev_raw = gas_raw[gas_raw.index.year == (CURRENT_YEAR - 1)].rolling(4, min_periods=1).mean()
-    gas_prev = gas_prev_raw.copy()
-    gas_prev.index = gas_prev.index + pd.DateOffset(years=1)
+    gas_curr = pd.Series(dtype=float)
+    gas_prev = pd.Series(dtype=float)
+    if isinstance(gas_raw.index, pd.DatetimeIndex) and len(gas_raw) > 0:
+        gas_curr = gas_raw[gas_raw.index.year == CURRENT_YEAR].rolling(4, min_periods=1).mean()
+        gas_prev_raw = gas_raw[gas_raw.index.year == (CURRENT_YEAR - 1)].rolling(4, min_periods=1).mean()
+        gas_prev = gas_prev_raw.copy()
+        gas_prev.index = gas_prev.index + pd.DateOffset(years=1)
 
     # 5. 5-year seasonal bands
     print("\nComputing 5-year seasonal bands...")
