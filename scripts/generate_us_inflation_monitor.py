@@ -53,6 +53,7 @@ SERIES = {
 
 # ── Weights (BLS Relative Importance, Jan 2025) ───────────────────────────────
 WEIGHTS = {
+    "cpi":             100.0,  # Total
     # Table 1 — Major groups
     "housing":          44.5,
     "food_bev":         14.5,
