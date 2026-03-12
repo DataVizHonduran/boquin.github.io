@@ -16,9 +16,9 @@ import yfinance as yf
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-TICKERS = ["CLZ26.NYM", "CLZ27.NYM", "CLZ28.NYM", "CLZ29.NYM", "CLZ30.NYM"]
-LABELS  = ["Dec 2026",   "Dec 2027",   "Dec 2028",   "Dec 2029",   "Dec 2030"]
-SHORT   = ["Z26", "Z27", "Z28", "Z29", "Z30"]
+TICKERS = ["CLN26.NYM", "CLZ26.NYM", "CLZ27.NYM", "CLZ28.NYM", "CLZ29.NYM", "CLZ30.NYM"]
+LABELS  = ["Jul 2026",  "Dec 2026",   "Dec 2027",   "Dec 2028",   "Dec 2029",   "Dec 2030"]
+SHORT   = ["N26", "Z26", "Z27", "Z28", "Z29", "Z30"]
 
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT   = os.path.dirname(SCRIPT_DIR)
@@ -229,11 +229,11 @@ html = f"""<!DOCTYPE html>
   /* ── Stat cards ── */
   .stat-grid {{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 14px;
     padding: 24px 32px;
   }}
-  @media (max-width: 1100px) {{ .stat-grid {{ grid-template-columns: repeat(3, 1fr); }} }}
+  @media (max-width: 1300px) {{ .stat-grid {{ grid-template-columns: repeat(3, 1fr); }} }}
   @media (max-width: 700px)  {{ .stat-grid {{ grid-template-columns: repeat(2, 1fr); }} }}
   @media (max-width: 420px)  {{ .stat-grid {{ grid-template-columns: 1fr; }} }}
 
@@ -321,7 +321,7 @@ html = f"""<!DOCTYPE html>
   <div class="header-badges">
     <span class="badge"><span class="dot"></span> Updated: {updated_ts}</span>
     <span class="badge">Data: Yahoo Finance</span>
-    <span class="badge">5 contracts tracked (CLZ26–CLZ30)</span>
+    <span class="badge">6 contracts tracked (CLN26, CLZ26–CLZ30)</span>
     <span class="badge">WTI · NYMEX</span>
   </div>
 </header>
@@ -402,7 +402,7 @@ const GRID_COL  = '#C8D4E3';
 const GRID_LITE = '#EBF0F8';
 const TEXT_COL  = '#2a3f5f';
 const FONT_FAM  = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-const COLORWAY  = ['#636efa','#EF553B','#00cc96','#ab63fa','#FFA15A'];
+const COLORWAY  = ['#636efa','#EF553B','#00cc96','#ab63fa','#FFA15A','#19d3f3'];
 const PLOTLY_CFG = {{ responsive: true, displayModeBar: false }};
 
 // Contango=blue (#636efa), backwardation=red (#d62728)
