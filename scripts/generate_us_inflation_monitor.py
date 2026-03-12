@@ -381,9 +381,9 @@ def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0, m
         weight = WEIGHTS.get(key, 0.0)
         contrib = round(val * weight / 100, 3) if val is not None else None
 
-        val_str    = f"{val:+.2f}%" if val is not None else "—"
+        val_str    = f"{val:+.1f}%" if val is not None else "—"
         weight_str = f"{weight:.1f}%"
-        contr_str  = f"{contrib:+.3f}%" if contrib is not None else "—"
+        contr_str  = f"{contrib:+.1f}%" if contrib is not None else "—"
 
         bar_yoy    = _bar_html(val, max_abs) if val is not None else ""
         bar_weight = _weight_bar(weight)
