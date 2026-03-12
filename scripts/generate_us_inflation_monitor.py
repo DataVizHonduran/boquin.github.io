@@ -361,7 +361,7 @@ def _weight_bar(weight: float) -> str:
     )
 
 
-def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0) -> str:
+def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0, max_contrib: float = 5.0) -> str:
     """
     rows: list of (label, key, indent_level)
     key = None means the row is a header/total with special styling
@@ -372,7 +372,7 @@ def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0) -
             # Section divider / header row
             rows_html.append(
                 f'<tr style="background:#f5f5f5;font-weight:700;font-size:0.82rem;">'
-                f'<td colspan="6" style="padding:6px 10px;color:#1a3a2f;">{label}</td></tr>'
+                f'<td colspan="8" style="padding:6px 10px;color:#1a3a2f;">{label}</td></tr>'
             )
             continue
 
@@ -387,6 +387,7 @@ def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0) -
 
         bar_yoy    = _bar_html(val, max_abs) if val is not None else ""
         bar_weight = _weight_bar(weight)
+        bar_contrib = _bar_html(contrib, max_contrib) if contrib is not None else ""
 
         indent_px = indent * 16
         color = "#4CAF50" if (val is not None and val >= 0) else "#F44336"
@@ -400,6 +401,7 @@ def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0) -
             f'<td style="padding:5px 6px;text-align:right;font-size:0.82rem;color:#555;white-space:nowrap;">{weight_str}</td>'
             f'<td style="padding:5px 6px;text-align:left;">{bar_weight}</td>'
             f'<td style="padding:5px 6px;text-align:right;font-size:0.82rem;font-weight:600;color:{val_color};white-space:nowrap;">{contr_str}</td>'
+            f'<td style="padding:5px 6px;text-align:left;">{bar_contrib}</td>'
             f'</tr>'
         )
 
@@ -410,12 +412,13 @@ def build_table_html(title: str, rows: list, yoy: dict, max_abs: float = 10.0) -
   <table>
     <thead>
       <tr>
-        <th style="text-align:left;width:38%">Category</th>
-        <th style="text-align:right;width:10%">YoY%</th>
-        <th style="width:14%"></th>
-        <th style="text-align:right;width:10%">Weight</th>
-        <th style="width:14%"></th>
-        <th style="text-align:right;width:14%">Contrib.</th>
+        <th style="text-align:left;width:30%">Category</th>
+        <th style="text-align:right;width:8%">YoY%</th>
+        <th style="width:10%"></th>
+        <th style="text-align:right;width:8%">Weight</th>
+        <th style="width:10%"></th>
+        <th style="text-align:right;width:10%">Contrib.</th>
+        <th style="width:10%"></th>
       </tr>
     </thead>
     <tbody>
@@ -474,9 +477,20 @@ def build_all_tables(yoy: dict) -> str:
         ("CPI ex-Shelter",  "cpi_ex_shelter",1),
     ]
 
-    t1 = build_table_html(f"Major Components — {latest_date}", t1_rows, yoy, max_abs)
-    t2 = build_table_html(f"Food, Energy &amp; Core — {latest_date}", t2_rows, yoy, max_abs)
-    t3 = build_table_html(f"Shelter Decomposition — {latest_date}", t3_rows, yoy, max_abs)
+    # Max contribution for bar scaling: largest absolute contrib across all displayed rows
+    all_keys = [k for _, k, _ in t1_rows + t2_rows + t3_rows if k is not None]
+    contribs = []
+    for k in all_keys:
+        s = yoy.get(k, pd.Series()).dropna()
+        if len(s) > 0:
+            val = float(s.iloc[-1])
+            w = WEIGHTS.get(k, 0.0)
+            contribs.append(abs(val * w / 100))
+    max_contrib = max(contribs) if contribs else 5.0
+
+    t1 = build_table_html(f"Major Components — {latest_date}", t1_rows, yoy, max_abs, max_contrib)
+    t2 = build_table_html(f"Food, Energy &amp; Core — {latest_date}", t2_rows, yoy, max_abs, max_contrib)
+    t3 = build_table_html(f"Shelter Decomposition — {latest_date}", t3_rows, yoy, max_abs, max_contrib)
 
     return t1 + t2 + t3
 
