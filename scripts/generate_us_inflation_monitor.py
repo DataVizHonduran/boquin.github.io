@@ -173,7 +173,11 @@ def fetch_all_series() -> dict:
 
 # ── Compute YoY ───────────────────────────────────────────────────────────────
 def compute_yoy(s: pd.Series) -> pd.Series:
-    """(current / lag(12) - 1) * 100"""
+    """(current / lag(12 months) - 1) * 100
+    Resample to uniform monthly freq first so shift(12) always means
+    exactly 12 calendar months, even if source data has gaps.
+    """
+    s = s.resample("MS").last()
     return (s / s.shift(12) - 1) * 100
 
 
