@@ -29,26 +29,26 @@ OUTPUT_FILE = OUTPUT_DIR / "index.html"
 
 # ── BLS Series ────────────────────────────────────────────────────────────────
 SERIES = {
-    "cpi":              "CUSR0000SA0",     # All items (SA)
-    "core_cpi":         "CUSR0000SA0L1E",  # Less food & energy (SA)
-    "shelter":          "CUSR0000SAH1",    # Shelter (SA)
-    "cpi_ex_shelter":   "CUSR0000SA0L2",   # Less shelter (SA)
-    "food":             "CUSR0000SAF1",    # Food (SA)
-    "food_home":        "CUSR0000SAF11",   # Food at home (SA)
-    "food_away":        "CUSR0000SEFV",    # Food away from home (SA)
-    "energy":           "CUSR0000SA0E",    # Energy (SA)
-    "energy_goods":     "CUSR0000SACL2",   # Energy commodities/gasoline (SA)
-    "energy_services":  "CUSR0000SAHE",    # Household energy services (SA)
-    "core_goods":       "CUSR0000SACL1E",  # Commodities less food & energy (SA)
-    "core_services":    "CUSR0000SASLE",   # Services less energy services (SA)
-    "housing":          "CUSR0000SAH",     # Housing major group (SA)
-    "food_bev":         "CUSR0000SAF",     # Food and beverages (SA)
-    "medical":          "CUSR0000SAM",     # Medical care (SA)
-    "transportation":   "CUSR0000SAT",     # Transportation (SA)
-    "apparel":          "CUSR0000SAA",     # Apparel (SA)
-    "edu_comm":         "CUSR0000SAE",     # Education & communication (SA)
-    "recreation":       "CUSR0000SAR",     # Recreation (SA)
-    "other":            "CUSR0000SAG",     # Other goods and services (SA)
+    "cpi":              "CUUR0000SA0",     # All items (NSA)
+    "core_cpi":         "CUUR0000SA0L1E",  # Less food & energy (NSA)
+    "shelter":          "CUUR0000SAH1",    # Shelter (NSA)
+    "cpi_ex_shelter":   "CUUR0000SA0L2",   # Less shelter (NSA)
+    "food":             "CUUR0000SAF1",    # Food (NSA)
+    "food_home":        "CUUR0000SAF11",   # Food at home (NSA)
+    "food_away":        "CUUR0000SEFV",    # Food away from home (NSA)
+    "energy":           "CUUR0000SA0E",    # Energy (NSA)
+    "energy_goods":     "CUUR0000SACL2",   # Energy commodities/gasoline (NSA)
+    "energy_services":  "CUUR0000SAHE",    # Household energy services (NSA)
+    "core_goods":       "CUUR0000SACL1E",  # Commodities less food & energy (NSA)
+    "core_services":    "CUUR0000SASLE",   # Services less energy services (NSA)
+    "housing":          "CUUR0000SAH",     # Housing major group (NSA)
+    "food_bev":         "CUUR0000SAF",     # Food and beverages (NSA)
+    "medical":          "CUUR0000SAM",     # Medical care (NSA)
+    "transportation":   "CUUR0000SAT",     # Transportation (NSA)
+    "apparel":          "CUUR0000SAA",     # Apparel (NSA)
+    "edu_comm":         "CUUR0000SAE",     # Education & communication (NSA)
+    "recreation":       "CUUR0000SAR",     # Recreation (NSA)
+    "other":            "CUUR0000SAG",     # Other goods and services (NSA)
 }
 
 # ── Weights (BLS Relative Importance, Jan 2025) ───────────────────────────────
@@ -613,7 +613,7 @@ def build_html(chart_json: str, tables_html: str, last_updated: str) -> str:
   <div>
     <h1>🇺🇸 U.S. Inflation Monitor</h1>
     <div style="font-size:0.78rem;color:rgba(255,255,255,0.65);margin-top:3px;">
-      Bureau of Labor Statistics · Consumer Price Index (Seasonally Adjusted)
+      Bureau of Labor Statistics · Consumer Price Index (Not Seasonally Adjusted, 12-month change)
     </div>
   </div>
   <div class="meta">
