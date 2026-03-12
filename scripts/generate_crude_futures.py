@@ -431,24 +431,22 @@ function baseLayout(extra) {{
 }}
 
 // ── Chart 1: Term Structure ──────────────────────────────────────────────────
-Plotly.newPlot('chart-term', [
-  {{
-    type: 'bar',
-    x: DATA.labels,
-    y: DATA.prices,
-    marker: {{ color: BAR_COLORS, opacity: 0.85 }},
-    hovertemplate: '<b>%{{x}}</b><br>$%{{y:.2f}}/bbl<extra></extra>',
-  }},
-  {{
+(function() {{
+  const mid  = DATA.prices.reduce((a,b) => a+b, 0) / DATA.prices.length;
+  const span = Math.max(...DATA.prices) - Math.min(...DATA.prices);
+  const pad  = Math.max(span * 2, 2);   // padding so line sits in middle
+  Plotly.newPlot('chart-term', [{{
     type: 'scatter',
     mode: 'lines+markers',
     x: DATA.labels,
     y: DATA.prices,
-    line: {{ color: TEXT_COL, width: 1.5, dash: 'dot' }},
-    marker: {{ color: TEXT_COL, size: 6 }},
-    hoverinfo: 'skip',
-  }}
-], baseLayout({{ yaxis: {{ title: '$/bbl' }} }}), PLOTLY_CFG);
+    line: {{ color: '#636efa', width: 2.5 }},
+    marker: {{ color: '#636efa', size: 8, line: {{ color: 'white', width: 1.5 }} }},
+    hovertemplate: '<b>%{{x}}</b><br>$%{{y:.2f}}/bbl<extra></extra>',
+  }}], baseLayout({{
+    yaxis: {{ title: '$/bbl', range: [mid - pad/2, mid + pad/2] }},
+  }}), PLOTLY_CFG);
+}})();
 
 // ── Chart 2: Calendar Spreads ───────────────────────────────────────────────
 Plotly.newPlot('chart-spreads', [{{
