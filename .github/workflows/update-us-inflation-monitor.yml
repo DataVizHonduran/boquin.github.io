@@ -1,0 +1,38 @@
+name: Update US Inflation Monitor
+
+on:
+  schedule:
+    # 13th of each month at 14:00 UTC (BLS CPI typically released 8:30 ET = 13:30 UTC)
+    - cron: '0 14 13 * *'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate dashboard
+        run: python scripts/generate_us_inflation_monitor.py
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/us-inflation-monitor/
+          git diff --staged --quiet || (git commit -m "Update US Inflation Monitor - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
