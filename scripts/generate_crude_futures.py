@@ -54,14 +54,17 @@ for ticker, label in zip(TICKERS, LABELS):
             continue
 
         closes   = hist["Close"].dropna()
+        highs    = hist["High"].dropna()
+        lows     = hist["Low"].dropna()
         last_px  = float(closes.iloc[-1])
         prev_px  = float(closes.iloc[-2]) if len(closes) >= 2 else last_px
         chg      = last_px - prev_px
         pct_chg  = (chg / prev_px * 100) if prev_px else 0.0
 
-        hi_52  = float(closes.tail(252).max())
-        lo_52  = float(closes.tail(252).min())
-        rng    = hi_52 - lo_52
+        # Use intraday High/Low for the true 52-week range
+        hi_52   = float(highs.tail(252).max())
+        lo_52   = float(lows.tail(252).min())
+        rng     = hi_52 - lo_52
         pct_rng = ((last_px - lo_52) / rng * 100) if rng else 50.0
 
         stat_cards.append({
