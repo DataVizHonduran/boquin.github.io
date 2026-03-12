@@ -9,20 +9,22 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:    #1a1a2e;
-    --surface: #16213e;
-    --blue:    #0f3460;
-    --accent:  #e94560;
-    --green:   #28a745;
-    --red:     #dc3545;
-    --text:    #e0e0e0;
-    --muted:   #9a9ab0;
-    --border:  #2a2a4a;
-    --gold:    #f59e0b;
+    --bg:      #f4f7fb;
+    --surface: #ffffff;
+    --navy:    #2a3f5f;
+    --navy-hd: #1a2e45;
+    --blue-md: #3d5a8a;
+    --text:    #2a3f5f;
+    --muted:   #7b8faa;
+    --border:  #d1dce9;
+    --grid:    #C8D4E3;
+    --green:   #2ca02c;
+    --red:     #d62728;
+    --accent:  #636efa;
   }
 
   body {
-    background: var(--navy);
+    background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 14px;
@@ -31,19 +33,20 @@
 
   /* ── Header ── */
   .dashboard-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    background: linear-gradient(135deg, var(--navy-hd) 0%, var(--blue-md) 100%);
     padding: 28px 32px 24px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid #b8c8db;
+    color: #ffffff;
   }
   .header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .dashboard-header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+  .dashboard-header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: #ffffff; }
   .header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
   .badge {
     display: inline-flex; align-items: center; gap: 4px;
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px; padding: 3px 10px; font-size: 11px; color: var(--muted);
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px; padding: 3px 10px; font-size: 11px; color: rgba(255,255,255,0.85);
   }
-  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #00cc96; }
 
   /* ── Stat cards ── */
   .stat-grid {
@@ -61,10 +64,10 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 16px 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(42,63,95,0.08);
   }
   .stat-card .contract { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .stat-card .price { font-size: 1.55rem; font-weight: 700; color: var(--text); }
+  .stat-card .price { font-size: 1.55rem; font-weight: 700; color: var(--navy); }
   .stat-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
   .stat-card .change { font-size: 0.88rem; font-weight: 600; margin-top: 3px; }
   .stat-card .change.up   { color: var(--green); }
@@ -74,15 +77,15 @@
   .range-bar-wrap { margin-top: 10px; }
   .range-bar-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-bottom: 3px; }
   .range-bar-track {
-    height: 5px; background: var(--border); border-radius: 3px; position: relative;
+    height: 5px; background: #dde6f0; border-radius: 3px; position: relative;
   }
   .range-bar-fill {
-    position: absolute; height: 100%; border-radius: 3px; background: #4a9eda;
+    position: absolute; height: 100%; border-radius: 3px; background: var(--accent);
     transition: width 0.3s;
   }
   .range-bar-dot {
     position: absolute; top: 50%; transform: translate(-50%, -50%);
-    width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--navy);
+    width: 9px; height: 9px; border-radius: 50%; border: 2px solid #ffffff;
   }
 
   /* ── Section ── */
@@ -107,7 +110,7 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(42,63,95,0.08);
   }
   .chart-card h3 {
     font-size: 0.82rem; font-weight: 600; color: var(--muted);
@@ -121,14 +124,14 @@
     font-size: 11px; border-top: 1px solid var(--border);
   }
   footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--text); }
+  footer a:hover { color: var(--navy); }
 
   .structure-badge {
     display: inline-block; padding: 2px 10px; border-radius: 12px;
     font-size: 11px; font-weight: 700; margin-left: 8px; vertical-align: middle;
   }
-  .structure-badge.contango     { background: rgba(74,158,218,0.2); color: #4a9eda; border: 1px solid #4a9eda; }
-  .structure-badge.backwardation { background: rgba(233,69,96,0.2); color: var(--accent); border: 1px solid var(--accent); }
+  .structure-badge.contango      { background: rgba(99,110,250,0.1); color: #636efa; border: 1px solid #636efa; }
+  .structure-badge.backwardation { background: rgba(214,39,40,0.1);  color: #d62728; border: 1px solid #d62728; }
 </style>
 </head>
 <body>
@@ -138,7 +141,7 @@
     <h1>🛢️ WTI Crude Oil — December Futures Strip</h1>
   </div>
   <div class="header-badges">
-    <span class="badge"><span class="dot"></span> Updated: March 12, 2026 09:17 UTC</span>
+    <span class="badge"><span class="dot"></span> Updated: March 12, 2026 09:25 UTC</span>
     <span class="badge">Data: Yahoo Finance</span>
     <span class="badge">5 contracts tracked (CLZ26–CLZ30)</span>
     <span class="badge">WTI · NYMEX</span>
@@ -3354,10 +3357,10 @@ const DATA = {
 // ── Stat cards ──────────────────────────────────────────────────────────────
 const grid = document.getElementById('stat-grid');
 DATA.stat_cards.forEach(c => {
-  const dir   = c.chg > 0 ? 'up' : c.chg < 0 ? 'down' : 'flat';
-  const sign  = c.chg > 0 ? '+' : '';
-  const pct   = c.pct_rng;
-  const dotColor = pct >= 50 ? '#28a745' : '#e94560';
+  const dir      = c.chg > 0 ? 'up' : c.chg < 0 ? 'down' : 'flat';
+  const sign     = c.chg > 0 ? '+' : '';
+  const pct      = c.pct_rng;
+  const dotColor = pct >= 50 ? '#2ca02c' : '#d62728';
   grid.innerHTML += `
     <div class="stat-card">
       <div class="contract">${c.label} · ${c.ticker.split('.')[0]}</div>
@@ -3366,7 +3369,7 @@ DATA.stat_cards.forEach(c => {
       <div class="range-bar-wrap">
         <div class="range-bar-label">
           <span>${c.lo_52.toFixed(1)}</span>
-          <span style="color:#9a9ab0;font-size:9px;">52-week</span>
+          <span style="font-size:9px;">52-week</span>
           <span>${c.hi_52.toFixed(1)}</span>
         </div>
         <div class="range-bar-track">
@@ -3382,23 +3385,37 @@ const badge = document.getElementById('struct-badge');
 badge.textContent = DATA.structure;
 badge.className = 'structure-badge ' + DATA.structure.toLowerCase();
 
-// ── Plotly config ────────────────────────────────────────────────────────────
-const DARK_BG   = '#16213e';
-const GRID_COL  = '#2a2a4a';
-const TEXT_COL  = '#e0e0e0';
+// ── Plotly config — Treasury palette ────────────────────────────────────────
+const CHART_BG  = 'white';
+const GRID_COL  = '#C8D4E3';
+const GRID_LITE = '#EBF0F8';
+const TEXT_COL  = '#2a3f5f';
 const FONT_FAM  = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+const COLORWAY  = ['#636efa','#EF553B','#00cc96','#ab63fa','#FFA15A'];
 const PLOTLY_CFG = { responsive: true, displayModeBar: false };
 
-function darkLayout(extra) {
+// Contango=blue (#636efa), backwardation=red (#d62728)
+const BAR_COLORS = DATA.bar_colors.map(c =>
+  c === '#4a9eda' ? '#636efa' : '#d62728'
+);
+const SPREAD_COLORS = DATA.spread_colors.map(c =>
+  c === '#28a745' ? '#636efa' : '#d62728'
+);
+const RANGE_COLORS = DATA.range_colors.map(c =>
+  c === '#28a745' ? '#2ca02c' : '#d62728'
+);
+
+function baseLayout(extra) {
   return Object.assign({
-    paper_bgcolor: DARK_BG,
-    plot_bgcolor:  DARK_BG,
+    paper_bgcolor: CHART_BG,
+    plot_bgcolor:  CHART_BG,
     font: { color: TEXT_COL, family: FONT_FAM, size: 11 },
-    margin: { l: 50, r: 20, t: 20, b: 50 },
-    xaxis: { gridcolor: GRID_COL, zerolinecolor: GRID_COL },
-    yaxis: { gridcolor: GRID_COL, zerolinecolor: GRID_COL },
+    margin: { l: 55, r: 20, t: 20, b: 50 },
+    xaxis: { gridcolor: GRID_LITE, linecolor: GRID_COL, zerolinecolor: GRID_COL },
+    yaxis: { gridcolor: GRID_COL,  linecolor: GRID_COL, zerolinecolor: GRID_COL },
     showlegend: false,
     hovermode: 'closest',
+    colorway: COLORWAY,
   }, extra || {});
 }
 
@@ -3408,7 +3425,7 @@ Plotly.newPlot('chart-term', [
     type: 'bar',
     x: DATA.labels,
     y: DATA.prices,
-    marker: { color: DATA.bar_colors, opacity: 0.85 },
+    marker: { color: BAR_COLORS, opacity: 0.85 },
     hovertemplate: '<b>%{x}</b><br>$%{y:.2f}/bbl<extra></extra>',
   },
   {
@@ -3416,57 +3433,54 @@ Plotly.newPlot('chart-term', [
     mode: 'lines+markers',
     x: DATA.labels,
     y: DATA.prices,
-    line: { color: '#ffffff', width: 1.5, dash: 'dot' },
-    marker: { color: '#ffffff', size: 6 },
+    line: { color: TEXT_COL, width: 1.5, dash: 'dot' },
+    marker: { color: TEXT_COL, size: 6 },
     hoverinfo: 'skip',
   }
-], darkLayout({ yaxis: { title: '$/bbl', gridcolor: GRID_COL } }), PLOTLY_CFG);
+], baseLayout({ yaxis: { title: '$/bbl' } }), PLOTLY_CFG);
 
 // ── Chart 2: Calendar Spreads ───────────────────────────────────────────────
 Plotly.newPlot('chart-spreads', [{
   type: 'bar',
   x: DATA.spread_labels,
   y: DATA.spread_values,
-  marker: { color: DATA.spread_colors, opacity: 0.9 },
+  marker: { color: SPREAD_COLORS, opacity: 0.9 },
   hovertemplate: '<b>%{x}</b><br>%{y:+.2f} $/bbl<extra></extra>',
-}], darkLayout({
-  yaxis: { title: 'Spread ($/bbl)', gridcolor: GRID_COL, zeroline: true, zerolinecolor: '#555577', zerolinewidth: 1.5 },
-  shapes: [{ type:'line', x0:-0.5, x1: DATA.spread_labels.length-0.5, y0:0, y1:0,
-              line:{ color:'#555577', width:1, dash:'dash' } }]
+}], baseLayout({
+  yaxis: { title: 'Spread ($/bbl)', zeroline: true, zerolinecolor: '#A2B1C6', zerolinewidth: 1.5 },
 }), PLOTLY_CFG);
 
 // ── Chart 3: Historical Price Evolution ─────────────────────────────────────
-const PALETTE = ['#4a9eda','#f59e0b','#e94560','#28a745','#a78bfa'];
 const histTraces = DATA.labels.map((lbl, i) => ({
   type: 'scatter',
   mode: 'lines',
   name: lbl,
   x: DATA.hist_dates,
   y: DATA.hist_series[lbl],
-  line: { color: PALETTE[i % PALETTE.length], width: 1.8 },
+  line: { color: COLORWAY[i % COLORWAY.length], width: 1.8 },
   hovertemplate: '<b>' + lbl + '</b><br>%{x}<br>$%{y:.2f}<extra></extra>',
 }));
 
-Plotly.newPlot('chart-history', histTraces, darkLayout({
+Plotly.newPlot('chart-history', histTraces, baseLayout({
   showlegend: true,
   legend: { orientation:'h', yanchor:'bottom', y:1.02, xanchor:'right', x:1,
              bgcolor:'rgba(0,0,0,0)', font:{ size:10 } },
-  yaxis: { title:'$/bbl', gridcolor: GRID_COL },
-  xaxis: { type:'date', gridcolor: GRID_COL },
+  yaxis: { title:'$/bbl' },
+  xaxis: { type:'date' },
   hovermode: 'x unified',
 }), PLOTLY_CFG);
 
 // ── Chart 4: 52-Week Range Dumbbell ─────────────────────────────────────────
 const dumbbell = [];
 
-// Gray range bars
+// Light gray range bars
 DATA.range_labels.forEach((lbl, i) => {
   dumbbell.push({
     type: 'scatter',
     mode: 'lines',
     x: [DATA.range_lo[i], DATA.range_hi[i]],
     y: [lbl, lbl],
-    line: { color: '#3a3a5a', width: 10 },
+    line: { color: '#DFE8F3', width: 12 },
     hoverinfo: 'skip',
     showlegend: false,
   });
@@ -3480,31 +3494,31 @@ dumbbell.push({
   x: DATA.range_cur,
   y: DATA.range_labels,
   marker: {
-    color: DATA.range_colors,
+    color: RANGE_COLORS,
     size: 14,
-    line: { color: DARK_BG, width: 2 },
+    line: { color: 'white', width: 2 },
   },
   hovertemplate: '<b>%{y}</b><br>Current: $%{x:.2f}<extra></extra>',
 });
 
-// Low / high end dots
+// Low / high tick marks
 dumbbell.push({
   type: 'scatter', mode: 'markers', name: '52-week low',
   x: DATA.range_lo, y: DATA.range_labels,
-  marker: { color: '#3a3a5a', size: 9, symbol: 'line-ns', line: { color: '#666688', width: 2 } },
+  marker: { color: '#A2B1C6', size: 9, symbol: 'line-ns', line: { color: '#A2B1C6', width: 2 } },
   hovertemplate: '52-week low: $%{x:.2f}<extra></extra>',
 });
 dumbbell.push({
   type: 'scatter', mode: 'markers', name: '52-week high',
   x: DATA.range_hi, y: DATA.range_labels,
-  marker: { color: '#3a3a5a', size: 9, symbol: 'line-ns', line: { color: '#666688', width: 2 } },
+  marker: { color: '#A2B1C6', size: 9, symbol: 'line-ns', line: { color: '#A2B1C6', width: 2 } },
   hovertemplate: '52-week high: $%{x:.2f}<extra></extra>',
 });
 
-Plotly.newPlot('chart-range', dumbbell, darkLayout({
+Plotly.newPlot('chart-range', dumbbell, baseLayout({
   showlegend: false,
-  xaxis: { title: 'Price ($/bbl)', gridcolor: GRID_COL },
-  yaxis: { gridcolor: 'transparent', fixedrange: true },
+  xaxis: { title: 'Price ($/bbl)' },
+  yaxis: { gridcolor: 'transparent', linecolor: 'transparent', fixedrange: true },
   margin: { l: 80, r: 30, t: 20, b: 50 },
   hovermode: 'y unified',
 }), PLOTLY_CFG);
