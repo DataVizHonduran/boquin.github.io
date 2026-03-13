@@ -1,0 +1,44 @@
+name: Update Iran Airspace Monitor
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # daily at 07:00 UTC
+  workflow_dispatch:        # allow manual trigger from GitHub Actions UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install requests
+
+      - name: Run Iran Airspace Monitor
+        env:
+          FR24_API_KEY: ${{ secrets.FR24_API_KEY }}
+        run: |
+          cd ${{ github.workspace }}
+          python scripts/generate_iran_flight_monitor.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/iran-flight-monitor/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update: Iran Airspace Monitor $(date +'%Y-%m-%d')"
+            git pull --rebase
+            git push
+          fi
