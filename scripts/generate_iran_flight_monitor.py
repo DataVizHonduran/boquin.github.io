@@ -157,7 +157,11 @@ def fetch_flights_for_day(iata: str, day: date) -> dict | None:
         try:
             resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
             if resp.status_code == 404:
+                print(f"  404 body: {resp.text[:300]}")
                 return None   # airport not in FR24 database
+            if resp.status_code in (401, 403):
+                print(f"  {resp.status_code} body: {resp.text[:300]}")
+                raise SystemExit(f"Auth/access error — check FR24_API_KEY and tier")
             resp.raise_for_status()
             data = resp.json()
             flights = data.get("data", [])
@@ -581,17 +585,32 @@ AIRPORTS.forEach(ap => buildChart(ap, "chart-" + ap.iata, 340));
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test", action="store_true",
+                        help="Test mode: fetch last 3 days for IKA, DXB, BGW only")
+    args = parser.parse_args()
+
     today = date.today()
-    window_start = today - timedelta(days=LOOKBACK_DAYS - 1)
+
+    if args.test:
+        lookback = 3
+        airports = [ap for ap in AIRPORTS if ap["iata"] in ("IKA", "DXB", "BGW")]
+        print("*** TEST MODE — 3 airports × 3 days ***")
+    else:
+        lookback = LOOKBACK_DAYS
+        airports = AIRPORTS
+
+    window_start = today - timedelta(days=lookback - 1)
 
     print(f"Iran Airspace Monitor — {today}")
-    print(f"Window: {window_start} → {today}  ({LOOKBACK_DAYS} days)")
+    print(f"Window: {window_start} → {today}  ({lookback} days)")
     print()
 
     cache = load_cache()
     total_fetched = 0
 
-    for ap in AIRPORTS:
+    for ap in airports:
         iata = ap["iata"]
         print(f"[{iata}] {ap['name']}")
 
@@ -607,7 +626,7 @@ def main():
             d += timedelta(days=1)
 
         if not missing_dates:
-            print(f"  All {LOOKBACK_DAYS} days cached, skipping.")
+            print(f"  All {lookback} days cached, skipping.")
         else:
             print(f"  Fetching {len(missing_dates)} missing date(s)...")
             not_found_streak = 0
