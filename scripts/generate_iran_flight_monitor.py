@@ -600,7 +600,8 @@ def main():
         win_starts = windows_of_7(missing_dates)
 
         for ws in win_starts:
-            we = ws + timedelta(days=7)
+            # Cap window end at start-of-today (exclusive upper bound for yesterday's data)
+            we = min(ws + timedelta(days=7), fetch_end + timedelta(days=1))
             begin_ts = date_to_unix(ws)
             end_ts   = date_to_unix(we)
 
