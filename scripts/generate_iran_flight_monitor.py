@@ -156,6 +156,8 @@ def fetch_flights_for_day(iata: str, day: date) -> dict:
         }
         try:
             resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
+            if resp.status_code == 404:
+                return None   # airport not in FR24 database
             if resp.status_code == 422:
                 # endpoint doesn't support airport filter at this tier — fall back
                 break
@@ -188,9 +190,11 @@ def fetch_flights_for_day(iata: str, day: date) -> dict:
 
     # Fallback: dedicated arrivals + departures endpoints
     arrivals = _fetch_endpoint_count(iata, day_from, day_to, "arrivals")
+    if arrivals is None:
+        return None   # airport not in FR24 database
     time.sleep(RATE_LIMIT_SLEEP)
     departures = _fetch_endpoint_count(iata, day_from, day_to, "departures")
-    return {"arrivals": arrivals, "departures": departures}
+    return {"arrivals": arrivals, "departures": departures or 0}
 
 
 def _fetch_endpoint_count(iata: str, day_from: str, day_to: str, direction: str) -> int:
@@ -212,6 +216,8 @@ def _fetch_endpoint_count(iata: str, day_from: str, day_to: str, direction: str)
         }
         try:
             resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
+            if resp.status_code == 404:
+                return None   # airport not in FR24 database
             resp.raise_for_status()
             data = resp.json()
             flights = data.get("data", [])
@@ -425,7 +431,7 @@ def render_html(stats_by_airport: dict, today: date) -> str:
 
 <header>
   <h1>✈️ Iran Airspace Monitor</h1>
-  <div class="subtitle">Daily flight counts at 8 strategic Iranian airports — tracking conflict-related airspace disruption</div>
+  <div class="subtitle">Daily flight counts at Iranian airports and neighboring hubs — tracking conflict-related airspace disruption</div>
   <div class="updated">Last updated: {updated}</div>
 </header>
 
@@ -659,14 +665,23 @@ def main():
             print(f"  All {LOOKBACK_DAYS} days cached, skipping.")
         else:
             print(f"  Fetching {len(missing_dates)} missing date(s)...")
+            not_found_streak = 0
             for i, day in enumerate(missing_dates):
                 print(f"  [{i+1}/{len(missing_dates)}] {day} ...", end=" ", flush=True)
                 try:
                     result = fetch_flights_for_day(iata, day)
-                    airport_cache[str(day)] = result
-                    total = result["arrivals"] + result["departures"]
-                    print(f"arr={result['arrivals']} dep={result['departures']} total={total}")
-                    total_fetched += 1
+                    if result is None:
+                        not_found_streak += 1
+                        print("not in FR24 (skipped)")
+                        if not_found_streak >= 3:
+                            print(f"  {iata} returned 404 three times in a row — skipping remaining dates.")
+                            break
+                    else:
+                        not_found_streak = 0
+                        airport_cache[str(day)] = result
+                        total = result["arrivals"] + result["departures"]
+                        print(f"arr={result['arrivals']} dep={result['departures']} total={total}")
+                        total_fetched += 1
                 except Exception as e:
                     print(f"ERROR: {e}")
                 time.sleep(RATE_LIMIT_SLEEP)
