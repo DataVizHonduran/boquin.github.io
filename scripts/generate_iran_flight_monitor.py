@@ -137,7 +137,7 @@ def fetch_flights_for_day(iata: str, day: date) -> dict | None:
     Max query window: 14 days (single day here — always within limit)
     Data available from: 2024-04-07 onward
     """
-    url = f"{FR24_BASE}/api/v1/flight-summary/light"
+    url = f"{FR24_BASE}/api/flight-summary/light"
     day_from = f"{day}T00:00:00Z"
     day_to   = f"{day}T23:59:59Z"
 
@@ -148,7 +148,7 @@ def fetch_flights_for_day(iata: str, day: date) -> dict | None:
 
     while True:
         params = {
-            "airports":             f"both:{iata}",
+            "airports":             iata,
             "flight_datetime_from": day_from,
             "flight_datetime_to":   day_to,
             "limit":                per_page,
