@@ -126,29 +126,29 @@ def fr24_headers() -> dict:
     }
 
 
-def fetch_flights_for_day(iata: str, day: date) -> dict:
+def fetch_flights_for_day(iata: str, day: date) -> dict | None:
     """
     Fetch arrivals and departures for one airport on one calendar day.
-    Returns {"arrivals": int, "departures": int}.
-    Uses /api/v1/flights/summary/light with pagination.
-    Falls back to arrivals + departures endpoints if summary doesn't support
-    airport filtering at the Explorer tier.
+    Returns {"arrivals": int, "departures": int}, or None if airport not found.
+
+    Endpoint: GET /api/v1/flight-summary/light
+    Airport filter: airports=both:{IATA}
+    Response fields: orig_iata, dest_iata
+    Max query window: 14 days (single day here — always within limit)
+    Data available from: 2024-04-07 onward
     """
+    url = f"{FR24_BASE}/api/v1/flight-summary/light"
     day_from = f"{day}T00:00:00Z"
     day_to   = f"{day}T23:59:59Z"
 
     arrivals = 0
     departures = 0
-
-    # Try summary/light first
-    url = f"{FR24_BASE}/api/v1/flights/summary/light"
     page = 1
-    per_page = 100
-    found_any = False
+    per_page = 3000   # endpoint supports up to 20,000; 3,000 minimises calls
 
     while True:
         params = {
-            "airport":              iata,
+            "airports":             f"both:{iata}",
             "flight_datetime_from": day_from,
             "flight_datetime_to":   day_to,
             "limit":                per_page,
@@ -158,23 +158,17 @@ def fetch_flights_for_day(iata: str, day: date) -> dict:
             resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
             if resp.status_code == 404:
                 return None   # airport not in FR24 database
-            if resp.status_code == 422:
-                # endpoint doesn't support airport filter at this tier — fall back
-                break
             resp.raise_for_status()
             data = resp.json()
             flights = data.get("data", [])
             if not flights:
                 break
-            found_any = True
+            iata_up = iata.upper()
             for flight in flights:
-                dest   = (flight.get("destination", {}) or {}).get("iata", "")
-                origin = (flight.get("origin", {}) or {}).get("iata", "")
-                if dest.upper() == iata.upper():
+                if (flight.get("dest_iata") or "").upper() == iata_up:
                     arrivals += 1
-                if origin.upper() == iata.upper():
+                if (flight.get("orig_iata") or "").upper() == iata_up:
                     departures += 1
-            # pagination
             meta = data.get("meta", {})
             total = meta.get("total", 0) if meta else 0
             if page * per_page >= total or len(flights) < per_page:
@@ -182,59 +176,10 @@ def fetch_flights_for_day(iata: str, day: date) -> dict:
             page += 1
             time.sleep(RATE_LIMIT_SLEEP)
         except requests.RequestException as e:
-            print(f"  Warning: summary/light error for {iata} {day}: {e}")
+            print(f"  Warning: flight-summary error for {iata} {day}: {e}")
             break
 
-    if found_any:
-        return {"arrivals": arrivals, "departures": departures}
-
-    # Fallback: dedicated arrivals + departures endpoints
-    arrivals = _fetch_endpoint_count(iata, day_from, day_to, "arrivals")
-    if arrivals is None:
-        return None   # airport not in FR24 database
-    time.sleep(RATE_LIMIT_SLEEP)
-    departures = _fetch_endpoint_count(iata, day_from, day_to, "departures")
-    return {"arrivals": arrivals, "departures": departures or 0}
-
-
-def _fetch_endpoint_count(iata: str, day_from: str, day_to: str, direction: str) -> int:
-    """
-    Fetch total flight count from /api/v1/airports/{iata}/arrivals or /departures.
-    Paginates until exhausted.
-    """
-    url = f"{FR24_BASE}/api/v1/airports/{iata}/{direction}"
-    page = 1
-    count = 0
-    per_page = 100
-
-    while True:
-        params = {
-            "flight_datetime_from": day_from,
-            "flight_datetime_to":   day_to,
-            "limit":                per_page,
-            "page":                 page,
-        }
-        try:
-            resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
-            if resp.status_code == 404:
-                return None   # airport not in FR24 database
-            resp.raise_for_status()
-            data = resp.json()
-            flights = data.get("data", [])
-            if not flights:
-                break
-            count += len(flights)
-            meta = data.get("meta", {})
-            total = meta.get("total", 0) if meta else 0
-            if page * per_page >= total or len(flights) < per_page:
-                break
-            page += 1
-            time.sleep(RATE_LIMIT_SLEEP)
-        except requests.RequestException as e:
-            print(f"  Warning: {direction} endpoint error for {iata}: {e}")
-            break
-
-    return count
+    return {"arrivals": arrivals, "departures": departures}
 
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
