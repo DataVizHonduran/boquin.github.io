@@ -2,11 +2,12 @@
 """
 Iran Airspace Monitor
 =====================
-Tracks daily flight counts at 8 strategic Iranian airports using the
-FlightRadar24 API. A sustained drop in flights signals airspace closure,
-carrier pullout, or active conflict disruption near Iran.
+Tracks daily flight counts at 8 strategic Iranian airports and 10 major
+airports in neighboring countries using the FlightRadar24 API. A sustained
+drop in flights signals airspace closure, carrier pullout, or active conflict
+disruption near Iran.
 
-Airports monitored:
+Iranian airports monitored:
   IKA  Tehran Imam Khomeini  — main international gateway
   THR  Tehran Mehrabad       — domestic hub + regional flights
   BND  Bandar Abbas          — Strait of Hormuz, naval/military proximity
@@ -15,6 +16,18 @@ Airports monitored:
   MHD  Mashhad               — northeast hub, near Afghanistan
   AWZ  Ahvaz                 — near Iraq/Kuwait border
   KSH  Kermanshah            — near Iraq border
+
+Neighboring country airports monitored:
+  DXB  Dubai International        — UAE
+  IST  Istanbul Airport           — Turkey
+  DOH  Hamad International        — Qatar
+  AUH  Abu Dhabi International    — UAE
+  KWI  Kuwait International       — Kuwait
+  BGW  Baghdad International      — Iraq
+  GYD  Baku Heydar Aliyev         — Azerbaijan
+  KHI  Karachi Jinnah             — Pakistan
+  RUH  King Khalid (Riyadh)       — Saudi Arabia
+  ASB  Ashgabat International     — Turkmenistan
 
 Data source:
   FlightRadar24 API v1 — https://fr24api.flightradar24.com
@@ -58,14 +71,26 @@ LOOKBACK_DAYS = 90
 RATE_LIMIT_SLEEP = 0.6               # seconds between API calls
 
 AIRPORTS = [
-    {"iata": "IKA", "icao": "OIIE", "name": "Tehran Imam Khomeini", "flag": "🇮🇷"},
-    {"iata": "THR", "icao": "OIII", "name": "Tehran Mehrabad",       "flag": "🇮🇷"},
-    {"iata": "BND", "icao": "OIKB", "name": "Bandar Abbas",          "flag": "🇮🇷"},
-    {"iata": "IFN", "icao": "OIFM", "name": "Isfahan",               "flag": "🇮🇷"},
-    {"iata": "SYZ", "icao": "OISF", "name": "Shiraz",                "flag": "🇮🇷"},
-    {"iata": "MHD", "icao": "OIMM", "name": "Mashhad",               "flag": "🇮🇷"},
-    {"iata": "AWZ", "icao": "OIAW", "name": "Ahvaz",                 "flag": "🇮🇷"},
-    {"iata": "KSH", "icao": "OICC", "name": "Kermanshah",            "flag": "🇮🇷"},
+    # ── Iran ──────────────────────────────────────────────────────────────────
+    {"iata": "IKA", "icao": "OIIE", "name": "Tehran Imam Khomeini", "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "THR", "icao": "OIII", "name": "Tehran Mehrabad",       "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "BND", "icao": "OIKB", "name": "Bandar Abbas",          "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "IFN", "icao": "OIFM", "name": "Isfahan",               "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "SYZ", "icao": "OISF", "name": "Shiraz",                "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "MHD", "icao": "OIMM", "name": "Mashhad",               "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "AWZ", "icao": "OIAW", "name": "Ahvaz",                 "flag": "🇮🇷", "group": "Iran"},
+    {"iata": "KSH", "icao": "OICC", "name": "Kermanshah",            "flag": "🇮🇷", "group": "Iran"},
+    # ── Neighboring countries ─────────────────────────────────────────────────
+    {"iata": "DXB", "icao": "OMDB", "name": "Dubai International",      "flag": "🇦🇪", "group": "Neighbors"},
+    {"iata": "IST", "icao": "LTFM", "name": "Istanbul Airport",         "flag": "🇹🇷", "group": "Neighbors"},
+    {"iata": "DOH", "icao": "OTHH", "name": "Hamad International",      "flag": "🇶🇦", "group": "Neighbors"},
+    {"iata": "AUH", "icao": "OMAA", "name": "Abu Dhabi International",  "flag": "🇦🇪", "group": "Neighbors"},
+    {"iata": "KWI", "icao": "OKBK", "name": "Kuwait International",     "flag": "🇰🇼", "group": "Neighbors"},
+    {"iata": "BGW", "icao": "ORBI", "name": "Baghdad International",    "flag": "🇮🇶", "group": "Neighbors"},
+    {"iata": "GYD", "icao": "UBBB", "name": "Baku Heydar Aliyev",       "flag": "🇦🇿", "group": "Neighbors"},
+    {"iata": "KHI", "icao": "OPKC", "name": "Karachi Jinnah",           "flag": "🇵🇰", "group": "Neighbors"},
+    {"iata": "RUH", "icao": "OERK", "name": "King Khalid (Riyadh)",     "flag": "🇸🇦", "group": "Neighbors"},
+    {"iata": "ASB", "icao": "UTAA", "name": "Ashgabat International",   "flag": "🇹🇲", "group": "Neighbors"},
 ]
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -284,6 +309,8 @@ def render_html(stats_by_airport: dict, today: date) -> str:
         airport_data_js.append({
             "iata":      iata,
             "name":      ap["name"],
+            "flag":      ap["flag"],
+            "group":     ap["group"],
             "dates":     dates,
             "arrivals":  arrivals,
             "departures": departures,
@@ -298,10 +325,16 @@ def render_html(stats_by_airport: dict, today: date) -> str:
     conflict_date = CONFLICT_START_DATE
 
     tab_buttons = ""
+    last_group = None
     for i, ap in enumerate(AIRPORTS):
+        if ap["group"] != last_group:
+            label = "🇮🇷 Iran" if ap["group"] == "Iran" else "🌍 Neighbors"
+            tab_buttons += f'<span class="tab-group-label">{label}</span>\n'
+            last_group = ap["group"]
         active = "active" if i == 0 else ""
-        tab_buttons += f'<button class="tab-btn {active}" onclick="showTab(\'{ap["iata"]}\')" id="tab-{ap["iata"]}">{ap["iata"]}</button>\n'
+        tab_buttons += f'<button class="tab-btn {active}" onclick="showTab(\'{ap["iata"]}\')" id="tab-{ap["iata"]}">{ap["flag"]} {ap["iata"]}</button>\n'
 
+    tab_buttons += '<span class="tab-group-label">─</span>\n'
     tab_buttons += '<button class="tab-btn" onclick="showTab(\'ALL\')" id="tab-ALL">All</button>\n'
 
     html = f"""<!DOCTYPE html>
@@ -340,6 +373,11 @@ def render_html(stats_by_airport: dict, today: date) -> str:
   }}
   .tab-btn:hover {{ color: #0f3460; }}
   .tab-btn.active {{ color: #0f3460; border-bottom-color: #0f3460; }}
+  .tab-group-label {{
+    display: flex; align-items: center; padding: 0 8px;
+    font-size: 0.72rem; font-weight: 600; color: #94a3b8;
+    text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+  }}
   main {{ max-width: 1200px; margin: 0 auto; padding: 24px 20px; }}
   .tab-panel {{ display: none; }}
   .tab-panel.active {{ display: block; }}
