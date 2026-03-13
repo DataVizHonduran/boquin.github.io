@@ -2,10 +2,52 @@
   "ASB": {},
   "AUH": {},
   "AWZ": {},
+  "BGW": {
+    "2026-03-11": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-12": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-13": {
+      "arrivals": 0,
+      "departures": 0
+    }
+  },
   "BND": {},
   "DOH": {},
+  "DXB": {
+    "2026-03-11": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-12": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-13": {
+      "arrivals": 0,
+      "departures": 0
+    }
+  },
   "GYD": {},
   "IFN": {},
+  "IKA": {
+    "2026-03-11": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-12": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-13": {
+      "arrivals": 0,
+      "departures": 0
+    }
+  },
   "IST": {},
   "KHI": {},
   "KSH": {},
