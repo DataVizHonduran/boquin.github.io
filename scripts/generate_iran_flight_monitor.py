@@ -63,6 +63,7 @@ OPENSKY_TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-networ
 CONFLICT_START_DATE = "2025-10-01"   # adjust to actual escalation date
 LOOKBACK_DAYS = 90
 RATE_LIMIT_SLEEP = 0.5               # seconds between API calls
+WINDOW_DAYS = 2                      # OpenSky max: 2 calendar-day partitions per request
 
 AIRPORTS = [
     {"iata": "DXB", "icao": "OMDB", "name": "Dubai International",     "flag": "🇦🇪"},
@@ -147,18 +148,18 @@ def date_to_unix(d: date) -> int:
     return int(datetime(d.year, d.month, d.day, tzinfo=timezone.utc).timestamp())
 
 
-def windows_of_7(dates: list) -> list:
-    """Group sorted dates into consecutive 7-day windows starting from each new gap."""
+def windows_of_n(dates: list, n: int) -> list:
+    """Group sorted dates into consecutive n-day windows starting from each new gap."""
     if not dates:
         return []
-    windows = []
+    result = []
     current_start = dates[0]
     for d in dates:
-        if (d - current_start).days >= 7:
-            windows.append(current_start)
+        if (d - current_start).days >= n:
+            result.append(current_start)
             current_start = d
-    windows.append(current_start)
-    return windows
+    result.append(current_start)
+    return result
 
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
@@ -599,11 +600,11 @@ def main():
         print(f"  Fetching {len(missing_dates)} missing date(s) in 7-day windows...")
 
         # Group missing dates into 7-day windows
-        win_starts = windows_of_7(missing_dates)
+        win_starts = windows_of_n(missing_dates, WINDOW_DAYS)
 
         for ws in win_starts:
             # Cap window end at start-of-today (exclusive upper bound for yesterday's data)
-            we = min(ws + timedelta(days=7), fetch_end + timedelta(days=1))
+            we = min(ws + timedelta(days=WINDOW_DAYS), fetch_end + timedelta(days=1))
             begin_ts = date_to_unix(ws)
             end_ts   = date_to_unix(we)
 
@@ -615,7 +616,7 @@ def main():
                 dep_by_day  = window_to_daily_counts(dep_flights, "departure")
 
                 # Store results for each missing date that falls in this window
-                window_dates = [ws + timedelta(days=i) for i in range(7)]
+                window_dates = [ws + timedelta(days=i) for i in range(WINDOW_DAYS)]
                 written = 0
                 for wd in window_dates:
                     day_str = str(wd)
