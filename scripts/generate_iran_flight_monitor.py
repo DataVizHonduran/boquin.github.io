@@ -139,7 +139,7 @@ def window_to_daily_counts(flights: list, direction: str) -> dict:
     for f in flights:
         ts = f.get(ts_field)
         if ts:
-            day = date.fromtimestamp(ts, tz=timezone.utc).isoformat()
+            day = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
             counts[day] = counts.get(day, 0) + 1
     return counts
 
