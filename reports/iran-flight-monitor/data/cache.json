@@ -13,6 +13,32 @@
       "departures": 0
     }
   },
-  "DXB": {},
-  "IST": {}
+  "DXB": {
+    "2026-03-10": {
+      "arrivals": 37,
+      "departures": 3
+    },
+    "2026-03-11": {
+      "arrivals": 43,
+      "departures": 4
+    },
+    "2026-03-12": {
+      "arrivals": 44,
+      "departures": 4
+    }
+  },
+  "IST": {
+    "2026-03-10": {
+      "arrivals": 586,
+      "departures": 535
+    },
+    "2026-03-11": {
+      "arrivals": 588,
+      "departures": 573
+    },
+    "2026-03-12": {
+      "arrivals": 601,
+      "departures": 432
+    }
+  }
 }
