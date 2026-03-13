@@ -2,20 +2,9 @@
 """
 Iran Airspace Monitor
 =====================
-Tracks daily flight counts at 8 strategic Iranian airports and 10 major
-airports in neighboring countries using the FlightRadar24 API. A sustained
-drop in flights signals airspace closure, carrier pullout, or active conflict
-disruption near Iran.
-
-Iranian airports monitored:
-  IKA  Tehran Imam Khomeini  — main international gateway
-  THR  Tehran Mehrabad       — domestic hub + regional flights
-  BND  Bandar Abbas          — Strait of Hormuz, naval/military proximity
-  IFN  Isfahan               — near nuclear/military facilities
-  SYZ  Shiraz                — major southern hub
-  MHD  Mashhad               — northeast hub, near Afghanistan
-  AWZ  Ahvaz                 — near Iraq/Kuwait border
-  KSH  Kermanshah            — near Iraq border
+Tracks daily flight counts at 10 major airports in Iran's neighboring region
+using the OpenSky Network API. A sustained drop in flights signals airspace
+closure, carrier pullout, or active conflict disruption near Iran.
 
 Neighboring country airports monitored:
   DXB  Dubai International        — UAE
@@ -30,24 +19,25 @@ Neighboring country airports monitored:
   ASB  Ashgabat International     — Turkmenistan
 
 Data source:
-  FlightRadar24 API v1 — https://fr24api.flightradar24.com
-  Endpoint: GET /api/v1/flights/summary/light
-  Auth: Bearer token via FR24_API_KEY environment variable
+  OpenSky Network API — https://opensky-network.org/api
+  Endpoints: /flights/arrival and /flights/departure
+  Auth: OAuth2 client credentials (OPENSKY_CLIENT_ID / OPENSKY_CLIENT_SECRET)
 
 Cache:
   reports/iran-flight-monitor/data/cache.json  (committed to repo)
-  Format: { "IKA": { "2025-10-01": {"arrivals": 42, "departures": 40}, ... }, ... }
+  Format: { "DXB": { "2025-10-01": {"arrivals": 42, "departures": 40}, ... }, ... }
   Only missing dates are fetched on each run (cache-forward pattern).
 
 Output:
   reports/iran-flight-monitor/index.html
 
 Environment variables:
-  FR24_API_KEY   — FlightRadar24 API key (Explorer tier or higher)
+  OPENSKY_CLIENT_ID     — OpenSky OAuth2 client ID
+  OPENSKY_CLIENT_SECRET — OpenSky OAuth2 client secret
 
 Run from repo root:
   cd ~/boquin.github.io
-  FR24_API_KEY=xxx python3 scripts/generate_iran_flight_monitor.py
+  OPENSKY_CLIENT_ID=xxx OPENSKY_CLIENT_SECRET=yyy python3 scripts/generate_iran_flight_monitor.py
 
 Authors: boquin.github.io
 """
@@ -57,47 +47,39 @@ import sys
 import json
 import time
 import requests
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 from pathlib import Path
 
 # ── Config ────────────────────────────────────────────────────────────────────
-FR24_API_KEY = os.environ.get("FR24_API_KEY")
-if not FR24_API_KEY:
-    print("ERROR: FR24_API_KEY environment variable is not set.", file=sys.stderr)
+OPENSKY_CLIENT_ID     = os.environ.get("OPENSKY_CLIENT_ID")
+OPENSKY_CLIENT_SECRET = os.environ.get("OPENSKY_CLIENT_SECRET")
+if not OPENSKY_CLIENT_ID or not OPENSKY_CLIENT_SECRET:
+    print("ERROR: OPENSKY_CLIENT_ID and OPENSKY_CLIENT_SECRET must be set", file=sys.stderr)
     sys.exit(1)
+
+OPENSKY_BASE      = "https://opensky-network.org/api"
+OPENSKY_TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
 
 CONFLICT_START_DATE = "2025-10-01"   # adjust to actual escalation date
 LOOKBACK_DAYS = 90
-RATE_LIMIT_SLEEP = 0.6               # seconds between API calls
+RATE_LIMIT_SLEEP = 0.5               # seconds between API calls
 
 AIRPORTS = [
-    # ── Iran ──────────────────────────────────────────────────────────────────
-    {"iata": "IKA", "icao": "OIIE", "name": "Tehran Imam Khomeini", "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "THR", "icao": "OIII", "name": "Tehran Mehrabad",       "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "BND", "icao": "OIKB", "name": "Bandar Abbas",          "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "IFN", "icao": "OIFM", "name": "Isfahan",               "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "SYZ", "icao": "OISF", "name": "Shiraz",                "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "MHD", "icao": "OIMM", "name": "Mashhad",               "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "AWZ", "icao": "OIAW", "name": "Ahvaz",                 "flag": "🇮🇷", "group": "Iran"},
-    {"iata": "KSH", "icao": "OICC", "name": "Kermanshah",            "flag": "🇮🇷", "group": "Iran"},
-    # ── Neighboring countries ─────────────────────────────────────────────────
-    {"iata": "DXB", "icao": "OMDB", "name": "Dubai International",      "flag": "🇦🇪", "group": "Neighbors"},
-    {"iata": "IST", "icao": "LTFM", "name": "Istanbul Airport",         "flag": "🇹🇷", "group": "Neighbors"},
-    {"iata": "DOH", "icao": "OTHH", "name": "Hamad International",      "flag": "🇶🇦", "group": "Neighbors"},
-    {"iata": "AUH", "icao": "OMAA", "name": "Abu Dhabi International",  "flag": "🇦🇪", "group": "Neighbors"},
-    {"iata": "KWI", "icao": "OKBK", "name": "Kuwait International",     "flag": "🇰🇼", "group": "Neighbors"},
-    {"iata": "BGW", "icao": "ORBI", "name": "Baghdad International",    "flag": "🇮🇶", "group": "Neighbors"},
-    {"iata": "GYD", "icao": "UBBB", "name": "Baku Heydar Aliyev",       "flag": "🇦🇿", "group": "Neighbors"},
-    {"iata": "KHI", "icao": "OPKC", "name": "Karachi Jinnah",           "flag": "🇵🇰", "group": "Neighbors"},
-    {"iata": "RUH", "icao": "OERK", "name": "King Khalid (Riyadh)",     "flag": "🇸🇦", "group": "Neighbors"},
-    {"iata": "ASB", "icao": "UTAA", "name": "Ashgabat International",   "flag": "🇹🇲", "group": "Neighbors"},
+    {"iata": "DXB", "icao": "OMDB", "name": "Dubai International",     "flag": "🇦🇪"},
+    {"iata": "IST", "icao": "LTFM", "name": "Istanbul Airport",        "flag": "🇹🇷"},
+    {"iata": "DOH", "icao": "OTHH", "name": "Hamad International",     "flag": "🇶🇦"},
+    {"iata": "AUH", "icao": "OMAA", "name": "Abu Dhabi International", "flag": "🇦🇪"},
+    {"iata": "KWI", "icao": "OKBK", "name": "Kuwait International",    "flag": "🇰🇼"},
+    {"iata": "BGW", "icao": "ORBI", "name": "Baghdad International",   "flag": "🇮🇶"},
+    {"iata": "GYD", "icao": "UBBB", "name": "Baku Heydar Aliyev",      "flag": "🇦🇿"},
+    {"iata": "KHI", "icao": "OPKC", "name": "Karachi Jinnah",          "flag": "🇵🇰"},
+    {"iata": "RUH", "icao": "OERK", "name": "King Khalid (Riyadh)",    "flag": "🇸🇦"},
+    {"iata": "ASB", "icao": "UTAA", "name": "Ashgabat International",  "flag": "🇹🇲"},
 ]
 
-REPO_ROOT = Path(__file__).parent.parent
+REPO_ROOT  = Path(__file__).parent.parent
 CACHE_PATH = REPO_ROOT / "reports/iran-flight-monitor/data/cache.json"
 OUTPUT_PATH = REPO_ROOT / "reports/iran-flight-monitor/index.html"
-
-FR24_BASE = "https://fr24api.flightradar24.com"
 
 
 # ── Cache I/O ─────────────────────────────────────────────────────────────────
@@ -117,90 +99,72 @@ def save_cache(cache: dict):
         json.dump(cache, f, indent=2, sort_keys=True)
 
 
-# ── FR24 API ──────────────────────────────────────────────────────────────────
-def fr24_headers() -> dict:
-    return {
-        "Authorization": f"Bearer {FR24_API_KEY}",
-        "Accept": "application/json",
-        "Accept-Version": "v1",
-    }
+# ── OpenSky Auth ──────────────────────────────────────────────────────────────
+def get_token() -> str:
+    resp = requests.post(OPENSKY_TOKEN_URL, data={
+        "client_id": OPENSKY_CLIENT_ID,
+        "client_secret": OPENSKY_CLIENT_SECRET,
+        "grant_type": "client_credentials",
+    }, timeout=30)
+    resp.raise_for_status()
+    return resp.json()["access_token"]
 
 
-def fetch_flights_for_day(iata: str, day: date) -> dict | None:
-    """
-    Fetch arrivals and departures for one airport on one calendar day.
-    Returns {"arrivals": int, "departures": int}, or None if airport not found.
+# ── OpenSky API ───────────────────────────────────────────────────────────────
+def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) -> list:
+    """Fetch one airport/direction/window. Returns list of flight dicts. 404 = 0 flights."""
+    url = f"{OPENSKY_BASE}/flights/{direction}"
+    resp = requests.get(url,
+        params={"airport": icao, "begin": begin, "end": end},
+        headers={"Authorization": f"Bearer {token}"},
+        timeout=30)
+    if resp.status_code == 404:
+        return []
+    if resp.status_code == 429:
+        retry_after = int(resp.headers.get("X-Rate-Limit-Retry-After-Seconds", 60))
+        print(f"  Rate limited — sleeping {retry_after}s")
+        time.sleep(retry_after)
+        return fetch_window(icao, begin, end, direction, token)
+    resp.raise_for_status()
+    return resp.json() or []
 
-    Endpoint: GET /api/v1/flight-summary/light
-    Airport filter: airports=both:{IATA}
-    Response fields: orig_iata, dest_iata
-    Max query window: 14 days (single day here — always within limit)
-    Data available from: 2024-04-07 onward
-    """
-    url = f"{FR24_BASE}/api/flight-summary/light"
-    day_from = f"{day}T00:00:00Z"
-    day_to   = f"{day}T23:59:59Z"
 
-    arrivals = 0
-    departures = 0
-    page = 1
-    per_page = 3000   # endpoint supports up to 20,000; 3,000 minimises calls
+def window_to_daily_counts(flights: list, direction: str) -> dict:
+    """Map flight records to {date_str: count} using UTC date of firstSeen/lastSeen."""
+    counts = {}
+    ts_field = "firstSeen" if direction == "departure" else "lastSeen"
+    for f in flights:
+        ts = f.get(ts_field)
+        if ts:
+            day = date.fromtimestamp(ts, tz=timezone.utc).isoformat()
+            counts[day] = counts.get(day, 0) + 1
+    return counts
 
-    while True:
-        params = {
-            "airports":             iata,
-            "flight_datetime_from": day_from,
-            "flight_datetime_to":   day_to,
-            "limit":                per_page,
-            "page":                 page,
-        }
-        try:
-            resp = requests.get(url, headers=fr24_headers(), params=params, timeout=30)
-            if resp.status_code == 404:
-                print(f"  404 body: {resp.text[:300]}")
-                return None   # airport not in FR24 database
-            if resp.status_code in (401, 403):
-                print(f"  {resp.status_code} body: {resp.text[:300]}")
-                raise SystemExit(f"Auth/access error — check FR24_API_KEY and tier")
-            resp.raise_for_status()
-            data = resp.json()
-            if page == 1 and arrivals == 0 and departures == 0:
-                print(f"  DEBUG status={resp.status_code} keys={list(data.keys())} data_len={len(data.get('data', []))} meta={data.get('meta')}")
-                if data.get("data"):
-                    print(f"  DEBUG first flight: {data['data'][0]}")
-            flights = data.get("data", [])
-            if not flights:
-                break
-            iata_up = iata.upper()
-            for flight in flights:
-                if (flight.get("dest_iata") or "").upper() == iata_up:
-                    arrivals += 1
-                if (flight.get("orig_iata") or "").upper() == iata_up:
-                    departures += 1
-            meta = data.get("meta", {})
-            total = meta.get("total", 0) if meta else 0
-            if page * per_page >= total or len(flights) < per_page:
-                break
-            page += 1
-            time.sleep(RATE_LIMIT_SLEEP)
-        except requests.RequestException as e:
-            print(f"  Warning: flight-summary error for {iata} {day}: {e}")
-            break
 
-    return {"arrivals": arrivals, "departures": departures}
+def date_to_unix(d: date) -> int:
+    return int(datetime(d.year, d.month, d.day, tzinfo=timezone.utc).timestamp())
+
+
+def windows_of_7(dates: list) -> list:
+    """Group sorted dates into consecutive 7-day windows starting from each new gap."""
+    if not dates:
+        return []
+    windows = []
+    current_start = dates[0]
+    for d in dates:
+        if (d - current_start).days >= 7:
+            windows.append(current_start)
+            current_start = d
+    windows.append(current_start)
+    return windows
 
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
 def compute_stats(cache: dict, iata: str, today: date) -> dict:
-    """
-    Compute rolling averages, baseline, and % change for one airport.
-    Returns series (list of dicts) and summary scalars.
-    """
     airport_cache = cache.get(iata, {})
     window_start = today - timedelta(days=LOOKBACK_DAYS - 1)
     conflict_start = date.fromisoformat(CONFLICT_START_DATE)
 
-    # Build daily series for the 90-day window
     series = []
     for n in range(LOOKBACK_DAYS):
         d = window_start + timedelta(days=n)
@@ -214,7 +178,6 @@ def compute_stats(cache: dict, iata: str, today: date) -> dict:
             series.append({"date": key, "arrivals": None,
                            "departures": None, "total": None})
 
-    # Pre-conflict baseline (all cached dates before conflict start)
     baseline_vals = [
         v["arrivals"] + v["departures"]
         for k, v in airport_cache.items()
@@ -223,7 +186,6 @@ def compute_stats(cache: dict, iata: str, today: date) -> dict:
     ]
     baseline_avg = round(sum(baseline_vals) / len(baseline_vals), 1) if baseline_vals else None
 
-    # 7D and 30D rolling avg (most recent complete days)
     recent_totals = [s["total"] for s in series[-7:] if s["total"] is not None]
     avg_7d = round(sum(recent_totals) / len(recent_totals), 1) if recent_totals else None
 
@@ -235,10 +197,10 @@ def compute_stats(cache: dict, iata: str, today: date) -> dict:
         pct_vs_baseline = round((avg_7d - baseline_avg) / baseline_avg * 100, 1)
 
     return {
-        "series":         series,
-        "avg_7d":         avg_7d,
-        "avg_30d":        avg_30d,
-        "baseline_avg":   baseline_avg,
+        "series":          series,
+        "avg_7d":          avg_7d,
+        "avg_30d":         avg_30d,
+        "baseline_avg":    baseline_avg,
         "pct_vs_baseline": pct_vs_baseline,
     }
 
@@ -247,7 +209,6 @@ def compute_stats(cache: dict, iata: str, today: date) -> dict:
 def render_html(stats_by_airport: dict, today: date) -> str:
     updated = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
-    # Build per-airport chart specs for inline JS
     airport_data_js = []
     for ap in AIRPORTS:
         iata = ap["iata"]
@@ -258,7 +219,6 @@ def render_html(stats_by_airport: dict, today: date) -> str:
         arrivals   = [s["arrivals"] for s in ser]
         departures = [s["departures"] for s in ser]
 
-        # 7D rolling average on total
         totals = [s["total"] for s in ser]
         rolling7 = []
         for i in range(len(totals)):
@@ -266,34 +226,27 @@ def render_html(stats_by_airport: dict, today: date) -> str:
             rolling7.append(round(sum(window)/len(window), 1) if window else None)
 
         airport_data_js.append({
-            "iata":      iata,
-            "name":      ap["name"],
-            "flag":      ap["flag"],
-            "group":     ap["group"],
-            "dates":     dates,
-            "arrivals":  arrivals,
+            "iata":       iata,
+            "name":       ap["name"],
+            "flag":       ap["flag"],
+            "dates":      dates,
+            "arrivals":   arrivals,
             "departures": departures,
-            "rolling7":  rolling7,
-            "avg_7d":    st["avg_7d"],
-            "avg_30d":   st["avg_30d"],
-            "baseline":  st["baseline_avg"],
-            "pct":       st["pct_vs_baseline"],
+            "rolling7":   rolling7,
+            "avg_7d":     st["avg_7d"],
+            "avg_30d":    st["avg_30d"],
+            "baseline":   st["baseline_avg"],
+            "pct":        st["pct_vs_baseline"],
         })
 
     data_json = json.dumps(airport_data_js)
     conflict_date = CONFLICT_START_DATE
 
     tab_buttons = ""
-    last_group = None
     for i, ap in enumerate(AIRPORTS):
-        if ap["group"] != last_group:
-            label = "🇮🇷 Iran" if ap["group"] == "Iran" else "🌍 Neighbors"
-            tab_buttons += f'<span class="tab-group-label">{label}</span>\n'
-            last_group = ap["group"]
         active = "active" if i == 0 else ""
         tab_buttons += f'<button class="tab-btn {active}" onclick="showTab(\'{ap["iata"]}\')" id="tab-{ap["iata"]}">{ap["flag"]} {ap["iata"]}</button>\n'
-
-    tab_buttons += '<span class="tab-group-label">─</span>\n'
+    tab_buttons += '<span class="tab-sep">|</span>\n'
     tab_buttons += '<button class="tab-btn" onclick="showTab(\'ALL\')" id="tab-ALL">All</button>\n'
 
     html = f"""<!DOCTYPE html>
@@ -322,7 +275,7 @@ def render_html(stats_by_airport: dict, today: date) -> str:
   }}
   nav.tabs {{
     background: #fff; border-bottom: 1px solid #e2e8f0;
-    padding: 0 20px; display: flex; flex-wrap: wrap; gap: 2px;
+    padding: 0 20px; display: flex; flex-wrap: wrap; gap: 2px; align-items: center;
   }}
   .tab-btn {{
     background: none; border: none; padding: 12px 16px;
@@ -332,10 +285,8 @@ def render_html(stats_by_airport: dict, today: date) -> str:
   }}
   .tab-btn:hover {{ color: #0f3460; }}
   .tab-btn.active {{ color: #0f3460; border-bottom-color: #0f3460; }}
-  .tab-group-label {{
-    display: flex; align-items: center; padding: 0 8px;
-    font-size: 0.72rem; font-weight: 600; color: #94a3b8;
-    text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+  .tab-sep {{
+    color: #e2e8f0; font-size: 1.2rem; padding: 0 4px; user-select: none;
   }}
   main {{ max-width: 1200px; margin: 0 auto; padding: 24px 20px; }}
   .tab-panel {{ display: none; }}
@@ -384,15 +335,14 @@ def render_html(stats_by_airport: dict, today: date) -> str:
 
 <header>
   <h1>✈️ Iran Airspace Monitor</h1>
-  <div class="subtitle">Daily flight counts at Iranian airports and neighboring hubs — tracking conflict-related airspace disruption</div>
+  <div class="subtitle">Daily flight counts at 10 airports in Iran's neighboring region — tracking conflict-related airspace disruption</div>
   <div class="updated">Last updated: {updated}</div>
 </header>
 
 <div class="conflict-strip">
   ⚠️ Conflict reference date: <strong>{conflict_date}</strong> — vertical line on each chart.
   A sustained drop in total flights (arrivals + departures) may signal airspace closure,
-  carrier pullout, or active conflict disruption. Note: Iran restricts ADS-B transponder
-  data; FlightRadar24 coverage may undercount actual military or domestic traffic.
+  carrier pullout, or active conflict disruption.
 </div>
 
 <nav class="tabs">
@@ -404,20 +354,25 @@ def render_html(stats_by_airport: dict, today: date) -> str:
 
   <div class="methodology">
     <h3>Methodology &amp; Caveats</h3>
-    <p><strong>Data source:</strong> FlightRadar24 API v1 (<code>/api/v1/flights/summary/light</code>).
-    Flights are counted per calendar day (UTC) per airport by IATA code. Each daily count
-    reflects the sum of arrivals (destination = airport) and departures (origin = airport)
-    as reported in the FR24 database.</p>
+    <p><strong>Data source:</strong> OpenSky Network API (<code>/api/flights/arrival</code> and
+    <code>/api/flights/departure</code>). Flights are counted per calendar day (UTC) per airport
+    by ICAO code. Each daily count reflects the sum of arrivals and departures as recorded in
+    the OpenSky database, which aggregates ADS-B and MLAT data from a global network of receivers.
+    Data is batch-processed overnight; only dates up to yesterday are fetched.</p>
+    <p style="margin-top:8px"><strong>Airport scope:</strong> Only the 10 airports in neighboring
+    countries are tracked. Iranian airports are excluded because ADS-B ground receiver coverage
+    inside Iran is too sparse to produce meaningful counts.</p>
     <p style="margin-top:8px"><strong>Pre-conflict baseline:</strong> Average daily total flights
-    in all cached dates before {conflict_date}. The % vs. baseline metric compares the
-    most recent 7-day rolling average against this baseline.</p>
-    <p style="margin-top:8px"><strong>Coverage caveat:</strong> Iran restricts ADS-B transponder
-    broadcasts; FlightRadar24 relies on ground receiver networks which have limited coverage
-    inside Iranian airspace. Counts reflect tracked flights only and may significantly undercount
-    actual military, cargo, or short-haul domestic traffic.</p>
+    in all cached dates before {conflict_date}. The % vs. baseline metric compares the most
+    recent 7-day rolling average against this baseline.</p>
     <p style="margin-top:8px"><strong>Cache:</strong> Historical data is cached in
     <code>reports/iran-flight-monitor/data/cache.json</code>. Only missing dates are
-    fetched on each run to minimize API usage.</p>
+    fetched on each run to minimize API usage. Fetch windows are up to 7 days per request
+    per direction per airport.</p>
+    <p style="margin-top:8px"><strong>Attribution:</strong> Flight data provided by
+    <a href="https://opensky-network.org" style="color:#0f3460">The OpenSky Network</a>,
+    Matthias Schäfer, Martin Strohmeier, Vincent Lenders, Ivan Martinovic and Matthias Wilhelm.
+    "Bringing Up OpenSky: A Large-scale ADS-B Sensor Network for Research." IPSN 2014.</p>
   </div>
 </main>
 
@@ -529,14 +484,13 @@ function buildStatsRow(ap) {{
 function buildPanels() {{
   const container = document.getElementById("panels");
 
-  // Per-airport panels
   AIRPORTS.forEach((ap, idx) => {{
     const panel = document.createElement("div");
     panel.className = "tab-panel" + (idx === 0 ? " active" : "");
     panel.id = "panel-" + ap.iata;
     panel.innerHTML = `
       <div class="panel-header">
-        <h2>${{ap.iata}} — ${{ap.name}}</h2>
+        <h2>${{ap.flag}} ${{ap.iata}} — ${{ap.name}}</h2>
       </div>
       ${{buildStatsRow(ap)}}
       <div class="chart-box">
@@ -545,14 +499,13 @@ function buildPanels() {{
     container.appendChild(panel);
   }});
 
-  // All airports panel
   const allPanel = document.createElement("div");
   allPanel.className = "tab-panel";
   allPanel.id = "panel-ALL";
-  let allHtml = '<div class="panel-header"><h2>All 8 Airports — Overview</h2></div><div class="all-grid">';
+  let allHtml = '<div class="panel-header"><h2>All 10 Airports — Overview</h2></div><div class="all-grid">';
   AIRPORTS.forEach(ap => {{
     allHtml += `<div class="mini-card">
-      <h4>${{ap.iata}} — ${{ap.name}}</h4>
+      <h4>${{ap.flag}} ${{ap.iata}} — ${{ap.name}}</h4>
       <div id="mini-chart-${{ap.iata}}" style="width:100%"></div>
     </div>`;
   }});
@@ -568,7 +521,6 @@ function showTab(iata) {{
   document.getElementById("tab-" + iata).classList.add("active");
 
   if (iata === "ALL") {{
-    // Build mini charts if not already built
     AIRPORTS.forEach(ap => {{
       const el = document.getElementById("mini-chart-" + ap.iata);
       if (el && el.children.length === 0) {{
@@ -592,80 +544,112 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", action="store_true",
-                        help="Test mode: fetch last 3 days for IKA, DXB, BGW only")
+                        help="Test mode: fetch last 3 days for DXB, BGW, IST only")
     args = parser.parse_args()
 
     today = date.today()
+    # Only fetch up to yesterday — today's data not yet batch-processed
+    fetch_end = today - timedelta(days=1)
 
     if args.test:
         lookback = 3
-        airports = [ap for ap in AIRPORTS if ap["iata"] in ("IKA", "DXB", "BGW")]
+        airports = [ap for ap in AIRPORTS if ap["iata"] in ("DXB", "BGW", "IST")]
         print("*** TEST MODE — 3 airports × 3 days ***")
     else:
         lookback = LOOKBACK_DAYS
         airports = AIRPORTS
 
-    window_start = today - timedelta(days=lookback - 1)
+    window_start = fetch_end - timedelta(days=lookback - 1)
 
     print(f"Iran Airspace Monitor — {today}")
-    print(f"Window: {window_start} → {today}  ({lookback} days)")
+    print(f"Fetch window: {window_start} → {fetch_end}  ({lookback} days)")
+    print()
+
+    print("Fetching OpenSky OAuth2 token...")
+    token = get_token()
+    print("Token acquired.")
     print()
 
     cache = load_cache()
-    total_fetched = 0
+    total_windows = 0
 
     for ap in airports:
         iata = ap["iata"]
-        print(f"[{iata}] {ap['name']}")
+        icao = ap["icao"]
+        print(f"[{iata}] {ap['name']} (ICAO: {icao})")
 
         if iata not in cache:
             cache[iata] = {}
 
         airport_cache = cache[iata]
-        missing_dates = []
-        d = window_start
-        while d <= today:
-            if str(d) not in airport_cache:
-                missing_dates.append(d)
-            d += timedelta(days=1)
+
+        # Collect missing dates in the fetch window
+        missing_dates = sorted([
+            window_start + timedelta(days=n)
+            for n in range(lookback)
+            if str(window_start + timedelta(days=n)) not in airport_cache
+        ])
 
         if not missing_dates:
             print(f"  All {lookback} days cached, skipping.")
-        else:
-            print(f"  Fetching {len(missing_dates)} missing date(s)...")
-            not_found_streak = 0
-            for i, day in enumerate(missing_dates):
-                print(f"  [{i+1}/{len(missing_dates)}] {day} ...", end=" ", flush=True)
-                try:
-                    result = fetch_flights_for_day(iata, day)
-                    if result is None:
-                        not_found_streak += 1
-                        print("not in FR24 (skipped)")
-                        if not_found_streak >= 3:
-                            print(f"  {iata} returned 404 three times in a row — skipping remaining dates.")
-                            break
-                    else:
-                        not_found_streak = 0
-                        airport_cache[str(day)] = result
-                        total = result["arrivals"] + result["departures"]
-                        print(f"arr={result['arrivals']} dep={result['departures']} total={total}")
-                        total_fetched += 1
-                except Exception as e:
-                    print(f"ERROR: {e}")
-                time.sleep(RATE_LIMIT_SLEEP)
+            continue
+
+        print(f"  Fetching {len(missing_dates)} missing date(s) in 7-day windows...")
+
+        # Group missing dates into 7-day windows
+        win_starts = windows_of_7(missing_dates)
+
+        for ws in win_starts:
+            we = ws + timedelta(days=7)
+            begin_ts = date_to_unix(ws)
+            end_ts   = date_to_unix(we)
+
+            print(f"  Window {ws} → {we} ...", end=" ", flush=True)
+            try:
+                arr_flights = fetch_window(icao, begin_ts, end_ts, "arrival", token)
+                dep_flights = fetch_window(icao, begin_ts, end_ts, "departure", token)
+                arr_by_day  = window_to_daily_counts(arr_flights, "arrival")
+                dep_by_day  = window_to_daily_counts(dep_flights, "departure")
+
+                # Store results for each missing date that falls in this window
+                window_dates = [ws + timedelta(days=i) for i in range(7)]
+                written = 0
+                for wd in window_dates:
+                    day_str = str(wd)
+                    if wd in missing_dates and wd <= fetch_end:
+                        airport_cache[day_str] = {
+                            "arrivals":   arr_by_day.get(day_str, 0),
+                            "departures": dep_by_day.get(day_str, 0),
+                        }
+                        written += 1
+
+                sample = next(
+                    (airport_cache[str(d)] for d in window_dates
+                     if str(d) in airport_cache and d in missing_dates),
+                    None
+                )
+                if sample:
+                    print(f"arr={sample['arrivals']} dep={sample['departures']} ({written} days written)")
+                else:
+                    print(f"({written} days written, all zeros)")
+
+                total_windows += 1
+            except Exception as e:
+                print(f"ERROR: {e}")
+
+            time.sleep(RATE_LIMIT_SLEEP)
 
     print()
-    print(f"Total API calls made: {total_fetched}")
+    print(f"Total API windows fetched: {total_windows} (×2 directions = {total_windows*2} calls)")
     save_cache(cache)
     print(f"Cache saved → {CACHE_PATH}")
 
-    # Compute stats
+    # Compute stats for all airports (not just fetched subset)
     print("Computing stats...")
     stats_by_airport = {}
     for ap in AIRPORTS:
         stats_by_airport[ap["iata"]] = compute_stats(cache, ap["iata"], today)
 
-    # Render
     print("Rendering HTML...")
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     html = render_html(stats_by_airport, today)
