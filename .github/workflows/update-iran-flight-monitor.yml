@@ -23,6 +23,9 @@ jobs:
           pip install --upgrade pip
           pip install requests
 
+      - name: Pull latest before generating
+        run: git pull
+
       - name: Run Iran Airspace Monitor
         env:
           FR24_API_KEY: ${{ secrets.FR24_API_KEY }}
@@ -39,6 +42,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto-update: Iran Airspace Monitor $(date +'%Y-%m-%d')"
-            git pull --rebase
             git push
           fi
