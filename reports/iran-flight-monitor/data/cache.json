@@ -1,5 +1,18 @@
 {
-  "BGW": {},
+  "BGW": {
+    "2026-03-10": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-11": {
+      "arrivals": 0,
+      "departures": 0
+    },
+    "2026-03-12": {
+      "arrivals": 0,
+      "departures": 0
+    }
+  },
   "DXB": {},
   "IST": {}
 }
