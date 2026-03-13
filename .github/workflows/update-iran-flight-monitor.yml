@@ -3,7 +3,12 @@ name: Update Iran Airspace Monitor
 on:
   schedule:
     - cron: "0 7 * * *"   # daily at 07:00 UTC
-  workflow_dispatch:        # allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "Run in test mode (3 airports × 3 days)"
+        type: boolean
+        default: false
 
 jobs:
   update:
@@ -31,7 +36,7 @@ jobs:
           FR24_API_KEY: ${{ secrets.FR24_API_KEY }}
         run: |
           cd ${{ github.workspace }}
-          python scripts/generate_iran_flight_monitor.py
+          python scripts/generate_iran_flight_monitor.py ${{ inputs.test_mode == true && '--test' || '' }}
 
       - name: Commit and push if changed
         run: |
