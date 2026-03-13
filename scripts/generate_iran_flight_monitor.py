@@ -164,6 +164,10 @@ def fetch_flights_for_day(iata: str, day: date) -> dict | None:
                 raise SystemExit(f"Auth/access error — check FR24_API_KEY and tier")
             resp.raise_for_status()
             data = resp.json()
+            if page == 1 and arrivals == 0 and departures == 0:
+                print(f"  DEBUG status={resp.status_code} keys={list(data.keys())} data_len={len(data.get('data', []))} meta={data.get('meta')}")
+                if data.get("data"):
+                    print(f"  DEBUG first flight: {data['data'][0]}")
             flights = data.get("data", [])
             if not flights:
                 break
