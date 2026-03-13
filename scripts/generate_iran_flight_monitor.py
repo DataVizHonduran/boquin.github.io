@@ -125,7 +125,9 @@ def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) ->
         print(f"  Rate limited — sleeping {retry_after}s")
         time.sleep(retry_after)
         return fetch_window(icao, begin, end, direction, token)
-    resp.raise_for_status()
+    if not resp.ok:
+        print(f"  HTTP {resp.status_code} body: {resp.text[:400]}")
+        resp.raise_for_status()
     return resp.json() or []
 
 
