@@ -35,6 +35,7 @@ jobs:
         env:
           OPENSKY_CLIENT_ID:     ${{ secrets.OPENSKY_CLIENT_ID }}
           OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
+          PYTHONUNBUFFERED:      "1"
         run: |
           cd ${{ github.workspace }}
           python scripts/generate_iran_flight_monitor.py ${{ inputs.test_mode == true && '--test' || '' }}
