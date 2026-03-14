@@ -122,7 +122,7 @@ def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) ->
     if resp.status_code == 404:
         return []
     if resp.status_code == 429:
-        retry_after = int(resp.headers.get("X-Rate-Limit-Retry-After-Seconds", 60))
+        retry_after = min(int(resp.headers.get("X-Rate-Limit-Retry-After-Seconds", 60)), 120)
         print(f"  Rate limited — sleeping {retry_after}s")
         time.sleep(retry_after)
         return fetch_window(icao, begin, end, direction, token)
