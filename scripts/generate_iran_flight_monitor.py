@@ -112,15 +112,20 @@ def get_token() -> str:
 
 
 # ── OpenSky API ───────────────────────────────────────────────────────────────
-def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) -> list:
-    """Fetch one airport/direction/window. Returns list of flight dicts. 404 = 0 flights."""
+def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) -> tuple:
+    """Fetch one airport/direction/window. Returns (flights, token) — token may be refreshed on 401."""
     url = f"{OPENSKY_BASE}/flights/{direction}"
     resp = requests.get(url,
         params={"airport": icao, "begin": begin, "end": end},
         headers={"Authorization": f"Bearer {token}"},
         timeout=30)
     if resp.status_code == 404:
-        return []
+        return [], token
+    if resp.status_code == 401:
+        print("  Token expired — refreshing...")
+        token = get_token()
+        print("  Token refreshed.")
+        return fetch_window(icao, begin, end, direction, token)
     if resp.status_code == 429:
         retry_after = min(int(resp.headers.get("X-Rate-Limit-Retry-After-Seconds", 60)), 120)
         print(f"  Rate limited — sleeping {retry_after}s")
@@ -129,7 +134,7 @@ def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) ->
     if not resp.ok:
         print(f"  HTTP {resp.status_code} body: {resp.text[:400]}")
         resp.raise_for_status()
-    return resp.json() or []
+    return resp.json() or [], token
 
 
 def window_to_daily_counts(flights: list, direction: str) -> dict:
@@ -610,8 +615,8 @@ def main():
 
             print(f"  Window {ws} → {we} ...", end=" ", flush=True)
             try:
-                arr_flights = fetch_window(icao, begin_ts, end_ts, "arrival", token)
-                dep_flights = fetch_window(icao, begin_ts, end_ts, "departure", token)
+                arr_flights, token = fetch_window(icao, begin_ts, end_ts, "arrival", token)
+                dep_flights, token = fetch_window(icao, begin_ts, end_ts, "departure", token)
                 arr_by_day  = window_to_daily_counts(arr_flights, "arrival")
                 dep_by_day  = window_to_daily_counts(dep_flights, "departure")
 
