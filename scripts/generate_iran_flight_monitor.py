@@ -61,7 +61,7 @@ OPENSKY_BASE      = "https://opensky-network.org/api"
 OPENSKY_TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
 
 CONFLICT_START_DATE = "2025-10-01"   # adjust to actual escalation date
-LOOKBACK_DAYS = 90
+LOOKBACK_DAYS = 30
 RATE_LIMIT_SLEEP = 0.5               # seconds between API calls
 WINDOW_DAYS = 2                      # OpenSky max: 2 calendar-day partitions per request
 
