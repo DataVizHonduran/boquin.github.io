@@ -62,7 +62,7 @@ OPENSKY_TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-networ
 
 CONFLICT_START_DATE = "2025-10-01"   # adjust to actual escalation date
 LOOKBACK_DAYS = 30
-RATE_LIMIT_SLEEP = 0.5               # seconds between API calls
+RATE_LIMIT_SLEEP = 5                 # seconds between API calls
 WINDOW_DAYS = 2                      # OpenSky max: 2 calendar-day partitions per request
 
 AIRPORTS = [
@@ -112,7 +112,7 @@ def get_token() -> str:
 
 
 # ── OpenSky API ───────────────────────────────────────────────────────────────
-def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) -> tuple:
+def fetch_window(icao: str, begin: int, end: int, direction: str, token: str, _retries: int = 0) -> tuple:
     """Fetch one airport/direction/window. Returns (flights, token) — token may be refreshed on 401."""
     url = f"{OPENSKY_BASE}/flights/{direction}"
     resp = requests.get(url,
@@ -125,12 +125,15 @@ def fetch_window(icao: str, begin: int, end: int, direction: str, token: str) ->
         print("  Token expired — refreshing...")
         token = get_token()
         print("  Token refreshed.")
-        return fetch_window(icao, begin, end, direction, token)
+        return fetch_window(icao, begin, end, direction, token, _retries)
     if resp.status_code == 429:
+        if _retries >= 2:
+            print(f"  Rate limited — skipping window after {_retries + 1} attempts")
+            return None, token
         retry_after = min(int(resp.headers.get("X-Rate-Limit-Retry-After-Seconds", 60)), 120)
-        print(f"  Rate limited — sleeping {retry_after}s")
+        print(f"  Rate limited — sleeping {retry_after}s (attempt {_retries + 1}/3)")
         time.sleep(retry_after)
-        return fetch_window(icao, begin, end, direction, token)
+        return fetch_window(icao, begin, end, direction, token, _retries + 1)
     if not resp.ok:
         print(f"  HTTP {resp.status_code} body: {resp.text[:400]}")
         resp.raise_for_status()
@@ -617,6 +620,10 @@ def main():
             try:
                 arr_flights, token = fetch_window(icao, begin_ts, end_ts, "arrival", token)
                 dep_flights, token = fetch_window(icao, begin_ts, end_ts, "departure", token)
+                if arr_flights is None or dep_flights is None:
+                    print(f"  Skipped (quota exhausted)")
+                    time.sleep(RATE_LIMIT_SLEEP)
+                    continue
                 arr_by_day  = window_to_daily_counts(arr_flights, "arrival")
                 dep_by_day  = window_to_daily_counts(dep_flights, "departure")
 
