@@ -1,4 +1,6 @@
 {
+  "ASB": {},
+  "AUH": {},
   "BGW": {
     "2026-03-10": {
       "arrivals": 0,
@@ -13,6 +15,7 @@
       "departures": 0
     }
   },
+  "DOH": {},
   "DXB": {
     "2026-03-10": {
       "arrivals": 37,
@@ -27,6 +30,7 @@
       "departures": 4
     }
   },
+  "GYD": {},
   "IST": {
     "2026-03-10": {
       "arrivals": 586,
@@ -40,5 +44,8 @@
       "arrivals": 601,
       "departures": 432
     }
-  }
+  },
+  "KHI": {},
+  "KWI": {},
+  "RUH": {}
 }
