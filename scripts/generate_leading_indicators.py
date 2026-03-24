@@ -17,6 +17,7 @@ from dateutil.relativedelta import relativedelta
 from fredapi import Fred
 
 OUTPUT_PATH  = "reports/leading-indicators/index.html"
+START_DATE   = "1956-01-01"
 FRED_API_KEY = os.environ.get('FRED_API_KEY')
 if not FRED_API_KEY:
     raise EnvironmentError("FRED_API_KEY environment variable is not set.")
@@ -147,19 +148,19 @@ def create_dashboard():
 
     # ── Chart 4: New Orders from 24-month high ────────────────────────────────
     print("Chart 4: New Orders...")
-    no = get_fred("NEWORDER", years=50)
+    no = get_fred("NEWORDER", years=75)
     no_rel = (no / no.rolling(24).max()).dropna()
     plot_series(fig, 2, 2, no_rel, recession, 0.65, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
 
     # ── Chart 5: Building Permits ─────────────────────────────────────────────
     print("Chart 5: Building Permits...")
-    permits = get_fred("PERMIT", years=50)
+    permits = get_fred("PERMIT", years=75)
     permits_rel = (permits / permits.rolling(24).max()).dropna()
     plot_series(fig, 3, 1, permits_rel, recession, 0.4, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
 
     # ── Chart 6: Mfg Orders-to-Inventories ───────────────────────────────────
     print("Chart 6: Mfg Orders-to-Inventories...")
-    mfg = get_fred_multi(["AMTMNO", "AMTMTI"], years=50)
+    mfg = get_fred_multi(["AMTMNO", "AMTMTI"], years=75)
     ratio = mfg["AMTMNO"] / mfg["AMTMTI"]
     ratio_rel = (ratio / ratio.rolling(24).max()).dropna()
     plot_series(fig, 3, 2, ratio_rel, recession, 0.7, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
@@ -177,7 +178,7 @@ def create_dashboard():
         "INDPRO":   "Industrial Production",
         "CPILFESL": "Core CPI",
     }
-    con_df  = get_fred_multi(list(consumer_ids.keys()), years=30)
+    con_df  = get_fred_multi(list(consumer_ids.keys()), years=75)
     con_yoy = con_df.pct_change(12) * 100
     diffusion7 = ((con_yoy > 0).sum(axis=1) / con_yoy.count(axis=1) * 100
                   ).rolling(3).mean().dropna()
@@ -190,7 +191,7 @@ def create_dashboard():
     ma3_8  = mom8.rolling(3).mean()
     ma36_8 = mom8.rolling(36).mean()
     cumgap8 = (ma3_8 - ma36_8).dropna().cumsum()
-    cumgap8 = cumgap8['1955-01-01':]
+    cumgap8 = cumgap8[START_DATE:]
 
     # COVID crop (Feb 2020–Feb 2022) for y-axis range
     covid_mask8 = (
@@ -247,7 +248,8 @@ def create_dashboard():
         showarrow=False,
         font=dict(size=11, color='gray'),
     )
-    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee',
+                     range=[START_DATE, datetime.today().strftime('%Y-%m-%d')])
     fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#eeeeee')
 
     return fig
