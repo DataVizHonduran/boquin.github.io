@@ -4,7 +4,7 @@ Adapted from DataVizHonduran/us-leading-indicators for boquin.github.io.
 
 Uses fredapi (not pandas_datareader) — set FRED_API_KEY env var.
 
-Generates a 7-panel dashboard of cyclical leading indicators with
+Generates an 8-panel dashboard of cyclical leading indicators with
 NBER recession shading. Output: reports/leading-indicators/index.html
 """
 
@@ -114,7 +114,7 @@ def create_dashboard():
             "Building Permits as % of 24-Month High",
             "Mfg Orders-to-Inventories from 24-Month High",
             "Consumer & Activity Diffusion Index (YoY, 3mma)",
-            "",
+            "Payrolls: Cumulative 3M MA − 36M MA Gap (Since 1955)",
         ],
         vertical_spacing=0.09,
         horizontal_spacing=0.08,
@@ -182,6 +182,46 @@ def create_dashboard():
     diffusion7 = ((con_yoy > 0).sum(axis=1) / con_yoy.count(axis=1) * 100
                   ).rolling(3).mean().dropna()
     plot_series(fig, 4, 1, diffusion7, recession, 0, 100, y_label='% of Series with Positive YoY')
+
+    # ── Chart 8: Payrolls Cumulative 3M MA − 36M MA Gap ──────────────────────
+    print("Chart 8: Payrolls Cumulative Gap (3M MA − 36M MA)...")
+    payems = get_fred("PAYEMS", years=75)
+    mom8   = payems.diff()
+    ma3_8  = mom8.rolling(3).mean()
+    ma36_8 = mom8.rolling(36).mean()
+    cumgap8 = (ma3_8 - ma36_8).dropna().cumsum()
+    cumgap8 = cumgap8['1955-01-01':]
+
+    # COVID crop (Feb 2020–Feb 2022) for y-axis range
+    covid_mask8 = (
+        (cumgap8.index >= pd.Timestamp('2020-02-01')) &
+        (cumgap8.index <= pd.Timestamp('2022-02-01'))
+    )
+    non_covid8 = cumgap8[~covid_mask8]
+    y0_8 = non_covid8.min() - 500
+    y1_8 = non_covid8.max() + 500
+
+    fig.add_trace(go.Scatter(
+        x=cumgap8.index, y=cumgap8.clip(lower=0).values,
+        fill='tozeroy', fillcolor='rgba(36,113,163,0.35)',
+        line=dict(width=0), showlegend=False, hoverinfo='skip',
+    ), row=4, col=2)
+    fig.add_trace(go.Scatter(
+        x=cumgap8.index, y=cumgap8.clip(upper=0).values,
+        fill='tozeroy', fillcolor='rgba(192,57,43,0.35)',
+        line=dict(width=0), showlegend=False, hoverinfo='skip',
+    ), row=4, col=2)
+    fig.add_trace(go.Scatter(
+        x=cumgap8.index, y=cumgap8.values,
+        mode='lines', showlegend=False,
+        line=dict(color='#1a3a2f', width=1.8),
+        hovertemplate='%{x|%b %Y}<br><b>Cumulative gap: %{y:+,.0f}k</b><extra></extra>',
+    ), row=4, col=2)
+    fig.add_hline(y=0, line_color='black', line_width=1, row=4, col=2)
+    add_recession_shading(fig, recession, 4, 2, y0_8, y1_8)
+    fig.update_yaxes(range=[y0_8, y1_8], title_text='Cumulative Gap (Thousands)',
+                     title_font=dict(size=11), row=4, col=2)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=4, col=2)
 
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
