@@ -154,7 +154,23 @@ body{{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a
 /* Grid hint */
 .grid-hint{{font-size:.76rem;color:#888;margin-bottom:10px;display:flex;align-items:center;gap:6px}}
 .grid-hint svg{{opacity:.5}}
-#chart-grid{{cursor:pointer}}
+
+/* Grid hover overlay */
+.grid-wrap{{position:relative}}
+.grid-overlay{{
+  position:absolute;display:none;pointer-events:none;
+  border:2px solid #1a3a2f;border-radius:3px;
+  background:rgba(26,58,47,0.07);
+  box-shadow:0 0 0 1px rgba(26,58,47,0.15);
+  z-index:5;
+}}
+.grid-overlay-badge{{
+  position:absolute;bottom:5px;right:5px;
+  background:#1a3a2f;color:#fff;
+  font-size:.68rem;font-weight:700;
+  padding:2px 7px;border-radius:3px;
+  letter-spacing:.3px;
+}}
 
 /* Single country view */
 .sc-header{{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px}}
@@ -230,7 +246,12 @@ body{{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Click any country chart to open it in Single Country View
       </div>
-      <div id="chart-grid" style="height:1200px"></div>
+      <div class="grid-wrap">
+        <div class="grid-overlay" id="grid-overlay">
+          <div class="grid-overlay-badge">&#x2197; Open</div>
+        </div>
+        <div id="chart-grid" style="height:1200px"></div>
+      </div>
     </div>
   </div>
 
@@ -434,10 +455,45 @@ function drawGrid() {{
   layout.annotations=annotations;
 
   Plotly.react('chart-grid', traces, layout, {{responsive:true}}).then(() => {{
-    document.getElementById('chart-grid').on('plotly_click', function(data) {{
+    const el = document.getElementById('chart-grid');
+    const overlay = document.getElementById('grid-overlay');
+    const countryList = Object.keys(WD[String(CYR)].grid);
+
+    // Pre-compute pixel bounding box for each subplot cell
+    const ML=10, MR=10, MT=30, MB=10;
+    function computeBounds() {{
+      const W = el.offsetWidth, H = 1200;
+      const pw = W - ML - MR, ph = H - MT - MB;
+      return countryList.map((_, i) => {{
+        const r = Math.floor(i/COLS), c = i%COLS;
+        const xd0 = c*(cw+gap), xd1 = xd0+cw;
+        const yd0 = 1-(r+1)*(rh+gap)+gap, yd1 = yd0+rh;
+        return {{
+          left:   ML + xd0 * pw,
+          top:    MT + (1 - yd1) * ph,
+          width:  (xd1 - xd0) * pw,
+          height: (yd1 - yd0) * ph,
+        }};
+      }});
+    }}
+    let bounds = computeBounds();
+    window.addEventListener('resize', () => {{ bounds = computeBounds(); }});
+
+    el.on('plotly_hover', function(data) {{
       if(!data.points.length) return;
-      const idx = data.points[0].curveNumber;
-      const country = Object.keys(WD[String(CYR)].grid)[idx];
+      const b = bounds[data.points[0].curveNumber];
+      if(!b) return;
+      overlay.style.left   = b.left   + 'px';
+      overlay.style.top    = b.top    + 'px';
+      overlay.style.width  = b.width  + 'px';
+      overlay.style.height = b.height + 'px';
+      overlay.style.display = 'block';
+    }});
+    el.on('plotly_unhover', () => {{ overlay.style.display = 'none'; }});
+
+    el.on('plotly_click', function(data) {{
+      if(!data.points.length) return;
+      const country = countryList[data.points[0].curveNumber];
       if(country) goToSingleCountry(country);
     }});
   }});
