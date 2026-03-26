@@ -8,6 +8,9 @@ Run from the repo root:
     python3 scripts/generate_bis_reer.py
 """
 
+import io
+import requests
+import zipfile
 import pandas as pd
 import numpy as np
 import json
@@ -16,15 +19,23 @@ from datetime import datetime
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-BIS_URL = "https://www.bis.org/statistics/eer/broad.xlsx"
+BIS_URL = "https://data.bis.org/static/bulk/WS_EER_csv_flat.zip"
 
-COUNTRIES = [
-    "Australia", "Brazil", "Canada", "Chile", "China", "Colombia", "Czechia",
-    "Euro area", "Hungary", "Iceland", "India", "Indonesia", "Israel", "Japan",
-    "Korea", "Malaysia", "Mexico", "New Zealand", "Norway", "Peru",
-    "Philippines", "Poland", "Romania", "Russia", "South Africa", "Sweden",
-    "Switzerland", "Thailand", "United Kingdom", "United States",
-]
+# BIS REF_AREA codes → display names (broad basket economies)
+CODE_TO_NAME = {
+    "AU": "Australia",  "BR": "Brazil",     "CA": "Canada",
+    "CL": "Chile",      "CN": "China",      "CO": "Colombia",
+    "CZ": "Czechia",    "XM": "Euro area",  "HU": "Hungary",
+    "IS": "Iceland",    "IN": "India",      "ID": "Indonesia",
+    "IL": "Israel",     "JP": "Japan",      "KR": "Korea",
+    "MY": "Malaysia",   "MX": "Mexico",     "NZ": "New Zealand",
+    "NO": "Norway",     "PE": "Peru",       "PH": "Philippines",
+    "PL": "Poland",     "RO": "Romania",    "RU": "Russia",
+    "ZA": "South Africa", "SE": "Sweden",   "CH": "Switzerland",
+    "TH": "Thailand",   "GB": "United Kingdom", "US": "United States",
+}
+
+COUNTRIES = list(CODE_TO_NAME.values())
 
 OUTPUT_DIR = "reports/bis-reer"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "index.html")
@@ -32,18 +43,48 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "index.html")
 # ── Data Loading ──────────────────────────────────────────────────────────────
 
 def load_data():
-    print("Fetching BIS REER broad data...")
-    df = pd.read_excel(BIS_URL, header=3)
-    df.index = df.iloc[:, 0]
-    df = df.iloc[1:, 1:]
-    # Keep only target countries (handle possible column name variations)
-    available = [c for c in COUNTRIES if c in df.columns]
-    missing = [c for c in COUNTRIES if c not in df.columns]
+    print("Downloading BIS EER bulk data (ZIP)...")
+    response = requests.get(BIS_URL, timeout=60)
+    response.raise_for_status()
+
+    with zipfile.ZipFile(io.BytesIO(response.content)) as z:
+        csv_names = [n for n in z.namelist() if n.endswith(".csv")]
+        if not csv_names:
+            raise ValueError("No CSV found in BIS ZIP archive")
+        print(f"  Parsing: {csv_names[0]}")
+        with z.open(csv_names[0]) as f:
+            raw = pd.read_csv(f, low_memory=False)
+
+    # Columns have format "CODE:Description" — strip to just the code
+    raw.columns = [c.split(":")[0].strip().upper() for c in raw.columns]
+
+    # Filter: broad real monthly
+    # EER_TYPE starts with "R" (Real), EER_BASKET starts with "B" (Broad), FREQ starts with "M"
+    mask = (
+        raw["EER_TYPE"].str.startswith("R", na=False) &
+        raw["EER_BASKET"].str.startswith("B", na=False) &
+        raw["FREQ"].str.startswith("M", na=False)
+    )
+    sub = raw.loc[mask, ["REF_AREA", "TIME_PERIOD", "OBS_VALUE"]].copy()
+
+    # REF_AREA values are like "XM: Euro area" — extract just the code
+    sub["REF_AREA"] = sub["REF_AREA"].str.split(":").str[0].str.strip()
+    sub["OBS_VALUE"] = pd.to_numeric(sub["OBS_VALUE"], errors="coerce")
+    sub["TIME_PERIOD"] = pd.to_datetime(sub["TIME_PERIOD"], errors="coerce")
+    sub = sub.dropna(subset=["TIME_PERIOD", "OBS_VALUE"])
+
+    # Pivot to wide: rows=date, cols=REF_AREA code
+    wide = sub.pivot_table(index="TIME_PERIOD", columns="REF_AREA", values="OBS_VALUE", aggfunc="last")
+    wide = wide.sort_index()
+
+    # Rename codes → display names; keep only known countries
+    wide = wide.rename(columns=CODE_TO_NAME)
+    available = [n for n in COUNTRIES if n in wide.columns]
+    missing = [n for n in COUNTRIES if n not in wide.columns]
     if missing:
-        print(f"  Warning — columns not found: {missing}")
-    df = df[available].copy()
-    df.index = pd.to_datetime(df.index)
-    df = df.sort_index().apply(pd.to_numeric, errors="coerce")
+        print(f"  Warning — countries not found: {missing}")
+    df = wide[available].copy()
+
     print(f"  Loaded {len(df)} months × {len(df.columns)} countries")
     print(f"  Date range: {df.index[0].strftime('%b %Y')} → {df.index[-1].strftime('%b %Y')}")
     return df
