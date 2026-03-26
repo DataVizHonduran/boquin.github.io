@@ -62,8 +62,61 @@ new Chart(document.getElementById('aumChart'), {
 });
 </script>
 
+  <h2>Asset Class Positioning — Top Longs &amp; Shorts</h2>
+  <p style="font-size:0.82rem;color:#6b7280;margin-bottom:0.75rem">Top 2 longs and shorts per asset class across all ETFs, sorted low to high. Color = asset class.</p>
+  
+<div style="max-width:900px;margin:0 auto 2rem;">
+  <div style="text-align:center;font-size:0.82rem;margin-bottom:0.5rem"><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:12px;height:12px;background:#16a34a;border-radius:2px;display:inline-block"></span>Fixed Income</span><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:12px;height:12px;background:#2563eb;border-radius:2px;display:inline-block"></span>Equities</span><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:12px;height:12px;background:#8b5cf6;border-radius:2px;display:inline-block"></span>Currencies</span><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:12px;height:12px;background:#d97706;border-radius:2px;display:inline-block"></span>Commodities</span></div>
+  <div style="position:relative;height:448px">
+    <canvas id="posChart"></canvas>
+  </div>
+</div>
+<script>
+(function() {
+  var ctx = document.getElementById('posChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["FVM6 Comdty (HFGM)", "USM6 Comdty (HFMF)", "XARM6 Index (HFEQ)", "CDM6 Curncy (HFGM)", "CCK6 Comdty (HFMF)", "DXM6 Curncy (HFGM)", "XARM6 Index (HFND)", "CCK6 Comdty (HFGM)", "IBYM6 Index (HFND)", "GCM6 Comdty (HFMF)", "ESM6 Index (HFMF)", "GCM6 Comdty (HFGM)", "ESM6 Index (HFGM)", "ECM6 Curncy (HFGM)", "ECM6 Curncy (HFMF)", "IBYM6 Index (HFGM)"],
+      datasets: [{
+        label: 'Weight (%)',
+        data: [-26.0, -20.94, -10.86, -9.56, -7.05, -6.18, -3.05, -2.85, 20.48, 26.81, 26.88, 28.94, 29.94, 30.49, 32.64, 36.26],
+        backgroundColor: ["#16a34acc", "#16a34acc", "#2563ebcc", "#8b5cf6cc", "#d97706cc", "#8b5cf6cc", "#2563ebcc", "#d97706cc", "#16a34acc", "#d97706cc", "#2563ebcc", "#d97706cc", "#2563ebcc", "#8b5cf6cc", "#8b5cf6cc", "#16a34acc"],
+        borderColor: ["#16a34a", "#16a34a", "#2563eb", "#8b5cf6", "#d97706", "#8b5cf6", "#2563eb", "#d97706", "#16a34a", "#d97706", "#2563eb", "#d97706", "#2563eb", "#8b5cf6", "#8b5cf6", "#16a34a"],
+        borderWidth: 1,
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.parsed.x.toFixed(2) + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Weight (%)' },
+          grid: { color: '#f3f4f6' }
+        },
+        y: {
+          ticks: { font: { family: 'monospace', size: 11 } }
+        }
+      }
+    }
+  });
+})();
+</script>
+
   <h2>Macro Summary</h2>
-  <p style="font-size:0.78rem;color:#9ca3af;margin-bottom:0.75rem">Last refreshed: 2026-03-26 18:20 UTC</p><div class="summary-box">The dominant move across all four Unlimited ETFs today is the mechanical roll of gold futures from the March contract (GCJ6) to June (GCM6), but the sheer scale of the new positions — 29% in HFGM, 27% in HFMF, and 4% in HFND — underscores a sustained, high-conviction long in the metal. This is not noise; these managers have been running meaningful gold exposure for weeks and the roll reaffirms it. Combined with long EUR/USD futures of roughly 30% in HFGM and 33% in HFMF, the positioning reads as a coherent dollar-bearish, hard-asset-bullish macro thesis: the funds expect either a deterioration in US fiscal credibility, a Fed that falls behind the curve on inflation, or both.<br><br>The rates book sharpens that picture. HFND carries an 18% short in 5-year Treasuries and HFMF a 21% short in 30-year bonds — both funds are positioned for higher yields at the front and long end of the curve despite (or because of) an uncertain growth backdrop. This is not a deflation trade. The concurrent long in iBoxx high-yield futures, which represents the largest single non-cash position in both HFND (20%) and HFGM (36%), suggests credit stress is not the primary concern — the funds are comfortable reaching for spread while fading duration. It is a stagflation-adjacent posture: inflation sticky enough to keep rates elevated, but credit conditions resilient enough to avoid a wave of defaults.<br><br>On the equity side, the geographic tilt is notably non-US. HFEQ, the purest equity vehicle, allocates its top three futures positions to MSCI Emerging Markets (23%), XAF Financials (18%), and Euro Stoxx 50 (18%), with Vanguard Value at 14% representing the only direct US equity exposure in the top five. HFND also holds MSCI EM futures at 11%. The combined message is a rotation trade: long EM and European equities, underweight US growth. The value tilt in HFEQ via VTV reinforces this — managers are not chasing Nasdaq momentum but rather seeking cheaper multiples in financial and cyclical names globally.<br><br>HFGM, the largest fund at $111M AUM and the highest gross leverage at 244%, is where macro conviction is most visible. It layers S&P 500 Emini longs (30%) alongside euro longs, gold, and high-yield credit — suggesting it is not outright bearish on US equities but expects international assets to outperform. Net exposure of 186% reflects an aggressive risk-on posture, not a defensive crouch.<br><br>In aggregate, the positioning implies a world where the dollar weakens, gold continues to serve as the preferred macro hedge, EM and European assets re-rate relative to the US, credit holds, and yields grind higher. The main risk to this book would be a sharp dollar rally or a credit event that reprices high-yield — either would hit multiple legs simultaneously.</div>
+  <p style="color:#6b7280;font-size:0.85rem;font-style:italic"> Holdings data as of 2026-03-26 19:18 UTC. Macro commentary is generated when running the <code>/unlimited-etfs</code> command locally.</p>
 
   <h2>Position Changes</h2>
   <p style="color:#6b7280;font-size:0.85rem">vs 2026-03-25</p><div style="overflow-x:auto"><table class="htable"><thead><tr><th>ETF</th><th>Change</th><th>Ticker</th><th>Security</th><th style="text-align:right">Δ Weight</th></tr></thead><tbody><tr><td>HFND</td><td style="color:#16a34a">New</td><td>GCM6 Comdty</td><td>GOLD 100 OZ FUTR  Jun26</td><td style="text-align:right;color:#16a34a">+4.02%</td></tr><tr><td>HFND</td><td style="color:#dc2626">Removed</td><td>GCJ6 Comdty</td><td>GOLD 100 OZ FUTR  Apr26</td><td style="text-align:right;color:#dc2626">—</td></tr><tr><td>HFGM</td><td style="color:#16a34a">New</td><td>GCM6 Comdty</td><td>GOLD 100 OZ FUTR  Jun26</td><td style="text-align:right;color:#16a34a">+28.94%</td></tr><tr><td>HFGM</td><td style="color:#dc2626">Removed</td><td>GCJ6 Comdty</td><td>GOLD 100 OZ FUTR  Apr26</td><td style="text-align:right;color:#dc2626">—</td></tr><tr><td>HFGM</td><td style="color:#dc2626">Changed</td><td>FGXXX</td><td>First American Government Obligations Fund 12/01/2031</td><td style="text-align:right;color:#dc2626">-2.37%</td></tr><tr><td>HFGM</td><td style="color:#16a34a">Changed</td><td>Cash&Other</td><td>Cash & Other</td><td style="text-align:right;color:#16a34a">+2.57%</td></tr><tr><td>HFMF</td><td style="color:#16a34a">New</td><td>GCM6 Comdty</td><td>GOLD 100 OZ FUTR  Jun26</td><td style="text-align:right;color:#16a34a">+26.81%</td></tr><tr><td>HFMF</td><td style="color:#dc2626">Removed</td><td>GCJ6 Comdty</td><td>GOLD 100 OZ FUTR  Apr26</td><td style="text-align:right;color:#dc2626">—</td></tr></tbody></table></div>
