@@ -322,14 +322,32 @@ def make_broad_usd_chart(usd_200d, top, bottom):
 def make_median_chart(df_200d):
     """Median 200d extension across all 25 currencies."""
     median_series = df_200d.median(axis=1)
-    fig = go.Figure(go.Scatter(
-        x=median_series.index.strftime("%Y-%m-%d").tolist(), y=median_series.tolist(),
+    p25 = float(median_series.quantile(0.25))
+    p75 = float(median_series.quantile(0.75))
+    x_vals = median_series.index.strftime("%Y-%m-%d").tolist()
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x_vals, y=median_series.tolist(),
         mode="lines", name="Median",
         line=dict(color="#2e7d32", width=1.8),
         fill="tozeroy",
         fillcolor="rgba(46,125,50,0.08)",
-        hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra></extra>",
+        hovertemplate="%{x}: %{y:.2f}%<extra></extra>",
     ))
+    fig.add_trace(go.Scatter(
+        x=x_vals, y=[p25] * len(median_series),
+        mode="lines", name=f"25th pct: {p25:.1f}%",
+        line=dict(color="#c62828", dash="dash", width=1),
+        hoverinfo="skip",
+    ))
+    fig.add_trace(go.Scatter(
+        x=x_vals, y=[p75] * len(median_series),
+        mode="lines", name=f"75th pct: {p75:.1f}%",
+        line=dict(color="#c62828", dash="dash", width=1),
+        hoverinfo="skip",
+    ))
+    last_x = x_vals[-1]
     fig.update_layout(
         title="Median 200d Extension — All 25 Currencies (EM + DM Composite Gauge)",
         yaxis_title="Median % distance from 200d MA",
@@ -340,7 +358,13 @@ def make_median_chart(df_200d):
         xaxis=dict(gridcolor="#f0f0f0"),
         yaxis=dict(gridcolor="#f0f0f0", zeroline=True, zerolinecolor="#999", zerolinewidth=1),
         hovermode="x unified",
-        showlegend=False,
+        legend=dict(orientation="h", y=-0.18),
+        annotations=[
+            dict(x=last_x, y=p25, xanchor="right", yanchor="top",
+                 text=f"25th: {p25:.1f}%", font=dict(color="#c62828", size=11), showarrow=False),
+            dict(x=last_x, y=p75, xanchor="right", yanchor="bottom",
+                 text=f"75th: {p75:.1f}%", font=dict(color="#c62828", size=11), showarrow=False),
+        ],
     )
     return fig
 
