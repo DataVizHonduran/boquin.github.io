@@ -390,7 +390,8 @@ def build_extremes_table(df_200d, df_edges):
 
 
 def fig_to_json(fig):
-    return json.dumps(fig.to_dict(), default=str)
+    import plotly.io as pio
+    return pio.to_json(fig, engine="json")  # force plain-JSON engine; avoids bdata binary encoding from Plotly 6.x
 
 
 def generate_html(df_200d, df_edges, broad_usd_data, today_str):
@@ -432,7 +433,7 @@ def generate_html(df_200d, df_edges, broad_usd_data, today_str):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>FX 200d MA Extension Dashboard — boquin.xyz</title>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a1a;font-size:14px}}
