@@ -166,6 +166,38 @@ body {
     transform: translateY(-2px);
 }
 
+.section-divider {
+    grid-column: 1 / -1;
+    padding: 2rem 0 0;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-divider:first-child {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.section-divider h2 {
+    color: #2c3e50;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap;
+    opacity: 0.65;
+}
+
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e8e8;
+}
+
 .footer {
     background: #2c3e50;
     color: white;
