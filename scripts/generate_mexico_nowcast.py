@@ -86,10 +86,11 @@ BANXICO_SERIES = {
 #       at https://www.imef.org.mx/publicaciones/reportes-economicos/
 IMEF_PMI_SEED = {
     # Source: IMEF InformacionEstadistica.xls — SERIE ORIGINAL INDICE
-    # Updated: 2026-02-24
+    # Updated: 2026-03-26
     # Format: (Manufacturero, No Manufacturero)
     # 2026
-    "2026-01": (45.12, 47.34),
+    "2026-02": (47.2, 50.0),
+    "2026-01": (46.7, 49.4),
     # 2025
     "2025-12": (46.72, 50.29),
     "2025-11": (46.35, 52.26),
