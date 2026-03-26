@@ -73,15 +73,28 @@ FRED_API_KEY = os.environ.get("FRED_API_KEY")
 # ── Helpers ─────────────────────────────────────────────────────────────────────
 
 def delete_outliers(df, z_threshold=2):
-    """Replace z-score outliers with the prior observation (faithful to quick_functions.ipynb)."""
+    """Replace single-day spike outliers using daily-returns z-score.
+
+    Operates on returns, not price levels, so sustained FX trends (e.g. JPY
+    depreciating from 110 to 160 over two years) are preserved while genuine
+    data glitches (a single day printing an implausible value) are replaced
+    with the prior observation.
+    """
     from scipy import stats
     cleaned_df = df.copy()
     for col in cleaned_df.columns:
-        series = cleaned_df[col].dropna()
-        if len(series) < 10:
+        series = cleaned_df[col].ffill()
+        if len(series.dropna()) < 10:
             continue
-        z_scores = np.abs(stats.zscore(cleaned_df[col].fillna(method="ffill")))
-        outlier_idx = np.where(z_scores > z_threshold)[0]
+        daily_ret = series.pct_change()
+        valid = daily_ret.dropna()
+        if len(valid) < 10:
+            continue
+        z = np.abs(stats.zscore(valid))
+        # Align z-scores back to the full index (first row has no return)
+        z_series = pd.Series(np.nan, index=series.index)
+        z_series.iloc[1:len(z) + 1] = z
+        outlier_idx = np.where(z_series > z_threshold)[0]
         for idx in outlier_idx:
             if idx > 0:
                 cleaned_df[col].iloc[idx] = cleaned_df[col].iloc[idx - 1]
