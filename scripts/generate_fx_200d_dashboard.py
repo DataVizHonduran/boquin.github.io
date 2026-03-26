@@ -167,7 +167,7 @@ def make_snapshot_bar(df_200d, df_edges):
     labels = [f"{ccy} ({CCY_NAMES.get(ccy, ccy)})" for ccy in current.index]
 
     fig = go.Figure(go.Bar(
-        x=current.values,
+        x=current.tolist(),
         y=labels,
         orientation="h",
         marker_color=colors,
@@ -200,17 +200,18 @@ def make_currency_explorer(df_200d, df_edges):
         p25 = df_edges[ccy]["25%"]
         p75 = df_edges[ccy]["75%"]
 
+        x_vals = df_200d.index.strftime("%Y-%m-%d").tolist()
         # Main series
         fig.add_trace(go.Scatter(
-            x=df_200d.index, y=df_200d[ccy],
+            x=x_vals, y=df_200d[ccy].tolist(),
             mode="lines", name=ccy,
             line=dict(color="#1a3a2f", width=1.5),
             visible=visible,
-            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra></extra>",
+            hovertemplate="%{x}: %{y:.2f}%<extra></extra>",
         ))
         # 25th percentile band
         fig.add_trace(go.Scatter(
-            x=df_200d.index, y=[p25] * len(df_200d),
+            x=x_vals, y=[float(p25)] * len(df_200d),
             mode="lines", name="25th pct",
             line=dict(color="#c62828", dash="dash", width=1),
             visible=visible,
@@ -219,7 +220,7 @@ def make_currency_explorer(df_200d, df_edges):
         ))
         # 75th percentile band
         fig.add_trace(go.Scatter(
-            x=df_200d.index, y=[p75] * len(df_200d),
+            x=x_vals, y=[float(p75)] * len(df_200d),
             mode="lines", name="75th pct",
             line=dict(color="#c62828", dash="dash", width=1),
             visible=visible,
@@ -243,10 +244,10 @@ def make_currency_explorer(df_200d, df_edges):
                 {"visible": vis},
                 {"title": f"{ccy} — {CCY_NAMES.get(ccy, ccy)}: % Distance from 200d MA",
                  "annotations": [
-                     dict(x=df_200d.index[-1], y=p25, xanchor="right", yanchor="top",
+                     dict(x=df_200d.index[-1].strftime("%Y-%m-%d"), y=float(p25), xanchor="right", yanchor="top",
                           text=f"25th: {p25:.1f}%", font=dict(color="#c62828", size=11),
                           showarrow=False),
-                     dict(x=df_200d.index[-1], y=p75, xanchor="right", yanchor="bottom",
+                     dict(x=df_200d.index[-1].strftime("%Y-%m-%d"), y=float(p75), xanchor="right", yanchor="bottom",
                           text=f"75th: {p75:.1f}%", font=dict(color="#c62828", size=11),
                           showarrow=False),
                  ]}
@@ -280,10 +281,11 @@ def make_currency_explorer(df_200d, df_edges):
     # First currency annotations
     p25_0 = df_edges[first_ccy]["25%"]
     p75_0 = df_edges[first_ccy]["75%"]
+    last_x = df_200d.index[-1].strftime("%Y-%m-%d")
     fig.update_layout(annotations=[
-        dict(x=df_200d.index[-1], y=p25_0, xanchor="right", yanchor="top",
+        dict(x=last_x, y=float(p25_0), xanchor="right", yanchor="top",
              text=f"25th: {p25_0:.1f}%", font=dict(color="#c62828", size=11), showarrow=False),
-        dict(x=df_200d.index[-1], y=p75_0, xanchor="right", yanchor="bottom",
+        dict(x=last_x, y=float(p75_0), xanchor="right", yanchor="bottom",
              text=f"75th: {p75_0:.1f}%", font=dict(color="#c62828", size=11), showarrow=False),
     ])
     return fig
@@ -293,7 +295,7 @@ def make_broad_usd_chart(usd_200d, top, bottom):
     """Broad USD 200d extension with 90th/10th percentile bands."""
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=usd_200d.index, y=usd_200d["Broad USD"],
+        x=usd_200d.index.strftime("%Y-%m-%d").tolist(), y=usd_200d["Broad USD"].tolist(),
         mode="lines", name="Broad USD 200d ext.",
         line=dict(color="#1a3a2f", width=1.8),
         hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra></extra>",
@@ -321,7 +323,7 @@ def make_median_chart(df_200d):
     """Median 200d extension across all 25 currencies."""
     median_series = df_200d.median(axis=1)
     fig = go.Figure(go.Scatter(
-        x=median_series.index, y=median_series,
+        x=median_series.index.strftime("%Y-%m-%d").tolist(), y=median_series.tolist(),
         mode="lines", name="Median",
         line=dict(color="#2e7d32", width=1.8),
         fill="tozeroy",
