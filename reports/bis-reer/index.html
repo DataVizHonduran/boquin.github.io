@@ -35,20 +35,20 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a1
 .card{background:#fff;border:1px solid #e4e8ec;border-radius:10px;padding:16px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .card-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#999;margin-bottom:12px}
 
-/* Snapshot table */
-.tbl-wrap{max-height:620px;overflow-y:auto}
-table{width:100%;border-collapse:collapse;font-size:.82rem}
-thead th{background:#f0f4f1;padding:8px 12px;text-align:left;font-weight:600;color:#333;border-bottom:2px solid #cdd4db;position:sticky;top:0;z-index:1}
-tbody td{padding:6px 12px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
-tbody tr:hover td{background:#fafcfa}
-.cname{font-weight:500}
-.vpos{color:#1565c0;font-weight:700}
-.vneg{color:#c62828;font-weight:700}
-.zval{color:#666}
-.bar-wrap{width:110px;height:10px;background:#f0f0f0;border-radius:5px;overflow:hidden;position:relative}
-.bar-inner{height:100%;border-radius:5px;position:absolute}
-.bar-pos-clr{background:#1976d2}
-.bar-neg-clr{background:#d32f2f}
+/* Grid hint */
+.grid-hint{font-size:.76rem;color:#888;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.grid-hint svg{opacity:.5}
+#chart-grid{cursor:pointer}
+
+/* Single country view */
+.sc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.sc-name{font-size:1.3rem;font-weight:700;color:#1a1a1a}
+.sc-stats{display:flex;gap:20px;margin-top:6px;flex-wrap:wrap}
+.sc-stat{display:flex;flex-direction:column}
+.sc-stat-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:#999;font-weight:600}
+.sc-stat-val{font-size:1rem;font-weight:700;margin-top:2px}
+.sc-stat-val.pos{color:#1565c0}.sc-stat-val.neg{color:#c62828}.sc-stat-val.neu{color:#555}
+.sc-pick{padding:6px 10px;border:1px solid #cdd4db;border-radius:6px;font-size:.82rem;min-width:170px}
 
 /* Explorer */
 .xctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
@@ -90,8 +90,8 @@ tbody tr:hover td{background:#fafcfa}
 
 <div class="tabs">
   <div class="tab active"  onclick="showTab('rankings')">Rankings</div>
-  <div class="tab"         onclick="showTab('snapshot')">Snapshot Table</div>
-  <div class="tab"         onclick="showTab('grid')">Small Multiples</div>
+  <div class="tab"         onclick="showTab('grid')">Multiple Country View</div>
+  <div class="tab"         onclick="showTab('single')">Single Country View</div>
   <div class="tab"         onclick="showTab('explorer')">Country Explorer</div>
   <div class="tab"         onclick="showTab('undervalued')">Undervalued Count</div>
 </div>
@@ -106,33 +106,36 @@ tbody tr:hover td{background:#fafcfa}
     </div>
   </div>
 
-  <!-- SNAPSHOT TABLE -->
-  <div class="panel" id="panel-snapshot">
-    <div class="card">
-      <div class="card-title" id="snapshot-title">All economies — latest month, sorted by deviation · 10-year window</div>
-      <div class="tbl-wrap">
-        <table id="snapshot-table">
-          <thead><tr>
-            <th>Country</th><th>% vs avg</th><th>Z-score</th><th>Deviation bar</th>
-          </tr></thead>
-          <tbody id="snapshot-body"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- SMALL MULTIPLES -->
+  <!-- MULTIPLE COUNTRY VIEW -->
   <div class="panel" id="panel-grid">
     <div class="card">
       <div class="card-title" id="grid-title">REER % vs 10-year rolling average — all 30 economies (last 20 years)</div>
+      <div class="grid-hint">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Click any country chart to open it in Single Country View
+      </div>
       <div id="chart-grid" style="height:1200px"></div>
     </div>
   </div>
 
-  <!-- EXPLORER -->
+  <!-- SINGLE COUNTRY VIEW -->
+  <div class="panel" id="panel-single">
+    <div class="card">
+      <div class="sc-header">
+        <div>
+          <div class="sc-name" id="sc-name">—</div>
+          <div class="sc-stats" id="sc-stats"></div>
+        </div>
+        <select class="sc-pick" id="sc-picker" onchange="goToSingleCountry(this.value)"></select>
+      </div>
+      <div id="chart-single" style="height:460px"></div>
+    </div>
+  </div>
+
+  <!-- COUNTRY EXPLORER -->
   <div class="panel" id="panel-explorer">
     <div class="card">
-      <div class="card-title">Country explorer — compare up to 8 economies</div>
+      <div class="card-title">Country Explorer — compare up to 8 economies</div>
       <div class="xctrl">
         <select class="xsel" id="xpicker"></select>
         <button class="xbtn" onclick="xAddCountry()">+ Add</button>
@@ -164,9 +167,10 @@ const COUNTRIES = ["Australia", "Brazil", "Canada", "Chile", "China", "Colombia"
 // ── State ─────────────────────────────────────────────────────────────────────
 let CYR = 10, CTHR = 5, XMODE = 'dev';
 let XSEL = ['United States','Euro area','Japan','Brazil'];
+let SC_COUNTRY = 'United States';
 const COLORS = ['#1565c0','#c62828','#2e7d32','#e65100','#6a1b9a','#00838f','#558b2f','#4e342e'];
-const TABS = ['rankings','snapshot','grid','explorer','undervalued'];
-let GRID_DRAWN = false, XDRAWN = false;
+const TABS = ['rankings','grid','single','explorer','undervalued'];
+let GRID_DRAWN = false, XDRAWN = false, SC_INIT = false;
 
 // ── Tabs ──────────────────────────────────────────────────────────────────────
 function showTab(name) {
@@ -175,6 +179,7 @@ function showTab(name) {
     document.querySelectorAll('.tab')[i].classList.toggle('active', t===name);
   });
   if(name==='grid' && !GRID_DRAWN) { drawGrid(); GRID_DRAWN=true; }
+  if(name==='single') { if(!SC_INIT) initSingleCountry(); else drawSingleCountry(); }
   if(name==='explorer' && !XDRAWN) { initExplorer(); XDRAWN=true; }
   if(name==='undervalued') drawUV();
 }
@@ -195,14 +200,12 @@ function setThreshold(thr) {
 function refreshAll() {
   const w = WD[String(CYR)];
   drawRankings(w);
-  drawSnapshotTable(w);
   if(GRID_DRAWN) drawGrid();
+  if(SC_INIT) drawSingleCountry();
   if(XDRAWN) drawExplorer();
   drawUV();
   document.getElementById('rankings-title').textContent =
     `Most Over/Undervalued — top & bottom 10 · ${CYR}-year window`;
-  document.getElementById('snapshot-title').textContent =
-    `All economies — latest month, sorted by deviation · ${CYR}-year window`;
   document.getElementById('grid-title').textContent =
     `REER % vs ${CYR}-year rolling average — all 30 economies (last 20 years)`;
   document.getElementById('uv-title').textContent =
@@ -258,28 +261,7 @@ function drawRankings(w) {
   Plotly.react('chart-rankings',[trPct,trZ],layout,{responsive:true});
 }
 
-// ── Snapshot table ────────────────────────────────────────────────────────────
-function drawSnapshotTable(w) {
-  const pct = w.latest_pct, z = w.latest_z;
-  const sorted = Object.entries(pct).sort((a,b)=>a[1]-b[1]);
-  let html = '';
-  sorted.forEach(([country, val]) => {
-    const zv = z[country] ?? null;
-    const cls = val < 0 ? 'vneg' : 'vpos';
-    const bw = Math.min(Math.abs(val)*1.8, 100).toFixed(1);
-    const bcls = val < 0 ? 'bar-neg-clr' : 'bar-pos-clr';
-    const bpos = val < 0 ? `right:0` : `left:0`;
-    html += `<tr>
-      <td class="cname">${country}</td>
-      <td class="${cls}">${val > 0 ? '+' : ''}${val.toFixed(1)}%</td>
-      <td class="zval">${zv !== null ? (zv>0?'+':'')+zv.toFixed(2) : '—'}</td>
-      <td><div class="bar-wrap"><div class="bar-inner ${bcls}" style="width:${bw}%;${bpos}"></div></div></td>
-    </tr>`;
-  });
-  document.getElementById('snapshot-body').innerHTML = html;
-}
-
-// ── Small multiples ───────────────────────────────────────────────────────────
+// ── Multiple country view (grid) ──────────────────────────────────────────────
 function drawGrid() {
   const w = WD[String(CYR)];
   const ROWS=6, COLS=5;
@@ -335,7 +317,108 @@ function drawGrid() {
   layout.margin={l:10,r:10,t:30,b:10};
   layout.annotations=annotations;
 
-  Plotly.react('chart-grid', traces, layout, {responsive:true});
+  Plotly.react('chart-grid', traces, layout, {responsive:true}).then(() => {
+    document.getElementById('chart-grid').on('plotly_click', function(data) {
+      if(!data.points.length) return;
+      const idx = data.points[0].curveNumber;
+      const country = Object.keys(WD[String(CYR)].grid)[idx];
+      if(country) goToSingleCountry(country);
+    });
+  });
+}
+
+// ── Single country view ───────────────────────────────────────────────────────
+function initSingleCountry() {
+  SC_INIT = true;
+  const sel = document.getElementById('sc-picker');
+  COUNTRIES.forEach(c => {
+    const o=document.createElement('option');
+    o.value=c; o.textContent=c;
+    if(c===SC_COUNTRY) o.selected=true;
+    sel.appendChild(o);
+  });
+  drawSingleCountry();
+}
+
+function goToSingleCountry(country) {
+  SC_COUNTRY = country;
+  showTab('single');
+  // Update picker value
+  const sel = document.getElementById('sc-picker');
+  if(sel) sel.value = country;
+  drawSingleCountry();
+}
+
+function drawSingleCountry() {
+  const w = WD[String(CYR)];
+  const g = w.grid[SC_COUNTRY];
+  if(!g) return;
+
+  // Stats
+  const latestPct = w.latest_pct[SC_COUNTRY];
+  const latestZ   = w.latest_z[SC_COUNTRY];
+  const latestRaw = g.raw[g.raw.length-1];
+  document.getElementById('sc-name').textContent = SC_COUNTRY;
+
+  const pctCls = latestPct > 0 ? 'pos' : latestPct < 0 ? 'neg' : 'neu';
+  const zCls   = latestZ   > 0 ? 'pos' : latestZ   < 0 ? 'neg' : 'neu';
+  document.getElementById('sc-stats').innerHTML = `
+    <div class="sc-stat">
+      <span class="sc-stat-lbl">REER Index</span>
+      <span class="sc-stat-val neu">${latestRaw !== null ? latestRaw.toFixed(1) : '—'}</span>
+    </div>
+    <div class="sc-stat">
+      <span class="sc-stat-lbl">% vs ${CYR}-yr avg</span>
+      <span class="sc-stat-val ${pctCls}">${latestPct !== undefined ? (latestPct>0?'+':'')+latestPct.toFixed(1)+'%' : '—'}</span>
+    </div>
+    <div class="sc-stat">
+      <span class="sc-stat-lbl">Z-score</span>
+      <span class="sc-stat-val ${zCls}">${latestZ !== undefined ? (latestZ>0?'+':'')+latestZ.toFixed(2) : '—'}</span>
+    </div>`;
+
+  // Chart — two traces: % vs avg (bar) and raw index (line on secondary axis)
+  const pctColors = g.pct.map(v => v===null?'#ccc': v<0?'rgba(198,40,40,0.7)':'rgba(21,101,192,0.7)');
+
+  const trPct = {
+    type:'bar', name:`% vs ${CYR}-yr avg`,
+    x: w.dates_grid, y: g.pct,
+    marker:{color:pctColors},
+    yaxis:'y',
+    hovertemplate:'%{x|%b %Y}: %{y:+.1f}%<extra></extra>'
+  };
+  const trRaw = {
+    type:'scatter', mode:'lines', name:'REER index',
+    x: w.dates_grid, y: g.raw,
+    line:{color:'#888',width:1.5,dash:'dot'},
+    yaxis:'y2',
+    hovertemplate:'%{x|%b %Y}: %{y:.1f}<extra></extra>'
+  };
+
+  const layout = {
+    height:460,
+    plot_bgcolor:'white', paper_bgcolor:'white',
+    xaxis:{gridcolor:'#f0f0f0',title:''},
+    yaxis:{
+      gridcolor:'#f0f0f0', zerolinecolor:'#bbb', zerolinewidth:1.5,
+      title:`% vs ${CYR}-yr avg`, titlefont:{size:11}
+    },
+    yaxis2:{
+      overlaying:'y', side:'right',
+      showgrid:false,
+      title:'REER index', titlefont:{size:11,color:'#999'},
+      tickfont:{color:'#999'}
+    },
+    legend:{orientation:'h', x:0, y:1.06, font:{size:11}},
+    margin:{l:60,r:60,t:36,b:40},
+    hovermode:'x unified',
+    shapes:[{
+      type:'line',xref:'paper',yref:'y',
+      x0:0,x1:1,y0:0,y1:0,
+      line:{color:'#555',width:1,dash:'dash'}
+    }]
+  };
+
+  Plotly.react('chart-single',[trPct,trRaw],layout,{responsive:true});
 }
 
 // ── Undervalued count ─────────────────────────────────────────────────────────
@@ -427,10 +510,7 @@ function drawExplorer() {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 (function() {
-  const w = WD['10'];
-  drawRankings(w);
-  drawSnapshotTable(w);
-  // Lazy: grid and explorer drawn on first tab visit
+  drawRankings(WD['10']);
 })();
 </script>
 </body>
