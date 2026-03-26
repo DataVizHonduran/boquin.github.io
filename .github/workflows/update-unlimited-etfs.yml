@@ -1,0 +1,39 @@
+name: Update Unlimited ETFs Holdings Monitor
+
+on:
+  schedule:
+    - cron: '0 14 * * 1-5'  # Every weekday at 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate report
+        env:
+          ETF_CACHE_DIR: ${{ github.workspace }}/reports/unlimited-etfs/cache
+          ETF_REPORT_DIR: ${{ github.workspace }}/reports/unlimited-etfs
+          ETF_LANDING_PAGE: ${{ github.workspace }}/index.html
+        run: python scripts/generate_unlimited_etfs.py --no-summary --no-publish
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/unlimited-etfs/
+          git diff --staged --quiet || (git commit -m "Update Unlimited ETFs Holdings Monitor — $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase && git push)
