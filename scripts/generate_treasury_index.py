@@ -387,22 +387,6 @@ html = f"""<!DOCTYPE html>
     <div class="chart-cards">{chart_links_slow}</div>
   </div>
 
-  <!-- ── Recent signal history ── -->
-  <h2>Recent Signal History</h2>
-  <table class="signal-table">
-    <thead>
-      <tr>
-        <th>Date</th><th>Tenor</th><th>Direction</th>
-        <th>Mode</th><th>Strength</th><th>Peak Pos.</th>
-      </tr>
-    </thead>
-    <tbody>{recent_rows}</tbody>
-  </table>
-
-  <!-- ── High-conviction signals ── -->
-  <h2>High-Conviction Signals (Score ≥ 60)</h2>
-  {'<table class="signal-table"><thead><tr><th>Date</th><th>Tenor</th><th>Direction</th><th>Mode</th><th>Strength</th><th>Peak Pos.</th></tr></thead><tbody>' + hc_rows + '</tbody></table>' if hc_signals else '<p style="color:#888;margin-bottom:28px;">No high-conviction signals generated yet.</p>'}
-
 </main>
 
 <footer>
