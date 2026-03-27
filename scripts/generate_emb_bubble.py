@@ -1,15 +1,13 @@
 """
-iShares EMB Holdings — Duration vs Yield Bubble Chart
-Source: iShares JP Morgan USD Emerging Markets Bond ETF daily holdings CSV
+iShares EM Bond ETF Holdings — Duration vs Yield Bubble Chart
+Supports: EMB, CEMB, LEMB, EMHY, LQD, HYG
 Output: reports/emb-bubble/index.html
 
 Run: python3 scripts/generate_emb_bubble.py
 """
 
-import csv
 import io
 import json
-import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -18,19 +16,76 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-# ── Config ────────────────────────────────────────────────────────────────────
-ISHARES_URL = (
-    "https://www.ishares.com/us/products/239572/"
-    "ishares-jp-morgan-usd-emerging-markets-bond-etf/"
-    "1467271812596.ajax?fileType=csv&fileName=EMB_holdings&dataType=fund"
-)
-HEADERS = {
+# ── ETF registry ──────────────────────────────────────────────────────────────
+ETFS = {
+    "EMB": {
+        "label": "EMB",
+        "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239572/"
+            "ishares-jp-morgan-usd-emerging-markets-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=EMB_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239572/",
+    },
+    "CEMB": {
+        "label": "CEMB",
+        "name": "iShares J.P. Morgan EM Corporate Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239525/"
+            "ishares-emerging-markets-corporate-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=CEMB_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239525/",
+    },
+    "LEMB": {
+        "label": "LEMB",
+        "name": "iShares J.P. Morgan EM Local Currency Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239528/"
+            "ishares-emerging-markets-local-currency-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=LEMB_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239528/",
+    },
+    "EMHY": {
+        "label": "EMHY",
+        "name": "iShares J.P. Morgan EM High Yield Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239527/"
+            "ishares-emerging-markets-high-yield-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=EMHY_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239527/",
+    },
+    "LQD": {
+        "label": "LQD",
+        "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239566/"
+            "ishares-iboxx-investment-grade-corporate-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=LQD_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239566/",
+    },
+    "HYG": {
+        "label": "HYG",
+        "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+        "url": (
+            "https://www.ishares.com/us/products/239565/"
+            "ishares-iboxx-high-yield-corporate-bond-etf/"
+            "1467271812596.ajax?fileType=csv&fileName=HYG_holdings&dataType=fund"
+        ),
+        "referer": "https://www.ishares.com/us/products/239565/",
+    },
+}
+
+BASE_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/120.0.0.0 Safari/537.36"
     ),
-    "Referer": "https://www.ishares.com/us/products/239572/",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
 }
@@ -38,64 +93,56 @@ HEADERS = {
 OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "emb-bubble"
 OUTPUT_FILE = OUTPUT_DIR / "index.html"
 CACHE_DIR = Path.home() / ".claude" / "cache" / "emb"
-CACHE_FILE = CACHE_DIR / "emb_holdings.csv"
-CACHE_META = CACHE_DIR / "emb_meta.json"
 
 # Duration column candidates (in priority order)
 DURATION_COLS = ["Effective Duration", "Modified Duration", "Duration"]
 # Yield column candidates
 YIELD_COLS = ["Yield to Maturity (%)", "YTM (%)", "Yield to Maturity", "YTM", "Yield (%)"]
+# Country/location column candidates (for non-EM funds like LQD/HYG, use Sector)
+COUNTRY_COLS = ["Location", "Country", "Country of Risk", "Sector"]
 
 
 # ── Fetch CSV ─────────────────────────────────────────────────────────────────
-def fetch_csv() -> tuple[str, bool]:
+def fetch_csv(ticker: str, etf: dict) -> tuple[str, bool]:
     """Return (csv_text, is_fresh). Falls back to cache if fetch fails."""
+    cache_file = CACHE_DIR / f"{ticker.lower()}_holdings.csv"
+    headers = {**BASE_HEADERS, "Referer": etf["referer"]}
     try:
-        print("Fetching iShares EMB holdings CSV…")
-        resp = requests.get(ISHARES_URL, headers=HEADERS, timeout=45)
+        print(f"  Fetching {ticker}…")
+        resp = requests.get(etf["url"], headers=headers, timeout=45)
         resp.raise_for_status()
         text = resp.text
-        if len(text) < 1000 or "Name" not in text:
+        if len(text) < 500 or "Name" not in text:
             raise ValueError(f"Response too short or missing data ({len(text)} chars)")
-        # Cache for fallback
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        CACHE_FILE.write_text(text, encoding="utf-8")
-        CACHE_META.write_text(
-            json.dumps({"fetched_at": datetime.now(timezone.utc).isoformat()}),
-            encoding="utf-8",
-        )
-        print(f"  Fetched {len(text):,} chars successfully")
+        cache_file.write_text(text, encoding="utf-8")
+        print(f"    {len(text):,} chars OK")
         return text, True
     except Exception as e:
-        print(f"  Fetch failed: {e}", file=sys.stderr)
-        if CACHE_FILE.exists():
-            print("  Falling back to cached CSV", file=sys.stderr)
-            return CACHE_FILE.read_text(encoding="utf-8"), False
-        raise RuntimeError("No cached CSV available — cannot continue") from e
+        print(f"    FAILED: {e}", file=sys.stderr)
+        if cache_file.exists():
+            print(f"    Falling back to cache for {ticker}", file=sys.stderr)
+            return cache_file.read_text(encoding="utf-8"), False
+        print(f"    No cache for {ticker} — skipping", file=sys.stderr)
+        return "", False
 
 
 # ── Parse CSV ─────────────────────────────────────────────────────────────────
+DATE_PATTERNS = [
+    (r"(\w{3}\s+\d{1,2},\s*\d{4})", "%b %d, %Y"),
+    (r"(\d{4}-\d{2}-\d{2})", "%Y-%m-%d"),
+    (r"(\d{1,2}/\d{1,2}/\d{4})", "%m/%d/%Y"),
+    (r"(\d{1,2}-\w{3}-\d{4})", "%d-%b-%Y"),
+]
+
+
 def parse_csv(text: str) -> tuple[pd.DataFrame, str]:
-    """
-    iShares CSV has 2–3 metadata rows before the column header.
-    We find the header row by locating the line that starts with 'Name' or 'Ticker'.
-    Returns (df, as_of_date_str).
-    """
+    """Parse iShares CSV (skipping metadata rows). Returns (df, as_of_date)."""
     lines = text.splitlines()
 
-    # Extract as-of date from metadata rows (typically row 1 or 2).
-    # The CSV line looks like: Fund Holdings as of,"Mar 25, 2026"
-    # We use regex to find a quoted date value rather than splitting on commas.
     as_of = ""
-    DATE_PATTERNS = [
-        (r"(\w{3}\s+\d{1,2},\s*\d{4})", "%b %d, %Y"),
-        (r"(\d{4}-\d{2}-\d{2})", "%Y-%m-%d"),
-        (r"(\d{1,2}/\d{1,2}/\d{4})", "%m/%d/%Y"),
-        (r"(\d{1,2}-\w{3}-\d{4})", "%d-%b-%Y"),
-    ]
     for line in lines[:8]:
         if "as of" in line.lower() or "holdings date" in line.lower():
-            # Strip quotes, then search for date patterns
             clean = line.replace('"', "")
             for pattern, fmt in DATE_PATTERNS:
                 m = re.search(pattern, clean)
@@ -109,7 +156,6 @@ def parse_csv(text: str) -> tuple[pd.DataFrame, str]:
             if as_of:
                 break
 
-    # Find header row index
     header_idx = None
     for i, line in enumerate(lines):
         stripped = line.strip().strip('"')
@@ -118,9 +164,7 @@ def parse_csv(text: str) -> tuple[pd.DataFrame, str]:
             break
 
     if header_idx is None:
-        raise ValueError("Could not find header row in iShares CSV")
-
-    print(f"  Header row at line {header_idx}, as-of: {as_of or 'unknown'}")
+        raise ValueError("Could not find header row in CSV")
 
     csv_body = "\n".join(lines[header_idx:])
     df = pd.read_csv(io.StringIO(csv_body), thousands=",", low_memory=False)
@@ -131,80 +175,30 @@ def parse_csv(text: str) -> tuple[pd.DataFrame, str]:
 # ── Clean & extract ───────────────────────────────────────────────────────────
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     """Filter to fixed income bonds with valid duration & yield."""
-    # Keep only Fixed Income rows
     if "Asset Class" in df.columns:
         df = df[df["Asset Class"].str.strip() == "Fixed Income"].copy()
 
-    # Find duration column
-    dur_col = None
-    for c in DURATION_COLS:
-        if c in df.columns:
-            dur_col = c
-            break
+    def find_col(candidates, partial_key):
+        for c in candidates:
+            if c in df.columns:
+                return c
+        for col in df.columns:
+            if partial_key in col.lower():
+                return col
+        return None
+
+    dur_col = find_col(DURATION_COLS, "duration")
+    ytm_col = find_col(YIELD_COLS, "yield")
+    mv_col = find_col(["Market Value", "Notional Value", "Market Value (USD)"], "market")
+    wt_col = find_col(["Weight (%)", "Weight", "Portfolio Weight"], "weight")
+    cp_col = find_col(["Coupon (%)", "Coupon", "Coupon Rate"], "coupon")
+    mat_col = find_col(["Maturity", "Maturity Date"], "matur")
+    loc_col = find_col(COUNTRY_COLS, "locat")
+
     if dur_col is None:
-        # Try partial match
-        for col in df.columns:
-            if "duration" in col.lower():
-                dur_col = col
-                break
-    if dur_col is None:
-        raise ValueError(f"No duration column found. Columns: {list(df.columns)}")
-
-    # Find yield column
-    ytm_col = None
-    for c in YIELD_COLS:
-        if c in df.columns:
-            ytm_col = c
-            break
+        raise ValueError(f"No duration column. Available: {list(df.columns)}")
     if ytm_col is None:
-        for col in df.columns:
-            if "yield" in col.lower() or "ytm" in col.lower():
-                ytm_col = col
-                break
-    if ytm_col is None:
-        raise ValueError(f"No yield column found. Columns: {list(df.columns)}")
-
-    print(f"  Using duration col: '{dur_col}', yield col: '{ytm_col}'")
-
-    # Find market value column
-    mv_col = None
-    for candidate in ["Market Value", "Notional Value", "Market Value (USD)"]:
-        if candidate in df.columns:
-            mv_col = candidate
-            break
-    if mv_col is None:
-        for col in df.columns:
-            if "market" in col.lower() and "value" in col.lower():
-                mv_col = col
-                break
-
-    # Find weight column
-    wt_col = None
-    for candidate in ["Weight (%)", "Weight", "Portfolio Weight"]:
-        if candidate in df.columns:
-            wt_col = candidate
-            break
-
-    # Find coupon column
-    cp_col = None
-    for candidate in ["Coupon (%)", "Coupon", "Coupon Rate"]:
-        if candidate in df.columns:
-            cp_col = candidate
-            break
-
-    # Find maturity column
-    mat_col = None
-    for candidate in ["Maturity", "Maturity Date"]:
-        if candidate in df.columns:
-            mat_col = candidate
-            break
-
-    # Find location/country column
-    loc_col = None
-    for candidate in ["Location", "Country", "Country of Risk"]:
-        if candidate in df.columns:
-            loc_col = candidate
-            break
+        raise ValueError(f"No yield column. Available: {list(df.columns)}")
 
     def to_float(series):
         return pd.to_numeric(
@@ -218,87 +212,71 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df["_weight"] = to_float(df[wt_col]) if wt_col else 0.0
     df["_coupon"] = to_float(df[cp_col]) if cp_col else None
     df["_maturity"] = df[mat_col].astype(str).str.strip() if mat_col else ""
-    df["_country"] = df[loc_col].astype(str).str.strip() if loc_col else "Unknown"
+    df["_group"] = df[loc_col].astype(str).str.strip() if loc_col else "Unknown"
     df["_name"] = df["Name"].astype(str).str.strip() if "Name" in df.columns else ""
 
-    # Drop rows missing the key chart fields
     df = df.dropna(subset=["_duration", "_ytm"])
     df = df[df["_duration"] > 0]
     df = df[df["_ytm"] > 0]
-    df = df[~df["_country"].isin(["", "nan", "N/A", "-"])]
-
-    print(f"  {len(df)} valid fixed-income bonds after cleaning")
+    df = df[~df["_group"].isin(["", "nan", "N/A", "-"])]
     return df
 
 
-# ── Build JSON payload ────────────────────────────────────────────────────────
-def build_payload(df: pd.DataFrame, as_of: str, fetched_at: str, is_fresh: bool) -> dict:
+# ── Build payload for one ETF ─────────────────────────────────────────────────
+def build_etf_payload(
+    ticker: str, df: pd.DataFrame, as_of: str, fetched_at: str, is_fresh: bool
+) -> dict:
     bonds = []
     for _, row in df.iterrows():
         bonds.append(
             {
-                "name": row["_name"],
-                "country": row["_country"],
-                "duration": round(float(row["_duration"]), 3),
-                "ytm": round(float(row["_ytm"]), 3),
-                "market_value": round(float(row["_market_value"]), 0),
-                "weight": round(float(row["_weight"]), 3) if row["_weight"] else 0.0,
-                "coupon": round(float(row["_coupon"]), 3) if pd.notna(row["_coupon"]) else None,
-                "maturity": row["_maturity"],
+                "n": row["_name"],
+                "g": row["_group"],
+                "d": round(float(row["_duration"]), 3),
+                "y": round(float(row["_ytm"]), 3),
+                "m": round(float(row["_market_value"]), 0),
+                "w": round(float(row["_weight"]), 3) if row["_weight"] else 0.0,
+                "c": round(float(row["_coupon"]), 3) if pd.notna(row["_coupon"]) else None,
+                "t": row["_maturity"],
             }
         )
 
-    countries = sorted(df["_country"].unique().tolist())
-
+    groups = sorted(df["_group"].unique().tolist())
     return {
         "as_of": as_of,
         "fetched_at": fetched_at,
         "is_fresh": is_fresh,
         "bond_count": len(bonds),
-        "country_count": len(countries),
-        "countries": countries,
+        "group_count": len(groups),
+        "groups": groups,
         "bonds": bonds,
     }
 
 
 # ── Generate HTML ─────────────────────────────────────────────────────────────
-def generate_html(payload: dict) -> str:
-    data_json = json.dumps(payload, ensure_ascii=False)
+def generate_html(all_payloads: dict) -> str:
+    data_json = json.dumps(all_payloads, ensure_ascii=False, separators=(",", ":"))
 
-    fetched_display = ""
-    if payload["fetched_at"]:
-        try:
-            dt = datetime.fromisoformat(payload["fetched_at"].replace("Z", "+00:00"))
-            fetched_display = dt.strftime("%Y-%m-%d %H:%M UTC")
-        except Exception:
-            fetched_display = payload["fetched_at"]
-
-    if payload["is_fresh"]:
-        update_badge = f'Data fetched {fetched_display}'
-        update_class = "badge-fresh"
-    else:
-        update_badge = f'&#9888; Using cached data from {fetched_display} — live fetch failed'
-        update_class = "badge-stale"
-
-    holdings_date = payload.get("as_of") or "unknown"
+    etf_tabs_html = ""
+    for ticker in ETFS:
+        if ticker not in all_payloads:
+            continue
+        etf_tabs_html += f'<button class="etf-tab" data-etf="{ticker}">{ticker}</button>\n'
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EMB Holdings — Duration vs Yield</title>
+<title>EM Bond ETF Holdings — Duration vs Yield</title>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   :root {{
     --forest: #1a3a2f;
     --forest-light: #2d5a47;
-    --moss: #3d6b56;
-    --mint: #e8f0ec;
     --cream: #faf9f7;
     --charcoal: #1a1a1a;
     --warm-gray: #6b6b6b;
-    --accent: #4f46e5;
     --c1: #0072B2;
     --c2: #E69F00;
     --c3: #009E73;
@@ -307,129 +285,137 @@ def generate_html(payload: dict) -> str:
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{ font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }}
 
-  /* Header */
   .page-header {{
     background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
     color: #fff;
-    padding: 24px 32px 20px;
+    padding: 20px 32px 16px;
   }}
-  .page-header h1 {{ font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }}
-  .page-header p {{ font-size: 0.85rem; opacity: 0.8; margin-top: 4px; }}
-  .badges {{ display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }}
-  .badge {{
-    font-size: 0.72rem; padding: 3px 10px; border-radius: 999px; font-weight: 500;
-  }}
-  .badge-holdings {{ background: rgba(255,255,255,0.15); color: #fff; }}
-  .badge-fresh {{ background: rgba(0,200,100,0.2); color: #7fffd4; }}
-  .badge-stale {{ background: rgba(255,180,0,0.2); color: #ffd580; }}
+  .page-header h1 {{ font-size: 1.4rem; font-weight: 700; }}
+  .page-header p {{ font-size: 0.82rem; opacity: 0.75; margin-top: 3px; }}
 
-  /* Main layout */
-  .main {{ max-width: 1300px; margin: 0 auto; padding: 20px 24px 40px; }}
+  /* ETF tab bar */
+  .etf-bar {{
+    display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+  }}
+  .etf-tab {{
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.75);
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }}
+  .etf-tab:hover {{ background: rgba(255,255,255,0.2); color: #fff; }}
+  .etf-tab.active {{ background: #fff; color: var(--forest); border-color: #fff; }}
+  .etf-tab.unavailable {{ opacity: 0.35; cursor: not-allowed; }}
+
+  /* Fund label strip */
+  .fund-strip {{
+    background: #fff;
+    border-bottom: 1px solid #e4e8ef;
+    padding: 8px 32px;
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }}
+  .fund-name {{ font-weight: 600; color: var(--charcoal); }}
+  .badge {{
+    font-size: 0.70rem; padding: 2px 8px; border-radius: 999px; font-weight: 500;
+  }}
+  .badge-fresh {{ background: rgba(44,160,44,0.12); color: #1a7a1a; }}
+  .badge-stale {{ background: rgba(212,168,0,0.15); color: #8a6a00; }}
+
+  .main {{ max-width: 1300px; margin: 0 auto; padding: 16px 24px 40px; }}
+
+  /* Stats */
+  .stats-row {{ display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }}
+  .stat-card {{
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 8px;
+    padding: 10px 14px; flex: 1; min-width: 110px;
+  }}
+  .stat-label {{ font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warm-gray); }}
+  .stat-value {{ font-size: 1.2rem; font-weight: 700; margin-top: 2px; }}
+  .stat-sub {{ font-size: 0.68rem; color: var(--warm-gray); margin-top: 1px; }}
 
   /* Country selector */
   .selector-panel {{
-    background: #fff;
-    border: 1px solid #e4e8ef;
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 10px;
+    padding: 14px 18px; margin-bottom: 14px;
   }}
   .selector-panel h3 {{
-    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--warm-gray); margin-bottom: 12px; font-weight: 600;
+    font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--warm-gray); margin-bottom: 8px; font-weight: 600;
   }}
-  .selector-hint {{
-    font-size: 0.75rem; color: var(--warm-gray); margin-bottom: 10px;
-  }}
+  .selector-hint {{ font-size: 0.73rem; color: var(--warm-gray); margin-bottom: 8px; }}
   .country-pills {{
-    display: flex; flex-wrap: wrap; gap: 6px; max-height: 200px;
-    overflow-y: auto; padding: 2px;
+    display: flex; flex-wrap: wrap; gap: 5px;
+    max-height: 180px; overflow-y: auto; padding: 2px;
   }}
   .pill {{
-    cursor: pointer;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    border: 1.5px solid #dde3ec;
-    background: #f8f9fc;
-    color: var(--charcoal);
-    transition: all 0.15s;
-    user-select: none;
+    cursor: pointer; padding: 3px 11px; border-radius: 999px;
+    font-size: 0.76rem; font-weight: 500;
+    border: 1.5px solid #dde3ec; background: #f8f9fc; color: var(--charcoal);
+    transition: all 0.13s; user-select: none;
   }}
   .pill:hover {{ border-color: #aab3c8; background: #eef1f7; }}
   .pill.active-0 {{ background: var(--c1); border-color: var(--c1); color: #fff; }}
   .pill.active-1 {{ background: var(--c2); border-color: var(--c2); color: #fff; }}
   .pill.active-2 {{ background: var(--c3); border-color: var(--c3); color: #fff; }}
   .pill.active-3 {{ background: var(--c4); border-color: var(--c4); color: #fff; }}
-  .pill.disabled {{ opacity: 0.4; cursor: not-allowed; }}
+  .pill.disabled {{ opacity: 0.38; cursor: not-allowed; }}
 
   /* Chart */
   .chart-card {{
-    background: #fff;
-    border: 1px solid #e4e8ef;
-    border-radius: 10px;
-    padding: 4px;
-    margin-bottom: 16px;
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 10px;
+    padding: 4px; margin-bottom: 14px;
   }}
-  #bubble-chart {{ width: 100%; height: 600px; }}
-
-  /* Summary stats */
-  .stats-row {{
-    display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
-  }}
-  .stat-card {{
-    background: #fff; border: 1px solid #e4e8ef; border-radius: 8px;
-    padding: 12px 16px; flex: 1; min-width: 120px;
-  }}
-  .stat-label {{ font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warm-gray); }}
-  .stat-value {{ font-size: 1.3rem; font-weight: 700; color: var(--charcoal); margin-top: 2px; }}
-  .stat-sub {{ font-size: 0.72rem; color: var(--warm-gray); margin-top: 1px; }}
+  #bubble-chart {{ width: 100%; height: 580px; }}
 
   /* Footer */
   .page-footer {{
-    border-top: 1px solid #e4e8ef;
-    margin-top: 8px;
-    padding-top: 14px;
-    font-size: 0.72rem;
-    color: var(--warm-gray);
+    border-top: 1px solid #e4e8ef; margin-top: 4px; padding-top: 12px;
+    font-size: 0.70rem; color: var(--warm-gray);
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
   }}
-  .footer-update {{ display: flex; align-items: center; gap: 6px; }}
-  .update-indicator {{ width: 8px; height: 8px; border-radius: 50%; display: inline-block; }}
-  .update-indicator.fresh {{ background: #2ca02c; }}
-  .update-indicator.stale {{ background: #d4a800; }}
+  .update-dot {{ width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }}
+  .dot-fresh {{ background: #2ca02c; }}
+  .dot-stale {{ background: #d4a800; }}
 
   @media (max-width: 600px) {{
-    .page-header {{ padding: 16px; }}
-    .main {{ padding: 12px; }}
-    #bubble-chart {{ height: 420px; }}
+    .page-header {{ padding: 14px 16px; }}
+    .fund-strip {{ padding: 7px 16px; }}
+    .main {{ padding: 10px 12px 30px; }}
+    #bubble-chart {{ height: 400px; }}
   }}
 </style>
 </head>
 <body>
 
 <header class="page-header">
-  <h1>&#128200; EMB Holdings — Duration vs Yield</h1>
-  <p>iShares JP Morgan USD Emerging Markets Bond ETF · Individual bond positions</p>
-  <div class="badges">
-    <span class="badge badge-holdings">Holdings date: {holdings_date}</span>
-    <span class="badge {update_class}">{update_badge}</span>
+  <h1>&#128200; EM Bond ETF Holdings — Duration vs Yield</h1>
+  <p>Select a fund below, then choose up to 4 countries/sectors to compare on the bubble chart.</p>
+  <div class="etf-bar">
+    {etf_tabs_html}
   </div>
 </header>
 
-<main class="main">
+<div class="fund-strip">
+  <span class="fund-name" id="fund-name">—</span>
+  <span id="fund-badge" class="badge"></span>
+  <span id="fund-holdings-date" style="margin-left:auto"></span>
+</div>
 
-  <div class="stats-row" id="stats-row">
-    <!-- populated by JS -->
-  </div>
+<main class="main">
+  <div class="stats-row" id="stats-row"></div>
 
   <div class="selector-panel">
-    <h3>Select Countries to Display</h3>
-    <p class="selector-hint">Choose up to <strong>4 countries</strong>. Each country shows all its bonds as bubbles (size = market value).</p>
-    <div class="country-pills" id="country-pills">
-      <!-- populated by JS -->
-    </div>
+    <h3>Select Countries / Sectors to Display</h3>
+    <p class="selector-hint">Choose up to <strong>4</strong>. Bubble size = market value.</p>
+    <div class="country-pills" id="country-pills"></div>
   </div>
 
   <div class="chart-card">
@@ -437,91 +423,98 @@ def generate_html(payload: dict) -> str:
   </div>
 
   <div class="page-footer">
-    <div class="footer-update">
-      <span class="update-indicator {'fresh' if payload['is_fresh'] else 'stale'}"></span>
-      <span id="footer-update-text">{update_badge}</span>
-    </div>
-    <div>
-      Source: <a href="https://www.ishares.com/us/products/239572/" target="_blank" rel="noopener">iShares EMB</a>
-      &nbsp;|&nbsp; Bubble size = market value &nbsp;|&nbsp; Fixed income holdings only
-    </div>
+    <div id="footer-left"></div>
+    <div>Source: <a href="https://www.ishares.com/us/" target="_blank" rel="noopener">iShares</a> &nbsp;|&nbsp; Fixed income holdings only &nbsp;|&nbsp; Bubble size = market value</div>
   </div>
-
 </main>
 
 <script>
-const DATA = {data_json};
-
-// ── State ──────────────────────────────────────────────────────────────────
+const ALL_DATA = {data_json};
+const ETF_META = {{
+  "EMB":  {{ label:"EMB",  name:"iShares J.P. Morgan USD Emerging Markets Bond ETF" }},
+  "CEMB": {{ label:"CEMB", name:"iShares J.P. Morgan EM Corporate Bond ETF" }},
+  "LEMB": {{ label:"LEMB", name:"iShares J.P. Morgan EM Local Currency Bond ETF" }},
+  "EMHY": {{ label:"EMHY", name:"iShares J.P. Morgan EM High Yield Bond ETF" }},
+  "LQD":  {{ label:"LQD",  name:"iShares iBoxx $ Investment Grade Corporate Bond ETF" }},
+  "HYG":  {{ label:"HYG",  name:"iShares iBoxx $ High Yield Corporate Bond ETF" }},
+}};
 const COLORS = ['#0072B2', '#E69F00', '#009E73', '#CC79A7'];
-const MAX_COUNTRIES = 4;
-let selected = []; // array of country names, in selection order
+const MAX_SEL = 4;
 
-// ── Init ───────────────────────────────────────────────────────────────────
+let currentEtf = null;
+let selected = [];
+
+// ── Boot ───────────────────────────────────────────────────────────────────
 function init() {{
-  renderStats();
-  // Default: pick the 4 largest countries by total market value
-  const ranked = rankCountries();
-  const defaults = ranked.slice(0, 4).map(d => d.country);
-  defaults.forEach(c => addCountry(c));
-  renderPills(); // must come AFTER defaults are added so active/disabled state is correct
-  renderChart();
+  // Mark unavailable tabs
+  document.querySelectorAll('.etf-tab').forEach(btn => {{
+    const etf = btn.dataset.etf;
+    if (!ALL_DATA[etf] || !ALL_DATA[etf].bonds.length) {{
+      btn.classList.add('unavailable');
+    }}
+    btn.addEventListener('click', () => {{
+      if (!btn.classList.contains('unavailable')) switchEtf(etf);
+    }});
+  }});
+
+  // Activate first available
+  const first = Object.keys(ALL_DATA).find(k => ALL_DATA[k] && ALL_DATA[k].bonds.length);
+  if (first) switchEtf(first);
 }}
 
-function rankCountries() {{
-  const mv = {{}};
-  DATA.bonds.forEach(b => {{
-    mv[b.country] = (mv[b.country] || 0) + b.market_value;
-  }});
-  return Object.entries(mv)
-    .map(([country, total]) => ({{ country, total }}))
-    .sort((a, b) => b.total - a.total);
+function switchEtf(etf) {{
+  currentEtf = etf;
+  selected = [];
+
+  // Update tabs
+  document.querySelectorAll('.etf-tab').forEach(b => b.classList.toggle('active', b.dataset.etf === etf));
+
+  // Update fund strip
+  const meta = ETF_META[etf] || {{}};
+  const payload = ALL_DATA[etf];
+  document.getElementById('fund-name').textContent = meta.name || etf;
+
+  const badge = document.getElementById('fund-badge');
+  if (payload.is_fresh) {{
+    badge.className = 'badge badge-fresh';
+    badge.textContent = 'Live';
+  }} else {{
+    badge.className = 'badge badge-stale';
+    badge.textContent = 'Cached';
+  }}
+
+  const hd = document.getElementById('fund-holdings-date');
+  hd.textContent = payload.as_of ? `Holdings: ${{payload.as_of}}` : '';
+
+  // Pick 4 largest defaults
+  const ranked = rankGroups(payload);
+  ranked.slice(0, MAX_SEL).forEach(d => {{ if (selected.length < MAX_SEL) selected.push(d.group); }});
+
+  renderStats(payload);
+  renderPills(payload);
+  renderChart(payload);
+  updateFooter(payload);
 }}
 
 // ── Stats ──────────────────────────────────────────────────────────────────
-function renderStats() {{
-  const el = document.getElementById('stats-row');
-  const totalMV = DATA.bonds.reduce((s, b) => s + (b.market_value || 0), 0);
-  const wtAvgDur = wavg(DATA.bonds, 'duration', 'market_value');
-  const wtAvgYTM = wavg(DATA.bonds, 'ytm', 'market_value');
-
-  el.innerHTML = `
-    <div class="stat-card">
-      <div class="stat-label">Total Holdings</div>
-      <div class="stat-value">${{DATA.bond_count}}</div>
-      <div class="stat-sub">fixed income bonds</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Countries</div>
-      <div class="stat-value">${{DATA.country_count}}</div>
-      <div class="stat-sub">in the fund</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Avg Duration</div>
-      <div class="stat-value">${{wtAvgDur.toFixed(1)}}y</div>
-      <div class="stat-sub">market-value weighted</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Avg YTM</div>
-      <div class="stat-value">${{wtAvgYTM.toFixed(2)}}%</div>
-      <div class="stat-sub">market-value weighted</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Total Market Value</div>
-      <div class="stat-value">${{fmtMV(totalMV)}}</div>
-      <div class="stat-sub">displayed holdings</div>
-    </div>
+function renderStats(payload) {{
+  const bonds = payload.bonds;
+  const totalMV = bonds.reduce((s, b) => s + (b.m || 0), 0);
+  const wtAvgDur = wavg(bonds, 'd', 'm');
+  const wtAvgYTM = wavg(bonds, 'y', 'm');
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Holdings</div><div class="stat-value">${{payload.bond_count}}</div><div class="stat-sub">bonds</div></div>
+    <div class="stat-card"><div class="stat-label">Groups</div><div class="stat-value">${{payload.group_count}}</div><div class="stat-sub">countries / sectors</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Duration</div><div class="stat-value">${{wtAvgDur.toFixed(1)}}y</div><div class="stat-sub">MV-weighted</div></div>
+    <div class="stat-card"><div class="stat-label">Avg YTM</div><div class="stat-value">${{wtAvgYTM.toFixed(2)}}%</div><div class="stat-sub">MV-weighted</div></div>
+    <div class="stat-card"><div class="stat-label">Total MV</div><div class="stat-value">${{fmtMV(totalMV)}}</div><div class="stat-sub">shown holdings</div></div>
   `;
 }}
 
 function wavg(bonds, field, wField) {{
-  let sumW = 0, sumWX = 0;
-  bonds.forEach(b => {{
-    const w = b[wField] || 0;
-    sumW += w;
-    sumWX += w * (b[field] || 0);
-  }});
-  return sumW > 0 ? sumWX / sumW : 0;
+  let sw = 0, swx = 0;
+  bonds.forEach(b => {{ const w = b[wField] || 0; sw += w; swx += w * (b[field] || 0); }});
+  return sw > 0 ? swx / sw : 0;
 }}
 
 function fmtMV(v) {{
@@ -531,131 +524,112 @@ function fmtMV(v) {{
 }}
 
 // ── Pills ──────────────────────────────────────────────────────────────────
-function renderPills() {{
+function renderPills(payload) {{
   const container = document.getElementById('country-pills');
   container.innerHTML = '';
-  DATA.countries.forEach(country => {{
-    const idx = selected.indexOf(country);
+  payload.groups.forEach(group => {{
+    const idx = selected.indexOf(group);
     const isActive = idx >= 0;
-    const isDisabled = !isActive && selected.length >= MAX_COUNTRIES;
+    const isDisabled = !isActive && selected.length >= MAX_SEL;
     const pill = document.createElement('span');
     pill.className = 'pill' + (isActive ? ' active-' + idx : '') + (isDisabled ? ' disabled' : '');
-    pill.textContent = country;
-    pill.dataset.country = country;
-    pill.addEventListener('click', () => onPillClick(country));
+    pill.textContent = group;
+    pill.addEventListener('click', () => onPillClick(group, payload));
     container.appendChild(pill);
   }});
 }}
 
-function onPillClick(country) {{
-  const idx = selected.indexOf(country);
+function onPillClick(group, payload) {{
+  const idx = selected.indexOf(group);
   if (idx >= 0) {{
-    // Deselect
     selected.splice(idx, 1);
   }} else {{
-    if (selected.length >= MAX_COUNTRIES) return; // silently ignore
-    selected.push(country);
+    if (selected.length >= MAX_SEL) return;
+    selected.push(group);
   }}
-  renderPills();
-  renderChart();
+  renderPills(payload);
+  renderChart(payload);
 }}
 
-function addCountry(country) {{
-  if (!selected.includes(country) && selected.length < MAX_COUNTRIES) {{
-    selected.push(country);
-  }}
+function rankGroups(payload) {{
+  const mv = {{}};
+  payload.bonds.forEach(b => {{ mv[b.g] = (mv[b.g] || 0) + b.m; }});
+  return Object.entries(mv).map(([group, total]) => ({{ group, total }})).sort((a, b) => b.total - a.total);
 }}
 
 // ── Chart ──────────────────────────────────────────────────────────────────
-function renderChart() {{
-  const traces = [];
-
+function renderChart(payload) {{
   if (selected.length === 0) {{
-    // Show empty placeholder
-    Plotly.react('bubble-chart', [], getLayout('Select countries above to display bonds'));
+    Plotly.react('bubble-chart', [], getLayout('Select groups above to display bonds'));
     return;
   }}
 
-  // Compute size scale: sqrt(mv), normalized so max = 60
-  const allBonds = DATA.bonds.filter(b => selected.includes(b.country));
-  const maxMV = Math.max(...allBonds.map(b => b.market_value || 1));
+  const allBonds = payload.bonds.filter(b => selected.includes(b.g));
+  const maxMV = Math.max(...allBonds.map(b => b.m || 1), 1);
 
-  selected.forEach((country, colorIdx) => {{
-    const bonds = DATA.bonds.filter(b => b.country === country);
-    if (bonds.length === 0) return;
-
-    const x = bonds.map(b => b.duration);
-    const y = bonds.map(b => b.ytm);
-    const sizes = bonds.map(b => {{
-      const s = Math.sqrt((b.market_value || 1) / maxMV) * 60;
-      return Math.max(s, 4);
-    }});
-    const text = bonds.map(b => `${{b.name}}<br>`
-      + `Duration: ${{b.duration.toFixed(1)}}y<br>`
-      + `YTM: ${{b.ytm.toFixed(2)}}%<br>`
-      + (b.coupon != null ? `Coupon: ${{b.coupon.toFixed(2)}}%<br>` : '')
-      + (b.maturity ? `Maturity: ${{b.maturity}}<br>` : '')
-      + `Market Value: $${{fmtMV(b.market_value)}}<br>`
-      + `Weight: ${{b.weight.toFixed(2)}}%`
-    );
-
-    traces.push({{
+  const traces = selected.map((group, colorIdx) => {{
+    const bonds = payload.bonds.filter(b => b.g === group);
+    if (!bonds.length) return null;
+    return {{
       type: 'scatter',
       mode: 'markers',
-      name: country,
-      x, y,
-      text,
-      hovertemplate: '%{{text}}<extra>' + country + '</extra>',
+      name: group,
+      x: bonds.map(b => b.d),
+      y: bonds.map(b => b.y),
+      text: bonds.map(b =>
+        `<b>${{b.n}}</b><br>`
+        + `Duration: ${{b.d.toFixed(1)}}y<br>`
+        + `YTM: ${{b.y.toFixed(2)}}%<br>`
+        + (b.c != null ? `Coupon: ${{b.c.toFixed(2)}}%<br>` : '')
+        + (b.t ? `Maturity: ${{b.t}}<br>` : '')
+        + `Market Value: $${{fmtMV(b.m)}}<br>`
+        + `Weight: ${{b.w.toFixed(2)}}%`
+      ),
+      hovertemplate: '%{{text}}<extra>' + group + '</extra>',
       marker: {{
-        size: sizes,
+        size: bonds.map(b => Math.max(Math.sqrt((b.m || 1) / maxMV) * 60, 4)),
         sizemode: 'diameter',
         color: COLORS[colorIdx],
-        opacity: 0.75,
-        line: {{ color: 'rgba(255,255,255,0.6)', width: 1 }},
+        opacity: 0.72,
+        line: {{ color: 'rgba(255,255,255,0.55)', width: 1 }},
       }},
-    }});
-  }});
+    }};
+  }}).filter(Boolean);
 
   Plotly.react('bubble-chart', traces, getLayout());
 }}
 
 function getLayout(annotation) {{
   const layout = {{
-    xaxis: {{
-      title: 'Effective Duration (years)',
-      gridcolor: 'rgba(200,200,200,0.4)',
-      zeroline: false,
-    }},
-    yaxis: {{
-      title: 'Yield to Maturity (%)',
-      gridcolor: 'rgba(200,200,200,0.4)',
-      zeroline: false,
-    }},
-    plot_bgcolor: '#fff',
-    paper_bgcolor: '#fff',
+    xaxis: {{ title: 'Duration (years)', gridcolor: 'rgba(200,200,200,0.4)', zeroline: false }},
+    yaxis: {{ title: 'Yield to Maturity (%)', gridcolor: 'rgba(200,200,200,0.4)', zeroline: false }},
+    plot_bgcolor: '#fff', paper_bgcolor: '#fff',
     margin: {{ l: 60, r: 30, t: 30, b: 60 }},
-    legend: {{
-      orientation: 'h',
-      yanchor: 'bottom',
-      y: 1.01,
-      xanchor: 'left',
-      x: 0,
-    }},
+    legend: {{ orientation: 'h', yanchor: 'bottom', y: 1.01, xanchor: 'left', x: 0 }},
     hovermode: 'closest',
   }};
   if (annotation) {{
-    layout.annotations = [{{
-      text: annotation,
-      xref: 'paper', yref: 'paper',
-      x: 0.5, y: 0.5,
-      showarrow: false,
-      font: {{ size: 16, color: '#aaa' }},
-    }}];
+    layout.annotations = [{{ text: annotation, xref: 'paper', yref: 'paper',
+      x: 0.5, y: 0.5, showarrow: false, font: {{ size: 15, color: '#bbb' }} }}];
   }}
   return layout;
 }}
 
-// ── Run ────────────────────────────────────────────────────────────────────
+// ── Footer ─────────────────────────────────────────────────────────────────
+function updateFooter(payload) {{
+  let ts = payload.fetched_at || '';
+  try {{
+    const dt = new Date(ts);
+    ts = dt.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+  }} catch(e) {{}}
+  const dotClass = payload.is_fresh ? 'dot-fresh' : 'dot-stale';
+  const msg = payload.is_fresh
+    ? `Data fetched ${{ts}}`
+    : `&#9888; Cached data from ${{ts}} — live fetch failed`;
+  document.getElementById('footer-left').innerHTML =
+    `<span class="update-dot ${{dotClass}}"></span>${{msg}}`;
+}}
+
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
@@ -666,21 +640,31 @@ document.addEventListener('DOMContentLoaded', init);
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
-    csv_text, is_fresh = fetch_csv()
     fetched_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    all_payloads = {}
 
-    df, as_of = parse_csv(csv_text)
-    print(f"  Parsed {len(df)} rows, as-of date: {as_of!r}")
+    print("Fetching iShares ETF holdings…")
+    for ticker, etf in ETFS.items():
+        csv_text, is_fresh = fetch_csv(ticker, etf)
+        if not csv_text:
+            continue
+        try:
+            df, as_of = parse_csv(csv_text)
+            print(f"    {ticker}: header found, as-of={as_of or 'unknown'}")
+            df = clean_data(df)
+            print(f"    {ticker}: {len(df)} valid bonds")
+            all_payloads[ticker] = build_etf_payload(ticker, df, as_of, fetched_at, is_fresh)
+        except Exception as e:
+            print(f"    {ticker}: parse/clean error — {e}", file=sys.stderr)
 
-    df = clean_data(df)
+    if not all_payloads:
+        raise RuntimeError("No ETF data could be loaded")
 
-    payload = build_payload(df, as_of, fetched_at, is_fresh)
-    print(f"  Payload: {payload['bond_count']} bonds, {payload['country_count']} countries")
-
-    html = generate_html(payload)
+    html = generate_html(all_payloads)
     OUTPUT_FILE.write_text(html, encoding="utf-8")
-    print(f"Saved → {OUTPUT_FILE}")
+    print(f"\nSaved → {OUTPUT_FILE}  ({len(html):,} chars, {len(all_payloads)} ETFs)")
 
 
 if __name__ == "__main__":
