@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yahtzee Odds Visualizer</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #2d3f55;
+      --surface3: #334155;
+      --text: #f1f5f9;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --gold: #fbbf24;
+      --gold-dim: rgba(251,191,36,0.12);
+      --green: #22c55e;
+      --green-dim: rgba(34,197,94,0.12);
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.1);
+      --blue: #60a5fa;
+      --border: #334155;
+      --border-light: #475569;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* ─── Header ─────────────────────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px; }
+    header p  { font-size: 0.8rem; color: var(--text-dim); margin-top: 3px; }
+
+    /* ─── Layout ─────────────────────────────────────────────────────────── */
+    .container { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    .section    { margin-top: 28px; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 12px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    /* ─── Dice ────────────────────────────────────────────────────────────── */
+    .dice-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+
+    .die-wrapper {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; user-select: none;
+    }
+    .die-wrapper svg { display: block; border-radius: 14px; }
+    .die-wrapper svg:hover { opacity: 0.85; }
+
+    .die-badge {
+      font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.4px; padding: 2px 8px; border-radius: 4px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .die-badge.keep   { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .die-badge.reroll { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(248,113,113,0.3); }
+    .die-badge:hover  { opacity: 0.75; }
+
+    /* ─── Controls ───────────────────────────────────────────────────────── */
+    .controls { display: flex; align-items: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .controls label { font-size: 0.8rem; color: var(--text-dim); white-space: nowrap; }
+
+    select {
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border-light); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.9rem; cursor: pointer; outline: none;
+    }
+    select:focus { border-color: var(--gold); }
+
+    .btn {
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border-light); border-radius: 8px;
+      padding: 7px 14px; font-size: 0.82rem; cursor: pointer; white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── Kept dice mini row ──────────────────────────────────────────────── */
+    .mini-kept {
+      display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .mini-kept .lbl {
+      font-size: 0.72rem; color: var(--text-dim); white-space: nowrap;
+    }
+
+    /* ─── Roll 2: Single die outcomes ─────────────────────────────────────── */
+    .outcome-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .outcome-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 8px 6px; border-radius: 8px; border: 1px solid transparent;
+      min-width: 60px; text-align: center;
+    }
+    .outcome-cell.win  { background: rgba(248,113,113,0.12); border-color: var(--red); border-width: 2px; }
+    .outcome-cell.miss { border-color: var(--border); }
+    .outcome-cell .result-label {
+      font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .outcome-cell.win  .result-label { color: var(--red); }
+    .outcome-cell.miss .result-label { color: var(--text-muted); }
+
+    /* ─── Roll 2: Two dice grid ───────────────────────────────────────────── */
+    .grid-outer {
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .grid-table {
+      display: grid;
+      grid-template-columns: 28px repeat(6, 1fr);
+      gap: 4px;
+      min-width: 340px;
+    }
+    .grid-axis-label {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--text-muted); font-weight: 600;
+    }
+    .grid-cell {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 3px; padding: 4px 2px; border-radius: 6px; border: 1px solid transparent;
+    }
+    .grid-cell.win  { background: rgba(248,113,113,0.12); border-color: var(--red); border-width: 2px; }
+    .grid-cell.miss { border-color: var(--border); }
+
+    /* ─── Roll 2: Multi dice summary ─────────────────────────────────────── */
+    .multi-summary {
+      font-size: 0.9rem; margin-bottom: 14px;
+    }
+    .win-combos { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .win-combo-card {
+      display: flex; gap: 3px; padding: 6px 8px;
+      background: var(--gold-dim); border: 1px solid rgba(251,191,36,0.3);
+      border-radius: 6px;
+    }
+
+    /* ─── Probability display ─────────────────────────────────────────────── */
+    .prob-display {
+      display: flex; align-items: center; gap: 16px;
+      margin-top: 18px; flex-wrap: wrap;
+    }
+    .prob-frac { font-size: 1.4rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .prob-pct  { font-size: 0.82rem; color: var(--text-dim); margin-top: 2px; }
+    .prob-bar {
+      flex: 1; min-width: 100px; height: 10px;
+      background: var(--surface3); border-radius: 5px; overflow: hidden;
+    }
+    .prob-bar-fill {
+      height: 100%; border-radius: 5px;
+      background: linear-gradient(90deg, #f59e0b, var(--gold));
+      transition: width 0.4s ease;
+    }
+
+    /* ─── Roll 3 scenario cards ───────────────────────────────────────────── */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .scenario-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .scenario-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px;
+    }
+    .scenario-title { font-size: 0.8rem; font-weight: 600; }
+    .badge-blue {
+      font-size: 0.68rem; font-weight: 600; padding: 2px 9px; border-radius: 12px;
+      background: rgba(96,165,250,0.12); color: var(--blue);
+      border: 1px solid rgba(96,165,250,0.25);
+    }
+
+    /* ─── Overall odds ────────────────────────────────────────────────────── */
+    .odds-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px;
+    }
+    .odds-item {
+      text-align: center; padding: 14px 8px;
+      background: var(--surface2); border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .odds-item .val { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .odds-item .lbl { font-size: 0.68rem; color: var(--text-dim); margin-top: 5px; }
+
+    .total-bar {
+      height: 16px; background: var(--surface3); border-radius: 8px; overflow: hidden;
+    }
+    .total-bar-fill {
+      height: 100%; border-radius: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold));
+      transition: width 0.5s ease;
+    }
+
+    /* ─── Status messages ─────────────────────────────────────────────────── */
+    .status-box {
+      text-align: center; padding: 28px 20px;
+      border-radius: 10px; font-weight: 600; font-size: 1.1rem;
+    }
+    .status-box.won   { color: var(--green); background: var(--green-dim); border: 1px solid rgba(34,197,94,0.2); }
+    .status-box.empty { color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border); }
+
+    .roll-desc {
+      font-size: 0.82rem; color: var(--text-dim); margin-bottom: 16px; line-height: 1.5;
+    }
+
+    /* ─── Divider ─────────────────────────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    @media (max-width: 600px) {
+      header h1    { font-size: 1.15rem; }
+      .odds-grid   { grid-template-columns: 1fr; }
+      .container   { padding: 0 14px; }
+      .card        { padding: 16px; }
+      .prob-frac   { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎲 Yahtzee Odds Visualizer</h1>
+  <p>See every possible outcome and your real probability of winning</p>
+</header>
+
+<div class="container">
+  <div id="app"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════════════
+const DOT_POS = {
+  1: [[50,50]],
+  2: [[30,30],[70,70]],
+  3: [[30,30],[50,50],[70,70]],
+  4: [[30,30],[70,30],[30,70],[70,70]],
+  5: [[30,30],[70,30],[50,50],[30,70],[70,70]],
+  6: [[30,30],[70,30],[30,50],[70,50],[30,70],[70,70]]
+};
+
+const TARGETS = [
+  { id:'yahtzee',        label:'Yahtzee — 5 of a kind' },
+  { id:'large-straight', label:'Large Straight — 1-2-3-4-5 or 2-3-4-5-6' },
+  { id:'small-straight', label:'Small Straight — any 4 consecutive' },
+  { id:'full-house',     label:'Full House — 3 of one + 2 of another' },
+  { id:'four-of-a-kind', label:'Four of a Kind' },
+  { id:'three-of-a-kind',label:'Three of a Kind' },
+  { id:'sixes',  label:'Sixes  — maximize 6s scored' },
+  { id:'fives',  label:'Fives  — maximize 5s scored' },
+  { id:'fours',  label:'Fours  — maximize 4s scored' },
+  { id:'threes', label:'Threes — maximize 3s scored' },
+  { id:'twos',   label:'Twos   — maximize 2s scored' },
+  { id:'ones',   label:'Ones   — maximize 1s scored' },
+  { id:'chance', label:'Chance — keep everything' },
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════
+const S = {
+  dice:     [5, 5, 5, 5, 3],
+  target:   'yahtzee',
+  keepMask: [true, true, true, true, false],
+  autoKeep: true,
+};
+
+// ═══════════════════════════════════════════════════════════════
+//  MATH UTILITIES
+// ═══════════════════════════════════════════════════════════════
+const _comboCache = {};
+function combos(n) {
+  if (_comboCache[n]) return _comboCache[n];
+  if (n === 0) return (_comboCache[0] = [[]]);
+  const sub = combos(n - 1), out = [];
+  for (let v = 1; v <= 6; v++) for (const s of sub) out.push([v, ...s]);
+  return (_comboCache[n] = out);
+}
+
+function counts(dice) {
+  const c = {};
+  dice.forEach(d => c[d] = (c[d]||0) + 1);
+  return c;
+}
+function maxCount(dice) { return Math.max(...Object.values(counts(dice))); }
+
+function isYahtzee(d)       { return maxCount(d) >= 5; }
+function is4oak(d)          { return maxCount(d) >= 4; }
+function is3oak(d)          { return maxCount(d) >= 3; }
+function isFullHouse(d) {
+  const v = Object.values(counts(d)).sort((a,b)=>b-a);
+  return v[0]===3 && v[1]===2;
+}
+function isLargeStraight(d) {
+  const u = [...new Set(d)].sort((a,b)=>a-b);
+  if (u.length < 5) return false;
+  for (let i = 0; i < 4; i++) if (u[i+1] !== u[i]+1) return false;
+  return true;
+}
+function isSmallStraight(d) {
+  const u = [...new Set(d)].sort((a,b)=>a-b);
+  for (let i = 0; i <= u.length-4; i++)
+    if (u[i+1]===u[i]+1 && u[i+2]===u[i]+2 && u[i+3]===u[i]+3) return true;
+  return false;
+}
+
+function evaluate(dice, target) {
+  switch (target) {
+    case 'yahtzee':         return isYahtzee(dice);
+    case 'large-straight':  return isLargeStraight(dice);
+    case 'small-straight':  return isSmallStraight(dice);
+    case 'full-house':      return isFullHouse(dice);
+    case 'four-of-a-kind':  return is4oak(dice);
+    case 'three-of-a-kind': return is3oak(dice);
+    case 'ones':   return dice.some(d=>d===1);
+    case 'twos':   return dice.some(d=>d===2);
+    case 'threes': return dice.some(d=>d===3);
+    case 'fours':  return dice.some(d=>d===4);
+    case 'fives':  return dice.some(d=>d===5);
+    case 'sixes':  return dice.some(d=>d===6);
+    case 'chance': return true;
+    default: return false;
+  }
+}
+
+// ─── Probability (memoised) ──────────────────────────────────
+const _pCache = {};
+function winProb1(kept, nReroll, target) {
+  const key = [...kept].sort((a,b)=>a-b).join(',')+'|'+nReroll+'|'+target;
+  if (_pCache[key] !== undefined) return _pCache[key];
+  const cs = combos(nReroll); let w = 0;
+  for (const c of cs) if (evaluate([...kept, ...c], target)) w++;
+  return (_pCache[key] = w / cs.length);
+}
+
+function bestKeep1(hand, target) {
+  let bMask = null, bProb = -1;
+  for (let m = 0; m < 32; m++) {
+    const mask = [0,1,2,3,4].map(i => !!(m & (1<<i)));
+    const k = hand.filter((_,i)=>mask[i]);
+    const p = winProb1(k, 5-k.length, target);
+    if (p > bProb) { bProb=p; bMask=mask; }
+  }
+  return bMask;
+}
+
+// ─── Full odds: P(win Roll2) and P(total via Roll3) ──────────
+function computeOdds(kept, nReroll, target) {
+  const cs = combos(nReroll); let w2=0, p3sum=0;
+  for (const c of cs) {
+    const h2 = [...kept, ...c];
+    if (evaluate(h2, target)) { w2++; }
+    else {
+      const m3 = bestKeep1(h2, target);
+      const k3 = h2.filter((_,i)=>m3[i]);
+      p3sum += winProb1(k3, 5-k3.length, target);
+    }
+  }
+  const n = cs.length;
+  return { p2: w2/n, pTotal: w2/n + p3sum/n, wins2: w2, total2: n };
+}
+
+// ─── Roll 3 scenario groups ──────────────────────────────────
+function roll3Scenarios(kept, nReroll, target) {
+  if (nReroll === 0) return [];
+  const cs = combos(nReroll), smap = new Map();
+  for (const c of cs) {
+    const h2 = [...kept, ...c];
+    if (evaluate(h2, target)) continue;
+    const m3 = bestKeep1(h2, target);
+    const k3 = h2.filter((_,i)=>m3[i]);
+    const nR3 = 5 - k3.length;
+    const sig = [...k3].sort((a,b)=>a-b).join(',')+'|'+nR3;
+    if (!smap.has(sig)) smap.set(sig, {count:0, k3, nR3});
+    smap.get(sig).count++;
+  }
+  const n = cs.length;
+  return [...smap.values()]
+    .map(s => ({ ...s, prob: s.count/n, p3: winProb1(s.k3, s.nR3, target) }))
+    .sort((a,b)=>b.prob-a.prob).slice(0,4);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  STRATEGY HEURISTICS
+// ═══════════════════════════════════════════════════════════════
+function suggest(dice, target) {
+  switch (target) {
+    case 'yahtzee':
+    case 'four-of-a-kind':
+    case 'three-of-a-kind': {
+      const c = counts(dice);
+      const best = parseInt(Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0]);
+      return dice.map(d => d===best);
+    }
+    case 'full-house': {
+      const c = counts(dice);
+      const sorted = Object.entries(c).sort((a,b)=>b[1]-a[1]);
+      if (sorted.length === 1) {
+        // yahtzee → keep 3, reroll 2 for a pair
+        const v = parseInt(sorted[0][0]);
+        const r=[false,false,false,false,false]; let n=0;
+        dice.forEach((d,i)=>{ if(d===v && n<3){r[i]=true;n++;} });
+        return r;
+      }
+      const v1=parseInt(sorted[0][0]), v2=parseInt(sorted[1][0]);
+      const lim1=Math.min(sorted[0][1],3), lim2=Math.min(sorted[1][1],2);
+      const r=[false,false,false,false,false]; let c1=0,c2=0;
+      dice.forEach((d,i)=>{
+        if(d===v1&&c1<lim1){r[i]=true;c1++;}
+        else if(d===v2&&c2<lim2){r[i]=true;c2++;}
+      });
+      return r;
+    }
+    case 'large-straight': {
+      const u = new Set(dice);
+      const s1=[1,2,3,4,5].filter(v=>u.has(v)).length;
+      const s2=[2,3,4,5,6].filter(v=>u.has(v)).length;
+      const tgt = new Set(s1>=s2?[1,2,3,4,5]:[2,3,4,5,6]);
+      const r=[false,false,false,false,false]; const used={};
+      dice.forEach((d,i)=>{if(tgt.has(d)&&!used[d]){r[i]=true;used[d]=true;}});
+      return r;
+    }
+    case 'small-straight': {
+      const u = new Set(dice);
+      const ws=[[1,2,3,4],[2,3,4,5],[3,4,5,6]];
+      let best=ws[0], bestN=0;
+      ws.forEach(w=>{const n=w.filter(v=>u.has(v)).length;if(n>bestN){bestN=n;best=w;}});
+      const tgt=new Set(best); const r=[false,false,false,false,false]; const used={};
+      dice.forEach((d,i)=>{if(tgt.has(d)&&!used[d]){r[i]=true;used[d]=true;}});
+      return r;
+    }
+    case 'ones':   return dice.map(d=>d===1);
+    case 'twos':   return dice.map(d=>d===2);
+    case 'threes': return dice.map(d=>d===3);
+    case 'fours':  return dice.map(d=>d===4);
+    case 'fives':  return dice.map(d=>d===5);
+    case 'sixes':  return dice.map(d=>d===6);
+    case 'chance': return [true,true,true,true,true];
+    default:       return [false,false,false,false,false];
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SVG DICE
+// ═══════════════════════════════════════════════════════════════
+function dieSVG(val, size, state) {
+  // state: 'normal'|'kept'|'reroll'|'win'|'miss'
+  const dots = DOT_POS[val] || DOT_POS[1];
+  let bg='#fff', dot='#1e293b', stroke='#cbd5e1', glow='';
+
+  if (state==='win') {
+    // cell border handles the highlight; die itself stays clean white
+  } else if (state==='miss') {
+    // fully visible normal die
+  } else if (state==='kept') {
+    bg='#f0fdf4'; dot='#14532d'; stroke='#22c55e';
+  } else if (state==='reroll') {
+    bg='#fff1f2'; dot='#7f1d1d'; stroke='#f87171';
+  }
+
+  const r = Math.round(size * 0.13);
+  const dotHTML = dots.map(([cx,cy])=>
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${dot}"/>`
+  ).join('');
+  const rx = Math.round(size * 0.16);
+
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" style="${glow}">
+    <rect x="3" y="3" width="94" height="94" rx="${rx}" ry="${rx}"
+          fill="${bg}" stroke="${stroke}" stroke-width="4.5"/>
+    ${dotHTML}
+  </svg>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  FRACTION / PERCENT HELPERS
+// ═══════════════════════════════════════════════════════════════
+function gcd(a,b){ return b===0?a:gcd(b,a%b); }
+function fracStr(w,t) {
+  if(t===0) return '0/0';
+  const g=gcd(w,t); return `${w/g}/${t/g}`;
+}
+function pct(p){ return (p*100).toFixed(1)+'%'; }
+
+// ═══════════════════════════════════════════════════════════════
+//  RENDER HELPERS
+// ═══════════════════════════════════════════════════════════════
+function miniKept(keptArr, sz=34) {
+  if (!keptArr.length) return '';
+  return `<div class="mini-kept">
+    <span class="lbl">Keeping:</span>
+    ${keptArr.map(v=>dieSVG(v,sz,'kept')).join('')}
+  </div>`;
+}
+
+function probBar(p, label) {
+  const w = pct(p);
+  return `<div class="prob-display">
+    <div>
+      <div class="prob-frac">${label||''}</div>
+      <div class="prob-pct">${pct(p)} chance of winning</div>
+    </div>
+    <div class="prob-bar">
+      <div class="prob-bar-fill" style="width:${w}"></div>
+    </div>
+  </div>`;
+}
+
+// ─── 1 die rerolled ──────────────────────────────────────────
+function roll2_1die(kept, target, dieSize=54) {
+  let html = `<div class="outcome-row">`;
+  for (let v=1; v<=6; v++) {
+    const w = evaluate([...kept,v], target);
+    html += `<div class="outcome-cell ${w?'win':'miss'}">
+      ${dieSVG(v, dieSize, 'normal')}
+      <div class="result-label">${w?'WIN':'miss'}</div>
+    </div>`;
+  }
+  return html + `</div>`;
+}
+
+// ─── 2 dice rerolled (6×6 grid with axis labels) ─────────────
+function roll2_2dice(kept, target, dieSize=32) {
+  let wins=0;
+  let html = `<div class="grid-outer"><div class="grid-table">`;
+  // Top-left corner + column headers
+  html += `<div class="grid-axis-label"></div>`;
+  for (let b=1;b<=6;b++)
+    html+=`<div class="grid-axis-label">${dieSVG(b,18,'normal')}</div>`;
+  // Rows
+  for (let a=1;a<=6;a++) {
+    html+=`<div class="grid-axis-label">${dieSVG(a,18,'normal')}</div>`;
+    for (let b=1;b<=6;b++) {
+      const w = evaluate([...kept,a,b], target);
+      if(w) wins++;
+      html+=`<div class="grid-cell ${w?'win':'miss'}" title="Die A=${a}, Die B=${b}">
+        ${dieSVG(a,dieSize,'normal')}
+        ${dieSVG(b,dieSize,'normal')}
+      </div>`;
+    }
+  }
+  html+=`</div></div>`;
+  return { html, wins };
+}
+
+// ─── 3–5 dice rerolled (summary + winning combos) ────────────
+function roll2_multi(kept, nReroll, target) {
+  const cs = combos(nReroll);
+  const winning = cs.filter(c=>evaluate([...kept,...c],target));
+  let html = `<div class="multi-summary">
+    <span style="color:var(--gold);font-size:1.1rem;font-weight:700">${winning.length}</span>
+    <span style="color:var(--text-dim)"> winning outcome${winning.length!==1?'s':''} out of
+    <strong style="color:var(--text)">${cs.length}</strong> possible (rerolling ${nReroll} dice)</span>
+  </div>`;
+  if (winning.length > 0) {
+    html+=`<div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px">
+      Winning combinations${winning.length>18?' (first 18 shown)':''}:
+    </div><div class="win-combos">`;
+    winning.slice(0,18).forEach(c=>{
+      html+=`<div class="win-combo-card">${c.map(v=>dieSVG(v,26,'normal')).join('')}</div>`;
+    });
+    if(winning.length>18) html+=`<div style="color:var(--text-muted);font-size:0.8rem;display:flex;align-items:center">+${winning.length-18} more</div>`;
+    html+=`</div>`;
+  }
+  return { html, wins: winning.length };
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  MAIN RENDER
+// ═══════════════════════════════════════════════════════════════
+function render() {
+  const {dice, target, keepMask} = S;
+  const kept    = dice.filter((_,i)=>keepMask[i]);
+  const nReroll = keepMask.filter(k=>!k).length;
+  const won     = evaluate(dice, target);
+  let html='';
+
+  // ── Section 1: Your Roll ──────────────────────────────────
+  html += `<div class="section">
+    <div class="section-label">Your Roll — click die to change value · click badge to toggle keep/reroll</div>
+    <div class="card">
+      <div class="dice-row">`;
+  dice.forEach((val,i)=>{
+    const isKept = keepMask[i];
+    html+=`<div class="die-wrapper" onclick="cycleDie(${i})">
+      ${dieSVG(val, 68, 'normal')}
+      <div class="die-badge ${isKept?'keep':'reroll'}"
+           onclick="event.stopPropagation();toggleKeep(${i})">
+        ${isKept?'✓ Keep':'↺ Reroll'}
+      </div>
+    </div>`;
+  });
+  html+=`</div>
+      <div class="controls">
+        <label>Going for:</label>
+        <select onchange="setTarget(this.value)">`;
+  TARGETS.forEach(t=>{
+    html+=`<option value="${t.id}"${t.id===target?' selected':''}>${t.label}</option>`;
+  });
+  html+=`</select>
+        <button class="btn" onclick="rollDice()">🎲 Roll Dice</button>
+        <button class="btn" onclick="autoStrat()">✨ Auto Strategy</button>
+      </div>
+    </div>
+  </div>`;
+
+  // ── Already won ───────────────────────────────────────────
+  if (won) {
+    html+=`<div class="section"><div class="status-box won">🎉 You already have this — no reroll needed!</div></div>`;
+    document.getElementById('app').innerHTML=html; return;
+  }
+
+  // ── No dice selected to reroll ────────────────────────────
+  if (nReroll===0) {
+    html+=`<div class="section"><div class="status-box empty">All dice are set to Keep. Click the badges above to mark some dice for rerolling.</div></div>`;
+    document.getElementById('app').innerHTML=html; return;
+  }
+
+  // ── Compute ────────────────────────────────────────────────
+  const odds = computeOdds(kept, nReroll, target);
+  const scenarios = roll3Scenarios(kept, nReroll, target);
+
+  // ── Section 2: Roll 2 ─────────────────────────────────────
+  html+=`<div class="section">
+    <div class="section-label">Roll 2 — all ${Math.pow(6,nReroll)} possible outcomes (rerolling ${nReroll} ${nReroll===1?'die':'dice'})</div>
+    <div class="card">`;
+
+  html+=miniKept(kept);
+
+  let wins2=odds.wins2, total2=odds.total2;
+
+  if (nReroll===1) {
+    html+=`<div class="roll-desc">Each box below is one possible outcome for the rerolled die.
+      Gold = wins the target, faded = miss.</div>`;
+    html+=roll2_1die(kept, target);
+  } else if (nReroll===2) {
+    const {html:g, wins:w} = roll2_2dice(kept, target);
+    wins2=w;
+    html+=`<div class="roll-desc">6×6 grid of every combination for the two rerolled dice. Gold = wins.</div>`;
+    html+=g;
+  } else {
+    const {html:m, wins:w} = roll2_multi(kept, nReroll, target);
+    wins2=w;
+    html+=m;
+  }
+
+  html+=probBar(odds.p2, fracStr(wins2, total2));
+  html+=`</div></div>`;
+
+  // ── Section 3: Roll 3 ────────────────────────────────────
+  if (scenarios.length > 0) {
+    html+=`<div class="section">
+      <div class="section-label">Roll 3 — what happens if Roll 2 misses</div>`;
+
+    if (scenarios.length===1) {
+      const sc=scenarios[0];
+      html+=`<div class="card">
+        <div class="roll-desc">
+          <strong style="color:var(--text)">${pct(sc.prob)}</strong> of games reach Roll 3
+          (those that missed on Roll 2).
+        </div>`;
+      html+=miniKept(sc.k3);
+      const nR3=sc.nR3, t3=Math.pow(6,nR3);
+      const w3=Math.round(sc.p3*t3);
+      if(nR3===1)      html+=roll2_1die(sc.k3, target, 48);
+      else if(nR3===2) html+=roll2_2dice(sc.k3, target, 28).html;
+      else             html+=roll2_multi(sc.k3, nR3, target).html;
+      html+=probBar(sc.p3, fracStr(w3, t3));
+      html+=`</div>`;
+    } else {
+      html+=`<div class="scenario-grid">`;
+      scenarios.forEach((sc,idx)=>{
+        const nR3=sc.nR3, t3=Math.pow(6,nR3), w3=Math.round(sc.p3*t3);
+        html+=`<div class="scenario-card">
+          <div class="scenario-head">
+            <span class="scenario-title">Scenario ${idx+1}</span>
+            <span class="badge-blue">${pct(sc.prob)} of games</span>
+          </div>`;
+        if(sc.k3.length>0) html+=miniKept(sc.k3,28);
+        html+=`<div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:10px">
+          Rerolling ${nR3} ${nR3===1?'die':'dice'}
+        </div>`;
+        if(nR3===1)        html+=roll2_1die(sc.k3,target,40);
+        else if(nR3===2)   html+=roll2_2dice(sc.k3,target,24).html;
+        else               html+=roll2_multi(sc.k3,nR3,target).html;
+        html+=probBar(sc.p3, fracStr(w3,t3));
+        html+=`</div>`;
+      });
+      html+=`</div>`;
+    }
+
+    html+=`</div>`;
+  }
+
+  // ── Section 4: Overall Odds ──────────────────────────────
+  const p3contrib = odds.pTotal - odds.p2;
+  html+=`<div class="section">
+    <div class="section-label">Overall Odds</div>
+    <div class="card">
+      <div class="odds-grid">
+        <div class="odds-item">
+          <div class="val" style="color:var(--blue)">${pct(odds.p2)}</div>
+          <div class="lbl">Win on Roll 2</div>
+        </div>
+        <div class="odds-item">
+          <div class="val" style="color:var(--green)">${pct(p3contrib)}</div>
+          <div class="lbl">Additional chance via Roll 3</div>
+        </div>
+        <div class="odds-item">
+          <div class="val" style="color:var(--gold)">${pct(odds.pTotal)}</div>
+          <div class="lbl">Total — Rolls 2 + 3 combined</div>
+        </div>
+      </div>
+      <div class="total-bar">
+        <div class="total-bar-fill" style="width:${pct(odds.pTotal)}"></div>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-muted);margin-top:8px">
+        Assumes optimal keep strategy on Roll 3
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('app').innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  EVENT HANDLERS
+// ═══════════════════════════════════════════════════════════════
+function cycleDie(i) {
+  S.dice[i] = (S.dice[i] % 6) + 1;
+  if (S.autoKeep) S.keepMask = suggest(S.dice, S.target);
+  Object.keys(_pCache).forEach(k=>delete _pCache[k]);
+  render();
+}
+
+function toggleKeep(i) {
+  S.autoKeep = false;
+  S.keepMask[i] = !S.keepMask[i];
+  Object.keys(_pCache).forEach(k=>delete _pCache[k]);
+  render();
+}
+
+function setTarget(t) {
+  S.target = t;
+  if (S.autoKeep) S.keepMask = suggest(S.dice, t);
+  Object.keys(_pCache).forEach(k=>delete _pCache[k]);
+  render();
+}
+
+function rollDice() {
+  S.dice = Array.from({length:5}, ()=>Math.ceil(Math.random()*6));
+  S.autoKeep = true;
+  S.keepMask = suggest(S.dice, S.target);
+  Object.keys(_pCache).forEach(k=>delete _pCache[k]);
+  render();
+}
+
+function autoStrat() {
+  S.autoKeep = true;
+  S.keepMask = suggest(S.dice, S.target);
+  Object.keys(_pCache).forEach(k=>delete _pCache[k]);
+  render();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════
+S.keepMask = suggest(S.dice, S.target);
+render();
+</script>
+</body>
+</html>
