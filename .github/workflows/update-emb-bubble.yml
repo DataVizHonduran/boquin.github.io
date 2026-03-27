@@ -1,0 +1,35 @@
+name: Update EMB Holdings Bubble Chart
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # 2pm UTC daily — after iShares publishes holdings
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas plotly
+
+      - name: Generate EMB bubble chart
+        run: python scripts/generate_emb_bubble.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/emb-bubble/
+          git diff --staged --quiet || (git commit -m "Update EMB Holdings Bubble Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
