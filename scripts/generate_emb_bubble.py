@@ -460,11 +460,11 @@ let selected = []; // array of country names, in selection order
 // ── Init ───────────────────────────────────────────────────────────────────
 function init() {{
   renderStats();
-  renderPills();
   // Default: pick the 4 largest countries by total market value
   const ranked = rankCountries();
   const defaults = ranked.slice(0, 4).map(d => d.country);
   defaults.forEach(c => addCountry(c));
+  renderPills(); // must come AFTER defaults are added so active/disabled state is correct
   renderChart();
 }}
 
