@@ -27,6 +27,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=EMB_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239572/",
+        "group_by": "country",   # group pills by Location column
     },
     "CEMB": {
         "label": "CEMB",
@@ -37,6 +38,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=CEMB_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239525/",
+        "group_by": "issuer",    # group pills by Name (company) column
     },
     "LEMB": {
         "label": "LEMB",
@@ -47,6 +49,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=LEMB_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239528/",
+        "group_by": "country",
     },
     "EMHY": {
         "label": "EMHY",
@@ -57,6 +60,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=EMHY_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239527/",
+        "group_by": "issuer",
     },
     "LQD": {
         "label": "LQD",
@@ -67,6 +71,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=LQD_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239566/",
+        "group_by": "issuer",
     },
     "HYG": {
         "label": "HYG",
@@ -77,6 +82,7 @@ ETFS = {
             "1467271812596.ajax?fileType=csv&fileName=HYG_holdings&dataType=fund"
         ),
         "referer": "https://www.ishares.com/us/products/239565/",
+        "group_by": "issuer",
     },
 }
 
@@ -173,8 +179,13 @@ def parse_csv(text: str) -> tuple[pd.DataFrame, str]:
 
 
 # ── Clean & extract ───────────────────────────────────────────────────────────
-def clean_data(df: pd.DataFrame) -> pd.DataFrame:
-    """Filter to fixed income bonds with valid duration & yield."""
+def clean_data(df: pd.DataFrame, group_by: str = "country") -> pd.DataFrame:
+    """Filter to fixed income bonds with valid duration & yield.
+
+    group_by:
+      "country" — use Location/Country column for pill grouping (sovereign ETFs)
+      "issuer"  — use Name column for pill grouping (corporate ETFs)
+    """
     if "Asset Class" in df.columns:
         df = df[df["Asset Class"].str.strip() == "Fixed Income"].copy()
 
@@ -212,8 +223,14 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df["_weight"] = to_float(df[wt_col]) if wt_col else 0.0
     df["_coupon"] = to_float(df[cp_col]) if cp_col else None
     df["_maturity"] = df[mat_col].astype(str).str.strip() if mat_col else ""
-    df["_group"] = df[loc_col].astype(str).str.strip() if loc_col else "Unknown"
     df["_name"] = df["Name"].astype(str).str.strip() if "Name" in df.columns else ""
+
+    if group_by == "issuer":
+        # For corporate ETFs the Name column IS the issuer/company name
+        df["_group"] = df["_name"]
+    else:
+        # For sovereign ETFs use Location column
+        df["_group"] = df[loc_col].astype(str).str.strip() if loc_col else "Unknown"
 
     df = df.dropna(subset=["_duration", "_ytm"])
     df = df[df["_duration"] > 0]
@@ -223,8 +240,13 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ── Build payload for one ETF ─────────────────────────────────────────────────
+# Max issuers shown in pill selector for corporate ETFs (ranked by total MV)
+MAX_ISSUER_PILLS = 80
+
+
 def build_etf_payload(
-    ticker: str, df: pd.DataFrame, as_of: str, fetched_at: str, is_fresh: bool
+    ticker: str, df: pd.DataFrame, as_of: str, fetched_at: str, is_fresh: bool,
+    group_by: str = "country",
 ) -> dict:
     bonds = []
     for _, row in df.iterrows():
@@ -241,13 +263,22 @@ def build_etf_payload(
             }
         )
 
-    groups = sorted(df["_group"].unique().tolist())
+    if group_by == "issuer":
+        # Rank by total market value, cap at MAX_ISSUER_PILLS
+        mv_by_group = df.groupby("_group")["_market_value"].sum().sort_values(ascending=False)
+        groups = mv_by_group.head(MAX_ISSUER_PILLS).index.tolist()
+        group_label = "Company"
+    else:
+        groups = sorted(df["_group"].unique().tolist())
+        group_label = "Country"
+
     return {
         "as_of": as_of,
         "fetched_at": fetched_at,
         "is_fresh": is_fresh,
         "bond_count": len(bonds),
-        "group_count": len(groups),
+        "group_count": len(df["_group"].unique()),
+        "group_label": group_label,
         "groups": groups,
         "bonds": bonds,
     }
@@ -413,8 +444,8 @@ def generate_html(all_payloads: dict) -> str:
   <div class="stats-row" id="stats-row"></div>
 
   <div class="selector-panel">
-    <h3>Select Countries / Sectors to Display</h3>
-    <p class="selector-hint">Choose up to <strong>4</strong>. Bubble size = market value.</p>
+    <h3 id="selector-heading">Select to Display</h3>
+    <p class="selector-hint" id="selector-hint">Choose up to <strong>4</strong>. Bubble size = market value.</p>
     <div class="country-pills" id="country-pills"></div>
   </div>
 
@@ -485,6 +516,12 @@ function switchEtf(etf) {{
 
   const hd = document.getElementById('fund-holdings-date');
   hd.textContent = payload.as_of ? `Holdings: ${{payload.as_of}}` : '';
+
+  // Update selector heading based on group type
+  const groupLabel = payload.group_label || 'Country';
+  document.getElementById('selector-heading').textContent = `Select ${{groupLabel === 'Company' ? 'Companies' : 'Countries'}} to Display`;
+  document.getElementById('selector-hint').innerHTML =
+    `Choose up to <strong>4</strong> ${{groupLabel === 'Company' ? 'companies (top 80 by market value shown)' : 'countries'}}. Bubble size = market value.`;
 
   // Pick 4 largest defaults
   const ranked = rankGroups(payload);
@@ -651,11 +688,14 @@ def main():
         if not csv_text:
             continue
         try:
+            group_by = etf.get("group_by", "country")
             df, as_of = parse_csv(csv_text)
-            print(f"    {ticker}: header found, as-of={as_of or 'unknown'}")
-            df = clean_data(df)
+            print(f"    {ticker}: header found, as-of={as_of or 'unknown'}, group_by={group_by}")
+            df = clean_data(df, group_by=group_by)
             print(f"    {ticker}: {len(df)} valid bonds")
-            all_payloads[ticker] = build_etf_payload(ticker, df, as_of, fetched_at, is_fresh)
+            all_payloads[ticker] = build_etf_payload(
+                ticker, df, as_of, fetched_at, is_fresh, group_by=group_by
+            )
         except Exception as e:
             print(f"    {ticker}: parse/clean error — {e}", file=sys.stderr)
 
