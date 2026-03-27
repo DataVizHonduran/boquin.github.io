@@ -330,26 +330,6 @@ html = f"""<!DOCTYPE html>
 
 <main>
 
-  <!-- ── Stat cards ── -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-value">{fast_total}</div>
-      <div class="stat-label">Fast Signals (all-time)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">{slow_total}</div>
-      <div class="stat-label">Slow Signals (all-time)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">{fast_hc}</div>
-      <div class="stat-label">Fast High-Conviction (≥60)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">{slow_hc}</div>
-      <div class="stat-label">Slow High-Conviction (≥60)</div>
-    </div>
-  </div>
-
   <!-- ── Current yield snapshot ── -->
   <h2>Current Treasury Yield Snapshot</h2>
   <table class="yield-table">
