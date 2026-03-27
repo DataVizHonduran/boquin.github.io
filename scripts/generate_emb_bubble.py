@@ -382,6 +382,20 @@ def generate_html(all_payloads: dict) -> str:
     color: var(--warm-gray); margin-bottom: 8px; font-weight: 600;
   }}
   .selector-hint {{ font-size: 0.73rem; color: var(--warm-gray); margin-bottom: 8px; }}
+  .search-wrap {{ position: relative; margin-bottom: 8px; }}
+  .search-wrap input {{
+    width: 100%; padding: 6px 30px 6px 10px;
+    border: 1.5px solid #dde3ec; border-radius: 6px;
+    font-size: 0.80rem; outline: none; background: #f8f9fc; color: var(--charcoal);
+  }}
+  .search-wrap input:focus {{ border-color: #8b9dc3; background: #fff; }}
+  .search-clear {{
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; color: #aab3c8; font-size: 1rem; line-height: 1;
+    display: none; user-select: none;
+  }}
+  .search-clear.visible {{ display: block; }}
+  .no-results {{ font-size: 0.76rem; color: #aab3c8; padding: 4px 2px; }}
   .country-pills {{
     display: flex; flex-wrap: wrap; gap: 5px;
     max-height: 180px; overflow-y: auto; padding: 2px;
@@ -446,6 +460,10 @@ def generate_html(all_payloads: dict) -> str:
   <div class="selector-panel">
     <h3 id="selector-heading">Select to Display</h3>
     <p class="selector-hint" id="selector-hint">Choose up to <strong>4</strong>. Bubble size = market value.</p>
+    <div class="search-wrap">
+      <input type="text" id="group-search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <span class="search-clear" id="search-clear" title="Clear">&#x2715;</span>
+    </div>
     <div class="country-pills" id="country-pills"></div>
   </div>
 
@@ -488,6 +506,20 @@ function init() {{
     }});
   }});
 
+  // Search input — filter pills on keystroke
+  const searchEl = document.getElementById('group-search');
+  const clearEl  = document.getElementById('search-clear');
+  searchEl.addEventListener('input', () => {{
+    clearEl.classList.toggle('visible', searchEl.value.length > 0);
+    if (currentEtf) renderPills(ALL_DATA[currentEtf]);
+  }});
+  clearEl.addEventListener('click', () => {{
+    searchEl.value = '';
+    clearEl.classList.remove('visible');
+    if (currentEtf) renderPills(ALL_DATA[currentEtf]);
+    searchEl.focus();
+  }});
+
   // Activate first available
   const first = Object.keys(ALL_DATA).find(k => ALL_DATA[k] && ALL_DATA[k].bonds.length);
   if (first) switchEtf(first);
@@ -496,6 +528,10 @@ function init() {{
 function switchEtf(etf) {{
   currentEtf = etf;
   selected = [];
+  // Clear search when switching funds
+  const searchEl = document.getElementById('group-search');
+  searchEl.value = '';
+  document.getElementById('search-clear').classList.remove('visible');
 
   // Update tabs
   document.querySelectorAll('.etf-tab').forEach(b => b.classList.toggle('active', b.dataset.etf === etf));
@@ -561,10 +597,28 @@ function fmtMV(v) {{
 }}
 
 // ── Pills ──────────────────────────────────────────────────────────────────
+function getSearchQuery() {{
+  return document.getElementById('group-search').value.trim().toLowerCase();
+}}
+
 function renderPills(payload) {{
   const container = document.getElementById('country-pills');
+  const query = getSearchQuery();
   container.innerHTML = '';
-  payload.groups.forEach(group => {{
+
+  const visible = payload.groups.filter(g =>
+    !query || g.toLowerCase().includes(query)
+  );
+
+  if (visible.length === 0) {{
+    const msg = document.createElement('span');
+    msg.className = 'no-results';
+    msg.textContent = 'No matches';
+    container.appendChild(msg);
+    return;
+  }}
+
+  visible.forEach(group => {{
     const idx = selected.indexOf(group);
     const isActive = idx >= 0;
     const isDisabled = !isActive && selected.length >= MAX_SEL;
