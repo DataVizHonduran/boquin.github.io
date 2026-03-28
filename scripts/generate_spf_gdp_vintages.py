@@ -47,14 +47,12 @@ VARIABLES: dict[str, tuple] = {
 }
 
 # Every 2 years for distant history, every year for recent vintages
-TARGET_YEARS = (
-    list(range(2000, 2018, 2)) +   # 2000 2002 … 2016
-    list(range(2018, 2027))        # 2018 2019 … 2026
-)
+TARGET_YEARS = list(range(1990, datetime.now().year + 4))
 
 # Start-year dropdown: (option value, display label)
 START_YEAR_OPTIONS = [
-    ("2000", "2000 — full 25 yrs"),
+    ("1990", "1990 — full history"),
+    ("2000", "2000 — last 25 yrs"),
     ("2006", "2006 — last 20 yrs"),
     ("2010", "2010 — last 15 yrs"),
     ("2015", "2015 — last 10 yrs"),
