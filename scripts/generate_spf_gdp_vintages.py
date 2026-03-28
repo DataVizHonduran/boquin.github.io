@@ -247,6 +247,46 @@ def build_trace_data(all_vintages: dict) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# Special traces: average and current-year
+# ---------------------------------------------------------------------------
+def build_special_traces(all_vintages: dict) -> list[dict]:
+    specials = []
+    for var_key, vintages in all_vintages.items():
+        _, _, _, unit, _ = VARIABLES[var_key]
+
+        # Average: mean of all target-year forecasts at each survey date
+        date_vals: dict[str, list[float]] = {}
+        for yr, s in vintages.items():
+            for date, val in zip(s.index, s.values):
+                date_vals.setdefault(date, []).append(float(val))
+        avg_dates = sorted(date_vals.keys())
+        specials.append({
+            "var":  var_key,
+            "mode": "avg",
+            "x":    avg_dates,
+            "y":    [round(sum(date_vals[d]) / len(date_vals[d]), 4) for d in avg_dates],
+            "unit": unit,
+        })
+
+        # Current year: forecast where target_year == survey_year (offset = 0)
+        curr_pts = []
+        for yr, s in vintages.items():
+            for date, val in zip(s.index, s.values):
+                if int(date[:4]) == yr:
+                    curr_pts.append((date, round(float(val), 4)))
+        curr_pts.sort()
+        specials.append({
+            "var":  var_key,
+            "mode": "current",
+            "x":    [p[0] for p in curr_pts],
+            "y":    [p[1] for p in curr_pts],
+            "unit": unit,
+        })
+
+    return specials
+
+
+# ---------------------------------------------------------------------------
 # HTML
 # ---------------------------------------------------------------------------
 HTML_TEMPLATE = """\
@@ -286,6 +326,7 @@ HTML_TEMPLATE = """\
         #varSelect {{ min-width: 200px; }}
         #startYearSelect {{ min-width: 185px; }}
         #yClipSelect {{ min-width: 150px; }}
+        #modeSelect {{ min-width: 160px; }}
         .ctrl-select:focus {{ outline: 2px solid #1a3a2f; border-color: transparent; }}
         .chart-card {{
             background: white; border-radius: 10px;
@@ -347,6 +388,14 @@ HTML_TEMPLATE = """\
 {y_clip_tags}
             </select>
         </div>
+        <div class="control-group">
+            <label for="modeSelect">Display:</label>
+            <select id="modeSelect" class="ctrl-select">
+                <option value="vintage" selected>All vintages</option>
+                <option value="avg">Average</option>
+                <option value="current">Current year</option>
+            </select>
+        </div>
     </div>
 
     <div class="chart-card">
@@ -369,9 +418,10 @@ HTML_TEMPLATE = """\
 </div>
 
 <script>
-const TRACES   = {traces_json};
-const VAR_META = {var_meta_json};
-const Y_BOUNDS = {y_bounds_json};
+const TRACES        = {traces_json};
+const SPECIAL       = {specials_json};
+const VAR_META      = {var_meta_json};
+const Y_BOUNDS      = {y_bounds_json};
 
 const DEFAULT_VAR   = 'RGDP';
 const DEFAULT_START = '{default_start}';
@@ -393,15 +443,37 @@ function makeTrace(t, activeVar) {{
         hovertemplate:
             '<b>' + VAR_META[t.var].label + ' \u2014 ' + t.year + ' forecast</b><br>' +
             'Survey: %{{x|%Y Q}} — %{{y:.2f}}' + t.unit + '<extra></extra>',
-        _var: t.var,
+        _var: t.var, _mode: 'vintage',
     }};
 }}
 
-const allTraces = TRACES.map(t => makeTrace(t, DEFAULT_VAR));
+function makeSpecialTrace(s) {{
+    const isAvg  = s.mode === 'avg';
+    const color  = isAvg ? '#c0392b' : '#1a3a2f';
+    const label  = isAvg ? 'Average across horizons' : 'Current-year forecast';
+    return {{
+        x: s.x, y: s.y,
+        mode: 'lines+markers',
+        type: 'scatter',
+        name: label,
+        showlegend: false,
+        line:   {{ color: color, width: 2.5 }},
+        marker: {{ size: 5, color: color }},
+        visible: false,
+        hovertemplate:
+            '<b>' + label + '</b><br>' +
+            'Survey: %{{x|%Y Q}} — %{{y:.2f}}' + s.unit + '<extra></extra>',
+        _var: s.var, _mode: s.mode,
+    }};
+}}
+
+const vintageTraces = TRACES.map(t => makeTrace(t, DEFAULT_VAR));
+const specialTraces = SPECIAL.map(s => makeSpecialTrace(s));
+const allTraces     = [...vintageTraces, ...specialTraces];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function xRange(startYear) {{
-    return [startYear + '-01-01', '2027-01-01'];
+    return [startYear + '-01-01', '2030-01-01'];
 }}
 
 function yRange(varKey, clipKey) {{
@@ -464,11 +536,13 @@ Plotly.newPlot('spf-chart', allTraces, layout, {{displayModeBar: false, responsi
 let currentVar   = DEFAULT_VAR;
 let currentStart = DEFAULT_START;
 let currentClip  = DEFAULT_YCLIP;
+let currentMode  = 'vintage';
 
 function applyAll() {{
-    const meta   = VAR_META[currentVar];
-    const vis    = allTraces.map(t => t._var === currentVar);
-    const showLg = allTraces.map(t => t._var === currentVar);
+    const meta = VAR_META[currentVar];
+
+    const vis    = allTraces.map(t => t._var === currentVar && t._mode === currentMode);
+    const showLg = allTraces.map(t => t._var === currentVar && t._mode === 'vintage');
 
     Plotly.restyle('spf-chart', {{ visible: vis, showlegend: showLg }});
 
@@ -498,13 +572,17 @@ document.getElementById('yClipSelect').addEventListener('change', function() {{
     currentClip = this.value;
     applyAll();
 }});
+document.getElementById('modeSelect').addEventListener('change', function() {{
+    currentMode = this.value;
+    applyAll();
+}});
 </script>
 </body>
 </html>
 """
 
 
-def build_html(all_vintages: dict, insights: dict, traces: list[dict], y_bounds: dict) -> str:
+def build_html(all_vintages: dict, insights: dict, traces: list[dict], specials: list[dict], y_bounds: dict) -> str:
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     # Variable dropdown
@@ -553,6 +631,7 @@ def build_html(all_vintages: dict, insights: dict, traces: list[dict], y_bounds:
         insight_sections=insight_sections_html,
         generated=now,
         traces_json=json.dumps(traces, separators=(",", ":")),
+        specials_json=json.dumps(specials, separators=(",", ":")),
         var_meta_json=json.dumps(var_meta, separators=(",", ":")),
         y_bounds_json=json.dumps(y_bounds, separators=(",", ":")),
         default_start=DEFAULT_START_YEAR,
@@ -587,7 +666,11 @@ def main():
     traces = build_trace_data(all_vintages)
     print(f"  {len(traces)} traces across {len(VARIABLES)} variables")
 
-    html = build_html(all_vintages, insights, traces, y_bounds)
+    print("\nBuilding special traces (avg + current year)...")
+    specials = build_special_traces(all_vintages)
+    print(f"  {len(specials)} special traces")
+
+    html = build_html(all_vintages, insights, traces, specials, y_bounds)
     OUTPUT_FILE.write_text(html, encoding="utf-8")
     print(f"\nSaved → {OUTPUT_FILE}  ({len(html):,} bytes)")
 
