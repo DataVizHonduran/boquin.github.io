@@ -119,6 +119,7 @@
                 <option value="vintage" selected>All vintages</option>
                 <option value="avg">Average</option>
                 <option value="current">Current year</option>
+                <option value="range">Range</option>
             </select>
         </div>
     </div>
@@ -218,7 +219,49 @@ function makeSpecialTrace(s) {
 
 const vintageTraces = TRACES.map(t => makeTrace(t, DEFAULT_VAR));
 const specialTraces = SPECIAL.map(s => makeSpecialTrace(s));
-const allTraces     = [...vintageTraces, ...specialTraces];
+
+function makeRangeTraces() {
+    const vars = [...new Set(TRACES.map(t => t.var))];
+    const out = [];
+    for (const varKey of vars) {
+        const vt = TRACES.filter(t => t.var === varKey);
+        const xMap = new Map();
+        for (const t of vt) {
+            for (let i = 0; i < t.x.length; i++) {
+                if (t.y[i] == null || isNaN(t.y[i])) continue;
+                if (!xMap.has(t.x[i])) xMap.set(t.x[i], []);
+                xMap.get(t.x[i]).push(t.y[i]);
+            }
+        }
+        const xs = [...xMap.keys()].sort();
+        const yMax = xs.map(x => Math.max(...xMap.get(x)));
+        const yMin = xs.map(x => Math.min(...xMap.get(x)));
+        const unit = vt[0]?.unit || '';
+        // Upper bound (invisible line — fills down from here)
+        out.push({
+            x: xs, y: yMax,
+            type: 'scatter', mode: 'lines',
+            name: 'Max', showlegend: false,
+            line: { width: 0 },
+            hovertemplate: '<b>Max</b>: %{y:.2f}' + unit + '<extra></extra>',
+            _var: varKey, _mode: 'range',
+        });
+        // Lower bound with fill to previous trace
+        out.push({
+            x: xs, y: yMin,
+            type: 'scatter', mode: 'lines',
+            name: 'Min', showlegend: false,
+            fill: 'tonexty',
+            fillcolor: 'rgba(150,150,150,0.28)',
+            line: { width: 0 },
+            hovertemplate: '<b>Min</b>: %{y:.2f}' + unit + '<extra></extra>',
+            _var: varKey, _mode: 'range',
+        });
+    }
+    return out;
+}
+const rangeTraces = makeRangeTraces();
+const allTraces   = [...vintageTraces, ...specialTraces, ...rangeTraces];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function xRange(startYear) {
