@@ -265,9 +265,8 @@ def build_analysis_html():
 # HTML template
 # ---------------------------------------------------------------------------
 CSS = """
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; }
 body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
-.chart-wrapper { max-width: 1440px; margin: 0 auto; padding: 24px 16px 0; }
 .analysis-section { max-width: 1440px; margin: 0 auto; padding: 32px 16px 48px; }
 .analysis-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #111; }
 .analysis-note { font-size: 13px; color: #888; margin-bottom: 24px; }
@@ -289,21 +288,6 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
 @media (max-width: 520px) { .analysis-grid { grid-template-columns: 1fr; } }
 """
 
-HTML_TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brazil DPF Debt Holders</title>
-  <style>{css}</style>
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-</head>
-<body>
-  <div class="chart-wrapper">{chart_div}</div>
-  {analysis_html}
-</body>
-</html>"""
-
 
 # ---------------------------------------------------------------------------
 # Main
@@ -311,18 +295,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 def main():
     df = fetch_data()
     fig = build_chart(df)
-    chart_div = fig.to_html(full_html=False, include_plotlyjs=False)
     analysis_html = build_analysis_html()
 
-    html = HTML_TEMPLATE.format(
-        css=CSS,
-        chart_div=chart_div,
-        analysis_html=analysis_html,
-    )
-
     os.makedirs(OUT_DIR, exist_ok=True)
+
+    # Let Plotly write the chart HTML cleanly, then inject analysis + CSS before </body>
+    fig.write_html(OUT_FILE, include_plotlyjs="cdn")
+
+    with open(OUT_FILE, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    inject = f"<style>{CSS}</style>\n{analysis_html}\n"
+    html = html.replace("</body>", inject + "</body>")
+
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
+
     print(f"\nChart saved to: {os.path.abspath(OUT_FILE)}")
 
 
