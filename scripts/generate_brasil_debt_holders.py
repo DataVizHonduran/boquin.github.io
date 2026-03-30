@@ -57,7 +57,7 @@ ANALYSIS = {
             ("Pension reform spread compression",
              "Bolsonaro's pension reform (approved October 2019) materially reduced long-term fiscal risk. Banks had been light on government bonds following the Dilma crisis of 2014-2016."),
             ("Subdued credit demand",
-             "Private sector credit growth remained sluggish starting in 2019 as corporates found more attractive funding opportunities in the debentures market due to retail tax incentives."
+             "Private sector credit growth remained sluggish starting in 2019 as corporates found more attractive funding opportunities in the debentures market due to retail tax incentives."),
         ],
     },
     "funds": {
@@ -223,12 +223,11 @@ def build_analysis_html():
         color = COLORS[key]
         info = ANALYSIS[key]
         factors_html = ""
-        for label, pct, text in info["factors"]:
+        for label, text in info["factors"]:
             factors_html += f"""
             <div class="factor">
               <div class="factor-header">
                 <span class="factor-label">{label}</span>
-                <span class="factor-pct" style="color:{color}">{pct}</span>
               </div>
               <p>{text}</p>
             </div>"""
