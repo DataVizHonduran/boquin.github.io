@@ -46,6 +46,7 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
   <button class="tab-btn"        onclick="switchTab('t1',this)">Holdings Over Time</button>
   <button class="tab-btn"        onclick="switchTab('t2',this)">Bond Type &amp; Maturity</button>
   <button class="tab-btn"        onclick="switchTab('t4',this)">Supply &amp; Demand</button>
+  <button class="tab-btn"        onclick="switchTab('t5',this)">Forecasting the Flows</button>
 </div>
 
 <div id="t1" class="tab-panel">
@@ -837,6 +838,21 @@ function switchTab(id, btn) {
   charts.forEach(function(c){ if(window.Plotly) Plotly.Plots.resize(c); });
 }
 </script>
+
+<div id="t5" class="tab-panel">
+
+  <div class="analysis-section">
+    <h2 class="analysis-title">Flow Proxies</h2>
+    <p class="analysis-note">qwerty</p>
+  </div>
+
+  <div class="analysis-section">
+    <h2 class="analysis-title">Price Signals</h2>
+    <p class="analysis-note">qwerty</p>
+  </div>
+
+</div><!-- /t5 -->
+
 
 </body>
 </html>
