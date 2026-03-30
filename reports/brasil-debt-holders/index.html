@@ -869,35 +869,41 @@ function switchTab(id, btn) {
 
   <div class="analysis-section">
     <h2 class="analysis-title">Flow Proxies</h2>
-    <p class="analysis-note">Leading indicators and flow proxies by investor class · Placeholder · Source: TBD</p>
+    <p class="analysis-note">Observable, near-real-time indicators that proxy for each investor class's demand before the monthly RMD is published (~3–4 week lag).</p>
     <div class="analysis-grid">
-
       <div class="analysis-col">
         <div class="col-header" style="border-top:3px solid #0072B2;">
           <span class="col-title" style="color:#0072B2">Banks</span>
           <span class="col-subtitle">Instituições Financeiras</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Structural LCR demand meets cyclical credit dynamics.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
-              <span class="factor-pct" style="color:#0072B2">Primary</span>
+              <span class="factor-label">Basel III LCR ratio</span>
+              <span class="factor-pct" style="color:#0072B2">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>BCB requires banks to hold HQLA equal to 100% of projected 30-day stressed outflows. Brazilian HQLA is almost exclusively federal securities (LFTs, LTNs, NTN-Bs). Monthly LCR disclosures signal whether banks are at the floor and forced to buy, or holding excess buffer.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#0072B2">Secondary</span>
+              <span class="factor-label">Credit growth vs. deposit growth (BCB Nota de Crédito)</span>
+              <span class="factor-pct" style="color:#0072B2">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>When loan growth lags deposit funding growth, the surplus lands in government bonds. Monitor the spread between total deposits and total credit outstanding; a widening gap is a leading indicator of bank DPF demand.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#0072B2">Tertiary</span>
+              <span class="factor-label">CDB / LCI / LCA net issuance (ANBIMA monthly)</span>
+              <span class="factor-pct" style="color:#0072B2">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Banks that grow their liability book faster than their loan book must deploy the excess. Net issuance of CDBs and tax-exempt LCIs/LCAs above credit origination growth tends to flow into LFTs.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">COPOM rate decisions</span>
+              <span class="factor-pct" style="color:#0072B2">Directional</span>
+            </div>
+            <p>Rate hikes increase LFT daily carry, making them more attractive vs. credit risk on a risk-adjusted basis. Rate cuts do the opposite and can shift banks toward longer-duration NTN-Fs for yield pickup.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -905,27 +911,34 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#009E73">Investment Funds</span>
           <span class="col-subtitle">Fundos de Investimento</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Fund flows are the most timely proxy — ANBIMA publishes weekly.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
-              <span class="factor-pct" style="color:#009E73">Primary</span>
+              <span class="factor-label">ANBIMA fund flow data (weekly)</span>
+              <span class="factor-pct" style="color:#009E73">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Net subscriptions/redemptions by fund category (DI, renda fixa, multimercado) are the most direct proxy. DI fund inflows translate almost mechanically into LFT demand; renda fixa inflows into LTN/NTN-B demand.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#009E73">Secondary</span>
+              <span class="factor-label">CRI / CRA new issuance (CVM/ANBIMA)</span>
+              <span class="factor-pct" style="color:#009E73">Structural shift</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Tax-exempt credit instruments compete directly with government bonds for fixed income fund allocations. Heavy CRI/CRA issuance months reliably correlate with government bond underperformance in fund portfolios.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#009E73">Tertiary</span>
+              <span class="factor-label">Tesouro Direto net flows</span>
+              <span class="factor-pct" style="color:#009E73">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Retail Tesouro Direto net purchases signal broad fixed income sentiment. TD growth reduces the intermediary role of fixed income funds, structurally compressing DI fund AUM over time.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">Multimercado leverage (ANBIMA risk reports)</span>
+              <span class="factor-pct" style="color:#009E73">Tactical</span>
+            </div>
+            <p>When multimercado funds are running high gross leverage in DI futures, they also tend to hold more government bond collateral. Futures positioning data (B3) gives a weekly read. Returns-based analysis of &#8220;O Kit Brasil&#8221; can proxy positioning.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -933,27 +946,34 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#D55E00">Pensions</span>
           <span class="col-subtitle">Previdência</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Demand is largely automatic once real yields exceed actuarial targets.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
-              <span class="factor-pct" style="color:#D55E00">Primary</span>
+              <span class="factor-label">PREVIC funded ratio reports</span>
+              <span class="factor-pct" style="color:#D55E00">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Funded ratio below 100% forces pension funds to extend duration and increase NTN-B allocations to close the gap between assets and actuarial liability. Published quarterly but widely tracked in real time by plan sponsors.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#D55E00">Secondary</span>
+              <span class="factor-label">NTN-B real yield vs. actuarial target</span>
+              <span class="factor-pct" style="color:#D55E00">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>The actuarial benchmark for most Brazilian defined-benefit plans is INPC/IPCA + 5.5–6.0%/year. When NTN-B real yields trade above this level, buying is nearly automatic. When below, demand stalls.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#D55E00">Tertiary</span>
+              <span class="factor-label">Benefit payment schedule / net cash flow</span>
+              <span class="factor-pct" style="color:#D55E00">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Pension funds with negative net cash flow (outflows &gt; contributions) are forced sellers of LFTs to fund monthly benefits. Periods of demographic stress compress LFT holdings and increase NTN-B duration bias.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">FUNPRESP contribution flows</span>
+              <span class="factor-pct" style="color:#D55E00">Structural</span>
+            </div>
+            <p>The federal civil servant pension fund grows at a fixed rate tied to enrollment and contribution rules. Its DPF demand is policy-driven and largely insensitive to market signals — a baseline bid that can be modeled from payroll data.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -961,62 +981,69 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#CC79A7">Foreigners</span>
           <span class="col-subtitle">Não-residentes</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">High-frequency BCB and B3 data lead the RMD by 3–4 weeks.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
-              <span class="factor-pct" style="color:#CC79A7">Primary</span>
+              <span class="factor-label">BCB capital flow report (weekly)</span>
+              <span class="factor-pct" style="color:#CC79A7">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>BCB publishes weekly portfolio investment flows in fixed income ~10 days after the reference week — roughly 3 weeks ahead of the RMD. The closest real-time proxy available.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#CC79A7">Secondary</span>
+              <span class="factor-label">B3 foreign custody data</span>
+              <span class="factor-pct" style="color:#CC79A7">Core driver</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>B3 publishes daily foreign holdings of DPMFi bonds in custody. Provides near-daily resolution on foreign demand direction even before BCB or RMD data.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#CC79A7">Tertiary</span>
+              <span class="factor-label">Cupom Cambial</span>
+              <span class="factor-pct" style="color:#CC79A7">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>At times, foreign hedge funds can buy LTNs and hedge out FX via the cupom cambial market, capturing a pickup over USD-equivalent debt that is quite attractive on a hedged basis.</p>
           </div>
       </div>
     </div>
   </div>
+
   <div class="analysis-section">
     <h2 class="analysis-title">Price Signals</h2>
-    <p class="analysis-note">Market price signals by investor class · Placeholder · Source: TBD</p>
+    <p class="analysis-note">Market prices that influence or predict each investor class's allocation decisions.</p>
     <div class="analysis-grid">
-
       <div class="analysis-col">
         <div class="col-header" style="border-top:3px solid #0072B2;">
           <span class="col-title" style="color:#0072B2">Banks</span>
           <span class="col-subtitle">Instituições Financeiras</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">SELIC level and curve shape determine LFT vs. LTN duration preference.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
+              <span class="factor-label">SELIC / DI rate level</span>
               <span class="factor-pct" style="color:#0072B2">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>LFTs reprice daily at SELIC. A high absolute SELIC rate makes LFTs attractive vs. private credit — banks earn near-sovereign returns with zero duration risk. The higher the SELIC, the more LFT-heavy bank portfolios tend to be.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#0072B2">Secondary</span>
+              <span class="factor-label">Short end of the yield curve (DI futures, 1–3Y)</span>
+              <span class="factor-pct" style="color:#0072B2">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>When the front end of the DI curve is inverted or flat, banks favor LFTs over LTNs for LCR purposes (LFTs carry no mark-to-market volatility). A steep curve can encourage extension into LTNs for yield pickup.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#0072B2">Tertiary</span>
+              <span class="factor-label">CDB spread over DI</span>
+              <span class="factor-pct" style="color:#0072B2">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>When bank funding costs (CDB rates) rise above DI, NIM compression incentivizes more sovereign bond holding as a low-risk, liquid asset. Narrow CDB spreads allow banks to be more selective.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">BCB COPOM forward guidance</span>
+              <span class="factor-pct" style="color:#0072B2">Directional</span>
+            </div>
+            <p>Clear rate guidance anchors duration decisions. A hiking cycle → LFT overweight; a credible easing cycle → incremental shift to LTN/NTN-F.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -1024,27 +1051,34 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#009E73">Investment Funds</span>
           <span class="col-subtitle">Fundos de Investimento</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Real rate level drives inflows; curve shape and credit spreads drive duration.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
+              <span class="factor-label">DI rate vs. IPCA (ex-ante real rate)</span>
               <span class="factor-pct" style="color:#009E73">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>High real rates attract inflows to fixed income funds broadly. When the DI-implied real rate exceeds ~7–8%, retail allocation to fixed income funds surges and government bond demand follows.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#009E73">Secondary</span>
+              <span class="factor-label">LTN / NTN-F term premium</span>
+              <span class="factor-pct" style="color:#009E73">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>The slope between 1Y and 5Y LTN yields determines whether funds extend duration. A steep curve (&gt;150bps) encourages extension into NTN-Fs; a flat or inverted curve pushes funds to LFTs or shorter LTNs.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#009E73">Tertiary</span>
+              <span class="factor-label">CRI/CRA spread vs. LTN (same duration)</span>
+              <span class="factor-pct" style="color:#009E73">Structural</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>The key substitution signal for fixed income fund managers. When tax-exempt credit spreads compress toward government bond yields (net of tax advantage), funds rotate back into government bonds. Currently tracking ~80–120bps net spread.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">Ibovespa / equity risk premium</span>
+              <span class="factor-pct" style="color:#009E73">Tactical</span>
+            </div>
+            <p>When equities are cheap relative to bonds (earnings yield well above NTN-B real yield), multimercado funds rotate from fixed income to equities, reducing DPF demand. The equity/bond frontier matters for multi-asset allocations.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -1052,27 +1086,34 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#D55E00">Pensions</span>
           <span class="col-subtitle">Previdência</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Long-end NTN-B real yields are the primary trigger for duration extension.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
+              <span class="factor-label">NTN-B real yield curve (2035, 2045, 2050)</span>
               <span class="factor-pct" style="color:#D55E00">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>The single most important price signal for pension demand. Long-end NTN-B real yields above IPCA + 6.5% have historically triggered aggressive buying by defined-benefit plans. Currently ~7.0–7.5% on the long end — elevated by historical standards.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#D55E00">Secondary</span>
+              <span class="factor-label">NTN-B curve shape (short vs. long end)</span>
+              <span class="factor-pct" style="color:#D55E00">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>When long-end NTN-Bs yield 50–100bps more than 5Y NTN-Bs, pension funds extend duration to match long-dated liabilities. When the curve is flat or inverted, they park in shorter NTN-Bs and LFTs.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#D55E00">Tertiary</span>
+              <span class="factor-label">IPCA expectations — FOCUS survey (2Y ahead)</span>
+              <span class="factor-pct" style="color:#D55E00">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Higher inflation expectations erode the attractiveness of nominal bonds (LTN/NTN-F) for pensions with IPCA-linked liabilities. Elevated FOCUS inflation = tilt toward NTN-B over NTN-F.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">Actuarial discount rate regulatory floor (CNPC)</span>
+              <span class="factor-pct" style="color:#D55E00">Structural</span>
+            </div>
+            <p>CNPC Resolution 30 sets maximum discount rates for actuarial liability valuation at INPC + 4.16%–6.05% depending on plan vintage. When market NTN-B yields approach or breach the cap, pensions are technically in surplus — reducing urgency to buy.</p>
           </div>
       </div>
       <div class="analysis-col">
@@ -1080,31 +1121,39 @@ function switchTab(id, btn) {
           <span class="col-title" style="color:#CC79A7">Foreigners</span>
           <span class="col-subtitle">Não-residentes</span>
         </div>
-        <p class="col-headline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i…</p>
+        <p class="col-headline">Currency trend and carry-to-vol are the two dominant signals for systematic investors.</p>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor I</span>
+              <span class="factor-label">BRL/USD trend — CTA momentum signal</span>
               <span class="factor-pct" style="color:#CC79A7">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>When BRL/USD has been in a sustained downtrend, CTA momentum models mechanically go short BRL — which means exiting or shorting Brazilian government bonds. The signal is self-reinforcing: depreciation triggers systematic selling that can persist for months regardless of yield levels.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor II</span>
-              <span class="factor-pct" style="color:#CC79A7">Secondary</span>
+              <span class="factor-label">Carry to vol (Sharpe of the carry trade)</span>
+              <span class="factor-pct" style="color:#CC79A7">Primary</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>The ratio of interest rate carry (SELIC minus USD funding cost) to BRL realized volatility determines whether the trade is attractive on a risk-adjusted basis. When carry/vol &gt; ~1.5, hedge funds increase BRL exposure; when it collapses below ~0.5 on a vol spike, unwinds are aggressive and rapid.</p>
           </div>
           <div class="factor">
             <div class="factor-header">
-              <span class="factor-label">Lorem ipsum factor III</span>
-              <span class="factor-pct" style="color:#CC79A7">Tertiary</span>
+              <span class="factor-label">CDS 5Y Brasil</span>
+              <span class="factor-pct" style="color:#CC79A7">Supporting</span>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Sovereign credit risk premium. Spreads above ~250bps historically signal risk-off for EM investors; below ~150bps signal carry-seeking. Currently ~200bps — in the middle of the historical range.</p>
+          </div>
+          <div class="factor">
+            <div class="factor-header">
+              <span class="factor-label">DXY / VIX (EM risk-off proxy)</span>
+              <span class="factor-pct" style="color:#CC79A7">Directional</span>
+            </div>
+            <p>Broad USD strength (DXY rising) correlates with EM capital outflows. VIX above 25 typically triggers EM risk-off. Both lead Brazilian bond demand by 2–4 weeks.</p>
           </div>
       </div>
     </div>
   </div>
+
 </div><!-- /t5 -->
 
 
