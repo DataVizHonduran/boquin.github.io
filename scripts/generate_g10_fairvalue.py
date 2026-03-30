@@ -9,6 +9,7 @@ Run from the repo root:
 
 import datetime
 from datetime import date
+import sys
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -99,6 +100,11 @@ df_fx = df_fx.apply(pd.to_numeric, errors="coerce").interpolate(method="linear")
 
 # Align on intersection
 df_fx, df_rates = df_fx.align(df_rates, join="inner", axis=0)
+
+if df_fx.empty or df_rates.empty:
+    print("\nNo data after alignment (Stooq may be unavailable) — skipping run.")
+    sys.exit(0)
+
 print(f"\nData aligned: {len(df_fx)} rows  |  {df_fx.index[0].date()} → {df_fx.index[-1].date()}")
 
 
