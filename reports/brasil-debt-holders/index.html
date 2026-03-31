@@ -359,6 +359,49 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
     </tbody>
   </table>
 </div>
+
+<!-- Annual change chart -->
+<div style="margin:40px 0 8px; padding:0 4px;">
+  <h3 style="font-size:15px; font-weight:700; color:#222; margin-bottom:2px;">Annual Change in Holdings by Investor Type</h3>
+  <p style="font-size:12px; color:#888; margin-bottom:12px;">December-over-December change in outstanding stock · R$ Billions · 2008–2025 · TTM = Feb/26 vs Feb/25 · Source: Tesouro Nacional RMD Anexo 2.7</p>
+  <div id="chart-annual-change" style="width:100%; height:420px;"></div>
+  <script>
+  (function(){
+    var yrs = [2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,'TTM'];
+    var acRaw = [
+      { name:'Banks (Inst. Financeiras)', color:'#0072B2',
+        y:[37.5,26.2,-31.8,66.3,15.6,36.3,36.9,12.8,25.9,78.3,81.1,160.0,403.5,163.9,84.2,200.4,194.6,677.7,561.8] },
+      { name:'Funds (Fundos)',             color:'#009E73',
+        y:[-23.4,60.4,11.3,38.7,21.4,-32.6,3.0,75.2,141.6,205.1,138.6,85.9,148.6,43.8,84.8,108.6,34.9,217.6,238.2] },
+      { name:'Pensions (Previdência)',     color:'#D55E00',
+        y:[-0.7,4.7,6.8,46.9,31.4,40.7,25.8,193.7,181.7,126.4,56.3,85.3,63.2,83.6,138.0,140.3,226.0,223.9,194.1] },
+      { name:'Foreigners (Não-residentes)',color:'#CC79A7',
+        y:[28.0,32.7,59.0,19.9,60.7,63.6,80.4,90.9,-70.0,-11.5,2.1,7.4,14.7,124.5,-31.5,60.7,116.7,148.7,221.7] },
+      { name:'Other',                      color:'#888888',
+        y:[-1.4,9.6,160.2,7.2,4.5,3.4,9.4,94.0,57.0,50.7,15.2,15.8,52.9,167.0,74.5,59.9,125.9,74.2,117.6] },
+    ];
+    var acTraces = acRaw.map(function(s){
+      return { name:s.name, x:yrs, y:s.y, type:'bar',
+               marker:{color:s.color},
+               hovertemplate:'%{x}<br>'+s.name+': R$ %{y:+,.0f}bn<extra></extra>' };
+    });
+    var acTotals = yrs.map(function(_,i){ return acRaw.reduce(function(a,s){ return a+s.y[i]; },0); });
+    acTraces.push({ name:'Net Total', x:yrs, y:acTotals, type:'scatter', mode:'lines+markers',
+      line:{color:'#111',width:2}, marker:{size:5,color:'#111'},
+      hovertemplate:'%{x}<br>Net: R$ %{y:+,.0f}bn<extra></extra>' });
+    Plotly.newPlot('chart-annual-change', acTraces, {
+      barmode:'relative',
+      xaxis:{ tickmode:'linear', dtick:1, tickangle:-45, gridcolor:'#e8e8e8', showgrid:false },
+      yaxis:{ title:'R$ Billions', gridcolor:'#e8e8e8', zeroline:true, zerolinecolor:'#999', zerolinewidth:1.5 },
+      paper_bgcolor:'#fafafa', plot_bgcolor:'#fafafa',
+      font:{ family:'Arial,sans-serif', size:12 },
+      legend:{ orientation:'h', y:-0.25, x:0.5, xanchor:'center' },
+      margin:{ t:20, r:20, b:100, l:65 },
+      hovermode:'x unified'
+    }, {responsive:true});
+  })();
+  </script>
+</div>
 </div><!-- /t1 -->
 
 <div id="t2" class="tab-panel">
@@ -812,7 +855,7 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
           <span class="col-subtitle">The dominant driver at current Selic levels</span>
         </div>
         <div class="col-headline">~¾ of net debt issuance is interest, not new spending</div>
-        <p style="font-size:13px;color:#444;line-height:1.6;margin:0;">With Selic at ~13.75% and total DPF near R$8.8 trillion, monthly interest accrual runs ~R$100bn. Because 49% of the stock is LFT (Selic-linked), rate cuts directly reduce this snowball effect, while rate hikes accelerate it. The Feb/26 MoM debt increase of R$199.6bn splits roughly 50/50 between accrued interest and net new issuance.</p>
+        <p style="font-size:13px;color:#444;line-height:1.6;margin:0;">With Selic at ~14.75% and total DPF near R$8.8 trillion, monthly interest accrual runs ~R$108bn. Because 49% of the stock is LFT (Selic-linked), rate cuts directly reduce this snowball effect, while rate hikes accelerate it. The Feb/26 MoM debt increase of R$199.6bn splits roughly 50/50 between accrued interest and net new issuance.</p>
       </div>
       <div class="analysis-col">
         <div class="col-header">
