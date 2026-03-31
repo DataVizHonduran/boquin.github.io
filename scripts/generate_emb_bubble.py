@@ -240,10 +240,6 @@ def clean_data(df: pd.DataFrame, group_by: str = "country") -> pd.DataFrame:
 
 
 # ── Build payload for one ETF ─────────────────────────────────────────────────
-# Max issuers shown in pill selector for corporate ETFs (ranked by total MV)
-MAX_ISSUER_PILLS = 80
-
-
 def build_etf_payload(
     ticker: str, df: pd.DataFrame, as_of: str, fetched_at: str, is_fresh: bool,
     group_by: str = "country",
@@ -264,9 +260,9 @@ def build_etf_payload(
         )
 
     if group_by == "issuer":
-        # Rank by total market value, cap at MAX_ISSUER_PILLS
+        # All issuers ranked by total market value (user can search/filter via search bar)
         mv_by_group = df.groupby("_group")["_market_value"].sum().sort_values(ascending=False)
-        groups = mv_by_group.head(MAX_ISSUER_PILLS).index.tolist()
+        groups = mv_by_group.index.tolist()
         group_label = "Company"
     else:
         groups = sorted(df["_group"].unique().tolist())
@@ -557,7 +553,7 @@ function switchEtf(etf) {{
   const groupLabel = payload.group_label || 'Country';
   document.getElementById('selector-heading').textContent = `Select ${{groupLabel === 'Company' ? 'Companies' : 'Countries'}} to Display`;
   document.getElementById('selector-hint').innerHTML =
-    `Choose up to <strong>4</strong> ${{groupLabel === 'Company' ? 'companies (top 80 by market value shown)' : 'countries'}}. Bubble size = market value.`;
+    `Choose up to <strong>4</strong> ${{groupLabel === 'Company' ? 'companies' : 'countries'}}. Bubble size = market value.`;
 
   // Pick 4 largest defaults
   const ranked = rankGroups(payload);
