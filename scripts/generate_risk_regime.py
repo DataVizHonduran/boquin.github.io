@@ -49,7 +49,7 @@ n_smooth = 20
 ticker_list = list(tickers.values())
 name_list = list(tickers.keys())
 
-raw = yf.download(ticker_list, start=start, end=end, auto_adjust=True, progress=False)
+raw = yf.download(ticker_list, start=start, end=end, auto_adjust=False, progress=False)
 close = raw["Close"].sort_index()
 close.columns = name_list
 
