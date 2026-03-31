@@ -1153,7 +1153,7 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
 
   Plotly.newPlot('chart-demand', demandTraces, {
     barmode:'relative',
-    xaxis:{ tickangle:-30, gridcolor:'#e8e8e8', showgrid:false },
+    xaxis:{ tickangle:-30, gridcolor:'#e8e8e8', showgrid:false, tickmode:'linear', dtick:3 },
     yaxis:{ title:'R$ Billions', gridcolor:'#e8e8e8',
             zeroline:true, zerolinecolor:'#999', zerolinewidth:1.5 },
     paper_bgcolor:'#fafafa', plot_bgcolor:'#fafafa',
@@ -1188,7 +1188,7 @@ body { font-family: Arial, sans-serif; background: #fff; color: #1a1a1a; }
 
   Plotly.newPlot('chart-supply', supplyTraces, {
     barmode:'relative',
-    xaxis:{ tickangle:-30, gridcolor:'#e8e8e8', showgrid:false },
+    xaxis:{ tickangle:-30, gridcolor:'#e8e8e8', showgrid:false, tickmode:'linear', dtick:3 },
     yaxis:{ title:'R$ Billions', gridcolor:'#e8e8e8',
             zeroline:true, zerolinecolor:'#999', zerolinewidth:1.5 },
     paper_bgcolor:'#fafafa', plot_bgcolor:'#fafafa',
