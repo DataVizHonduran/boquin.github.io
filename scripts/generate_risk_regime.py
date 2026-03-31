@@ -1,12 +1,13 @@
 """
 Daily Global Risk Regime Indicator for GitHub Actions
-Uses Stooq via pandas_datareader — no API key required
+Tries Stooq first; falls back to yfinance if Stooq is unavailable.
 """
 
 import os
-import yfinance as yf
+import warnings
 import pandas as pd
-import numpy as np
+import pandas_datareader.data as web
+import yfinance as yf
 import datetime
 import plotly.graph_objects as go
 
@@ -18,21 +19,22 @@ OUTPUT_PATH = os.path.join(
     'reports', 'risk-regimes', 'us_regime.html'
 )
 
+# Friendly name → (stooq ticker, yfinance ticker)
 tickers = {
-    "SPX": "SPY",
-    "DAX": "EWG",
-    "NIKKEI": "EWJ",
-    "EMEQ": "EEM",
-    "HYG": "HYG",
-    "LQD": "LQD",
-    "TLT": "TLT",
-    "VIX": "VIXY",
-    "DBC": "DBC",
-    "GLD": "GLD",
-    "USO": "USO",
-    "CPER": "CPER",
-    "VNQ": "VNQ",
-    "UUP": "UUP"
+    "SPX":    ("SPY.US",  "SPY"),
+    "DAX":    ("EWG.US",  "EWG"),
+    "NIKKEI": ("EWJ.US",  "EWJ"),
+    "EMEQ":   ("EEM.US",  "EEM"),
+    "HYG":    ("HYG.US",  "HYG"),
+    "LQD":    ("LQD.US",  "LQD"),
+    "TLT":    ("TLT.US",  "TLT"),
+    "VIX":    ("VIXY.US", "VIXY"),
+    "DBC":    ("DBC.US",  "DBC"),
+    "GLD":    ("GLD.US",  "GLD"),
+    "USO":    ("USO.US",  "USO"),
+    "CPER":   ("CPER.US", "CPER"),
+    "VNQ":    ("VNQ.US",  "VNQ"),
+    "UUP":    ("UUP.US",  "UUP"),
 }
 
 invert_list = ["VIX", "TLT", "GLD", "UUP"]
@@ -43,18 +45,48 @@ end = datetime.datetime.today()
 n_day = 100
 n_smooth = 20
 
-# ---------------------------------------------------------
-# DATA FETCH — batch download via yfinance
-# ---------------------------------------------------------
-ticker_list = list(tickers.values())
-name_list = list(tickers.keys())
 
-raw = yf.download(ticker_list, start=start, end=end, auto_adjust=False, progress=False)
-close = raw["Close"].sort_index()
-close.columns = name_list
+# ---------------------------------------------------------
+# DATA FETCH — Stooq first, yfinance fallback
+# ---------------------------------------------------------
+def fetch_stooq():
+    stooq_tickers = [v[0] for v in tickers.values()]
+    name_list = list(tickers.keys())
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        raw = web.DataReader(stooq_tickers, "stooq", start, end)
+    close = raw.xs("Close", axis=1, level="Attributes").sort_index()
+    stooq_to_name = {v[0]: k for k, v in tickers.items()}
+    close = close.rename(columns=stooq_to_name)
+    # Verify we got actual data (not all-NaN)
+    if close.dropna().empty:
+        raise ValueError("Stooq returned no usable data")
+    return close[name_list]
+
+
+def fetch_yfinance():
+    yf_tickers = [v[1] for v in tickers.values()]
+    name_list = list(tickers.keys())
+    raw = yf.download(yf_tickers, start=start, end=end, auto_adjust=False, progress=False)
+    close = raw["Close"].sort_index()
+    # yfinance sorts columns alphabetically — rename via explicit mapping
+    yf_to_name = {v[1]: k for k, v in tickers.items()}
+    close = close.rename(columns=yf_to_name)
+    return close[name_list]
+
+
+try:
+    print("Trying Stooq...")
+    close = fetch_stooq()
+    print("Stooq data loaded.")
+except Exception as e:
+    print(f"Stooq failed ({e}), falling back to yfinance...")
+    close = fetch_yfinance()
+    print("yfinance data loaded.")
 
 df_all = close.dropna()
 print(f"Combined data shape: {df_all.shape}")
+
 
 # ---------------------------------------------------------
 # Z-SCORE REGIME
@@ -82,6 +114,7 @@ else:
     current_regime = "NEUTRAL"
 
 print(f"Current Risk Regime: {current_regime} (Score: {current_score:.2f})")
+
 
 # ---------------------------------------------------------
 # CHART
