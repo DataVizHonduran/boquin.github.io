@@ -50,18 +50,16 @@ n_smooth = 20
 # DATA FETCH — Stooq first, yfinance fallback
 # ---------------------------------------------------------
 def fetch_stooq():
-    stooq_tickers = [v[0] for v in tickers.values()]
-    name_list = list(tickers.keys())
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        raw = web.DataReader(stooq_tickers, "stooq", start, end)
-    close = raw.xs("Close", axis=1, level="Attributes").sort_index()
-    stooq_to_name = {v[0]: k for k, v in tickers.items()}
-    close = close.rename(columns=stooq_to_name)
-    # Verify we got actual data (not all-NaN)
+    frames = {}
+    for name, (stooq_ticker, _) in tickers.items():
+        df = web.DataReader(stooq_ticker, "stooq", start, end)
+        df = df[::-1]  # oldest to newest (matches original script)
+        frames[name] = df["Close"]
+    close = pd.concat(frames.values(), axis=1)
+    close.columns = list(frames.keys())
     if close.dropna().empty:
         raise ValueError("Stooq returned no usable data")
-    return close[name_list]
+    return close
 
 
 def fetch_yfinance():
