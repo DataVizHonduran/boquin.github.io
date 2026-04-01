@@ -93,6 +93,44 @@
             margin-bottom: 2.5rem;
         }
 
+        .email-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .email-wrapper .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .email-wrapper .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #0f172a;
+        }
+
+        .email-wrapper:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
         .email-btn {
             display: inline-block;
             background: #4f46e5;
@@ -139,7 +177,10 @@
         <div class="contact-card">
             <h1>Get in Touch</h1>
             <p class="subtitle">Questions, ideas, or just want to connect?</p>
-            <a id="email-link" class="email-btn" href="#">Send an Email</a>
+            <div class="email-wrapper">
+                <span class="tooltip" id="email-tooltip"></span>
+                <a id="email-link" class="email-btn" href="#">Send an Email</a>
+            </div>
         </div>
     </main>
 
@@ -151,9 +192,11 @@
         (function () {
             var u = 'boquin';
             var d = 'gmail.com';
+            var addr = u + '\u0040' + d;
             var el = document.getElementById('email-link');
-            el.href = 'mailto:' + u + '\u0040' + d;
+            el.href = 'mailto:' + addr;
             el.textContent = 'boquin at gmail';
+            document.getElementById('email-tooltip').textContent = addr;
         })();
     </script>
 </body>
