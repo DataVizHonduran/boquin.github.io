@@ -258,7 +258,7 @@ body {
     border-radius: 6px;
     white-space: nowrap;
     position: absolute;
-    bottom: calc(100% + 8px);
+    top: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 0.2s ease;
@@ -268,11 +268,11 @@ body {
 .nav-contact-wrapper .nav-tooltip::after {
     content: '';
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     border: 5px solid transparent;
-    border-top-color: #0f172a;
+    border-bottom-color: #0f172a;
 }
 
 .nav-contact-wrapper:hover .nav-tooltip {
