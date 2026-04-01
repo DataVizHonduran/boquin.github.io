@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me — boquin.xyz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f6f7f9;
+            color: #475569;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 1px 0 #e4e8ef;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 2rem 4rem;
+        }
+
+        .about-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 3.5rem 4rem;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e4e8ef;
+            max-width: 760px;
+            width: 100%;
+        }
+
+        .about-card h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #e4e8ef;
+        }
+
+        .about-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-card h1 {
+                font-size: 1.6rem;
+            }
+
+            .about-card p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">boquin.xyz</a>
+            <div class="nav-links">
+                <a href="/">Dashboards</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="about-card">
+            <h1>About Me</h1>
+            <p>I am a discretionary emerging markets investor leveraging a combination of systematic filters and fundamental judgment to identify asymmetric opportunities across currencies and local rates. My framework combines macroeconomic rigor with disciplined portfolio construction and risk management to deliver superior returns across the market cycle.</p>
+            <p>EM assets are prone to mispricing due to misunderstood macro signals, political noise, and episodic liquidity dislocations. My process seeks to exploit these inefficiencies by aligning valuation anomalies with business cycle inflections and global macro regime shifts. The key is knowing when a mispricing is investable and structuring it effectively.</p>
+            <p>My edge lies in blending systematic rigor with fundamental insight. Quantitative models alone miss context ("assets can be cheap for a reason"), while pure fundamental approaches often overestimate priced-in narratives ("great macro stories"). A programmatic approach to macro and price data provides a comprehensive and disciplined assessment that avoids anecdotal cherry picking.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026, thanks Claude!</p>
+    </footer>
+</body>
+</html>
