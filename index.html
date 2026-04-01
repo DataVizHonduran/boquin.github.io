@@ -16,7 +16,10 @@
             <div class="nav-links">
                 <a href="#dashboards">Dashboards</a>
                 <a href="about.html" target="_blank">About Me</a>
-                <a href="#contact">Contact</a>
+                <span class="nav-contact-wrapper">
+                    <span class="nav-tooltip" id="nav-email-tooltip"></span>
+                    <span class="nav-contact-btn">Contact</span>
+                </span>
             </div>
         </div>
     </nav>
@@ -445,6 +448,13 @@
                 divider.closest('.section-group').classList.toggle('collapsed');
             });
         });
+    </script>
+    <script>
+        (function () {
+            var u = 'boquin';
+            var d = 'gmail.com';
+            document.getElementById('nav-email-tooltip').textContent = u + '\u0040' + d;
+        })();
     </script>
 </body>
 </html>

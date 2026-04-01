@@ -235,6 +235,51 @@ body {
     transform: rotate(0deg);
 }
 
+.nav-contact-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+}
+
+.nav-contact-btn {
+    color: #0f172a;
+    font-weight: 500;
+    cursor: default;
+}
+
+.nav-contact-wrapper .nav-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.nav-contact-wrapper .nav-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #0f172a;
+}
+
+.nav-contact-wrapper:hover .nav-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
 .footer {
     background: #0f172a;
     color: white;
