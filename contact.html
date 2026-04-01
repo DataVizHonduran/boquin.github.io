@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me — boquin.xyz</title>
+    <title>Contact — boquin.xyz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -69,34 +69,46 @@
             padding: 120px 2rem 4rem;
         }
 
-        .about-card {
+        .contact-card {
             background: #ffffff;
             border-radius: 16px;
             padding: 3.5rem 4rem;
             box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
             border: 1px solid #e4e8ef;
-            max-width: 760px;
+            max-width: 560px;
             width: 100%;
+            text-align: center;
         }
 
-        .about-card h1 {
+        .contact-card h1 {
             font-size: 2rem;
             font-weight: 800;
             color: #0f172a;
-            margin-bottom: 2rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 1px solid #e4e8ef;
+            margin-bottom: 0.75rem;
         }
 
-        .about-card p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #475569;
-            margin-bottom: 1.5rem;
+        .contact-card .subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
         }
 
-        .about-card p:last-child {
-            margin-bottom: 0;
+        .email-btn {
+            display: inline-block;
+            background: #4f46e5;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .email-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
         }
 
         .footer {
@@ -107,16 +119,8 @@
         }
 
         @media (max-width: 768px) {
-            .about-card {
+            .contact-card {
                 padding: 2rem 1.5rem;
-            }
-
-            .about-card h1 {
-                font-size: 1.6rem;
-            }
-
-            .about-card p {
-                font-size: 1rem;
             }
         }
     </style>
@@ -127,22 +131,31 @@
             <a href="/" class="nav-brand">boquin.xyz</a>
             <div class="nav-links">
                 <a href="/">Dashboards</a>
-                <a href="contact.html" target="_blank">Contact</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <div class="about-card">
-            <h1>About Me</h1>
-            <p>I am a discretionary emerging markets investor leveraging a combination of systematic filters and fundamental judgment to identify asymmetric opportunities across currencies and local rates. My framework combines macroeconomic rigor with disciplined portfolio construction and risk management to deliver superior returns across the market cycle.</p>
-            <p>EM assets are prone to mispricing due to misunderstood macro signals, political noise, and episodic liquidity dislocations. My process seeks to exploit these inefficiencies by aligning valuation anomalies with business cycle inflections and global macro regime shifts. The key is knowing when a mispricing is investable and structuring it effectively.</p>
-            <p>My edge lies in blending systematic rigor with fundamental insight. Quantitative models alone miss context ("assets can be cheap for a reason"), while pure fundamental approaches often overestimate priced-in narratives ("great macro stories"). A programmatic approach to macro and price data provides a comprehensive and disciplined assessment that avoids anecdotal cherry picking.</p>
+        <div class="contact-card">
+            <h1>Get in Touch</h1>
+            <p class="subtitle">Questions, ideas, or just want to connect?</p>
+            <a id="email-link" class="email-btn" href="#">Send an Email</a>
         </div>
     </main>
 
     <footer class="footer">
         <p>&copy; 2026, thanks Claude!</p>
     </footer>
+
+    <script>
+        (function () {
+            var u = 'boquin';
+            var d = 'gmail.com';
+            var el = document.getElementById('email-link');
+            var addr = u + '\u0040' + d;
+            el.href = 'mailto:' + addr;
+            el.textContent = addr;
+        })();
+    </script>
 </body>
 </html>
