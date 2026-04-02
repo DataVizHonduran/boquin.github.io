@@ -1,38 +1,39 @@
 {
   "fast": {
-    "generated_at": "2026-04-01T04:50:14.395637",
+    "generated_at": "2026-04-02T04:33:17.501620",
     "mode": "fast",
     "windows": "20/50/100",
-    "currencies": 24,
+    "currencies": 25,
     "latest_positions": {
-      "INR": 36.67378345171879,
-      "KRW": 20.43391117044109,
-      "PHP": 17.469723143897617,
-      "JPY": 17.422676588172507,
-      "AUD": 14.186870604346641,
-      "THB": 12.981434160451466,
-      "PEN": 11.684781610385258,
-      "PLN": 8.61901891825615,
-      "IDR": 5.204434250390216,
-      "CZK": 4.051151524630807,
-      "CHF": 0.0,
+      "INR": 36.47735771970377,
+      "KRW": 20.84503290727767,
+      "PHP": 18.68383346293357,
+      "JPY": 17.124439582281894,
+      "THB": 13.371135110606705,
+      "AUD": 13.13587939249288,
+      "TRY": 13.00179560454198,
+      "PEN": 12.57539452489835,
+      "PLN": 9.042470505269476,
+      "IDR": 5.3639482231643765,
+      "CZK": 4.31664694563783,
+      "MXN": 0.0,
       "SGD": 0.0,
-      "CAD": 0.0,
       "SEK": 0.0,
-      "CLP": 0.0,
+      "CAD": 0.0,
+      "CHF": 0.0,
       "NZD": 0.0,
       "HUF": 0.0,
       "ZAR": 0.0,
-      "MXN": 0.0,
-      "BRL": -4.763211860011293,
-      "COP": -6.246830564308618,
-      "GBP": -8.738421819768845,
-      "EUR": -10.451375974216148,
-      "NOK": -13.933533084809719
+      "CLP": 0.0,
+      "BRL": -4.960362310886335,
+      "COP": -6.410617631631818,
+      "GBP": -9.206205457204314,
+      "EUR": -10.455786451741332,
+      "NOK": -13.62362730594876
     },
-    "charts_generated": 24,
-    "signal_count": 548,
-    "high_conviction_count": 47,
+    "charts_generated": 25,
+    "signal_count": 570,
+    "high_conviction_count": 50,
     "signal_metadata": [
       {
         "date": "2026-03-23",
@@ -1569,6 +1570,19 @@
         "strength_score": 43.2
       },
       {
+        "date": "2023-09-05",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 36.92,
+        "roc_at_signal": -0.5683,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 40.0,
+        "speed_score": 7.6,
+        "consensus_score": 0,
+        "strength_score": 47.6
+      },
+      {
         "date": "2023-08-28",
         "currency": "CAD",
         "direction": "Short",
@@ -1827,6 +1841,19 @@
         "speed_score": 14.7,
         "consensus_score": 0,
         "strength_score": 19.1
+      },
+      {
+        "date": "2023-05-25",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 4.12,
+        "threshold": 5.43,
+        "roc_at_signal": 0.2027,
+        "rsi_at_signal": null,
+        "extremity_score": 0.9,
+        "speed_score": 2.7,
+        "consensus_score": 0,
+        "strength_score": 3.6
       },
       {
         "date": "2023-05-24",
@@ -2453,6 +2480,19 @@
         "strength_score": 63.3
       },
       {
+        "date": "2022-08-12",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 28.86,
+        "threshold": 27.7,
+        "roc_at_signal": -0.2226,
+        "rsi_at_signal": 21.3,
+        "extremity_score": 2.1,
+        "speed_score": 3.0,
+        "consensus_score": 0,
+        "strength_score": 5.1
+      },
+      {
         "date": "2022-08-11",
         "currency": "CAD",
         "direction": "Long",
@@ -2856,6 +2896,19 @@
         "strength_score": 44.7
       },
       {
+        "date": "2022-02-28",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 26.0,
+        "roc_at_signal": -0.1683,
+        "rsi_at_signal": 3.8,
+        "extremity_score": 40.0,
+        "speed_score": 2.2,
+        "consensus_score": 0,
+        "strength_score": 42.2
+      },
+      {
         "date": "2022-01-26",
         "currency": "COP",
         "direction": "Long",
@@ -3129,6 +3182,19 @@
         "strength_score": 60.9
       },
       {
+        "date": "2021-09-21",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 3.68,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
+      },
+      {
         "date": "2021-09-14",
         "currency": "SEK",
         "direction": "Long",
@@ -3205,6 +3271,19 @@
         "speed_score": 40.0,
         "consensus_score": 0,
         "strength_score": 49.5
+      },
+      {
+        "date": "2021-07-19",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 21.32,
+        "threshold": 19.86,
+        "roc_at_signal": -0.4495,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 1.9,
+        "speed_score": 6.0,
+        "consensus_score": 0,
+        "strength_score": 7.9
       },
       {
         "date": "2021-07-09",
@@ -3387,6 +3466,19 @@
         "speed_score": 12.5,
         "consensus_score": 0,
         "strength_score": 38.2
+      },
+      {
+        "date": "2021-03-26",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": -14.65,
+        "threshold": 0.0,
+        "roc_at_signal": 6.3575,
+        "rsi_at_signal": null,
+        "extremity_score": 11.7,
+        "speed_score": 40.0,
+        "consensus_score": 20,
+        "strength_score": 71.7
       },
       {
         "date": "2021-03-09",
@@ -3608,6 +3700,19 @@
         "speed_score": 40.0,
         "consensus_score": 0,
         "strength_score": 40.0
+      },
+      {
+        "date": "2020-12-01",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 29.82,
+        "threshold": 17.9,
+        "roc_at_signal": -0.5046,
+        "rsi_at_signal": 0.2,
+        "extremity_score": 14.9,
+        "speed_score": 6.7,
+        "consensus_score": 0,
+        "strength_score": 21.6
       },
       {
         "date": "2020-11-26",
@@ -4507,6 +4612,19 @@
         "strength_score": 64.6
       },
       {
+        "date": "2019-12-20",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 0.3812,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 5.1,
+        "consensus_score": 0,
+        "strength_score": 5.1
+      },
+      {
         "date": "2019-12-17",
         "currency": "NOK",
         "direction": "Long",
@@ -4609,6 +4727,19 @@
         "speed_score": 12.0,
         "consensus_score": 0,
         "strength_score": 14.2
+      },
+      {
+        "date": "2019-10-15",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": -4.49,
+        "threshold": 0.0,
+        "roc_at_signal": 0.4524,
+        "rsi_at_signal": 90.7,
+        "extremity_score": 3.6,
+        "speed_score": 6.0,
+        "consensus_score": 0,
+        "strength_score": 9.6
       },
       {
         "date": "2019-10-14",
@@ -5092,6 +5223,19 @@
         "strength_score": 41.0
       },
       {
+        "date": "2019-03-07",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": -5.61,
+        "threshold": -3.2,
+        "roc_at_signal": 1.62,
+        "rsi_at_signal": null,
+        "extremity_score": 2.1,
+        "speed_score": 21.6,
+        "consensus_score": 0,
+        "strength_score": 23.7
+      },
+      {
         "date": "2019-02-19",
         "currency": "JPY",
         "direction": "Short",
@@ -5355,9 +5499,9 @@
         "date": "2018-09-28",
         "currency": "NZD",
         "direction": "Short",
-        "peak_position": -22.25,
+        "peak_position": -22.26,
         "threshold": -17.98,
-        "roc_at_signal": 0.1827,
+        "roc_at_signal": 0.1828,
         "rsi_at_signal": 98.7,
         "extremity_score": 5.3,
         "speed_score": 2.4,
@@ -5402,6 +5546,19 @@
         "speed_score": 40.0,
         "consensus_score": 20,
         "strength_score": 85.2
+      },
+      {
+        "date": "2018-09-19",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 49.34,
+        "roc_at_signal": -0.931,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 26.3,
+        "speed_score": 12.4,
+        "consensus_score": 0,
+        "strength_score": 38.7
       },
       {
         "date": "2018-09-05",
@@ -5545,6 +5702,19 @@
         "speed_score": 13.5,
         "consensus_score": 0,
         "strength_score": 14.0
+      },
+      {
+        "date": "2018-07-05",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 46.88,
+        "roc_at_signal": -1.1749,
+        "rsi_at_signal": 12.8,
+        "extremity_score": 40.0,
+        "speed_score": 15.7,
+        "consensus_score": 0,
+        "strength_score": 55.7
       },
       {
         "date": "2018-07-04",
@@ -5875,9 +6045,9 @@
         "date": "2017-12-20",
         "currency": "NZD",
         "direction": "Short",
-        "peak_position": -22.36,
+        "peak_position": -22.37,
         "threshold": -10.4,
-        "roc_at_signal": 8.0375,
+        "roc_at_signal": 8.0377,
         "rsi_at_signal": 99.5,
         "extremity_score": 12.1,
         "speed_score": 40.0,
@@ -5896,6 +6066,19 @@
         "speed_score": 40.0,
         "consensus_score": 0,
         "strength_score": 49.9
+      },
+      {
+        "date": "2017-12-11",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 29.82,
+        "threshold": 29.34,
+        "roc_at_signal": -0.9935,
+        "rsi_at_signal": 22.2,
+        "extremity_score": 0.9,
+        "speed_score": 13.2,
+        "consensus_score": 0,
+        "strength_score": 14.2
       },
       {
         "date": "2017-12-08",
@@ -5961,6 +6144,19 @@
         "speed_score": 4.4,
         "consensus_score": 0,
         "strength_score": 11.2
+      },
+      {
+        "date": "2017-10-11",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": -10.28,
+        "threshold": -2.98,
+        "roc_at_signal": 6.0981,
+        "rsi_at_signal": null,
+        "extremity_score": 6.2,
+        "speed_score": 40.0,
+        "consensus_score": 20,
+        "strength_score": 66.2
       },
       {
         "date": "2017-10-09",
@@ -6288,6 +6484,19 @@
         "strength_score": 39.0
       },
       {
+        "date": "2017-02-07",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 48.53,
+        "roc_at_signal": -0.8882,
+        "rsi_at_signal": 3.7,
+        "extremity_score": 40.0,
+        "speed_score": 11.8,
+        "consensus_score": 0,
+        "strength_score": 51.8
+      },
+      {
         "date": "2017-01-31",
         "currency": "MXN",
         "direction": "Long",
@@ -6501,7 +6710,7 @@
         "direction": "Long",
         "peak_position": 26.48,
         "threshold": 15.04,
-        "roc_at_signal": -1.1355,
+        "roc_at_signal": -1.1356,
         "rsi_at_signal": 1.4,
         "extremity_score": 13.1,
         "speed_score": 15.1,
@@ -6559,6 +6768,19 @@
         "speed_score": 15.5,
         "consensus_score": 0,
         "strength_score": 22.2
+      },
+      {
+        "date": "2016-09-13",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 0.5066,
+        "rsi_at_signal": 43.2,
+        "extremity_score": 0.0,
+        "speed_score": 6.8,
+        "consensus_score": 0,
+        "strength_score": 6.8
       },
       {
         "date": "2016-09-05",
@@ -6652,12 +6874,25 @@
         "strength_score": 64.0
       },
       {
+        "date": "2016-07-19",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 2.1579,
+        "rsi_at_signal": 73.2,
+        "extremity_score": 0.0,
+        "speed_score": 28.8,
+        "consensus_score": 0,
+        "strength_score": 28.8
+      },
+      {
         "date": "2016-07-11",
         "currency": "CAD",
         "direction": "Short",
         "peak_position": -23.35,
         "threshold": -8.12,
-        "roc_at_signal": 5.0752,
+        "roc_at_signal": 5.0753,
         "rsi_at_signal": 97.0,
         "extremity_score": 14.5,
         "speed_score": 40.0,
@@ -6761,7 +6996,7 @@
         "direction": "Long",
         "peak_position": 17.58,
         "threshold": 6.51,
-        "roc_at_signal": -5.98,
+        "roc_at_signal": -5.9802,
         "rsi_at_signal": 0.0,
         "extremity_score": 10.2,
         "speed_score": 40.0,
@@ -6819,6 +7054,19 @@
         "speed_score": 23.2,
         "consensus_score": 0,
         "strength_score": 34.8
+      },
+      {
+        "date": "2016-05-19",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": -13.39,
+        "threshold": 0.0,
+        "roc_at_signal": 6.8176,
+        "rsi_at_signal": 98.5,
+        "extremity_score": 10.7,
+        "speed_score": 40.0,
+        "consensus_score": 20,
+        "strength_score": 70.7
       },
       {
         "date": "2016-05-12",
@@ -6899,6 +7147,19 @@
         "strength_score": 64.6
       },
       {
+        "date": "2016-02-29",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 5.4712,
+        "rsi_at_signal": 43.5,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
+      },
+      {
         "date": "2016-02-19",
         "currency": "MXN",
         "direction": "Long",
@@ -6919,6 +7180,19 @@
         "threshold": 0.0,
         "roc_at_signal": -4.6318,
         "rsi_at_signal": 61.5,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
+      },
+      {
+        "date": "2016-02-16",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 6.8576,
+        "rsi_at_signal": 26.0,
         "extremity_score": 0.0,
         "speed_score": 40.0,
         "consensus_score": 0,
@@ -6969,7 +7243,7 @@
         "direction": "Long",
         "peak_position": 12.78,
         "threshold": 0.0,
-        "roc_at_signal": -8.1837,
+        "roc_at_signal": -8.1839,
         "rsi_at_signal": 0.0,
         "extremity_score": 10.2,
         "speed_score": 40.0,
@@ -7055,6 +7329,19 @@
         "strength_score": 21.7
       },
       {
+        "date": "2015-12-11",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 7.9367,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
+      },
+      {
         "date": "2015-12-07",
         "currency": "KRW",
         "direction": "Short",
@@ -7099,7 +7386,7 @@
         "direction": "Long",
         "peak_position": 0.0,
         "threshold": 0.0,
-        "roc_at_signal": -4.9929,
+        "roc_at_signal": -4.9931,
         "rsi_at_signal": 0.0,
         "extremity_score": 0.0,
         "speed_score": 40.0,
@@ -7125,7 +7412,7 @@
         "direction": "Short",
         "peak_position": 0.0,
         "threshold": 0.0,
-        "roc_at_signal": 9.8478,
+        "roc_at_signal": 9.8477,
         "rsi_at_signal": 43.4,
         "extremity_score": 0.0,
         "speed_score": 40.0,
@@ -7161,39 +7448,40 @@
     ]
   },
   "slow": {
-    "generated_at": "2026-04-01T04:50:29.400855",
+    "generated_at": "2026-04-02T04:33:30.772960",
     "mode": "slow",
     "windows": "50/100/200",
-    "currencies": 24,
+    "currencies": 25,
     "latest_positions": {
-      "INR": 36.20236341678369,
-      "AUD": 32.29601171022404,
-      "KRW": 17.038360766249284,
-      "JPY": 16.060690309952516,
-      "IDR": 12.943301244966152,
-      "PHP": 12.350101122059728,
-      "NZD": 2.221356331503709,
+      "INR": 36.49427617426947,
+      "AUD": 31.706499472371796,
+      "TRY": 23.064950429550336,
+      "KRW": 17.400923399387096,
+      "JPY": 16.08209835877139,
+      "IDR": 13.08052689834534,
+      "PHP": 12.932065634078166,
+      "NZD": 1.7377812056732038,
       "EUR": 0.0,
+      "CZK": 0.0,
       "PLN": 0.0,
       "THB": 0.0,
       "PEN": 0.0,
       "GBP": 0.0,
-      "CZK": 0.0,
-      "HUF": -8.291280156982738,
-      "BRL": -8.719953072298352,
-      "CAD": -9.259722713103898,
-      "MXN": -10.684011098019013,
-      "ZAR": -11.734959761983092,
-      "CLP": -14.420191258102367,
-      "SGD": -15.132687184959668,
-      "COP": -15.85620240815665,
-      "NOK": -18.49264398997996,
-      "SEK": -18.76155011521501,
-      "CHF": -20.089831936762803
+      "HUF": -8.334772264514335,
+      "CAD": -8.547762723152964,
+      "BRL": -8.772288212491338,
+      "MXN": -10.413398408302841,
+      "ZAR": -11.313131581163343,
+      "CLP": -13.650997943615275,
+      "SGD": -14.624680384044817,
+      "COP": -15.836516004657271,
+      "SEK": -17.791598985586667,
+      "NOK": -18.532328158445285,
+      "CHF": -19.323672430875718
     },
-    "charts_generated": 24,
-    "signal_count": 332,
-    "high_conviction_count": 13,
+    "charts_generated": 25,
+    "signal_count": 345,
+    "high_conviction_count": 15,
     "signal_metadata": [
       {
         "date": "2026-03-30",
@@ -7649,6 +7937,19 @@
         "speed_score": 30.5,
         "consensus_score": 0,
         "strength_score": 39.5
+      },
+      {
+        "date": "2025-03-24",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 18.83,
+        "threshold": 19.44,
+        "roc_at_signal": 0.4084,
+        "rsi_at_signal": 97.6,
+        "extremity_score": 0.4,
+        "speed_score": 5.4,
+        "consensus_score": 0,
+        "strength_score": 5.8
       },
       {
         "date": "2025-03-19",
@@ -8275,6 +8576,19 @@
         "strength_score": 10.7
       },
       {
+        "date": "2023-09-25",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 49.91,
+        "roc_at_signal": -0.1687,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 3.8,
+        "speed_score": 2.2,
+        "consensus_score": 0,
+        "strength_score": 6.0
+      },
+      {
         "date": "2023-09-20",
         "currency": "CHF",
         "direction": "Short",
@@ -8520,6 +8834,19 @@
         "speed_score": 4.1,
         "consensus_score": 0,
         "strength_score": 20.3
+      },
+      {
+        "date": "2023-06-05",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 18.43,
+        "threshold": 18.97,
+        "roc_at_signal": 0.7404,
+        "rsi_at_signal": null,
+        "extremity_score": 0.3,
+        "speed_score": 9.9,
+        "consensus_score": 0,
+        "strength_score": 10.2
       },
       {
         "date": "2023-06-01",
@@ -8886,6 +9213,19 @@
         "strength_score": 53.1
       },
       {
+        "date": "2022-09-30",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 49.03,
+        "roc_at_signal": -0.1539,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 39.0,
+        "speed_score": 2.1,
+        "consensus_score": 0,
+        "strength_score": 41.0
+      },
+      {
         "date": "2022-08-12",
         "currency": "NOK",
         "direction": "Long",
@@ -9159,6 +9499,19 @@
         "strength_score": 40.0
       },
       {
+        "date": "2021-08-17",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 27.24,
+        "threshold": 26.3,
+        "roc_at_signal": -0.3571,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 1.6,
+        "speed_score": 4.8,
+        "consensus_score": 0,
+        "strength_score": 6.3
+      },
+      {
         "date": "2021-07-21",
         "currency": "ZAR",
         "direction": "Short",
@@ -9294,7 +9647,7 @@
         "direction": "Long",
         "peak_position": 28.12,
         "threshold": 22.7,
-        "roc_at_signal": -1.1472,
+        "roc_at_signal": -1.1471,
         "rsi_at_signal": 0.0,
         "extremity_score": 7.9,
         "speed_score": 15.3,
@@ -9352,6 +9705,19 @@
         "speed_score": 6.0,
         "consensus_score": 0,
         "strength_score": 16.0
+      },
+      {
+        "date": "2021-03-29",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 3.74,
+        "roc_at_signal": 1.0038,
+        "rsi_at_signal": null,
+        "extremity_score": 2.8,
+        "speed_score": 13.4,
+        "consensus_score": 20,
+        "strength_score": 36.2
       },
       {
         "date": "2021-03-19",
@@ -9482,6 +9848,19 @@
         "speed_score": 2.4,
         "consensus_score": 0,
         "strength_score": 7.4
+      },
+      {
+        "date": "2020-12-31",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 35.71,
+        "threshold": 25.13,
+        "roc_at_signal": -0.6391,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 17.0,
+        "speed_score": 8.5,
+        "consensus_score": 0,
+        "strength_score": 25.5
       },
       {
         "date": "2020-11-20",
@@ -10134,6 +10513,19 @@
         "strength_score": 53.0
       },
       {
+        "date": "2019-08-29",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 4.8833,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
+      },
+      {
         "date": "2019-08-14",
         "currency": "BRL",
         "direction": "Short",
@@ -10236,6 +10628,19 @@
         "speed_score": 4.3,
         "consensus_score": 0,
         "strength_score": 11.4
+      },
+      {
+        "date": "2019-03-22",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 6.5852,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 0,
+        "strength_score": 40.0
       },
       {
         "date": "2019-03-18",
@@ -10498,6 +10903,19 @@
         "strength_score": 49.6
       },
       {
+        "date": "2018-10-15",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 50.0,
+        "roc_at_signal": -0.7006,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 0.0,
+        "speed_score": 9.3,
+        "consensus_score": 0,
+        "strength_score": 9.3
+      },
+      {
         "date": "2018-09-20",
         "currency": "CZK",
         "direction": "Long",
@@ -10579,9 +10997,9 @@
         "date": "2018-05-11",
         "currency": "SGD",
         "direction": "Short",
-        "peak_position": -25.37,
-        "threshold": -19.49,
-        "roc_at_signal": 0.5249,
+        "peak_position": -25.36,
+        "threshold": -19.52,
+        "roc_at_signal": 0.5247,
         "rsi_at_signal": null,
         "extremity_score": 7.7,
         "speed_score": 7.0,
@@ -10763,7 +11181,7 @@
         "direction": "Short",
         "peak_position": -21.98,
         "threshold": -11.45,
-        "roc_at_signal": 0.2998,
+        "roc_at_signal": 0.2999,
         "rsi_at_signal": null,
         "extremity_score": 10.9,
         "speed_score": 4.0,
@@ -10834,6 +11252,19 @@
         "speed_score": 13.7,
         "consensus_score": 0,
         "strength_score": 23.3
+      },
+      {
+        "date": "2017-10-11",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 4.8321,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 20,
+        "strength_score": 60.0
       },
       {
         "date": "2017-09-26",
@@ -10966,6 +11397,19 @@
         "strength_score": 18.2
       },
       {
+        "date": "2017-02-23",
+        "currency": "TRY",
+        "direction": "Long",
+        "peak_position": 50.0,
+        "threshold": 50.0,
+        "roc_at_signal": -0.7033,
+        "rsi_at_signal": 0.0,
+        "extremity_score": 0.0,
+        "speed_score": 9.4,
+        "consensus_score": 0,
+        "strength_score": 9.4
+      },
+      {
         "date": "2017-02-08",
         "currency": "CHF",
         "direction": "Long",
@@ -11075,7 +11519,7 @@
         "direction": "Long",
         "peak_position": 15.88,
         "threshold": 7.99,
-        "roc_at_signal": -4.0614,
+        "roc_at_signal": -4.0613,
         "rsi_at_signal": 4.8,
         "extremity_score": 7.5,
         "speed_score": 40.0,
@@ -11203,9 +11647,9 @@
         "date": "2016-10-21",
         "currency": "CAD",
         "direction": "Short",
-        "peak_position": -8.36,
+        "peak_position": -8.37,
         "threshold": -2.12,
-        "roc_at_signal": 1.5733,
+        "roc_at_signal": 1.5737,
         "rsi_at_signal": null,
         "extremity_score": 5.2,
         "speed_score": 21.0,
@@ -11229,9 +11673,9 @@
         "date": "2016-09-30",
         "currency": "SGD",
         "direction": "Short",
-        "peak_position": -16.36,
-        "threshold": -12.53,
-        "roc_at_signal": 0.2446,
+        "peak_position": -16.39,
+        "threshold": -12.55,
+        "roc_at_signal": 0.245,
         "rsi_at_signal": null,
         "extremity_score": 4.1,
         "speed_score": 3.3,
@@ -11317,6 +11761,19 @@
         "strength_score": 26.7
       },
       {
+        "date": "2016-05-19",
+        "currency": "TRY",
+        "direction": "Short",
+        "peak_position": 0.0,
+        "threshold": 0.0,
+        "roc_at_signal": 6.9179,
+        "rsi_at_signal": null,
+        "extremity_score": 0.0,
+        "speed_score": 40.0,
+        "consensus_score": 20,
+        "strength_score": 60.0
+      },
+      {
         "date": "2016-03-21",
         "currency": "PLN",
         "direction": "Long",
@@ -11386,8 +11843,8 @@
         "currency": "CAD",
         "direction": "Long",
         "peak_position": 36.1,
-        "threshold": 33.28,
-        "roc_at_signal": -0.5313,
+        "threshold": 33.29,
+        "roc_at_signal": -0.5314,
         "rsi_at_signal": 0.0,
         "extremity_score": 6.7,
         "speed_score": 7.1,
