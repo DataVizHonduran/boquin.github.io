@@ -6,7 +6,6 @@ Tries Stooq first (individual fetches); falls back to yfinance.
 import os
 import warnings
 import pandas as pd
-import pandas_datareader.data as web
 import yfinance as yf
 import datetime
 import plotly.graph_objects as go
@@ -64,6 +63,7 @@ n_smooth = 30
 # DATA FETCH — Stooq first, yfinance fallback
 # ---------------------------------------------------------
 def fetch_stooq():
+    import pandas_datareader.data as web  # lazy — fails gracefully if pandas >= 3.0
     df_all = pd.DataFrame()
     for stooq_ticker in tickers:
         df = web.DataReader(stooq_ticker, "stooq", start=start, end=end)

@@ -6,7 +6,6 @@ Tries Stooq first; falls back to yfinance if Stooq is unavailable.
 import os
 import warnings
 import pandas as pd
-import pandas_datareader.data as web
 import yfinance as yf
 import datetime
 import plotly.graph_objects as go
@@ -50,6 +49,7 @@ n_smooth = 20
 # DATA FETCH — Stooq first, yfinance fallback
 # ---------------------------------------------------------
 def fetch_stooq():
+    import pandas_datareader.data as web  # lazy — fails gracefully if pandas >= 3.0
     frames = {}
     for name, (stooq_ticker, _) in tickers.items():
         df = web.DataReader(stooq_ticker, "stooq", start, end)
