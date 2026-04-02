@@ -418,6 +418,19 @@ def change_log_html(diffs: dict, today: str, prior_date: str | None) -> str:
     )
 
 
+def extract_existing_summary() -> str:
+    """Extract macro summary text from the existing report, if present."""
+    out_path = REPORT_DIR / "index.html"
+    if not out_path.exists():
+        return ""
+    html = out_path.read_text()
+    import re
+    m = re.search(r'<div class="summary-box">(.*?)</div>', html, re.DOTALL)
+    if not m:
+        return ""
+    return m.group(1).replace("<br>", "\n").strip()
+
+
 def render_html(today_data: dict, metrics: dict, diffs: dict, summary: str,
                 snapshots: list[dict], prior_date: str | None,
                 performance: dict | None = None,
@@ -660,7 +673,13 @@ def main():
     if args.summary_file:
         summary = Path(args.summary_file).read_text().strip()
         print(f"  ✓ Summary loaded from {args.summary_file} ({len(summary.split())} words)")
-    elif not args.no_summary:
+    elif args.no_summary:
+        summary = extract_existing_summary()
+        if summary:
+            print(f"  ✓ Preserved existing macro summary ({len(summary.split())} words)")
+        else:
+            print("  ℹ No existing summary to preserve")
+    else:
         print("  ℹ No summary (run via /unlimited-etfs skill for Claude-generated commentary)")
 
     # Step 5: Fetch performance and render HTML
