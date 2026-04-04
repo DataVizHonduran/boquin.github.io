@@ -84,7 +84,9 @@ print(f"Fetched FX data: {df_close.shape[0]} rows, {df_close.shape[1]} currencie
 # ANALYSIS
 # ---------------------------------------------------------
 existing_emfx = [c for c in emfx if c in df_close.columns]
-df_em = 1 / df_close[existing_emfx].bfill().ffill().loc["2014-11-01":]
+# limit=5 fills only weekends/short holidays; stale currencies stay NaN rather than
+# being forward-filled indefinitely, which caused artificial "near 252d-high" readings
+df_em = 1 / df_close[existing_emfx].ffill(limit=5).bfill(limit=5).loc["2014-11-01":]
 
 window = 252
 threshold = 0.05
@@ -101,15 +103,25 @@ for i in range(window, len(df_em)):
     near_high = (latest_highs - latest_prices) / latest_highs <= threshold
     near_low = (latest_prices - latest_lows) / latest_lows <= threshold
 
-    count_high = near_high.sum()
-    count_low = near_low.sum()
-    total = df_em.shape[1]
+    # Only count currencies with valid (non-stale) data
+    valid = latest_prices.notna()
+    count_high = near_high[valid].sum()
+    count_low = near_low[valid].sum()
+    total = int(valid.sum())
+    if total == 0:
+        diffusion_data.append((slice_df.index[-1], float("nan")))
+        continue
 
     diffusion_index = (count_high - count_low) / total
     diffusion_data.append((slice_df.index[-1], diffusion_index))
 
 diffusion_df = pd.DataFrame(diffusion_data, columns=["Date", "Diffusion"]).set_index("Date")
+# Interpolate any NaN (from zero-coverage days) before smoothing
+diffusion_df["Diffusion"] = diffusion_df["Diffusion"].interpolate(limit_direction="both")
 diffusion_df["Smoothed"] = savgol_filter(diffusion_df["Diffusion"], 11, 3)
+
+valid_last = df_em.iloc[-1].notna().sum()
+print(f"Coverage on last date: {valid_last}/{len(existing_emfx)} currencies")
 
 em_fx = df_em.mean(axis=1)
 em_fx = em_fx / em_fx.iloc[0] * 100
@@ -120,7 +132,7 @@ q10_c = diffusion_df["Diffusion"].quantile(0.06)
 q90_c = diffusion_df["Diffusion"].quantile(0.94)
 contrarian_signal = pd.Series(index=diffusion_df.index, dtype="float64")
 last_signal_day = None
-cooldown = pd.Timedelta(days=5)
+cooldown = pd.Timedelta(days=28)  # ~4 weeks; 5 days caused weekly signal spam
 
 for date in diffusion_df.index:
     val = diffusion_df.loc[date, "Diffusion"]
