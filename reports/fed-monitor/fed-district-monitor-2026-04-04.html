@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federal Reserve District Monitor - April 4, 2026</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px; margin-top: 30px; }
+        h3 { color: #007bff; margin-top: 25px; }
+        .meta { color: #666; font-size: 0.95em; margin: 10px 0; }
+        .publication {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+        .publication-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .publication-title a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .publication-title a:hover {
+            text-decoration: underline;
+        }
+        .authors { color: #555; font-size: 0.9em; margin: 5px 0; }
+        .pub-date { color: #888; font-size: 0.85em; }
+        .summary { margin-top: 8px; color: #333; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .badge {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        .badge-new { background: #d4edda; color: #155724; }
+        .badge-type { background: #e2e3f3; color: #383d92; }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        .thematic-item { margin: 8px 0; padding: 8px 12px; background: #f0f4ff; border-radius: 4px; }
+        .highlight-item { margin: 10px 0; padding: 10px 14px; background: #fff8e1; border-left: 3px solid #f0a500; border-radius: 4px; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .summary-card {
+            background: #f0f4ff;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        .summary-card .count { font-size: 2em; font-weight: bold; color: #007bff; }
+        .summary-card .label { font-size: 0.8em; color: #555; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Fed Monitor Archive</a>
+    <div class="container">
+        <h1>🏛️ Federal Reserve District Monitor</h1>
+        <div class="meta">
+            <strong>Report Date:</strong> April 4, 2026<br>
+            <strong>Coverage Period:</strong> March 5 – April 4, 2026 (30 days)<br>
+            <strong>Districts Monitored:</strong> NY, RIC, ATL, STL, DAL, SF, MIN
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card"><div class="count">5</div><div class="label">NY Fed Posts</div></div>
+            <div class="summary-card"><div class="count">3</div><div class="label">Richmond Briefs</div></div>
+            <div class="summary-card"><div class="count">2</div><div class="label">Atlanta Papers</div></div>
+            <div class="summary-card"><div class="count">4</div><div class="label">STL Papers</div></div>
+            <div class="summary-card"><div class="count">3</div><div class="label">Dallas Papers</div></div>
+            <div class="summary-card"><div class="count">4</div><div class="label">SF Fed Items</div></div>
+            <div class="summary-card"><div class="count">⚠️</div><div class="label">MIN Unavailable</div></div>
+        </div>
+
+        <h2>Executive Summary</h2>
+        <p>This month's output from Federal Reserve district banks is dominated by two cross-cutting themes: <strong>tariff and trade policy effects</strong> and <strong>artificial intelligence and the labor market</strong>. Six of the seven monitored districts contributed research in the past 30 days (Minneapolis was unreachable due to access errors).</p>
+        <p>On <strong>trade and tariffs</strong>, San Francisco Fed economists quantify how tariffs differentially hit inflation components and how Fed communications shape inflation expectations. New York Fed examines how Treasury market liquidity — severely disrupted by April 2025 tariff announcements — has since recovered. Dallas Fed dissects how Chinese multinationals are reshaping global structural transformation. These publications together suggest a research community acutely focused on the macroeconomic transmission of trade shocks.</p>
+        <p>On <strong>AI and productivity</strong>, Atlanta Fed surveyed nearly 750 corporate executives to find significant heterogeneity in AI adoption, with large firms expecting workforce reductions but small firms expecting modest employment gains. St. Louis Fed researchers find a major US–Europe AI adoption gap. Richmond Fed's brief on stablecoins and dollar demand reflects the broader wave of digital-asset research running through district banks. The Dallas Fed adds a concrete data-center channel: AI-driven electricity demand is already lifting wholesale power prices 3–5%, with projections of 20–50% increases by 2028.</p>
+        <p>On <strong>labor and macro</strong>, Dallas Fed provides new evidence that unauthorized immigration raises housing costs without expanding supply — a demand-side shock. STL Fed decomposes recent wage and employment growth into supply and demand drivers. SF Fed finds tight financial conditions tilt investment toward cheaper but less energy-efficient capital.</p>
+
+        <!-- ===== NEW YORK FED ===== -->
+        <h2>New York Fed (2nd District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Liberty Street Economics Blog &nbsp;|&nbsp; <strong>New Items:</strong> 5</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2026/04/treasury-market-liquidity-since-april-2025/" target="_blank">Treasury Market Liquidity Since April 2025 →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Henry Dyer &amp; Michael J. Fleming</div>
+            <div class="pub-date">Published: 2026-04-02</div>
+            <div class="summary">Examines how U.S. Treasury market liquidity evolved over the past year following the tariff-induced stress of April 2025, finding that conditions worsened markedly at announcement, then recovered and stabilized through February 2026. Timely context for fixed-income investors assessing renewed tariff risks.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/behind-the-atm-exploring-the-structure-of-bank-holding-companies/" target="_blank">Behind the ATM: Exploring the Structure of Bank Holding Companies →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Lily Gordon &amp; Lee Seltzer</div>
+            <div class="pub-date">Published: 2026-03-31</div>
+            <div class="summary">Documents how modern financial holding company organizational structures have evolved, emphasizing why corporate architecture details matter for accurate financial system analysis and regulatory monitoring.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/sports-betting-is-everywhere-especially-on-credit-reports/" target="_blank">Sports Betting Is Everywhere, Especially on Credit Reports →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Jacob Goss &amp; Daniel Mangrum</div>
+            <div class="pub-date">Published: 2026-03-25</div>
+            <div class="summary">Finds that legalization of sports betting raises overall credit delinquency by roughly 0.3 percentage points, offering quantitative evidence linking consumer financial stress to gambling legalization waves.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/chinas-electric-trade/" target="_blank">China's Electric Trade →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Thomas Klitgaard</div>
+            <div class="pub-date">Published: 2026-03-23</div>
+            <div class="summary">Analyzes China's expansion in advanced electric technology industries — passenger EVs and batteries — and their growing contribution to China's trade surplus, with implications for U.S. trade and industrial policy debates.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/the-new-york-fed-dsge-model-forecast-march-2026/" target="_blank">The New York Fed DSGE Model Forecast — March 2026 →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Marco Del Negro, Ibrahima Diagne, Keshav Dogra, Elena Elbarmi, Donggyu Lee &amp; Michael Pham</div>
+            <div class="pub-date">Published: 2026-03-20</div>
+            <div class="summary">Quarterly structural model forecast showing stronger 2026 growth and more persistent inflation compared to December 2025 projections, driven by stronger investment and cost-push shocks — consistent with a tariff-driven supply-side repricing.</div>
+        </div>
+
+        <!-- ===== RICHMOND FED ===== -->
+        <h2>Richmond Fed (5th District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Economic Briefs &nbsp;|&nbsp; <strong>New Items:</strong> 3</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-11" target="_blank">What Is Trend Inflation? →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Thomas A. Lubik</div>
+            <div class="pub-date">Published: April 2026 (EB 26-11)</div>
+            <div class="summary">Explores methods for identifying and measuring underlying inflation trend, distinguishing durable from transitory price movements — directly relevant for interpreting the current inflation path relative to the Fed's 2% target.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-10" target="_blank">Stablecoins and the Demand for Dollars →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Marina Azzimonti-Renzo &amp; Vincenzo Quadrini</div>
+            <div class="pub-date">Published: March 2026 (EB 26-10)</div>
+            <div class="summary">Analyzes how the proliferation of USD-backed digital stablecoins might affect demand for traditional U.S. currency, with implications for monetary transmission and the Fed's balance sheet.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-09" target="_blank">Are We There Yet? The Road Back to 2 Percent Inflation →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Paul Ho</div>
+            <div class="pub-date">Published: March 2026 (EB 26-09)</div>
+            <div class="summary">Assesses the remaining distance to the Fed's 2% inflation target and identifies the key risks and challenges on the disinflation path — essential context for rate path expectations.</div>
+        </div>
+
+        <!-- ===== ATLANTA FED ===== -->
+        <h2>Atlanta Fed (6th District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Working Papers &nbsp;|&nbsp; <strong>New Items:</strong> 2 (confirmed March 2026)</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedawp/102936.html" target="_blank">Artificial Intelligence, Productivity, and the Workforce: Evidence from Corporate Executives →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Salomé Baslandze, Zach Edwards, John Graham, Ty McClure, Brent Meyer, Michael Sparks, Sonya Ravindranath Waddell &amp; Daniel J. Weitz</div>
+            <div class="pub-date">Published: 2026-03-25 (WP 2026-04)</div>
+            <div class="summary">Survey of ~750 corporate executives finds large AI adoption heterogeneity across firms; more than half have invested in AI. Large firms expect workforce reductions; smaller firms anticipate modest employment gains. Routine clerical roles declining, demand for skilled technical positions rising — with negligible near-term aggregate employment effect.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedawp/102928.html" target="_blank">Firm Data on AI →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Jose Maria Barrero, Nicholas Bloom, Philip Bunn, Steven J. Davis, Kevin Foster, Aaron Jalca, Brent Meyer, Paul Mizen, Michael Navarrete, Pawel Smietanka, Gregory Thwaites, Ben Wang &amp; Ivan Yotzov</div>
+            <div class="pub-date">Published: Early 2026 (WP 2026-03)</div>
+            <div class="summary">Analyzes firm-level data on AI implementation and adoption patterns across businesses, providing a comprehensive cross-country empirical foundation for studying AI's macroeconomic footprint.</div>
+        </div>
+
+        <!-- ===== ST. LOUIS FED ===== -->
+        <h2>St. Louis Fed (8th District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Working Papers &nbsp;|&nbsp; <strong>New Items:</strong> 4</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedlwp/102965.html" target="_blank">Expanding College Access →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Lutz Hendricks, Tatyana Koreshkova &amp; Oksana Leukhina</div>
+            <div class="pub-date">Published: 2026-03-26 (WP 2026-05)</div>
+            <div class="summary">Quantitative model finds a 20% expansion of selective public universities yields 0.8% aggregate earnings growth and 2% welfare gains; earnings benefits exceed financing costs by 8×. High-ability students previously excluded show strong graduation rates and significant income improvements.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedlwp/102951.html" target="_blank">Drivers of Wage and Employment Growth in Recent Years: A Supply and Demand Decomposition →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Maximiliano Dvorkin &amp; Cassandra Marks</div>
+            <div class="pub-date">Published: 2026 (WP 2026-04)</div>
+            <div class="summary">Separates supply-side and demand-side factors driving the recent wage and employment surge, offering a structural lens to interpret whether the labor market's resilience is demand- or supply-driven.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedlwp/102950.html" target="_blank">Mind the Gap: AI Adoption in Europe and the US →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Alexander Bick, Adam Blandin, David Deming, Nicola Fuchs-Schündeln &amp; Jonas Jessen</div>
+            <div class="pub-date">Published: 2026 (WP 2026-03)</div>
+            <div class="summary">Documents a substantial transatlantic gap in AI adoption, investigating structural and institutional factors behind the US–Europe divergence — with implications for relative productivity growth trajectories.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://ideas.repec.org/p/fip/fedlwp/102929.html" target="_blank">Why Do Americans No Longer Work So Much More Than Non-Americans? →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Serdar Birinci, Loukas Karabarbounis &amp; Kurt See</div>
+            <div class="pub-date">Published: 2026 (WP 2026-02)</div>
+            <div class="summary">Investigates the secular convergence in hours worked between U.S. workers and their international counterparts, documenting structural shifts in labor supply that challenge long-held assumptions about American work culture and labor market exceptionalism.</div>
+        </div>
+
+        <!-- ===== DALLAS FED ===== -->
+        <h2>Dallas Fed (11th District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Working Papers &nbsp;|&nbsp; <strong>New Items:</strong> 3</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://econpapers.repec.org/paper/fip/feddwp/102970.htm" target="_blank">Multinationals and Structural Transformation →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Vanessa Alviarez, Cheng Chen, Nitya Pandalai-Nayar, Liliana Varela, Kei-Mu Yi &amp; Hongyong Zhang</div>
+            <div class="pub-date">Published: 2026-03-30 (WP 2608)</div>
+            <div class="summary">Uses Japanese confidential microdata and a quasi-exogenous reform expanding foreign investment in China to show that multinationals shift parent employment from manufacturing into R&amp;D and higher-value services, accounting for a substantial share of manufacturing reallocation in middle-income countries.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://econpapers.repec.org/paper/fip/feddwp/102961.htm" target="_blank">The Impacts of Unauthorized Immigration on U.S. Labor and Housing Markets: New Evidence from Administrative Microdata →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Daniel Wilson &amp; Xiaoqing Zhou</div>
+            <div class="pub-date">Published: 2026-03-23 (WP 2607)</div>
+            <div class="summary">Analyzes the 2021–2024 unauthorized immigration surge using administrative microdata; finds employment expanded proportionally without wage suppression, but housing costs rose sharply without supply expansion (demand-side shock). Also documents declines in per-capita labor income and government transfers.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://econpapers.repec.org/paper/fip/feddwp/102959.htm" target="_blank">Processing Power: The Effect of Data Centers on Wholesale Electricity Markets →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+            </div>
+            <div class="authors">Owen Kay, Robert Reaser &amp; Reid Taylor</div>
+            <div class="pub-date">Published: 2026-03-20 (WP 2606)</div>
+            <div class="summary">Using an hourly dispatch model across continental wholesale electricity markets, finds existing data centers have already raised wholesale prices 3–5% nationally (larger in data center hubs). If planned construction proceeds, prices could rise 20–50% by 2028 — a major input cost risk for the broader economy.</div>
+        </div>
+
+        <!-- ===== SAN FRANCISCO FED ===== -->
+        <h2>San Francisco Fed (12th District)</h2>
+        <p class="meta"><strong>Content Type:</strong> Economic Letters &amp; Working Papers &nbsp;|&nbsp; <strong>New Items:</strong> 4</p>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2026/03/fed-communications-and-inflation-expectations/" target="_blank">Fed Communications and Inflation Expectations →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+                <span class="badge badge-type">Economic Letter</span>
+            </div>
+            <div class="authors">Michael Bauer &amp; Wesley Wasserburger</div>
+            <div class="pub-date">Published: 2026-03-31</div>
+            <div class="summary">Finds hawkish Fed communication surprises lower market-based inflation expectations while dovish surprises raise them, with stronger effects at longer horizons — validating the signaling channel of forward guidance and relevant for how markets will read any pivot communication.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/2026/03/effects-of-tariffs-on-components-of-inflation/" target="_blank">The Effects of Tariffs on the Components of Inflation →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+                <span class="badge badge-type">Economic Letter</span>
+            </div>
+            <div class="authors">Naomi Halbersleben, Oscar Jorda &amp; Fernanda Nechio</div>
+            <div class="pub-date">Published: 2026-03-30</div>
+            <div class="summary">Quantifies how tariff policies differentially impact goods, services, and other inflation components, providing a decomposition tool for forecasters trying to parse the tariff-driven vs. domestic inflationary dynamics in 2026.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.frbsf.org/research-and-insights/publications/working-papers/2026/03/can-models-idiosyncratic-risk-solve-equity-premium-puzzle-redux/" target="_blank">Can Models with Idiosyncratic Risk Solve the Equity Premium Puzzle? Redux →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+                <span class="badge badge-type">Working Paper</span>
+            </div>
+            <div class="authors">Sanjay R. Singh</div>
+            <div class="pub-date">Published: 2026-03-31</div>
+            <div class="summary">Revisits the equity premium puzzle using novel household-level panel data to measure imperfect risk sharing, identifying high-income/low-net-worth households whose volatile consumption may be sufficient to explain the historically large equity risk premium.</div>
+        </div>
+
+        <div class="publication">
+            <div class="publication-title">
+                <a href="https://www.frbsf.org/research-and-insights/publications/working-papers/2026/03/financial-conditions-and-capital-investment-choices/" target="_blank">Financial Conditions and Capital Investment Choices →</a>
+                <span class="badge badge-new">🆕 NEW</span>
+                <span class="badge badge-type">Working Paper</span>
+            </div>
+            <div class="authors">Oscar Jorda, Fernanda Nechio, Toan Phan &amp; Felipe Schwartzman</div>
+            <div class="pub-date">Published: 2026-03-20</div>
+            <div class="summary">Using 150 years of data across 17 countries, shows tight financial conditions shift investment toward cheaper but less energy-efficient capital by reducing the present value of future energy savings — a novel channel linking monetary policy to the energy transition.</div>
+        </div>
+
+        <!-- ===== MINNEAPOLIS FED ===== -->
+        <h2>Minneapolis Fed (9th District)</h2>
+        <div class="warning-box">
+            ⚠️ <strong>Access Error:</strong> All attempts to reach Minneapolis Fed research pages returned HTTP 403 errors. No content could be retrieved for this reporting period. Minneapolis Fed research is available at <a href="https://www.minneapolisfed.org/research" target="_blank">minneapolisfed.org/research</a>.
+        </div>
+
+        <!-- ===== THEMATIC ANALYSIS ===== -->
+        <h2>Thematic Analysis</h2>
+
+        <h3>Tariffs &amp; Trade Policy</h3>
+        <div class="thematic-item"><strong>NY Fed:</strong> Treasury market liquidity nearly fully recovered from April 2025 tariff shock; conditions stabilized by Feb 2026.</div>
+        <div class="thematic-item"><strong>SF Fed:</strong> Tariff effects on inflation are component-specific — goods inflation bears the primary burden; services more insulated.</div>
+        <div class="thematic-item"><strong>NY Fed:</strong> China's electric vehicle and battery exports are reshaping trade balances and trade-policy dynamics.</div>
+        <div class="thematic-item"><strong>Dallas Fed:</strong> Multinational FDI into China shifts parent-company employment from manufacturing into R&amp;D, reinforcing deindustrialization pressures in advanced economies.</div>
+
+        <h3>Monetary Policy &amp; Inflation</h3>
+        <div class="thematic-item"><strong>SF Fed:</strong> Fed forward guidance credibly shifts market inflation expectations, with larger effects at longer horizons — supporting the case for clear communication during the current tariff-inflation episode.</div>
+        <div class="thematic-item"><strong>Richmond Fed:</strong> Two briefs assess the inflation path: trend inflation methodologies (Lubik) and progress toward 2% (Ho) — both relevant to rate path debates.</div>
+        <div class="thematic-item"><strong>NY Fed DSGE:</strong> March 2026 model forecast signals stronger growth and stickier inflation than December 2025 anticipated — fewer near-term rate cuts implied.</div>
+
+        <h3>Artificial Intelligence &amp; Productivity</h3>
+        <div class="thematic-item"><strong>Atlanta Fed:</strong> Executive survey finds AI adoption already majority among large firms; clerical roles declining, technical roles rising — no near-term aggregate employment shock but meaningful compositional shifts.</div>
+        <div class="thematic-item"><strong>STL Fed:</strong> Europe significantly lags the U.S. in AI adoption — transatlantic productivity divergence may widen.</div>
+        <div class="thematic-item"><strong>Dallas Fed:</strong> AI-driven data center electricity demand a major emerging macro risk — wholesale power prices could rise 20–50% by 2028 in affected regions.</div>
+
+        <h3>Labor Markets</h3>
+        <div class="thematic-item"><strong>STL Fed:</strong> Wage/employment decomposition separates supply from demand drivers — key for assessing whether recent labor strength is sustainable.</div>
+        <div class="thematic-item"><strong>STL Fed:</strong> U.S. workers no longer work substantially more than non-Americans — a structural convergence with implications for relative productivity assessments.</div>
+        <div class="thematic-item"><strong>Dallas Fed:</strong> Unauthorized immigration 2021–2024: employment expanded; wages unaffected; housing costs rose sharply; government transfers fell — net distributional effects are complex.</div>
+
+        <h3>Finance &amp; Financial Markets</h3>
+        <div class="thematic-item"><strong>NY Fed:</strong> Bank holding company structures are increasingly complex — a data-quality and regulatory-design concern.</div>
+        <div class="thematic-item"><strong>NY Fed:</strong> Sports betting legalization causally raises credit delinquencies — a consumer finance risk quietly building across states.</div>
+        <div class="thematic-item"><strong>Richmond Fed:</strong> Stablecoins could meaningfully affect dollar demand — emerging systemic relevance for Fed monetary operations.</div>
+        <div class="thematic-item"><strong>SF Fed:</strong> Tight financial conditions reduce investment in energy-efficient capital — a monetary-policy/green-transition interaction that could slow decarbonization.</div>
+
+        <h3>Education &amp; Human Capital</h3>
+        <div class="thematic-item"><strong>STL Fed:</strong> Expanding selective public university capacity yields 8× return on financing cost — strong social ROI case for higher-ed investment.</div>
+        <div class="thematic-item"><strong>Atlanta Fed:</strong> 20th-century educational mobility gains closely tied to public education expansion — historical evidence for education's long-run distributional role.</div>
+
+        <!-- ===== HIGHLIGHTS FOR INVESTORS ===== -->
+        <h2>Notable Highlights for Investors</h2>
+
+        <div class="highlight-item"><strong>NY Fed</strong> — <em>Treasury Market Liquidity Since April 2025</em>: Liquidity has recovered from the April 2025 tariff shock but remains fragile — a baseline caution for positioning in a tariff-volatile environment heading into renewed trade actions.</div>
+        <div class="highlight-item"><strong>SF Fed</strong> — <em>Effects of Tariffs on Components of Inflation</em>: Goods inflation is most exposed to tariff pass-through; services inflation is more insulated. Directly relevant for CPI disaggregation and rate-path modeling.</div>
+        <div class="highlight-item"><strong>SF Fed</strong> — <em>Fed Communications and Inflation Expectations</em>: Fed hawkish surprises durably shift long-run inflation expectations lower — markets should monitor for forward guidance shifts as primary rate signals.</div>
+        <div class="highlight-item"><strong>Dallas Fed</strong> — <em>Processing Power: Data Centers and Electricity Markets</em>: AI infrastructure buildout is already raising wholesale electricity prices. By 2028, regional prices could rise 20–50% — a material cost risk for energy-intensive industries and utilities sector.</div>
+        <div class="highlight-item"><strong>Dallas Fed</strong> — <em>Unauthorized Immigration and Housing Markets</em>: Demand shock without supply response = housing cost inflation without traditional supply safety valve. Confirms structural housing shortage dynamics.</div>
+        <div class="highlight-item"><strong>NY Fed DSGE — March 2026:</strong> Structural model now projects stronger growth and more persistent inflation than the December 2025 vintage — a hawkish signal from the Fed's own forecasting apparatus.</div>
+        <div class="highlight-item"><strong>Richmond Fed</strong> — <em>Stablecoins and Dollar Demand</em>: Rising stablecoin adoption could structurally affect dollar velocity and Fed balance-sheet dynamics — an emerging macro variable to monitor.</div>
+
+        <!-- ===== CACHE SUMMARY ===== -->
+        <h2>Cache Update Summary</h2>
+        <div class="meta">
+            <strong>Items added this run:</strong> 21<br>
+            <strong>Items already cached:</strong> 0 (all items are new since last run 2026-02-02)<br>
+            <strong>Total cache size:</strong> 98 items (77 prior + 21 new)<br>
+            <strong>Cache file:</strong> <code>~/.claude/cache/fed-district-monitor.json</code><br>
+            <strong>Last run:</strong> 2026-04-04T00:00:00.000000
+        </div>
+
+        <hr style="margin-top:40px; border:none; border-top:1px solid #ddd;">
+        <div class="meta" style="font-size:0.8em; text-align:center; color:#aaa; margin-top:16px;">
+            Generated by Claude Code · boquin.xyz · Data sourced from Federal Reserve district websites via Liberty Street Economics, Richmond Fed, Atlanta Fed, St. Louis Fed, Dallas Fed, San Francisco Fed · April 4, 2026
+        </div>
+    </div>
+</body>
+</html>
