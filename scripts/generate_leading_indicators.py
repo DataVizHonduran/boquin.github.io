@@ -106,7 +106,7 @@ def create_dashboard():
     recession = get_fred("USREC", years=100)
 
     fig = make_subplots(
-        rows=4, cols=2,
+        rows=5, cols=2,
         subplot_titles=[
             "Payrolls Diffusion Index (3mma)",
             "Employment-to-Population from 24-Month High",
@@ -116,8 +116,9 @@ def create_dashboard():
             "Mfg Orders-to-Inventories from 24-Month High",
             "Consumer & Activity Diffusion Index (YoY, 3mma)",
             "Payrolls: Cumulative 3M MA − 36M MA Gap (Since 1955)",
+            "Capex Shipments: Nondefense ex Aircraft, NSA (YoY %)",
         ],
-        vertical_spacing=0.09,
+        vertical_spacing=0.08,
         horizontal_spacing=0.08,
     )
 
@@ -150,20 +151,20 @@ def create_dashboard():
     print("Chart 4: New Orders...")
     no = get_fred("NEWORDER", years=75)
     no_rel = (no / no.rolling(24).max()).dropna()
-    plot_series(fig, 2, 2, no_rel, recession, 0.65, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
+    plot_series(fig, 2, 2, no_rel, recession, 0.65, 1.02, y_label='Ratio vs 24M High')
 
     # ── Chart 5: Building Permits ─────────────────────────────────────────────
     print("Chart 5: Building Permits...")
     permits = get_fred("PERMIT", years=75)
     permits_rel = (permits / permits.rolling(24).max()).dropna()
-    plot_series(fig, 3, 1, permits_rel, recession, 0.4, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
+    plot_series(fig, 3, 1, permits_rel, recession, 0.4, 1.02, y_label='Ratio vs 24M High')
 
     # ── Chart 6: Mfg Orders-to-Inventories ───────────────────────────────────
     print("Chart 6: Mfg Orders-to-Inventories...")
     mfg = get_fred_multi(["AMTMNO", "AMTMTI"], years=75)
     ratio = mfg["AMTMNO"] / mfg["AMTMTI"]
     ratio_rel = (ratio / ratio.rolling(24).max()).dropna()
-    plot_series(fig, 3, 2, ratio_rel, recession, 0.7, 1.02, quantile_line=None, y_label='Ratio vs 24M High')
+    plot_series(fig, 3, 2, ratio_rel, recession, 0.7, 1.02, y_label='Ratio vs 24M High')
 
     # ── Chart 7: Consumer & Activity Diffusion Index ─────────────────────────
     # YoY % change > 0 across 8 consumer/activity series = broad spending health
@@ -224,6 +225,15 @@ def create_dashboard():
                      title_font=dict(size=11), row=4, col=2)
     fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=4, col=2)
 
+    # ── Chart 9: Capex Shipments — Nondefense ex Aircraft (YoY %) ────────────
+    print("Chart 9: Capex Shipments (NonDef ex-Aircraft, NSA YoY%)...")
+    capex_raw = get_fred("UNXAVS", years=100)
+    capex_yoy = (capex_raw.pct_change(12) * 100).dropna()
+    plot_series(fig, 5, 1, capex_yoy, recession, -25, 22,
+                color='#e67e22', quantile_line=None,
+                y_label='YoY % Change')
+    fig.add_hline(y=0, line_color='black', line_width=1, row=5, col=1)
+
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
     fig.update_layout(
@@ -232,7 +242,7 @@ def create_dashboard():
             x=0.5, xanchor='center',
             font=dict(size=22, color='#1a1a2e')
         ),
-        height=1700,
+        height=2100,
         showlegend=False,
         template='plotly_white',
         margin=dict(t=100, l=55, r=40, b=60),
