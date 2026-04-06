@@ -106,7 +106,7 @@ def create_dashboard():
     recession = get_fred("USREC", years=100)
 
     fig = make_subplots(
-        rows=5, cols=2,
+        rows=6, cols=2,
         subplot_titles=[
             "Payrolls Diffusion Index (3mma)",
             "Employment-to-Population from 24-Month High (All 16+ vs 25–54)",
@@ -118,6 +118,8 @@ def create_dashboard():
             "Payrolls: Cumulative 3M MA − 36M MA Gap (Since 1955)",
             "Capex Shipments: Nondefense ex Aircraft, NSA (YoY %)",
             "Full-Time vs Part-Time Employment Spread (3M/12M Rolling Sum)",
+            "Construction + Manufacturing Jobs: % Below 24-Month Peak",
+            "",
         ],
         vertical_spacing=0.08,
         horizontal_spacing=0.08,
@@ -288,6 +290,35 @@ def create_dashboard():
                      title_font=dict(size=11), row=5, col=2)
     fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=5, col=2)
 
+    # ── Chart 11: Construction + Manufacturing Jobs % from 24-Month Peak ────────
+    print("Chart 11: Construction + Manufacturing Jobs % from 24-Month Peak...")
+    cons = get_fred("USCONS", years=100)
+    mfg  = get_fred("MANEMP", years=100)
+    combined11 = (cons + mfg).dropna()
+    peak_24m11 = combined11.rolling(24).max()
+    pct_from_peak11 = ((combined11 / peak_24m11) - 1) * 100
+    pct_from_peak11 = pct_from_peak11.dropna()
+
+    # Drawdown fill below zero
+    fig.add_trace(go.Scatter(
+        x=pct_from_peak11.index,
+        y=pct_from_peak11.clip(upper=0).values,
+        fill='tozeroy', fillcolor='rgba(220,38,38,0.15)',
+        line=dict(width=0), showlegend=False, hoverinfo='skip',
+    ), row=6, col=1)
+    # Main line
+    fig.add_trace(go.Scatter(
+        x=pct_from_peak11.index, y=pct_from_peak11.values,
+        mode='lines', showlegend=False,
+        line=dict(color='#1f77b4', width=1.8),
+        hovertemplate='%{x|%b %Y}: %{y:.2f}%<extra></extra>',
+    ), row=6, col=1)
+    fig.add_hline(y=0, line_color='black', line_width=1, row=6, col=1)
+    add_recession_shading(fig, recession, 6, 1, -26, 1)
+    fig.update_yaxes(range=[-26, 1], title_text='% Below 24M Peak',
+                     title_font=dict(size=11), row=6, col=1)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=6, col=1)
+
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
     fig.update_layout(
@@ -296,7 +327,7 @@ def create_dashboard():
             x=0.5, xanchor='center',
             font=dict(size=22, color='#1a1a2e')
         ),
-        height=2100,
+        height=2520,
         showlegend=True,
         legend=dict(x=0.55, y=0.805, xanchor='left', bgcolor='rgba(255,255,255,0.7)',
                     bordercolor='lightgray', borderwidth=1, font=dict(size=11)),
