@@ -109,7 +109,7 @@ def create_dashboard():
         rows=5, cols=2,
         subplot_titles=[
             "Payrolls Diffusion Index (3mma)",
-            "Employment-to-Population from 24-Month High",
+            "Employment-to-Population from 24-Month High (All 16+ vs 25–54)",
             "Continuing Claims — % Above 3-Year Low (Inverted)",
             "New Orders from 24-Month High",
             "Building Permits as % of 24-Month High",
@@ -117,6 +117,7 @@ def create_dashboard():
             "Consumer & Activity Diffusion Index (YoY, 3mma)",
             "Payrolls: Cumulative 3M MA − 36M MA Gap (Since 1955)",
             "Capex Shipments: Nondefense ex Aircraft, NSA (YoY %)",
+            "Full-Time vs Part-Time Employment Spread (3M/12M Rolling Sum)",
         ],
         vertical_spacing=0.08,
         horizontal_spacing=0.08,
@@ -139,7 +140,23 @@ def create_dashboard():
     print("Chart 2: Employment-to-Population Ratio...")
     epop = get_fred("EMRATIO", years=100)
     epop_rel = (epop - epop.rolling(24).max()).dropna()
+    epop25 = get_fred("LNS12300060", years=100)
+    epop25_rel = (epop25 - epop25.rolling(24).max()).dropna()
     plot_series(fig, 1, 2, epop_rel, recession, -4, 0, y_label='pp vs 24M High')
+    # Overlay prime-age (25-54) EPOP as a second line
+    fig.add_trace(go.Scatter(
+        x=epop25_rel.index, y=epop25_rel.values,
+        mode='lines', showlegend=True,
+        name='25–54',
+        line=dict(color='#e67e22', width=1.6),
+    ), row=1, col=2)
+    # Legend entry for the blue All 16+ line (plot_series draws it with showlegend=False)
+    fig.add_trace(go.Scatter(
+        x=epop_rel.index, y=epop_rel.values,
+        mode='lines', showlegend=True,
+        name='All 16+',
+        line=dict(color='#1f77b4', width=1.8),
+    ), row=1, col=2)
 
     # ── Chart 3: Continuing Claims (inverted) ─────────────────────────────────
     print("Chart 3: Continuing Claims...")
@@ -234,6 +251,43 @@ def create_dashboard():
                 y_label='YoY % Change')
     fig.add_hline(y=0, line_color='black', line_width=1, row=5, col=1)
 
+    # ── Chart 10: Full-Time vs Part-Time Employment Spread ───────────────────
+    print("Chart 10: Full-Time vs Part-Time Employment Spread...")
+    ft = get_fred("LNS12500000", years=100)
+    pt = get_fred("LNS12600000", years=100)
+    ft_chg = ft.diff()
+    pt_chg = pt.diff()
+    spread_3m  = ft_chg.rolling(3).sum()  - pt_chg.rolling(3).sum()
+    spread_12m = ft_chg.rolling(12).sum() - pt_chg.rolling(12).sum()
+    spread_3m  = spread_3m.dropna()
+    spread_12m = spread_12m.dropna()
+    # COVID crop for y-axis range (use 3M series which is noisier)
+    covid_mask10 = (
+        (spread_3m.index >= pd.Timestamp('2020-02-01')) &
+        (spread_3m.index <= pd.Timestamp('2022-02-01'))
+    )
+    non_covid10 = spread_3m[~covid_mask10]
+    y0_10 = non_covid10.min() * 1.20
+    y1_10 = non_covid10.max() * 1.20
+    colors10 = ['rgba(34,139,34,0.65)' if v >= 0 else 'rgba(200,30,30,0.65)'
+                for v in spread_3m.values]
+    fig.add_trace(go.Bar(
+        x=spread_3m.index, y=spread_3m.values,
+        marker_color=colors10, showlegend=False,
+        hovertemplate='%{x|%b %Y}<br><b>3M spread: %{y:+,.0f}k</b><extra></extra>',
+    ), row=5, col=2)
+    fig.add_trace(go.Scatter(
+        x=spread_12m.index, y=spread_12m.values,
+        mode='lines', showlegend=False,
+        line=dict(color='#111111', width=1.8),
+        hovertemplate='%{x|%b %Y}<br><b>12M spread: %{y:+,.0f}k</b><extra></extra>',
+    ), row=5, col=2)
+    fig.add_hline(y=0, line_color='black', line_width=1, row=5, col=2)
+    add_recession_shading(fig, recession, 5, 2, y0_10, y1_10)
+    fig.update_yaxes(range=[y0_10, y1_10], title_text='Thousands (FT \u2212 PT)',
+                     title_font=dict(size=11), row=5, col=2)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=5, col=2)
+
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
     fig.update_layout(
@@ -243,7 +297,9 @@ def create_dashboard():
             font=dict(size=22, color='#1a1a2e')
         ),
         height=2100,
-        showlegend=False,
+        showlegend=True,
+        legend=dict(x=0.55, y=0.805, xanchor='left', bgcolor='rgba(255,255,255,0.7)',
+                    bordercolor='lightgray', borderwidth=1, font=dict(size=11)),
         template='plotly_white',
         margin=dict(t=100, l=55, r=40, b=60),
     )
