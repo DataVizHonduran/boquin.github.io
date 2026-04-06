@@ -224,18 +224,18 @@ def create_dashboard():
 
     fig.add_trace(go.Scatter(
         x=cumgap8.index, y=cumgap8.clip(lower=0).values,
-        fill='tozeroy', fillcolor='rgba(36,113,163,0.35)',
+        fill='tozeroy', fillcolor='rgba(31,119,180,0.25)',
         line=dict(width=0), showlegend=False, hoverinfo='skip',
     ), row=4, col=2)
     fig.add_trace(go.Scatter(
         x=cumgap8.index, y=cumgap8.clip(upper=0).values,
-        fill='tozeroy', fillcolor='rgba(192,57,43,0.35)',
+        fill='tozeroy', fillcolor='rgba(214,39,40,0.20)',
         line=dict(width=0), showlegend=False, hoverinfo='skip',
     ), row=4, col=2)
     fig.add_trace(go.Scatter(
         x=cumgap8.index, y=cumgap8.values,
         mode='lines', showlegend=False,
-        line=dict(color='#1a3a2f', width=1.8),
+        line=dict(color='#1f77b4', width=1.8),
         hovertemplate='%{x|%b %Y}<br><b>Cumulative gap: %{y:+,.0f}k</b><extra></extra>',
     ), row=4, col=2)
     fig.add_hline(y=0, line_color='black', line_width=1, row=4, col=2)
@@ -249,7 +249,7 @@ def create_dashboard():
     capex_raw = get_fred("UNXAVS", years=100)
     capex_yoy = (capex_raw.pct_change(12) * 100).dropna()
     plot_series(fig, 5, 1, capex_yoy, recession, -25, 22,
-                color='#e67e22', quantile_line=None,
+                color='#1f77b4', quantile_line=None,
                 y_label='YoY % Change')
     fig.add_hline(y=0, line_color='black', line_width=1, row=5, col=1)
 
@@ -281,7 +281,7 @@ def create_dashboard():
     fig.add_trace(go.Scatter(
         x=spread_12m.index, y=spread_12m.values,
         mode='lines', showlegend=False,
-        line=dict(color='#111111', width=1.8),
+        line=dict(color='#1f77b4', width=1.8),
         hovertemplate='%{x|%b %Y}<br><b>12M spread: %{y:+,.0f}k</b><extra></extra>',
     ), row=5, col=2)
     fig.add_hline(y=0, line_color='black', line_width=1, row=5, col=2)
@@ -303,7 +303,7 @@ def create_dashboard():
     fig.add_trace(go.Scatter(
         x=pct_from_peak11.index,
         y=pct_from_peak11.clip(upper=0).values,
-        fill='tozeroy', fillcolor='rgba(220,38,38,0.15)',
+        fill='tozeroy', fillcolor='rgba(214,39,40,0.20)',
         line=dict(width=0), showlegend=False, hoverinfo='skip',
     ), row=6, col=1)
     # Main line
