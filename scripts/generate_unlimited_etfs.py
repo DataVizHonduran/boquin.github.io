@@ -43,6 +43,130 @@ ETF_NAMES = {
 }
 CSV_URL = "https://unlimitedetfs.com/wp-content/uploads/data/TidalFG_Holdings_{ticker}.csv"
 
+# ── Asset Class Classification ────────────────────────────────────────────────
+
+TICKER_ASSET_CLASS = {
+    # Currencies (CME FX futures — Bloomberg "Curncy" suffix)
+    "ECM6 Curncy": "currencies", "ECU6 Curncy": "currencies", "ECZ6 Curncy": "currencies",
+    "ADM6 Curncy": "currencies", "ADU6 Curncy": "currencies",
+    "SFM6 Curncy": "currencies", "SFU6 Curncy": "currencies",
+    "CDM6 Curncy": "currencies", "CDU6 Curncy": "currencies",
+    "BPM6 Curncy": "currencies", "BPU6 Curncy": "currencies",
+    "JYM6 Curncy": "currencies", "JYU6 Curncy": "currencies",
+    "DXM6 Curncy": "currencies", "DXU6 Curncy": "currencies",
+    # Currencies (bare tickers as fallback)
+    "ECM6": "currencies", "ADM6": "currencies", "SFM6": "currencies",
+    "CDM6": "currencies", "BPM6": "currencies", "JYM6": "currencies", "DXM6": "currencies",
+    # Commodities (Bloomberg "Comdty" suffix)
+    "GCM6 Comdty": "commodities", "GCZ6 Comdty": "commodities", "GCQ6 Comdty": "commodities",
+    "HGK6 Comdty": "commodities", "HGN6 Comdty": "commodities",
+    "SBK6 Comdty": "commodities", "SBN6 Comdty": "commodities",
+    "CCK6 Comdty": "commodities", "CCN6 Comdty": "commodities",
+    "CLM6 Comdty": "commodities", "CLN6 Comdty": "commodities",
+    "C K6 Comdty": "commodities",   # Corn
+    "S K6 Comdty": "commodities",   # Soybean
+    "KCK6 Comdty": "commodities",   # Coffee
+    "LCJ6 Comdty": "commodities",   # Live Cattle
+    # Commodities (ETFs / bare)
+    "DBB": "commodities", "GLD": "commodities", "IAU": "commodities",
+    "SLV": "commodities", "USO": "commodities",
+    # Equities (Bloomberg "Index" suffix — futures)
+    "ESM6 Index": "equities", "ESU6 Index": "equities",
+    "NQM6 Index": "equities", "NQU6 Index": "equities",
+    "MESM6 Index": "equities", "MFSM6 Index": "equities",
+    "NXM6 Index": "equities", "VGM6 Index": "equities",
+    "IXAM6 Index": "equities", "DNM6 Index": "equities",
+    "XARM6 Index": "equities", "UXJ6 Index": "equities",
+    # Equities (ETFs / bare)
+    "VTV": "equities", "VUG": "equities", "VO": "equities", "VTWO": "equities",
+    "VGK": "equities", "VFMO": "equities",
+    "XLF": "equities", "XLE": "equities", "XLI": "equities", "XLB": "equities",
+    "XLY": "equities", "XLP": "equities", "XLU": "equities",
+    "XBI": "equities", "XHB": "equities", "XRT": "equities",
+    "EWW": "equities", "EWY": "equities", "EWZ": "equities", "EZA": "equities",
+    "MCHI": "equities",
+    "SPY": "equities", "QQQ": "equities", "IWM": "equities",
+    "EEM": "equities", "EFA": "equities",
+    # Fixed Income (Bloomberg "Comdty" suffix — Treasury futures)
+    "FVM6 Comdty": "fixed_income", "FVU6 Comdty": "fixed_income",
+    "USM6 Comdty": "fixed_income", "USU6 Comdty": "fixed_income",
+    "TYM6 Comdty": "fixed_income", "TYU6 Comdty": "fixed_income",
+    "ZNM6 Comdty": "fixed_income", "ZNU6 Comdty": "fixed_income",
+    # Fixed Income (Bloomberg "Index" suffix — credit futures)
+    "IBYM6 Index": "fixed_income",
+    # Fixed Income (ETFs / bare)
+    "VWOB": "fixed_income", "AGZ": "fixed_income",
+    "AGG": "fixed_income", "LQD": "fixed_income",
+    "HYG": "fixed_income", "JNK": "fixed_income",
+    "BKLN": "fixed_income", "EMHY": "fixed_income", "ICVT": "fixed_income",
+}
+
+
+TICKER_SHORT_NAME = {
+    # Currencies
+    "ECM6 Curncy": "Euro FX",     "ECU6 Curncy": "Euro FX",
+    "ADM6 Curncy": "AUD/USD",     "ADU6 Curncy": "AUD/USD",
+    "SFM6 Curncy": "Swiss Franc", "SFU6 Curncy": "Swiss Franc",
+    "CDM6 Curncy": "CAD",         "CDU6 Curncy": "CAD",
+    "BPM6 Curncy": "GBP",         "BPU6 Curncy": "GBP",
+    "JYM6 Curncy": "Yen",         "JYU6 Curncy": "Yen",
+    "DXM6 Curncy": "Dollar Index","DXU6 Curncy": "Dollar Index",
+    # Commodities
+    "GCM6 Comdty": "Gold",        "GCZ6 Comdty": "Gold",
+    "HGK6 Comdty": "Copper",      "HGN6 Comdty": "Copper",
+    "SBK6 Comdty": "Sugar",       "SBN6 Comdty": "Sugar",
+    "CCK6 Comdty": "Cocoa",       "CCN6 Comdty": "Cocoa",
+    "CLM6 Comdty": "WTI Crude",   "CLN6 Comdty": "WTI Crude",
+    "C K6 Comdty": "Corn",
+    "S K6 Comdty": "Soybean",
+    "KCK6 Comdty": "Coffee",
+    "LCJ6 Comdty": "Live Cattle",
+    "DBB": "Base Metals ETF",
+    # Equities — futures
+    "ESM6 Index":  "S&P E-mini",  "ESU6 Index":  "S&P E-mini",
+    "NQM6 Index":  "Nasdaq E-mini","NQU6 Index": "Nasdaq E-mini",
+    "MESM6 Index": "MSCI EM",     "MFSM6 Index": "MSCI EAFE",
+    "NXM6 Index":  "Nikkei 225",  "VGM6 Index":  "Euro Stoxx 50",
+    "IXAM6 Index": "XAF Financial","DNM6 Index":  "BCOM Index",
+    "XARM6 Index": "S&P RE E-mini","UXJ6 Index":  "VIX",
+    # Equities — ETFs
+    "VTV": "Vanguard Value",  "VUG": "Vanguard Growth",
+    "VO":  "Mid-Cap ETF",     "VTWO": "Russell 2000",
+    "VGK": "FTSE Europe",     "VFMO": "Momentum ETF",
+    "XLF": "Financials",      "XLE": "Energy",
+    "XLI": "Industrials",     "XLB": "Materials",
+    "XLY": "Cons. Disc.",     "XLP": "Cons. Staples",
+    "XLU": "Utilities",       "XBI": "Biotech",
+    "XHB": "Homebuilders",    "XRT": "Retail",
+    "EWW": "MSCI Mexico",     "EWY": "MSCI S. Korea",
+    "EWZ": "MSCI Brazil",     "EZA": "MSCI S. Africa",
+    "MCHI": "MSCI China",
+    # Fixed Income
+    "FVM6 Comdty": "5Y Treasury", "FVU6 Comdty": "5Y Treasury",
+    "TYM6 Comdty": "10Y Treasury","TYU6 Comdty": "10Y Treasury",
+    "USM6 Comdty": "30Y Bond",    "USU6 Comdty": "30Y Bond",
+    "IBYM6 Index": "HY Credit",
+    "VWOB": "EM Gov Bonds",   "AGZ": "Agency Bonds",
+    "LQD": "IG Corp Bonds",   "BKLN": "Senior Loans",
+    "EMHY": "EM High Yield",  "ICVT": "Convert. Bonds",
+}
+
+
+def classify_ticker(ticker: str, name: str):
+    if ticker in TICKER_ASSET_CLASS:
+        return TICKER_ASSET_CLASS[ticker]
+    n = name.lower()
+    if any(k in n for k in ("euro fx", "yen", "pound", "franc", "dollar index", "aud/", "cad/", "currency")):
+        return "currencies"
+    if any(k in n for k in ("gold", "silver", "copper", "crude", "oil", "sugar", "cocoa", "wheat", "corn", "commodity", "metal")):
+        return "commodities"
+    if any(k in n for k in ("treasury", "note", "bond", "yield", "credit", "high yield", "fixed income", "sovereign", "government bond")):
+        return "fixed_income"
+    if any(k in n for k in ("s&p", "nasdaq", "russell", "stoxx", "nikkei", "equity", "stock", "msci", "financial", "sector")):
+        return "equities"
+    return None
+
+
 CACHE_DIR = Path(os.environ.get("ETF_CACHE_DIR", str(Path.home() / ".claude" / "cache" / "unlimited-etfs")))
 REPORT_DIR = Path(os.environ.get("ETF_REPORT_DIR", str(Path.home() / "boquin.github.io" / "reports" / "unlimited-etfs")))
 LANDING_PAGE = Path(os.environ.get("ETF_LANDING_PAGE", str(Path.home() / "boquin.github.io" / "index.html")))
@@ -177,7 +301,6 @@ def snapshot_path(d: str) -> Path:
 
 def save_snapshot(data: dict, today: str):
     path = snapshot_path(today)
-    path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
     print(f"  Saved snapshot: {path.name}")
@@ -304,6 +427,8 @@ def print_context_for_claude(today_data: dict, metrics: dict, diffs: dict, prior
             "on the current positioning of the four Unlimited ETFs (HFND, HFGM, HFMF, HFEQ). "
             "Cover: overall risk-on/risk-off stance, sector tilts, geographic exposure (EM vs DM), "
             "notable position changes, and what the positioning implies for macro expectations. "
+            "Start with a 'Key macro themes' opening paragraph (2-3 sentences) that summarizes the dominant cross-ETF bets — what is the suite collectively expressing? "
+            "Then continue with fund-by-fund detail. "
             "Write in flowing prose, no bullet points, no headers. Be precise and insightful."
         ),
     }
@@ -354,6 +479,135 @@ new Chart(document.getElementById('aumChart'), {{
     }}
   }}
 }});
+</script>"""
+
+
+def positioning_bar_chart_js(today_data: dict) -> str:
+    CLASS_COLORS = {
+        "currencies":  "#8b5cf6",
+        "commodities": "#d97706",
+        "equities":    "#2563eb",
+        "fixed_income": "#16a34a",
+    }
+    CLASS_LABELS = {
+        "currencies":  "Currencies",
+        "commodities": "Commodities",
+        "equities":    "Equities",
+        "fixed_income": "Fixed Income",
+    }
+
+    candidates = []
+    for etf, holdings in today_data["etfs"].items():
+        for h in holdings:
+            if is_cash(h) or h["Weightings"] == 0:
+                continue
+            cls = classify_ticker(h["StockTicker"], h["SecurityName"])
+            if cls is None:
+                continue
+            candidates.append({
+                "label": f'{TICKER_SHORT_NAME.get(h["StockTicker"], h["StockTicker"].split()[0])} ({etf})',
+                "weight": h["Weightings"],
+                "cls": cls,
+            })
+
+    bars = []
+    for cls in CLASS_COLORS:
+        cls_items = [c for c in candidates if c["cls"] == cls]
+        # Group by asset name (strip " (ETF)" suffix) so the same asset in multiple
+        # ETFs can't dominate both top-2 slots. Keep the highest-weight entry per name.
+        name_to_best: dict = {}
+        for item in cls_items:
+            name = item["label"].rsplit(" (", 1)[0]
+            if name not in name_to_best or item["weight"] > name_to_best[name]["weight"]:
+                name_to_best[name] = item
+        unique_assets = list(name_to_best.values())
+        longs  = sorted(unique_assets, key=lambda x: x["weight"], reverse=True)[:2]
+        shorts = sorted(unique_assets, key=lambda x: x["weight"])[:2]
+        seen_ids: set = set()
+        for item in longs + shorts:
+            if id(item) not in seen_ids:
+                seen_ids.add(id(item))
+                bars.append(item)
+
+    bars.sort(key=lambda x: x["weight"])
+
+    if not bars:
+        return '<p style="color:#6b7280;font-style:italic">No classified positions found.</p>'
+
+    labels = [b["label"] for b in bars]
+    data   = [round(b["weight"], 2) for b in bars]
+    bg_colors     = [CLASS_COLORS[b["cls"]] + "cc" for b in bars]
+    border_colors = [CLASS_COLORS[b["cls"]] for b in bars]
+
+    legend_items = []
+    seen_cls: list = []
+    for b in bars:
+        if b["cls"] not in seen_cls:
+            seen_cls.append(b["cls"])
+            c = CLASS_COLORS[b["cls"]]
+            legend_items.append(
+                f'<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px">'
+                f'<span style="width:12px;height:12px;background:{c};border-radius:2px;display:inline-block"></span>'
+                f'{CLASS_LABELS[b["cls"]]}</span>'
+            )
+    legend_html = f'<div style="text-align:center;font-size:0.82rem;margin-bottom:0.5rem">{"".join(legend_items)}</div>'
+
+    labels_json = json.dumps(labels)
+    data_json   = json.dumps(data)
+    bg_json     = json.dumps(bg_colors)
+    border_json = json.dumps(border_colors)
+    n_bars = len(bars)
+    chart_height = max(180, n_bars * 28)
+
+    return f"""
+<div style="max-width:900px;margin:0 auto 2rem;">
+  {legend_html}
+  <div style="position:relative;height:{chart_height}px">
+    <canvas id="posChart"></canvas>
+  </div>
+</div>
+<script>
+(function() {{
+  var ctx = document.getElementById('posChart');
+  new Chart(ctx, {{
+    type: 'bar',
+    data: {{
+      labels: {labels_json},
+      datasets: [{{
+        label: 'Weight (%)',
+        data: {data_json},
+        backgroundColor: {bg_json},
+        borderColor: {border_json},
+        borderWidth: 1,
+        borderRadius: 3,
+      }}]
+    }},
+    options: {{
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {{
+        legend: {{ display: false }},
+        tooltip: {{
+          callbacks: {{
+            label: function(ctx) {{
+              return ' ' + ctx.parsed.x.toFixed(2) + '%';
+            }}
+          }}
+        }}
+      }},
+      scales: {{
+        x: {{
+          title: {{ display: true, text: 'Weight (%)' }},
+          grid: {{ color: '#f3f4f6' }}
+        }},
+        y: {{
+          ticks: {{ font: {{ family: 'monospace', size: 11 }} }}
+        }}
+      }}
+    }}
+  }});
+}})();
 </script>"""
 
 
@@ -438,6 +692,7 @@ def render_html(today_data: dict, metrics: dict, diffs: dict, summary: str,
     today = today_data["date"]
     tables = "\n".join(holdings_table(t, today_data["etfs"][t]) for t in ETF_TICKERS)
     chart = aum_chart_js(snapshots)
+    pos_chart = positioning_bar_chart_js(today_data)
     change_section = change_log_html(diffs, today, prior_date)
     refresh_tag = f'<p style="font-size:0.78rem;color:#9ca3af;margin-bottom:0.75rem">Last refreshed: {generated_at}</p>' if generated_at else ""
     if summary:
@@ -526,6 +781,10 @@ def render_html(today_data: dict, metrics: dict, diffs: dict, summary: str,
 
   <h2>AUM History</h2>
   {chart}
+
+  <h2>Asset Class Positioning — Top Longs &amp; Shorts</h2>
+  <p style="font-size:0.82rem;color:#6b7280;margin-bottom:0.75rem">Top 2 longs and shorts per asset class across all ETFs, sorted low to high. Color = asset class.</p>
+  {pos_chart}
 
   <h2>Macro Summary</h2>
   {summary_html}
