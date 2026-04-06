@@ -9,7 +9,7 @@ Usage:
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import yfinance as yf
 
@@ -172,7 +172,7 @@ data_json = json.dumps({
     "range_colors":   range_colors,
 }, indent=2)
 
-updated_ts = datetime.now().strftime("%B %d, %Y %H:%M UTC")
+updated_ts = datetime.now(timezone.utc).strftime("%B %d, %Y %H:%M UTC")
 
 # ---------------------------------------------------------------------------
 # HTML template — Treasury-matched color scheme
