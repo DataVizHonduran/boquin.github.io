@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICVT — Convertible Bond Bubble Chart</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  :root {
+    --forest: #1a3a2f;
+    --forest-light: #2d5a47;
+    --cream: #faf9f7;
+    --charcoal: #1a1a1a;
+    --warm-gray: #6b6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+  .page-header {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+    color: #fff;
+    padding: 20px 32px 18px;
+  }
+  .page-header h1 { font-size: 1.4rem; font-weight: 700; }
+  .page-header p { font-size: 0.82rem; opacity: 0.75; margin-top: 4px; }
+
+  /* Fund strip */
+  .fund-strip {
+    background: #fff;
+    border-bottom: 1px solid #e4e8ef;
+    padding: 8px 32px;
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .fund-name { font-weight: 600; color: var(--charcoal); }
+  .badge {
+    font-size: 0.70rem; padding: 2px 8px; border-radius: 999px; font-weight: 500;
+  }
+  .badge-fresh { background: rgba(44,160,44,0.12); color: #1a7a1a; }
+  .badge-stale { background: rgba(212,168,0,0.15); color: #8a6a00; }
+
+  .main { max-width: 1300px; margin: 0 auto; padding: 16px 24px 40px; }
+
+  /* Stats */
+  .stats-row { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .stat-card {
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 8px;
+    padding: 10px 14px; flex: 1; min-width: 110px;
+  }
+  .stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warm-gray); }
+  .stat-value { font-size: 1.2rem; font-weight: 700; margin-top: 2px; }
+  .stat-sub { font-size: 0.68rem; color: var(--warm-gray); margin-top: 1px; }
+
+  /* Sector selector */
+  .selector-panel {
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 10px;
+    padding: 14px 18px; margin-bottom: 14px;
+  }
+  .selector-panel h3 {
+    font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--warm-gray); margin-bottom: 8px; font-weight: 600;
+  }
+  .selector-controls {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .selector-hint { font-size: 0.73rem; color: var(--warm-gray); flex: 1; }
+  .btn-link {
+    font-size: 0.73rem; color: var(--forest); background: none; border: none;
+    cursor: pointer; padding: 2px 6px; border-radius: 4px; font-weight: 500;
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .btn-link:hover { background: rgba(26,58,47,0.08); }
+  .search-wrap { position: relative; margin-bottom: 8px; }
+  .search-wrap input {
+    width: 100%; padding: 6px 30px 6px 10px;
+    border: 1.5px solid #dde3ec; border-radius: 6px;
+    font-size: 0.80rem; outline: none; background: #f8f9fc; color: var(--charcoal);
+  }
+  .search-wrap input:focus { border-color: #8b9dc3; background: #fff; }
+  .search-clear {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; color: #aab3c8; font-size: 1rem; line-height: 1;
+    display: none; user-select: none;
+  }
+  .search-clear.visible { display: block; }
+  .no-results { font-size: 0.76rem; color: #aab3c8; padding: 4px 2px; }
+  .sector-pills {
+    display: flex; flex-wrap: wrap; gap: 5px; padding: 2px;
+  }
+  .pill {
+    cursor: pointer; padding: 3px 11px; border-radius: 999px;
+    font-size: 0.76rem; font-weight: 500;
+    border: 1.5px solid #dde3ec; background: #f8f9fc; color: var(--charcoal);
+    transition: all 0.13s; user-select: none;
+  }
+  .pill:hover { border-color: #aab3c8; background: #eef1f7; }
+  .pill.active { color: #fff; }
+  .pill.disabled { opacity: 0.38; cursor: not-allowed; }
+
+  /* Chart */
+  .chart-card {
+    background: #fff; border: 1px solid #e4e8ef; border-radius: 10px;
+    padding: 4px; margin-bottom: 14px;
+  }
+  #bubble-chart { width: 100%; height: 580px; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid #e4e8ef; margin-top: 4px; padding-top: 12px;
+    font-size: 0.70rem; color: var(--warm-gray);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+  }
+  .update-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+  .dot-fresh { background: #2ca02c; }
+  .dot-stale { background: #d4a800; }
+
+  @media (max-width: 600px) {
+    .page-header { padding: 14px 16px; }
+    .fund-strip { padding: 7px 16px; }
+    .main { padding: 10px 12px 30px; }
+    #bubble-chart { height: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>&#128200; ICVT — iShares Convertible Bond ETF</h1>
+  <p>Yield to Worst vs. Modified Duration &nbsp;&middot;&nbsp; Bubble size = portfolio weight &nbsp;&middot;&nbsp; Color = sector</p>
+</header>
+
+<div class="fund-strip">
+  <span class="fund-name">iShares Convertible Bond ETF (ICVT)</span>
+  <span id="fund-badge" class="badge"></span>
+  <span id="fund-holdings-date" style="margin-left:auto"></span>
+</div>
+
+<main class="main">
+  <div class="stats-row" id="stats-row"></div>
+
+  <div class="selector-panel">
+    <h3>Select Sectors to Display</h3>
+    <div class="selector-controls">
+      <span class="selector-hint">Click sectors to toggle. Max <strong>8</strong> at a time.</span>
+      <button class="btn-link" id="btn-select-all">Select All</button>
+      <button class="btn-link" id="btn-clear">Clear</button>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="group-search" placeholder="Search sectors…" autocomplete="off" spellcheck="false">
+      <span class="search-clear" id="search-clear" title="Clear">&#x2715;</span>
+    </div>
+    <div class="sector-pills" id="sector-pills"></div>
+  </div>
+
+  <div class="chart-card">
+    <div id="bubble-chart"></div>
+  </div>
+
+  <div class="page-footer">
+    <div id="footer-left"></div>
+    <div>Source: <a href="https://www.ishares.com/us/products/272819/" target="_blank" rel="noopener">iShares</a> &nbsp;|&nbsp; Fixed income holdings only &nbsp;|&nbsp; Bubble size = portfolio weight (%)</div>
+  </div>
+</main>
+
+<script>
+const DATA = {"as_of":"2026-04-02","fetched_at":"2026-04-07T10:23:42Z","is_fresh":true,"bond_count":324,"sector_count":16,"sectors":["Technology","Consumer Cyclical","Consumer Non-Cyclical","Electric","Reits","Capital Goods","Communications","Basic Industry","Financial Other","Brokerage/Asset Managers/Exchanges","Energy","Industrial Other","Finance Companies","Transportation","Utility Other","Insurance"],"bonds":[{"n":"WESTERN DIGITAL CORPORATION","s":"Technology","d":3.8,"y":0.38,"w":3.84,"m":204124839.0,"c":3.0,"t":"Nov 15, 2028"},{"n":"LUMENTUM HOLDINGS INC","s":"Technology","d":5.12,"y":0.13,"w":2.2,"m":116863266.0,"c":1.5,"t":"Dec 15, 2029"},{"n":"ALIBABA GROUP HOLDING LTD","s":"Consumer Cyclical","d":5.25,"y":0.37,"w":2.09,"m":111049727.0,"c":0.5,"t":"Jun 01, 2031"},{"n":"LUMENTUM HOLDINGS INC 144A","s":"Technology","d":6.72,"y":0.08,"w":1.74,"m":92620269.0,"c":0.38,"t":"Mar 15, 2032"},{"n":"LUMENTUM HOLDINGS INC 144A","s":"Technology","d":3.33,"y":0.08,"w":1.66,"m":88288915.0,"c":0.5,"t":"Jun 15, 2028"},{"n":"LUMENTUM HOLDINGS INC","s":"Technology","d":3.15,"y":0.06,"w":1.19,"m":63296834.0,"c":0.5,"t":"Dec 15, 2026"},{"n":"COREWEAVE INC 144A","s":"Technology","d":5.37,"y":1.67,"w":0.83,"m":44017861.0,"c":1.75,"t":"Dec 01, 2031"},{"n":"DOORDASH INC 144A","s":"Consumer Cyclical","d":4.08,"y":1.89,"w":0.77,"m":41046985.0,"c":0.0,"t":"May 15, 2030"},{"n":"STRATEGY INC 144A","s":"Technology","d":3.49,"y":8.59,"w":0.77,"m":40765674.0,"c":0.0,"t":"Dec 01, 2029"},{"n":"AKAMAI TECHNOLOGIES INC 144A","s":"Technology","d":7.24,"y":0.18,"w":0.75,"m":39734732.0,"c":0.25,"t":"May 15, 2033"},{"n":"MKS INSTRUMENTS INC","s":"Technology","d":4.33,"y":0.74,"w":0.72,"m":38453420.0,"c":1.25,"t":"Jun 01, 2030"},{"n":"PG&E CORPORATION","s":"Electric","d":1.59,"y":4.02,"w":0.7,"m":37005292.0,"c":4.25,"t":"Dec 01, 2027"},{"n":"WELLTOWER OP LLC 144A","s":"Reits","d":2.46,"y":1.29,"w":0.69,"m":36488117.0,"c":2.75,"t":"May 15, 2028"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":4.78,"y":1.55,"w":0.69,"m":36456986.0,"c":1.25,"t":"Mar 15, 2031"},{"n":"MP MATERIALS CORP 144A","s":"Basic Industry","d":4.22,"y":1.22,"w":0.65,"m":34465677.0,"c":3.0,"t":"Mar 01, 2030"},{"n":"UBER TECHNOLOGIES INC","s":"Consumer Cyclical","d":2.72,"y":0.73,"w":0.64,"m":33808190.0,"c":0.88,"t":"Dec 01, 2028"},{"n":"SEAGATE HDD CAYMAN","s":"Technology","d":3.09,"y":0.68,"w":0.63,"m":33658571.0,"c":3.5,"t":"Jun 01, 2028"},{"n":"JD.COM INC","s":"Consumer Cyclical","d":3.14,"y":1.08,"w":0.6,"m":32093198.0,"c":0.25,"t":"Jun 01, 2029"},{"n":"ZOETIS INC 144A","s":"Consumer Non-Cyclical","d":3.18,"y":0.45,"w":0.6,"m":32070804.0,"c":0.25,"t":"Jun 15, 2029"},{"n":"CHECK POINT SOFTWARE TECHNOLOGIES 144A","s":"Technology","d":4.64,"y":1.38,"w":0.57,"m":30318687.0,"c":0.0,"t":"Dec 15, 2030"},{"n":"LIBERTY LIVE HOLDINGS INC 144A","s":"Financial Other","d":21.92,"y":1.52,"w":0.54,"m":28519540.0,"c":2.38,"t":"Sep 30, 2032"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":4.4,"y":0.91,"w":0.54,"m":28476875.0,"c":1.0,"t":"Sep 15, 2030"},{"n":"STRATEGY INC","s":"Technology","d":3.78,"y":7.41,"w":0.54,"m":28470183.0,"c":0.0,"t":"Mar 01, 2030"},{"n":"GLOBAL PAYMENTS INC","s":"Technology","d":4.64,"y":4.28,"w":0.53,"m":28414631.0,"c":1.5,"t":"Mar 01, 2031"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":5.93,"y":2.55,"w":0.52,"m":27772495.0,"c":2.75,"t":"Sep 15, 2032"},{"n":"SUPER MICRO COMPUTER INC 144A","s":"Technology","d":4.05,"y":7.33,"w":0.52,"m":27690918.0,"c":0.0,"t":"Jun 15, 2030"},{"n":"SOUTHERN COMPANY (THE) 144A","s":"Electric","d":2.1,"y":3.15,"w":0.52,"m":27579293.0,"c":3.25,"t":"Jun 15, 2028"},{"n":"RIVIAN AUTOMOTIVE INC","s":"Consumer Cyclical","d":4.06,"y":4.41,"w":0.52,"m":27544620.0,"c":3.63,"t":"Oct 15, 2030"},{"n":"WELLTOWER OP LLC 144A","s":"Reits","d":3.37,"y":1.92,"w":0.52,"m":27452225.0,"c":3.13,"t":"Jul 15, 2029"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":6.28,"y":3.31,"w":0.51,"m":27324620.0,"c":2.63,"t":"Mar 15, 2033"},{"n":"RIVIAN AUTOMOTIVE INC","s":"Consumer Cyclical","d":2.77,"y":4.25,"w":0.5,"m":26327610.0,"c":4.63,"t":"Mar 15, 2029"},{"n":"SOFI TECHNOLOGIES INC 144A","s":"Finance Companies","d":3.22,"y":0.69,"w":0.49,"m":25914719.0,"c":1.25,"t":"Mar 15, 2029"},{"n":"EVERGY INC","s":"Electric","d":1.77,"y":3.27,"w":0.48,"m":25750561.0,"c":4.5,"t":"Dec 15, 2027"},{"n":"INTERDIGITAL INC","s":"Technology","d":2.08,"y":0.86,"w":0.48,"m":25704276.0,"c":3.5,"t":"Jun 01, 2027"},{"n":"ZSCALER INC 144A","s":"Technology","d":2.19,"y":4.12,"w":0.48,"m":25527873.0,"c":0.0,"t":"Jul 15, 2028"},{"n":"TRIP.COM GROUP LTD","s":"Consumer Cyclical","d":3.17,"y":0.72,"w":0.48,"m":25471597.0,"c":0.75,"t":"Jun 15, 2029"},{"n":"LIVE NATION ENTERTAINMENT INC","s":"Consumer Cyclical","d":2.88,"y":2.01,"w":0.48,"m":25330089.0,"c":3.13,"t":"Jan 15, 2029"},{"n":"FIRSTENERGY CORPORATION 144A","s":"Electric","d":2.68,"y":3.15,"w":0.47,"m":25117537.0,"c":3.63,"t":"Jan 15, 2029"},{"n":"DUKE ENERGY CORP 144A","s":"Electric","d":2.81,"y":2.97,"w":0.47,"m":24984736.0,"c":3.0,"t":"Mar 15, 2029"},{"n":"AKAMAI TECHNOLOGIES INC","s":"Technology","d":2.89,"y":0.97,"w":0.45,"m":23971405.0,"c":1.13,"t":"Feb 15, 2029"},{"n":"ON SEMICONDUCTOR CORPORATION","s":"Technology","d":2.88,"y":1.21,"w":0.45,"m":23926906.0,"c":0.5,"t":"Mar 01, 2029"},{"n":"LIVE NATION ENTERTAINMENT INC 144A","s":"Consumer Cyclical","d":5.03,"y":2.77,"w":0.44,"m":23632695.0,"c":2.88,"t":"Oct 15, 2031"},{"n":"PLANET LABS PBC 144A","s":"Communications","d":5.12,"y":0.16,"w":0.44,"m":23531245.0,"c":0.5,"t":"Oct 15, 2030"},{"n":"TERAWULF INC 144A","s":"Financial Other","d":5.46,"y":0.7,"w":0.44,"m":23176273.0,"c":1.0,"t":"Sep 01, 2031"},{"n":"SUPER MICRO COMPUTER INC","s":"Technology","d":2.62,"y":11.15,"w":0.43,"m":22960885.0,"c":3.5,"t":"Mar 01, 2029"},{"n":"JAZZ INV I LTD","s":"Consumer Non-Cyclical","d":4.34,"y":2.22,"w":0.43,"m":22923363.0,"c":3.13,"t":"Sep 15, 2030"},{"n":"ADVANCED ENERGY INDUSTRIES INC","s":"Technology","d":2.88,"y":1.01,"w":0.43,"m":22904035.0,"c":2.5,"t":"Sep 15, 2028"},{"n":"NEXTERA ENERGY CAP","s":"Electric","d":1.07,"y":2.15,"w":0.43,"m":22823268.0,"c":3.0,"t":"Mar 01, 2027"},{"n":"AKAMAI TECHNOLOGIES INC","s":"Technology","d":1.49,"y":0.32,"w":0.42,"m":22111939.0,"c":0.38,"t":"Sep 01, 2027"},{"n":"VENTAS REALTY LP 144A","s":"Reits","d":0.01,"y":2.44,"w":0.41,"m":21714460.0,"c":3.75,"t":"Jun 01, 2026"},{"n":"FIRSTENERGY CORPORATION 144A","s":"Electric","d":4.41,"y":3.31,"w":0.41,"m":21588739.0,"c":3.88,"t":"Jan 15, 2031"},{"n":"COINBASE GLOBAL INC 144A","s":"Brokerage/Asset Managers/Exchanges","d":3.37,"y":3.79,"w":0.4,"m":21443657.0,"c":0.0,"t":"Oct 01, 2029"},{"n":"AST SPACEMOBILE INC 144A","s":"Communications","d":8.92,"y":1.72,"w":0.4,"m":21342152.0,"c":2.0,"t":"Jan 15, 2036"},{"n":"NCL CORPORATION LTD 144A","s":"Consumer Cyclical","d":4.33,"y":2.4,"w":0.4,"m":21041885.0,"c":0.75,"t":"Sep 15, 2030"},{"n":"ALNYLAM PHARMACEUTICALS INC","s":"Technology","d":1.56,"y":0.8,"w":0.39,"m":20844793.0,"c":1.0,"t":"Sep 15, 2027"},{"n":"BILL HOLDINGS INC 144A","s":"Technology","d":3.88,"y":2.92,"w":0.38,"m":20240774.0,"c":0.0,"t":"Apr 01, 2030"},{"n":"DIGITAL REALTY TRUST LP 144A","s":"Reits","d":3.5,"y":1.75,"w":0.38,"m":20107060.0,"c":1.88,"t":"Nov 15, 2029"},{"n":"PPL CAPITAL FUNDING INC 144A","s":"Electric","d":4.31,"y":2.84,"w":0.38,"m":20007307.0,"c":3.0,"t":"Dec 01, 2030"},{"n":"MICROCHIP TECHNOLOGY INCORPORATED","s":"Technology","d":4.08,"y":1.36,"w":0.38,"m":19940737.0,"c":0.75,"t":"Jun 01, 2030"},{"n":"COINBASE GLOBAL INC","s":"Brokerage/Asset Managers/Exchanges","d":0.16,"y":4.73,"w":0.37,"m":19845963.0,"c":0.5,"t":"Jun 01, 2026"},{"n":"LIVE NATION ENTERTAINMENT INC","s":"Consumer Cyclical","d":3.6,"y":2.61,"w":0.37,"m":19788783.0,"c":2.88,"t":"Jan 15, 2030"},{"n":"APPLIED DIGITAL CORP","s":"Capital Goods","d":4.52,"y":1.0,"w":0.37,"m":19787419.0,"c":2.75,"t":"Jun 01, 2030"},{"n":"MAKEMYTRIP LTD 144A","s":"Consumer Cyclical","d":4.09,"y":7.38,"w":0.37,"m":19707097.0,"c":0.0,"t":"Jul 01, 2030"},{"n":"CENTERPOINT ENERGY INC","s":"Electric","d":0.5,"y":3.53,"w":0.37,"m":19608433.0,"c":4.25,"t":"Aug 15, 2026"},{"n":"COINBASE GLOBAL INC 144A","s":"Brokerage/Asset Managers/Exchanges","d":6.28,"y":3.48,"w":0.36,"m":19246182.0,"c":0.0,"t":"Oct 01, 2032"},{"n":"COINBASE GLOBAL INC","s":"Brokerage/Asset Managers/Exchanges","d":3.93,"y":2.27,"w":0.36,"m":19062159.0,"c":0.25,"t":"Apr 01, 2030"},{"n":"JAZZ INVESTMENTS I LTD","s":"Consumer Non-Cyclical","d":0.54,"y":1.66,"w":0.36,"m":18992499.0,"c":2.0,"t":"Jun 15, 2026"},{"n":"PPL CAPITAL FUNDING INC","s":"Electric","d":1.97,"y":2.43,"w":0.36,"m":18934029.0,"c":2.88,"t":"Mar 15, 2028"},{"n":"DEXCOM INC","s":"Consumer Non-Cyclical","d":2.07,"y":4.22,"w":0.35,"m":18600323.0,"c":0.38,"t":"May 15, 2028"},{"n":"DRAFTKINGS INC","s":"Consumer Cyclical","d":1.86,"y":5.2,"w":0.34,"m":18295194.0,"c":0.0,"t":"Mar 15, 2028"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":5.29,"y":1.33,"w":0.34,"m":18105936.0,"c":3.0,"t":"Jun 05, 2031"},{"n":"UBER TECHNOLOGIES INC 144A","s":"Consumer Cyclical","d":2.1,"y":0.89,"w":0.34,"m":18030582.0,"c":0.0,"t":"May 15, 2028"},{"n":"STRATEGY INC","s":"Technology","d":2.47,"y":0.57,"w":0.34,"m":17935258.0,"c":0.63,"t":"Sep 15, 2028"},{"n":"NEBIUS GROUP NV 144A","s":"Technology","d":3.51,"y":0.89,"w":0.34,"m":17881083.0,"c":2.0,"t":"Jun 05, 2029"},{"n":"WEC ENERGY GROUP INC","s":"Electric","d":3.02,"y":3.46,"w":0.33,"m":17758976.0,"c":4.38,"t":"Jun 01, 2029"},{"n":"WEC ENERGY GROUP INC","s":"Electric","d":1.21,"y":3.54,"w":0.33,"m":17351787.0,"c":4.38,"t":"Jun 01, 2027"},{"n":"IREN LTD 144A","s":"Technology","d":6.8,"y":2.53,"w":0.32,"m":17232795.0,"c":1.0,"t":"Jun 01, 2033"},{"n":"CMS ENERGY CORPORATION 144A","s":"Electric","d":4.63,"y":2.99,"w":0.32,"m":17025231.0,"c":3.13,"t":"May 01, 2031"},{"n":"CENTERPOINT ENERGY INC 144A","s":"Electric","d":2.26,"y":2.81,"w":0.32,"m":17007020.0,"c":3.0,"t":"Aug 01, 2028"},{"n":"GUARDANT HEALTH INC","s":"Consumer Non-Cyclical","d":5.01,"y":0.73,"w":0.32,"m":16792176.0,"c":1.25,"t":"Feb 15, 2031"},{"n":"EXELON CORPORATION 144A","s":"Electric","d":2.79,"y":3.11,"w":0.32,"m":16763063.0,"c":3.25,"t":"Mar 15, 2029"},{"n":"IREN LTD 144A","s":"Technology","d":6.05,"y":2.16,"w":0.31,"m":16397969.0,"c":0.25,"t":"Jun 01, 2032"},{"n":"TERAWULF INC 144A","s":"Financial Other","d":4.0,"y":1.37,"w":0.31,"m":16292852.0,"c":2.75,"t":"Feb 01, 2030"},{"n":"WAYFAIR INC","s":"Consumer Cyclical","d":2.77,"y":2.02,"w":0.31,"m":16253993.0,"c":3.5,"t":"Nov 15, 2028"},{"n":"UGI CORPORATION","s":"Energy","d":2.19,"y":3.5,"w":0.3,"m":16151094.0,"c":5.0,"t":"Jun 01, 2028"},{"n":"SEA LTD","s":"Technology","d":0.44,"y":5.07,"w":0.3,"m":16101148.0,"c":0.25,"t":"Sep 15, 2026"},{"n":"RUBRIK INC 144A","s":"Technology","d":4.07,"y":3.29,"w":0.3,"m":16044716.0,"c":0.0,"t":"Jun 15, 2030"},{"n":"DATADOG INC","s":"Technology","d":3.64,"y":0.78,"w":0.3,"m":15889222.0,"c":0.0,"t":"Dec 01, 2029"},{"n":"BRIDGEBIO PHARMA INC","s":"Consumer Non-Cyclical","d":1.27,"y":1.4,"w":0.3,"m":15875046.0,"c":2.5,"t":"Mar 15, 2027"},{"n":"MIRUM PHARMACEUTICALS INC","s":"Technology","d":3.53,"y":1.31,"w":0.3,"m":15754729.0,"c":4.0,"t":"May 01, 2029"},{"n":"AMERICAN WATER CAPITAL CORP","s":"Utility Other","d":0.2,"y":4.2,"w":0.3,"m":15748580.0,"c":3.63,"t":"Jun 15, 2026"},{"n":"BRIDGEBIO PHARMA I","s":"Consumer Non-Cyclical","d":5.0,"y":1.04,"w":0.3,"m":15685317.0,"c":1.75,"t":"Mar 01, 2031"},{"n":"CYTOKINETICS INCORPORATED 144A","s":"Consumer Non-Cyclical","d":5.38,"y":1.37,"w":0.29,"m":15627926.0,"c":1.75,"t":"Oct 01, 2031"},{"n":"TELADOC HEALTH INC","s":"Consumer Non-Cyclical","d":1.12,"y":5.39,"w":0.29,"m":15534898.0,"c":1.25,"t":"Jun 01, 2027"},{"n":"WEC ENERGY GROUP INC 144A","s":"Electric","d":2.07,"y":3.2,"w":0.29,"m":15495044.0,"c":3.38,"t":"Jun 01, 2028"},{"n":"INTEGER HOLDINGS C","s":"Consumer Non-Cyclical","d":3.76,"y":3.06,"w":0.29,"m":15489800.0,"c":1.88,"t":"Mar 15, 2030"},{"n":"LIBERTY BROADBAND CORP 144A","s":"Communications","d":18.2,"y":3.11,"w":0.29,"m":15405736.0,"c":3.13,"t":"Apr 06, 2026"},{"n":"SOUTHERN COMPANY (THE)","s":"Electric","d":1.2,"y":3.98,"w":0.29,"m":15368843.0,"c":4.5,"t":"Jun 15, 2027"},{"n":"TRUMP MEDIA & TECHNOLOGY GROUP COR 144A","s":"Technology","d":2.09,"y":10.86,"w":0.29,"m":15273710.0,"c":0.0,"t":"May 29, 2028"},{"n":"CMS ENERGY CORPORATION","s":"Electric","d":2.04,"y":2.93,"w":0.29,"m":15250372.0,"c":3.38,"t":"May 01, 2028"},{"n":"SPHERE ENTERTAINMENT CO","s":"Communications","d":3.29,"y":0.95,"w":0.29,"m":15226470.0,"c":3.5,"t":"Dec 01, 2028"},{"n":"WIX.COM LTD 144A","s":"Technology","d":4.25,"y":4.67,"w":0.28,"m":15100421.0,"c":0.0,"t":"Sep 15, 2030"},{"n":"SOLARIS ENERGY INFRASTRUCTURE INC","s":"Energy","d":5.57,"y":0.2,"w":0.28,"m":14765764.0,"c":0.25,"t":"Oct 01, 2031"},{"n":"GALAXY DIGITAL HOLDINGS LP 144A","s":"Brokerage/Asset Managers/Exchanges","d":4.81,"y":7.69,"w":0.28,"m":14689114.0,"c":0.5,"t":"May 01, 2031"},{"n":"ETSY INC","s":"Consumer Cyclical","d":2.14,"y":5.33,"w":0.27,"m":14611600.0,"c":0.25,"t":"Jun 15, 2028"},{"n":"BOSTON PROPERTIES LP 144A","s":"Reits","d":4.22,"y":4.21,"w":0.27,"m":14590159.0,"c":2.0,"t":"Oct 01, 2030"},{"n":"MICROCHIP TECHNOLOGY INCORPORATED 144A","s":"Technology","d":3.86,"y":0.58,"w":0.27,"m":14423506.0,"c":0.0,"t":"Feb 15, 2030"},{"n":"MICROSTRATEGY INCORPORATED 144A","s":"Technology","d":3.96,"y":0.55,"w":0.27,"m":14414976.0,"c":0.63,"t":"Mar 15, 2030"},{"n":"REALTY INCOME CORPORATION 144A","s":"Reits","d":2.63,"y":3.38,"w":0.27,"m":14255859.0,"c":3.5,"t":"Jan 15, 2029"},{"n":"MARA HOLDINGS INC 144A","s":"Industrial Other","d":3.79,"y":7.53,"w":0.27,"m":14171392.0,"c":0.0,"t":"Mar 01, 2030"},{"n":"IONIS PHARMACEUTICALS INC","s":"Consumer Non-Cyclical","d":2.36,"y":1.16,"w":0.27,"m":14091886.0,"c":1.75,"t":"Jun 15, 2028"},{"n":"AST SPACEMOBILE INC 144A","s":"Communications","d":8.96,"y":2.16,"w":0.26,"m":14042934.0,"c":2.25,"t":"Apr 15, 2036"},{"n":"MARA HOLDINGS INC","s":"Industrial Other","d":5.08,"y":7.46,"w":0.26,"m":14018591.0,"c":0.0,"t":"Jun 01, 2031"},{"n":"LI AUTO INC","s":"Consumer Cyclical","d":2.07,"y":0.25,"w":0.26,"m":14005247.0,"c":0.25,"t":"May 01, 2028"},{"n":"CENTRUS ENERGY CORP 144A","s":"Basic Industry","d":4.77,"y":1.05,"w":0.26,"m":13864566.0,"c":2.25,"t":"Nov 01, 2030"},{"n":"EURONET WORLDWIDE INC. 144A","s":"Technology","d":4.35,"y":3.8,"w":0.26,"m":13800653.0,"c":0.63,"t":"Oct 01, 2030"},{"n":"AFFIRM HOLDINGS INC","s":"Financial Other","d":3.6,"y":2.58,"w":0.26,"m":13784023.0,"c":0.75,"t":"Dec 15, 2029"},{"n":"ASCENDIS PHARMA A 144A","s":"Technology","d":2.15,"y":1.53,"w":0.25,"m":13533074.0,"c":2.25,"t":"Apr 01, 2028"},{"n":"COMPASS INC 144A","s":"Consumer Cyclical","d":4.91,"y":3.82,"w":0.25,"m":13513600.0,"c":0.25,"t":"Apr 15, 2031"},{"n":"BRIDGEBIO PHARMA INC","s":"Consumer Non-Cyclical","d":2.78,"y":2.0,"w":0.25,"m":13299769.0,"c":2.25,"t":"Feb 01, 2029"},{"n":"ENERGY FUELS INC 144A","s":"Basic Industry","d":5.52,"y":0.65,"w":0.25,"m":13265863.0,"c":0.75,"t":"Nov 01, 2031"},{"n":"MICROSTRATEGY INCORPORATED","s":"Technology","d":5.73,"y":2.22,"w":0.25,"m":13080058.0,"c":2.25,"t":"Jun 15, 2032"},{"n":"CORE SCIENTIFIC INC 144A","s":"Finance Companies","d":3.53,"y":1.77,"w":0.25,"m":13041150.0,"c":3.0,"t":"Sep 01, 2029"},{"n":"PARSONS CORP","s":"Technology","d":2.78,"y":2.79,"w":0.24,"m":12967857.0,"c":2.63,"t":"Mar 01, 2029"},{"n":"CLEANSPARK INC 144A","s":"Financial Other","d":5.69,"y":6.31,"w":0.24,"m":12900929.0,"c":0.0,"t":"Feb 15, 2032"},{"n":"GDS HOLDINGS LTD 144A","s":"Technology","d":5.95,"y":1.57,"w":0.24,"m":12823894.0,"c":2.25,"t":"Jun 01, 2032"},{"n":"ITRON INC","s":"Capital Goods","d":4.14,"y":1.37,"w":0.24,"m":12809546.0,"c":1.38,"t":"Jul 15, 2030"},{"n":"GRANITE CONSTRUCTION INCORPORATED","s":"Capital Goods","d":2.58,"y":1.4,"w":0.24,"m":12808903.0,"c":3.75,"t":"May 15, 2028"},{"n":"AST SPACEMOBILE INC 144A","s":"Communications","d":6.31,"y":1.47,"w":0.24,"m":12762912.0,"c":2.38,"t":"Oct 15, 2032"},{"n":"MERIT MEDICAL SYSTEMS INC 144A","s":"Consumer Non-Cyclical","d":2.72,"y":2.81,"w":0.24,"m":12678174.0,"c":3.0,"t":"Feb 01, 2029"},{"n":"CRESCENT ENERGY CO 144A","s":"Energy","d":4.68,"y":2.39,"w":0.24,"m":12637321.0,"c":2.75,"t":"Mar 15, 2031"},{"n":"ORMAT TECHNOLOGIES INC 144A","s":"Electric","d":4.78,"y":1.43,"w":0.24,"m":12581861.0,"c":1.5,"t":"Mar 15, 2031"},{"n":"NUTANIX INC","s":"Technology","d":3.62,"y":2.81,"w":0.24,"m":12545406.0,"c":0.5,"t":"Dec 15, 2029"},{"n":"ITRON INC 144A","s":"Capital Goods","d":5.92,"y":0.95,"w":0.24,"m":12506210.0,"c":0.0,"t":"Mar 15, 2032"},{"n":"CONMED CORP","s":"Consumer Non-Cyclical","d":1.16,"y":4.93,"w":0.23,"m":12389121.0,"c":2.25,"t":"Jun 15, 2027"},{"n":"B2GOLD CORP 144A","s":"Basic Industry","d":3.91,"y":1.65,"w":0.23,"m":12381801.0,"c":2.75,"t":"Feb 01, 2030"},{"n":"HALOZYME THERAPEUTICS INC 144A","s":"Technology","d":6.39,"y":1.04,"w":0.23,"m":12124092.0,"c":0.88,"t":"Nov 15, 2032"},{"n":"PNM RESOURCES INC","s":"Electric","d":15.62,"y":4.22,"w":0.23,"m":12013052.0,"c":5.75,"t":"Jun 01, 2054"},{"n":"INTUITIVE MACHINES INC 144A","s":"Capital Goods","d":4.7,"y":1.17,"w":0.23,"m":11980243.0,"c":2.5,"t":"Oct 01, 2030"},{"n":"HIMS & HERS HEALTH INC 144A","s":"Consumer Cyclical","d":3.82,"y":7.6,"w":0.22,"m":11955495.0,"c":0.0,"t":"May 15, 2030"},{"n":"HALOZYME THERAPEUTICS INC 144A","s":"Technology","d":4.86,"y":0.46,"w":0.22,"m":11942444.0,"c":0.0,"t":"Feb 15, 2031"},{"n":"MARA HOLDINGS INC 144A","s":"Industrial Other","d":6.01,"y":5.26,"w":0.22,"m":11933435.0,"c":0.0,"t":"Aug 01, 2032"},{"n":"LUCID GROUP INC 144A","s":"Consumer Cyclical","d":4.07,"y":18.2,"w":0.22,"m":11920901.0,"c":7.0,"t":"Nov 01, 2031"},{"n":"STRIDE INC","s":"Industrial Other","d":1.71,"y":0.64,"w":0.22,"m":11783966.0,"c":1.13,"t":"Sep 01, 2027"},{"n":"IREN LTD 144A","s":"Technology","d":5.1,"y":5.81,"w":0.22,"m":11695879.0,"c":0.0,"t":"Jul 01, 2031"},{"n":"COMMVAULT SYSTEMS INC 144A","s":"Technology","d":4.35,"y":4.73,"w":0.22,"m":11692764.0,"c":0.0,"t":"Sep 15, 2030"},{"n":"SAREPTA THERAPEUTICS INC","s":"Consumer Non-Cyclical","d":3.78,"y":9.59,"w":0.22,"m":11686728.0,"c":4.88,"t":"Sep 01, 2030"},{"n":"AEROVIRONMENT INC","s":"Capital Goods","d":4.27,"y":0.35,"w":0.22,"m":11674763.0,"c":0.0,"t":"Jul 15, 2030"},{"n":"IRHYTHM TECHNOLOGIES INC","s":"Consumer Non-Cyclical","d":3.36,"y":1.37,"w":0.22,"m":11661149.0,"c":1.5,"t":"Sep 01, 2029"},{"n":"TEMPUS AI INC 144A","s":"Consumer Non-Cyclical","d":4.19,"y":1.46,"w":0.22,"m":11568075.0,"c":0.75,"t":"Jul 15, 2030"},{"n":"VISHAY INTERTECHNOLOGY INC.","s":"Technology","d":4.19,"y":2.97,"w":0.22,"m":11486102.0,"c":2.25,"t":"Sep 15, 2030"},{"n":"GUIDEWIRE SOFTWARE","s":"Technology","d":3.47,"y":1.28,"w":0.21,"m":11347302.0,"c":1.25,"t":"Nov 01, 2029"},{"n":"FLUOR CORPORATION","s":"Industrial Other","d":3.41,"y":0.91,"w":0.21,"m":11301528.0,"c":1.13,"t":"Aug 15, 2029"},{"n":"AVNET INC 144A","s":"Technology","d":4.27,"y":1.6,"w":0.21,"m":11210124.0,"c":1.75,"t":"Sep 01, 2030"},{"n":"ETSY INC 144A","s":"Consumer Cyclical","d":4.08,"y":1.54,"w":0.21,"m":11209710.0,"c":1.0,"t":"Jun 15, 2030"},{"n":"RIOT PLATFORMS INC 144A","s":"Technology","d":3.81,"y":0.63,"w":0.21,"m":11199303.0,"c":0.75,"t":"Jan 15, 2030"},{"n":"VIAVI SOLUTIONS INC 144A","s":"Technology","d":5.39,"y":0.23,"w":0.21,"m":11068574.0,"c":0.63,"t":"Mar 01, 2031"},{"n":"GOLAR LNG LTD 144A","s":"Energy","d":4.47,"y":2.27,"w":0.21,"m":11026317.0,"c":2.75,"t":"Dec 15, 2030"},{"n":"BRIDGEBIO PHARMA INC 144A","s":"Consumer Non-Cyclical","d":6.63,"y":0.86,"w":0.21,"m":11020585.0,"c":0.75,"t":"Feb 01, 2033"},{"n":"LANTHEUS HOLDINGS INC","s":"Consumer Non-Cyclical","d":1.74,"y":2.17,"w":0.21,"m":11007877.0,"c":2.63,"t":"Dec 15, 2027"},{"n":"CENTERPOINT ENERGY INC 144A","s":"Electric","d":2.96,"y":2.84,"w":0.2,"m":10817325.0,"c":2.88,"t":"May 15, 2029"},{"n":"HAEMONETICS CORPORATION","s":"Consumer Non-Cyclical","d":2.97,"y":4.1,"w":0.2,"m":10791164.0,"c":2.5,"t":"Jun 01, 2029"},{"n":"WORKIVA INC","s":"Technology","d":2.29,"y":4.01,"w":0.2,"m":10620067.0,"c":1.25,"t":"Aug 15, 2028"},{"n":"FIVE9 INC","s":"Technology","d":2.83,"y":5.89,"w":0.2,"m":10585864.0,"c":1.0,"t":"Mar 15, 2029"},{"n":"DROPBOX INC","s":"Technology","d":1.87,"y":2.41,"w":0.2,"m":10574345.0,"c":0.0,"t":"Mar 01, 2028"},{"n":"CLEANSPARK INC","s":"Financial Other","d":4.19,"y":0.22,"w":0.19,"m":10329473.0,"c":0.0,"t":"Jun 15, 2030"},{"n":"SUPER MICRO COMPUTER INC 144A","s":"Technology","d":2.14,"y":8.35,"w":0.19,"m":10056037.0,"c":2.25,"t":"Jul 15, 2028"},{"n":"BLACKLINE INC","s":"Technology","d":3.06,"y":3.15,"w":0.19,"m":9995200.0,"c":1.0,"t":"Jun 01, 2029"},{"n":"POST HOLDINGS INC","s":"Consumer Non-Cyclical","d":1.38,"y":2.29,"w":0.19,"m":9947699.0,"c":2.5,"t":"Aug 15, 2027"},{"n":"NIO INC 144A","s":"Consumer Cyclical","d":3.98,"y":4.45,"w":0.19,"m":9915822.0,"c":4.63,"t":"Oct 15, 2030"},{"n":"ETSY INC","s":"Consumer Cyclical","d":1.38,"y":5.07,"w":0.19,"m":9892855.0,"c":0.13,"t":"Sep 01, 2027"},{"n":"ALLIANT ENERGY CORP 144A","s":"Electric","d":2.08,"y":3.01,"w":0.19,"m":9839313.0,"c":3.25,"t":"May 30, 2028"},{"n":"HALOZYME THERAPEUTICS INC","s":"Technology","d":2.46,"y":0.78,"w":0.18,"m":9809502.0,"c":1.0,"t":"Aug 15, 2028"},{"n":"SNAP INC","s":"Communications","d":3.92,"y":5.61,"w":0.18,"m":9806757.0,"c":0.5,"t":"May 01, 2030"},{"n":"PINNACLE WEST CAPITAL CORPORATION","s":"Electric","d":1.22,"y":4.05,"w":0.18,"m":9795856.0,"c":4.75,"t":"Jun 15, 2027"},{"n":"TETRA TECH INC","s":"Consumer Cyclical","d":2.32,"y":2.11,"w":0.18,"m":9761771.0,"c":2.25,"t":"Aug 15, 2028"},{"n":"PEABODY ENERGY CORPORATION 144A","s":"Basic Industry","d":2.19,"y":1.74,"w":0.18,"m":9761386.0,"c":3.25,"t":"Mar 01, 2028"},{"n":"CRISPR THERAPEUTICS AG 144A","s":"Technology","d":4.69,"y":1.73,"w":0.18,"m":9734307.0,"c":1.73,"t":"Mar 01, 2031"},{"n":"GRANITE CONSTRUCTION INCORPORATED","s":"Capital Goods","d":4.2,"y":1.94,"w":0.18,"m":9681836.0,"c":3.25,"t":"Jun 15, 2030"},{"n":"OSI SYSTEMS INC 144A","s":"Capital Goods","d":4.77,"y":0.49,"w":0.18,"m":9594379.0,"c":0.5,"t":"Feb 01, 2031"},{"n":"ALNYLAM PHARMACEUTICALS INC 144A","s":"Technology","d":2.38,"y":3.09,"w":0.18,"m":9552630.0,"c":0.0,"t":"Sep 15, 2028"},{"n":"JOBY AVIATION INC","s":"Capital Goods","d":5.64,"y":3.29,"w":0.18,"m":9510982.0,"c":0.75,"t":"Feb 15, 2032"},{"n":"BIOMARIN PHARMACEUTICAL INC.","s":"Consumer Non-Cyclical","d":1.08,"y":4.69,"w":0.18,"m":9510372.0,"c":1.25,"t":"May 15, 2027"},{"n":"SUNRUN INC 144A","s":"Technology","d":3.69,"y":3.35,"w":0.18,"m":9461248.0,"c":4.0,"t":"Mar 01, 2030"},{"n":"TRANSMEDICS GROUP INC","s":"Consumer Non-Cyclical","d":2.25,"y":1.15,"w":0.18,"m":9443739.0,"c":1.5,"t":"Jun 01, 2028"},{"n":"SIRIUS XM HOLDINGS INC","s":"Communications","d":1.88,"y":3.6,"w":0.18,"m":9404687.0,"c":3.75,"t":"Mar 15, 2028"},{"n":"MICROSTRATEGY INCORPORATED","s":"Technology","d":4.81,"y":2.85,"w":0.18,"m":9397303.0,"c":0.88,"t":"Mar 15, 2031"},{"n":"REPLIGEN CORPORATION","s":"Consumer Non-Cyclical","d":2.64,"y":1.98,"w":0.18,"m":9328222.0,"c":1.0,"t":"Dec 15, 2028"},{"n":"CHEESECAKE FACTORY INC 144A","s":"Consumer Cyclical","d":3.79,"y":1.95,"w":0.17,"m":9297737.0,"c":2.0,"t":"Mar 15, 2030"},{"n":"SHIFT4 PAYMENTS INC","s":"Technology","d":1.29,"y":5.4,"w":0.17,"m":9245994.0,"c":0.5,"t":"Aug 01, 2027"},{"n":"REXFORD INDUSTRIAL REALTY LP 144A","s":"Reits","d":0.92,"y":4.88,"w":0.17,"m":9176370.0,"c":4.38,"t":"Mar 15, 2027"},{"n":"HAT HOLDINGS I LLC 144A","s":"Financial Other","d":2.44,"y":2.61,"w":0.17,"m":9174482.0,"c":3.75,"t":"Aug 15, 2028"},{"n":"NIO INC","s":"Consumer Cyclical","d":3.24,"y":3.67,"w":0.17,"m":9139403.0,"c":3.88,"t":"Oct 15, 2029"},{"n":"RAPID7 INC","s":"Technology","d":0.92,"y":6.24,"w":0.17,"m":9129298.0,"c":0.25,"t":"Mar 15, 2027"},{"n":"SOLAREDGE TECHNOLOGIES INC","s":"Technology","d":3.39,"y":1.35,"w":0.17,"m":9126849.0,"c":2.25,"t":"Jul 01, 2029"},{"n":"REXFORD INDUSTRIAL REALTY LP 144A","s":"Reits","d":2.74,"y":4.83,"w":0.17,"m":9090870.0,"c":4.13,"t":"Mar 15, 2029"},{"n":"JBT MAREL CORP 144A","s":"Capital Goods","d":4.39,"y":1.26,"w":0.17,"m":9040640.0,"c":0.38,"t":"Sep 15, 2030"},{"n":"WISDOMTREE INC 144A","s":"Brokerage/Asset Managers/Exchanges","d":4.85,"y":4.34,"w":0.17,"m":8912456.0,"c":4.5,"t":"Oct 01, 2031"},{"n":"DENISON MINES CORP 144A","s":"Basic Industry","d":5.18,"y":2.66,"w":0.17,"m":8907275.0,"c":4.25,"t":"Sep 15, 2031"},{"n":"ETSY INC","s":"Consumer Cyclical","d":0.49,"y":4.27,"w":0.17,"m":8902506.0,"c":0.13,"t":"Oct 01, 2026"},{"n":"MERITAGE HOMES CORP","s":"Consumer Cyclical","d":2.04,"y":3.45,"w":0.17,"m":8870763.0,"c":1.75,"t":"May 15, 2028"},{"n":"NORTHERN OIL AND GAS INC","s":"Energy","d":2.85,"y":3.29,"w":0.17,"m":8864183.0,"c":3.63,"t":"Apr 15, 2029"},{"n":"MARRIOTT VACATIONS WORLDWIDE CORP","s":"Consumer Cyclical","d":1.61,"y":5.56,"w":0.17,"m":8850842.0,"c":3.25,"t":"Dec 15, 2027"},{"n":"LIGAND PHARMACEUTICALS INCORPORATE 144A","s":"Technology","d":4.52,"y":0.62,"w":0.17,"m":8832128.0,"c":0.75,"t":"Oct 01, 2030"},{"n":"OSI SYSTEMS INC","s":"Capital Goods","d":3.43,"y":1.45,"w":0.17,"m":8825103.0,"c":2.25,"t":"Aug 01, 2029"},{"n":"LIBERTY MEDIA CORP","s":"Communications","d":1.42,"y":1.91,"w":0.17,"m":8811876.0,"c":2.25,"t":"Aug 15, 2027"},{"n":"TRANSOCEAN INC 144A","s":"Energy","d":3.65,"y":2.22,"w":0.16,"m":8709445.0,"c":4.63,"t":"Sep 30, 2029"},{"n":"LCI INDUSTRIES","s":"Consumer Cyclical","d":3.77,"y":2.48,"w":0.16,"m":8687614.0,"c":3.0,"t":"Mar 01, 2030"},{"n":"NUTANIX INC","s":"Technology","d":1.51,"y":0.24,"w":0.16,"m":8614180.0,"c":0.25,"t":"Oct 01, 2027"},{"n":"BENTLEY SYSTEMS INCORPORATED","s":"Technology","d":1.22,"y":4.31,"w":0.16,"m":8606699.0,"c":0.38,"t":"Jul 01, 2027"},{"n":"SQUARE INC","s":"Technology","d":1.54,"y":4.31,"w":0.16,"m":8577999.0,"c":0.25,"t":"Nov 01, 2027"},{"n":"LUCID GROUP INC 144A","s":"Consumer Cyclical","d":3.17,"y":22.85,"w":0.16,"m":8465368.0,"c":5.0,"t":"Apr 01, 2030"},{"n":"VOYAGER TECHNOLOGIES INC 144A","s":"Capital Goods","d":4.58,"y":0.67,"w":0.16,"m":8348406.0,"c":0.75,"t":"Nov 15, 2030"},{"n":"MATCH GROUP FINANCECO 3 INC 144A","s":"Consumer Cyclical","d":3.55,"y":5.18,"w":0.16,"m":8342000.0,"c":2.0,"t":"Jan 15, 2030"},{"n":"INDIVIOR PHARMACEUTICALS INC 144A","s":"Consumer Non-Cyclical","d":4.88,"y":0.62,"w":0.16,"m":8312811.0,"c":0.63,"t":"Mar 15, 2031"},{"n":"PLUG POWER INC 144A","s":"Technology","d":5.96,"y":5.77,"w":0.16,"m":8275144.0,"c":6.75,"t":"Dec 01, 2033"},{"n":"UNITY SOFTWARE INC","s":"Technology","d":0.59,"y":4.67,"w":0.16,"m":8260909.0,"c":0.0,"t":"Nov 15, 2026"},{"n":"ENPHASE ENERGY INC","s":"Technology","d":1.8,"y":5.95,"w":0.15,"m":8196151.0,"c":0.0,"t":"Mar 01, 2028"},{"n":"CSG SYSTEMS INTERNATIONAL INC.","s":"Technology","d":2.42,"y":3.18,"w":0.15,"m":8142353.0,"c":3.88,"t":"Sep 15, 2028"},{"n":"PELOTON INTERACTIVE INC","s":"Consumer Cyclical","d":3.45,"y":3.91,"w":0.15,"m":8016035.0,"c":5.5,"t":"Dec 01, 2029"},{"n":"FEDERAL REALTY OP LP 144A","s":"Reits","d":2.64,"y":3.14,"w":0.15,"m":7958785.0,"c":3.25,"t":"Jan 15, 2029"},{"n":"REDFIN CORP","s":"Consumer Cyclical","d":0.97,"y":5.49,"w":0.15,"m":7903590.0,"c":0.5,"t":"Apr 01, 2027"},{"n":"ENVISTA HOLDINGS CORP","s":"Consumer Non-Cyclical","d":2.3,"y":1.91,"w":0.15,"m":7889244.0,"c":1.75,"t":"Aug 15, 2028"},{"n":"BURLINGTON STORES INC","s":"Consumer Cyclical","d":1.95,"y":0.75,"w":0.15,"m":7815649.0,"c":1.25,"t":"Dec 15, 2027"},{"n":"WISDOMTREE INC 144A","s":"Brokerage/Asset Managers/Exchanges","d":3.95,"y":4.23,"w":0.15,"m":7771586.0,"c":4.63,"t":"Aug 15, 2030"},{"n":"LYFT INC","s":"Consumer Cyclical","d":2.89,"y":0.61,"w":0.15,"m":7726472.0,"c":0.63,"t":"Mar 01, 2029"},{"n":"SNAP INC","s":"Communications","d":1.87,"y":4.85,"w":0.14,"m":7696454.0,"c":0.13,"t":"Mar 01, 2028"},{"n":"ALIGNMENT HEALTHCARE","s":"Technology","d":3.52,"y":2.87,"w":0.14,"m":7672379.0,"c":4.25,"t":"Nov 15, 2029"},{"n":"SYNAPTICS INC","s":"Technology","d":5.56,"y":0.7,"w":0.14,"m":7608190.0,"c":0.75,"t":"Dec 01, 2031"},{"n":"PATRICK INDUSTRIES INC","s":"Capital Goods","d":2.9,"y":0.98,"w":0.14,"m":7594638.0,"c":1.75,"t":"Dec 01, 2028"},{"n":"FRESHPET INC","s":"Consumer Cyclical","d":2.0,"y":2.59,"w":0.14,"m":7504991.0,"c":3.0,"t":"Apr 01, 2028"},{"n":"ENOVIS CORP","s":"Capital Goods","d":2.33,"y":5.36,"w":0.14,"m":7392303.0,"c":3.88,"t":"Oct 15, 2028"},{"n":"LYFT INC 144A","s":"Consumer Cyclical","d":4.42,"y":1.33,"w":0.14,"m":7233822.0,"c":0.0,"t":"Sep 15, 2030"},{"n":"FIRST MAJESTIC SILVER CORP 144A","s":"Basic Industry","d":4.9,"y":0.1,"w":0.14,"m":7230613.0,"c":0.13,"t":"Jan 15, 2031"},{"n":"BITDEER TECHNOLOGIES GROUP 144A","s":"Technology","d":5.18,"y":4.27,"w":0.14,"m":7205600.0,"c":5.0,"t":"Mar 01, 2032"},{"n":"JETBLUE AIRWAYS CORPORATION 144A","s":"Transportation","d":3.24,"y":3.05,"w":0.14,"m":7187328.0,"c":2.5,"t":"Sep 01, 2029"},{"n":"MIRION TECHNOLOGIES INC 144A","s":"Capital Goods","d":4.18,"y":0.23,"w":0.13,"m":7168102.0,"c":0.25,"t":"Jun 01, 2030"},{"n":"ALARMCOM HOLDINGS INC","s":"Technology","d":2.97,"y":4.87,"w":0.13,"m":7102291.0,"c":2.25,"t":"Jun 01, 2029"},{"n":"UPSTART HOLDINGS INC","s":"Finance Companies","d":3.35,"y":2.79,"w":0.13,"m":7060263.0,"c":2.0,"t":"Oct 01, 2029"},{"n":"UPSTART HOLDINGS INC 144A","s":"Finance Companies","d":5.46,"y":7.41,"w":0.13,"m":7046662.0,"c":0.0,"t":"Feb 15, 2032"},{"n":"GREENBRIER CO INC","s":"Transportation","d":2.02,"y":2.46,"w":0.13,"m":6900997.0,"c":2.88,"t":"Apr 15, 2028"},{"n":"ARRAY TECHNOLOGIES INC 144A","s":"Technology","d":4.96,"y":2.3,"w":0.13,"m":6795725.0,"c":2.88,"t":"Jul 01, 2031"},{"n":"CHEFS WAREHOUSE INC","s":"Consumer Non-Cyclical","d":2.79,"y":1.64,"w":0.13,"m":6762384.0,"c":2.38,"t":"Dec 15, 2028"},{"n":"BOX INC","s":"Technology","d":3.31,"y":3.93,"w":0.13,"m":6691475.0,"c":1.5,"t":"Sep 15, 2029"},{"n":"PEBBLEBROOK HOTEL TRUST 144A","s":"Reits","d":3.66,"y":1.57,"w":0.12,"m":6610840.0,"c":1.63,"t":"Jan 15, 2030"},{"n":"LIVANOVA PLC","s":"Consumer Non-Cyclical","d":2.91,"y":2.14,"w":0.12,"m":6581856.0,"c":2.5,"t":"Mar 15, 2029"},{"n":"ODDITY FINANCE LLC 144A","s":"Technology","d":3.84,"y":9.2,"w":0.12,"m":6544092.0,"c":0.0,"t":"Jun 15, 2030"},{"n":"COHU INC 144A","s":"Technology","d":4.79,"y":1.07,"w":0.12,"m":6455266.0,"c":1.5,"t":"Jan 15, 2031"},{"n":"TRAVERE THERAPEUTICS INC","s":"Consumer Non-Cyclical","d":2.94,"y":1.74,"w":0.12,"m":6435165.0,"c":2.25,"t":"Mar 01, 2029"},{"n":"TWENTY ONE CAPITAL INC 144A","s":"Financial Other","d":4.43,"y":4.97,"w":0.12,"m":6424619.0,"c":1.0,"t":"Dec 01, 2030"},{"n":"CORPORATE OFFICE PROPERTIES LP 144A","s":"Reits","d":2.36,"y":4.43,"w":0.12,"m":6419315.0,"c":5.25,"t":"Sep 15, 2028"},{"n":"PTC THERAPEUTICS INC","s":"Technology","d":0.71,"y":1.13,"w":0.12,"m":6410420.0,"c":1.5,"t":"Sep 15, 2026"},{"n":"ALPHATEC HLDGS INC","s":"Consumer Non-Cyclical","d":3.9,"y":0.73,"w":0.12,"m":6373549.0,"c":0.75,"t":"Mar 15, 2030"},{"n":"VARONIS SYSTEMS INC","s":"Technology","d":3.31,"y":4.95,"w":0.12,"m":6310890.0,"c":1.0,"t":"Sep 15, 2029"},{"n":"PROGRESS SOFTWARE CORP","s":"Technology","d":3.54,"y":6.89,"w":0.12,"m":6260300.0,"c":3.5,"t":"Mar 01, 2030"},{"n":"PENNYMAC CORP","s":"Reits","d":2.68,"y":7.96,"w":0.12,"m":6248032.0,"c":8.5,"t":"Jun 01, 2029"},{"n":"ENDEAVOUR SILVER CORP 144A","s":"Basic Industry","d":4.8,"y":0.23,"w":0.12,"m":6169095.0,"c":0.25,"t":"Jan 15, 2031"},{"n":"FLUENCE ENERGY INC 144A","s":"Technology","d":3.96,"y":2.46,"w":0.12,"m":6138879.0,"c":2.25,"t":"Jun 15, 2030"},{"n":"OSCAR HEALTH INC 144A","s":"Insurance","d":4.12,"y":4.39,"w":0.12,"m":6119140.0,"c":2.25,"t":"Sep 01, 2030"},{"n":"WORLD KINECT CORPORATION","s":"Consumer Cyclical","d":2.16,"y":3.05,"w":0.11,"m":6098518.0,"c":3.25,"t":"Jul 01, 2028"},{"n":"ANI PHARMACEUTICALS INC","s":"Consumer Non-Cyclical","d":3.37,"y":1.85,"w":0.11,"m":6081402.0,"c":2.25,"t":"Sep 01, 2029"},{"n":"BITFARMS LTD 144A","s":"Technology","d":4.32,"y":11.16,"w":0.11,"m":6019396.0,"c":1.38,"t":"Jan 15, 2031"},{"n":"JOHN BEAN TECHNOLOGIES CORP","s":"Capital Goods","d":0.12,"y":5.43,"w":0.11,"m":5968803.0,"c":0.25,"t":"May 15, 2026"},{"n":"STARWOOD PROPERTY TRUST INC","s":"Reits","d":1.21,"y":6.53,"w":0.11,"m":5918048.0,"c":6.75,"t":"Jul 15, 2027"},{"n":"MIRION TECHNOLOGIES INC 144A","s":"Capital Goods","d":5.48,"y":0.74,"w":0.11,"m":5881536.0,"c":0.0,"t":"Oct 01, 2031"},{"n":"UPSTART HOLDINGS INC 144A","s":"Finance Companies","d":4.3,"y":8.29,"w":0.11,"m":5836972.0,"c":1.0,"t":"Nov 15, 2030"},{"n":"I-80 GOLD CORP 144A","s":"Basic Industry","d":4.66,"y":3.22,"w":0.11,"m":5820605.0,"c":3.75,"t":"Apr 15, 2031"},{"n":"IMMUNOCORE HOLDINGS PLC","s":"Technology","d":3.55,"y":5.4,"w":0.11,"m":5746306.0,"c":2.5,"t":"Feb 01, 2030"},{"n":"UNITI GROUP INC 144A","s":"Communications","d":1.6,"y":6.12,"w":0.11,"m":5731500.0,"c":7.5,"t":"Dec 01, 2027"},{"n":"SPECTRUM BRANDS INC","s":"Consumer Non-Cyclical","d":2.94,"y":3.88,"w":0.11,"m":5675727.0,"c":3.38,"t":"Jun 01, 2029"},{"n":"PAGERDUTY INC","s":"Communications","d":2.41,"y":5.58,"w":0.11,"m":5674732.0,"c":1.5,"t":"Oct 15, 2028"},{"n":"NCL CORPORATION LTD 144A","s":"Consumer Cyclical","d":3.97,"y":0.83,"w":0.11,"m":5608607.0,"c":0.88,"t":"Apr 15, 2030"},{"n":"EOS ENERGY ENTERPRISES INC 144A","s":"Technology","d":4.98,"y":11.47,"w":0.1,"m":5545556.0,"c":1.75,"t":"Dec 01, 2031"},{"n":"BITDEER TECHNOLOGIES GROUP 144A","s":"Technology","d":4.43,"y":8.56,"w":0.1,"m":5456093.0,"c":4.88,"t":"Jul 01, 2031"},{"n":"MATCH GROUP FINANCECO 2 INC 144A","s":"Finance Companies","d":0.2,"y":5.17,"w":0.1,"m":5417029.0,"c":0.88,"t":"Jun 15, 2026"},{"n":"PORCH GROUP INC 144A","s":"Technology","d":2.26,"y":7.07,"w":0.1,"m":5377421.0,"c":6.75,"t":"Oct 02, 2026"},{"n":"BITDEER TECHNOLOGIES GROUP 144A","s":"Technology","d":4.78,"y":8.77,"w":0.1,"m":5370148.0,"c":4.0,"t":"Nov 15, 2031"},{"n":"WAYFAIR INC","s":"Consumer Cyclical","d":1.56,"y":2.43,"w":0.1,"m":5324666.0,"c":3.25,"t":"Sep 15, 2027"},{"n":"XPLR INFRASTRUCTURE LP 144A","s":"Electric","d":0.2,"y":7.17,"w":0.1,"m":5264346.0,"c":2.5,"t":"Jun 15, 2026"},{"n":"WEIBO CORP","s":"Communications","d":4.51,"y":1.31,"w":0.1,"m":5216111.0,"c":1.38,"t":"Dec 01, 2030"},{"n":"TANDEM DIABETES CARE INC","s":"Consumer Non-Cyclical","d":2.88,"y":1.48,"w":0.1,"m":5205217.0,"c":1.5,"t":"Mar 15, 2029"},{"n":"IQIYI INC RegS","s":"Communications","d":3.55,"y":9.35,"w":0.1,"m":5158116.0,"c":4.63,"t":"Mar 15, 2030"},{"n":"HERBALIFE LTD","s":"Consumer Non-Cyclical","d":2.14,"y":3.6,"w":0.1,"m":5129684.0,"c":4.25,"t":"Jun 15, 2028"},{"n":"PEBBLEBROOK HOTEL TRUST","s":"Reits","d":0.68,"y":5.14,"w":0.09,"m":5043011.0,"c":1.75,"t":"Dec 15, 2026"},{"n":"WISDOMTREE INC 144A","s":"Brokerage/Asset Managers/Exchanges","d":3.32,"y":2.44,"w":0.09,"m":5020167.0,"c":3.25,"t":"Aug 15, 2029"},{"n":"AMPHASTAR PHARMACEUTICALS INC","s":"Consumer Non-Cyclical","d":2.8,"y":5.47,"w":0.09,"m":5013667.0,"c":2.0,"t":"Mar 15, 2029"},{"n":"ARRAY TECHNOLOGIES INC","s":"Technology","d":2.56,"y":4.88,"w":0.09,"m":4969607.0,"c":1.0,"t":"Dec 01, 2028"},{"n":"WINNEBAGO INDS INC 144A","s":"Consumer Non-Cyclical","d":3.45,"y":6.14,"w":0.09,"m":4962490.0,"c":3.25,"t":"Jan 15, 2030"},{"n":"VIZSLA SILVER CORP 144A","s":"Basic Industry","d":4.15,"y":4.86,"w":0.09,"m":4937674.0,"c":5.0,"t":"Jan 15, 2031"},{"n":"XOMETRY INC 144A","s":"Industrial Other","d":4.22,"y":0.62,"w":0.09,"m":4889069.0,"c":0.75,"t":"Jun 15, 2030"},{"n":"NEOGENOMICS INC","s":"Consumer Non-Cyclical","d":1.74,"y":5.41,"w":0.09,"m":4801024.0,"c":0.25,"t":"Jan 15, 2028"},{"n":"ALKAMI TECHNOLOGY INC 144A","s":"Technology","d":3.77,"y":4.0,"w":0.09,"m":4800500.0,"c":1.5,"t":"Mar 15, 2030"},{"n":"REDWOOD TRUST INC","s":"Reits","d":1.11,"y":7.48,"w":0.09,"m":4685894.0,"c":7.75,"t":"Jun 15, 2027"},{"n":"LIFE360 INC 144A","s":"Technology","d":4.07,"y":2.18,"w":0.09,"m":4659652.0,"c":0.0,"t":"Jun 01, 2030"},{"n":"DIGITALOCEAN HOLDINGS INC","s":"Technology","d":0.65,"y":2.88,"w":0.09,"m":4636212.0,"c":0.0,"t":"Dec 01, 2026"},{"n":"VERTEX INC","s":"Technology","d":2.96,"y":5.4,"w":0.09,"m":4626411.0,"c":0.75,"t":"May 01, 2029"},{"n":"HERTZ CORPORATION (THE) 144A","s":"Transportation","d":3.61,"y":16.76,"w":0.08,"m":4415381.0,"c":5.5,"t":"Oct 01, 2030"},{"n":"IMAX CORP 144A","s":"Consumer Cyclical","d":4.6,"y":0.65,"w":0.08,"m":4357111.0,"c":0.75,"t":"Nov 15, 2030"},{"n":"HERCULES CAPITAL INC 144A","s":"Finance Companies","d":2.23,"y":6.24,"w":0.08,"m":4345668.0,"c":4.75,"t":"Sep 01, 2028"},{"n":"PACIRA BIOSCIENCES INC","s":"Consumer Non-Cyclical","d":2.96,"y":3.1,"w":0.08,"m":4333245.0,"c":2.13,"t":"May 15, 2029"},{"n":"INNOVIVA INC","s":"Industrial Other","d":1.94,"y":1.98,"w":0.08,"m":4316538.0,"c":2.13,"t":"Mar 15, 2028"},{"n":"TANDEM DIABETES CARE INC 144A","s":"Consumer Non-Cyclical","d":5.8,"y":2.56,"w":0.08,"m":4296401.0,"c":0.0,"t":"Mar 15, 2032"},{"n":"ZIFF DAVIS INC","s":"Technology","d":1.82,"y":4.61,"w":0.08,"m":4270728.0,"c":3.63,"t":"Mar 01, 2028"},{"n":"CRACKER BARREL OLD COUNTRY STORE I 144A","s":"Consumer Cyclical","d":4.12,"y":7.52,"w":0.08,"m":4263351.0,"c":1.75,"t":"Sep 15, 2030"},{"n":"BLACKSTONE MORTGAGE TRUST INC","s":"Reits","d":0.91,"y":6.04,"w":0.08,"m":4261710.0,"c":5.5,"t":"Mar 15, 2027"},{"n":"RAMACO RESOURCES INC","s":"Energy","d":5.33,"y":4.57,"w":0.08,"m":4216955.0,"c":0.0,"t":"Nov 01, 2031"},{"n":"ENOVIX CORP 144A","s":"Technology","d":3.78,"y":11.19,"w":0.08,"m":4178454.0,"c":4.75,"t":"Sep 15, 2030"},{"n":"PAR TECHNOLOGY CORP 144A","s":"Technology","d":4.48,"y":3.83,"w":0.08,"m":4174737.0,"c":4.0,"t":"Mar 15, 2031"},{"n":"CABLE ONE INC","s":"Communications","d":1.79,"y":16.54,"w":0.08,"m":4128553.0,"c":1.13,"t":"Mar 15, 2028"},{"n":"MARATHON DIGITAL HOLDINGS INC","s":"Industrial Other","d":4.97,"y":7.77,"w":0.07,"m":3985091.0,"c":2.13,"t":"Sep 01, 2031"},{"n":"RAPID7 INC","s":"Technology","d":2.8,"y":7.35,"w":0.07,"m":3975029.0,"c":1.25,"t":"Mar 15, 2029"},{"n":"OKTA INC","s":"Technology","d":0.2,"y":4.96,"w":0.07,"m":3647194.0,"c":0.38,"t":"Jun 15, 2026"},{"n":"SHAKE SHACK INC","s":"Consumer Cyclical","d":1.86,"y":2.97,"w":0.07,"m":3638955.0,"c":0.0,"t":"Mar 01, 2028"},{"n":"LITHIUM AMERICAS CORP","s":"Basic Industry","d":0.76,"y":6.14,"w":0.07,"m":3581102.0,"c":1.75,"t":"Jan 15, 2027"},{"n":"TANGER PROPERTIES LP 144A","s":"Reits","d":4.48,"y":2.34,"w":0.07,"m":3556252.0,"c":2.38,"t":"Jan 15, 2031"},{"n":"REPAY HOLDINGS CORP 144A","s":"Industrial Other","d":2.98,"y":9.69,"w":0.07,"m":3538587.0,"c":2.88,"t":"Jul 15, 2029"},{"n":"KOSMOS ENERGY LTD","s":"Energy","d":3.53,"y":9.93,"w":0.06,"m":3407948.0,"c":3.13,"t":"Mar 15, 2030"},{"n":"NABORS INDUSTRIES INC 144A","s":"Energy","d":3.03,"y":5.16,"w":0.06,"m":3306044.0,"c":1.75,"t":"Jun 15, 2029"},{"n":"EVOLENT HEALTH INC","s":"Consumer Non-Cyclical","d":2.97,"y":22.8,"w":0.06,"m":3278833.0,"c":3.5,"t":"Dec 01, 2029"},{"n":"UPWORK INC","s":"Technology","d":0.36,"y":4.45,"w":0.05,"m":2872406.0,"c":0.25,"t":"Aug 15, 2026"},{"n":"BEAUTY HEALTH CO 144A","s":"Consumer Non-Cyclical","d":2.25,"y":8.51,"w":0.05,"m":2593566.0,"c":7.95,"t":"Nov 15, 2028"},{"n":"Q2 HOLDINGS INC","s":"Technology","d":0.16,"y":4.89,"w":0.04,"m":2245472.0,"c":0.75,"t":"Jun 01, 2026"},{"n":"BROOKDALE SENIOR LIVING INC","s":"Consumer Non-Cyclical","d":3.57,"y":2.07,"w":0.02,"m":1265796.0,"c":3.5,"t":"Oct 15, 2029"},{"n":"XEROX HOLDINGS CORP","s":"Technology","d":2.67,"y":49.79,"w":0.02,"m":933855.0,"c":3.75,"t":"Mar 15, 2030"}]};
+const PALETTE = ["#0072B2", "#E69F00", "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#6B4226", "#999999"];
+const MAX_SEL = 8;
+
+let selected = [];
+let sectorColors = {};
+
+// ── Boot ───────────────────────────────────────────────────────────────────
+function init() {
+  // Assign colors to sectors (by weight order, already sorted in payload)
+  DATA.sectors.forEach((s, i) => {
+    sectorColors[s] = PALETTE[i % PALETTE.length];
+  });
+
+  // Default: select all sectors
+  selected = DATA.sectors.slice(0, MAX_SEL);
+
+  // Fund strip metadata
+  const badge = document.getElementById('fund-badge');
+  if (DATA.is_fresh) {
+    badge.className = 'badge badge-fresh';
+    badge.textContent = 'Live';
+  } else {
+    badge.className = 'badge badge-stale';
+    badge.textContent = 'Cached';
+  }
+  const hd = document.getElementById('fund-holdings-date');
+  hd.textContent = DATA.as_of ? `Holdings: ${DATA.as_of}` : '';
+
+  // Search input
+  const searchEl = document.getElementById('group-search');
+  const clearEl  = document.getElementById('search-clear');
+  searchEl.addEventListener('input', () => {
+    clearEl.classList.toggle('visible', searchEl.value.length > 0);
+    renderPills();
+  });
+  clearEl.addEventListener('click', () => {
+    searchEl.value = '';
+    clearEl.classList.remove('visible');
+    renderPills();
+    searchEl.focus();
+  });
+
+  // Select All / Clear buttons
+  document.getElementById('btn-select-all').addEventListener('click', () => {
+    selected = DATA.sectors.slice(0, MAX_SEL);
+    renderPills();
+    renderChart();
+    renderStats();
+  });
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    selected = [];
+    renderPills();
+    renderChart();
+    renderStats();
+  });
+
+  renderStats();
+  renderPills();
+  renderChart();
+  updateFooter();
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+function renderStats() {
+  const visibleBonds = selected.length > 0
+    ? DATA.bonds.filter(b => selected.includes(b.s))
+    : DATA.bonds;
+
+  const totalW = visibleBonds.reduce((s, b) => s + (b.w || 0), 0);
+  const wtAvgDur = wavg(visibleBonds, 'd', 'w');
+  const wtAvgYTW = wavg(visibleBonds, 'y', 'w');
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Holdings Shown</div><div class="stat-value">${visibleBonds.length}</div><div class="stat-sub">of ${DATA.bond_count} bonds</div></div>
+    <div class="stat-card"><div class="stat-label">Sectors</div><div class="stat-value">${DATA.sector_count}</div><div class="stat-sub">in ETF</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Mod Duration</div><div class="stat-value">${wtAvgDur.toFixed(1)}y</div><div class="stat-sub">weight-avg</div></div>
+    <div class="stat-card"><div class="stat-label">Avg YTW</div><div class="stat-value">${wtAvgYTW.toFixed(2)}%</div><div class="stat-sub">weight-avg</div></div>
+    <div class="stat-card"><div class="stat-label">Total Weight</div><div class="stat-value">${totalW.toFixed(1)}%</div><div class="stat-sub">shown sectors</div></div>
+  `;
+}
+
+function wavg(bonds, field, wField) {
+  let sw = 0, swx = 0;
+  bonds.forEach(b => { const w = b[wField] || 0; sw += w; swx += w * (b[field] || 0); });
+  return sw > 0 ? swx / sw : 0;
+}
+
+// ── Pills ──────────────────────────────────────────────────────────────────
+function renderPills() {
+  const container = document.getElementById('sector-pills');
+  const query = document.getElementById('group-search').value.trim().toLowerCase();
+  container.innerHTML = '';
+
+  const visible = DATA.sectors.filter(s => !query || s.toLowerCase().includes(query));
+
+  if (visible.length === 0) {
+    const msg = document.createElement('span');
+    msg.className = 'no-results';
+    msg.textContent = 'No matches';
+    container.appendChild(msg);
+    return;
+  }
+
+  visible.forEach(sector => {
+    const isActive  = selected.includes(sector);
+    const isDisabled = !isActive && selected.length >= MAX_SEL;
+    const pill = document.createElement('span');
+    pill.className = 'pill' + (isActive ? ' active' : '') + (isDisabled ? ' disabled' : '');
+    pill.textContent = sector;
+    if (isActive) {
+      const col = sectorColors[sector] || '#999';
+      pill.style.background = col;
+      pill.style.borderColor = col;
+    }
+    pill.addEventListener('click', () => onPillClick(sector));
+    container.appendChild(pill);
+  });
+}
+
+function onPillClick(sector) {
+  const idx = selected.indexOf(sector);
+  if (idx >= 0) {
+    selected.splice(idx, 1);
+  } else {
+    if (selected.length >= MAX_SEL) return;
+    selected.push(sector);
+  }
+  renderPills();
+  renderChart();
+  renderStats();
+}
+
+// ── Chart ──────────────────────────────────────────────────────────────────
+function renderChart() {
+  if (selected.length === 0) {
+    Plotly.react('bubble-chart', [], getLayout('Select sectors above to display bonds'));
+    return;
+  }
+
+  const allBonds = DATA.bonds.filter(b => selected.includes(b.s));
+  const maxW = Math.max(...allBonds.map(b => b.w || 0.01), 0.01);
+
+  const traces = selected.map(sector => {
+    const bonds = DATA.bonds.filter(b => b.s === sector);
+    if (!bonds.length) return null;
+    const col = sectorColors[sector] || '#999';
+    return {
+      type: 'scatter',
+      mode: 'markers',
+      name: sector,
+      x: bonds.map(b => b.d),
+      y: bonds.map(b => b.y),
+      text: bonds.map(b =>
+        `<b>${b.n}</b><br>`
+        + `Sector: ${b.s}<br>`
+        + `Mod. Duration: ${b.d.toFixed(2)}y<br>`
+        + `Yield to Worst: ${b.y.toFixed(2)}%<br>`
+        + `Weight: ${b.w.toFixed(2)}%<br>`
+        + (b.c != null ? `Coupon: ${b.c.toFixed(2)}%<br>` : '')
+        + (b.t && b.t !== 'nan' ? `Maturity: ${b.t}` : '')
+      ),
+      hovertemplate: '%{text}<extra>' + sector + '</extra>',
+      marker: {
+        size: bonds.map(b => Math.max(Math.sqrt((b.w || 0.01) / maxW) * 55, 5)),
+        sizemode: 'diameter',
+        color: col,
+        opacity: 0.72,
+        line: { color: 'rgba(255,255,255,0.55)', width: 1 },
+      },
+    };
+  }).filter(Boolean);
+
+  Plotly.react('bubble-chart', traces, getLayout());
+}
+
+function getLayout(annotation) {
+  const layout = {
+    xaxis: { title: 'Modified Duration (years)', gridcolor: 'rgba(200,200,200,0.4)', zeroline: false },
+    yaxis: { title: 'Yield to Worst (%)', gridcolor: 'rgba(200,200,200,0.4)', zeroline: false },
+    plot_bgcolor: '#fff', paper_bgcolor: '#fff',
+    margin: { l: 65, r: 30, t: 30, b: 65 },
+    legend: { orientation: 'h', yanchor: 'bottom', y: 1.01, xanchor: 'left', x: 0 },
+    hovermode: 'closest',
+  };
+  if (annotation) {
+    layout.annotations = [{ text: annotation, xref: 'paper', yref: 'paper',
+      x: 0.5, y: 0.5, showarrow: false, font: { size: 15, color: '#bbb' } }];
+  }
+  return layout;
+}
+
+// ── Footer ─────────────────────────────────────────────────────────────────
+function updateFooter() {
+  let ts = DATA.fetched_at || '';
+  try {
+    const dt = new Date(ts);
+    ts = dt.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+  } catch(e) {}
+  const dotClass = DATA.is_fresh ? 'dot-fresh' : 'dot-stale';
+  const msg = DATA.is_fresh
+    ? `Data fetched ${ts}`
+    : `&#9888; Cached data from ${ts} — live fetch failed`;
+  document.getElementById('footer-left').innerHTML =
+    `<span class="update-dot ${dotClass}"></span>${msg}`;
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
