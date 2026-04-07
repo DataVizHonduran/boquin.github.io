@@ -10,6 +10,8 @@ Run from the repo root:
 import datetime
 from datetime import date
 import sys
+import io
+import time
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -18,6 +20,8 @@ from plotly.subplots import make_subplots
 import os
 import json
 import warnings
+import requests
+from pandas_datareader import data as pdr
 
 warnings.filterwarnings("ignore")
 
@@ -26,17 +30,10 @@ OUTPUT_DIR = "reports/g10-fairvalue"
 YEARS = 20
 FX_DATA_URL = "https://raw.githubusercontent.com/DataVizHonduran/EMFX_risk_diffusion/main/fx_data_raw.csv"
 
-BONDS = {
-    "AUD": "5yauy.b",
-    "CAD": "5ycay.b",
-    "EUR": "5ydey.b",
-    "JPY": "5yjpy.b",
-    "NZD": "5ynzy.b",
-    "NOK": "5ynoy.b",
-    "SEK": "5ysey.b",
-    "GBP": "5yuky.b",
-    "USD": "5yusy.b",
+# Stooq tickers kept only for CHF/NZD current-day override
+STOOQ_CURRENT = {
     "CHF": "5ychy.b",
+    "NZD": "5ynzy.b",
 }
 
 # FX pair → non-USD rate currency
@@ -62,16 +59,166 @@ end_dt = date.today().strftime("%Y%m%d")
 
 
 # ── 1. Bond Yields ────────────────────────────────────────────────────────────
-print("Fetching 5Y bond yields from Stooq...")
+print("Fetching 5Y bond yields from central bank APIs...")
+
+start_date = (datetime.datetime.now() - datetime.timedelta(days=365 * YEARS)).strftime("%Y-%m-%d")
+end_date = date.today().strftime("%Y-%m-%d")
 frames = {}
-for ccy, ticker in BONDS.items():
-    url = f"https://stooq.com/q/d/l/?s={ticker}&d1={start_dt}&d2={end_dt}&i=d"
+
+# USD — FRED DGS5 (daily 5Y Treasury)
+try:
+    s = pdr.DataReader("DGS5", "fred", start_date, end_date)["DGS5"]
+    s.index = pd.to_datetime(s.index)
+    frames["USD"] = s
+    print("  ✓ USD (FRED DGS5)")
+except Exception as e:
+    print(f"  ✗ USD: {e}")
+
+# EUR — ECB SDW yield curve 5Y spot rate
+try:
+    ecb_url = (
+        "https://data-api.ecb.europa.eu/service/data/YC/"
+        "B.U2.EUR.4F.G_N_A.SV_C_YM.SR_5Y"
+        f"?startPeriod={start_date}&format=csvdata"
+    )
+    r = requests.get(ecb_url, timeout=30)
+    r.raise_for_status()
+    ecb_df = pd.read_csv(io.StringIO(r.text))
+    ecb_df["date"] = pd.to_datetime(ecb_df["TIME_PERIOD"])
+    ecb_df = ecb_df.set_index("date")["OBS_VALUE"].astype(float)
+    frames["EUR"] = ecb_df
+    print("  ✓ EUR (ECB SDW)")
+except Exception as e:
+    print(f"  ✗ EUR: {e}")
+
+# CAD — Bank of Canada Valet API (5Y benchmark bond yield)
+try:
+    boc_url = (
+        f"https://www.bankofcanada.ca/valet/observations/BD.CDN.5YR.DQ.YLD/json"
+        f"?start_date={start_date}&end_date={end_date}"
+    )
+    r = requests.get(boc_url, timeout=30)
+    r.raise_for_status()
+    obs = r.json()["observations"]
+    cad_data = {
+        pd.Timestamp(o["d"]): float(o["BD.CDN.5YR.DQ.YLD"]["v"])
+        for o in obs
+        if o.get("BD.CDN.5YR.DQ.YLD", {}).get("v") not in (None, "", "nan")
+    }
+    frames["CAD"] = pd.Series(cad_data)
+    print("  ✓ CAD (Bank of Canada)")
+except Exception as e:
+    print(f"  ✗ CAD: {e}")
+
+# AUD — RBA F2 table (5Y Commonwealth Government bond, column index 2)
+try:
+    rba_url = "https://www.rba.gov.au/statistics/tables/csv/f2-data.csv"
+    r = requests.get(rba_url, timeout=30)
+    r.raise_for_status()
+    rba_df = pd.read_csv(io.StringIO(r.text), skiprows=1, index_col=0, parse_dates=True)
+    rba_series = pd.to_numeric(rba_df.iloc[:, 2], errors="coerce").dropna()
+    rba_series.index = pd.to_datetime(rba_series.index, dayfirst=True)
+    rba_series = rba_series[rba_series.index >= pd.Timestamp(start_date)]
+    frames["AUD"] = rba_series
+    print("  ✓ AUD (RBA F2)")
+except Exception as e:
+    print(f"  ✗ AUD: {e}")
+
+# JPY — Japan MOF historical JGB rates (5Y = column index 4)
+try:
+    mof_url = "https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/historical/jgbcme_all.csv"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; research/1.0)",
+        "Referer": "https://www.mof.go.jp/english/",
+    }
+    r = requests.get(mof_url, headers=headers, timeout=30)
+    r.raise_for_status()
+    mof_df = pd.read_csv(io.StringIO(r.text), index_col=0, parse_dates=True, encoding="utf-8")
+    mof_series = pd.to_numeric(mof_df.iloc[:, 4], errors="coerce").dropna()
+    mof_series.index = pd.to_datetime(mof_series.index, format="%Y/%m/%d", errors="coerce")
+    mof_series = mof_series.dropna()
+    mof_series = mof_series[mof_series.index >= pd.Timestamp(start_date)]
+    frames["JPY"] = mof_series
+    print("  ✓ JPY (Japan MOF)")
+except Exception as e:
+    print(f"  ✗ JPY: {e}")
+
+# GBP — Riksbank API (UK 5Y gilt)
+try:
+    rb_url = f"https://api.riksbank.se/swea/v1/Observations/GBGVB5Y/{start_date}/{end_date}"
+    r = requests.get(rb_url, timeout=30)
+    r.raise_for_status()
+    rb_data = {pd.Timestamp(o["date"]): float(o["value"]) for o in r.json() if o.get("value") is not None}
+    frames["GBP"] = pd.Series(rb_data)
+    print("  ✓ GBP (Riksbank GBGVB5Y)")
+except Exception as e:
+    print(f"  ✗ GBP: {e}")
+
+time.sleep(0.5)
+
+# SEK — Riksbank API (Sweden 5Y)
+try:
+    rb_url = f"https://api.riksbank.se/swea/v1/Observations/SEGVB5YC/{start_date}/{end_date}"
+    r = requests.get(rb_url, timeout=30)
+    r.raise_for_status()
+    rb_data = {pd.Timestamp(o["date"]): float(o["value"]) for o in r.json() if o.get("value") is not None}
+    frames["SEK"] = pd.Series(rb_data)
+    print("  ✓ SEK (Riksbank SEGVB5YC)")
+except Exception as e:
+    print(f"  ✗ SEK: {e}")
+
+time.sleep(0.5)
+
+# NOK — Riksbank API (Norway 10Y as proxy for 5Y)
+try:
+    rb_url = f"https://api.riksbank.se/swea/v1/Observations/NOGVB10Y/{start_date}/{end_date}"
+    r = requests.get(rb_url, timeout=30)
+    r.raise_for_status()
+    rb_data = {pd.Timestamp(o["date"]): float(o["value"]) for o in r.json() if o.get("value") is not None}
+    frames["NOK"] = pd.Series(rb_data)
+    print("  ✓ NOK (Riksbank NOGVB10Y)")
+except Exception as e:
+    print(f"  ✗ NOK: {e}")
+
+# CHF — FRED monthly (10Y) forward-filled to daily + Stooq current override
+try:
+    chf_monthly = pdr.DataReader("IRLTLT01CHM156N", "fred", start_date, end_date)["IRLTLT01CHM156N"]
+    chf_monthly.index = pd.to_datetime(chf_monthly.index)
+    chf_daily = chf_monthly.resample("D").interpolate(method="linear")
+    # Override today's value with Stooq current quote
     try:
-        df = pd.read_csv(url, index_col="Date", parse_dates=True)
-        frames[ccy] = df["Close"]
-        print(f"  ✓ {ccy}")
-    except Exception as e:
-        print(f"  ✗ {ccy}: {e}")
+        stooq_url = f"https://stooq.com/q/l/?s={STOOQ_CURRENT['CHF']}&f=sd2t2ohlc&h&e=csv"
+        r = requests.get(stooq_url, timeout=10)
+        stooq_df = pd.read_csv(io.StringIO(r.text))
+        if not stooq_df.empty and "Close" in stooq_df.columns:
+            chf_today = float(stooq_df["Close"].iloc[0])
+            chf_daily[pd.Timestamp(date.today())] = chf_today
+    except Exception:
+        pass
+    frames["CHF"] = chf_daily
+    print("  ✓ CHF (FRED monthly + Stooq current)")
+except Exception as e:
+    print(f"  ✗ CHF: {e}")
+
+# NZD — FRED monthly (10Y) forward-filled to daily + Stooq current override
+try:
+    nzd_monthly = pdr.DataReader("IRLTLT01NZM156N", "fred", start_date, end_date)["IRLTLT01NZM156N"]
+    nzd_monthly.index = pd.to_datetime(nzd_monthly.index)
+    nzd_daily = nzd_monthly.resample("D").interpolate(method="linear")
+    # Override today's value with Stooq current quote
+    try:
+        stooq_url = f"https://stooq.com/q/l/?s={STOOQ_CURRENT['NZD']}&f=sd2t2ohlc&h&e=csv"
+        r = requests.get(stooq_url, timeout=10)
+        stooq_df = pd.read_csv(io.StringIO(r.text))
+        if not stooq_df.empty and "Close" in stooq_df.columns:
+            nzd_today = float(stooq_df["Close"].iloc[0])
+            nzd_daily[pd.Timestamp(date.today())] = nzd_today
+    except Exception:
+        pass
+    frames["NZD"] = nzd_daily
+    print("  ✓ NZD (FRED monthly + Stooq current)")
+except Exception as e:
+    print(f"  ✗ NZD: {e}")
 
 df_rates = pd.DataFrame(frames).sort_index()
 df_rates = df_rates.apply(pd.to_numeric, errors="coerce").interpolate(method="linear")
@@ -102,7 +249,7 @@ df_fx = df_fx.apply(pd.to_numeric, errors="coerce").interpolate(method="linear")
 df_fx, df_rates = df_fx.align(df_rates, join="inner", axis=0)
 
 if df_fx.empty or df_rates.empty:
-    print("\nNo data after alignment (Stooq may be unavailable) — skipping run.")
+    print("\nNo data after alignment — skipping run.")
     sys.exit(0)
 
 print(f"\nData aligned: {len(df_fx)} rows  |  {df_fx.index[0].date()} → {df_fx.index[-1].date()}")
