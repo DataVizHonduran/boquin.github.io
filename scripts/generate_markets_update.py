@@ -35,18 +35,54 @@ OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "markets-update"
 # FRED release IDs for major US macro releases.
 # Add a new entry here (and in RELEASE_SERIES below) to cover more releases.
 RELEASE_WHITELIST = {
+    # --- Tier 1: highest market impact ---
     50:  "Employment Situation (NFP)",
     10:  "Consumer Price Index (CPI)",
-    31:  "Producer Price Index (PPI)",
+    46:  "Producer Price Index (PPI)",
     54:  "Personal Income and Outlays (PCE)",
     53:  "Gross Domestic Product (GDP)",
-    84:  "Advance Retail Sales",
+    9:   "Advance Retail Sales",
     180: "Unemployment Insurance Weekly Claims",
-    21:  "Industrial Production and Capacity Utilization",
+    13:  "Industrial Production and Capacity Utilization",
+    # --- Tier 2: high market impact ---
+    192: "Job Openings and Labor Turnover Survey (JOLTS)",
+    194: "ADP National Employment Report",
+    291: "Existing Home Sales",
+    97:  "New Residential Sales",
+    27:  "New Residential Construction",
+    95:  "Durable Goods Orders",
+    51:  "U.S. International Trade in Goods and Services",
+    188: "U.S. Import and Export Price Indexes",
+    11:  "Employment Cost Index",
+    47:  "Productivity and Costs",
+    229: "Construction Spending",
+    14:  "Consumer Credit (G.19)",
+    # --- Tier 3: supplemental / regional ---
+    91:  "University of Michigan Consumer Sentiment",
+    321: "Empire State Manufacturing Survey",
+    351: "Philadelphia Fed Manufacturing Survey",
+    219: "Chicago Fed National Activity Index (CFNAI)",
+    221: "Chicago Fed National Financial Conditions Index",
+    101: "FOMC Press Release",
+    191: "Senior Loan Officer Opinion Survey",
+    199: "S&P Case-Shiller Home Price Index",
+    171: "FHFA House Price Index",
+    25:  "Manufacturing and Trade Inventories and Sales",
+    # --- Tier 4: additional coverage ---
+    290: "Monthly Wholesale Trade",
+    22:  "H.8 Assets and Liabilities of Commercial Banks",
+    21:  "H.6 Money Stock Measures",
+    323: "Trimmed Mean PCE Inflation Rate (Dallas Fed)",
+    179: "Quarterly Retail E-Commerce Sales",
+    435: "Advance Economic Indicators",
+    374: "Texas Manufacturing Outlook Survey",
+    443: "Business Formation Statistics",
+    190: "Primary Mortgage Market Survey",
+    231: "Charge-Off and Delinquency Rates on Loans",
 }
 
 # Series to pull for each release (FRED release_id → list of (label, series_id)).
-# Months of history fetched: 13 (gives 12 MoM comparisons).
+# Any series that FRED rejects is skipped automatically — no crash.
 RELEASE_SERIES = {
     50: [  # NFP
         ("Nonfarm Payrolls (thousands, SA)",            "PAYEMS"),
@@ -62,23 +98,23 @@ RELEASE_SERIES = {
     ],
     10: [  # CPI
         ("CPI All Items (index, SA)",                   "CPIAUCSL"),
-        ("CPI YoY % (SA)",                              "CPIAUCSL"),  # transform applied below
         ("Core CPI ex Food & Energy (index, SA)",       "CPILFESL"),
         ("CPI Food (index, unadj)",                     "CPIUFDSL"),
         ("CPI Energy (index, unadj)",                   "CPIENGSL"),
         ("CPI Shelter (index, SA)",                     "CUSR0000SAH1"),
         ("CPI Medical Care (index, unadj)",             "CPIMEDSL"),
+        ("CPI Transportation (index, unadj)",           "CPITRNSL"),
     ],
-    31: [  # PPI
-        ("PPI Final Demand (index, SA)",                "PPIACO"),
-        ("PPI ex Food & Energy (index, SA)",            "PPIFES"),
-        ("PPI Goods (index, SA)",                       "PPIGFD"),
+    46: [  # PPI
+        ("PPI All Commodities (index)",                 "PPIACO"),
+        ("PPI Final Demand ex Food & Energy (index, SA)","PPIFES"),
+        ("PPI Finished Goods (index, SA)",              "PPIGFD"),
         ("PPI Services (index, SA)",                    "PPIS"),
     ],
     54: [  # PCE
         ("PCE Price Index (index, SA)",                 "PCEPI"),
         ("Core PCE Price Index (index, SA)",            "PCEPILFE"),
-        ("Personal Income MoM % (SA)",                  "PI"),
+        ("Personal Income (bn $, SAAR)",                "PI"),
         ("Personal Consumption Expenditures (bn $, SA)","PCE"),
         ("Personal Saving Rate (%, SA)",                "PSAVERT"),
     ],
@@ -90,8 +126,8 @@ RELEASE_SERIES = {
         ("Real Exports (bn 2017$, SAAR)",               "EXPGSC1"),
         ("Real Imports (bn 2017$, SAAR)",               "IMPGSC1"),
     ],
-    84: [  # Retail Sales
-        ("Retail Sales (mn $, SA)",                     "RSAFS"),
+    9: [  # Advance Retail Sales
+        ("Retail Sales Total (mn $, SA)",               "RSAFS"),
         ("Retail Sales ex Autos (mn $, SA)",            "RSFSXMV"),
         ("Retail Sales ex Autos & Gas (mn $, SA)",      "RSFSDG"),
     ],
@@ -100,12 +136,148 @@ RELEASE_SERIES = {
         ("Continued Claims (thousands, SA)",            "CCSA"),
         ("4-Week Avg Initial Claims (thousands, SA)",   "IC4WSA"),
     ],
-    21: [  # Industrial Production
+    13: [  # Industrial Production
         ("Industrial Production Index (index, SA)",     "INDPRO"),
         ("Capacity Utilization, Total (%, SA)",         "TCU"),
         ("Manufacturing Production (index, SA)",        "IPMAN"),
         ("Mining Production (index, SA)",               "IPB10001N"),
         ("Utilities Production (index, SA)",            "IPG2211S"),
+    ],
+    192: [  # JOLTS
+        ("Job Openings (thousands, SA)",                "JTSJOL"),
+        ("Hires (thousands, SA)",                       "JTSHIL"),
+        ("Quits (thousands, SA)",                       "JTSQUL"),
+        ("Quits Rate (%, SA)",                          "JTSQUR"),
+        ("Layoffs & Discharges Rate (%, SA)",           "JTSLDR"),
+    ],
+    194: [  # ADP
+        ("ADP Private Nonfarm Employment (thousands)",  "ADPWNUSNERSA"),
+    ],
+    291: [  # Existing Home Sales
+        ("Existing Home Sales (SAAR, thousands)",       "EXHOSLUSM495S"),
+    ],
+    97: [  # New Home Sales
+        ("New One-Family Houses Sold (SAAR, thousands)","HSN1F"),
+        ("New Home Median Sales Price ($)",             "MSPNHSUS"),
+    ],
+    27: [  # New Residential Construction
+        ("Housing Starts Total (SAAR, thousands)",      "HOUST"),
+        ("Housing Starts 1-Unit (SAAR, thousands)",     "HOUST1F"),
+        ("Building Permits Total (SAAR, thousands)",    "PERMIT"),
+        ("Building Permits 1-Unit (SAAR, thousands)",   "PERMIT1"),
+    ],
+    95: [  # Durable Goods
+        ("Durable Goods New Orders (mn $, SA)",         "DGORDER"),
+        ("Core Capex Orders ex Aircraft (mn $, SA)",    "NEWORDER"),
+    ],
+    51: [  # Trade Balance
+        ("Trade Balance, Goods & Services (mn $, SA)",  "BOPGSTB"),
+        ("Goods Trade Balance (mn $, SA)",              "BOPGTB"),
+    ],
+    188: [  # Import/Export Prices
+        ("Import Price Index (index)",                  "IR"),
+        ("Export Price Index (index)",                  "IQ"),
+    ],
+    11: [  # Employment Cost Index
+        ("ECI Total Compensation, All Civilian (SA)",   "ECIALLCIV"),
+        ("ECI Wages & Salaries, Private (SA)",          "ECIWAG"),
+    ],
+    47: [  # Productivity & Costs
+        ("Nonfarm Business Output per Hour (SA)",       "OPHNFB"),
+        ("Unit Labor Costs, Nonfarm Business (SA)",     "ULCNFB"),
+    ],
+    229: [  # Construction Spending
+        ("Total Construction Spending (mn $, SA)",      "TTLCONS"),
+        ("Private Residential Construction (mn $, SA)", "PRRESCON"),
+        ("Private Nonresidential Construction (mn $, SA)","TLNRESCONS"),
+    ],
+    14: [  # Consumer Credit
+        ("Total Consumer Credit (bn $, SA)",            "TOTALSL"),
+        ("Revolving Credit (bn $, SA)",                 "REVOLSL"),
+        ("Nonrevolving Credit (bn $, SA)",              "NONREVSL"),
+    ],
+    91: [  # Michigan Sentiment
+        ("Consumer Sentiment Index",                    "UMCSENT"),
+        ("5-Year Inflation Expectations (%)",           "MICH"),
+    ],
+    321: [  # Empire State Manufacturing
+        ("NY Fed General Business Conditions",          "GAFDISA066MSFRBNY"),
+    ],
+    351: [  # Philly Fed Manufacturing
+        ("Philly Fed Business Activity Index",          "GAPHIFRBPHI"),
+    ],
+    219: [  # CFNAI
+        ("Chicago Fed National Activity Index",         "CFNAI"),
+        ("CFNAI 3-Month Moving Average",                "CFNAIMA3"),
+    ],
+    221: [  # NFCI
+        ("Chicago Fed National Financial Conditions",   "NFCI"),
+        ("NFCI Credit Subindex",                        "NFCICREDIT"),
+        ("NFCI Risk Subindex",                          "NFCIRISK"),
+    ],
+    101: [  # FOMC
+        ("Fed Funds Target Rate Upper (%, daily)",      "DFEDTARU"),
+        ("Fed Funds Target Rate Lower (%, daily)",      "DFEDTARL"),
+        ("Effective Fed Funds Rate (%)",                "FEDFUNDS"),
+    ],
+    191: [  # Senior Loan Officer Survey
+        ("Net % Tightening C&I Loans — Large Firms",   "DRTSCILM"),
+        ("Net % Tightening Credit Card Standards",      "DRTSCLCC"),
+        ("Net % Tightening Mortgage Standards",         "DRTSSP500"),
+    ],
+    199: [  # Case-Shiller
+        ("Case-Shiller US Home Price Index (SA)",       "CSUSHPISA"),
+        ("Case-Shiller 20-City Composite (SA)",         "SPCS20RSA"),
+    ],
+    171: [  # FHFA HPI
+        ("FHFA House Price Index (purchase-only, SA)",  "USSTHPI"),
+    ],
+    25: [  # Business Inventories
+        ("Total Business Inventories/Sales Ratio",      "ISRATIO"),
+        ("Manufacturing Inventories/Sales Ratio",       "MNFCTRIRSA"),
+        ("Retail Inventories/Sales Ratio",              "RETAILIRSA"),
+    ],
+    290: [  # Wholesale Trade
+        ("Wholesale Inventories (mn $, SA)",            "WHLSLRIMSA"),
+        ("Wholesale Sales (mn $, SA)",                  "WHLSLRSMSA"),
+    ],
+    22: [  # H.8 Commercial Banks
+        ("Commercial & Industrial Loans (bn $, SA)",    "BUSLOANS"),
+        ("Real Estate Loans (bn $, SA)",                "REALLN"),
+        ("Consumer Loans (bn $, SA)",                   "CONSUMER"),
+        ("Total Deposits (bn $, SA)",                   "DPSACBW027SBOG"),
+    ],
+    21: [  # H.6 Money Stock
+        ("M2 Money Stock (bn $, SA)",                   "M2SL"),
+        ("M1 Money Stock (bn $, SA)",                   "M1SL"),
+    ],
+    323: [  # Trimmed Mean PCE
+        ("12-Month Trimmed Mean PCE Inflation (%)",     "PCETRIM12M159SFRBDAL"),
+        ("1-Month Trimmed Mean PCE Inflation (%)",      "PCETRIM1M158SFRBDAL"),
+    ],
+    179: [  # Quarterly E-Commerce
+        ("E-Commerce Retail Sales (mn $, SA)",          "ECOMSA"),
+        ("E-Commerce as % of Total Retail (%)",         "ECOMPCTSA"),
+    ],
+    435: [  # Advance Economic Indicators
+        ("Advance Trade Balance in Goods (mn $, SA)",   "ADVANCETRADE"),
+    ],
+    374: [  # Texas Manufacturing
+        ("Texas Manufacturing Business Activity",       "TXMFGBCINDX"),
+    ],
+    443: [  # Business Formation
+        ("Business Applications Total (SA)",            "BABATOTALSAUS"),
+        ("High-Propensity Business Applications (SA)",  "HBABATOTALSAUS"),
+    ],
+    190: [  # Freddie Mac Mortgage Survey
+        ("30-Year Fixed Mortgage Rate (%)",             "MORTGAGE30US"),
+        ("15-Year Fixed Mortgage Rate (%)",             "MORTGAGE15US"),
+    ],
+    231: [  # Charge-Off & Delinquency
+        ("Credit Card Delinquency Rate (%)",            "DRCCLACBS"),
+        ("Consumer Loan Delinquency Rate (%)",          "DRCONGACBS"),
+        ("C&I Loan Delinquency Rate (%)",               "DRBLACBS"),
+        ("Credit Card Charge-Off Rate (%)",             "CORCCACBS"),
     ],
 }
 
