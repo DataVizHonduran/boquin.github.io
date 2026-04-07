@@ -445,6 +445,43 @@ def _inline(text: str) -> str:
     return text
 
 
+def get_ref_month(data_block: str) -> str:
+    """Return the most recent YYYY-MM observation period found in a data block."""
+    import re
+    matches = re.findall(r"  (\d{4}-\d{2})  ", data_block)
+    return max(matches) if matches else ""
+
+
+def extract_ref_month_from_html(html_path: Path) -> str:
+    """Read a report HTML and return its reference month (YYYY-MM)."""
+    import re
+    try:
+        content = html_path.read_text(encoding="utf-8")
+        # Fast path: meta tag written by render_html
+        m = re.search(r'<meta name="reference-month" content="(\d{4}-\d{2})"', content)
+        if m:
+            return m.group(1)
+        # Fallback: scan the raw data block for observation dates
+        matches = re.findall(r"  (\d{4}-\d{2})  ", content)
+        return max(matches) if matches else ""
+    except Exception:
+        return ""
+
+
+def fmt_date(date_str: str) -> str:
+    try:
+        return datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %-d, %Y")
+    except Exception:
+        return date_str
+
+
+def fmt_month(month_str: str) -> str:
+    try:
+        return datetime.strptime(month_str + "-01", "%Y-%m-%d").strftime("%B %Y")
+    except Exception:
+        return month_str
+
+
 def render_html(release_name: str, date_str: str, data_block: str, note_md: str) -> str:
     note_html = markdown_to_html_body(note_md)
     # Extract key metrics for summary cards (latest value of first 3 series)
@@ -472,11 +509,14 @@ def render_html(release_name: str, date_str: str, data_block: str, note_md: str)
             <p class="card-period">{period}</p>
         </div>"""
 
+    ref_month = get_ref_month(data_block)
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="{ref_month}">
     <title>{release_name} — {date_str}</title>
     <style>
         :root {{
@@ -612,23 +652,52 @@ def update_index(reports: list[dict]) -> None:
     """Regenerate the markets-update index.html from all HTML files in the dir."""
     existing = sorted(OUTPUT_DIR.glob("markets-update-*.html"), reverse=True)
 
+    # Build a set of filenames already covered by existing files
+    seen_fnames: set[str] = set()
     rows = ""
     for f in existing:
-        name = f.stem  # e.g. markets-update-2026-04-07-nfp
-        parts = name.split("-", 4)  # ['markets', 'update', 'YYYY', 'MM', 'DD-slug']
-        if len(parts) >= 5:
+        seen_fnames.add(f.name)
+        name = f.stem  # e.g. markets-update-2026-04-07-employment-situation
+        # split("-", 5) → ['markets','update','YYYY','MM','DD','slug...']
+        parts = name.split("-", 5)
+        if len(parts) >= 6:
+            date_part = "-".join(parts[2:5])   # YYYY-MM-DD
+            slug = parts[5]                     # employment-situation
+        elif len(parts) == 5:
             date_part = "-".join(parts[2:5])
-            slug = parts[5] if len(parts) > 5 else ""
+            slug = ""
         else:
             date_part = ""
             slug = ""
-        rows += f'<tr><td><a href="{f.name}">{f.stem}</a></td><td>{date_part}</td></tr>\n'
 
-    # Also include any just-generated reports passed in
+        release_title = " ".join(w.capitalize() for w in slug.split("-")) if slug else name
+        ref_month     = extract_ref_month_from_html(f)
+        generated_fmt = fmt_date(date_part)
+        ref_month_fmt = fmt_month(ref_month) if ref_month else "—"
+
+        rows += (
+            f'<tr>'
+            f'<td><a href="{f.name}">{release_title}</a></td>'
+            f'<td>{ref_month_fmt}</td>'
+            f'<td>{generated_fmt}</td>'
+            f'</tr>\n'
+        )
+
+    # Also include any just-generated reports not yet on disk when this runs
     for r in reports:
         fname = Path(r["path"]).name
-        if not any(fname in row for row in rows):
-            rows += f'<tr><td><a href="{fname}">{Path(r["path"]).stem}</a></td><td>{r["date"]}</td></tr>\n'
+        if fname in seen_fnames:
+            continue
+        release_title = r.get("release_name", Path(r["path"]).stem)
+        ref_month_fmt = fmt_month(r.get("ref_month", "")) or "—"
+        generated_fmt = fmt_date(r["date"])
+        rows += (
+            f'<tr>'
+            f'<td><a href="{fname}">{release_title}</a></td>'
+            f'<td>{ref_month_fmt}</td>'
+            f'<td>{generated_fmt}</td>'
+            f'</tr>\n'
+        )
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -637,11 +706,12 @@ def update_index(reports: list[dict]) -> None:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>US Markets Update — Archive</title>
     <style>
-        body {{ font-family: -apple-system, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; color: #333; }}
+        body {{ font-family: -apple-system, sans-serif; max-width: 960px; margin: 40px auto; padding: 20px; color: #333; }}
         h1 {{ color: #003366; border-bottom: 2px solid #003366; padding-bottom: 10px; margin-bottom: 24px; }}
         table {{ width: 100%; border-collapse: collapse; }}
         th {{ background: #003366; color: white; padding: 12px; text-align: left; }}
         td {{ padding: 10px 12px; border-bottom: 1px solid #dee2e6; }}
+        td:nth-child(2), td:nth-child(3) {{ white-space: nowrap; color: #555; font-size: 0.9rem; }}
         tr:hover {{ background: #f8f9fa; }}
         a {{ color: #003366; }}
         .meta {{ color: #888; font-size: 0.9rem; margin-bottom: 20px; }}
@@ -651,7 +721,7 @@ def update_index(reports: list[dict]) -> None:
     <h1>📊 US Markets Update</h1>
     <p class="meta">Daily analyst notes on major US economic releases. Generated by Gemma 4 31B via FRED data.</p>
     <table>
-        <thead><tr><th>Report</th><th>Date</th></tr></thead>
+        <thead><tr><th>Report</th><th>Reference Month</th><th>Generated</th></tr></thead>
         <tbody>
 {rows}
         </tbody>
@@ -698,7 +768,7 @@ def main():
 
         if out_path.exists():
             print(f"  Already exists, skipping: {out_path.name}", file=sys.stderr)
-            generated.append({"path": str(out_path), "date": today})
+            generated.append({"path": str(out_path), "date": today, "release_name": release_name, "ref_month": ""})
             continue
 
         print(f"\n--- {release_name} ---", file=sys.stderr)
@@ -711,7 +781,12 @@ def main():
         html = render_html(release_name, today, data_block, note_md)
         out_path.write_text(html, encoding="utf-8")
         print(f"\n  Saved: {out_path}", file=sys.stderr)
-        generated.append({"path": str(out_path), "date": today})
+        generated.append({
+            "path":         str(out_path),
+            "date":         today,
+            "release_name": release_name,
+            "ref_month":    get_ref_month(data_block),
+        })
 
     update_index(generated)
     print(f"\nDone. {len(generated)} report(s) written.", file=sys.stderr)
