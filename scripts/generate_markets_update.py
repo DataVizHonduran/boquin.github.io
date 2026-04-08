@@ -496,30 +496,42 @@ def generate_charts_html(chart_data: list[dict]) -> str:
 # Gemma inference
 # ---------------------------------------------------------------------------
 
-def generate_note(data_block: str, hf_token: str) -> str:
+def generate_note(data_block: str, hf_token: str, retries: int = 5) -> str:
     client = InferenceClient(model=MODEL_ID, token=hf_token, timeout=300)
-    stream = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user",   "content": (
-                "Please analyze the following economic data and produce your economist note:\n\n"
-                + data_block
-            )},
-        ],
-        temperature=0.3,
-        max_tokens=2048,
-        stream=True,
-    )
-    parts = []
-    for chunk in stream:
-        if not chunk.choices:
-            continue
-        delta = chunk.choices[0].delta.content
-        if delta:
-            parts.append(delta)
-            print(delta, end="", flush=True)
-    print()
-    return "".join(parts)
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user",   "content": (
+            "Please analyze the following economic data and produce your economist note:\n\n"
+            + data_block
+        )},
+    ]
+    for attempt in range(retries):
+        try:
+            stream = client.chat.completions.create(
+                messages=messages,
+                temperature=0.3,
+                max_tokens=2048,
+                stream=True,
+            )
+            parts = []
+            for chunk in stream:
+                if not chunk.choices:
+                    continue
+                delta = chunk.choices[0].delta.content
+                if delta:
+                    parts.append(delta)
+                    print(delta, end="", flush=True)
+            print()
+            return "".join(parts)
+        except Exception as e:
+            is_rate_limit = "429" in str(e) or "Too Many Requests" in str(e)
+            if is_rate_limit and attempt < retries - 1:
+                wait = 60 * (attempt + 1)   # 60s, 120s, 180s, 240s
+                print(f"\n  HF rate limit (429), waiting {wait}s before retry "
+                      f"(attempt {attempt+1}/{retries}) ...", file=sys.stderr)
+                time.sleep(wait)
+            else:
+                raise
 
 
 # ---------------------------------------------------------------------------
