@@ -779,7 +779,93 @@ def generate_md_report(articles_by_district: dict, top_insights_text: str,
 
 
 # ---------------------------------------------------------------------------
-# Core pipeline (shared between both modes)
+# Monthly MTD helpers
+# ---------------------------------------------------------------------------
+
+def load_mtd_articles(cache_path: Path, year_month: str) -> list[dict]:
+    """Return all cached articles whose publicationDate falls in year_month (YYYY-MM)."""
+    cache = load_cache(cache_path)
+    articles = []
+    for item in cache.get("items", {}).values():
+        if item.get("publicationDate", "").startswith(year_month):
+            articles.append({
+                "district":        item.get("districtCode", ""),
+                "title":           item.get("title", ""),
+                "url":             item.get("url", ""),
+                "publicationDate": item.get("publicationDate", ""),
+                "authors":         item.get("authors", []),
+                "scrapedSnippet":  item.get("scrapedSnippet", ""),
+                "aiSummary":       item.get("aiSummary", ""),
+                "tags":            item.get("tags", []),
+                "_isNew":          False,
+                "_hash":           "",
+            })
+    articles.sort(key=lambda a: a["publicationDate"], reverse=True)
+    return articles
+
+
+def run_monthly_pipeline(run_date: str, cache_path: Path,
+                         output_dir: Path, hf_token: str) -> None:
+    """Build the month-to-date rolling report from the cache."""
+    year_month   = run_date[:7]           # e.g. "2026-04"
+    month_label  = datetime.strptime(year_month, "%Y-%m").strftime("%B %Y")  # "April 2026"
+
+    all_articles = load_mtd_articles(cache_path, year_month)
+    if not all_articles:
+        print(f"[fed-district-ai] No cached articles for {year_month} — skipping MTD report.")
+        return
+
+    print(f"\n[fed-district-ai] MTD report: {len(all_articles)} articles for {month_label}")
+
+    top_insights_text = generate_top_insights(all_articles, hf_token, run_date)
+    top_insights_html = insights_to_html(top_insights_text)
+
+    articles_by_district: dict = {}
+    for article in all_articles:
+        code = article.get("district", "UNKNOWN")
+        articles_by_district.setdefault(code, []).append(article)
+
+    # Reuse generate_html_report with a custom title/coverage via a thin wrapper
+    cache_stats = {"added": 0, "cached": len(all_articles),
+                   "total": len(all_articles)}
+    html = generate_html_report(
+        articles_by_district, top_insights_html,
+        run_date=f"{month_label} (Month to Date)",
+        days=0,   # not used — coverage line is overridden below
+        cache_stats=cache_stats,
+    )
+    # Patch the coverage line to say "Month to date: April 2026 (N articles)"
+    html = html.replace(
+        "<strong>Coverage Period:</strong> Past 0 days",
+        f"<strong>Coverage Period:</strong> Month to date: {month_label} "
+        f"({len(all_articles)} articles across 7 districts)",
+    )
+
+    md = generate_md_report(
+        articles_by_district, top_insights_text,
+        run_date=f"{month_label} (Month to Date)",
+        days=0,
+        cache_stats=cache_stats,
+    )
+    md = md.replace(
+        "**Coverage Period:** Past 0 days",
+        f"**Coverage Period:** Month to date: {month_label} ({len(all_articles)} articles)",
+    )
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    html_path = output_dir / f"fed-district-monitor-{year_month}.html"
+    md_path   = output_dir / f"fed-district-monitor-{year_month}.md"
+
+    html_path.write_text(html, encoding="utf-8")
+    md_path.write_text(md,   encoding="utf-8")
+
+    print(f"[fed-district-ai] MTD reports written:")
+    print(f"  HTML → {html_path}")
+    print(f"  MD   → {md_path}")
+
+
+# ---------------------------------------------------------------------------
+# Core pipeline (shared between --input and --scrape modes)
 # ---------------------------------------------------------------------------
 
 def run_pipeline(all_articles: list, days: int, run_date: str,
@@ -887,9 +973,11 @@ def main():
     parser = argparse.ArgumentParser(description="Fed District Monitor — AI Processor")
 
     mode_group = parser.add_mutually_exclusive_group(required=True)
-    mode_group.add_argument("--input",  help="Path to pre-fetched raw articles JSON (skill mode)")
-    mode_group.add_argument("--scrape", action="store_true",
+    mode_group.add_argument("--input",   help="Path to pre-fetched raw articles JSON (skill mode)")
+    mode_group.add_argument("--scrape",  action="store_true",
                             help="Fetch articles directly from Fed district sources (GH Actions mode)")
+    mode_group.add_argument("--monthly", action="store_true",
+                            help="Build month-to-date rolling report from cache (no scraping)")
 
     parser.add_argument("--output-dir", required=True, help="Directory for HTML/MD reports")
     parser.add_argument("--cache",      required=True, help="Path to cache JSON file")
@@ -906,11 +994,14 @@ def main():
     cache_path = Path(args.cache).expanduser()
     run_date   = args.date
 
-    if args.scrape:
+    if args.monthly:
+        run_monthly_pipeline(run_date, cache_path, output_dir, hf_token)
+    elif args.scrape:
         days         = args.days
         all_articles = scrape_all_districts(days)
         print(f"\n[fed-district-ai] {len(all_articles)} articles scraped "
               f"(last {days} days)")
+        run_pipeline(all_articles, days, run_date, cache_path, output_dir, hf_token)
     else:
         input_path = Path(args.input)
         if not input_path.exists():
@@ -919,8 +1010,7 @@ def main():
         all_articles = raw.get("articles", [])
         days         = args.days if args.days != 3 else raw.get("days", 30)
         print(f"\n[fed-district-ai] {len(all_articles)} articles loaded from {input_path}")
-
-    run_pipeline(all_articles, days, run_date, cache_path, output_dir, hf_token)
+        run_pipeline(all_articles, days, run_date, cache_path, output_dir, hf_token)
 
 
 if __name__ == "__main__":

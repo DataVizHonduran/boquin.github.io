@@ -38,6 +38,16 @@ jobs:
             --cache reports/fed-monitor/cache.json \
             --date $(date +%Y-%m-%d)
 
+      - name: Generate month-to-date report
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/fed_district_ai_processor.py \
+            --monthly \
+            --output-dir reports/fed-monitor/ \
+            --cache reports/fed-monitor/cache.json \
+            --date $(date +%Y-%m-%d)
+
       - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
