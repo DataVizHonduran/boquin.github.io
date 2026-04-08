@@ -70,8 +70,13 @@ def build_dataset(fred: Fred) -> pd.DataFrame:
     df = pd.concat([dgs10_m, expinf_m, acmtp10_m, rstar_m], axis=1)
     df = df.dropna()
 
-    # Model
-    df["FairValue"] = df["rstar"] + df["EXPINF1YR"] + df["ACMTP10"]
+    # Model — calibrated with a constant intercept so the residual is mean-zero
+    # over the full sample. Without this, GDP-based r* chronically overstates
+    # the true neutral real rate, producing a persistent level bias.
+    raw_composite = df["rstar"] + df["EXPINF1YR"] + df["ACMTP10"]
+    alpha = (df["DGS10"] - raw_composite).mean()
+    df["alpha"] = alpha
+    df["FairValue"] = alpha + raw_composite
     df["Residual"] = df["DGS10"] - df["FairValue"]
 
     return df
@@ -249,7 +254,8 @@ METHODOLOGY_HTML = """
       </tr>
     </tbody>
   </table>
-  <p><b>Fair Value</b> = r* + E[π] + TP</p>
+  <p><b>Fair Value</b> = α + r* + E[π] + TP</p>
+  <p style="margin-top:4px;font-size:13px;color:#555;">where <b>α</b> is a calibration constant equal to the historical mean of (Actual − raw composite), ensuring the residual is mean-zero over the full sample. Without this intercept, GDP-based r* chronically overstates the true neutral real rate — particularly post-GFC — producing a persistent level bias in the raw model.</p>
   <p><b>Residual</b> = Actual Yield (DGS10) − Fair Value</p>
   <ul style="margin:8px 0 16px 20px;">
     <li><span style="color:#2ca02c;font-weight:600;">Residual &gt; 0</span>: Yield trades above fair value → market is <b>cheap / undervalued</b> relative to fundamentals</li>
@@ -327,10 +333,12 @@ def main():
     print(f"      Dataset: {len(df)} monthly observations ({df.index[0].strftime('%b %Y')} – {df.index[-1].strftime('%b %Y')})")
 
     latest = df.iloc[-1]
-    print(f"\n      Latest snapshot ({df.index[-1].strftime('%b %Y')}):")
+    print(f"\n      Calibration intercept (α) = {df['alpha'].iloc[-1]:+.2f}pp")
+    print(f"      Latest snapshot ({df.index[-1].strftime('%b %Y')}):")
     print(f"        r*         = {latest['rstar']:.2f}%")
     print(f"        E[π]       = {latest['EXPINF1YR']:.2f}%")
     print(f"        TP         = {latest['ACMTP10']:.2f}%")
+    print(f"        α          = {latest['alpha']:+.2f}pp")
     print(f"        Fair Value = {latest['FairValue']:.2f}%")
     print(f"        Actual     = {latest['DGS10']:.2f}%")
     print(f"        Residual   = {latest['Residual']:+.2f}pp  ({'CHEAP' if latest['Residual'] > 0 else 'RICH'})")
