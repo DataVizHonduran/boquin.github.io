@@ -93,7 +93,7 @@ def build_dataset(fred: Fred) -> tuple[pd.DataFrame, object]:
     df = df.dropna()
 
     # ── OLS ────────────────────────────────────────────────────────────────
-    regressors = ["DGS2", "TaylorGap"]
+    regressors = ["DGS2", "PolicySpread", "TaylorGap"]
     X = sm.add_constant(df[regressors])
     result = sm.OLS(df["DGS10"], X).fit()
 
@@ -102,9 +102,10 @@ def build_dataset(fred: Fred) -> tuple[pd.DataFrame, object]:
 
     # Component contributions for the stacked area chart
     params = result.params  # includes 'const'
-    df["contrib_alpha"]     = params["const"]
-    df["contrib_DGS2"]      = params["DGS2"]      * df["DGS2"]
-    df["contrib_TaylorGap"] = params["TaylorGap"] * df["TaylorGap"]
+    df["contrib_alpha"]        = params["const"]
+    df["contrib_DGS2"]         = params["DGS2"]         * df["DGS2"]
+    df["contrib_PolicySpread"] = params["PolicySpread"]  * df["PolicySpread"]
+    df["contrib_TaylorGap"]    = params["TaylorGap"]     * df["TaylorGap"]
 
     return df, result
 
@@ -190,6 +191,9 @@ def build_chart(df: pd.DataFrame, result) -> go.Figure:
         ("p3_dgs2",   df["contrib_DGS2"],
          f"β·2Y Yield ({params['DGS2']:+.2f}×DGS2)",
          "rgba(31,119,180,0.55)",  "#1f77b4"),
+        ("p3_spread", df["contrib_PolicySpread"],
+         f"β·Policy Spread ({params['PolicySpread']:+.2f}×[DGS2−FFR])",
+         "rgba(255,127,14,0.55)",  "#ff7f0e"),
         ("p3_taylor", df["contrib_TaylorGap"],
          f"β·Taylor Gap ({params['TaylorGap']:+.2f}×gap)",
          "rgba(44,160,44,0.55)",   "#2ca02c"),
@@ -278,7 +282,7 @@ def build_html(fig: go.Figure, df: pd.DataFrame, result) -> str:
   <h2 style="font-size:17px;border-bottom:1px solid #ddd;padding-bottom:8px;margin-top:40px;">Model Methodology</h2>
   <p>This model estimates the 10-year Treasury yield as a linear function of two Fed policy stance variables, calibrated by OLS regression over the full historical sample.</p>
   <p style="font-family:monospace;background:#f5f5f5;padding:10px 14px;border-radius:4px;">
-    DGS10 = α + β₁·DGS2 + β₂·TaylorGap
+    DGS10 = α + β₁·DGS2 + β₂·PolicySpread + β₃·TaylorGap
   </p>
   <table style="width:100%;border-collapse:collapse;margin:12px 0 20px;">
     <thead>
@@ -300,9 +304,15 @@ def build_html(fig: go.Figure, df: pd.DataFrame, result) -> str:
         <td style="padding:8px 12px;border:1px solid #ddd;"><b>DGS2</b></td>
         <td style="padding:8px 12px;border:1px solid #ddd;">2-Year Treasury yield</td>
         <td style="padding:8px 12px;border:1px solid #ddd;font-family:monospace;">{params['DGS2']:+.3f}</td>
-        <td style="padding:8px 12px;border:1px solid #ddd;">Market pricing of short-rate path</td>
+        <td style="padding:8px 12px;border:1px solid #ddd;">Market pricing of short-rate path (level anchor)</td>
       </tr>
       <tr>
+        <td style="padding:8px 12px;border:1px solid #ddd;"><b>PolicySpread</b></td>
+        <td style="padding:8px 12px;border:1px solid #ddd;">DGS2 − FEDFUNDS</td>
+        <td style="padding:8px 12px;border:1px solid #ddd;font-family:monospace;">{params['PolicySpread']:+.3f}</td>
+        <td style="padding:8px 12px;border:1px solid #ddd;">Hike expectations (+) / cut expectations (−)</td>
+      </tr>
+      <tr style="background:#fafafa;">
         <td style="padding:8px 12px;border:1px solid #ddd;"><b>TaylorGap</b></td>
         <td style="padding:8px 12px;border:1px solid #ddd;">FEDFUNDS − Taylor Rule rate</td>
         <td style="padding:8px 12px;border:1px solid #ddd;font-family:monospace;">{params['TaylorGap']:+.3f}</td>
@@ -375,6 +385,7 @@ def main():
     lr = latest["Residual"]
     print(f"\n      Latest snapshot ({df.index[-1].strftime('%b %Y')}):")
     print(f"        DGS2           = {latest['DGS2']:.2f}%")
+    print(f"        PolicySpread   = {latest['PolicySpread']:+.2f}pp")
     print(f"        TaylorGap      = {latest['TaylorGap']:+.2f}pp")
     print(f"        Fair Value     = {latest['FairValue']:.2f}%")
     print(f"        Actual         = {latest['DGS10']:.2f}%")
