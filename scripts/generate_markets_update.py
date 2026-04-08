@@ -18,6 +18,7 @@ Adding a new release: add one entry each to RELEASE_WHITELIST and RELEASE_SERIES
 import os
 import sys
 import json
+import time
 import requests
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -275,6 +276,37 @@ RELEASE_SERIES = {
     ],
 }
 
+# Which 1-2 series to feature as inline charts per release.
+# Falls back to the first 2 series in RELEASE_SERIES for unlisted releases.
+CHART_SERIES = {
+    50:  ["PAYEMS", "UNRATE"],
+    10:  ["CPIAUCSL", "CPILFESL"],
+    46:  ["PPIACO", "PPIFES"],
+    54:  ["PCEPILFE", "PSAVERT"],
+    53:  ["GDPC1"],
+    9:   ["RSAFS", "RSFSXMV"],
+    180: ["ICSA", "IC4WSA"],
+    13:  ["INDPRO", "TCU"],
+    192: ["JTSJOL", "JTSQUR"],
+    194: ["ADPWNUSNERSA"],
+    291: ["EXHOSLUSM495S"],
+    97:  ["HSN1F", "MSPNHSUS"],
+    27:  ["HOUST", "PERMIT"],
+    95:  ["DGORDER", "NEWORDER"],
+    51:  ["BOPGSTB"],
+    11:  ["ECIALLCIV"],
+    47:  ["OPHNFB", "ULCNFB"],
+    91:  ["UMCSENT", "MICH"],
+    219: ["CFNAI", "CFNAIMA3"],
+    221: ["NFCI"],
+    199: ["CSUSHPISA", "SPCS20RSA"],
+    22:  ["BUSLOANS", "REALLN"],
+    21:  ["M2SL"],
+    323: ["PCETRIM12M159SFRBDAL"],
+    190: ["MORTGAGE30US", "MORTGAGE15US"],
+    231: ["DRCCLACBS", "CORCCACBS"],
+}
+
 SYSTEM_PROMPT = """\
 You are an economist at a top investment bank. The user will provide you with \
 a structured data summary of a recent US economic release. Read it carefully \
@@ -300,9 +332,17 @@ jargon-appropriate).
 # FRED helpers
 # ---------------------------------------------------------------------------
 
-def fred_get(endpoint: str, params: dict, api_key: str) -> dict:
+def fred_get(endpoint: str, params: dict, api_key: str, retries: int = 3) -> dict:
     params = {"api_key": api_key, "file_type": "json", **params}
-    resp = requests.get(f"{FRED_BASE}/{endpoint}", params=params, timeout=30)
+    for attempt in range(retries):
+        resp = requests.get(f"{FRED_BASE}/{endpoint}", params=params, timeout=30)
+        if resp.status_code < 500:
+            resp.raise_for_status()
+            return resp.json()
+        wait = 2 ** attempt
+        print(f"  FRED {resp.status_code} on {endpoint}, retrying in {wait}s "
+              f"(attempt {attempt+1}/{retries}) ...", file=sys.stderr)
+        time.sleep(wait)
     resp.raise_for_status()
     return resp.json()
 
@@ -350,6 +390,106 @@ def build_data_block(release_id: int, release_name: str, api_key: str) -> str:
             lines.append(f"  {o['date'][:7]}  {float(o['value']):>12.3f}")
         lines.append("")
     return "\n".join(lines)
+
+
+def build_chart_data(release_id: int, api_key: str, n_months: int = 24) -> list[dict]:
+    """Fetch 1-2 featured series for inline Chart.js charts (24 months of history)."""
+    sid_list = CHART_SERIES.get(release_id)
+    if sid_list is None:
+        sid_list = [sid for _, sid in RELEASE_SERIES.get(release_id, [])[:2]]
+    label_map = {sid: label for label, sid in RELEASE_SERIES.get(release_id, [])}
+    charts = []
+    for sid in sid_list:
+        try:
+            obs = fetch_series(sid, api_key, limit=n_months)
+        except Exception as e:
+            print(f"  WARNING: chart series {sid} failed — {e}", file=sys.stderr)
+            continue
+        if not obs:
+            continue
+        charts.append({
+            "label":     label_map.get(sid, sid),
+            "series_id": sid,
+            "dates":     [o["date"][:7] for o in obs],
+            "values":    [float(o["value"]) for o in obs],
+        })
+    return charts
+
+
+def generate_charts_html(chart_data: list[dict]) -> str:
+    """Return an HTML snippet with Chart.js line charts for the featured series."""
+    if not chart_data:
+        return ""
+    parts = []
+    for i, cd in enumerate(chart_data):
+        chart_id    = f"mu_chart_{i}"
+        label_short = cd["label"].split("(")[0].strip()
+        latest      = cd["values"][-1] if cd["values"] else None
+        latest_str  = f"{latest:,.3f}".rstrip("0").rstrip(".") if latest is not None else ""
+        dates_json  = json.dumps(cd["dates"])
+        values_json = json.dumps(cd["values"])
+        parts.append(f"""
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">{label_short}
+                <span class="mu-chart-latest">{latest_str}</span>
+            </div>
+            <canvas id="{chart_id}" height="120"></canvas>
+            <script>
+            (function(){{
+                new Chart(document.getElementById('{chart_id}'), {{
+                    type: 'line',
+                    data: {{
+                        labels: {dates_json},
+                        datasets: [{{
+                            data: {values_json},
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }}]
+                    }},
+                    options: {{
+                        responsive: true,
+                        plugins: {{
+                            legend: {{ display: false }},
+                            tooltip: {{
+                                callbacks: {{
+                                    label: function(c) {{
+                                        return c.parsed.y.toLocaleString(undefined, {{maximumFractionDigits: 3}});
+                                    }}
+                                }}
+                            }}
+                        }},
+                        scales: {{
+                            x: {{
+                                ticks: {{ maxTicksLimit: 8, font: {{ size: 11 }} }},
+                                grid: {{ display: false }}
+                            }},
+                            y: {{
+                                ticks: {{
+                                    font: {{ size: 11 }},
+                                    callback: function(v) {{
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{{maximumFractionDigits:2}});
+                                    }}
+                                }},
+                                grid: {{ color: 'rgba(0,0,0,0.06)' }}
+                            }}
+                        }}
+                    }}
+                }});
+            }})();
+            </script>
+        </div>""")
+    grid_cols = "1fr 1fr" if len(parts) > 1 else "1fr"
+    return f"""
+    <div class="mu-charts" style="display:grid;grid-template-columns:{grid_cols};gap:24px;margin-bottom:32px;">
+        {"".join(parts)}
+    </div>"""
 
 
 # ---------------------------------------------------------------------------
@@ -473,7 +613,8 @@ def fmt_month(month_str: str) -> str:
         return month_str
 
 
-def render_html(release_name: str, date_str: str, data_block: str, note_md: str) -> str:
+def render_html(release_name: str, date_str: str, data_block: str, note_md: str,
+                chart_data: list | None = None) -> str:
     note_html = markdown_to_html_body(note_md)
     # Extract key metrics for summary cards (latest value of first 3 series)
     card_html = ""
@@ -500,7 +641,10 @@ def render_html(release_name: str, date_str: str, data_block: str, note_md: str)
             <p class="card-period">{period}</p>
         </div>"""
 
-    ref_month = get_ref_month(data_block)
+    ref_month  = get_ref_month(data_block)
+    charts_html = generate_charts_html(chart_data or [])
+    chartjs_cdn = ('<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>'
+                   if charts_html else "")
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -509,6 +653,7 @@ def render_html(release_name: str, date_str: str, data_block: str, note_md: str)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="reference-month" content="{ref_month}">
     <title>{release_name} — {date_str}</title>
+    {chartjs_cdn}
     <style>
         :root {{
             --fed-blue: #003366;
@@ -604,6 +749,23 @@ def render_html(release_name: str, date_str: str, data_block: str, note_md: str)
             color: #888;
         }}
         footer a {{ color: var(--fed-blue); }}
+        .mu-chart-wrap {{
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }}
+        .mu-chart-title {{
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }}
+        .mu-chart-latest {{
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }}
     </style>
 </head>
 <body>
@@ -616,6 +778,8 @@ def render_html(release_name: str, date_str: str, data_block: str, note_md: str)
     <div class="summary-cards">
         {card_html}
     </div>
+
+    {charts_html}
 
     <div class="note-body">
         {note_html}
@@ -765,11 +929,12 @@ def main():
         print(f"\n--- {release_name} ---", file=sys.stderr)
         print(f"  Fetching FRED series ...", file=sys.stderr)
         data_block = build_data_block(release_id, release_name, fred_key)
+        chart_data = build_chart_data(release_id, fred_key)
 
         print(f"  Generating analyst note via {MODEL_ID} ...\n", file=sys.stderr)
         note_md = generate_note(data_block, hf_token)
 
-        html = render_html(release_name, today, data_block, note_md)
+        html = render_html(release_name, today, data_block, note_md, chart_data)
         out_path.write_text(html, encoding="utf-8")
         print(f"\n  Saved: {out_path}", file=sys.stderr)
         generated.append({
