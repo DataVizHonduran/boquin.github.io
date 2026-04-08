@@ -1,0 +1,37 @@
+name: Update 10Y Treasury MA Monitor
+
+on:
+  schedule:
+    - cron: '0 14 * * 1-5'  # Weekdays at 14:00 UTC (after FRED daily update ~13:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate dashboard
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python scripts/generate_10y_ma_monitor.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/10y-ma-monitor/
+          git diff --staged --quiet || (git commit -m "Update 10Y Treasury MA Monitor - $(date +'%Y-%m-%d')" && git pull --rebase && git push)
