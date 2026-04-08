@@ -95,16 +95,20 @@ def split_positive_negative(series: pd.Series):
 
 def build_chart(df: pd.DataFrame) -> go.Figure:
     fig = make_subplots(
-        rows=2, cols=1,
+        rows=3, cols=1,
         shared_xaxes=True,
-        row_heights=[0.62, 0.38],
-        vertical_spacing=0.06,
-        subplot_titles=("10-Year Yield vs. Model Fair Value", "Residual (Actual − Fair Value)"),
+        row_heights=[0.42, 0.25, 0.33],
+        vertical_spacing=0.05,
+        subplot_titles=(
+            "10-Year Yield vs. Model Fair Value",
+            "Residual (Actual − Fair Value)",
+            "Fair Value Decomposition",
+        ),
     )
 
     dates = df.index
 
-    # ── Top subplot ─────────────────────────────────────────────────────────
+    # ── Row 1: Actual vs Fair Value ──────────────────────────────────────────
     fig.add_trace(
         go.Scatter(
             x=dates, y=df["DGS10"],
@@ -118,18 +122,17 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(
         go.Scatter(
             x=dates, y=df["FairValue"],
-            name="Model Fair Value (r* + E[π] + TP)",
+            name="Model Fair Value (α + r* + E[π] + TP)",
             line=dict(color="#ff7f0e", width=2, dash="dash"),
             hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Fair Value</extra>",
         ),
         row=1, col=1,
     )
 
-    # ── Bottom subplot — residual with green/red fill ───────────────────────
+    # ── Row 2: Residual with green/red fill ─────────────────────────────────
     resid = df["Residual"]
     pos_resid, neg_resid = split_positive_negative(resid)
 
-    # Positive residual → market cheap (green)
     fig.add_trace(
         go.Scatter(
             x=dates, y=pos_resid,
@@ -142,7 +145,6 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         row=2, col=1,
     )
 
-    # Negative residual → market rich (red)
     fig.add_trace(
         go.Scatter(
             x=dates, y=neg_resid,
@@ -155,7 +157,6 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         row=2, col=1,
     )
 
-    # Residual line on top of fills
     fig.add_trace(
         go.Scatter(
             x=dates, y=resid,
@@ -167,10 +168,46 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         row=2, col=1,
     )
 
-    # Zero line on residual panel
     fig.add_hline(y=0, line=dict(color="#888", width=1, dash="dot"), row=2, col=1)
 
-    # Latest annotation
+    # ── Row 3: Stacked area — component contributions ────────────────────────
+    # α is a constant — broadcast to a Series aligned with dates
+    alpha_s = pd.Series(df["alpha"].iloc[0], index=dates)
+
+    components = [
+        (alpha_s,          "α (Intercept)",          "rgba(150, 100, 200, 0.55)", "#7b52ab"),
+        (df["rstar"],      "r* (Rolling GDP trend)",  "rgba( 31, 119, 180, 0.55)", "#1f77b4"),
+        (df["EXPINF1YR"],  "E[π] (Inflation exp.)",   "rgba(214,  39,  40, 0.55)", "#d62728"),
+        (df["ACMTP10"],    "TP (Term premium)",        "rgba( 44, 160,  44, 0.55)", "#2ca02c"),
+    ]
+
+    for i, (series, label, fillcolor, linecolor) in enumerate(components):
+        stackgroup = "fv_stack"
+        fig.add_trace(
+            go.Scatter(
+                x=dates, y=series,
+                name=label,
+                stackgroup=stackgroup,
+                fillcolor=fillcolor,
+                line=dict(color=linecolor, width=0.8),
+                hovertemplate=f"%{{x|%b %Y}}: %{{y:.2f}}pp<extra>{label}</extra>",
+            ),
+            row=3, col=1,
+        )
+
+    # Overlay the actual yield on the decomposition panel for reference
+    fig.add_trace(
+        go.Scatter(
+            x=dates, y=df["DGS10"],
+            name="Actual 10Y (ref.)",
+            line=dict(color="#1f77b4", width=1.5, dash="dot"),
+            showlegend=True,
+            hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Actual (ref.)</extra>",
+        ),
+        row=3, col=1,
+    )
+
+    # ── Annotation box ───────────────────────────────────────────────────────
     latest = df.index[-1]
     latest_resid = df["Residual"].iloc[-1]
     latest_fv = df["FairValue"].iloc[-1]
@@ -179,7 +216,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     bias_color = "#2ca02c" if latest_resid > 0 else "#d62728"
 
     fig.add_annotation(
-        x=0.01, y=0.97, xref="paper", yref="paper",
+        x=0.01, y=0.99, xref="paper", yref="paper",
         text=(
             f"<b>As of {latest.strftime('%b %Y')}</b><br>"
             f"Actual: <b>{latest_actual:.2f}%</b><br>"
@@ -201,7 +238,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
             x=0.5, xanchor="center",
             font=dict(size=20, color="#1a1a2e"),
         ),
-        height=700,
+        height=950,
         template="plotly_white",
         legend=dict(
             orientation="h",
@@ -215,7 +252,8 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
 
     fig.update_yaxes(title_text="Yield (%)", ticksuffix="%", row=1, col=1)
     fig.update_yaxes(title_text="pp vs. Fair Value", ticksuffix="pp", row=2, col=1)
-    fig.update_xaxes(title_text="", row=2, col=1)
+    fig.update_yaxes(title_text="Contribution (%)", ticksuffix="%", row=3, col=1)
+    fig.update_xaxes(title_text="", row=3, col=1)
 
     return fig
 
