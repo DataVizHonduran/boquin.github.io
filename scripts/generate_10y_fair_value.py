@@ -109,11 +109,13 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     dates = df.index
 
     # ── Row 1: Actual vs Fair Value ──────────────────────────────────────────
+    # Each trace gets a unique legendgroup so it can be toggled independently.
+    # legendgrouptitle on the first trace of each section renders the section header.
     fig.add_trace(
         go.Scatter(
             x=dates, y=df["DGS10"],
             name="Actual 10Y Yield",
-            legendgroup="panel1",
+            legendgroup="p1_actual",
             legendgrouptitle=dict(text="<b>Yield vs. Fair Value</b>", font=dict(size=12)),
             line=dict(color="#1f77b4", width=2),
             hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Actual</extra>",
@@ -125,7 +127,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         go.Scatter(
             x=dates, y=df["FairValue"],
             name="Model Fair Value",
-            legendgroup="panel1",
+            legendgroup="p1_fv",
             line=dict(color="#ff7f0e", width=2, dash="dash"),
             hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Fair Value</extra>",
         ),
@@ -140,7 +142,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         go.Scatter(
             x=dates, y=pos_resid,
             name="Cheap / Undervalued",
-            legendgroup="panel2",
+            legendgroup="p2_cheap",
             legendgrouptitle=dict(text="<b>Residual Signal</b>", font=dict(size=12)),
             fill="tozeroy",
             fillcolor="rgba(44, 160, 44, 0.30)",
@@ -154,7 +156,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         go.Scatter(
             x=dates, y=neg_resid,
             name="Rich / Overvalued",
-            legendgroup="panel2",
+            legendgroup="p2_rich",
             fill="tozeroy",
             fillcolor="rgba(214, 39, 40, 0.25)",
             line=dict(color="rgba(214, 39, 40, 0.0)", width=0),
@@ -167,7 +169,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         go.Scatter(
             x=dates, y=resid,
             name="Residual",
-            legendgroup="panel2",
+            legendgroup="p2_resid",
             line=dict(color="#333333", width=1.5),
             showlegend=False,
             hovertemplate="%{x|%b %Y}: %{y:.2f}pp<extra>Residual</extra>",
@@ -182,18 +184,18 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     alpha_s = pd.Series(df["alpha"].iloc[0], index=dates)
 
     components = [
-        (alpha_s,          "α  Intercept",             "rgba(150, 100, 200, 0.55)", "#7b52ab"),
-        (df["rstar"],      "r*  Rolling GDP trend",     "rgba( 31, 119, 180, 0.55)", "#1f77b4"),
-        (df["EXPINF10YR"], "E[π]  10Y Inflation exp.",  "rgba(214,  39,  40, 0.55)", "#d62728"),
-        (df["ACMTP10"],    "TP  Term premium",           "rgba( 44, 160,  44, 0.55)", "#2ca02c"),
+        ("p3_alpha", alpha_s,          "α  Intercept",             "rgba(150, 100, 200, 0.55)", "#7b52ab"),
+        ("p3_rstar", df["rstar"],      "r*  Rolling GDP trend",     "rgba( 31, 119, 180, 0.55)", "#1f77b4"),
+        ("p3_expinf",df["EXPINF10YR"], "E[π]  10Y Inflation exp.",  "rgba(214,  39,  40, 0.55)", "#d62728"),
+        ("p3_tp",    df["ACMTP10"],    "TP  Term premium",           "rgba( 44, 160,  44, 0.55)", "#2ca02c"),
     ]
 
-    for i, (series, label, fillcolor, linecolor) in enumerate(components):
+    for i, (lgkey, series, label, fillcolor, linecolor) in enumerate(components):
         fig.add_trace(
             go.Scatter(
                 x=dates, y=series,
                 name=label,
-                legendgroup="panel3",
+                legendgroup=lgkey,
                 legendgrouptitle=dict(text="<b>Fair Value Components</b>", font=dict(size=12)) if i == 0 else None,
                 stackgroup="fv_stack",
                 fillcolor=fillcolor,
