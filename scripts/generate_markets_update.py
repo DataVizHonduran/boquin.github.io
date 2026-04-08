@@ -63,7 +63,6 @@ RELEASE_WHITELIST = {
     351: "Philadelphia Fed Manufacturing Survey",
     219: "Chicago Fed National Activity Index (CFNAI)",
     221: "Chicago Fed National Financial Conditions Index",
-    101: "FOMC Press Release",
     191: "Senior Loan Officer Opinion Survey",
     199: "S&P Case-Shiller Home Price Index",
     171: "FHFA House Price Index",
@@ -215,11 +214,6 @@ RELEASE_SERIES = {
         ("NFCI Credit Subindex",                        "NFCICREDIT"),
         ("NFCI Risk Subindex",                          "NFCIRISK"),
     ],
-    101: [  # FOMC
-        ("Fed Funds Target Rate Upper (%, daily)",      "DFEDTARU"),
-        ("Fed Funds Target Rate Lower (%, daily)",      "DFEDTARL"),
-        ("Effective Fed Funds Rate (%)",                "FEDFUNDS"),
-    ],
     191: [  # Senior Loan Officer Survey
         ("Net % Tightening C&I Loans — Large Firms",   "DRTSCILM"),
         ("Net % Tightening Credit Card Standards",      "DRTSCLCC"),
@@ -291,9 +285,6 @@ key policy signals.
 2. Five Main Views — exactly five bullet points capturing the central messages.
 3. Macro Characterization — one paragraph each on (i) growth, (ii) labor \
 market, and (iii) inflation, reflecting how the data describes them.
-4. Fiscal Commentary — highlight any implications for fiscal policy, \
-credibility, or fiscal risks, and why they matter for monetary policy \
-transmission. If none, say so briefly.
 5. Policy Outlook — provide a reasoned forecast for the next Fed move (timing \
 and direction), grounded in the data and balance of risks.
 
