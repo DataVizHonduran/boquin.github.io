@@ -58,7 +58,7 @@ def build_dataset(fred: Fred) -> pd.DataFrame:
     acmtp10_m = tp_d.resample("ME").mean().rename("ACMTP10")
 
     # Monthly — already at right frequency
-    expinf_m = fetch_series(fred, "EXPINF1YR", START_DATE).resample("ME").last().rename("EXPINF1YR")
+    expinf_m = fetch_series(fred, "EXPINF10YR", START_DATE).resample("ME").last().rename("EXPINF10YR")
 
     # Quarterly GDP → compute r* then forward-fill to monthly
     gdp_q = fetch_series(fred, "A191RO1Q156NBEA", START_DATE)
@@ -73,7 +73,7 @@ def build_dataset(fred: Fred) -> pd.DataFrame:
     # Model — calibrated with a constant intercept so the residual is mean-zero
     # over the full sample. Without this, GDP-based r* chronically overstates
     # the true neutral real rate, producing a persistent level bias.
-    raw_composite = df["rstar"] + df["EXPINF1YR"] + df["ACMTP10"]
+    raw_composite = df["rstar"] + df["EXPINF10YR"] + df["ACMTP10"]
     alpha = (df["DGS10"] - raw_composite).mean()
     df["alpha"] = alpha
     df["FairValue"] = alpha + raw_composite
@@ -112,7 +112,9 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(
         go.Scatter(
             x=dates, y=df["DGS10"],
-            name="Actual 10Y Yield (DGS10)",
+            name="Actual 10Y Yield",
+            legendgroup="panel1",
+            legendgrouptitle=dict(text="<b>Yield vs. Fair Value</b>", font=dict(size=12)),
             line=dict(color="#1f77b4", width=2),
             hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Actual</extra>",
         ),
@@ -122,7 +124,8 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(
         go.Scatter(
             x=dates, y=df["FairValue"],
-            name="Model Fair Value (α + r* + E[π] + TP)",
+            name="Model Fair Value",
+            legendgroup="panel1",
             line=dict(color="#ff7f0e", width=2, dash="dash"),
             hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Fair Value</extra>",
         ),
@@ -136,7 +139,9 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(
         go.Scatter(
             x=dates, y=pos_resid,
-            name="Cheap / Undervalued (Residual > 0)",
+            name="Cheap / Undervalued",
+            legendgroup="panel2",
+            legendgrouptitle=dict(text="<b>Residual Signal</b>", font=dict(size=12)),
             fill="tozeroy",
             fillcolor="rgba(44, 160, 44, 0.30)",
             line=dict(color="rgba(44, 160, 44, 0.0)", width=0),
@@ -148,7 +153,8 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(
         go.Scatter(
             x=dates, y=neg_resid,
-            name="Rich / Overvalued (Residual < 0)",
+            name="Rich / Overvalued",
+            legendgroup="panel2",
             fill="tozeroy",
             fillcolor="rgba(214, 39, 40, 0.25)",
             line=dict(color="rgba(214, 39, 40, 0.0)", width=0),
@@ -161,6 +167,7 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         go.Scatter(
             x=dates, y=resid,
             name="Residual",
+            legendgroup="panel2",
             line=dict(color="#333333", width=1.5),
             showlegend=False,
             hovertemplate="%{x|%b %Y}: %{y:.2f}pp<extra>Residual</extra>",
@@ -175,37 +182,26 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     alpha_s = pd.Series(df["alpha"].iloc[0], index=dates)
 
     components = [
-        (alpha_s,          "α (Intercept)",          "rgba(150, 100, 200, 0.55)", "#7b52ab"),
-        (df["rstar"],      "r* (Rolling GDP trend)",  "rgba( 31, 119, 180, 0.55)", "#1f77b4"),
-        (df["EXPINF1YR"],  "E[π] (Inflation exp.)",   "rgba(214,  39,  40, 0.55)", "#d62728"),
-        (df["ACMTP10"],    "TP (Term premium)",        "rgba( 44, 160,  44, 0.55)", "#2ca02c"),
+        (alpha_s,          "α  Intercept",             "rgba(150, 100, 200, 0.55)", "#7b52ab"),
+        (df["rstar"],      "r*  Rolling GDP trend",     "rgba( 31, 119, 180, 0.55)", "#1f77b4"),
+        (df["EXPINF10YR"], "E[π]  10Y Inflation exp.",  "rgba(214,  39,  40, 0.55)", "#d62728"),
+        (df["ACMTP10"],    "TP  Term premium",           "rgba( 44, 160,  44, 0.55)", "#2ca02c"),
     ]
 
     for i, (series, label, fillcolor, linecolor) in enumerate(components):
-        stackgroup = "fv_stack"
         fig.add_trace(
             go.Scatter(
                 x=dates, y=series,
                 name=label,
-                stackgroup=stackgroup,
+                legendgroup="panel3",
+                legendgrouptitle=dict(text="<b>Fair Value Components</b>", font=dict(size=12)) if i == 0 else None,
+                stackgroup="fv_stack",
                 fillcolor=fillcolor,
                 line=dict(color=linecolor, width=0.8),
-                hovertemplate=f"%{{x|%b %Y}}: %{{y:.2f}}pp<extra>{label}</extra>",
+                hovertemplate=f"%{{x|%b %Y}}: %{{y:.2f}}%<extra>{label}</extra>",
             ),
             row=3, col=1,
         )
-
-    # Overlay the actual yield on the decomposition panel for reference
-    fig.add_trace(
-        go.Scatter(
-            x=dates, y=df["DGS10"],
-            name="Actual 10Y (ref.)",
-            line=dict(color="#1f77b4", width=1.5, dash="dot"),
-            showlegend=True,
-            hovertemplate="%{x|%b %Y}: %{y:.2f}%<extra>Actual (ref.)</extra>",
-        ),
-        row=3, col=1,
-    )
 
     # ── Annotation box ───────────────────────────────────────────────────────
     latest = df.index[-1]
@@ -241,17 +237,21 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
         height=950,
         template="plotly_white",
         legend=dict(
-            orientation="h",
-            yanchor="bottom", y=1.02,
-            xanchor="right", x=1,
-            font=dict(size=11),
+            orientation="v",
+            x=1.01, xanchor="left",
+            y=0.5,  yanchor="middle",
+            font=dict(size=12),
+            bgcolor="rgba(255,255,255,0.85)",
+            bordercolor="#ddd",
+            borderwidth=1,
+            tracegroupgap=12,
         ),
-        margin=dict(t=110, l=60, r=40, b=60),
+        margin=dict(t=90, l=60, r=180, b=60),
         hovermode="x unified",
     )
 
     fig.update_yaxes(title_text="Yield (%)", ticksuffix="%", row=1, col=1)
-    fig.update_yaxes(title_text="pp vs. Fair Value", ticksuffix="pp", row=2, col=1)
+    fig.update_yaxes(title_text="Residual (pp)", ticksuffix="pp", row=2, col=1)
     fig.update_yaxes(title_text="Contribution (%)", ticksuffix="%", row=3, col=1)
     fig.update_xaxes(title_text="", row=3, col=1)
 
@@ -282,8 +282,8 @@ METHODOLOGY_HTML = """
       </tr>
       <tr style="background:#fafafa;">
         <td style="padding:8px 12px;border:1px solid #ddd;"><b>E[π]</b> — Inflation expectations</td>
-        <td style="padding:8px 12px;border:1px solid #ddd;">NY Fed 1-Year Ahead Expected Inflation</td>
-        <td style="padding:8px 12px;border:1px solid #ddd;font-family:monospace;">EXPINF1YR</td>
+        <td style="padding:8px 12px;border:1px solid #ddd;">NY Fed 10-Year Expected Inflation</td>
+        <td style="padding:8px 12px;border:1px solid #ddd;font-family:monospace;">EXPINF10YR</td>
       </tr>
       <tr>
         <td style="padding:8px 12px;border:1px solid #ddd;"><b>TP</b> — Term premium</td>
@@ -374,7 +374,7 @@ def main():
     print(f"\n      Calibration intercept (α) = {df['alpha'].iloc[-1]:+.2f}pp")
     print(f"      Latest snapshot ({df.index[-1].strftime('%b %Y')}):")
     print(f"        r*         = {latest['rstar']:.2f}%")
-    print(f"        E[π]       = {latest['EXPINF1YR']:.2f}%")
+    print(f"        E[π]       = {latest['EXPINF10YR']:.2f}%")
     print(f"        TP         = {latest['ACMTP10']:.2f}%")
     print(f"        α          = {latest['alpha']:+.2f}pp")
     print(f"        Fair Value = {latest['FairValue']:.2f}%")
