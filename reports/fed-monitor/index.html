@@ -80,6 +80,10 @@
             background-color: #007bff;
             color: white;
         }
+        .report-card-monthly {
+            border-left: 4px solid #f9a825;
+            background: #fffde7;
+        }
         .last-updated {
             color: #666;
             font-size: 0.9em;
@@ -143,15 +147,27 @@
 
                 // Sort by date (newest first)
                 mdFiles.sort((a, b) => b.name.localeCompare(a.name)).forEach(file => {
-                    // Parse filename: fed-district-monitor-YYYY-MM-DD.md
-                    const dateMatch = file.name.match(/(\d{4}-\d{2}-\d{2})/);
-                    const reportDate = dateMatch ? dateMatch[1] : 'Unknown date';
+                    // Match YYYY-MM-DD (daily) or YYYY-MM (monthly)
+                    const dailyMatch   = file.name.match(/(\d{4}-\d{2}-\d{2})/);
+                    const monthlyMatch = !dailyMatch && file.name.match(/(\d{4}-\d{2})(?!-\d{2})/);
+
+                    let reportDate, isMonthly = false;
+                    if (dailyMatch) {
+                        reportDate = dailyMatch[1];
+                    } else if (monthlyMatch) {
+                        isMonthly  = true;
+                        const [y, m] = monthlyMatch[1].split('-');
+                        const label  = new Date(y, m - 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+                        reportDate   = `${label} — Month to Date`;
+                    } else {
+                        reportDate = 'Unknown date';
+                    }
 
                     const card = document.createElement('div');
-                    card.className = 'report-card';
+                    card.className = 'report-card' + (isMonthly ? ' report-card-monthly' : '');
                     card.innerHTML = `
-                        <div class="report-title">Fed District Monitor</div>
-                        <div class="date">Report Date: ${reportDate}</div>
+                        <div class="report-title">Fed District Monitor${isMonthly ? ' 📅' : ''}</div>
+                        <div class="date">${isMonthly ? '' : 'Report Date: '}${reportDate}</div>
                         <div class="districts">Coverage: All 7 districts (NY, RIC, ATL, STL, DAL, SF, MIN)</div>
                         <a href="${file.name}" class="link">View Report →</a>
                     `;
