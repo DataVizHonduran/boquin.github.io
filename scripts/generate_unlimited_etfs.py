@@ -991,28 +991,22 @@ def generate_summary_gemma(context_text: str, hf_token: str, retries: int = 5) -
     ]
     for attempt in range(retries):
         try:
-            stream = client.chat.completions.create(
+            response = client.chat.completions.create(
                 messages=messages,
                 temperature=0.3,
                 max_tokens=700,
-                stream=True,
+                stream=False,
             )
-            parts = []
-            for chunk in stream:
-                if not chunk.choices:
-                    continue
-                delta = chunk.choices[0].delta.content
-                if delta:
-                    parts.append(delta)
-                    print(delta, end="", flush=True)
-            print()
-            return "".join(parts)
+            text = response.choices[0].message.content or ""
+            if not text.strip():
+                raise ValueError("Gemma returned empty response")
+            return text.strip()
         except Exception as e:
             is_rate_limit = "429" in str(e) or "Too Many Requests" in str(e)
-            if is_rate_limit and attempt < retries - 1:
-                wait = 60 * (attempt + 1)
-                print(f"\n  HF rate limit (429), waiting {wait}s before retry "
-                      f"(attempt {attempt+1}/{retries}) ...", file=sys.stderr)
+            if attempt < retries - 1:
+                wait = 60 * (attempt + 1) if is_rate_limit else 10
+                print(f"  Gemma attempt {attempt+1}/{retries} failed ({e}), retrying in {wait}s...",
+                      file=sys.stderr)
                 time.sleep(wait)
             else:
                 raise
