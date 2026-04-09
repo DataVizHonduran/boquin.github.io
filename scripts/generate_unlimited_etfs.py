@@ -194,7 +194,20 @@ dominant cross-ETF bets — what is the suite collectively expressing? Then \
 continue with fund-by-fund detail.
 
 Style: flowing prose, no bullet points, no headers, precise and insightful. \
-Anchor every judgment in the numbers provided.\
+Anchor every judgment in the numbers provided.
+
+Asset naming: always use plain English names instead of futures ticker codes. \
+For example, write "yen" not "JYU6", "euro" not "ECM6", "pound" not "BPM6", \
+"Australian dollar" not "ADM6", "Swiss franc" not "SFM6", "Canadian dollar" \
+not "CDM6", "dollar index" not "DXM6". Apply the same principle to all \
+instruments — describe the underlying asset, not the contract code.
+
+Directionality: reason about currency positions correctly. A long futures \
+position on a foreign currency is a bet on that currency strengthening against \
+the dollar; a short is a bet on it weakening. Never conflate a short foreign \
+currency position with a dollar-bearish view, and never conflate a long foreign \
+currency position with a dollar-bullish view. State the directional implication \
+explicitly and accurately.\
 """
 
 # ── Performance ──────────────────────────────────────────────────────────────
