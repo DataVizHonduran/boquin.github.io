@@ -419,7 +419,6 @@ def build_context_prompt(today_data: dict, metrics: dict, diffs: dict) -> str:
     lines = [f"Date: {today_data['date']}\n"]
     for ticker in ETF_TICKERS:
         m = metrics[ticker]
-        holdings = today_data["etfs"][ticker]
         lines.append(f"## {ticker} — {ETF_NAMES[ticker]}")
         lines.append(f"AUM: ${m['net_assets']:,.0f} | Net Exposure: {m['net_exposure']:.1f}% | Gross Long: {m['gross_long']:.1f}% | Gross Short: {m['gross_short']:.1f}% | Cash: {m['cash_pct']:.1f}%")
         lines.append("Top 5 positions (by |weight|):")
@@ -434,6 +433,67 @@ def build_context_prompt(today_data: dict, metrics: dict, diffs: dict) -> str:
             lines.append("Removed: " + ", ".join(h["StockTicker"] for h in d["removed"]))
         if d.get("changed"):
             lines.append("Weight changes: " + ", ".join(f"{c['ticker']} {c['prior']:.1f}%→{c['today']:.1f}% ({c['delta']:+.1f}%)" for c in d["changed"]))
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def snapshot_before_days(today: str, days: int) -> dict | None:
+    """Return the snapshot closest to `days` calendar days before today, or oldest available."""
+    cutoff = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=days)).strftime("%Y-%m-%d")
+    files = sorted(CACHE_DIR.glob("*.json"))
+    candidates = [f for f in files if f.stem < today]
+    if not candidates:
+        return None
+    # Pick the file on or just before the cutoff; fall back to oldest if none reach that far
+    before_cutoff = [f for f in candidates if f.stem <= cutoff]
+    target = before_cutoff[-1] if before_cutoff else candidates[0]
+    with open(target) as fh:
+        return json.load(fh)
+
+
+def build_gemma_context(today_data: dict, metrics: dict, window_days: int = 5) -> str:
+    """Build context for Gemma using position changes over the last `window_days` days."""
+    baseline = snapshot_before_days(today_data["date"], window_days)
+    baseline_date = baseline["date"] if baseline else None
+
+    rolling_diffs = {}
+    if baseline:
+        for ticker in ETF_TICKERS:
+            rolling_diffs[ticker] = compute_diff(
+                today_data["etfs"][ticker],
+                baseline["etfs"].get(ticker, []),
+            )
+
+    lines = [f"Date: {today_data['date']}"]
+    if baseline_date:
+        lines.append(f"Position changes shown vs {baseline_date} ({window_days}-day window)\n")
+    else:
+        lines.append("")
+
+    for ticker in ETF_TICKERS:
+        m = metrics[ticker]
+        lines.append(f"## {ticker} — {ETF_NAMES[ticker]}")
+        lines.append(
+            f"AUM: ${m['net_assets']:,.0f} | Net Exposure: {m['net_exposure']:.1f}% | "
+            f"Gross Long: {m['gross_long']:.1f}% | Gross Short: {m['gross_short']:.1f}% | "
+            f"Cash: {m['cash_pct']:.1f}%"
+        )
+        lines.append("Top 5 positions (by |weight|):")
+        for h in m["top5"]:
+            sign = "+" if h["Weightings"] >= 0 else ""
+            lines.append(f"  {h['StockTicker']:20s} {sign}{h['Weightings']:.2f}%  {h['SecurityName']}")
+
+        d = rolling_diffs.get(ticker, {})
+        if d.get("new"):
+            lines.append("Added over window: " + ", ".join(
+                f"{h['StockTicker']} ({h['Weightings']:+.1f}%)" for h in d["new"]))
+        if d.get("removed"):
+            lines.append("Removed over window: " + ", ".join(h["StockTicker"] for h in d["removed"]))
+        if d.get("changed"):
+            lines.append("Net weight shifts: " + ", ".join(
+                f"{c['ticker']} {c['prior']:.1f}%→{c['today']:.1f}% ({c['delta']:+.1f}%)"
+                for c in d["changed"]))
         lines.append("")
 
     return "\n".join(lines)
@@ -1032,7 +1092,7 @@ def main():
             meta = load_summary_meta()
             last_date = meta.get("generated_at", "never")
             print(f"  ↻ Commentary stale (last: {last_date}), refreshing via Gemma 4...")
-            context_text = build_context_prompt(today_data, metrics, diffs)
+            context_text = build_gemma_context(today_data, metrics, window_days=SUMMARY_REFRESH_DAYS)
             try:
                 summary = generate_summary_gemma(context_text, hf_token)
                 save_summary_meta(datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"), len(summary.split()))
