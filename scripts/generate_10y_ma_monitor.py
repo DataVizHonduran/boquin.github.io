@@ -63,10 +63,8 @@ def sigma_stats(res, ma):
 def make_series_configs(raw, series_id, series_label):
     ma_d = raw.rolling(200).mean()
     ma_w = compute_ma(raw, "W",  200)
-    ma_m = compute_ma(raw, "MS", 200)
     res_d = (raw - ma_d).dropna()
     res_w = (raw - ma_w).dropna()
-    res_m = (raw - ma_m).dropna()
     return [
         dict(series_id=series_id, series_label=series_label,
              label=f"{series_label} — 200-Day MA",
@@ -76,10 +74,6 @@ def make_series_configs(raw, series_id, series_label):
              label=f"{series_label} — 200-Week MA",
              res=res_w, ma=ma_w, stats=sigma_stats(res_w, ma_w),
              ma_label="200w MA", raw=raw),
-        dict(series_id=series_id, series_label=series_label,
-             label=f"{series_label} — 200-Month MA",
-             res=res_m, ma=ma_m, stats=sigma_stats(res_m, ma_m),
-             ma_label="200m MA", raw=raw),
     ]
 
 configs_n = make_series_configs(raw_n, "DGS10",  "Nominal 10Y")
@@ -96,22 +90,22 @@ BAND_COLS    = ("#d62728", "#1f77b4")   # +/- bands (same for both series)
 
 # ── Trace index layout ───────────────────────────────────────────────────────
 # s = series index (0=nominal, 1=real)
-# m = MA index    (0=200d, 1=200w, 2=200m)
+# m = MA index    (0=200d, 1=200w)
 #
 # 0-1    : Yield lines         (one per series)
-# 2-7    : MA lines            (s*3 + m + 2)
-# 8-13   : Residual fills      (s*3 + m + 8)
-# 14-37  : σ band traces       (s*12 + m*4 + k + 14)  — 4 per config
-# 38-43  : Latest dot          (s*3 + m + 38)
-# Total  : 44
+# 2-5    : MA lines            (s*2 + m + 2)
+# 6-9    : Residual fills      (s*2 + m + 6)
+# 10-25  : σ band traces       (s*8 + m*4 + k + 10)  — 4 per config
+# 26-29  : Latest dot          (s*2 + m + 26)
+# Total  : 30
 
-TOTAL_TRACES = 44
+TOTAL_TRACES = 30
 
 def trace_yield(s):      return s
-def trace_ma(s, m):      return 2 + s*3 + m
-def trace_res(s, m):     return 8 + s*3 + m
-def trace_band(s, m, k): return 14 + s*12 + m*4 + k
-def trace_dot(s, m):     return 38 + s*3 + m
+def trace_ma(s, m):      return 2 + s*2 + m
+def trace_res(s, m):     return 6 + s*2 + m
+def trace_band(s, m, k): return 10 + s*8 + m*4 + k
+def trace_dot(s, m):     return 26 + s*2 + m
 
 def vis(s, m):
     v = [False] * TOTAL_TRACES
@@ -152,10 +146,10 @@ for s, (raw, name, color) in enumerate([(raw_n, "10Y Nominal Yield", YIELD_COLOR
         hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>" + name + "</extra>"
     ), row=1, col=1)
 
-# Traces 2-7 — MA lines
+# Traces 2-5 — MA lines
 for s in range(2):
-    for m in range(3):
-        cfg = configs[s*3 + m]
+    for m in range(2):
+        cfg = configs[s*2 + m]
         fig.add_trace(go.Scatter(
             x=cfg["ma"].index, y=cfg["ma"].values,
             mode="lines", line=dict(color=MA_COLORS[m], width=2, dash="dot"),
@@ -163,10 +157,10 @@ for s in range(2):
             hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>" + cfg["label"] + "</extra>"
         ), row=1, col=1)
 
-# Traces 8-13 — Residual fills
+# Traces 6-9 — Residual fills
 for s in range(2):
-    for m in range(3):
-        cfg = configs[s*3 + m]
+    for m in range(2):
+        cfg = configs[s*2 + m]
         fig.add_trace(go.Scatter(
             x=cfg["res"].index, y=cfg["res"].values,
             mode="lines", line=dict(color=YIELD_COLORS[s], width=0.9),
@@ -176,10 +170,10 @@ for s in range(2):
             hovertemplate="%{x|%Y-%m-%d}: %{y:+.3f} pp<extra>Residual</extra>"
         ), row=2, col=1)
 
-# Traces 14-37 — sigma bands (4 per config: +1σ,-1σ,+2σ,-2σ)
+# Traces 10-25 — sigma bands (4 per config: +1σ,-1σ,+2σ,-2σ)
 for s in range(2):
-    for m in range(3):
-        cfg = configs[s*3 + m]
+    for m in range(2):
+        cfg = configs[s*2 + m]
         st  = cfg["stats"]
         sig = st["sigma"]
         rc, bc = BAND_COLS
@@ -201,12 +195,12 @@ for s in range(2):
                 hoverinfo="skip"
             ), row=2, col=1)
 
-# Traces 38-43 — latest dot
+# Traces 26-29 — latest dot
 for s in range(2):
     latest_yield = latest_n if s == 0 else latest_r
     latest_date  = latest_n_date if s == 0 else latest_r_date
-    for m in range(3):
-        cfg = configs[s*3 + m]
+    for m in range(2):
+        cfg = configs[s*2 + m]
         st  = cfg["stats"]
         dot_color = "#d62728" if st["latest_residual"] >= 0 else "#1f77b4"
         fig.add_trace(go.Scatter(
@@ -232,8 +226,8 @@ YAXIS_LABELS  = ["Yield (%)", "Real Rate (%)"]
 
 for s in range(2):
     latest_yield, latest_date = SERIES_LATEST[s]
-    for m in range(3):
-        cfg = configs[s*3 + m]
+    for m in range(2):
+        cfg = configs[s*2 + m]
         buttons.append(dict(
             label=cfg["label"],
             method="update",
@@ -414,11 +408,11 @@ with open(OUTPUT_PATH, "w") as f:
 print(f"✅  Saved: {OUTPUT_PATH}")
 print(f"\nNominal 10Y (DGS10) — as of {latest_n_date}:")
 for cfg in configs_n:
-    s = cfg["stats"]
-    print(f"   {cfg['label']:30s}  MA={s['latest_ma']:.2f}%  "
-          f"res={s['latest_residual']:+.3f} pp  z={s['zscore']:+.2f}σ")
+    st = cfg["stats"]
+    print(f"   {cfg['label']:30s}  MA={st['latest_ma']:.2f}%  "
+          f"res={st['latest_residual']:+.3f} pp  z={st['zscore']:+.2f}σ")
 print(f"\nReal 10Y TIPS (DFII10) — as of {latest_r_date}:")
 for cfg in configs_r:
-    s = cfg["stats"]
-    print(f"   {cfg['label']:30s}  MA={s['latest_ma']:.2f}%  "
-          f"res={s['latest_residual']:+.3f} pp  z={s['zscore']:+.2f}σ")
+    st = cfg["stats"]
+    print(f"   {cfg['label']:30s}  MA={st['latest_ma']:.2f}%  "
+          f"res={st['latest_residual']:+.3f} pp  z={st['zscore']:+.2f}σ")
