@@ -1,13 +1,12 @@
 """
-10Y Treasury Yield — MA Monitor
-================================
+10Y Treasury Yield / Real Rate — MA Monitor
+=============================================
 Two-panel interactive dashboard with dropdown to switch between:
-  • 200-Day MA
-  • 200-Week MA
-  • 200-Month MA
+  • Nominal 10Y (DGS10) or Real 10Y TIPS (DFII10)
+  × 200-Day / 200-Week / 200-Month MA
 
 Each view shows:
-  Panel 1 — 10Y yield vs selected MA (40-year history)
+  Panel 1 — yield vs selected MA
   Panel 2 — Residual with ±1σ and ±2σ mean-reversion bands
 
 Output: reports/10y-ma-monitor/index.html
@@ -34,88 +33,104 @@ os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 fred = Fred(api_key=FRED_API_KEY)
 
 # ── Fetch raw daily series ───────────────────────────────────────────────────
-start = date.today() - relativedelta(years=YEARS)
-raw   = fred.get_series("DGS10", observation_start=start).dropna()
-raw.index = pd.to_datetime(raw.index)
-raw.name  = "10Y Yield"
-latest_yield = raw.iloc[-1]
-latest_date  = raw.index[-1].strftime("%Y-%m-%d")
+start_nominal = date.today() - relativedelta(years=YEARS)
+raw_n = fred.get_series("DGS10",  observation_start=start_nominal).dropna()
+raw_r = fred.get_series("DFII10").dropna()   # full history from Jan 2003
 
-# ── Compute three MAs + residuals ────────────────────────────────────────────
+raw_n.index = pd.to_datetime(raw_n.index)
+raw_r.index = pd.to_datetime(raw_r.index)
+raw_n.name = "10Y Nominal Yield"
+raw_r.name = "10Y Real Rate (TIPS)"
+
+latest_n      = raw_n.iloc[-1]
+latest_r      = raw_r.iloc[-1]
+latest_n_date = raw_n.index[-1].strftime("%Y-%m-%d")
+latest_r_date = raw_r.index[-1].strftime("%Y-%m-%d")
+
+# ── Compute MAs + residuals for one series ───────────────────────────────────
 def compute_ma(series, freq, window):
     """Resample → rolling MA → reindex back to daily (ffill)."""
     resampled = series.resample(freq).last()
     ma = resampled.rolling(window).mean()
     return ma.reindex(series.index, method="ffill")
 
-ma_d = raw.rolling(200).mean()                  # 200-day (on daily)
-ma_w = compute_ma(raw, "W",  200)               # 200-week
-ma_m = compute_ma(raw, "MS", 200)               # 200-month
-
-res_d = (raw - ma_d).dropna()
-res_w = (raw - ma_w).dropna()
-res_m = (raw - ma_m).dropna()
-
 def sigma_stats(res, ma):
     s    = res.std()
     last = res.iloc[-1]
-    return dict(
-        sigma=s,
-        latest_residual=last,
-        zscore=last / s,
-        latest_ma=ma.dropna().iloc[-1],
-    )
+    return dict(sigma=s, latest_residual=last, zscore=last / s,
+                latest_ma=ma.dropna().iloc[-1])
 
-sd = sigma_stats(res_d, ma_d)
-sw = sigma_stats(res_w, ma_w)
-sm = sigma_stats(res_m, ma_m)
+def make_series_configs(raw, series_id, series_label):
+    ma_d = raw.rolling(200).mean()
+    ma_w = compute_ma(raw, "W",  200)
+    ma_m = compute_ma(raw, "MS", 200)
+    res_d = (raw - ma_d).dropna()
+    res_w = (raw - ma_w).dropna()
+    res_m = (raw - ma_m).dropna()
+    return [
+        dict(series_id=series_id, series_label=series_label,
+             label=f"{series_label} — 200-Day MA",
+             res=res_d, ma=ma_d, stats=sigma_stats(res_d, ma_d),
+             ma_label="200d MA", raw=raw),
+        dict(series_id=series_id, series_label=series_label,
+             label=f"{series_label} — 200-Week MA",
+             res=res_w, ma=ma_w, stats=sigma_stats(res_w, ma_w),
+             ma_label="200w MA", raw=raw),
+        dict(series_id=series_id, series_label=series_label,
+             label=f"{series_label} — 200-Month MA",
+             res=res_m, ma=ma_m, stats=sigma_stats(res_m, ma_m),
+             ma_label="200m MA", raw=raw),
+    ]
 
-configs = [
-    dict(label="200-Day MA",   res=res_d, ma=ma_d, stats=sd, ma_label="200d MA"),
-    dict(label="200-Week MA",  res=res_w, ma=ma_w, stats=sw, ma_label="200w MA"),
-    dict(label="200-Month MA", res=res_m, ma=ma_m, stats=sm, ma_label="200m MA"),
-]
+configs_n = make_series_configs(raw_n, "DGS10",  "Nominal 10Y")
+configs_r = make_series_configs(raw_r, "DFII10", "Real 10Y (TIPS)")
 
-MA_COLORS   = ["firebrick", "#e07b00", "#6a0dad"]
-BAND_COLORS = [("#d62728", "#1f77b4"),   # red/blue for day
-               ("#d62728", "#1f77b4"),
-               ("#d62728", "#1f77b4")]
+# Flat list: indices 0-2 = nominal, 3-5 = real
+# Within each group: 0=200d, 1=200w, 2=200m
+configs = configs_n + configs_r   # 6 total
+
+MA_COLORS    = ["firebrick", "#e07b00", "#6a0dad"]
+YIELD_COLORS = ["#2c7bb6", "#2ca02c"]   # nominal=blue, real=green
+FILL_COLORS  = ["rgba(44,123,182,0.15)", "rgba(44,160,44,0.15)"]
+BAND_COLS    = ("#d62728", "#1f77b4")   # +/- bands (same for both series)
 
 # ── Trace index layout ───────────────────────────────────────────────────────
-# 0      : 10Y Yield (always visible)
-# 1-3    : MA lines (one per config)
-# 4-6    : Residual fills (one per config)
-# 7-14   : σ band traces — 4 per config (±1σ, ±2σ) × 3
-# 15-17  : Latest dot (one per config)
-# Total  : 18 traces
+# s = series index (0=nominal, 1=real)
+# m = MA index    (0=200d, 1=200w, 2=200m)
+#
+# 0-1    : Yield lines         (one per series)
+# 2-7    : MA lines            (s*3 + m + 2)
+# 8-13   : Residual fills      (s*3 + m + 8)
+# 14-37  : σ band traces       (s*12 + m*4 + k + 14)  — 4 per config
+# 38-43  : Latest dot          (s*3 + m + 38)
+# Total  : 44
 
-N = len(configs)   # 3
-TRACE_YIELD     = 0
-TRACE_MA        = [1, 2, 3]
-TRACE_RES       = [4, 5, 6]
-TRACE_BANDS_OFF = 7          # bands start here; 4 traces per config × 3 configs = 12 traces (7-18)
-TRACE_DOT       = [19, 20, 21]
-TOTAL_TRACES    = 22
+TOTAL_TRACES = 44
 
-def vis(active):
-    """Return visibility list for the given active config index (0/1/2)."""
+def trace_yield(s):      return s
+def trace_ma(s, m):      return 2 + s*3 + m
+def trace_res(s, m):     return 8 + s*3 + m
+def trace_band(s, m, k): return 14 + s*12 + m*4 + k
+def trace_dot(s, m):     return 38 + s*3 + m
+
+def vis(s, m):
     v = [False] * TOTAL_TRACES
-    v[TRACE_YIELD] = True
-    v[TRACE_MA[active]]  = True
-    v[TRACE_RES[active]] = True
+    v[trace_yield(s)] = True
+    v[trace_ma(s, m)] = True
+    v[trace_res(s, m)] = True
     for k in range(4):
-        v[TRACE_BANDS_OFF + active * 4 + k] = True
-    v[TRACE_DOT[active]] = True
+        v[trace_band(s, m, k)] = True
+    v[trace_dot(s, m)] = True
     return v
 
-def make_title(cfg):
-    s = cfg["stats"]
+def make_title(cfg, latest_yield, latest_date):
+    st = cfg["stats"]
     return (
-        f"10Y US Treasury Yield — {cfg['label']} Monitor<br>"
+        f"{cfg['label']} Monitor<br>"
         f"<sub>Latest: {latest_yield:.2f}%  |  "
-        f"{cfg['ma_label']}: {s['latest_ma']:.2f}%  |  "
-        f"Residual: {s['latest_residual']:+.3f} pp  "
-        f"(z = {s['zscore']:+.2f}σ)  |  Updated {latest_date}</sub>"
+        f"{cfg['ma_label']}: {st['latest_ma']:.2f}%  |  "
+        f"Residual: {st['latest_residual']:+.3f} pp  "
+        f"(z = {st['zscore']:+.2f}σ)  |  Updated {latest_date}</sub>"
     )
 
 # ── Build figure ─────────────────────────────────────────────────────────────
@@ -124,97 +139,112 @@ fig = make_subplots(
     shared_xaxes=True,
     row_heights=[0.55, 0.45],
     vertical_spacing=0.07,
-    subplot_titles=[
-        "10Y Treasury Yield vs Moving Average",
-        "Residual (10Y Yield − MA)"
-    ]
+    subplot_titles=["Yield vs Moving Average", "Residual (Yield − MA)"]
 )
 
-x0, xend = raw.index[0], raw.index[-1]
-
-# Trace 0 — yield (always on)
-fig.add_trace(go.Scatter(
-    x=raw.index, y=raw.values,
-    mode="lines", line=dict(color="#2c7bb6", width=1.3),
-    name="10Y Yield",
-    hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>10Y Yield</extra>"
-), row=1, col=1)
-
-# Traces 1-3 — MA lines
-for i, cfg in enumerate(configs):
+# Traces 0-1 — yield lines
+for s, (raw, name, color) in enumerate([(raw_n, "10Y Nominal Yield", YIELD_COLORS[0]),
+                                         (raw_r, "10Y Real Rate (TIPS)", YIELD_COLORS[1])]):
     fig.add_trace(go.Scatter(
-        x=cfg["ma"].index, y=cfg["ma"].values,
-        mode="lines", line=dict(color=MA_COLORS[i], width=2, dash="dot"),
-        name=cfg["label"],
-        visible=(i == 0),
-        hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>" + cfg["label"] + "</extra>"
+        x=raw.index, y=raw.values,
+        mode="lines", line=dict(color=color, width=1.3),
+        name=name, visible=(s == 0),
+        hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>" + name + "</extra>"
     ), row=1, col=1)
 
-# Traces 4-6 — Residual fills
-for i, cfg in enumerate(configs):
-    fig.add_trace(go.Scatter(
-        x=cfg["res"].index, y=cfg["res"].values,
-        mode="lines", line=dict(color="#2c7bb6", width=0.9),
-        fill="tozeroy", fillcolor="rgba(44,123,182,0.15)",
-        name="Residual",
-        visible=(i == 0),
-        showlegend=False,
-        hovertemplate="%{x|%Y-%m-%d}: %{y:+.3f} pp<extra>Residual</extra>"
-    ), row=2, col=1)
-
-# Traces 7-18 — sigma bands (4 per config: +1σ, -1σ, +2σ, -2σ)
-for i, cfg in enumerate(configs):
-    s   = cfg["stats"]["sigma"]
-    rc, bc = BAND_COLORS[i]
-    bands = [
-        ( s,    rc, "dash", "+1σ"),
-        (-s,    bc, "dash", "−1σ"),
-        ( 2*s,  rc, "dot",  "+2σ"),
-        (-2*s,  bc, "dot",  "−2σ"),
-    ]
-    for val, color, dash, lbl in bands:
+# Traces 2-7 — MA lines
+for s in range(2):
+    for m in range(3):
+        cfg = configs[s*3 + m]
         fig.add_trace(go.Scatter(
-            x=[x0, xend], y=[val, val],
-            mode="lines+text",
-            text=["", lbl],
-            textposition="middle right",
-            textfont=dict(color=color, size=10),
-            line=dict(color=color, width=1 if "1σ" in lbl else 1.4, dash=dash),
+            x=cfg["ma"].index, y=cfg["ma"].values,
+            mode="lines", line=dict(color=MA_COLORS[m], width=2, dash="dot"),
+            name=cfg["ma_label"], visible=(s == 0 and m == 0),
+            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra>" + cfg["label"] + "</extra>"
+        ), row=1, col=1)
+
+# Traces 8-13 — Residual fills
+for s in range(2):
+    for m in range(3):
+        cfg = configs[s*3 + m]
+        fig.add_trace(go.Scatter(
+            x=cfg["res"].index, y=cfg["res"].values,
+            mode="lines", line=dict(color=YIELD_COLORS[s], width=0.9),
+            fill="tozeroy", fillcolor=FILL_COLORS[s],
+            name="Residual", visible=(s == 0 and m == 0),
             showlegend=False,
-            visible=(i == 0),
-            hoverinfo="skip"
+            hovertemplate="%{x|%Y-%m-%d}: %{y:+.3f} pp<extra>Residual</extra>"
         ), row=2, col=1)
 
-# Traces 15-17 — latest dot
-for i, cfg in enumerate(configs):
-    s = cfg["stats"]
-    dot_color = "#d62728" if s["latest_residual"] >= 0 else "#1f77b4"
-    fig.add_trace(go.Scatter(
-        x=[cfg["res"].index[-1]], y=[s["latest_residual"]],
-        mode="markers",
-        marker=dict(color=dot_color, size=8, line=dict(color="white", width=1.5)),
-        name=f"Latest: {s['latest_residual']:+.3f} pp",
-        visible=(i == 0),
-        hovertemplate=(
-            f"{latest_date}: {s['latest_residual']:+.3f} pp "
-            f"(z={s['zscore']:+.2f}σ)<extra></extra>"
-        )
-    ), row=2, col=1)
+# Traces 14-37 — sigma bands (4 per config: +1σ,-1σ,+2σ,-2σ)
+for s in range(2):
+    for m in range(3):
+        cfg = configs[s*3 + m]
+        st  = cfg["stats"]
+        sig = st["sigma"]
+        rc, bc = BAND_COLS
+        x0, xend = cfg["res"].index[0], cfg["res"].index[-1]
+        for k, (val, color, dash, lbl) in enumerate([
+            ( sig,    rc, "dash", "+1σ"),
+            (-sig,    bc, "dash", "−1σ"),
+            ( 2*sig,  rc, "dot",  "+2σ"),
+            (-2*sig,  bc, "dot",  "−2σ"),
+        ]):
+            fig.add_trace(go.Scatter(
+                x=[x0, xend], y=[val, val],
+                mode="lines+text",
+                text=["", lbl],
+                textposition="middle right",
+                textfont=dict(color=color, size=10),
+                line=dict(color=color, width=1 if "1σ" in lbl else 1.4, dash=dash),
+                showlegend=False, visible=(s == 0 and m == 0),
+                hoverinfo="skip"
+            ), row=2, col=1)
 
-# ── Zero line (shape — always visible) ──────────────────────────────────────
+# Traces 38-43 — latest dot
+for s in range(2):
+    latest_yield = latest_n if s == 0 else latest_r
+    latest_date  = latest_n_date if s == 0 else latest_r_date
+    for m in range(3):
+        cfg = configs[s*3 + m]
+        st  = cfg["stats"]
+        dot_color = "#d62728" if st["latest_residual"] >= 0 else "#1f77b4"
+        fig.add_trace(go.Scatter(
+            x=[cfg["res"].index[-1]], y=[st["latest_residual"]],
+            mode="markers",
+            marker=dict(color=dot_color, size=8,
+                        line=dict(color="white", width=1.5)),
+            name=f"Latest: {st['latest_residual']:+.3f} pp",
+            visible=(s == 0 and m == 0),
+            hovertemplate=(
+                f"{latest_date}: {st['latest_residual']:+.3f} pp "
+                f"(z={st['zscore']:+.2f}σ)<extra></extra>"
+            )
+        ), row=2, col=1)
+
+# ── Zero line (always visible) ───────────────────────────────────────────────
 fig.add_hline(y=0, line_color="black", line_width=1.5, row=2, col=1)
 
-# ── Dropdown ─────────────────────────────────────────────────────────────────
+# ── Dropdown (6 options: 2 series × 3 MA types) ──────────────────────────────
 buttons = []
-for i, cfg in enumerate(configs):
-    buttons.append(dict(
-        label=cfg["label"],
-        method="update",
-        args=[
-            {"visible": vis(i)},
-            {"title.text": make_title(cfg)}
-        ]
-    ))
+SERIES_LATEST = [(latest_n, latest_n_date), (latest_r, latest_r_date)]
+YAXIS_LABELS  = ["Yield (%)", "Real Rate (%)"]
+
+for s in range(2):
+    latest_yield, latest_date = SERIES_LATEST[s]
+    for m in range(3):
+        cfg = configs[s*3 + m]
+        buttons.append(dict(
+            label=cfg["label"],
+            method="update",
+            args=[
+                {"visible": vis(s, m)},
+                {
+                    "title.text":       make_title(cfg, latest_yield, latest_date),
+                    "yaxis.title.text": YAXIS_LABELS[s],
+                }
+            ]
+        ))
 
 fig.update_layout(
     updatemenus=[dict(
@@ -227,7 +257,8 @@ fig.update_layout(
         bordercolor="#ccc",
         font=dict(size=12)
     )],
-    title=dict(text=make_title(configs[0]), font=dict(size=17)),
+    title=dict(text=make_title(configs[0], latest_n, latest_n_date),
+               font=dict(size=17)),
     plot_bgcolor="white",
     paper_bgcolor="white",
     hovermode="x unified",
@@ -240,8 +271,8 @@ fig.update_layout(
 
 fig.update_xaxes(showgrid=True, gridcolor="#ebebeb", tickformat="%Y")
 fig.update_yaxes(showgrid=True, gridcolor="#ebebeb")
-fig.update_yaxes(title_text="Yield (%)",      row=1, col=1)
-fig.update_yaxes(title_text="Residual (pp)",  zeroline=False, row=2, col=1)
+fig.update_yaxes(title_text="Yield (%)",     row=1, col=1)
+fig.update_yaxes(title_text="Residual (pp)", zeroline=False, row=2, col=1)
 
 # ── Stats JSON for JS stats bar ───────────────────────────────────────────────
 stats_json = json.dumps({
@@ -251,9 +282,15 @@ stats_json = json.dumps({
         "zscore":   f"{cfg['stats']['zscore']:+.2f}σ",
         "sigma":    f"{cfg['stats']['sigma']:.3f} pp",
         "pos":      bool(cfg['stats']['latest_residual'] >= 0),
+        "yield":    f"{(latest_n if cfg['series_id']=='DGS10' else latest_r):.2f}%",
     }
     for cfg in configs
 })
+
+# Ordered label list matching dropdown button order
+all_labels_json = json.dumps([cfg["label"] for cfg in configs])
+
+sd = configs[0]["stats"]  # default: nominal 200d
 
 chart_html = fig.to_html(full_html=False, include_plotlyjs="cdn", div_id="ma-chart")
 
@@ -291,14 +328,14 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
   <div class="header">
-    <h1>📈 10Y Treasury Yield — MA Monitor</h1>
+    <h1>📈 10Y Treasury — MA Monitor</h1>
     <a href="/">← boquin.xyz</a>
   </div>
 
   <div class="stats">
     <div class="stat">
-      <span class="stat-label">10Y Yield</span>
-      <span class="stat-value">{latest_yield:.2f}%</span>
+      <span class="stat-label" id="stat-series-label">10Y Yield</span>
+      <span class="stat-value" id="stat-yield">{latest_n:.2f}%</span>
     </div>
     <div class="stat">
       <span class="stat-label">Selected MA</span>
@@ -318,7 +355,7 @@ html = f"""<!DOCTYPE html>
     </div>
     <div class="stat">
       <span class="stat-label">As of</span>
-      <span class="stat-value">{latest_date}</span>
+      <span class="stat-value" id="stat-date">{latest_n_date}</span>
     </div>
   </div>
 
@@ -327,21 +364,32 @@ html = f"""<!DOCTYPE html>
   </div>
 
   <div class="footer">
-    Data: FRED (DGS10) · Updated daily on business days ·
+    Data: FRED (DGS10 · DFII10) · Updated daily on business days ·
     <a href="https://github.com/DataVizHonduran/boquin.github.io/tree/main/scripts/generate_10y_ma_monitor.py">Source code</a>
   </div>
 
   <script>
-    const STATS = {stats_json};
-    const MA_LABELS = ["200-Day MA", "200-Week MA", "200-Month MA"];
+    const STATS      = {stats_json};
+    const ALL_LABELS = {all_labels_json};
+    // latest dates per series
+    const DATES = {{ "DGS10": "{latest_n_date}", "DFII10": "{latest_r_date}" }};
+    const SERIES_LABELS = {{ "DGS10": "10Y Yield", "DFII10": "10Y Real Rate" }};
+
+    function seriesIdFromLabel(label) {{
+      return label.includes("Real") ? "DFII10" : "DGS10";
+    }}
 
     function updateStatsBar(label) {{
       const s = STATS[label];
       if (!s) return;
-      document.getElementById('stat-ma').textContent    = s.ma;
-      document.getElementById('stat-res').textContent   = s.residual;
-      document.getElementById('stat-z').textContent     = s.zscore;
-      document.getElementById('stat-sigma').textContent = s.sigma;
+      const sid = seriesIdFromLabel(label);
+      document.getElementById('stat-series-label').textContent = SERIES_LABELS[sid];
+      document.getElementById('stat-yield').textContent  = s.yield;
+      document.getElementById('stat-ma').textContent     = s.ma;
+      document.getElementById('stat-res').textContent    = s.residual;
+      document.getElementById('stat-z').textContent      = s.zscore;
+      document.getElementById('stat-sigma').textContent  = s.sigma;
+      document.getElementById('stat-date').textContent   = DATES[sid];
       ['stat-res','stat-z'].forEach(id => {{
         const el = document.getElementById(id);
         el.className = 'stat-value ' + (s.pos ? 'pos' : 'neg');
@@ -351,10 +399,9 @@ html = f"""<!DOCTYPE html>
     // Detect Plotly dropdown selection via plotly_restyle event
     const div = document.getElementById('ma-chart');
     div.on('plotly_restyle', function() {{
-      // The active button index is stored in the updatemenus state
       const menu = div._fullLayout.updatemenus[0];
       if (menu && typeof menu.active === 'number') {{
-        updateStatsBar(MA_LABELS[menu.active]);
+        updateStatsBar(ALL_LABELS[menu.active]);
       }}
     }});
   </script>
@@ -365,8 +412,13 @@ with open(OUTPUT_PATH, "w") as f:
     f.write(html)
 
 print(f"✅  Saved: {OUTPUT_PATH}")
-for cfg in configs:
+print(f"\nNominal 10Y (DGS10) — as of {latest_n_date}:")
+for cfg in configs_n:
     s = cfg["stats"]
-    print(f"   {cfg['label']:15s}  MA={s['latest_ma']:.2f}%  "
-          f"res={s['latest_residual']:+.3f} pp  z={s['zscore']:+.2f}σ  σ={s['sigma']:.3f}")
-print(f"   As of: {latest_date}")
+    print(f"   {cfg['label']:30s}  MA={s['latest_ma']:.2f}%  "
+          f"res={s['latest_residual']:+.3f} pp  z={s['zscore']:+.2f}σ")
+print(f"\nReal 10Y TIPS (DFII10) — as of {latest_r_date}:")
+for cfg in configs_r:
+    s = cfg["stats"]
+    print(f"   {cfg['label']:30s}  MA={s['latest_ma']:.2f}%  "
+          f"res={s['latest_residual']:+.3f} pp  z={s['zscore']:+.2f}σ")
