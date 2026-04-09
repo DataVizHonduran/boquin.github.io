@@ -174,7 +174,7 @@ REPORT_DIR = Path(os.environ.get("ETF_REPORT_DIR", str(Path.home() / "boquin.git
 LANDING_PAGE = Path(os.environ.get("ETF_LANDING_PAGE", str(Path.home() / "boquin.github.io" / "index.html")))
 
 MAX_SNAPSHOTS = 20
-SUMMARY_REFRESH_DAYS = 5
+SUMMARY_REFRESH_DAYS = 1
 SUMMARY_META_FILE = REPORT_DIR / "summary_meta.json"
 
 MODEL_ID = "google/gemma-4-31B-it"
