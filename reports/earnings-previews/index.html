@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings Previews</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #28a745;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .description { color: #555; margin-bottom: 15px; line-height: 1.6; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-label { font-size: 0.9em; color: #666; margin-bottom: 5px; }
+        .stat-value { font-size: 1.5em; font-weight: bold; color: #333; }
+        .search-box { margin-bottom: 20px; }
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        .search-box input:focus { outline: none; border-color: #28a745; }
+        .reports-table {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #28a745; color: white; }
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover { background: #1e7e34; }
+        th::after { content: ' ↕'; opacity: 0.5; }
+        tbody tr {
+            border-bottom: 1px solid #dee2e6;
+            transition: background-color 0.2s;
+        }
+        tbody tr:hover { background: #f8f9fa; }
+        td { padding: 15px; }
+        .ticker { font-weight: bold; color: #28a745; font-size: 1.1em; }
+        .report-link { color: #333; text-decoration: none; font-weight: 500; }
+        .report-link:hover { color: #28a745; text-decoration: underline; }
+        .date { color: #666; font-size: 0.9em; }
+        .badge-upcoming {
+            background: #d4edda;
+            color: #155724;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table { font-size: 0.9em; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔭 Earnings Previews</h1>
+
+        <div class="info-box">
+            <p class="description">
+                Pre-earnings briefings built from Yahoo Finance data — consensus estimates,
+                analyst sentiment, beat/miss track record, and key metrics to watch ahead of each report.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Total Previews</div>
+                    <div class="stat-value">1</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Companies Covered</div>
+                    <div class="stat-value">1</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Most Recent</div>
+                    <div class="stat-value">JPM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search by ticker or keywords...">
+        </div>
+
+        <div class="reports-table">
+            <table id="reportsTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Ticker</th>
+                        <th onclick="sortTable(1)">Preview</th>
+                        <th onclick="sortTable(2)">Preview Date</th>
+                        <th onclick="sortTable(3)">Earnings Date</th>
+                    </tr>
+                </thead>
+                <tbody id="reportsBody">
+
+                    <tr>
+                        <td class="ticker">JPM</td>
+                        <td><a href="JPM-preview-2026-04-09.md" class="report-link">The street expects JPM to deliver $5.49 EPS (+8.3% YoY) on $48.9B in revenue (+7.9%), with the bar shaped by three strong quarters of beats followed by a Q4 mis...</a></td>
+                        <td class="date">2026-04-09</td>
+                        <td class="date">2026-04-14</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="last-updated">Last updated: 2026-04-09 14:09 UTC</div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const reportsBody = document.getElementById('reportsBody');
+        const rows = Array.from(reportsBody.querySelectorAll('tr'));
+
+        searchInput.addEventListener('input', function() {
+            const term = this.value.toLowerCase();
+            rows.forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+            });
+        });
+
+        let sortDir = {};
+        function sortTable(col) {
+            const tbody = document.getElementById('reportsBody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const key = `c${col}`;
+            sortDir[key] = !sortDir[key];
+            const asc = sortDir[key];
+            rows.sort((a, b) => {
+                const at = a.cells[col].textContent.trim();
+                const bt = b.cells[col].textContent.trim();
+                if (col === 2 || col === 3) {
+                    const ad = new Date(at), bd = new Date(bt);
+                    if (!isNaN(ad) && !isNaN(bd)) return asc ? ad - bd : bd - ad;
+                }
+                return asc ? at.localeCompare(bt) : bt.localeCompare(at);
+            });
+            rows.forEach(r => tbody.appendChild(r));
+        }
+    </script>
+</body>
+</html>
