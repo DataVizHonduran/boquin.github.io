@@ -175,7 +175,7 @@ MAX_SNAPSHOTS = 20
 SUMMARY_REFRESH_DAYS = 1
 SUMMARY_META_FILE = REPORT_DIR / "summary_meta.json"
 
-MODEL_ID = "google/gemma-4-31B-it"
+MODEL_ID = "google/gemma-4-26B-A4B-it"
 
 SYSTEM_PROMPT = """\
 You are a macro analyst at a top hedge fund. The user will provide you with a \
