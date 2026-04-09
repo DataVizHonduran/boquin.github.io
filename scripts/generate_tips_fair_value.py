@@ -281,6 +281,20 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     )
     fig.add_hline(y=0, line=dict(color="#888", width=1, dash="dot"), row=2, col=1)
 
+    # ±1σ and ±2σ bands on residual panel
+    resid_std = resid.std()
+    for n, dash, opacity in [(1, "dash", 0.6), (2, "dot", 0.45)]:
+        for sign, label in [(1, f"+{n}σ"), (-1, f"−{n}σ")]:
+            fig.add_hline(
+                y=sign * n * resid_std,
+                line=dict(color="#888", width=1, dash=dash),
+                opacity=opacity,
+                annotation_text=label,
+                annotation_position="right" if sign == 1 else "right",
+                annotation_font=dict(size=10, color="#666"),
+                row=2, col=1,
+            )
+
     # ── Row 3: Stacked component contributions ───────────────────────────────
     components = [
         ("p3_alpha", df["contrib_alpha"], "α  Intercept",           "rgba(150, 100, 200, 0.55)", "#7b52ab"),
