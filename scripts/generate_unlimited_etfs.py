@@ -1100,6 +1100,8 @@ def main():
         print(f"  ✓ Summary loaded from {args.summary_file} ({len(summary.split())} words)")
         fresh_summary = True
     elif args.no_summary:
+        print("  ℹ Skipping summary (--no-summary)")
+    else:
         hf_token = os.environ.get("HF_TOKEN")
         if hf_token and should_refresh_summary():
             meta = load_summary_meta()
@@ -1121,8 +1123,6 @@ def main():
                 print(f"  ✓ Preserved existing macro summary ({len(summary.split())} words)")
             else:
                 print("  ℹ No existing summary to preserve")
-    else:
-        print("  ℹ No summary (run via /unlimited-etfs skill for Claude-generated commentary)")
 
     # Step 5: Fetch performance and render HTML
     print("Fetching ETF performance...")
