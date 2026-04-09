@@ -30,7 +30,7 @@ jobs:
           ETF_REPORT_DIR: ${{ github.workspace }}/reports/unlimited-etfs
           ETF_LANDING_PAGE: ${{ github.workspace }}/index.html
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python scripts/generate_unlimited_etfs.py --no-summary --no-publish
+        run: python scripts/generate_unlimited_etfs.py --no-publish
 
       - name: Commit and push
         run: |
