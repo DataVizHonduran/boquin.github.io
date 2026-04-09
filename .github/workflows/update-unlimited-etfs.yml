@@ -29,6 +29,7 @@ jobs:
           ETF_CACHE_DIR: ${{ github.workspace }}/reports/unlimited-etfs/cache
           ETF_REPORT_DIR: ${{ github.workspace }}/reports/unlimited-etfs
           ETF_LANDING_PAGE: ${{ github.workspace }}/index.html
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python scripts/generate_unlimited_etfs.py --no-summary --no-publish
 
       - name: Commit and push
