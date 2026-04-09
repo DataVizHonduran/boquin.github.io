@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-08T22:06:33.574965+00:00",
+    "lastRun": "2026-04-09T08:23:44.088909+00:00",
     "totalItems": 6
   },
   "items": {
@@ -16,7 +16,7 @@
         "Adam Copeland and Owen Engbretson"
       ],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "The Federal Reserve’s 2022-23 tightening cycle involved the use of two monetary policy tools: changes in administrative rates and changes in the size of its balance sheet. This post highlights the results of a recent Staff Report that explores how these tools affect money market conditions. Using confidential trade-level data, we find that both tools have significant effects on the pricing of funds sourced through repo. These results suggest that the Fed can manage how financing conditions are affected even as it influences economic conditions. For example, the Fed can lower its administrative",
       "aiSummary": "The analysis examines the efficacy of administrative rate adjustments and balance sheet modifications during the 2022-23 tightening cycle. It finds that both tools significantly influence money market pricing and overall liquidity conditions.",
       "tags": [
@@ -37,7 +37,7 @@
       "publicationDate": "2026-04-08",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "Bank failures are almost always preceded by weak fundamentals. Depositor panics are rarely the root cause.",
       "aiSummary": "The paper argues that bank failures are primarily driven by weak underlying fundamentals rather than depositor panics. It emphasizes the role of solvency issues over sudden liquidity shocks in triggering institutional collapse.",
       "tags": [
@@ -58,11 +58,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-08T22:06:33.574965+00:00"
+      "tagsGeneratedAt": "2026-04-09T08:23:44.088909+00:00"
     },
     "06f3a014187f9b34de80e58d47e535255613616760bf8154e517d70a503e4fea": {
       "url": "https://www.dallasfed.org/research/economics/2026/0331",
@@ -73,11 +73,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-08T22:06:33.574965+00:00"
+      "tagsGeneratedAt": "2026-04-09T08:23:44.088909+00:00"
     },
     "69953e5f72b6c446e4d5d559d121553751081b15a57946ca719824466f14219a": {
       "url": "https://www.dallasfed.org/research/economics/2026/0324",
@@ -88,11 +88,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-08T22:06:33.574965+00:00"
+      "tagsGeneratedAt": "2026-04-09T08:23:44.088909+00:00"
     },
     "5db402c171740647575da1108949579d3331851a773f854243d14df8241e8e38": {
       "url": "https://www.fedinprint.org/item/fedlwp/102353/103009",
@@ -103,7 +103,7 @@
       "publicationDate": "2026-04-08",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-08T22:06:33.574965+00:00",
+      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The study explores how expectations regarding wealth returns impact labor supply decisions during periods of increased retirement. It analyzes the trade-off between leisure and employment in the context of asset performance.",
       "tags": [
