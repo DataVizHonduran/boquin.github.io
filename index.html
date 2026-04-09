@@ -150,23 +150,13 @@
                     </div>
                 </div>
 
-                <!-- ── Fixed Income ────────────────────────────────── -->
-                <div class="section-group collapsed" id="section-fixed-income">
+                <!-- ── US Treasuries ───────────────────────────────── -->
+                <div class="section-group collapsed" id="section-treasuries">
                     <div class="section-divider">
-                        <h2>🏛️ Fixed Income</h2>
+                        <h2>🏛️ US Treasuries</h2>
                         <span class="chevron">▾</span>
                     </div>
                     <div class="section-cards">
-                        <article class="dashboard-card">
-                            <div class="card-header">
-                                <h3>📊 5Y Bond Yield Spread Explorer</h3>
-                                <p>Z-score heatmap of pairwise 5Y government bond yield spreads across 10 G10 currencies. Click any cell to explore the spread time series.</p>
-                            </div>
-                            <div class="card-actions">
-                                <a href="reports/bond5y-spreads/index.html" class="btn btn-primary">Launch Dashboard</a>
-                            </div>
-                        </article>
-
                         <article class="dashboard-card">
                             <div class="card-header">
                                 <h3>⚖️ US 10Y Treasury Fair Value Model</h3>
@@ -174,7 +164,17 @@
                             </div>
                             <div class="card-actions">
                                 <a href="reports/us-10y-fair-value/index.html" class="btn btn-primary">Launch Dashboard</a>
-                                <a href="https://github.com/DataVizHonduran/boquin.github.io/tree/main/scripts/generate_10y_fair_value.py" class="btn btn-secondary">Source Code</a>
+                            </div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <div class="card-header">
+                                <h3>📐 10Y TIPS Fair Value Model</h3>
+                                <p>OLS regression of the 10-year TIPS real yield on the Laubach-Williams neutral rate (R*) and the ACM term premium — with cointegration diagnostics and a rich/cheap residual signal.</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="reports/tips-fair-value/index.html" class="btn btn-primary">Launch Dashboard</a>
+                                <a href="https://github.com/DataVizHonduran/boquin.github.io/tree/main/scripts/generate_tips_fair_value.py" class="btn btn-secondary">Source Code</a>
                             </div>
                         </article>
 
@@ -185,7 +185,6 @@
                             </div>
                             <div class="card-actions">
                                 <a href="reports/fed-policy-fv/index.html" class="btn btn-primary">Launch Dashboard</a>
-                                <a href="https://github.com/DataVizHonduran/boquin.github.io/tree/main/scripts/generate_fed_policy_fv.py" class="btn btn-secondary">Source Code</a>
                             </div>
                         </article>
 
@@ -196,7 +195,6 @@
                             </div>
                             <div class="card-actions">
                                 <a href="reports/10y-ma-monitor/index.html" class="btn btn-primary">Launch Dashboard</a>
-                                <a href="https://github.com/DataVizHonduran/boquin.github.io/tree/main/scripts/generate_10y_ma_monitor.py" class="btn btn-secondary">Source Code</a>
                             </div>
                         </article>
 
@@ -217,6 +215,25 @@
                             </div>
                             <div class="card-actions">
                                 <a href="reports/treasury-cta-signals/" class="btn btn-primary">View Dashboard</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- ── Other Fixed Income ─────────────────────────── -->
+                <div class="section-group collapsed" id="section-fixed-income">
+                    <div class="section-divider">
+                        <h2>📊 Other Fixed Income</h2>
+                        <span class="chevron">▾</span>
+                    </div>
+                    <div class="section-cards">
+                        <article class="dashboard-card">
+                            <div class="card-header">
+                                <h3>📊 5Y Bond Yield Spread Explorer</h3>
+                                <p>Z-score heatmap of pairwise 5Y government bond yield spreads across 10 G10 currencies. Click any cell to explore the spread time series.</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="reports/bond5y-spreads/index.html" class="btn btn-primary">Launch Dashboard</a>
                             </div>
                         </article>
 
