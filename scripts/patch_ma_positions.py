@@ -11,7 +11,7 @@ import os
 
 FX_DATA_URL = "https://raw.githubusercontent.com/DataVizHonduran/EMFX_risk_diffusion/main/fx_data_raw.csv"
 OUTPUT_DIR  = "reports/cta-signals"
-MA_WINDOWS  = [5, 10, 20, 50, 100]
+MA_WINDOWS  = [5, 10, 20, 50, 60, 100, 200]
 WINDOW      = 2500
 CTA_MODES   = {
     'fast': {'short': 20, 'mid': 50,  'long': 100},

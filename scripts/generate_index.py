@@ -354,7 +354,9 @@ html_content = f"""<!DOCTYPE html>
                     <option value="10">10 days</option>
                     <option value="20" selected>20 days</option>
                     <option value="50">50 days</option>
+                    <option value="60">60 days</option>
                     <option value="100">100 days</option>
+                    <option value="200">200 days</option>
                 </select>
             </div>
             <div class="chart-container">

@@ -27,7 +27,7 @@ ROLLING_PCT_WINDOW = 500   # ~2 years rolling window for percentile thresholds (
 ROLLING_PCT_MINPERIODS = 252  # Minimum days before rolling percentile is valid
 RSI_PERIOD = 14      # RSI lookback for positioning series (P5)
 CONSENSUS_WINDOW_DAYS = 5   # Max days apart for fast/slow signals to count as consensus (P4)
-MA_WINDOWS = [5, 10, 20, 50, 100]  # N-day MA windows for scatter chart tab
+MA_WINDOWS = [5, 10, 20, 50, 60, 100, 200]  # N-day MA windows for scatter chart tab
 
 # CTA mode configurations
 CTA_MODES = {
