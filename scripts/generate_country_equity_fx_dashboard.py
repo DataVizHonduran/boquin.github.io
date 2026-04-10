@@ -232,7 +232,11 @@ def _etf_to_country(ticker_ratio):
 
 
 def create_main_dashboard(summary_df, last_updated):
-    """Horizontal bar chart of residuals for all currencies."""
+    """
+    Returns (fig, html_str) where html_str is a complete page with a real
+    HTML sidebar so links open in the same tab (SVG annotation links cannot
+    be forced to stay in the same tab across browsers).
+    """
     colors = ["#d62728" if x > 0 else "#2ca02c" for x in summary_df["Residual_%"]]
 
     hover_text = []
@@ -245,7 +249,7 @@ def create_main_dashboard(summary_df, last_updated):
             f"Residual: {row['Residual_%']:.1f}%<br>"
             f"R²: {row['R_Squared']:.3f}<br>"
             f"Top predictors: {top_p}<br>"
-            f"<i>Click to open detail page</i>"
+            f"<i>Click bar to open detail</i>"
         )
 
     fig = go.Figure()
@@ -261,55 +265,97 @@ def create_main_dashboard(summary_df, last_updated):
     ))
     fig.add_vline(x=0, line_dash="dash", line_color="gray", line_width=1)
 
-    # Navigation links sidebar
-    links_html = "<br>".join([
-        f'<a href="{c}_analysis.html" target="_self" style="text-decoration:none; color:#1f77b4;">'
-        f'📊 {c}</a>'
-        for c in summary_df["Currency"]
-    ])
-    links_html += '<br><br><a href="network.html" target="_self" style="text-decoration:none; color:#9467bd;">🔗 Currency Network</a>'
-
-    fig.add_annotation(
-        text="<b>Currency Details:</b><br>" + links_html,
-        xref="paper", yref="paper", x=1.02, y=1,
-        xanchor="left", yanchor="top", showarrow=False,
-        font=dict(size=11), align="left",
-        bgcolor="rgba(255,255,255,0.9)", bordercolor="gray", borderwidth=1,
-    )
-
-    # Methodology note
-    methodology = (
-        "<b>Methodology:</b><br>"
-        "LASSO regression (LassoCV, top-5 features)<br>"
-        "Predictors: country equity ETF performance<br>"
-        "relative to the US (EUSA). 5-year lookback.<br>"
-        "<br>"
-        "<b>Green</b> = currency below model fair value<br>"
-        "<b>Red</b> = currency above model fair value<br>"
-        f"<br>Updated: {last_updated}"
-    )
-    fig.add_annotation(
-        text=methodology,
-        xref="paper", yref="paper", x=-0.15, y=0.5,
-        xanchor="left", yanchor="middle", showarrow=False,
-        font=dict(size=10), align="left",
-        bgcolor="rgba(255,255,255,0.9)", bordercolor="gray", borderwidth=1,
-    )
-
     fig.update_layout(
         title={
             "text": "FX Fair Value: Country Equity ETF Model",
-            "x": 0.5, "xanchor": "center", "font": {"size": 26},
+            "x": 0.5, "xanchor": "center", "font": {"size": 22},
         },
         xaxis_title="Residual (% deviation from fair value)",
-        yaxis_title="Currency Pair",
-        height=max(600, len(summary_df) * 28),
+        yaxis_title="",
+        height=max(520, len(summary_df) * 26),
         template="plotly_white",
         hovermode="closest",
         showlegend=False,
-        margin=dict(l=120, r=260, t=80, b=60),
+        margin=dict(l=80, r=40, t=60, b=50),
     )
-    return fig
+
+    # ── Build sidebar link items ─────────────────────────────────────────
+    sidebar_links = "\n".join([
+        f'<a href="{c}_analysis.html">{c}</a>'
+        for c in summary_df["Currency"]
+    ])
+
+    import plotly.io as _pio
+    chart_div = _pio.to_html(
+        fig, div_id="main-chart",
+        include_plotlyjs=True, full_html=False,
+        config={"displayModeBar": False, "responsive": True},
+    )
+
+    html_str = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FX Country Equity Fair Value</title>
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background: #f8f9fa; display: flex; min-height: 100vh; }}
+  #sidebar {{
+    width: 160px; min-width: 140px; background: #fff;
+    border-right: 1px solid #e0e0e0; padding: 16px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }}
+  #sidebar h3 {{ font-size: 12px; color: #888; text-transform: uppercase;
+                 letter-spacing: .05em; margin-bottom: 8px; }}
+  #sidebar a {{
+    display: block; padding: 5px 8px; border-radius: 4px;
+    text-decoration: none; font-size: 13px; font-weight: 500; color: #1f77b4;
+    transition: background .15s;
+  }}
+  #sidebar a:hover {{ background: #eef4fb; }}
+  #sidebar .network-link {{ color: #9467bd; margin-top: 10px;
+                             border-top: 1px solid #eee; padding-top: 10px; }}
+  #sidebar .note {{
+    font-size: 10px; color: #888; margin-top: auto; padding-top: 12px;
+    border-top: 1px solid #eee; line-height: 1.5;
+  }}
+  #chart-wrap {{ flex: 1; padding: 8px 4px; }}
+  #main-chart {{ width: 100% !important; }}
+  #main-chart:hover {{ cursor: pointer; }}
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <h3>Currencies</h3>
+  {sidebar_links}
+  <a href="network.html" class="network-link">🔗 Network graph</a>
+  <div class="note">
+    LASSO (LassoCV)<br>
+    Top-5 country ETF<br>
+    predictors vs US<br>
+    5-year lookback<br><br>
+    🟢 below fair value<br>
+    🔴 above fair value<br><br>
+    Updated:<br>{last_updated}
+  </div>
+</nav>
+<div id="chart-wrap">
+  {chart_div}
+</div>
+<script>
+document.getElementById("main-chart").on("plotly_click", function(data) {{
+  if (data.points && data.points.length > 0) {{
+    window.location.href = data.points[0].y + "_analysis.html";
+  }}
+}});
+</script>
+</body>
+</html>"""
+
+    return html_str
 
 
 def create_currency_page(result, back_link="index.html"):
@@ -613,27 +659,11 @@ def main():
     last_updated = datetime.datetime.now().strftime("%Y-%m-%d %H:%M UTC")
     config = {"displayModeBar": False, "responsive": True}
 
-    # 5. Main dashboard — custom HTML so bar clicks navigate in the same tab
+    # 5. Main dashboard — custom HTML layout with real sidebar links
     print("\nGenerating main dashboard …")
-    main_fig = create_main_dashboard(summary_df, last_updated)
-    import plotly.io as _pio
-    html_str = _pio.to_html(
-        main_fig, div_id="main-chart",
-        include_plotlyjs=True, full_html=True, config=config,
-    )
-    click_js = """
-<script>
-document.getElementById('main-chart').on('plotly_click', function(data) {
-    if (data.points && data.points.length > 0) {
-        var currency = data.points[0].y;
-        window.location.href = currency + '_analysis.html';
-    }
-});
-</script>
-"""
-    html_str = html_str.replace("</body>", click_js + "</body>")
+    main_html = create_main_dashboard(summary_df, last_updated)
     with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
-        f.write(html_str)
+        f.write(main_html)
     print("  ✓ index.html")
 
     # 6. Individual currency pages
