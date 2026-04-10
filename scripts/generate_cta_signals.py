@@ -27,6 +27,7 @@ ROLLING_PCT_WINDOW = 500   # ~2 years rolling window for percentile thresholds (
 ROLLING_PCT_MINPERIODS = 252  # Minimum days before rolling percentile is valid
 RSI_PERIOD = 14      # RSI lookback for positioning series (P5)
 CONSENSUS_WINDOW_DAYS = 5   # Max days apart for fast/slow signals to count as consensus (P4)
+MA_WINDOWS = [5, 10, 20, 50, 100]  # N-day MA windows for scatter chart tab
 
 # CTA mode configurations
 CTA_MODES = {
@@ -438,6 +439,17 @@ for mode, windows in CTA_MODES.items():
     all_summaries[mode]['signal_metadata'] = sorted(
         signal_metadata, key=lambda x: x['date'], reverse=True
     )
+
+    # MA positions for scatter chart tab in generate_index.py
+    ma_pos = {}
+    for n in MA_WINDOWS:
+        ma_row = positions_df.rolling(n, min_periods=1).mean().iloc[-1]
+        ma_pos[str(n)] = {
+            col.replace('_posy', ''): round(float(val), 4)
+            for col, val in ma_row.items()
+            if not pd.isna(val)
+        }
+    all_summaries[mode]['ma_positions'] = ma_pos
 
 
 # ── Save combined summary ─────────────────────────────────────────────────────

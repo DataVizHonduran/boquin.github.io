@@ -48,10 +48,11 @@
         .methodology h3 { margin: 0 0 10px 0; color: #007bff; }
         .methodology p { margin: 5px 0; line-height: 1.6; }
 
+        /* ── Mode selector ── */
         .mode-selector {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             justify-content: center;
         }
 
@@ -70,6 +71,40 @@
         .mode-btn:hover { background: #e7f3ff; }
         .mode-btn.active { background: #007bff; color: white; }
 
+        /* ── Tab navigation ── */
+        .tab-bar {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 0;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .tab-btn {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            background: #f8f9fa;
+            color: #495057;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover { background: #e9ecef; }
+        .tab-btn.active {
+            background: white;
+            color: #007bff;
+            border-color: #dee2e6;
+            border-bottom: 2px solid white;
+        }
+
+        .tab-panel { display: none; padding-top: 20px; }
+        .tab-panel.active { display: block; }
+
+        /* ── Bar chart tab ── */
         .chart-container {
             background: white;
             padding: 20px;
@@ -81,6 +116,39 @@
         .chart-wrapper { display: none; }
         .chart-wrapper.active { display: block; }
 
+        /* ── Scatter tab ── */
+        .scatter-controls {
+            background: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .scatter-controls label {
+            font-weight: 600;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        #ma-n-select {
+            padding: 8px 16px;
+            font-size: 15px;
+            border: 2px solid #007bff;
+            border-radius: 6px;
+            background: white;
+            color: #007bff;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #ma-n-select:focus { box-shadow: 0 0 0 3px rgba(0,123,255,0.25); }
+
+        /* ── Stats grid ── */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -100,6 +168,7 @@
 
         .last-updated { text-align: center; color: #666; font-size: 0.9em; margin-top: 20px; }
 
+        /* ── Currency link grid ── */
         .currency-list { margin-top: 20px; }
         .currency-list h3 { margin-bottom: 15px; color: #333; }
 
@@ -140,7 +209,6 @@
 
         .position-long  { background: #d4edda; color: #155724; }
         .position-short { background: #f8d7da; color: #721c24; }
-
     </style>
 </head>
 <body>
@@ -185,32 +253,56 @@
         </div>
 
         <div class="mode-selector">
-            <button class="mode-btn active" onclick="showMode('fast')">FAST Mode (20/50/100)</button>
-            <button class="mode-btn" onclick="showMode('slow')">SLOW Mode (50/100/200)</button>
+            <button class="mode-btn active" data-mode="fast" onclick="showMode('fast')">FAST Mode (20/50/100)</button>
+            <button class="mode-btn" data-mode="slow" onclick="showMode('slow')">SLOW Mode (50/100/200)</button>
         </div>
 
-        <div class="chart-container">
-            <div id="fast-chart-wrapper" class="chart-wrapper active">
-                <html>
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="positions" onclick="switchTab('positions')">Current Positioning</button>
+            <button class="tab-btn" data-tab="scatter" onclick="switchTab('scatter')">Positioning vs. MA</button>
+        </div>
+
+        <!-- Tab 1: Bar charts -->
+        <div id="tab-positions" class="tab-panel active">
+            <div class="chart-container">
+                <div id="fast-chart-wrapper" class="chart-wrapper active">
+                    <html>
 <head><meta charset="utf-8" /></head>
 <body>
     <div>                            <div id="fast-chart" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("fast-chart")) {                    Plotly.newPlot(                        "fast-chart",                        [{"customdata":["INR","KRW","PHP","JPY","THB","AUD","PEN","PLN","IDR","CZK","MXN","CAD","CHF","SGD","SEK","HUF","CLP","BRL","COP","NZD","EUR","GBP","NOK"],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003ePosition: %{y:.1f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545"],"line":{"color":"rgba(0,0,0,0.3)","width":1}},"x":["INR","KRW","PHP","JPY","THB","AUD","PEN","PLN","IDR","CZK","MXN","CAD","CHF","SGD","SEK","HUF","CLP","BRL","COP","NZD","EUR","GBP","NOK"],"y":[30.970344770582287,20.452515730682155,18.83261988317915,16.64554171542595,13.32795913149876,10.460939889589147,8.520753509911117,8.046755057907285,6.1546700985589275,4.235120050722338,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-6.627968037432447,-6.914094495136913,-8.30352865371548,-9.08956743585415,-9.230998193665735,-11.850151921580212],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#333"},"text":"CTA FAST Mode - Current Positioning","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":11},"title":{"text":"Currency"},"showgrid":false,"tickangle":-45},"yaxis":{"title":{"text":"Position Size"},"showgrid":true,"gridcolor":"#e9ecef","zeroline":true,"zerolinecolor":"#333","zerolinewidth":2,"range":[-55,55]},"margin":{"b":100},"plot_bgcolor":"white","height":500,"hovermode":"closest"},                        {"responsive": true}                    )                };            </script>        </div>
 </body>
 </html>
-            </div>
-            <div id="slow-chart-wrapper" class="chart-wrapper">
-                <html>
+                </div>
+                <div id="slow-chart-wrapper" class="chart-wrapper">
+                    <html>
 <head><meta charset="utf-8" /></head>
 <body>
     <div>                            <div id="slow-chart" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("slow-chart")) {                    Plotly.newPlot(                        "slow-chart",                        [{"customdata":["INR","AUD","KRW","JPY","PHP","IDR","PLN","EUR","PEN","CZK","GBP","THB","NZD","CAD","BRL","HUF","MXN","CLP","SGD","SEK","COP","CHF","NOK"],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003ePosition: %{y:.1f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#28a745","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545","#dc3545"],"line":{"color":"rgba(0,0,0,0.3)","width":1}},"x":["INR","AUD","KRW","JPY","PHP","IDR","PLN","EUR","PEN","CZK","GBP","THB","NZD","CAD","BRL","HUF","MXN","CLP","SGD","SEK","COP","CHF","NOK"],"y":[36.33774951531332,29.477396275685695,18.714686368020374,16.484144093118143,14.410859610995708,13.83894040223648,4.033655600205132,0.0,0.0,0.0,0.0,0.0,-0.8416450486815993,-5.216913127600184,-9.39320255715448,-9.45213476561114,-9.623601086663362,-11.193782518075087,-12.747871912559813,-13.371389051418683,-15.64089157666984,-15.825299649693815,-18.486366031213464],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#333"},"text":"CTA SLOW Mode - Current Positioning","x":0.5,"xanchor":"center"},"xaxis":{"tickfont":{"size":11},"title":{"text":"Currency"},"showgrid":false,"tickangle":-45},"yaxis":{"title":{"text":"Position Size"},"showgrid":true,"gridcolor":"#e9ecef","zeroline":true,"zerolinecolor":"#333","zerolinewidth":2,"range":[-55,55]},"margin":{"b":100},"plot_bgcolor":"white","height":500,"hovermode":"closest"},                        {"responsive": true}                    )                };            </script>        </div>
 </body>
 </html>
+                </div>
+            </div>
+
+            <div class="currency-list">
+                <h3>View Individual Currency Charts</h3>
+                <div class="currency-grid" id="currency-grid"></div>
             </div>
         </div>
 
-        <div class="currency-list">
-            <h3>View Individual Currency Charts</h3>
-            <div class="currency-grid" id="currency-grid">
+        <!-- Tab 2: Scatter — current positioning vs. N-day MA -->
+        <div id="tab-scatter" class="tab-panel">
+            <div class="scatter-controls">
+                <label for="ma-n-select">Moving Average Window:</label>
+                <select id="ma-n-select" onchange="renderScatterChart()">
+                    <option value="5">5 days</option>
+                    <option value="10">10 days</option>
+                    <option value="20" selected>20 days</option>
+                    <option value="50">50 days</option>
+                    <option value="100">100 days</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <div id="scatter-chart" style="height:580px; width:100%;"></div>
             </div>
         </div>
 
@@ -224,33 +316,54 @@
 
         const fastPositions = {"INR": 30.970344770582287, "KRW": 20.452515730682155, "PHP": 18.83261988317915, "JPY": 16.64554171542595, "THB": 13.32795913149876, "AUD": 10.460939889589147, "PEN": 8.520753509911117, "PLN": 8.046755057907285, "IDR": 6.1546700985589275, "CZK": 4.235120050722338, "MXN": 0.0, "CAD": 0.0, "CHF": 0.0, "SGD": 0.0, "SEK": 0.0, "HUF": 0.0, "CLP": 0.0, "BRL": -6.627968037432447, "COP": -6.914094495136913, "NZD": -8.30352865371548, "EUR": -9.08956743585415, "GBP": -9.230998193665735, "NOK": -11.850151921580212};
         const slowPositions = {"INR": 36.33774951531332, "AUD": 29.477396275685695, "KRW": 18.714686368020374, "JPY": 16.484144093118143, "PHP": 14.410859610995708, "IDR": 13.83894040223648, "PLN": 4.033655600205132, "EUR": 0.0, "PEN": 0.0, "CZK": 0.0, "GBP": 0.0, "THB": 0.0, "NZD": -0.8416450486815993, "CAD": -5.216913127600184, "BRL": -9.39320255715448, "HUF": -9.45213476561114, "MXN": -9.623601086663362, "CLP": -11.193782518075087, "SGD": -12.747871912559813, "SEK": -13.371389051418683, "COP": -15.64089157666984, "CHF": -15.825299649693815, "NOK": -18.486366031213464};
+        const maData = {
+            fast: {"5": {"EUR": -10.1354, "AUD": 10.5375, "CAD": 0.0, "GBP": -9.9319, "JPY": 17.0082, "SEK": 0.0, "NOK": -12.156, "NZD": -6.6063, "CHF": 0.0, "MXN": 0.0, "CLP": 0.0, "BRL": -6.0262, "COP": -6.7753, "PEN": 10.6659, "KRW": 21.7748, "IDR": 5.8979, "INR": 33.0163, "THB": 14.2476, "PHP": 19.594, "SGD": 0.0, "PLN": 8.7231, "HUF": 0.0, "CZK": 4.556}, "10": {"EUR": -10.0201, "AUD": 12.5614, "CAD": 0.0, "GBP": -9.1132, "JPY": 17.0116, "SEK": 0.0, "NOK": -13.0003, "NZD": -3.3031, "CHF": 0.0, "MXN": 0.0, "CLP": 0.0, "BRL": -5.523, "COP": -6.5084, "PEN": 11.0146, "KRW": 20.9415, "IDR": 5.505, "INR": 34.3097, "THB": 13.4406, "PHP": 18.3377, "SGD": 0.0, "PLN": 8.6088, "HUF": 0.0, "CZK": 4.272}, "20": {"EUR": -6.6708, "AUD": 17.5621, "CAD": -3.9118, "GBP": -4.8727, "JPY": 15.9099, "SEK": -3.2161, "NOK": -14.3376, "NZD": -0.4661, "CHF": -3.0557, "MXN": -0.9237, "CLP": 0.0, "BRL": -5.9191, "COP": -6.2101, "PEN": 5.5073, "KRW": 17.467, "IDR": 5.2185, "INR": 30.4206, "THB": 6.7203, "PHP": 13.2074, "SGD": -2.7443, "PLN": 7.4027, "HUF": 0.0, "CZK": 2.8479}, "50": {"EUR": 3.5208, "AUD": 22.5236, "CAD": -8.3209, "GBP": 4.6405, "JPY": 9.6312, "SEK": -17.2697, "NOK": -12.6495, "NZD": 8.5787, "CHF": -12.671, "MXN": -6.282, "CLP": -11.7342, "BRL": -7.1636, "COP": -9.1513, "PEN": -3.2691, "KRW": 8.2831, "IDR": 4.6128, "INR": 24.2558, "THB": -4.4777, "PHP": 6.866, "SGD": -11.0139, "PLN": 1.2876, "HUF": -7.8488, "CZK": 0.6187}, "100": {"EUR": 4.5676, "AUD": 14.6706, "CAD": -4.9681, "GBP": 3.7983, "JPY": 16.1904, "SEK": -16.1619, "NOK": -5.5164, "NZD": 2.1163, "CHF": -8.8341, "MXN": -6.0446, "CLP": -12.3353, "BRL": -4.6271, "COP": -11.187, "PEN": -11.5618, "KRW": 13.1539, "IDR": 4.7271, "INR": 21.8878, "THB": -8.248, "PHP": 10.6371, "SGD": -6.3955, "PLN": -1.902, "HUF": -10.8219, "CZK": -2.1388}},
+            slow: {"5": {"EUR": 0.0, "AUD": 29.8739, "CAD": -6.1404, "GBP": 0.0, "JPY": 16.4089, "SEK": -14.7975, "NOK": -18.3952, "NZD": -0.0186, "CHF": -16.8178, "MXN": -9.7288, "CLP": -11.7489, "BRL": -9.1517, "COP": -15.7089, "PEN": 0.0, "KRW": 18.6598, "IDR": 13.586, "INR": 36.5394, "THB": 0.0, "PHP": 14.1644, "SGD": -13.0876, "PLN": 2.3997, "HUF": -8.7632, "CZK": 0.0}, "10": {"EUR": 0.0, "AUD": 31.1586, "CAD": -7.7275, "GBP": 0.0, "JPY": 16.1802, "SEK": -16.809, "NOK": -18.415, "NZD": 1.1349, "CHF": -18.4873, "MXN": -10.2548, "CLP": -13.155, "BRL": -8.981, "COP": -15.7849, "PEN": 0.0, "KRW": 17.8044, "IDR": 13.2275, "INR": 36.1995, "THB": 0.0, "PHP": 13.212, "SGD": -14.1914, "PLN": 1.1998, "HUF": -8.6437, "CZK": 0.0}, "20": {"EUR": 3.1137, "AUD": 33.3385, "CAD": -10.2073, "GBP": 3.4517, "JPY": 15.4587, "SEK": -20.5292, "NOK": -17.8892, "NZD": 3.158, "CHF": -21.5736, "MXN": -11.5948, "CLP": -16.8014, "BRL": -9.1266, "COP": -16.1307, "PEN": -7.0509, "KRW": 15.7712, "IDR": 12.9671, "INR": 33.6226, "THB": -6.5689, "PHP": 10.9396, "SGD": -16.4059, "PLN": 0.5999, "HUF": -10.1329, "CZK": -1.6976}, "50": {"EUR": 11.3234, "AUD": 31.0252, "CAD": -10.8694, "GBP": 9.4371, "JPY": 14.5162, "SEK": -25.6446, "NOK": -12.3757, "NZD": 4.1601, "CHF": -25.1309, "MXN": -13.803, "CLP": -23.8341, "BRL": -8.655, "COP": -18.4443, "PEN": -16.6996, "KRW": 13.3559, "IDR": 12.525, "INR": 30.1855, "THB": -15.0609, "PHP": 9.9279, "SGD": -18.648, "PLN": -3.8479, "HUF": -15.0966, "CZK": -6.654}, "100": {"EUR": 13.7065, "AUD": 20.2099, "CAD": -5.2005, "GBP": 8.1747, "JPY": 15.5666, "SEK": -20.9927, "NOK": -5.2772, "NZD": -2.0395, "CHF": -23.7634, "MXN": -12.0831, "CLP": -18.2887, "BRL": -7.4343, "COP": -18.7202, "PEN": -22.9698, "KRW": 14.8715, "IDR": 12.071, "INR": 27.1242, "THB": -15.9787, "PHP": 11.8958, "SGD": -12.1019, "PLN": -4.9975, "HUF": -16.7659, "CZK": -10.7728}}
+        };
 
-        function getSortedCurrencies(positions) {
-            return Object.keys(positions).sort((a, b) => positions[b] - positions[a]);
-        }
-
+        // ── Mode selector ─────────────────────────────────────────────────────
         function showMode(mode) {
             currentMode = mode;
 
             document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.remove('active');
+                btn.classList.toggle('active', btn.dataset.mode === mode);
             });
-            event.target.classList.add('active');
 
-            document.querySelectorAll('.chart-wrapper').forEach(wrapper => {
-                wrapper.classList.remove('active');
-            });
+            // Update bar chart visibility
+            document.querySelectorAll('.chart-wrapper').forEach(w => w.classList.remove('active'));
             const activeWrapper = document.getElementById(mode + '-chart-wrapper');
-            activeWrapper.classList.add('active');
-
-            setTimeout(() => {
-                const chartDiv = activeWrapper.querySelector('[id$="-chart"]');
-                if (chartDiv && window.Plotly) {
-                    window.Plotly.Plots.resize(chartDiv);
-                }
-            }, 50);
+            if (activeWrapper) {
+                activeWrapper.classList.add('active');
+                setTimeout(() => {
+                    const chartDiv = activeWrapper.querySelector('[id$="-chart"]');
+                    if (chartDiv && window.Plotly) Plotly.Plots.resize(chartDiv);
+                }, 50);
+            }
 
             updateCurrencyGrid();
+
+            // Re-render scatter if that tab is active
+            if (document.getElementById('tab-scatter').classList.contains('active')) {
+                renderScatterChart();
+            }
+        }
+
+        // ── Tab switching ─────────────────────────────────────────────────────
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+
+            if (tab === 'scatter') {
+                renderScatterChart();
+            }
+        }
+
+        // ── Currency grid (bar chart tab) ─────────────────────────────────────
+        function getSortedCurrencies(positions) {
+            return Object.keys(positions).sort((a, b) => positions[b] - positions[a]);
         }
 
         function updateCurrencyGrid() {
@@ -263,20 +376,115 @@
                 const badge = pos > 0
                     ? `<span class="position-badge position-long">+${pos.toFixed(1)}</span>`
                     : `<span class="position-badge position-short">${pos.toFixed(1)}</span>`;
-
-                return `<a href="${ccy}_exhaustion_${currentMode}.html" class="currency-link">
-                    ${ccy}${badge}
-                </a>`;
+                return `<a href="${ccy}_exhaustion_${currentMode}.html" class="currency-link">${ccy}${badge}</a>`;
             }).join('');
         }
 
+        // ── Scatter chart ─────────────────────────────────────────────────────
+        function renderScatterChart() {
+            const n = document.getElementById('ma-n-select').value;
+            const ma   = (maData[currentMode] && maData[currentMode][n]) || {};
+            const curr = currentMode === 'fast' ? fastPositions : slowPositions;
+
+            const currencies = Object.keys(curr).filter(c => c in ma);
+            currencies.sort((a, b) => curr[b] - curr[a]);
+
+            if (currencies.length === 0) {
+                document.getElementById('scatter-chart').innerHTML =
+                    '<p style="text-align:center;padding:60px;color:#666;font-size:1.1em">' +
+                    'MA data not yet available. Run <code>python3 scripts/patch_ma_positions.py</code> ' +
+                    'then <code>python3 scripts/generate_index.py</code>.</p>';
+                return;
+            }
+
+            const x = currencies.map(c => ma[c]);
+            const y = currencies.map(c => curr[c]);
+            const colors = y.map(v => v > 0.5 ? '#28a745' : v < -0.5 ? '#dc3545' : '#6c757d');
+            const sizes  = y.map(v => Math.max(9, Math.min(22, Math.abs(v) * 0.28 + 9)));
+
+            const AX = [-55, 55];
+
+            const traces = [
+                // Dashed diagonal: y = x (current = MA, no divergence)
+                {
+                    x: AX, y: AX,
+                    mode: 'lines',
+                    line: {color: '#adb5bd', width: 1.5, dash: 'dot'},
+                    hoverinfo: 'none',
+                    showlegend: false
+                },
+                // Currency scatter points
+                {
+                    x, y,
+                    mode: 'markers+text',
+                    text: currencies,
+                    textposition: y.map(v => v >= 0 ? 'top center' : 'bottom center'),
+                    textfont: {size: 11, color: '#333'},
+                    marker: {
+                        color: colors,
+                        size: sizes,
+                        opacity: 0.85,
+                        line: {color: 'rgba(0,0,0,0.25)', width: 1}
+                    },
+                    customdata: currencies,
+                    hovertemplate:
+                        '<b>%{customdata}</b><br>' +
+                        'Current: %{y:.1f}<br>' +
+                        n + '-day MA: %{x:.1f}<extra></extra>',
+                    showlegend: false
+                }
+            ];
+
+            const layout = {
+                title: {
+                    text: `CTA ${currentMode.toUpperCase()} — Current Positioning vs. ${n}-Day MA`,
+                    x: 0.5, xanchor: 'center',
+                    font: {size: 20, color: '#333'}
+                },
+                xaxis: {
+                    title: `${n}-Day Moving Average of Positioning`,
+                    range: AX,
+                    showgrid: true, gridcolor: '#e9ecef',
+                    zeroline: true, zerolinecolor: '#999', zerolinewidth: 1.5
+                },
+                yaxis: {
+                    title: 'Current Positioning',
+                    range: AX,
+                    showgrid: true, gridcolor: '#e9ecef',
+                    zeroline: true, zerolinecolor: '#999', zerolinewidth: 1.5
+                },
+                annotations: [
+                    {x: 44, y: 51, xanchor: 'right', yanchor: 'top',
+                      text: 'Long · above avg', showarrow: false,
+                      font: {color: '#adb5bd', size: 10}},
+                    {x: -44, y: 51, xanchor: 'left', yanchor: 'top',
+                      text: 'Recovering · long', showarrow: false,
+                      font: {color: '#adb5bd', size: 10}},
+                    {x: 44, y: -51, xanchor: 'right', yanchor: 'bottom',
+                      text: 'Fading · long avg', showarrow: false,
+                      font: {color: '#adb5bd', size: 10}},
+                    {x: -44, y: -51, xanchor: 'left', yanchor: 'bottom',
+                      text: 'Short · below avg', showarrow: false,
+                      font: {color: '#adb5bd', size: 10}}
+                ],
+                plot_bgcolor: 'white',
+                height: 580,
+                hovermode: 'closest',
+                margin: {t: 60, l: 65, r: 30, b: 65}
+            };
+
+            Plotly.react('scatter-chart', traces, layout, {responsive: true});
+        }
+
+        // ── Init ──────────────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', function() {
             updateCurrencyGrid();
 
             const charts = document.querySelectorAll('[id$="-chart"]');
             charts.forEach(chart => {
                 chart.on('plotly_click', function(data) {
-                    const ccy = data.points[0].x;
+                    if (!data.points[0].customdata) return;
+                    const ccy = data.points[0].customdata;
                     window.location.href = `${ccy}_exhaustion_${currentMode}.html`;
                 });
             });
