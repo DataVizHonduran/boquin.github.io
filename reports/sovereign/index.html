@@ -33,53 +33,55 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .report-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
             margin-top: 20px;
         }
         .report-card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 10px 16px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: background-color 0.15s;
             border-left: 4px solid #1a5276;
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
         .report-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background-color: #f0f4fb;
         }
         .report-title {
-            font-size: 1.3em;
+            font-size: 1em;
             font-weight: bold;
             color: #1a5276;
-            margin-bottom: 8px;
+            min-width: 160px;
         }
         .date {
             color: #666;
-            font-size: 0.9em;
-            margin-bottom: 8px;
+            font-size: 0.85em;
+            min-width: 110px;
         }
         .framework {
             color: #444;
-            font-size: 0.85em;
-            margin-bottom: 15px;
+            font-size: 0.8em;
             background: #eaf0fb;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 4px;
-            display: inline-block;
+            flex: 1;
         }
         .link {
             display: inline-block;
-            margin-top: 10px;
             color: #1a5276;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 16px;
+            font-size: 0.85em;
+            padding: 5px 12px;
             border: 1px solid #1a5276;
             border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: background-color 0.15s;
+            white-space: nowrap;
         }
         .link:hover {
             background-color: #1a5276;
@@ -156,8 +158,15 @@
                 const reportsDiv = document.getElementById('reports');
                 reportsDiv.innerHTML = '';
 
-                // Sort by date (newest first)
-                mdFiles.sort((a, b) => b.name.localeCompare(a.name)).forEach(file => {
+                // Sort: alphabetically by country slug, then reverse chronologically within each country
+                mdFiles.sort((a, b) => {
+                    const slugA = a.name.replace(/-\d{4}-\d{2}-\d{2}\.md$/, '');
+                    const slugB = b.name.replace(/-\d{4}-\d{2}-\d{2}\.md$/, '');
+                    if (slugA !== slugB) return slugA.localeCompare(slugB);
+                    return b.name.localeCompare(a.name); // newest first within same country
+                });
+
+                mdFiles.forEach(file => {
                     // Parse filename: {country-slug}-YYYY-MM-DD.md
                     const dateMatch = file.name.match(/(\d{4}-\d{2}-\d{2})/);
                     const reportDate = dateMatch ? dateMatch[1] : 'Unknown date';
@@ -170,9 +179,8 @@
                     card.className = 'report-card';
                     card.innerHTML = `
                         <div class="report-title">${countryName}</div>
-                        <div class="date">Report Date: ${reportDate}</div>
-                        <div class="framework">IMF-DSA Framework · Moody's/Fitch Style</div>
-                        <br>
+                        <div class="date">${reportDate}</div>
+                        <div class="framework">IMF-DSA · Moody's/Fitch Style</div>
                         <a href="${file.name}" class="link">View Report →</a>
                     `;
                     reportsDiv.appendChild(card);
