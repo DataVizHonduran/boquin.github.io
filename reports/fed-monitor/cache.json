@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-09T08:23:44.088909+00:00",
-    "totalItems": 6
+    "lastRun": "2026-04-10T08:25:12.411287+00:00",
+    "totalItems": 8
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -37,7 +37,7 @@
       "publicationDate": "2026-04-08",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
       "scrapedSnippet": "Bank failures are almost always preceded by weak fundamentals. Depositor panics are rarely the root cause.",
       "aiSummary": "The paper argues that bank failures are primarily driven by weak underlying fundamentals rather than depositor panics. It emphasizes the role of solvency issues over sudden liquidity shocks in triggering institutional collapse.",
       "tags": [
@@ -58,11 +58,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
       "scrapedSnippet": "",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-09T08:23:44.088909+00:00"
+      "tagsGeneratedAt": "2026-04-10T08:25:12.411287+00:00"
     },
     "06f3a014187f9b34de80e58d47e535255613616760bf8154e517d70a503e4fea": {
       "url": "https://www.dallasfed.org/research/economics/2026/0331",
@@ -73,11 +73,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
       "scrapedSnippet": "",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-09T08:23:44.088909+00:00"
+      "tagsGeneratedAt": "2026-04-10T08:25:12.411287+00:00"
     },
     "69953e5f72b6c446e4d5d559d121553751081b15a57946ca719824466f14219a": {
       "url": "https://www.dallasfed.org/research/economics/2026/0324",
@@ -103,7 +103,7 @@
       "publicationDate": "2026-04-08",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-09T08:23:44.088909+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The study explores how expectations regarding wealth returns impact labor supply decisions during periods of increased retirement. It analyzes the trade-off between leisure and employment in the context of asset performance.",
       "tags": [
@@ -114,6 +114,36 @@
         "GDP growth"
       ],
       "tagsGeneratedAt": "2026-04-08T21:37:43.600815+00:00"
+    },
+    "934eca1138cc1ddbc4e82d5be92a164d4593d1a7d98ecf205cd4c78b0ac4dea7": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/04/a-closer-look-at-emerging-market-resilience-during-recent-shocks/",
+      "title": "A Closer Look at Emerging Market Resilience During Recent Shocks",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-04-09",
+      "authors": [],
+      "firstSeen": "2026-04-10T08:25:12.411287+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
+      "scrapedSnippet": "A succession of shocks to the global economy in recent years has focused attention on the improved economic and financial resilience of emerging market economies. For some of these economies, this assessment is well-founded and highlights the fruits of deep, structural economic reforms since the 1990s. However, for a much larger universe of countries, the ability to weather shocks is still mixed and many remain vulnerable. In this post, we explore the divide between the two sets of countries and focus on the effects of recent economic shocks, including the ongoing conflict in the Middle East.",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-04-10T08:25:12.411287+00:00"
+    },
+    "ae55224a9e7ef57f322677c00735b536902fdde34e26076ac4dbb6fce91eb702": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0409",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-04-10T08:25:12.411287+00:00",
+      "lastChecked": "2026-04-10T08:25:12.411287+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-04-10T08:25:12.411287+00:00"
     }
   }
 }
