@@ -379,14 +379,6 @@ def create_currency_page(result, back_link="index.html"):
             row=1, col=2,
         )
 
-    # Lock residual y-axis to ±15 (with fallback to data range)
-    resid_clean = chart_data["resids"].dropna()
-    if len(resid_clean):
-        r_min = max(-30, resid_clean.quantile(0.01))
-        r_max = min(30, resid_clean.quantile(0.99))
-    else:
-        r_min, r_max = -15, 15
-    fig.update_yaxes(range=[r_min, r_max], row=1, col=2)
 
     # X-axis: year ticks
     for col in [1, 2]:
