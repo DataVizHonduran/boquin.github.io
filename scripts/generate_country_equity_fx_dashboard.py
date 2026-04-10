@@ -245,7 +245,7 @@ def create_main_dashboard(summary_df, last_updated):
             f"Residual: {row['Residual_%']:.1f}%<br>"
             f"R²: {row['R_Squared']:.3f}<br>"
             f"Top predictors: {top_p}<br>"
-            f"<i>Click for detail analysis</i>"
+            f"<i>Click to open detail page</i>"
         )
 
     fig = go.Figure()
@@ -263,11 +263,11 @@ def create_main_dashboard(summary_df, last_updated):
 
     # Navigation links sidebar
     links_html = "<br>".join([
-        f'<a href="{c}_analysis.html" style="text-decoration:none; color:#1f77b4;">'
+        f'<a href="{c}_analysis.html" target="_self" style="text-decoration:none; color:#1f77b4;">'
         f'📊 {c}</a>'
         for c in summary_df["Currency"]
     ])
-    links_html += '<br><br><a href="network.html" style="text-decoration:none; color:#9467bd;">🔗 Currency Network</a>'
+    links_html += '<br><br><a href="network.html" target="_self" style="text-decoration:none; color:#9467bd;">🔗 Currency Network</a>'
 
     fig.add_annotation(
         text="<b>Currency Details:</b><br>" + links_html,
@@ -613,14 +613,27 @@ def main():
     last_updated = datetime.datetime.now().strftime("%Y-%m-%d %H:%M UTC")
     config = {"displayModeBar": False, "responsive": True}
 
-    # 5. Main dashboard
+    # 5. Main dashboard — custom HTML so bar clicks navigate in the same tab
     print("\nGenerating main dashboard …")
     main_fig = create_main_dashboard(summary_df, last_updated)
-    pyo.plot(
-        main_fig,
-        filename=os.path.join(OUTPUT_DIR, "index.html"),
-        auto_open=False, config=config,
+    import plotly.io as _pio
+    html_str = _pio.to_html(
+        main_fig, div_id="main-chart",
+        include_plotlyjs=True, full_html=True, config=config,
     )
+    click_js = """
+<script>
+document.getElementById('main-chart').on('plotly_click', function(data) {
+    if (data.points && data.points.length > 0) {
+        var currency = data.points[0].y;
+        window.location.href = currency + '_analysis.html';
+    }
+});
+</script>
+"""
+    html_str = html_str.replace("</body>", click_js + "</body>")
+    with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
+        f.write(html_str)
     print("  ✓ index.html")
 
     # 6. Individual currency pages
