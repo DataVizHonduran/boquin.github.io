@@ -1,0 +1,299 @@
+{
+  "last_updated": "2026-04-10 08:26 UTC",
+  "currencies_analysed": 23,
+  "fair_value_summary": [
+    {
+      "Currency": "PEN",
+      "Current_Rate": 3.3835,
+      "Fair_Value": 3.5053001341815473,
+      "Residual_%": -3.5998266345957473,
+      "R_Squared": 0.7115319863399231,
+      "Num_Predictors": 5,
+      "Top_Predictors": "United Kingdom, Australia, Chile"
+    },
+    {
+      "Currency": "COP",
+      "Current_Rate": 3647.5,
+      "Fair_Value": 3748.8435648330596,
+      "Residual_%": -2.778439063277852,
+      "R_Squared": 0.74614351244855,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Colombia, Canada, Poland"
+    },
+    {
+      "Currency": "NOK",
+      "Current_Rate": 9.553,
+      "Fair_Value": 9.756796002798007,
+      "Residual_%": -2.1333194054015063,
+      "R_Squared": 0.8501315858347954,
+      "Num_Predictors": 5,
+      "Top_Predictors": "South Africa, Canada, Norway"
+    },
+    {
+      "Currency": "AUD",
+      "Current_Rate": 1.41985,
+      "Fair_Value": 1.4428000176711895,
+      "Residual_%": -1.6163691707708157,
+      "R_Squared": 0.875821906528764,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Sweden, Australia, Germany"
+    },
+    {
+      "Currency": "CLP",
+      "Current_Rate": 896.68,
+      "Fair_Value": 905.0635319153452,
+      "Residual_%": -0.934952481971852,
+      "R_Squared": 0.7973364694185489,
+      "Num_Predictors": 5,
+      "Top_Predictors": "New Zealand, Japan, Chile"
+    },
+    {
+      "Currency": "BRL",
+      "Current_Rate": 5.0986,
+      "Fair_Value": 5.129615669376668,
+      "Residual_%": -0.6083173690163552,
+      "R_Squared": 0.7971390219791026,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Brazil, Australia, United Kingdom"
+    },
+    {
+      "Currency": "IDR",
+      "Current_Rate": 17005.0,
+      "Fair_Value": 17106.460778556488,
+      "Residual_%": -0.5966526230901948,
+      "R_Squared": 0.9277389210330697,
+      "Num_Predictors": 5,
+      "Top_Predictors": "New Zealand, Indonesia, Chile"
+    },
+    {
+      "Currency": "JPY",
+      "Current_Rate": 158.58,
+      "Fair_Value": 159.4952382669367,
+      "Residual_%": -0.5771460883697079,
+      "R_Squared": 0.9287155940023247,
+      "Num_Predictors": 5,
+      "Top_Predictors": "New Zealand, South Africa, United Kingdom"
+    },
+    {
+      "Currency": "KRW",
+      "Current_Rate": 1478.35,
+      "Fair_Value": 1478.7143394251668,
+      "Residual_%": -0.024645004577191994,
+      "R_Squared": 0.861176801041571,
+      "Num_Predictors": 5,
+      "Top_Predictors": "New Zealand, South Africa, Canada"
+    },
+    {
+      "Currency": "SGD",
+      "Current_Rate": 1.2736,
+      "Fair_Value": 1.270052383638172,
+      "Residual_%": 0.2785502796661422,
+      "R_Squared": 0.819486343015361,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Colombia, South Africa, Poland"
+    },
+    {
+      "Currency": "PHP",
+      "Current_Rate": 59.444,
+      "Fair_Value": 59.2420717009294,
+      "Residual_%": 0.33969500550198795,
+      "R_Squared": 0.9042586037915087,
+      "Num_Predictors": 4,
+      "Top_Predictors": "Colombia, Canada, New Zealand"
+    },
+    {
+      "Currency": "GBP",
+      "Current_Rate": 0.74671,
+      "Fair_Value": 0.7438855888352982,
+      "Residual_%": 0.37824740055734873,
+      "R_Squared": 0.8099504095852721,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Chile, Germany, Poland"
+    },
+    {
+      "Currency": "EUR",
+      "Current_Rate": 0.8573,
+      "Fair_Value": 0.853030217676858,
+      "Residual_%": 0.4980499618735451,
+      "R_Squared": 0.9093258352352914,
+      "Num_Predictors": 5,
+      "Top_Predictors": "United Kingdom, Poland, Germany"
+    },
+    {
+      "Currency": "CAD",
+      "Current_Rate": 1.3846,
+      "Fair_Value": 1.370541191939083,
+      "Residual_%": 1.015369641840024,
+      "R_Squared": 0.8738400617789672,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Australia, Turkey, Japan"
+    },
+    {
+      "Currency": "THB",
+      "Current_Rate": 32.0,
+      "Fair_Value": 31.6687580177897,
+      "Residual_%": 1.0351311944071906,
+      "R_Squared": 0.7759830049850992,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Australia, Germany, South Africa"
+    },
+    {
+      "Currency": "PLN",
+      "Current_Rate": 3.6448,
+      "Fair_Value": 3.6020414806824688,
+      "Residual_%": 1.1731376019954805,
+      "R_Squared": 0.8966037920780676,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Poland, Germany, Canada"
+    },
+    {
+      "Currency": "HUF",
+      "Current_Rate": 322.81,
+      "Fair_Value": 318.4948803559348,
+      "Residual_%": 1.336736669887919,
+      "R_Squared": 0.8746609357507646,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Poland, New Zealand, Chile"
+    },
+    {
+      "Currency": "NZD",
+      "Current_Rate": 1.71762,
+      "Fair_Value": 1.6934970157893434,
+      "Residual_%": 1.4044424384122511,
+      "R_Squared": 0.8800827757288574,
+      "Num_Predictors": 5,
+      "Top_Predictors": "United Kingdom, Australia, New Zealand"
+    },
+    {
+      "Currency": "INR",
+      "Current_Rate": 92.58,
+      "Fair_Value": 90.97338911731205,
+      "Residual_%": 1.7353757644069407,
+      "R_Squared": 0.9413912385765753,
+      "Num_Predictors": 5,
+      "Top_Predictors": "New Zealand, Colombia, Chile"
+    },
+    {
+      "Currency": "MXN",
+      "Current_Rate": 17.44,
+      "Fair_Value": 17.080049183061192,
+      "Residual_%": 2.0639381705206965,
+      "R_Squared": 0.9304719878977099,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Mexico, Switzerland, Poland"
+    },
+    {
+      "Currency": "SEK",
+      "Current_Rate": 9.31,
+      "Fair_Value": 9.11173332971261,
+      "Residual_%": 2.1296097775229894,
+      "R_Squared": 0.9554967322522273,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Sweden, South Africa, United Kingdom"
+    },
+    {
+      "Currency": "CZK",
+      "Current_Rate": 20.878,
+      "Fair_Value": 20.42558415578177,
+      "Residual_%": 2.1669501112090703,
+      "R_Squared": 0.8514682907636484,
+      "Num_Predictors": 5,
+      "Top_Predictors": "South Africa, Germany, Poland"
+    },
+    {
+      "Currency": "CHF",
+      "Current_Rate": 0.7912,
+      "Fair_Value": 0.7708162096557212,
+      "Residual_%": 2.5763132386601164,
+      "R_Squared": 0.9103350250643946,
+      "Num_Predictors": 5,
+      "Top_Predictors": "Poland, Colombia, South Africa"
+    }
+  ],
+  "top_global_predictors": [
+    {
+      "index": "Chile",
+      "Count": 8,
+      "Avg_Coeff": 3.6257
+    },
+    {
+      "index": "New Zealand",
+      "Count": 13,
+      "Avg_Coeff": -5.1556
+    },
+    {
+      "index": "Poland",
+      "Count": 11,
+      "Avg_Coeff": -1.8537
+    },
+    {
+      "index": "Australia",
+      "Count": 9,
+      "Avg_Coeff": -0.0999
+    },
+    {
+      "index": "Canada",
+      "Count": 13,
+      "Avg_Coeff": 3.8578
+    },
+    {
+      "index": "Sweden",
+      "Count": 4,
+      "Avg_Coeff": -0.0207
+    },
+    {
+      "index": "Germany",
+      "Count": 11,
+      "Avg_Coeff": -0.095
+    },
+    {
+      "index": "Hong Kong",
+      "Count": 1,
+      "Avg_Coeff": 6.6186
+    },
+    {
+      "index": "Japan",
+      "Count": 2,
+      "Avg_Coeff": -1.5674
+    },
+    {
+      "index": "Switzerland",
+      "Count": 1,
+      "Avg_Coeff": 0.0707
+    }
+  ],
+  "methodology": {
+    "model": "LASSO Regression (LassoCV, top-5 features refit)",
+    "predictors": "Country equity ETF performance relative to US (EUSA)",
+    "countries": [
+      "Australia",
+      "Brazil",
+      "Canada",
+      "Chile",
+      "China",
+      "Colombia",
+      "France",
+      "Germany",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Mexico",
+      "New Zealand",
+      "Norway",
+      "Peru",
+      "Poland",
+      "South Africa",
+      "South Korea",
+      "Sweden",
+      "Switzerland",
+      "Taiwan",
+      "Turkey",
+      "United Kingdom",
+      "United States"
+    ],
+    "lookback_years": 5,
+    "test_size": 0.25,
+    "cv_folds": 5
+  }
+}
