@@ -1,8 +1,5 @@
 """
 Generate index.html with bar chart landing page and mode selector.
-
-P6: Adds "Recent Signal History" table (10 most recent signals across both modes)
-    and "High Conviction Signals" section (strength score >= 60).
 """
 
 import os
@@ -12,8 +9,6 @@ import plotly.graph_objects as go
 import plotly.io as pio
 
 OUTPUT_DIR = "reports/cta-signals"
-HIGH_CONVICTION_THRESHOLD = 60  # strength score cutoff for high-conviction section
-RECENT_SIGNALS_COUNT = 10       # rows in the recent signal history table
 
 # Load summary data
 with open(os.path.join(OUTPUT_DIR, 'summary.json'), 'r') as f:
@@ -22,53 +17,6 @@ with open(os.path.join(OUTPUT_DIR, 'summary.json'), 'r') as f:
 # Get positions for both modes
 fast_positions = all_summaries['fast']['latest_positions']
 slow_positions = all_summaries['slow']['latest_positions']
-
-# ── P6: Build signal tables ───────────────────────────────────────────────────
-
-def build_combined_signals(all_summaries, max_recent=RECENT_SIGNALS_COUNT):
-    """Combine fast + slow signal metadata, sort by date desc, return top N recent."""
-    combined = []
-    for mode in ['fast', 'slow']:
-        meta = all_summaries.get(mode, {}).get('signal_metadata', [])
-        for sig in meta:
-            combined.append({**sig, 'mode': mode.upper()})
-    combined.sort(key=lambda x: x['date'], reverse=True)
-    return combined[:max_recent]
-
-def build_high_conviction_signals(all_summaries, threshold=HIGH_CONVICTION_THRESHOLD):
-    """Return all high-conviction signals from both modes, sorted by score desc."""
-    combined = []
-    for mode in ['fast', 'slow']:
-        meta = all_summaries.get(mode, {}).get('signal_metadata', [])
-        for sig in meta:
-            if sig.get('strength_score', 0) >= threshold:
-                combined.append({**sig, 'mode': mode.upper()})
-    combined.sort(key=lambda x: (x['strength_score'], x['date']), reverse=True)
-    return combined[:20]  # cap at 20 rows
-
-recent_signals      = build_combined_signals(all_summaries)
-hc_signals          = build_high_conviction_signals(all_summaries)
-
-def render_signal_row(sig):
-    direction_class = 'dir-long' if sig['direction'] == 'Long' else 'dir-short'
-    direction_arrow = '▲' if sig['direction'] == 'Long' else '▼'
-    score           = int(sig.get('strength_score', 0))
-    score_class     = 'score-high' if score >= 60 else ('score-mid' if score >= 35 else 'score-low')
-    consensus_badge = (' <span class="consensus-badge">✓ Consensus</span>'
-                       if sig.get('consensus_score', 0) > 0 else '')
-    return (
-        f'<tr>'
-        f'<td>{sig["date"]}</td>'
-        f'<td><strong>{sig["currency"]}</strong></td>'
-        f'<td class="{direction_class}">{direction_arrow} {sig["direction"]}{consensus_badge}</td>'
-        f'<td><span class="mode-badge mode-{sig["mode"].lower()}">{sig["mode"]}</span></td>'
-        f'<td class="score-cell {score_class}">{score}</td>'
-        f'<td class="peak-cell">{sig.get("peak_position", "—"):.1f}</td>'
-        f'</tr>'
-    )
-
-recent_rows = '\n'.join(render_signal_row(s) for s in recent_signals)
-hc_rows     = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 # ── Bar charts ────────────────────────────────────────────────────────────────
 
@@ -253,103 +201,6 @@ html_content = f"""<!DOCTYPE html>
         .position-long  {{ background: #d4edda; color: #155724; }}
         .position-short {{ background: #f8d7da; color: #721c24; }}
 
-        /* ── P6: Signal tables ── */
-        .signal-section {{
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }}
-
-        .signal-table {{
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.92em;
-        }}
-
-        .signal-table th {{
-            background: #343a40;
-            color: white;
-            padding: 10px 12px;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-        }}
-
-        .signal-table td {{
-            padding: 9px 12px;
-            border-bottom: 1px solid #e9ecef;
-            vertical-align: middle;
-        }}
-
-        .signal-table tr:hover td {{ background: #f8f9fa; }}
-        .signal-table tr:last-child td {{ border-bottom: none; }}
-
-        .dir-long  {{ color: #155724; font-weight: 600; }}
-        .dir-short {{ color: #721c24; font-weight: 600; }}
-
-        .mode-badge {{
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.82em;
-            font-weight: bold;
-        }}
-
-        .mode-badge.mode-fast {{ background: #cce5ff; color: #004085; }}
-        .mode-badge.mode-slow {{ background: #e2d9f3; color: #432874; }}
-
-        .score-cell {{ font-weight: bold; font-size: 1.05em; text-align: center; }}
-        .score-high {{ color: #155724; }}
-        .score-mid  {{ color: #856404; }}
-        .score-low  {{ color: #6c757d; }}
-
-        .peak-cell {{ text-align: right; font-family: monospace; }}
-
-        .consensus-badge {{
-            display: inline-block;
-            margin-left: 6px;
-            padding: 1px 5px;
-            background: #d4edda;
-            color: #155724;
-            border-radius: 3px;
-            font-size: 0.78em;
-            font-weight: bold;
-        }}
-
-        .hc-section-header {{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }}
-
-        .hc-badge {{
-            background: #ffc107;
-            color: #212529;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            font-weight: bold;
-        }}
-
-        .empty-state {{
-            text-align: center;
-            color: #6c757d;
-            padding: 20px;
-            font-style: italic;
-        }}
-
-        .score-legend {{
-            display: flex;
-            gap: 16px;
-            font-size: 0.82em;
-            color: #666;
-            margin-top: 8px;
-        }}
-
-        .score-legend span {{ display: flex; align-items: center; gap: 4px; }}
     </style>
 </head>
 <body>
@@ -375,10 +226,6 @@ html_content = f"""<!DOCTYPE html>
                     <div class="stat-value">{all_summaries['fast'].get('signal_count', '—')}</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-label">High Conviction</div>
-                    <div class="stat-value">{all_summaries['fast'].get('high_conviction_count', 0) + all_summaries['slow'].get('high_conviction_count', 0)}</div>
-                </div>
-                <div class="stat-item">
                     <div class="stat-label">Last Updated</div>
                     <div class="stat-value">{datetime.fromisoformat(all_summaries['fast']['generated_at']).strftime('%Y-%m-%d')}</div>
                 </div>
@@ -395,27 +242,6 @@ html_content = f"""<!DOCTYPE html>
             suggesting potential trend exhaustion and reversal opportunities. Signals require rolling 2-year
             percentile confirmation, rate-of-change filter, and RSI of positioning confirmation.
             Numbers on markers show the signal strength score (0–100).</p>
-        </div>
-
-        <!-- ── P6: High Conviction Signals ── -->
-        <div class="signal-section">
-            <div class="hc-section-header">
-                <h2>⭐ High Conviction Signals</h2>
-                <span class="hc-badge">Score ≥ 60</span>
-            </div>
-            {'<table class="signal-table"><thead><tr><th>Date</th><th>Currency</th><th>Direction</th><th>Mode</th><th>Score</th><th>Peak Pos.</th></tr></thead><tbody>' + hc_rows + '</tbody></table>' if hc_rows else '<div class="empty-state">No high conviction signals found (score ≥ 60)</div>'}
-            <div class="score-legend">
-                <span><strong>Score = Extremity (40)</strong> + Speed (40) + Consensus (20)</span>
-                <span class="score-high">■ High ≥60</span>
-                <span class="score-mid">■ Mid 35–59</span>
-                <span class="score-low">■ Low &lt;35</span>
-            </div>
-        </div>
-
-        <!-- ── P6: Recent Signal History ── -->
-        <div class="signal-section">
-            <h2>🕐 Recent Signal History <span style="font-weight:400;font-size:0.85em;color:#666">(last {RECENT_SIGNALS_COUNT} across all modes)</span></h2>
-            {'<table class="signal-table"><thead><tr><th>Date</th><th>Currency</th><th>Direction</th><th>Mode</th><th>Score</th><th>Peak Pos.</th></tr></thead><tbody>' + recent_rows + '</tbody></table>' if recent_rows else '<div class="empty-state">No signals generated yet. Run generate_cta_signals.py first.</div>'}
         </div>
 
         <div class="mode-selector">
@@ -517,5 +343,3 @@ with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w') as f:
 print(f"✅ Generated index.html with bar charts for {len(fast_positions)} currencies")
 print(f"   - FAST mode chart with {all_summaries['fast']['windows']} windows")
 print(f"   - SLOW mode chart with {all_summaries['slow']['windows']} windows")
-print(f"   - Recent signals table: {len(recent_signals)} rows")
-print(f"   - High conviction signals: {len(hc_signals)} signals")
