@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-04">
+    <title>Primary Mortgage Market Survey — 2026-04-10</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Primary Mortgage Market Survey</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-04-10 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>6.060</h3>
+            <p>30-Year Fixed Mortgage Rate</p>
+            <p class="card-period">2026-01</p>
+        </div>
+        <div class="card">
+            <h3>5.380</h3>
+            <p>15-Year Fixed Mortgage Rate</p>
+            <p class="card-period">2026-01</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">30-Year Fixed Mortgage Rate
+                <span class="mu-chart-latest">6.37</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2025-10", "2025-11", "2025-11", "2025-11", "2025-11", "2025-12", "2025-12", "2025-12", "2025-12", "2025-12", "2026-01", "2026-01", "2026-01", "2026-01", "2026-02", "2026-02", "2026-02", "2026-02", "2026-03", "2026-03", "2026-03", "2026-03", "2026-04", "2026-04"],
+                        datasets: [{
+                            data: [6.17, 6.22, 6.24, 6.26, 6.23, 6.19, 6.22, 6.21, 6.18, 6.15, 6.16, 6.06, 6.09, 6.1, 6.11, 6.09, 6.01, 5.98, 6.0, 6.11, 6.22, 6.38, 6.46, 6.37],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">15-Year Fixed Mortgage Rate
+                <span class="mu-chart-latest">5.74</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2025-10", "2025-11", "2025-11", "2025-11", "2025-11", "2025-12", "2025-12", "2025-12", "2025-12", "2025-12", "2026-01", "2026-01", "2026-01", "2026-01", "2026-02", "2026-02", "2026-02", "2026-02", "2026-03", "2026-03", "2026-03", "2026-03", "2026-04", "2026-04"],
+                        datasets: [{
+                            data: [5.41, 5.5, 5.49, 5.54, 5.51, 5.44, 5.54, 5.47, 5.5, 5.44, 5.46, 5.38, 5.44, 5.49, 5.5, 5.44, 5.35, 5.44, 5.43, 5.5, 5.54, 5.75, 5.77, 5.74],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: April 2026</strong></p>
+<p><strong>Subject: Mortgage Rate Acceleration and Implications for Monetary Policy</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest Primary Mortgage Market Survey data reveals a sharp upward trajectory in borrowing costs, signaling a significant tightening of financial conditions within the housing sector. After a period of relative stability in January and February, both 30-year and 15-year fixed rates accelerated through March and into April, suggesting that markets are pricing in a "higher-for-longer" interest rate environment or a resurgence in inflationary pressures.</p>
+
+<p>This trend indicates a decoupling from the early-year stability, with the 30-year fixed rate climbing approximately 34 basis points (bps) since January. The rapid ascent in April suggests a market-driven adjustment to hawkish expectations, which will likely dampen residential investment and exert downward pressure on overall GDP growth.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Accelerating 30Y Costs:</strong> The average 30-year fixed mortgage rate rose from ~6.08% in January to ~6.42% in April, representing a total increase of 34 bps over the period.</li>
+<li>  <strong>Parallel 15Y Movement:</strong> The 15-year fixed rate mirrored this trend, climbing from ~5.44% in January to ~5.76% in April (+32 bps), confirming a broad-based rise in long-term yields.</li>
+<li>  <strong>Q2 Momentum Shift:</strong> The most aggressive movement occurred between March and April, with the 30-year rate jumping from a March average of ~6.18% to ~6.42% (+24 bps MoM), signaling a sharp shift in market sentiment.</li>
+<li>  <strong>Affordability Headwinds:</strong> The rapid climb in rates during April (reaching a peak of 6.46% for the 30Y) is likely to freeze mortgage applications and accelerate the "lock-in effect" for existing homeowners.</li>
+<li>  <strong>Market Pricing of Inflation:</strong> The upward drift in mortgage rates—which typically track 10-year Treasuries—suggests that investors are demanding a higher term premium to compensate for perceived inflation risks.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The rise in mortgage rates acts as a direct headwind to economic growth. By increasing the cost of capital for new home purchases and refinancing, the current trend will likely reduce residential fixed investment and dampen the "wealth effect" on consumer spending, potentially slowing overall GDP growth in the coming quarters.</p>
+
+<p><strong>(ii) Labor Market:</strong> While mortgage rates are a lagging indicator for employment, the acceleration seen in April suggests a looming slowdown in the construction and real estate services sectors. A sustained move toward 6.5% for 30-year loans typically correlates with reduced housing starts, which may eventually bleed into higher unemployment figures for trade and construction labor.</p>
+
+<p><strong>(iii) Inflation:</strong> The data suggests that inflation remains a primary concern for the market. The steady climb from January (~6.08%) to April (~6.42%) indicates that the market is not pricing in a rapid decline in CPI, but rather a sticky inflationary environment that requires higher nominal yields to maintain real returns.</p>
+
+<h3>5. Policy Outlook</h3>
+<p>Based on the current trajectory of mortgage rates, we forecast the Federal Reserve will maintain a <strong>hawkish hold</strong> at the next FOMC meeting. The market is already doing the Fed's work by tightening financial conditions; however, the acceleration in rates suggests that inflation expectations are not yet fully anchored. </p>
+
+<p>Given the 24 bps MoM jump in 30-year rates through April, the Fed has room to pause without losing momentum in its tightening cycle. We expect the Fed to hold rates steady in the immediate term but remain biased toward a 25 bps hike if upcoming CPI prints confirm the market's suspicion of sticky inflation. The balance of risks has shifted toward inflation persistence, outweighing the risks of a housing market correction.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+PRIMARY MORTGAGE MARKET SURVEY — LATEST FRED DATA
+
+30-Year Fixed Mortgage Rate (%)  [MORTGAGE30US]
+  2026-01         6.060
+  2026-01         6.090
+  2026-01         6.100
+  2026-02         6.110
+  2026-02         6.090
+  2026-02         6.010
+  2026-02         5.980
+  2026-03         6.000
+  2026-03         6.110
+  2026-03         6.220
+  2026-03         6.380
+  2026-04         6.460
+  2026-04         6.370
+
+15-Year Fixed Mortgage Rate (%)  [MORTGAGE15US]
+  2026-01         5.380
+  2026-01         5.440
+  2026-01         5.490
+  2026-02         5.500
+  2026-02         5.440
+  2026-02         5.350
+  2026-02         5.440
+  2026-03         5.430
+  2026-03         5.500
+  2026-03         5.540
+  2026-03         5.750
+  2026-04         5.770
+  2026-04         5.740
+
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
