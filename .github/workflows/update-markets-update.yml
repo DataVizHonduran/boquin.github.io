@@ -5,6 +5,10 @@ on:
     - cron: '30 14 * * 1-5'  # 10:30am ET (14:30 UTC), Mon-Fri — after 8:30am releases
   workflow_dispatch:          # allow manual trigger
 
+concurrency:
+  group: markets-update
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -26,11 +30,6 @@ jobs:
           pip install -r requirements.txt
           pip install huggingface_hub
 
-      - name: Pull latest
-        run: |
-          git fetch origin main
-          git reset --hard origin/main
-
       - name: Generate markets update
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -44,5 +43,6 @@ jobs:
           git add reports/markets-update/
           git diff --staged --quiet || (
             git commit -m "Daily markets update — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
             git push
           )
