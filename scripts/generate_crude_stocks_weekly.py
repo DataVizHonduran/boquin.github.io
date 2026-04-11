@@ -36,7 +36,7 @@ from datetime import date
 # ---------------------------------------------------------------------------
 EIA_API_BASE  = "https://api.eia.gov/v2/petroleum/stoc/wstk/data/"
 OUTPUT_DIR    = os.path.join(os.path.dirname(__file__), "..", "reports", "crude-stocks")
-WINDOW_DAYS   = 252
+WINDOW_DAYS   = 365
 HISTORY_YEARS = 7
 
 PANELS = [
