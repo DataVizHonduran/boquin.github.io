@@ -27,7 +27,9 @@ jobs:
           pip install huggingface_hub
 
       - name: Pull latest
-        run: git pull --rebase --autostash
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Generate markets update
         env:
