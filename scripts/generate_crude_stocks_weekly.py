@@ -368,6 +368,87 @@ def build_chart(summary: pd.DataFrame, latest_date_str: str) -> plt.Figure:
     return fig
 
 
+def generate_index_html(filename: str, latest_date_str: str, output_dir: str) -> None:
+    """Write an index.html that displays the current week's PNG."""
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Crude Oil Stocks by PADD — {latest_date_str}</title>
+  <style>
+    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    body {{
+      background: #0e1117;
+      color: #e2e8f0;
+      font-family: 'Inter', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }}
+    header {{
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }}
+    header h1 {{
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }}
+    header p {{
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+    }}
+    .chart-wrapper {{
+      width: 100%;
+      max-width: 1200px;
+      background: #161b22;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 1rem;
+    }}
+    .chart-wrapper img {{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }}
+    footer {{
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #475569;
+      text-align: center;
+    }}
+    footer a {{ color: #3b82f6; text-decoration: none; }}
+    footer a:hover {{ text-decoration: underline; }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>&#x1F6E2;&#xFE0F; U.S. Crude Oil Stocks by PAD District</h1>
+    <p>EIA Weekly Petroleum Status Report &mdash; week ending {latest_date_str}</p>
+  </header>
+  <div class="chart-wrapper">
+    <img src="{filename}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
+  </div>
+  <footer>
+    Source: <a href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">EIA Weekly Petroleum Status Report</a>
+    &nbsp;&bull;&nbsp;
+    <a href="https://github.com/DataVizHonduran/boquin.github.io/blob/main/scripts/generate_crude_stocks_weekly.py" target="_blank">Source Code</a>
+    &nbsp;&bull;&nbsp;
+    <a href="https://boquin.xyz" target="_blank">boquin.xyz</a>
+  </footer>
+</body>
+</html>"""
+    index_path = os.path.join(output_dir, "index.html")
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Saved: {index_path}")
+
+
 def main():
     api_key = get_api_key()
 
@@ -391,8 +472,9 @@ def main():
     output_path = os.path.join(OUTPUT_DIR, filename)
     fig.savefig(output_path, dpi=150, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)
-
     print(f"Saved: {output_path}")
+
+    generate_index_html(filename, latest_date_str, OUTPUT_DIR)
 
 
 if __name__ == "__main__":

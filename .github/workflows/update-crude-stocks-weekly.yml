@@ -38,3 +38,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add reports/crude-stocks/
           git diff --staged --quiet || (git commit -m "Update Crude Oil Stocks Weekly Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
+
