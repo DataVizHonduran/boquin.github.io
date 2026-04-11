@@ -40,9 +40,11 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git status
           git add reports/markets-update/
           git diff --staged --quiet || (
             git commit -m "Daily markets update — $(date +'%Y-%m-%d') 🤖" &&
+            git status &&
             git pull --rebase &&
             git push
           )
