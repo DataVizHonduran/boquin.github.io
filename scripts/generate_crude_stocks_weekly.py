@@ -146,19 +146,23 @@ def check_freshness(series_dict: dict) -> None:
 # Seasonal band
 # ---------------------------------------------------------------------------
 def seasonal_band(s: pd.Series, window: pd.Series) -> tuple[np.ndarray, np.ndarray]:
+    """
+    For each date in window, find the nearest EIA data point from exactly
+    1, 2, 3, 4, and 5 years prior (within ±10 days), then return min/max.
+    E.g. for Sep 1 2025 → looks up ~Sep 1 of 2024, 2023, 2022, 2021, 2020.
+    """
     lo_vals, hi_vals = [], []
-    iso_weeks  = s.index.isocalendar().week.values
-    iso_years  = s.index.isocalendar().year.values
 
     for dt in window.index:
-        w = dt.isocalendar()[1]
-        y = dt.isocalendar()[0]
         bucket = []
-        for off in range(1, 6):
-            mask = (iso_weeks == w) & (iso_years == y - off)
-            vals = s.values[mask]
-            if len(vals):
-                bucket.append(float(vals[0]))
+        for years_back in range(1, 6):
+            target = dt - pd.DateOffset(years=years_back)
+            days_diff = pd.Series(
+                (s.index - target).days, index=s.index
+            ).abs()
+            candidates = s[days_diff <= 10]
+            if not candidates.empty:
+                bucket.append(float(candidates.iloc[days_diff[days_diff <= 10].values.argmin()]))
         lo_vals.append(min(bucket) if bucket else np.nan)
         hi_vals.append(max(bucket) if bucket else np.nan)
 
