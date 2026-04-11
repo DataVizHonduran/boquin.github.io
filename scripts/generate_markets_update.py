@@ -831,8 +831,10 @@ def update_index(reports: list[dict]) -> None:
     """Regenerate the markets-update index.html from all HTML files in the dir."""
     existing = sorted(OUTPUT_DIR.glob("markets-update-*.html"), reverse=True)
 
-    # Build a set of filenames already covered by existing files
-    seen_fnames: set[str] = set()
+    # existing is sorted newest-first, so the first file seen for a given
+    # (slug, ref_month) is the most recently Generated — skip later duplicates.
+    seen_keys:  set[tuple] = set()   # (slug, ref_month) dedup
+    seen_fnames: set[str]  = set()
     rows = ""
     for f in existing:
         seen_fnames.add(f.name)
@@ -857,6 +859,12 @@ def update_index(reports: list[dict]) -> None:
         generated_fmt    = fmt_date(date_part)
         ref_month_fmt    = fmt_month(ref_month) if ref_month else "—"
 
+        dedup_key = (slug, ref_month)
+        if dedup_key in seen_keys:
+            print(f"  Index: skipping duplicate {f.name} (same report+ref_month, keeping newer)", file=sys.stderr)
+            continue
+        seen_keys.add(dedup_key)
+
         rows += (
             f'<tr>'
             f'<td><a href="{f.name}">{release_title}</a></td>'
@@ -872,9 +880,18 @@ def update_index(reports: list[dict]) -> None:
         if fname in seen_fnames:
             continue
         release_title    = r.get("release_name", Path(r["path"]).stem)
-        ref_month_fmt    = fmt_month(r.get("ref_month", "")) or "—"
+        ref_month        = r.get("ref_month", "")
+        ref_month_fmt    = fmt_month(ref_month) or "—"
         release_date_fmt = fmt_date(r.get("release_date", r["date"]))
         generated_fmt    = fmt_date(r["date"])
+
+        stem_parts = Path(r["path"]).stem.split("-", 5)
+        slug = stem_parts[5] if len(stem_parts) >= 6 else Path(r["path"]).stem
+        dedup_key = (slug, ref_month)
+        if dedup_key in seen_keys:
+            continue
+        seen_keys.add(dedup_key)
+
         rows += (
             f'<tr>'
             f'<td><a href="{fname}">{release_title}</a></td>'
@@ -953,12 +970,27 @@ def main():
 
         if out_path.exists():
             print(f"  Already exists, skipping: {out_path.name}", file=sys.stderr)
-            generated.append({"path": str(out_path), "date": today, "release_name": release_name, "ref_month": ""})
+            generated.append({"path": str(out_path), "date": today, "release_name": release_name,
+                               "ref_month": extract_ref_month_from_html(out_path)})
             continue
 
         print(f"\n--- {release_name} ---", file=sys.stderr)
         print(f"  Fetching FRED series ...", file=sys.stderr)
         data_block = build_data_block(release_id, release_name, fred_key)
+        ref_month  = get_ref_month(data_block)
+
+        # Skip generation if an existing file for this slug already covers the
+        # same reference month (same release event published on a prior run).
+        existing_for_slug = sorted(OUTPUT_DIR.glob(f"markets-update-*-{slug}.html"), reverse=True)
+        dup_file = next((f for f in existing_for_slug
+                         if extract_ref_month_from_html(f) == ref_month), None)
+        if dup_file:
+            print(f"  Duplicate: ref_month {ref_month} already covered by {dup_file.name} — skipping LLM call.",
+                  file=sys.stderr)
+            generated.append({"path": str(dup_file), "date": today, "release_name": release_name,
+                               "ref_month": ref_month})
+            continue
+
         chart_data = build_chart_data(release_id, fred_key)
 
         print(f"  Generating analyst note via {MODEL_ID} ...\n", file=sys.stderr)
@@ -971,7 +1003,7 @@ def main():
             "path":         str(out_path),
             "date":         today,
             "release_name": release_name,
-            "ref_month":    get_ref_month(data_block),
+            "ref_month":    ref_month,
         })
 
     update_index(generated)
