@@ -6,15 +6,7 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-Team,
 
-The recent monitoring window was unusually lean, with the majority of district entries serving as placeholders rather than substantive releases. However, two publications provide critical signals regarding systemic risk and global capital flows.
-
-1. **[NY] A Closer Look at Emerging Market Resilience During Recent Shocks**: This research highlights that many emerging market economies (EMEs) have developed stronger structural buffers and policy frameworks to withstand global volatility. For our outlook, this suggests a reduced probability of a systemic EM contagion event, potentially allowing for more aggressive diversification into these assets despite high global rates.
-
-2. **[RIC] Bank Failures: Solvency and Liquidity**: The authors argue that bank failures are fundamentally driven by solvency issues (weak fundamentals) rather than being spontaneous liquidity events caused by depositor panic. This is a crucial distinction for our risk models; it implies that liquidity backstops (like the Discount Window) are merely bandages, and we must prioritize solvency and capital adequacy metrics when assessing counterparty risk in the banking sector.
-
-**Synthesis:** The current research suggests a divergence between global and domestic fragility, where emerging markets are showing surprising structural strength while domestic banking risks remain rooted in fundamental solvency. We should maintain a cautious eye on bank balance sheets while considering a tactical increase in EM exposure.
 
 ---
 
@@ -28,146 +20,136 @@ The recent monitoring window was unusually lean, with the majority of district e
 
 **Tags:** 
 
-## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 1
-
-### (cached) [Bank Failures: Solvency and Liquidity](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-12)
-**Published:** 2026-04-08 | **Authors:** 
-
-The paper argues that bank failures are primarily driven by weak underlying fundamentals rather than depositor panics. It emphasizes the role of solvency issues over sudden liquidity shocks in triggering institutional collapse.
-
-**Tags:** banking · financial stability · financial regulation · credit · recession
-
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 19 of 19
+**Content Type:** Working Papers | **New:** 0 of 19
 
-### 🆕 [System wide](https://www.fedinprint.org/latest/system)
+### (cached) [System wide](https://www.fedinprint.org/latest/system)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Board of Governors](https://www.fedinprint.org/latest/board)
+### (cached) [Board of Governors](https://www.fedinprint.org/latest/board)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Kansas City](https://www.fedinprint.org/latest/kansascity)
+### (cached) [Kansas City](https://www.fedinprint.org/latest/kansascity)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Minneapolis](https://www.fedinprint.org/latest/minneapolis)
+### (cached) [Minneapolis](https://www.fedinprint.org/latest/minneapolis)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Philadelphia](https://www.fedinprint.org/latest/philadelphia)
+### (cached) [Philadelphia](https://www.fedinprint.org/latest/philadelphia)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [San Francisco](https://www.fedinprint.org/latest/sanfrancisco)
+### (cached) [San Francisco](https://www.fedinprint.org/latest/sanfrancisco)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Board of Governors Publications](https://www.federalreserve.gov/publications.htm)
+### (cached) [Board of Governors Publications](https://www.federalreserve.gov/publications.htm)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Atlanta Publications](https://www.frbatlanta.org/research/publications.aspx)
+### (cached) [Atlanta Publications](https://www.frbatlanta.org/research/publications.aspx)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Boston Publications](https://www.bostonfed.org/publications-and-data.aspx#/)
+### (cached) [Boston Publications](https://www.bostonfed.org/publications-and-data.aspx#/)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Chicago Publications](https://www.chicagofed.org/publications/index)
+### (cached) [Chicago Publications](https://www.chicagofed.org/publications/index)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Cleveland Publications](https://www.clevelandfed.org/our-research/publications.aspx)
+### (cached) [Cleveland Publications](https://www.clevelandfed.org/our-research/publications.aspx)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Dallas Publications](https://www.dallasfed.org/pubs.aspx)
+### (cached) [Dallas Publications](https://www.dallasfed.org/pubs.aspx)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Kansas City Publications](https://www.kansascityfed.org/publications)
+### (cached) [Kansas City Publications](https://www.kansascityfed.org/publications)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Minneapolis Publications](https://www.minneapolisfed.org/economic-research)
+### (cached) [Minneapolis Publications](https://www.minneapolisfed.org/economic-research)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [New York Publications](https://www.newyorkfed.org/research/publication_annuals)
+### (cached) [New York Publications](https://www.newyorkfed.org/research/publication_annuals)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Philadelphia Publications](https://www.philadelphiafed.org/search-results/all-work?searchtype=all-work-the-economy)
+### (cached) [Philadelphia Publications](https://www.philadelphiafed.org/search-results/all-work?searchtype=all-work-the-economy)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [Richmond Publications](https://www.richmondfed.org/publications)
+### (cached) [Richmond Publications](https://www.richmondfed.org/publications)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [St. Louis Publications](https://www.stlouisfed.org/publications)
+### (cached) [St. Louis Publications](https://www.stlouisfed.org/publications)
 **Published:**  | **Authors:** 
 
 
 
 **Tags:** 
 
-### 🆕 [San Francisco Publications](https://www.frbsf.org/our-district/subscriptions)
+### (cached) [San Francisco Publications](https://www.frbsf.org/our-district/subscriptions)
 **Published:**  | **Authors:** 
 
 
@@ -201,6 +183,6 @@ The paper argues that bank failures are primarily driven by weak underlying fund
 ---
 
 ## Cache Update Summary
-- Items added: 19
-- Already cached: 5
+- Items added: 0
+- Already cached: 23
 - Total cache size: 27 items
