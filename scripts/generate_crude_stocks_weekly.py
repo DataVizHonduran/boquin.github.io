@@ -50,22 +50,26 @@ def fetch_us_crude(api_key: str) -> pd.Series:
     """
     Fetch weekly U.S. total crude oil ending stocks going back HISTORY_YEARS.
     Returns a Series indexed by date, values in Million Barrels.
+
+    Uses the known WCRSTUS1 series ID to guarantee we only get the U.S.
+    total series — avoids EIA API bracket-encoding quirks with facet filters.
     """
     weeks_needed = HISTORY_YEARS * 53 + 10  # generous buffer
 
-    params = {
-        "api_key": api_key,
-        "frequency": "weekly",
-        "data[0]": "value",
-        "facets[duoarea][]": "NUS",   # U.S. total
-        "facets[product][]": "EPC0",  # Crude Oil
-        "sort[0][column]": "period",
-        "sort[0][direction]": "desc",
-        "length": weeks_needed,
-    }
+    # Build query string manually so bracket params encode correctly
+    qs = (
+        f"api_key={api_key}"
+        f"&frequency=weekly"
+        f"&data[0]=value"
+        f"&facets[series][]=WCRSTUS1"   # U.S. total crude stocks — single known series
+        f"&sort[0][column]=period"
+        f"&sort[0][direction]=desc"
+        f"&length={weeks_needed}"
+    )
+    url = f"{EIA_API_BASE}?{qs}"
 
     try:
-        resp = requests.get(EIA_API_BASE, params=params, timeout=30)
+        resp = requests.get(url, timeout=30)
         resp.raise_for_status()
     except requests.HTTPError as e:
         print(f"ERROR: EIA API request failed — {e}")
@@ -86,6 +90,8 @@ def fetch_us_crude(api_key: str) -> pd.Series:
 
     records = []
     for row in rows:
+        if row.get("duoarea") != "NUS":   # safety filter: U.S. total only
+            continue
         try:
             val = float(row["value"]) / 1_000.0  # Thousand Bbls → MMBbls
             records.append({"date": pd.to_datetime(row["period"]), "value": val})
@@ -153,83 +159,106 @@ def build_chart(s: pd.Series) -> plt.Figure:
 
     lo, hi = build_seasonal_band(s, current)
 
-    latest_val   = current.iloc[-1]
-    latest_date  = current.index[-1]
-    lo_latest    = lo[-1] if not np.isnan(lo[-1]) else None
-    hi_latest    = hi[-1] if not np.isnan(hi[-1]) else None
+    x_dates = current.index
+    x_num   = mdates.date2num(x_dates.to_pydatetime())
 
-    # --- figure ---
-    fig, ax = plt.subplots(figsize=(14, 6), facecolor="#0e1117")
-    ax.set_facecolor("#0e1117")
+    # ------------------------------------------------------------------ figure
+    fig, ax = plt.subplots(figsize=(10, 5.5), facecolor="white")
+    ax.set_facecolor("white")
 
-    # 5-year hi-lo band
-    ax.fill_between(
-        current.index, lo, hi,
-        color="#475569", alpha=0.35, label="5-Year Range (Hi–Lo)",
-        zorder=2,
-    )
+    # ---- gradient grey band (dark at top → white at bottom) ---------------
+    # Achieved by stacking N thin fill_between strips with decreasing alpha.
+    N = 80
+    for i in range(N):
+        frac_lo = i / N
+        frac_hi = (i + 1) / N
+        band_lo = lo + frac_lo * (hi - lo)
+        band_hi = lo + frac_hi * (hi - lo)
+        alpha   = 0.55 * (1 - frac_lo) ** 0.6   # dark at top, fades down
+        ax.fill_between(x_dates, band_lo, band_hi,
+                        color="#606060", alpha=alpha, linewidth=0, zorder=2)
 
-    # Current line
-    ax.plot(
-        current.index, current.values,
-        color="#3b82f6", linewidth=2.2, label="U.S. Crude Stocks", zorder=4,
-    )
+    # ---- blue weekly line -------------------------------------------------
+    ax.plot(x_dates, current.values,
+            color="#2196F3", linewidth=1.6, label="Weekly", zorder=4)
 
-    # Latest dot
-    ax.scatter([latest_date], [latest_val], color="#3b82f6", s=55, zorder=5)
+    # ---- axes style -------------------------------------------------------
+    ax.set_xlim(x_dates[0], x_dates[-1])
 
-    # Annotation: current value vs range
-    pct_str = ""
-    if lo_latest and hi_latest and hi_latest > lo_latest:
-        pct = (latest_val - lo_latest) / (hi_latest - lo_latest) * 100
-        pct_str = f"  ({pct:.0f}th pct of 5-yr range)"
+    # y-axis: label on top-left, no rotation
+    y_min = min(np.nanmin(lo), current.min())
+    y_max = max(np.nanmax(hi), current.max())
+    pad   = (y_max - y_min) * 0.08
+    ax.set_ylim(y_min - pad, y_max + pad * 1.5)
 
-    ax.annotate(
-        f"{latest_val:.1f} MMBbl{pct_str}",
-        xy=(latest_date, latest_val),
-        xytext=(10, 8),
-        textcoords="offset points",
-        color="#93c5fd",
-        fontsize=9,
-        fontweight="bold",
-    )
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(20))
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}"))
+    ax.tick_params(axis="y", labelsize=9, length=0, colors="#333333")
+    ax.tick_params(axis="x", labelsize=9, length=4, colors="#333333")
 
-    # Axes formatting
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b '%y"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=30, ha="right")
+    # "Million Barrels" above y-axis, flush left
+    ax.text(-0.01, 1.01, "Million Barrels", transform=ax.transAxes,
+            ha="left", va="bottom", fontsize=9, color="#333333")
 
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
-    ax.set_ylabel("Million Barrels", color="#94a3b8", fontsize=10)
-    ax.tick_params(colors="#64748b", labelsize=9)
-
-    for spine in ax.spines.values():
-        spine.set_color("#1e293b")
-
-    ax.yaxis.grid(True, color="#1e293b", linewidth=0.6, zorder=0)
+    # horizontal grid lines only
+    ax.yaxis.grid(True, color="#cccccc", linewidth=0.6, zorder=0)
+    ax.xaxis.grid(False)
     ax.set_axisbelow(True)
-    ax.set_xlim(current.index[0], current.index[-1] + pd.Timedelta(days=7))
 
-    ax.set_title(
-        f"U.S. Crude Oil Stocks — Last 252 Days with 5-Year Seasonal Range\n"
-        f"Week Ending {latest_date.strftime('%B %d, %Y')}",
-        color="#f1f5f9", fontsize=13, fontweight="bold", pad=14,
-    )
+    # spines: keep only bottom and left, light grey
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_color("#cccccc")
+    ax.spines["bottom"].set_color("#333333")
 
-    legend = ax.legend(
-        facecolor="#161b22", edgecolor="#334155",
-        labelcolor="#e2e8f0", fontsize=9, loc="upper left",
-    )
+    # ---- x-axis: MM/DD ticks + year band labels below --------------------
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
 
-    ax.text(
-        0.99, 0.02,
-        "Source: EIA Weekly Petroleum Status Report",
-        transform=ax.transAxes,
-        ha="right", va="bottom",
-        color="#475569", fontsize=8,
-    )
+    # Draw year labels below the tick labels (EIA style)
+    # Find year boundaries within the plotted range
+    fig.canvas.draw()          # needed to get tick positions
+    years_in_range = sorted(set(x_dates.year))
+    ax_xmin, ax_xmax = mdates.date2num(x_dates[0].to_pydatetime()), \
+                       mdates.date2num(x_dates[-1].to_pydatetime())
 
-    plt.tight_layout()
+    trans = ax.get_xaxis_transform()   # blended: data x, axes y
+    for yr in years_in_range:
+        yr_start = mdates.date2num(pd.Timestamp(f"{yr}-01-01").to_pydatetime())
+        yr_end   = mdates.date2num(pd.Timestamp(f"{yr}-12-31").to_pydatetime())
+        x_left   = max(yr_start, ax_xmin)
+        x_right  = min(yr_end,   ax_xmax)
+        if x_right <= x_left:
+            continue
+        x_mid_num  = (x_left + x_right) / 2
+        x_mid_frac = (x_mid_num - ax_xmin) / (ax_xmax - ax_xmin)
+        # horizontal line using axhline-equivalent in blended coords
+        import matplotlib.lines as mlines
+        line = mlines.Line2D([x_left, x_right], [-0.08, -0.08],
+                             transform=trans, color="#333333",
+                             linewidth=0.8, clip_on=False)
+        ax.add_line(line)
+        ax.text(x_mid_frac, -0.13, str(yr),
+                transform=ax.transAxes,
+                ha="center", va="top", fontsize=9, color="#333333")
+
+    # ---- title ------------------------------------------------------------
+    ax.set_title("U.S. Crude Oil Stocks", fontsize=12, color="#222222",
+                 fontweight="normal", pad=10)
+
+    # ---- legend below chart -----------------------------------------------
+    from matplotlib.patches import Patch
+    from matplotlib.lines  import Line2D
+    legend_elements = [
+        Patch(facecolor="#888888", edgecolor="none", label="5-yr Range"),
+        Line2D([0], [0], color="#2196F3", linewidth=1.6, label="Weekly"),
+    ]
+    ax.legend(handles=legend_elements, loc="lower center",
+              bbox_to_anchor=(0.5, -0.28), ncol=2,
+              frameon=False, fontsize=9, handlelength=1.5,
+              handleheight=0.9, columnspacing=1.0)
+
+    plt.tight_layout(rect=[0, 0.05, 1, 1])
     return fig
 
 
@@ -243,9 +272,9 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
   <style>
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
-      background: #0e1117;
-      color: #e2e8f0;
-      font-family: 'Inter', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -253,21 +282,21 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
       min-height: 100vh;
     }}
     header {{ text-align: center; margin-bottom: 1.5rem; }}
-    header h1 {{ font-size: 1.5rem; font-weight: 700; color: #f1f5f9; }}
-    header p {{ color: #94a3b8; font-size: 0.9rem; margin-top: 0.4rem; }}
+    header h1 {{ font-size: 1.4rem; font-weight: bold; color: #222; }}
+    header p {{ color: #555; font-size: 0.85rem; margin-top: 0.4rem; }}
     .chart-wrapper {{
-      width: 100%; max-width: 1200px;
-      background: #161b22;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
+      width: 100%; max-width: 900px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
       padding: 1rem;
     }}
-    .chart-wrapper img {{ width: 100%; height: auto; display: block; border-radius: 4px; }}
+    .chart-wrapper img {{ width: 100%; height: auto; display: block; }}
     footer {{
       margin-top: 1.5rem; font-size: 0.8rem;
-      color: #475569; text-align: center;
+      color: #888; text-align: center;
     }}
-    footer a {{ color: #3b82f6; text-decoration: none; }}
+    footer a {{ color: #2196F3; text-decoration: none; }}
     footer a:hover {{ text-decoration: underline; }}
   </style>
 </head>
