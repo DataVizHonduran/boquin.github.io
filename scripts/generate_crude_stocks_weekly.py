@@ -74,21 +74,8 @@ def get_api_key() -> str:
     return key
 
 
-def fetch_crude_stocks(api_key: str) -> pd.DataFrame:
-    """
-    Fetch ~60 weeks of weekly crude oil ending stocks for all PADD areas.
-    Returns a DataFrame with columns: period, area_key, value_mmbbl
-    """
-    params = {
-        "api_key": api_key,
-        "frequency": "weekly",
-        "data[0]": "value",
-        "facets[product][]": "EPC0",   # Crude Oil
-        "sort[0][column]": "period",
-        "sort[0][direction]": "desc",
-        "length": 400,                 # ~60 weeks × 7 areas + buffer
-    }
-
+def _call_api(params: dict) -> list:
+    """Make one EIA API call and return the data rows, or exit on error."""
     try:
         resp = requests.get(EIA_API_BASE, params=params, timeout=30)
         resp.raise_for_status()
@@ -96,36 +83,80 @@ def fetch_crude_stocks(api_key: str) -> pd.DataFrame:
         print(f"ERROR: EIA API request failed — {e}")
         sys.exit(1)
     except requests.RequestException as e:
-        print(f"ERROR: Network error fetching EIA data — {e}")
+        print(f"ERROR: Network error — {e}")
         sys.exit(1)
 
     data = resp.json()
     if "response" not in data:
-        err = data.get("error", data)
-        print(f"ERROR: Unexpected API response — {err}")
+        print(f"ERROR: Unexpected API response — {data.get('error', data)}")
         sys.exit(1)
+    return data["response"]["data"]
 
-    rows = data["response"]["data"]
-    if not rows:
+
+def fetch_crude_stocks(api_key: str) -> pd.DataFrame:
+    """
+    Fetch ~60 weeks of weekly crude oil ending stocks for all PADD areas + Cushing.
+    Uses two queries:
+      1. PADD 1–5 targeted by duoarea facets (R10–R50)
+      2. Broad query to discover Cushing's duoarea code by area-name match
+    Returns a DataFrame with columns: period, area_key, value_mmbbl
+    """
+    base_params = {
+        "api_key": api_key,
+        "frequency": "weekly",
+        "data[0]": "value",
+        "facets[product][]": "EPC0",
+        "sort[0][column]": "period",
+        "sort[0][direction]": "desc",
+    }
+
+    # --- Query 1: PADD 1–5 via duoarea facets (clean, targeted) ---
+    padd_params = {
+        **base_params,
+        "facets[duoarea][]": ["R10", "R20", "R30", "R40", "R50"],
+        "length": 5000,
+    }
+    padd_rows = _call_api(padd_params)
+
+    # --- Query 2: Discover Cushing (unknown duoarea code) ---
+    # Fetch a broad recent window and look for any area-name containing "cushing"
+    cushing_params = {
+        **base_params,
+        "length": 5000,
+    }
+    all_rows = _call_api(cushing_params)
+
+    # Debug: show all unique area-names so Cushing's label is visible in logs
+    unique_areas = sorted({r.get("area-name", "") for r in all_rows})
+    print(f"  Available EIA area-names: {unique_areas}")
+
+    combined_rows = padd_rows + all_rows
+
+    if not combined_rows:
         print("ERROR: EIA API returned no data.")
         sys.exit(1)
 
     records = []
-    for row in rows:
+    seen = set()  # deduplicate (period, area_key) pairs
+    for row in combined_rows:
         area_raw = row.get("area-name", "").strip().lower()
-        # Map to canonical key
         area_key = None
         for pattern, key in AREA_NAME_MAP.items():
             if pattern in area_raw:
                 area_key = key
                 break
         if area_key is None:
-            continue  # skip U.S. totals, other products
+            continue
 
         try:
-            value_mmbbl = float(row["value"]) / 1_000.0  # Thousand Bbls → MMBbls
+            value_mmbbl = float(row["value"]) / 1_000.0
         except (ValueError, TypeError):
             continue
+
+        dedup_key = (row["period"], area_key)
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
 
         records.append(
             {
