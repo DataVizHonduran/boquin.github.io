@@ -100,7 +100,11 @@ def fetch_area(api_key: str, duoarea: str) -> pd.Series:
             continue
         try:
             val = float(row["value"]) / 1_000.0   # Thousand Bbls → MMBbls
-            records.append({"date": pd.to_datetime(row["period"]), "value": val})
+            records.append({
+                "date":    pd.to_datetime(row["period"]),
+                "value":   val,
+                "process": row.get("process", ""),
+            })
         except (ValueError, TypeError):
             continue
 
@@ -108,13 +112,18 @@ def fetch_area(api_key: str, duoarea: str) -> pd.Series:
         print(f"  WARNING: no data returned for {duoarea}")
         return pd.Series(dtype=float)
 
+    df = pd.DataFrame(records)
+    # Prefer SAX (ex-SPR, commercial stocks) over SAE (total incl. SPR).
+    # PADD 3 has ~300 MMBbl of SPR that inflates SAE; other PADDs SAX ≈ SAE.
+    has_sax = df[df["process"] == "SAX"]
+    df = has_sax if not has_sax.empty else df
     s = (
-        pd.DataFrame(records)
-        .drop_duplicates("date")
+        df.drop_duplicates("date")
         .set_index("date")["value"]
         .sort_index()
     )
-    print(f"  {duoarea}: {len(s)} weeks  {s.index[0].date()} – {s.index[-1].date()}"
+    proc = "SAX" if not has_sax.empty else "SAE"
+    print(f"  {duoarea} [{proc}]: {len(s)} weeks  {s.index[0].date()} – {s.index[-1].date()}"
           f"  range [{s.min():.1f}, {s.max():.1f}] MMBbl")
     return s
 
