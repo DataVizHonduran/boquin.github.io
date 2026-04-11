@@ -63,23 +63,21 @@ def get_api_key() -> str:
     return key
 
 
-def fetch_all_areas(api_key: str) -> dict[str, pd.Series]:
+def fetch_area(api_key: str, duoarea: str) -> pd.Series:
     """
-    Fetch HISTORY_YEARS of weekly crude stocks for NUS + PADD 1-5.
-    Returns {duoarea: pd.Series(date → MMBbl)}.
-    Uses manual query string to ensure [] bracket params encode correctly.
+    Fetch HISTORY_YEARS of weekly crude stocks for a single duoarea.
+    One call per area guarantees we get the full history needed for the 5-yr band.
     """
-    weeks = HISTORY_YEARS * 53 + 10
-    duoareas = "&".join(f"facets[duoarea][]={da}" for da, _ in PANELS)
+    weeks = HISTORY_YEARS * 53 + 10   # ~381 weeks ≈ 7.3 years
     qs = (
         f"api_key={api_key}"
         f"&frequency=weekly"
         f"&data[0]=value"
         f"&facets[product][]=EPC0"
-        f"&{duoareas}"
+        f"&facets[duoarea][]={duoarea}"
         f"&sort[0][column]=period"
         f"&sort[0][direction]=desc"
-        f"&length={weeks * len(PANELS)}"
+        f"&length={weeks}"
     )
     url = f"{EIA_API_BASE}?{qs}"
 
@@ -87,48 +85,48 @@ def fetch_all_areas(api_key: str) -> dict[str, pd.Series]:
         resp = requests.get(url, timeout=30)
         resp.raise_for_status()
     except requests.HTTPError as e:
-        print(f"ERROR: EIA API request failed — {e}")
-        sys.exit(1)
+        print(f"  ERROR fetching {duoarea}: {e}")
+        return pd.Series(dtype=float)
     except requests.RequestException as e:
-        print(f"ERROR: Network error — {e}")
-        sys.exit(1)
+        print(f"  ERROR fetching {duoarea}: {e}")
+        return pd.Series(dtype=float)
 
     data = resp.json()
-    if "response" not in data:
-        print(f"ERROR: Unexpected API response — {data.get('error', data)}")
-        sys.exit(1)
+    rows = data.get("response", {}).get("data", [])
 
-    rows = data["response"]["data"]
-    if not rows:
-        print("ERROR: EIA API returned no data.")
-        sys.exit(1)
-
-    # Group by duoarea
-    buckets: dict[str, list] = {da: [] for da, _ in PANELS}
+    records = []
     for row in rows:
-        da = row.get("duoarea", "")
-        if da not in buckets:
+        if row.get("duoarea") != duoarea:
             continue
         try:
             val = float(row["value"]) / 1_000.0   # Thousand Bbls → MMBbls
-            buckets[da].append({"date": pd.to_datetime(row["period"]), "value": val})
+            records.append({"date": pd.to_datetime(row["period"]), "value": val})
         except (ValueError, TypeError):
             continue
 
-    result = {}
-    for da, records in buckets.items():
-        if not records:
-            print(f"WARNING: No data for duoarea {da}")
-            continue
-        s = (
-            pd.DataFrame(records)
-            .drop_duplicates("date")
-            .set_index("date")["value"]
-            .sort_index()
-        )
-        result[da] = s
-        print(f"  {da}: {len(s)} weeks ({s.index[0].date()} – {s.index[-1].date()})")
+    if not records:
+        print(f"  WARNING: no data returned for {duoarea}")
+        return pd.Series(dtype=float)
 
+    s = (
+        pd.DataFrame(records)
+        .drop_duplicates("date")
+        .set_index("date")["value"]
+        .sort_index()
+    )
+    print(f"  {duoarea}: {len(s)} weeks  {s.index[0].date()} – {s.index[-1].date()}"
+          f"  range [{s.min():.1f}, {s.max():.1f}] MMBbl")
+    return s
+
+
+def fetch_all_areas(api_key: str) -> dict[str, pd.Series]:
+    """Fetch each PADD area separately so every area gets its full history."""
+    result = {}
+    for da, title in PANELS:
+        print(f"  Fetching {da} ({title})...")
+        s = fetch_area(api_key, da)
+        if not s.empty:
+            result[da] = s
     return result
 
 
