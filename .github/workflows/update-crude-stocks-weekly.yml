@@ -1,0 +1,40 @@
+name: Update Crude Oil Stocks Weekly Chart
+
+on:
+  schedule:
+    # 15:30 UTC = 10:30 AM ET (UTC-5 standard) / 11:30 AM ET (UTC-4 DST)
+    # EIA publishes every Wednesday by 10:30 AM ET — this clears both DST windows.
+    - cron: '30 15 * * 3'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install matplotlib
+
+      - name: Generate chart
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/generate_crude_stocks_weekly.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/crude-stocks/
+          git diff --staged --quiet || (git commit -m "Update Crude Oil Stocks Weekly Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
