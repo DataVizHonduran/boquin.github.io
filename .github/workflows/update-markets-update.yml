@@ -26,6 +26,9 @@ jobs:
           pip install -r requirements.txt
           pip install huggingface_hub
 
+      - name: Pull latest
+        run: git pull --rebase
+
       - name: Generate markets update
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -36,7 +39,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull --rebase
           git add reports/markets-update/
           git diff --staged --quiet || (
             git commit -m "Daily markets update — $(date +'%Y-%m-%d') 🤖" &&
