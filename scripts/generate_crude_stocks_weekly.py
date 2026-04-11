@@ -1,10 +1,10 @@
 """
-Weekly Crude Oil Stocks by PAD District — Chart Generator
-=========================================================
-Fetches EIA Weekly Petroleum Status Report data via the EIA Open Data API v2
-and generates a two-panel PNG visualization:
-  - Chart A: Current vs. Prior-Year stocks by PADD (grouped bar)
-  - Chart B: Week-over-Week change by PADD (diverging bar)
+Weekly Crude Oil Stocks — Time Series Chart Generator
+=====================================================
+Fetches EIA Weekly Petroleum Status Report (U.S. total crude stocks)
+and generates a single-panel PNG:
+  - Line: last 252 calendar days of weekly crude stock levels
+  - Grey band: 5-year seasonal high-low range (same week of year)
 
 Required env var:
   EIA_API_KEY  — Register free at https://www.eia.gov/opendata/register.php
@@ -17,11 +17,13 @@ import os
 import sys
 import requests
 import pandas as pd
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
 # ---------------------------------------------------------------------------
 # Config
@@ -29,38 +31,8 @@ from datetime import date, datetime, timedelta
 EIA_API_BASE = "https://api.eia.gov/v2/petroleum/stoc/wstk/data/"
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "reports", "crude-stocks")
 
-PADD_ORDER = [
-    "PADD 1",
-    "PADD 2",
-    "Cushing, OK",
-    "PADD 3",
-    "PADD 4",
-    "PADD 5",
-]
-
-AREA_LABELS = {
-    "PADD 1": "PADD 1\n(East Coast)",
-    "PADD 2": "PADD 2\n(Midwest)",
-    "Cushing, OK": "Cushing,\nOK",
-    "PADD 3": "PADD 3\n(Gulf Coast)",
-    "PADD 4": "PADD 4\n(Rocky Mtn)",
-    "PADD 5": "PADD 5\n(West Coast)",
-}
-
-# EIA area-name values to canonical key (substring match, case-insensitive)
-AREA_NAME_MAP = {
-    "east coast (padd 1)": "PADD 1",
-    "padd 1":              "PADD 1",
-    "midwest (padd 2)":    "PADD 2",
-    "padd 2":              "PADD 2",
-    "cushing":             "Cushing, OK",
-    "gulf coast (padd 3)": "PADD 3",
-    "padd 3":              "PADD 3",
-    "rocky mountain":      "PADD 4",
-    "padd 4":              "PADD 4",
-    "west coast (padd 5)": "PADD 5",
-    "padd 5":              "PADD 5",
-}
+WINDOW_DAYS   = 252   # current-period line length
+HISTORY_YEARS = 7     # total history to fetch (5-yr band + 2 yr buffer)
 
 
 def get_api_key() -> str:
@@ -74,8 +46,24 @@ def get_api_key() -> str:
     return key
 
 
-def _call_api(params: dict) -> list:
-    """Make one EIA API call and return the data rows, or exit on error."""
+def fetch_us_crude(api_key: str) -> pd.Series:
+    """
+    Fetch weekly U.S. total crude oil ending stocks going back HISTORY_YEARS.
+    Returns a Series indexed by date, values in Million Barrels.
+    """
+    weeks_needed = HISTORY_YEARS * 53 + 10  # generous buffer
+
+    params = {
+        "api_key": api_key,
+        "frequency": "weekly",
+        "data[0]": "value",
+        "facets[duoarea][]": "NUS",   # U.S. total
+        "facets[product][]": "EPC0",  # Crude Oil
+        "sort[0][column]": "period",
+        "sort[0][direction]": "desc",
+        "length": weeks_needed,
+    }
+
     try:
         resp = requests.get(EIA_API_BASE, params=params, timeout=30)
         resp.raise_for_status()
@@ -90,292 +78,168 @@ def _call_api(params: dict) -> list:
     if "response" not in data:
         print(f"ERROR: Unexpected API response — {data.get('error', data)}")
         sys.exit(1)
-    return data["response"]["data"]
 
-
-def fetch_crude_stocks(api_key: str) -> pd.DataFrame:
-    """
-    Fetch ~60 weeks of weekly crude oil ending stocks for all PADD areas + Cushing.
-    Uses two queries:
-      1. PADD 1–5 targeted by duoarea facets (R10–R50)
-      2. Broad query to discover Cushing's duoarea code by area-name match
-    Returns a DataFrame with columns: period, area_key, value_mmbbl
-    """
-    base_params = {
-        "api_key": api_key,
-        "frequency": "weekly",
-        "data[0]": "value",
-        "facets[product][]": "EPC0",
-        "sort[0][column]": "period",
-        "sort[0][direction]": "desc",
-    }
-
-    # --- Query 1: PADD 1–5 via duoarea facets (clean, targeted) ---
-    padd_params = {
-        **base_params,
-        "facets[duoarea][]": ["R10", "R20", "R30", "R40", "R50"],
-        "length": 5000,
-    }
-    padd_rows = _call_api(padd_params)
-
-    # --- Query 2: Discover Cushing (unknown duoarea code) ---
-    # Fetch a broad recent window and look for any area-name containing "cushing"
-    cushing_params = {
-        **base_params,
-        "length": 5000,
-    }
-    all_rows = _call_api(cushing_params)
-
-    # Debug: show all unique area-names so Cushing's label is visible in logs
-    unique_areas = sorted({r.get("area-name", "") for r in all_rows})
-    print(f"  Available EIA area-names: {unique_areas}")
-
-    combined_rows = padd_rows + all_rows
-
-    if not combined_rows:
-        print("ERROR: EIA API returned no data.")
+    rows = data["response"]["data"]
+    if not rows:
+        print("ERROR: EIA API returned no data for U.S. crude stocks.")
         sys.exit(1)
 
     records = []
-    seen = set()  # deduplicate (period, area_key) pairs
-    for row in combined_rows:
-        area_raw = row.get("area-name", "").strip().lower()
-        area_key = None
-        for pattern, key in AREA_NAME_MAP.items():
-            if pattern in area_raw:
-                area_key = key
-                break
-        if area_key is None:
-            continue
-
+    for row in rows:
         try:
-            value_mmbbl = float(row["value"]) / 1_000.0
+            val = float(row["value"]) / 1_000.0  # Thousand Bbls → MMBbls
+            records.append({"date": pd.to_datetime(row["period"]), "value": val})
         except (ValueError, TypeError):
             continue
 
-        dedup_key = (row["period"], area_key)
-        if dedup_key in seen:
-            continue
-        seen.add(dedup_key)
-
-        records.append(
-            {
-                "period": row["period"],
-                "area_key": area_key,
-                "value_mmbbl": value_mmbbl,
-            }
-        )
-
-    df = pd.DataFrame(records)
-    if df.empty:
-        print("ERROR: No PADD crude stock rows found in API response.")
-        sys.exit(1)
-
-    df["period"] = pd.to_datetime(df["period"])
-    df = df.sort_values("period", ascending=False).reset_index(drop=True)
-    return df
+    s = (
+        pd.DataFrame(records)
+        .set_index("date")["value"]
+        .sort_index()
+    )
+    print(f"  Fetched {len(s)} weeks of data ({s.index[0].date()} – {s.index[-1].date()})")
+    return s
 
 
-def check_freshness(df: pd.DataFrame) -> str:
-    """
-    Return the most recent data date as a string, or exit if stale.
-    'Stale' = latest data point is older than 8 days (EIA publishes every Wednesday).
-    """
-    latest_date = df["period"].max()
-    today = pd.Timestamp(date.today())
-    age_days = (today - latest_date).days
-
-    if age_days > 8:
-        week_str = latest_date.strftime("%Y-%m-%d")
+def check_freshness(s: pd.Series) -> None:
+    latest = s.index.max()
+    age = (pd.Timestamp(date.today()) - latest).days
+    if age > 8:
         print(
-            f"EIA update not yet available. Most recent data: week ending {week_str} "
-            f"({age_days} days ago). Check back after Wednesday 10:30 AM ET."
+            f"EIA update not yet available. Most recent data: {latest.date()} "
+            f"({age} days ago). Check back after Wednesday 10:30 AM ET."
         )
         sys.exit(0)
+    print(f"  Most recent EIA data: week ending {latest.date()}")
 
-    return latest_date.strftime("%Y-%m-%d")
 
-
-def build_summary(df: pd.DataFrame) -> pd.DataFrame:
+def build_seasonal_band(s: pd.Series, current_window: pd.Series) -> tuple:
     """
-    For each PADD area, extract:
-      current   — most recent week
-      previous  — one week prior
-      prior_year — same week approximately one year ago (nearest available)
-    Returns a DataFrame indexed by PADD_ORDER.
+    For each date in current_window, find the same ISO week across the
+    5 years prior and return (lo, hi) arrays aligned to current_window.index.
     """
-    latest_date = df["period"].max()
-    prev_date = latest_date - pd.Timedelta(weeks=1)
-    py_target = latest_date - pd.Timedelta(weeks=52)
+    lo_vals, hi_vals = [], []
 
-    summary = []
-    for area in PADD_ORDER:
-        adf = df[df["area_key"] == area].set_index("period")["value_mmbbl"]
+    for dt in current_window.index:
+        iso_week = dt.isocalendar()[1]
+        iso_year = dt.isocalendar()[0]
 
-        def nearest(target):
-            # Pick row closest to target within ±14 days
-            raw_deltas = adf.index - target
-            deltas = pd.Series(raw_deltas.map(abs), index=adf.index)
-            mask = deltas <= pd.Timedelta(days=14)
-            if not mask.any():
-                return float("nan")
-            closest_label = deltas[mask].idxmin()
-            return float(adf.loc[closest_label])
-
-        current = nearest(latest_date)
-        previous = nearest(prev_date)
-        prior_year = nearest(py_target)
-
-        if current != current:  # NaN check
-            print(f"WARNING: No current data found for {area}, skipping.")
-            continue
-
-        summary.append(
-            {
-                "area": area,
-                "label": AREA_LABELS[area],
-                "current": current,
-                "previous": previous,
-                "prior_year": prior_year,
-                "wow_change": current - previous,
-            }
-        )
-
-    return pd.DataFrame(summary)
-
-
-def build_chart(summary: pd.DataFrame, latest_date_str: str) -> plt.Figure:
-    """Build and return a two-panel matplotlib figure."""
-    fig, (ax1, ax2) = plt.subplots(
-        1, 2,
-        figsize=(16, 7),
-        facecolor="#0e1117",
-    )
-    fig.patch.set_facecolor("#0e1117")
-
-    labels = summary["label"].tolist()
-    x = range(len(labels))
-    bar_w = 0.35
-
-    # ------------------------------------------------------------------
-    # Chart A — Current vs. Prior Year grouped bar
-    # ------------------------------------------------------------------
-    ax1.set_facecolor("#161b22")
-    bars_curr = ax1.bar(
-        [i - bar_w / 2 for i in x],
-        summary["current"],
-        width=bar_w,
-        label="Current Week",
-        color="#3b82f6",
-        zorder=3,
-    )
-    bars_py = ax1.bar(
-        [i + bar_w / 2 for i in x],
-        summary["prior_year"],
-        width=bar_w,
-        label="Prior Year",
-        color="#94a3b8",
-        zorder=3,
-    )
-
-    # Value labels on bars
-    for bar in bars_curr:
-        h = bar.get_height()
-        if h == h:  # not NaN
-            ax1.text(
-                bar.get_x() + bar.get_width() / 2,
-                h + 0.3,
-                f"{h:.1f}",
-                ha="center", va="bottom",
-                fontsize=7.5, color="#e2e8f0",
+        # Collect values from the same ISO week in years [y-1 .. y-5]
+        bucket = []
+        for offset in range(1, 6):
+            target_year = iso_year - offset
+            mask = (
+                s.index.map(lambda d: d.isocalendar()[1]) == iso_week
+            ) & (
+                s.index.map(lambda d: d.isocalendar()[0]) == target_year
             )
-    for bar in bars_py:
-        h = bar.get_height()
-        if h == h:
-            ax1.text(
-                bar.get_x() + bar.get_width() / 2,
-                h + 0.3,
-                f"{h:.1f}",
-                ha="center", va="bottom",
-                fontsize=7.5, color="#94a3b8",
-            )
+            vals = s[mask]
+            if not vals.empty:
+                bucket.append(float(vals.iloc[0]))
 
-    ax1.set_xticks(list(x))
-    ax1.set_xticklabels(labels, color="#cbd5e1", fontsize=9)
-    ax1.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.0f"))
-    ax1.set_ylabel("Million Barrels", color="#cbd5e1", fontsize=10)
-    ax1.set_title(
-        f"U.S. Crude Oil Stocks by PADD: Current vs. Prior Year\n"
-        f"Week Ending {latest_date_str}",
-        color="#f1f5f9", fontsize=12, fontweight="bold", pad=12,
+        if bucket:
+            lo_vals.append(min(bucket))
+            hi_vals.append(max(bucket))
+        else:
+            lo_vals.append(np.nan)
+            hi_vals.append(np.nan)
+
+    return np.array(lo_vals), np.array(hi_vals)
+
+
+def build_chart(s: pd.Series) -> plt.Figure:
+    cutoff = s.index.max() - pd.Timedelta(days=WINDOW_DAYS)
+    current = s[s.index >= cutoff]
+
+    lo, hi = build_seasonal_band(s, current)
+
+    latest_val   = current.iloc[-1]
+    latest_date  = current.index[-1]
+    lo_latest    = lo[-1] if not np.isnan(lo[-1]) else None
+    hi_latest    = hi[-1] if not np.isnan(hi[-1]) else None
+
+    # --- figure ---
+    fig, ax = plt.subplots(figsize=(14, 6), facecolor="#0e1117")
+    ax.set_facecolor("#0e1117")
+
+    # 5-year hi-lo band
+    ax.fill_between(
+        current.index, lo, hi,
+        color="#475569", alpha=0.35, label="5-Year Range (Hi–Lo)",
+        zorder=2,
     )
-    ax1.tick_params(colors="#cbd5e1")
-    ax1.spines["bottom"].set_color("#334155")
-    ax1.spines["left"].set_color("#334155")
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax1.yaxis.grid(True, color="#1e293b", linewidth=0.7, zorder=0)
-    ax1.set_axisbelow(True)
-    ax1.legend(
-        facecolor="#1e293b", edgecolor="#334155", labelcolor="#e2e8f0",
-        fontsize=9, loc="upper right",
+
+    # Current line
+    ax.plot(
+        current.index, current.values,
+        color="#3b82f6", linewidth=2.2, label="U.S. Crude Stocks", zorder=4,
     )
 
-    # ------------------------------------------------------------------
-    # Chart B — Week-over-Week diverging bar
-    # ------------------------------------------------------------------
-    ax2.set_facecolor("#161b22")
-    wow = summary["wow_change"].tolist()
-    colors = ["#22c55e" if v >= 0 else "#ef4444" for v in wow]
+    # Latest dot
+    ax.scatter([latest_date], [latest_val], color="#3b82f6", s=55, zorder=5)
 
-    bars_wow = ax2.bar(x, wow, width=0.55, color=colors, zorder=3)
+    # Annotation: current value vs range
+    pct_str = ""
+    if lo_latest and hi_latest and hi_latest > lo_latest:
+        pct = (latest_val - lo_latest) / (hi_latest - lo_latest) * 100
+        pct_str = f"  ({pct:.0f}th pct of 5-yr range)"
 
-    for bar, val in zip(bars_wow, wow):
-        if val != val:
-            continue
-        offset = 0.08 if val >= 0 else -0.12
-        ax2.text(
-            bar.get_x() + bar.get_width() / 2,
-            val + offset,
-            f"{val:+.2f}",
-            ha="center",
-            va="bottom" if val >= 0 else "top",
-            fontsize=8, color="#f1f5f9", fontweight="bold",
-        )
-
-    ax2.axhline(0, color="#475569", linewidth=1.2, zorder=2)
-    ax2.set_xticks(list(x))
-    ax2.set_xticklabels(labels, color="#cbd5e1", fontsize=9)
-    ax2.yaxis.set_major_formatter(mticker.FormatStrFormatter("%+.1f"))
-    ax2.set_ylabel("Change (Million Barrels)", color="#cbd5e1", fontsize=10)
-    ax2.set_title(
-        "Week-over-Week Change by PADD\n(Build = Green  |  Draw = Red)",
-        color="#f1f5f9", fontsize=12, fontweight="bold", pad=12,
+    ax.annotate(
+        f"{latest_val:.1f} MMBbl{pct_str}",
+        xy=(latest_date, latest_val),
+        xytext=(10, 8),
+        textcoords="offset points",
+        color="#93c5fd",
+        fontsize=9,
+        fontweight="bold",
     )
-    ax2.tick_params(colors="#cbd5e1")
-    ax2.spines["bottom"].set_color("#334155")
-    ax2.spines["left"].set_color("#334155")
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-    ax2.yaxis.grid(True, color="#1e293b", linewidth=0.7, zorder=0)
-    ax2.set_axisbelow(True)
 
-    fig.suptitle(
-        "EIA Weekly Petroleum Status Report — Crude Oil Stocks",
-        color="#94a3b8", fontsize=10, y=0.02,
+    # Axes formatting
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b '%y"))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    plt.setp(ax.xaxis.get_majorticklabels(), rotation=30, ha="right")
+
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
+    ax.set_ylabel("Million Barrels", color="#94a3b8", fontsize=10)
+    ax.tick_params(colors="#64748b", labelsize=9)
+
+    for spine in ax.spines.values():
+        spine.set_color("#1e293b")
+
+    ax.yaxis.grid(True, color="#1e293b", linewidth=0.6, zorder=0)
+    ax.set_axisbelow(True)
+    ax.set_xlim(current.index[0], current.index[-1] + pd.Timedelta(days=7))
+
+    ax.set_title(
+        f"U.S. Crude Oil Stocks — Last 252 Days with 5-Year Seasonal Range\n"
+        f"Week Ending {latest_date.strftime('%B %d, %Y')}",
+        color="#f1f5f9", fontsize=13, fontweight="bold", pad=14,
     )
-    plt.tight_layout(rect=[0, 0.04, 1, 1])
+
+    legend = ax.legend(
+        facecolor="#161b22", edgecolor="#334155",
+        labelcolor="#e2e8f0", fontsize=9, loc="upper left",
+    )
+
+    ax.text(
+        0.99, 0.02,
+        "Source: EIA Weekly Petroleum Status Report",
+        transform=ax.transAxes,
+        ha="right", va="bottom",
+        color="#475569", fontsize=8,
+    )
+
+    plt.tight_layout()
     return fig
 
 
 def generate_index_html(filename: str, latest_date_str: str, output_dir: str) -> None:
-    """Write an index.html that displays the current week's PNG."""
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekly Crude Oil Stocks by PADD — {latest_date_str}</title>
+  <title>U.S. Crude Oil Stocks — {latest_date_str}</title>
   <style>
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
@@ -388,39 +252,20 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
       padding: 2rem 1rem;
       min-height: 100vh;
     }}
-    header {{
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }}
-    header h1 {{
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #f1f5f9;
-    }}
-    header p {{
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 0.4rem;
-    }}
+    header {{ text-align: center; margin-bottom: 1.5rem; }}
+    header h1 {{ font-size: 1.5rem; font-weight: 700; color: #f1f5f9; }}
+    header p {{ color: #94a3b8; font-size: 0.9rem; margin-top: 0.4rem; }}
     .chart-wrapper {{
-      width: 100%;
-      max-width: 1200px;
+      width: 100%; max-width: 1200px;
       background: #161b22;
       border: 1px solid #1e293b;
       border-radius: 8px;
       padding: 1rem;
     }}
-    .chart-wrapper img {{
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-    }}
+    .chart-wrapper img {{ width: 100%; height: auto; display: block; border-radius: 4px; }}
     footer {{
-      margin-top: 1.5rem;
-      font-size: 0.8rem;
-      color: #475569;
-      text-align: center;
+      margin-top: 1.5rem; font-size: 0.8rem;
+      color: #475569; text-align: center;
     }}
     footer a {{ color: #3b82f6; text-decoration: none; }}
     footer a:hover {{ text-decoration: underline; }}
@@ -428,11 +273,11 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
 </head>
 <body>
   <header>
-    <h1>&#x1F6E2;&#xFE0F; U.S. Crude Oil Stocks by PAD District</h1>
-    <p>EIA Weekly Petroleum Status Report &mdash; week ending {latest_date_str}</p>
+    <h1>&#x1F6E2;&#xFE0F; U.S. Crude Oil Stocks</h1>
+    <p>Last 252 days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
   </header>
   <div class="chart-wrapper">
-    <img src="{filename}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
+    <img src="{filename}" alt="U.S. Crude Oil Stocks {latest_date_str}" />
   </div>
   <footer>
     Source: <a href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">EIA Weekly Petroleum Status Report</a>
@@ -452,19 +297,13 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
 def main():
     api_key = get_api_key()
 
-    print("Fetching crude oil stock data from EIA API...")
-    df = fetch_crude_stocks(api_key)
+    print("Fetching U.S. crude oil stock data from EIA API...")
+    s = fetch_us_crude(api_key)
 
-    latest_date_str = check_freshness(df)
-    print(f"Most recent EIA data: week ending {latest_date_str}")
+    check_freshness(s)
 
-    summary = build_summary(df)
-    if summary.empty:
-        print("ERROR: Could not build summary table — no matching PADD rows.")
-        sys.exit(1)
-
-    print("Building charts...")
-    fig = build_chart(summary, latest_date_str)
+    print("Building chart...")
+    fig = build_chart(s)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     today_str = date.today().strftime("%Y_%m_%d")
@@ -474,6 +313,7 @@ def main():
     plt.close(fig)
     print(f"Saved: {output_path}")
 
+    latest_date_str = s.index.max().strftime("%Y-%m-%d")
     generate_index_html(filename, latest_date_str, OUTPUT_DIR)
 
 
