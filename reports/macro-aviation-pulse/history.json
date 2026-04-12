@@ -52,5 +52,28 @@
       "South Korea": 67,
       "China": 424
     }
+  },
+  {
+    "ts": 1775998821,
+    "counts": {
+      "Brazil": 152,
+      "Mexico": 469,
+      "South Korea": 57,
+      "China": 403
+    }
+  },
+  {
+    "ts": 1775999058,
+    "counts": {
+      "Brazil": 158,
+      "Mexico": 474,
+      "South Korea": 52,
+      "China": 396,
+      "UAE": 24,
+      "Qatar": 5,
+      "Saudi Arabia": 0,
+      "Turkey": 42,
+      "Kuwait / Bahrain": 3
+    }
   }
 ]
