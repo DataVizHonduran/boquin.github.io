@@ -119,7 +119,7 @@ def create_dashboard():
             "Capex Shipments: Nondefense ex Aircraft, NSA (YoY %)",
             "Full-Time vs Part-Time Employment Spread (3M/12M Rolling Sum)",
             "Construction + Manufacturing Jobs: % Below 24-Month Peak",
-            "Residential Fixed Investment (YoY %)",
+            "Residential Fixed Investment vs Prior 12Q Max",
         ],
         vertical_spacing=0.08,
         horizontal_spacing=0.08,
@@ -320,21 +320,14 @@ def create_dashboard():
     fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=6, col=1)
 
     # ── Chart 12: Real Gross Domestic Income (YoY %) ─────────────────────────
-    print("Chart 12: Residential Fixed Investment (YoY %)...")
+    print("Chart 12: Residential Fixed Investment vs Prior 12Q Max...")
     rfi_raw = get_fred("A011RE1Q156NBEA", years=100)
-    rfi_yoy = (rfi_raw.pct_change(4) * 100).dropna()
-    colors12 = ['rgba(34,139,34,0.75)' if v >= 0 else 'rgba(200,30,30,0.75)'
-                for v in rfi_yoy.values]
-    fig.add_trace(go.Bar(
-        x=rfi_yoy.index, y=rfi_yoy.values,
-        marker_color=colors12, showlegend=False,
-        hovertemplate='%{x|%b %Y}<br><b>Residential Fixed Inv YoY: %{y:.2f}%</b><extra></extra>',
-    ), row=6, col=2)
-    fig.add_hline(y=0, line_color='black', line_width=1, row=6, col=2)
-    add_recession_shading(fig, recession, 6, 2, -40, 40)
-    fig.update_yaxes(range=[-40, 40], title_text='YoY % Change',
-                     title_font=dict(size=11), row=6, col=2)
-    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=6, col=2)
+    prior_12q_max = rfi_raw.rolling(12).max().shift(1)
+    rfi_rel = (rfi_raw - prior_12q_max).dropna()
+    plot_series(fig, 6, 2, rfi_rel, recession,
+                rfi_rel.min() * 1.1, rfi_rel.max() * 1.1,
+                color='#1f77b4', quantile_line=None,
+                y_label='Actual − Prior 12Q Max (Bil. $)')
 
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
