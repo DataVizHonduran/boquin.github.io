@@ -186,7 +186,7 @@ _GRID = dict(gridcolor="#21262d", zerolinecolor="#30363d")
 
 
 def build_map_figure(all_positions: dict[str, list[dict]]) -> go.Figure:
-    """Scattermapbox — one trace per region; open-street-map (no token needed)."""
+    """Scattergeo — one trace per region; Plotly built-in geo (no token needed)."""
     fig = go.Figure()
     total = sum(len(v) for v in all_positions.values())
 
@@ -195,18 +195,29 @@ def build_map_figure(all_positions: dict[str, list[dict]]) -> go.Figure:
             continue
         color = REGIONS[region]["color"]
         flag  = REGIONS[region]["flag"]
-        fig.add_trace(go.Scattermap(
+        fig.add_trace(go.Scattergeo(
             lat=[p["lat"] for p in positions],
             lon=[p["lon"] for p in positions],
             mode="markers",
-            marker=dict(size=5, color=color, opacity=0.7),
+            marker=dict(size=4, color=color, opacity=0.75),
             name=f"{flag} {region}",
             text=[f"{p['callsign']}<br>{region}" for p in positions],
             hovertemplate="%{text}<extra></extra>",
         ))
 
     fig.update_layout(
-        map=dict(style="open-street-map", zoom=1, center=dict(lat=20, lon=60)),
+        geo=dict(
+            showland=True,       landcolor="#1c2128",
+            showocean=True,      oceancolor="#0d1117",
+            showcountries=True,  countrycolor="#30363d",
+            showcoastlines=True, coastlinecolor="#30363d",
+            showframe=False,
+            bgcolor="#0d1117",
+            projection_type="natural earth",
+            # zoom into the 4 EM regions
+            lataxis_range=[-40, 60],
+            lonaxis_range=[-130, 145],
+        ),
         margin=dict(l=0, r=0, t=0, b=0),
         height=420,
         legend=dict(bgcolor="rgba(22,27,34,0.85)", bordercolor="#30363d",
