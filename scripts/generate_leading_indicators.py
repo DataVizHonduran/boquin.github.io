@@ -119,7 +119,7 @@ def create_dashboard():
             "Capex Shipments: Nondefense ex Aircraft, NSA (YoY %)",
             "Full-Time vs Part-Time Employment Spread (3M/12M Rolling Sum)",
             "Construction + Manufacturing Jobs: % Below 24-Month Peak",
-            "",
+            "Real Gross Domestic Income (YoY %)",
         ],
         vertical_spacing=0.08,
         horizontal_spacing=0.08,
@@ -318,6 +318,23 @@ def create_dashboard():
     fig.update_yaxes(range=[-26, 1], title_text='% Below 24M Peak',
                      title_font=dict(size=11), row=6, col=1)
     fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=6, col=1)
+
+    # ── Chart 12: Real Gross Domestic Income (YoY %) ─────────────────────────
+    print("Chart 12: Real Gross Domestic Income (YoY %)...")
+    gdi_raw = get_fred("A011RE1Q156NBEA", years=100)
+    gdi_yoy = (gdi_raw.pct_change(4) * 100).dropna()
+    colors12 = ['rgba(34,139,34,0.75)' if v >= 0 else 'rgba(200,30,30,0.75)'
+                for v in gdi_yoy.values]
+    fig.add_trace(go.Bar(
+        x=gdi_yoy.index, y=gdi_yoy.values,
+        marker_color=colors12, showlegend=False,
+        hovertemplate='%{x|Q%q %Y}<br><b>GDI YoY: %{y:.2f}%</b><extra></extra>',
+    ), row=6, col=2)
+    fig.add_hline(y=0, line_color='black', line_width=1, row=6, col=2)
+    add_recession_shading(fig, recession, 6, 2, -8, 12)
+    fig.update_yaxes(range=[-8, 12], title_text='YoY % Change',
+                     title_font=dict(size=11), row=6, col=2)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=6, col=2)
 
     # ── Layout ────────────────────────────────────────────────────────────────
     update_time = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
