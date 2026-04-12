@@ -1,0 +1,38 @@
+name: Update FX 200d MA Extension Dashboard
+
+on:
+  schedule:
+    - cron: '0 20 * * 1-5'  # Weekdays at 20:00 UTC (after US market close)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate dashboard
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python scripts/generate_fx_200d_dashboard.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/fx-200d/
+          git diff --staged --quiet || (git commit -m "Update FX 200d MA Extension Dashboard - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase && git push)
