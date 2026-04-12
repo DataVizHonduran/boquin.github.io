@@ -141,16 +141,25 @@ def compute_200d(df, z_threshold=Z_THRESHOLD):
 
 
 def fetch_broad_usd(years=YEARS_USD):
-    """Fetch DTWEXBGS (Broad USD Index) from FRED via pandas_datareader."""
+    """Fetch DTWEXBGS (Broad USD Index) directly from the FRED API."""
     if not FRED_API_KEY:
         print("No FRED_API_KEY — skipping Broad USD chart.")
         return None
     try:
-        from pandas_datareader import data as pdr
-        start = datetime.datetime.now() - timedelta(days=365 * years)
-        fred_df = pdr.DataReader("DTWEXBGS", "fred", start, date.today())
-        fred_df.columns = ["Broad USD"]
-        fred_df = fred_df.fillna(method="bfill")
+        import urllib.request
+        start = (datetime.datetime.now() - timedelta(days=365 * years)).strftime("%Y-%m-%d")
+        url = (
+            f"https://api.stlouisfed.org/fred/series/observations"
+            f"?series_id=DTWEXBGS&observation_start={start}"
+            f"&api_key={FRED_API_KEY}&file_type=json"
+        )
+        with urllib.request.urlopen(url) as resp:
+            payload = json.loads(resp.read())
+        obs = payload["observations"]
+        records = {o["date"]: float(o["value"]) for o in obs if o["value"] != "."}
+        fred_df = pd.DataFrame.from_dict(records, orient="index", columns=["Broad USD"])
+        fred_df.index = pd.to_datetime(fred_df.index)
+        fred_df = fred_df.sort_index().bfill()
         usd_200d = (fred_df / fred_df.rolling(200).mean() - 1) * 100
         top    = usd_200d.quantile(0.90).iloc[0]
         bottom = usd_200d.quantile(0.10).iloc[0]
