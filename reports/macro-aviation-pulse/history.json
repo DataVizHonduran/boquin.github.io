@@ -27,12 +27,21 @@
     }
   },
   {
-    "ts": 1775995502,
+    "ts": 1775995293,
     "counts": {
       "Brazil": 127,
-      "Mexico": 295,
+      "Mexico": 275,
+      "South Korea": 68,
+      "China": 426
+    }
+  },
+  {
+    "ts": 1775995544,
+    "counts": {
+      "Brazil": 127,
+      "Mexico": 298,
       "South Korea": 66,
-      "China": 435
+      "China": 440
     }
   }
 ]
