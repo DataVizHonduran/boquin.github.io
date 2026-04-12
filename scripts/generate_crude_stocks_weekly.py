@@ -186,7 +186,7 @@ def draw_panel(ax, s: pd.Series, title: str) -> None:
     for i in range(N):
         f0 = i / N
         f1 = (i + 1) / N
-        alpha = 0.55 * (1 - f0) ** 0.6
+        alpha = 0.50 * f1 ** 0.7   # dark at top (f1→1), fades to white at bottom
         ax.fill_between(current.index,
                         lo + f0 * (hi - lo),
                         lo + f1 * (hi - lo),
@@ -271,7 +271,7 @@ def build_figure(series_dict: dict) -> plt.Figure:
 
     latest = max(s.index.max() for s in series_dict.values())
     fig.suptitle(
-        f"Figure 1. Stocks of Crude Oil by PAD District — Last 252 Days",
+        f"Figure 1. Stocks of Crude Oil by PAD District — Last 365 Days",
         fontsize=10, color="#222", y=1.01,
     )
     fig.text(0.5, -0.01,
