@@ -285,7 +285,7 @@ def build_figure(series_dict: dict) -> plt.Figure:
 # ---------------------------------------------------------------------------
 # HTML wrapper
 # ---------------------------------------------------------------------------
-def generate_index_html(filename: str, latest_date_str: str, output_dir: str) -> None:
+def generate_index_html(filename: str, latest_date_str: str, output_dir: str, ts: str = "") -> None:
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,7 +312,7 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str) ->
     <p>Last 252 days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
   </header>
   <div class="chart-wrapper">
-    <img src="{filename}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
+    <img src="{filename}?v={ts}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
   </div>
   <footer>
     Source: <a href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">EIA Weekly Petroleum Status Report</a>
@@ -351,7 +351,8 @@ def main():
     print(f"Saved: {out_path}")
 
     latest_str = max(s.index.max() for s in series_dict.values()).strftime("%Y-%m-%d")
-    generate_index_html(filename, latest_str, OUTPUT_DIR)
+    import time
+    generate_index_html(filename, latest_str, OUTPUT_DIR, ts=str(int(time.time())))
 
 
 if __name__ == "__main__":
