@@ -28,6 +28,7 @@ jobs:
       - name: Generate dashboard
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          OUTPUT_DIR: ${{ github.workspace }}/reports/fx-200d
         run: python scripts/generate_fx_200d_dashboard.py
 
       - name: Commit and push

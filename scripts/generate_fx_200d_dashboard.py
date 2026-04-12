@@ -65,7 +65,7 @@ REGION = {
     "THB": "EM", "COP": "EM",
 }
 
-OUTPUT_DIR  = os.path.expanduser("~/boquin.github.io/reports/fx-200d")
+OUTPUT_DIR  = os.environ.get("OUTPUT_DIR") or os.path.expanduser("~/boquin.github.io/reports/fx-200d")
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "index.html")
 
 FRED_API_KEY = os.environ.get("FRED_API_KEY")
