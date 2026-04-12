@@ -63,69 +63,61 @@ def get_api_key() -> str:
     return key
 
 
-def fetch_area(api_key: str, duoarea: str) -> pd.Series:
-    """
-    Fetch HISTORY_YEARS of weekly crude stocks for a single duoarea.
-    One call per area guarantees we get the full history needed for the 5-yr band.
-    """
-    weeks = HISTORY_YEARS * 53 + 10   # ~381 weeks ≈ 7.3 years
+def _query_one(api_key: str, duoarea: str, process: str) -> pd.Series:
+    """Fetch one duoarea+process combination. Returns empty Series if no data."""
+    weeks = HISTORY_YEARS * 53 + 10
     qs = (
         f"api_key={api_key}"
         f"&frequency=weekly"
         f"&data[0]=value"
         f"&facets[product][]=EPC0"
         f"&facets[duoarea][]={duoarea}"
+        f"&facets[process][]={process}"
         f"&sort[0][column]=period"
         f"&sort[0][direction]=desc"
         f"&length={weeks}"
     )
-    url = f"{EIA_API_BASE}?{qs}"
-
     try:
-        resp = requests.get(url, timeout=30)
+        resp = requests.get(f"{EIA_API_BASE}?{qs}", timeout=30)
         resp.raise_for_status()
-    except requests.HTTPError as e:
-        print(f"  ERROR fetching {duoarea}: {e}")
-        return pd.Series(dtype=float)
-    except requests.RequestException as e:
-        print(f"  ERROR fetching {duoarea}: {e}")
+    except Exception as e:
+        print(f"  WARNING: {duoarea}/{process} failed — {e}")
         return pd.Series(dtype=float)
 
-    data = resp.json()
-    rows = data.get("response", {}).get("data", [])
-
-    records = []
-    for row in rows:
-        if row.get("duoarea") != duoarea:
-            continue
-        try:
-            val = float(row["value"]) / 1_000.0   # Thousand Bbls → MMBbls
-            records.append({
-                "date":    pd.to_datetime(row["period"]),
-                "value":   val,
-                "process": row.get("process", ""),
-            })
-        except (ValueError, TypeError):
-            continue
-
+    rows = resp.json().get("response", {}).get("data", [])
+    records = [
+        {"date": pd.to_datetime(r["period"]), "value": float(r["value"]) / 1_000.0}
+        for r in rows
+        if r.get("duoarea") == duoarea and r.get("value") not in (None, "")
+    ]
     if not records:
-        print(f"  WARNING: no data returned for {duoarea}")
         return pd.Series(dtype=float)
-
-    df = pd.DataFrame(records)
-    # Prefer SAX (ex-SPR, commercial stocks) over SAE (total incl. SPR).
-    # PADD 3 has ~300 MMBbl of SPR that inflates SAE; other PADDs SAX ≈ SAE.
-    has_sax = df[df["process"] == "SAX"]
-    df = has_sax if not has_sax.empty else df
-    s = (
-        df.drop_duplicates("date")
+    return (
+        pd.DataFrame(records)
+        .drop_duplicates("date")
         .set_index("date")["value"]
         .sort_index()
     )
-    proc = "SAX" if not has_sax.empty else "SAE"
-    print(f"  {duoarea} [{proc}]: {len(s)} weeks  {s.index[0].date()} – {s.index[-1].date()}"
-          f"  range [{s.min():.1f}, {s.max():.1f}] MMBbl")
-    return s
+
+
+def fetch_area(api_key: str, duoarea: str) -> pd.Series:
+    """
+    Fetch HISTORY_YEARS of weekly commercial crude stocks for one duoarea.
+    Queries with explicit process filter so all 381 rows come from one series.
+    SAX (ex-SPR) is preferred — critical for PADD 3 (Gulf Coast) which holds
+    ~300 MMBbl of SPR that would otherwise inflate the values. Falls back to
+    SAE if SAX is unavailable for that area.
+    """
+    for process in ("SAX", "SAE"):
+        s = _query_one(api_key, duoarea, process)
+        if not s.empty:
+            print(f"  {duoarea} [{process}]: {len(s)} weeks  "
+                  f"{s.index[0].date()} – {s.index[-1].date()}  "
+                  f"range [{s.min():.1f}, {s.max():.1f}] MMBbl")
+            return s
+
+    print(f"  WARNING: no data returned for {duoarea}")
+    return pd.Series(dtype=float)
 
 
 def fetch_all_areas(api_key: str) -> dict[str, pd.Series]:
