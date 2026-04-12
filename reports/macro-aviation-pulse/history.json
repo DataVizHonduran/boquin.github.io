@@ -1,0 +1,20 @@
+[
+  {
+    "ts": 1775994736,
+    "counts": {
+      "Brazil": 117,
+      "Mexico": 259,
+      "South Korea": 65,
+      "China": 447
+    }
+  },
+  {
+    "ts": 1775994765,
+    "counts": {
+      "Brazil": 119,
+      "Mexico": 259,
+      "South Korea": 65,
+      "China": 443
+    }
+  }
+]
