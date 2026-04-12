@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-11T16:05:24.127753+00:00",
+    "lastRun": "2026-04-12T08:08:14.592365+00:00",
     "totalItems": 27
   },
   "items": {
@@ -58,11 +58,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Insufficient data provided to analyze the content of the article.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "GDP growth",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "06f3a014187f9b34de80e58d47e535255613616760bf8154e517d70a503e4fea": {
       "url": "https://www.dallasfed.org/research/economics/2026/0331",
@@ -73,11 +79,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Insufficient data provided to analyze the content of the article.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "GDP growth",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "69953e5f72b6c446e4d5d559d121553751081b15a57946ca719824466f14219a": {
       "url": "https://www.dallasfed.org/research/economics/2026/0324",
@@ -124,11 +136,17 @@
       "publicationDate": "2026-04-09",
       "authors": [],
       "firstSeen": "2026-04-10T08:25:12.411287+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "A succession of shocks to the global economy in recent years has focused attention on the improved economic and financial resilience of emerging market economies. For some of these economies, this assessment is well-founded and highlights the fruits of deep, structural economic reforms since the 1990s. However, for a much larger universe of countries, the ability to weather shocks is still mixed and many remain vulnerable. In this post, we explore the divide between the two sets of countries and focus on the effects of recent economic shocks, including the ongoing conflict in the Middle East.",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "The paper examines the varying degrees of economic and financial resilience among emerging market economies following recent global shocks. It argues that while structural reforms have strengthened some nations, others remain vulnerable.",
+      "tags": [
+        "emerging markets",
+        "international",
+        "financial stability",
+        "GDP growth",
+        "credit"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "ae55224a9e7ef57f322677c00735b536902fdde34e26076ac4dbb6fce91eb702": {
       "url": "https://www.dallasfed.org/research/economics/2026/0409",
@@ -139,11 +157,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-10T08:25:12.411287+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Insufficient data provided to analyze the content of the article.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "GDP growth",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "ce645a4edb8ecd56c19d2e019d13858113621f362d6911c8adf76f488cb2de5c": {
       "url": "https://www.fedinprint.org/latest/system",
@@ -154,11 +178,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "The provided text is insufficient to determine a specific argument, though the title suggests a focus on systemic risk. Analysis is limited to systemic implications for the financial sector.",
+      "tags": [
+        "financial stability",
+        "banking",
+        "financial regulation",
+        "credit",
+        "monetary policy"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "8409e5d92069b33b04c053f970f21a4715eb81ee6b09f88d3920f45a17da3a44": {
       "url": "https://www.fedinprint.org/latest/board",
@@ -169,11 +199,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "The provided text refers to the Federal Reserve Board of Governors without specific content. It likely pertains to central bank governance and policy oversight.",
+      "tags": [
+        "monetary policy",
+        "financial regulation",
+        "banking",
+        "interest rates",
+        "inflation"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "4c5520bff25fe92c38f12853837887b25eeeca54d60d80f69bae0b8924db3e0f": {
       "url": "https://www.fedinprint.org/latest/kansascity",
@@ -184,11 +220,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "The provided text refers to the Kansas City regional district. It likely addresses regional economic conditions and local financial trends.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "employment",
+        "banking",
+        "housing"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "200bfc09c8c0e87286e9e3a40fd24a2a1736e1dd62ab6d99a8b03e93d74f5bbf": {
       "url": "https://www.fedinprint.org/latest/minneapolis",
@@ -199,11 +241,17 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "The provided text refers to the Minneapolis regional district. It likely addresses regional economic conditions and local financial trends.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "employment",
+        "banking",
+        "housing"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "44c9abd38bebadfa28c19404e743eaffbef07245f15b62f168958cbabe8dd0a7": {
       "url": "https://www.fedinprint.org/latest/philadelphia",
@@ -214,11 +262,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Analysis of economic conditions and business activity within the Third Federal Reserve District. Focuses on regional growth trends and local industrial performance.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "employment",
+        "banking",
+        "credit",
+        "consumer spending"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "211e9aaf6f8c9f32fe44b31a2b894c592dc912084b2e87f5cced2971931c347f": {
       "url": "https://www.fedinprint.org/latest/sanfrancisco",
@@ -229,11 +284,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Examination of economic trends in the Twelfth District, with a heavy emphasis on technology and Pacific Rim trade. Analyzes the intersection of innovation and regional labor dynamics.",
+      "tags": [
+        "regional economy",
+        "trade",
+        "AI & economy",
+        "labor markets",
+        "fintech",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "955ddab0846b5b8e1c8620b42601f476ee6c66703dbe3e400b98093625a5840c": {
       "url": "https://www.federalreserve.gov/publications.htm",
@@ -244,11 +306,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Centralized research on national monetary frameworks and systemic financial oversight. Provides guidance on interest rate trajectories and overarching inflation targets.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "financial stability",
+        "financial regulation",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "6f4e456a2a79f941dd345ca907bdcdc8aee5fbc9074a2389dce2ecfb3cbf1e64": {
       "url": "https://www.frbatlanta.org/research/publications.aspx",
@@ -259,11 +328,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Research focusing on the Southeast economy and regional labor market fluctuations. Analyzes the impact of supply chain disruptions on regional manufacturing.",
+      "tags": [
+        "regional economy",
+        "labor markets",
+        "supply chain",
+        "employment",
+        "GDP growth",
+        "inflation"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "992a66a36c430b6f5f8a4f27d1e25e9dd17b4e628842bc8b41c0f05a2967724e": {
       "url": "https://www.bostonfed.org/publications-and-data.aspx#/",
@@ -274,11 +350,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Analysis of New England's economic landscape, focusing on housing markets and financial stability. Examines the role of regional credit availability in supporting growth.",
+      "tags": [
+        "regional economy",
+        "housing",
+        "real estate",
+        "credit",
+        "financial stability",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "9701b9cc7611fde67669f42ceff0a39eaed3086cb2b3fb0a9bb9084a5ca4b930": {
       "url": "https://www.chicagofed.org/publications/index",
@@ -289,11 +372,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Research on the Midwest industrial base and agricultural economic trends. Evaluates the relationship between wages and regional productivity.",
+      "tags": [
+        "regional economy",
+        "wages",
+        "labor markets",
+        "employment",
+        "GDP growth",
+        "supply chain"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "7f77929d1e405a01d8701d50dba61151f3e3fef2f9c004de2bfcbdf8b16d6651": {
       "url": "https://www.clevelandfed.org/our-research/publications.aspx",
@@ -304,11 +394,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Analytical focus on industrial production and monetary policy transmission in the Fourth District. Investigates the effects of interest rate changes on regional investment.",
+      "tags": [
+        "regional economy",
+        "monetary policy",
+        "interest rates",
+        "inflation",
+        "credit",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "40e500f19ea81249abbf8428093bccc0385b2af108343eb06390c35274709490": {
       "url": "https://www.dallasfed.org/pubs.aspx",
@@ -319,11 +416,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "Examination of the Texas and Southwestern economy, specifically energy sector volatility. Analyzes the impact of oil prices on regional GDP and employment.",
+      "tags": [
+        "regional economy",
+        "energy",
+        "GDP growth",
+        "employment",
+        "trade",
+        "inflation"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "64cc6572fdd6d3565c5eb215f8b9ea36b25efafc8a80b2043513af70516207cc": {
       "url": "https://www.kansascityfed.org/publications",
@@ -334,11 +438,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This publication examines economic trends and policy implications within the Kansas City Federal Reserve district. It focuses on regional growth drivers and local financial conditions.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "banking",
+        "credit",
+        "monetary policy",
+        "employment"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "9acae14a60b3a649080c4ea04cb568d4814baddc8601e351419ed147fac25df4": {
       "url": "https://www.minneapolisfed.org/economic-research",
@@ -349,11 +460,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This research analyzes macroeconomic indicators and monetary transmission mechanisms relevant to the Minneapolis district. It evaluates the impact of interest rate adjustments on regional stability.",
+      "tags": [
+        "monetary policy",
+        "interest rates",
+        "regional economy",
+        "inflation",
+        "GDP growth",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "563b980880b7bf9cb011c02612c553422a4b573f9084be76005aea6726bc097e": {
       "url": "https://www.newyorkfed.org/research/publication_annuals",
@@ -364,11 +482,19 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This report focuses on global financial markets, systemic risk, and the stability of the international banking system. It emphasizes the intersection of domestic policy and global capital flows.",
+      "tags": [
+        "financial stability",
+        "banking",
+        "international",
+        "financial regulation",
+        "credit",
+        "monetary policy",
+        "emerging markets"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "7274ab0a752d63c903d72f845082223fc2334766d21d2744f7597a40372904e6": {
       "url": "https://www.philadelphiafed.org/search-results/all-work?searchtype=all-work-the-economy",
@@ -379,11 +505,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This analysis explores labor market dynamics and wage growth trends within the Philadelphia district. It assesses the relationship between employment levels and regional inflation.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "inflation",
+        "regional economy",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "342655e08290fcf7541e164e12e759378feee010466e6f9c2d67872659d00d69": {
       "url": "https://www.richmondfed.org/publications",
@@ -394,11 +527,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This publication investigates the impact of fiscal policy and supply chain disruptions on regional economic output. It examines the resilience of local industries to external shocks.",
+      "tags": [
+        "fiscal policy",
+        "supply chain",
+        "regional economy",
+        "GDP growth",
+        "inflation",
+        "trade"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "01736ee5baba6800e86a37b678634bf0a9d1375554665279802665fdc875426b": {
       "url": "https://www.stlouisfed.org/publications",
@@ -409,11 +549,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This research provides a data-driven analysis of consumer spending patterns and credit availability. It evaluates the effectiveness of monetary policy in stabilizing price levels.",
+      "tags": [
+        "consumer spending",
+        "credit",
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     },
     "c9d5cc817cfbbe44aab007c802c593ac187aa7d4033c194ee9bb9ef867f6b676": {
       "url": "https://www.frbsf.org/our-district/subscriptions",
@@ -424,11 +571,18 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-04-11T16:05:24.127753+00:00",
+      "lastChecked": "2026-04-12T08:08:14.592365+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-11T16:05:24.127753+00:00"
+      "aiSummary": "This report examines the influence of emerging technologies and climate risks on the Western economy. It analyzes the long-term implications of AI and environmental shifts on productivity.",
+      "tags": [
+        "AI & economy",
+        "climate & economy",
+        "regional economy",
+        "GDP growth",
+        "fintech",
+        "labor markets"
+      ],
+      "tagsGeneratedAt": "2026-04-12T08:08:14.592365+00:00"
     }
   }
 }
