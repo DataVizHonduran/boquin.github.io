@@ -209,14 +209,21 @@ def _load_or_fetch(slug: str, api_name: str, session: requests.Session, detalhe:
     return df_all
 
 
+MAX_HORIZON_YEARS = 3  # only show surveys within this many years of the ref year
+
 def _df_to_vintages(df: pd.DataFrame) -> dict:
-    """Convert flat DataFrame to {ref_year: pd.Series(index=date_str, values=median)}."""
+    """Convert flat DataFrame to {ref_year: pd.Series(index=date_str, values=median)}.
+    Only keeps survey dates within MAX_HORIZON_YEARS of the reference year.
+    """
     target_set = set(TARGET_YEARS)
     vintages: dict = {}
     for yr, grp in df.groupby('ref_year'):
         if yr not in target_set:
             continue
         grp = grp.sort_values('date')
+        grp = grp[grp['date'].str[:4].astype(int) >= yr - MAX_HORIZON_YEARS]
+        if grp.empty:
+            continue
         vintages[yr] = pd.Series(
             grp['median'].values,
             index=grp['date'].values,
