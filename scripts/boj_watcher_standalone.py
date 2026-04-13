@@ -70,41 +70,43 @@ NEWS_QUERIES = [
     '"Bank of Japan" OR "BOJ" interest rates inflation 2026',
     '"Kazuo Ueda" speech 2026',
     'BOJ "Policy Board" decision statement 2026',
-    '"Naoki Tamura" OR "Shinichi Uchida" BOJ 2026',
-    '"Hajime Takata" OR "Kazuyuki Masu" BOJ 2026',
-    '"Toyoaki Nakamura" OR "Asahi Noguchi" BOJ 2026',
+    '"Hajime Takata" OR "Naoki Tamura" BOJ 2026',
+    '"Kazuyuki Masu" OR "Toichiro Asada" BOJ 2026',
+    '"Shinichi Uchida" OR "Ryozo Himino" BOJ 2026',
     'Japan CPI wages "Bank of Japan" 2026',
 ]
 
 # ---------------------------------------------------------------------------
-# Policy Board hawk/dove baselines — updated through Q1 2026
+# Policy Board hawk/dove baselines — verified April 2026
 # All 9 members vote at every MPM (unlike FOMC rotation)
+# Expired: Toyoaki Nakamura (Jun 2025), Asahi Noguchi (Mar 2026)
+# Incoming: Ayano Sato replaces Junko Nakagawa (term ends Jun 29, 2026)
 # ---------------------------------------------------------------------------
 BASELINES = {
     # --- Governor & Deputy Governors ---
-    "Kazuo Ueda":        "Neutral/Hawkish — renewed normalization intent Jan 2026; hiked Jul 2024 & Jan 2025; kept April hike on table after Mar hold",
-    "Ryozo Himino":      "Neutral — financial stability focus; cautious on pace of normalization",
-    "Shinichi Uchida":   "Neutral/Dovish — emphasizes market stability; flagged FX volatility risks Aug 2024",
+    "Kazuo Ueda":       "Neutral/Cautionary — managing 'Middle East shock' risks; hiked Jul 2024 & Jan 2025; kept April hike on table after Mar hold",
+    "Shinichi Uchida":  "Dovish/Pragmatic — architect of the 'Accommodative Hike'; emphasizes market stability",
+    "Ryozo Himino":     "Neutral — focus on financial stability and market function",
     # --- External Members ---
-    "Naoki Tamura":      "Hawkish — advocates faster rate normalization; serial hawk",
-    "Toyoaki Nakamura":  "Neutral/Dovish — cautions on demand-pull inflation; favors gradual approach",
-    "Asahi Noguchi":     "Dovish — monetary easing advocate; most dovish board member",
-    "Junko Nakagawa":    "Neutral — data-dependent; limited divergence from consensus",
-    "Hajime Takata":     "Hawkish — serial dissenter; proposed hike to 1% at both Jan and Mar 2026 MPMs (8-1 against); vigilant on wage-price spiral",
-    "Kazuyuki Masu":     "Neutral/Hawkish — new external member (joined 2026); Feb speech: 'continuing with further rate hikes needed to complete normalization'; Japan has shifted into inflation",
+    "Hajime Takata":    "Hawkish — serial dissenter; proposed hike to 1% at Jan and Mar 2026 MPMs (8-1 against); vigilant on wage-price spiral",
+    "Naoki Tamura":     "Hawkish — wants neutral rate reached faster; consistent hawk alongside Takata",
+    "Kazuyuki Masu":    "Neutral/Hawkish — replaced Nakamura (Apr 2026); Feb speech: 'further rate hikes needed to complete normalization'; Japan has shifted into inflation",
+    "Toichiro Asada":   "Dovish/Reflationist — replaced Noguchi (Apr 1, 2026); occupies the dovish/reflationist seat",
+    "Junko Nakagawa":   "Neutral/Lame Duck — term ending Jun 29, 2026; Ayano Sato incoming as replacement",
+    "Junko Koeda":      "Neutral/Data-Dependent — focus on real interest rates; consensus-follower",
 }
 
 # Roles for the voting member table
 ROLES = {
-    "Kazuo Ueda":        "Governor",
-    "Ryozo Himino":      "Deputy Governor",
-    "Shinichi Uchida":   "Deputy Governor",
-    "Naoki Tamura":      "External Member",
-    "Toyoaki Nakamura":  "External Member",
-    "Asahi Noguchi":     "External Member",
-    "Junko Nakagawa":    "External Member",
-    "Hajime Takata":     "External Member",
-    "Kazuyuki Masu":     "External Member",
+    "Kazuo Ueda":       "Governor",
+    "Shinichi Uchida":  "Deputy Governor",
+    "Ryozo Himino":     "Deputy Governor",
+    "Hajime Takata":    "External Member",
+    "Naoki Tamura":     "External Member",
+    "Kazuyuki Masu":    "External Member",
+    "Toichiro Asada":   "External Member",
+    "Junko Nakagawa":   "External Member",
+    "Junko Koeda":      "External Member",
 }
 
 
@@ -498,7 +500,8 @@ Rules:
 - Policy Signal classification: Hawkish / Dovish / Neutral / Mixed
 - 90-DAY RECENCY RULE: Only reference specific prior statements when they appear in the data above; otherwise use "Consistent with historical [lean] baseline".
 - All 9 Policy Board members vote at every MPM — note voting records when available in minutes.
-- Key BOJ-specific context: BOJ began rate normalization in 2024 after 17 years of NIRP/YCC; current policy rate ~0.5% as of early 2026; JGB purchase tapering ongoing.
+- Key BOJ-specific context: BOJ began rate normalization in 2024 after 17 years of NIRP/YCC; current policy rate 0.75% (held Mar 2026, 8-1 with Takata dissenting for 1%); JGB purchase tapering ongoing.
+- Board rotation note: Toyoaki Nakamura (term ended Jun 2025) and Asahi Noguchi (term ended Mar 31, 2026) have departed. Toichiro Asada joined Apr 1, 2026 (dovish/reflationist). Junko Nakagawa's term ends Jun 29, 2026 — Ayano Sato is the incoming replacement.
 """
     return prompt
 
