@@ -647,7 +647,7 @@ INDEX_TEMPLATE = """\
         analyzed by Gemma 4. All 25 Governing Council members covered.
     </p>
     <ul class="report-list">
-        {{items}}
+        {items}
     </ul>
 </div>
 </body>
