@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECB Watcher — Archive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px; margin: 0 auto; padding: 20px;
+            background: #f5f5f5; color: #333;
+        }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        h1 { color: #003189; border-bottom: 3px solid #003189; padding-bottom: 10px; }
+        .description { color: #555; margin: 16px 0 32px; line-height: 1.6; }
+        .report-list { list-style: none; padding: 0; }
+        .report-list li {
+            border-left: 4px solid #003189; padding: 12px 16px; margin: 10px 0;
+            background: #f8f9fa; border-radius: 0 6px 6px 0;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .report-list a { color: #003189; text-decoration: none; font-weight: 500; font-size: 1.05em; }
+        .report-list a:hover { text-decoration: underline; }
+        .report-date { color: #888; font-size: 0.85em; }
+        .badge-latest {
+            font-size: 0.75em; background: #e8f5e9; color: #2e7d32;
+            padding: 3px 8px; border-radius: 10px; margin-left: 8px;
+        }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #003189; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+    <h1>🇪🇺 ECB Watcher</h1>
+    <p class="description">
+        ECB Governing Council speeches, interviews, and policy communications — tracked every 3 days
+        using <strong>ecb.europa.eu</strong>, Google News RSS, and NCB feeds,
+        analyzed by Gemma 4. All 25 Governing Council members covered.
+    </p>
+    <ul class="report-list">
+        {items}
+    </ul>
+</div>
+</body>
+</html>
