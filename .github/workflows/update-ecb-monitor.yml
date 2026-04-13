@@ -1,0 +1,60 @@
+name: Update ECB & Eurozone Monitor
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Daily at 8:00 AM UTC (ECB Frankfurt opens)
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  update-ecb-monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+
+      - name: Run ECB Monitor (scrape + AI enrichment)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/ecb_district_ai_processor.py \
+            --scrape \
+            --days 3 \
+            --output-dir reports/ecb-monitor/ \
+            --cache reports/ecb-monitor/cache.json \
+            --date $(date +%Y-%m-%d)
+
+      - name: Generate month-to-date report
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/ecb_district_ai_processor.py \
+            --monthly \
+            --output-dir reports/ecb-monitor/ \
+            --cache reports/ecb-monitor/cache.json \
+            --date $(date +%Y-%m-%d)
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/ecb-monitor/
+          git diff --staged --quiet || (
+            git commit -m "ECB Monitor — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
+            git push
+          )
