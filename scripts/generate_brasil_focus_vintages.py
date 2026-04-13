@@ -27,20 +27,22 @@ BCB_ENDPOINT = (
     "/versao/v1/odata/ExpectativasMercadoAnuais"
 )
 
-# slug: (display_label, api_indicator_name, unit, show_zero_line)
+# slug: (display_label, api_indicator_name, unit, show_zero_line, indicador_detalhe_filter)
+# baseCalculo=0 (all respondents) is always applied.
+# indicador_detalhe_filter: None = no sub-filter; 'Saldo' = net trade balance only.
 INDICATORS = {
-    'ipca':               ('IPCA',                          'IPCA',                           '% a.a.',  False),
-    'pib':                ('PIB Total',                     'PIB Total',                      '% a.a.',  True),
-    'cambio':             ('Câmbio',                        'Câmbio',                         'BRL/USD', False),
-    'selic':              ('Selic',                         'Selic',                          '% a.a.',  False),
-    'igpm':               ('IGP-M',                         'IGP-M',                          '% a.a.',  False),
-    'resultado_primario': ('Resultado Primário',             'Resultado primário',              '% PIB',   True),
-    'resultado_nominal':  ('Resultado Nominal',              'Resultado nominal',               '% PIB',   True),
-    'divida_liquida':     ('Dívida Líquida Setor Público',   'Dívida líquida do setor público', '% PIB',   False),
-    'conta_corrente':     ('Conta Corrente',                 'Conta corrente',                  'US$ bi',  True),
-    'balanca_comercial':  ('Balança Comercial',              'Balança comercial',               'US$ bi',  False),
-    'ipca_adm':           ('IPCA Administrados',             'IPCA Administrados',              '% a.a.',  False),
-    'ide':                ('Invest. Direto no País',         'Investimento direto no país',     'US$ bi',  False),
+    'ipca':               ('IPCA',                          'IPCA',                           '% a.a.',  False, None),
+    'pib':                ('PIB Total',                     'PIB Total',                      '% a.a.',  True,  None),
+    'cambio':             ('Câmbio',                        'Câmbio',                         'BRL/USD', False, None),
+    'selic':              ('Selic',                         'Selic',                          '% a.a.',  False, None),
+    'igpm':               ('IGP-M',                         'IGP-M',                          '% a.a.',  False, None),
+    'resultado_primario': ('Resultado Primário',             'Resultado primário',              '% PIB',   True,  None),
+    'resultado_nominal':  ('Resultado Nominal',              'Resultado nominal',               '% PIB',   True,  None),
+    'divida_liquida':     ('Dívida Líquida Setor Público',   'Dívida líquida do setor público', '% PIB',   False, None),
+    'conta_corrente':     ('Conta Corrente',                 'Conta corrente',                  'US$ bi',  True,  None),
+    'balanca_comercial':  ('Balança Comercial (Saldo)',      'Balança comercial',               'US$ bi',  False, 'Saldo'),
+    'ipca_adm':           ('IPCA Administrados',             'IPCA Administrados',              '% a.a.',  False, None),
+    'ide':                ('Invest. Direto no País',         'Investimento direto no país',     'US$ bi',  False, None),
 }
 
 TARGET_YEARS = list(range(2001, datetime.now().year + 3))
@@ -114,13 +116,24 @@ def _make_session() -> requests.Session:
     return s
 
 
-def _api_fetch(api_name: str, start_date: str, session: requests.Session) -> list:
-    """Fetch paginated records for one indicator from BCB Olinda, starting at start_date."""
+def _api_fetch(api_name: str, start_date: str, session: requests.Session, detalhe: str = None) -> list:
+    """Fetch paginated records for one indicator from BCB Olinda, starting at start_date.
+
+    Always filters baseCalculo=0 (all respondents).
+    detalhe: optional IndicadorDetalhe value (e.g. 'Saldo' for Balança Comercial).
+    """
     records = []
     skip = 0
     top  = 10000
     while True:
-        date_filter = f"Data ge '{start_date}' and Indicador eq '{api_name}'"
+        parts = [
+            f"Data ge '{start_date}'",
+            f"Indicador eq '{api_name}'",
+            "baseCalculo eq 0",
+        ]
+        if detalhe:
+            parts.append(f"IndicadorDetalhe eq '{detalhe}'")
+        date_filter = ' and '.join(parts)
         url = (
             f"{BCB_ENDPOINT}"
             f"?$top={top}&$skip={skip}"
@@ -157,7 +170,7 @@ def _records_to_df(records: list) -> pd.DataFrame:
     return pd.DataFrame(rows) if rows else pd.DataFrame(columns=['date', 'ref_year', 'median'])
 
 
-def _load_or_fetch(slug: str, api_name: str, session: requests.Session) -> pd.DataFrame:
+def _load_or_fetch(slug: str, api_name: str, session: requests.Session, detalhe: str = None) -> pd.DataFrame:
     """
     Load cached CSV and append the last INCREMENTAL_DAYS of API data.
     On first run (no CSV), fetches full history from 2001-01-01.
@@ -167,14 +180,17 @@ def _load_or_fetch(slug: str, api_name: str, session: requests.Session) -> pd.Da
 
     if csv_path.exists():
         df_cached = pd.read_csv(csv_path, dtype={'date': str, 'ref_year': int, 'median': float})
-        start_date = (datetime.now() - timedelta(days=INCREMENTAL_DAYS)).strftime('%Y-%m-%d')
-        print(f'    Cached {len(df_cached):,} rows. Fetching from {start_date}...')
     else:
         df_cached = pd.DataFrame(columns=['date', 'ref_year', 'median'])
+
+    if len(df_cached) == 0:
         start_date = '2001-01-01'
         print(f'    No cache. Full fetch from {start_date}...')
+    else:
+        start_date = (datetime.now() - timedelta(days=INCREMENTAL_DAYS)).strftime('%Y-%m-%d')
+        print(f'    Cached {len(df_cached):,} rows. Fetching from {start_date}...')
 
-    records = _api_fetch(api_name, start_date, session)
+    records = _api_fetch(api_name, start_date, session, detalhe=detalhe)
     df_new  = _records_to_df(records)
     print(f'    API returned {len(records):,} new records.')
 
@@ -212,9 +228,9 @@ def _df_to_vintages(df: pd.DataFrame) -> dict:
 def fetch_all() -> dict:
     session = _make_session()
     all_vintages = {}
-    for slug, (label, api_name, *_) in INDICATORS.items():
+    for slug, (label, api_name, unit, zero_line, detalhe) in INDICATORS.items():
         print(f'  {label}...')
-        df = _load_or_fetch(slug, api_name, session)
+        df = _load_or_fetch(slug, api_name, session, detalhe=detalhe)
         all_vintages[slug] = _df_to_vintages(df)
         ref_yrs = sorted(all_vintages[slug].keys())
         span = f'{ref_yrs[0]}–{ref_yrs[-1]}' if ref_yrs else 'none'
@@ -273,7 +289,7 @@ def compute_insights(all_vintages: dict) -> dict:
 def build_trace_data(all_vintages: dict) -> list:
     traces = []
     for slug, vintages in all_vintages.items():
-        _, _, unit, _ = INDICATORS[slug]
+        _, _, unit, *_ = INDICATORS[slug]
         for yr in TARGET_YEARS:
             if yr not in vintages:
                 continue
@@ -294,7 +310,7 @@ def build_trace_data(all_vintages: dict) -> list:
 def build_special_traces(all_vintages: dict) -> list:
     specials = []
     for slug, vintages in all_vintages.items():
-        _, _, unit, _ = INDICATORS[slug]
+        _, _, unit, *_ = INDICATORS[slug]
 
         # Average across all ref years at each survey date
         date_vals: dict = defaultdict(list)
@@ -659,6 +675,7 @@ def build_html(all_vintages: dict, insights: dict, traces: list, specials: list,
         slug: {'label': cfg[0], 'unit': cfg[2], 'zeroLine': cfg[3]}
         for slug, cfg in INDICATORS.items()
     }
+
 
     return HTML_TEMPLATE.format(
         option_tags=option_tags.rstrip('\n'),
