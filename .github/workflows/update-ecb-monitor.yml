@@ -55,6 +55,6 @@ jobs:
           git add reports/ecb-monitor/
           git diff --staged --quiet || (
             git commit -m "ECB Monitor — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase &&
+            git pull --rebase --strategy-option=theirs &&
             git push
           )
