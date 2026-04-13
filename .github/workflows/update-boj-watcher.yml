@@ -1,0 +1,46 @@
+name: Update BOJ Watcher
+
+on:
+  schedule:
+    - cron: '0 9 */3 * *'   # Every 3 days at 09:00 UTC
+  workflow_dispatch:          # Allow manual trigger
+
+jobs:
+  update-boj-watcher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run BOJ Watcher
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/boj_watcher_standalone.py \
+            --days 30 \
+            --output-dir reports/boj-watcher/
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/boj-watcher/
+          git diff --staged --quiet || (
+            git commit -m "BOJ Watcher — $(date +'%Y-%m-%d') 🤖" &&
+            git push
+          )
