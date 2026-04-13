@@ -71,39 +71,40 @@ NEWS_QUERIES = [
     '"Kazuo Ueda" speech 2026',
     'BOJ "Policy Board" decision statement 2026',
     '"Naoki Tamura" OR "Shinichi Uchida" BOJ 2026',
-    '"Hajime Takata" OR "Toyoaki Nakamura" BOJ 2026',
+    '"Hajime Takata" OR "Kazuyuki Masu" BOJ 2026',
+    '"Toyoaki Nakamura" OR "Asahi Noguchi" BOJ 2026',
     'Japan CPI wages "Bank of Japan" 2026',
 ]
 
 # ---------------------------------------------------------------------------
-# Policy Board hawk/dove baselines
+# Policy Board hawk/dove baselines — updated through Q1 2026
 # All 9 members vote at every MPM (unlike FOMC rotation)
 # ---------------------------------------------------------------------------
 BASELINES = {
     # --- Governor & Deputy Governors ---
-    "Kazuo Ueda":       "Neutral — gradualist normalizer; data-dependent; hiked Jul 2024 & Jan 2025",
-    "Ryozo Himino":     "Neutral — financial stability focus; cautious on pace of normalization",
-    "Shinichi Uchida":  "Neutral/Dovish — emphasizes market stability; flagged FX volatility risks Aug 2024",
+    "Kazuo Ueda":        "Neutral/Hawkish — renewed normalization intent Jan 2026; hiked Jul 2024 & Jan 2025; kept April hike on table after Mar hold",
+    "Ryozo Himino":      "Neutral — financial stability focus; cautious on pace of normalization",
+    "Shinichi Uchida":   "Neutral/Dovish — emphasizes market stability; flagged FX volatility risks Aug 2024",
     # --- External Members ---
-    "Naoki Tamura":     "Hawkish — most hawkish on board; advocates faster rate normalization",
-    "Toyoaki Nakamura": "Neutral/Dovish — cautions on demand-pull inflation; favors gradual approach",
-    "Asahi Noguchi":    "Dovish — monetary easing advocate; most dovish board member",
-    "Junko Nakagawa":   "Neutral — data-dependent; limited divergence from consensus",
-    "Hajime Takata":    "Neutral/Hawkish — pushed for rate hikes; vigilant on wage-price spiral",
-    "Junko Koeda":      "Neutral — academic background; consensus-follower; limited public record",
+    "Naoki Tamura":      "Hawkish — advocates faster rate normalization; serial hawk",
+    "Toyoaki Nakamura":  "Neutral/Dovish — cautions on demand-pull inflation; favors gradual approach",
+    "Asahi Noguchi":     "Dovish — monetary easing advocate; most dovish board member",
+    "Junko Nakagawa":    "Neutral — data-dependent; limited divergence from consensus",
+    "Hajime Takata":     "Hawkish — serial dissenter; proposed hike to 1% at both Jan and Mar 2026 MPMs (8-1 against); vigilant on wage-price spiral",
+    "Kazuyuki Masu":     "Neutral/Hawkish — new external member (joined 2026); Feb speech: 'continuing with further rate hikes needed to complete normalization'; Japan has shifted into inflation",
 }
 
 # Roles for the voting member table
 ROLES = {
-    "Kazuo Ueda":       "Governor",
-    "Ryozo Himino":     "Deputy Governor",
-    "Shinichi Uchida":  "Deputy Governor",
-    "Naoki Tamura":     "External Member",
-    "Toyoaki Nakamura": "External Member",
-    "Asahi Noguchi":    "External Member",
-    "Junko Nakagawa":   "External Member",
-    "Hajime Takata":    "External Member",
-    "Junko Koeda":      "External Member",
+    "Kazuo Ueda":        "Governor",
+    "Ryozo Himino":      "Deputy Governor",
+    "Shinichi Uchida":   "Deputy Governor",
+    "Naoki Tamura":      "External Member",
+    "Toyoaki Nakamura":  "External Member",
+    "Asahi Noguchi":     "External Member",
+    "Junko Nakagawa":    "External Member",
+    "Hajime Takata":     "External Member",
+    "Kazuyuki Masu":     "External Member",
 }
 
 
