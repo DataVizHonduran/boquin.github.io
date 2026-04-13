@@ -279,15 +279,14 @@ def build_trace_data(all_vintages: dict) -> list:
                 continue
             s = vintages[yr]
             traces.append({
-                'var':        slug,
-                'year':       yr,
-                'x':          list(s.index),
-                'y':          [round(v, 4) for v in s.values],
-                'color':      PALETTE.get(yr, '#888888'),
-                'width':      _line_width(yr),
-                'markerSize': _marker_size(yr),
-                'name':       str(yr),
-                'unit':       unit,
+                'var':   slug,
+                'year':  yr,
+                'x':     list(s.index),
+                'y':     [round(v, 4) for v in s.values],
+                'color': PALETTE.get(yr, '#888888'),
+                'width': _line_width(yr),
+                'name':  str(yr),
+                'unit':  unit,
             })
     return traces
 
@@ -476,13 +475,12 @@ function makeTrace(t, activeVar) {{
     return {{
         x: t.x,
         y: t.y,
-        mode: 'lines+markers',
+        mode: 'lines',
         type: 'scatter',
         name: String(t.year),
         legendgroup: t.var + '_' + t.year,
         showlegend: (t.var === activeVar),
-        line:   {{ color: t.color, width: t.width }},
-        marker: {{ size: t.markerSize, color: t.color }},
+        line: {{ color: t.color, width: t.width }},
         visible: (t.var === activeVar),
         hovertemplate:
             '<b>' + VAR_META[t.var].label + ' \u2014 ' + t.year + ' forecast</b><br>' +
@@ -499,12 +497,11 @@ function makeSpecialTrace(s) {{
     return {{
         x: s.x,
         y: s.y,
-        mode: 'lines+markers',
+        mode: 'lines',
         type: 'scatter',
         name: label,
         showlegend: false,
-        line:   {{ color: color, width: 2.5 }},
-        marker: {{ size: 4, color: color }},
+        line: {{ color: color, width: 2.5 }},
         visible: false,
         hovertemplate:
             '<b>' + label + '</b><br>' +
