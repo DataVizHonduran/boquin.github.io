@@ -1,88 +1,97 @@
 # BOJ Watcher — 2026-04-13
 
-**Generated:** 2026-04-13 09:35 UTC  
+**Generated:** 2026-04-13 09:46 UTC  
 **Coverage:** 30 days ending 2026-04-13  
 **Model:** google/gemma-4-31B-it
 
 ---
 
-# BOJ Watcher Report
+# BOJ Watcher: Monetary Policy Analysis
 **Date:** 2026-04-13
 **Coverage Period:** 2026-03-14 to 2026-04-13
 
 ### Executive Summary
-The Bank of Japan (BOJ) maintained its policy rate at 0.75% during the March 18-19 meeting, opting for stability amid escalating geopolitical tensions in the Middle East. While the March Summary of Opinions reveals an internal debate regarding the necessity of further rate hikes and the inflationary impact of a weak yen, Governor Ueda's most recent communications (April 13) signal "rising caution." The BOJ is currently balancing a "stagflation" risk—driven by a jump in wholesale inflation and oil surges—against the economic drag of the Iran war on Japanese firms. Consequently, the path toward further normalization has become less certain, with the Governor avoiding clear hints on the timing of the next hike.
+The Bank of Japan (BOJ) maintained its policy rate at 0.75% during the March MPM, opting for stability amid escalating geopolitical tensions in the Middle East. While the Board continues to debate the necessity of further rate hikes to complete normalization, Governor Ueda has shifted toward a tone of "rising caution" as of April 13, citing the risks of the Iran war. The central bank faces a complex "stagflation" risk: wholesale inflation is jumping due to oil surges, yet the real economy is being squeezed. Despite this, the BOJ keeps the door open for future hikes, though the immediate path has become less certain due to external shocks and extreme FX volatility.
 
 ### Policy Board Member Pronouncements
 
 | Date | Official | Role | Venue/Context | Key Statement | Policy Signal | Evolution vs Baseline |
 |------|----------|------|---------------|---------------|---------------|-----------------------|
-| 2026-04-13 | Kazuo Ueda | Governor | Public Remarks | Called for vigilance against the impact of the Middle East war. | Mixed/Cautious | Neutral $\rightarrow$ Cautious |
-| 2026-03-19 | Kazuo Ueda | Governor | Post-MPM Speech | Revealed policy outlook following the decision to hold rates. | Neutral | Consistent with baseline |
-| Other Members | N/A | N/A | N/A | No public comments found | N/A | Consistent with baseline |
+| 2026-04-13 | Kazuo Ueda | Governor | Public Remarks | Called for vigilance against the impact of the Middle East war; showed "rising caution." | Neutral/Mixed | Slight shift toward caution |
+| 2026-03-19 | Kazuo Ueda | Governor | Post-MPM Speech | Revealed policy outlook following the expected interest rate hold. | Neutral/Hawkish | Consistent with baseline |
+| 2026-02-XX | Kazuyuki Masu | External Member | Feb Speech | "Continuing with further rate hikes needed to complete normalization"; Japan has shifted into inflation. | Hawkish | Consistent with baseline |
+| N/A | Ryozo Himino | Deputy Gov | N/A | No public comments found in coverage period. | Neutral | Consistent with baseline |
+| N/A | Shinichi Uchida | Deputy Gov | N/A | No public comments found in coverage period. | Neutral/Dovish | Consistent with baseline |
+| N/A | Naoki Tamura | External Member | N/A | No public comments found in coverage period. | Hawkish | Consistent with baseline |
+| N/A | Toyoaki Nakamura | External Member | N/A | No public comments found in coverage period. | Neutral/Dovish | Consistent with baseline |
+| N/A | Asahi Noguchi | External Member | N/A | No public comments found in coverage period. | Dovish | Consistent with baseline |
+| N/A | Junko Nakagawa | External Member | N/A | No public comments found in coverage period. | Neutral | Consistent with baseline |
+| N/A | Hajime Takata | External Member | N/A | No public comments found in coverage period. | Hawkish | Consistent with baseline |
 
 ### MPM Official Communications
 
 | Date | Document Type | Title | Key Takeaways | Policy Implications |
 |------|---------------|-------|---------------|---------------------|
-| 2026-03-18 | Policy Statement | Statement on Monetary Policy | Policy rate held at 0.75%; focus on Middle East situation. | Pause in normalization to assess external shocks. |
-| 2026-03-29 | Summary of Opinions | March Meeting Summary | Board debated the need for more rate hikes and the impact of the weak yen on prices. | Internal hawkish pressure exists despite the hold. |
+| 2026-03-18 | Policy Decision | Statement on Monetary Policy | Policy rate held steady at 0.75%. | Pause to assess external shocks. |
+| 2026-03-29 | Summary of Opinions | March Meeting Summary | Board debated the need for more rate hikes. | Internal divide on pace of normalization. |
+| 2026-03-24 | Minutes | January Meeting Minutes | Debated need for more hikes and the impact of the weak yen on prices. | Long-standing concern over FX-driven inflation. |
 
 ### Thematic Analysis
 
 **1. Inflation Assessment (CPI, Core, Wages)**
-Inflation remains a primary concern, but the nature of the pressure is shifting. Wholesale inflation recently jumped (April 10), leading the BOJ to express vigilance regarding "stagflation risk." The board is distinguishing between desired demand-pull inflation and the cost-push inflation currently fueled by oil surges and geopolitical instability.
+The BOJ is grappling with "bad" inflation. Wholesale inflation has jumped (April 10), but this is largely driven by oil surges linked to the Iran war. The BOJ has explicitly vowed vigilance against "stagflation risk," where prices rise while economic activity is suppressed.
 
 **2. Growth Outlook**
-The growth outlook is clouded by the "protracted Iran war," which is reported to be squeezing Japanese firms (April 3). This external shock is narrowing the BOJ's options, as aggressive tightening could exacerbate the pain for businesses already struggling with supply chain or energy costs.
+The outlook has dimmed slightly due to geopolitical instability. Reports indicate the Iran war is "squeezing firms," which may counteract the demand-pull inflation the BOJ prefers for its normalization cycle.
 
 **3. Yen / FX Considerations**
-The weak yen continues to be a focal point. The March meeting summary confirms the board is debating the yen's impact on prices. Furthermore, government officials have suggested that policy to boost the yen could be a necessary option to curb inflation (April 12), indicating potential coordination or pressure on the BOJ to address FX volatility.
+The weak yen remains a critical pain point. There is increasing political pressure, with government ministers suggesting that BOJ policy to boost the yen could be a necessary option to curb imported inflation.
 
 **4. Financial Conditions & JGB Market**
-Markets reacted to the March hold as expected, though some analysts (April 2, 8) initially speculated on an April hike. The current environment is characterized by uncertainty, with investors weighing the BOJ's desire to normalize against the risks of global instability.
+The market remains expectant of normalization. Despite the March hold, some analysts and former officials viewed an April hike as likely, suggesting the market still perceives the long-term trend as upward.
 
 **5. Balance Sheet (JGB purchase taper)**
-No specific updates to the JGB purchase tapering schedule were provided in the recent communications; operations are assumed to be consistent with the historical baseline of ongoing normalization.
+No specific new updates on the quantitative tapering schedule were provided in the current data set; however, the focus remains on the policy rate.
 
 **6. Forward Guidance Evolution**
-Forward guidance has shifted toward increased ambiguity. While the "door remains open" for hikes (April 3), Governor Ueda's April 13 remarks show a lack of clear hints on future moves, replacing a steady normalization narrative with one of "vigilance" and "caution."
+Guidance has shifted from "decisive" (March 19) to "vigilant/cautious" (April 13). While the "door remains open" for hikes, the BOJ is now emphasizing the need to monitor the Middle East situation before committing to the next move.
 
 ### Hawk-Dove Spectrum Analysis
 
 ```
 HAWKISH (favor faster normalization / rate hikes)
-├─ Naoki Tamura (Consistent with baseline)
-└─ Hajime Takata (Consistent with baseline)
+├─ Hajime Takata (Proposed 1% hike in Jan/Mar; serial dissenter)
+├─ Kazuyuki Masu (Explicitly stated further hikes are needed)
+└─ Naoki Tamura (Consistent with hawkish baseline)
 
 NEUTRAL/DATA-DEPENDENT
-├─ Kazuo Ueda (Shifting toward caution due to Mideast risks)
-├─ Ryozo Himino (Consistent with baseline)
-├─ Junko Nakagawa (Consistent with baseline)
-└─ Junko Koeda (Consistent with baseline)
+├─ Kazuo Ueda (Neutral/Hawkish baseline; currently exhibiting "rising caution")
+├─ Ryozo Himino (Focus on financial stability)
+└─ Junko Nakagawa (Data-dependent)
 
 DOVISH (favor maintaining accommodation / slower hikes)
-├─ Asahi Noguchi (Consistent with baseline)
-├─ Toyoaki Nakamura (Consistent with baseline)
-└─ Shinichi Uchida (Consistent with baseline)
+├─ Shinichi Uchida (Focus on market stability/FX volatility)
+├─ Toyoaki Nakamura (Cautions on demand-pull inflation)
+└─ Asahi Noguchi (Monetary easing advocate)
 ```
 
 **Key Shifts Identified:**
-*   **Governor Ueda:** Moving from a "gradualist normalizer" to a more cautious stance. The immediate priority has shifted from "when to hike" to "how to manage the Middle East shock."
+*   **Governor Ueda:** Moving from a "normalization intent" posture toward a "risk management" posture due to the Iran war.
+*   **Board Consensus:** The March Summary of Opinions confirms that the debate over "more hikes" is active, indicating the hold was not a pivot to dovishness, but a tactical pause.
 
 ### All 9 Voting Members Focus
 
 | Official | Role | Current Stance | Key Quote |
 |----------|------|----------------|-----------|
-| Kazuo Ueda | Governor | Neutral/Cautious | "Vigilance against impact of Middle East war" |
-| Ryozo Himino | Deputy Gov | Neutral | No public comments found |
-| Shinichi Uchida | Deputy Gov | Neutral/Dovish | No public comments found |
-| Naoki Tamura | External | Hawkish | No public comments found |
-| Toyoaki Nakamura | External | Neutral/Dovish | No public comments found |
-| Asahi Noguchi | External | Dovish | No public comments found |
-| Junko Nakagawa | External | Neutral | No public comments found |
-| Hajime Takata | External | Neutral/Hawkish | No public comments found |
-| Junko Koeda | External | Neutral | No public comments found |
+| Kazuo Ueda | Governor | Neutral/Mixed | "Vigilance against impact of Middle East war" |
+| Ryozo Himino | Deputy Gov | Neutral | Consistent with historical neutral baseline |
+| Shinichi Uchida | Deputy Gov | Neutral/Dovish | Consistent with historical neutral/dovish baseline |
+| Naoki Tamura | External | Hawkish | Consistent with historical hawkish baseline |
+| Toyoaki Nakamura | External | Neutral/Dovish | Consistent with historical neutral/dovish baseline |
+| Asahi Noguchi | External | Dovish | Consistent with historical dovish baseline |
+| Junko Nakagawa | External | Neutral | Consistent with historical neutral baseline |
+| Hajime Takata | External | Hawkish | Proposed hike to 1% (Jan/Mar 2026) |
+| Kazuyuki Masu | External | Hawkish | "Continuing with further rate hikes needed" |
 
 ### Dissent Watch
-No formal dissents were recorded for the March 18-19 meeting. However, the **Summary of Opinions (March 29)** indicates a non-trivial internal debate regarding the "need for more rate hikes," suggesting that while the decision to hold was unanimous, a hawkish minority is actively pushing for a faster pace of normalization to combat yen-driven inflation.
+**Hajime Takata** remains the primary outlier. He proposed a rate hike to 1.0% at both the January and March 2026 MPMs. In both instances, he was outvoted 8-1. This indicates a significant gap between the most hawkish member and the consensus, though the "debate" mentioned in the March summary suggests other members may be moving closer to his view, albeit at a slower pace.
