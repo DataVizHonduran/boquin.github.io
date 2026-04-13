@@ -27,6 +27,9 @@ jobs:
       - name: Install Playwright Chromium
         run: playwright install chromium --with-deps
 
+      - name: Pull latest before running
+        run: git pull
+
       - name: Run ECB Monitor (scrape + AI enrichment)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -55,6 +58,5 @@ jobs:
           git add reports/ecb-monitor/
           git diff --staged --quiet || (
             git commit -m "ECB Monitor — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase --strategy-option=theirs &&
             git push
           )
