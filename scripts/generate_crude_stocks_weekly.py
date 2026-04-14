@@ -182,16 +182,16 @@ def draw_panel(ax, s: pd.Series, title: str) -> None:
     ax_xmax = mdates.date2num(current.index[-1].to_pydatetime())
 
     # ---- gradient grey band (80 strips, dark at top → white at bottom) ---
-    N = 80
-    for i in range(N):
-        f0 = i / N
-        f1 = (i + 1) / N
-        alpha = 0.50 * f1 ** 0.7   # dark at top (f1→1), fades to white at bottom
-        ax.fill_between(current.index,
-                        lo + f0 * (hi - lo),
-                        lo + f1 * (hi - lo),
-                        color="#606060", alpha=alpha, linewidth=0, zorder=2)
-
+  # Use a single fill_between with a fixed alpha for a uniform look
+    ax.fill_between(
+          current.index, 
+          lo, 
+          hi, 
+          color="#E0E0E0",  # A light, professional grey
+          alpha=1.0,       # Fully opaque (or use 0.5 if you want it softer)
+          linewidth=0, 
+          zorder=2
+      )
     # ---- blue weekly line ------------------------------------------------
     ax.plot(current.index, current.values,
             color="#2196F3", linewidth=1.2, zorder=4)
