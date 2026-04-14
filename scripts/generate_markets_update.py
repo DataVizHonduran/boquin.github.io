@@ -23,6 +23,7 @@ import requests
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from huggingface_hub import InferenceClient
+import numpy as np
 
 # ---------------------------------------------------------------------------
 # Config
@@ -317,6 +318,9 @@ key policy signals.
 2. Five Main Views — exactly five bullet points capturing the central messages.
 3. Macro Characterization — one paragraph each on (i) growth, (ii) labor \
 market, and (iii) inflation, reflecting how the data describes them.
+4. Cyclical Alignment — Use the provided 10-year Z-scores and percentiles to \
+classify the current regime. Identify if the print suggests a 'late-cycle' \
+overheating, a 'mid-cycle' pause, or a structural 'regime shift.'
 5. Policy Outlook — provide a reasoned forecast for the next Fed move (timing \
 and direction), grounded in the data and balance of risks.
 
@@ -324,9 +328,40 @@ Style guidelines:
 - Write in the tone of a sell-side economist's client note (tight, analytical, \
 jargon-appropriate).
 - Avoid generic filler; anchor every judgment in the numbers provided.
+- Interpret Z-scores: A Z-score > |2.0| should be treated as a significant \
+regime-defining event.
 - Compute and reference month-on-month and year-on-year changes where relevant.\
 """
 
+class CyclicalEngine:
+    def __init__(self, api_key):
+        self.api_key = api_key
+
+    def get_metrics(self, series_id, lookback_years=10):
+        """Computes regime-aware statistics: Z-score and Percentiles."""
+        try:
+            # Fetch 120 months for a decade-long baseline
+            obs = fetch_series(series_id, self.api_key, limit=lookback_years * 12)
+            values = [float(o['value']) for o in obs if o['value'] != "."]
+            
+            if len(values) < 2: return "Insufficient history."
+
+            latest = values[-1]
+            mean = np.mean(values)
+            std = np.std(values)
+            
+            # Mathematical Magnitude (Z-score)
+            z_score = (latest - mean) / std if std > 0 else 0
+            # Historical Rarity (Percentile)
+            percentile = (sum(1 for v in values if v <= latest) / len(values)) * 100
+
+            return (
+                f"10Y REGIME: {percentile:.1f}th Percentile | "
+                f"Z-Score: {z_score:+.2f}σ | "
+                f"10Y Range: [{min(values):,.2f}, {max(values):,.2f}]"
+            )
+        except Exception:
+            return "Cyclical Data Unavailable."
 
 # ---------------------------------------------------------------------------
 # FRED helpers
@@ -398,28 +433,49 @@ def fetch_series(series_id: str, api_key: str, limit: int = 13) -> list[dict]:
     obs = [o for o in data.get("observations", []) if o["value"] != "."]
     return list(reversed(obs))
 
+##original claude suggestion
+# def build_data_block(release_id: int, release_name: str, api_key: str) -> str:
+#     series_list = RELEASE_SERIES.get(release_id, [])
+#     lines = [f"{release_name.upper()} — LATEST FRED DATA\n"]
+#     seen = set()
+#     for label, sid in series_list:
+#         if sid in seen:
+#             continue
+#         seen.add(sid)
+#         try:
+#             obs = fetch_series(sid, api_key)
+#         except Exception as e:
+#             print(f"  WARNING: skipping {sid} — {e}", file=sys.stderr)
+#             continue
+#         if not obs:
+#             continue
+#         lines.append(f"{label}  [{sid}]")
+#         for o in obs:
+#             lines.append(f"  {o['date'][:7]}  {float(o['value']):>12.3f}")
+#         lines.append("")
+#     return "\n".join(lines)
 
-def build_data_block(release_id: int, release_name: str, api_key: str) -> str:
+def build_enhanced_data_block(release_id, release_name, api_key):
+    engine = CyclicalEngine(api_key)
     series_list = RELEASE_SERIES.get(release_id, [])
-    lines = [f"{release_name.upper()} — LATEST FRED DATA\n"]
-    seen = set()
+    lines = [f"--- {release_name.upper()}: CYCLE-AWARE SUMMARY ---", ""]
+    
     for label, sid in series_list:
-        if sid in seen:
-            continue
-        seen.add(sid)
         try:
-            obs = fetch_series(sid, api_key)
-        except Exception as e:
-            print(f"  WARNING: skipping {sid} — {e}", file=sys.stderr)
-            continue
-        if not obs:
-            continue
-        lines.append(f"{label}  [{sid}]")
-        for o in obs:
-            lines.append(f"  {o['date'][:7]}  {float(o['value']):>12.3f}")
-        lines.append("")
-    return "\n".join(lines)
+            # Tactical Momentum (Last 13 months for MoM/YoY)
+            tactical_obs = fetch_series(sid, api_key, limit=13)
+            # Cyclical Context (10-year statistical distribution)
+            cyclical_context = engine.get_metrics(sid)
 
+            lines.append(f"SERIES: {label} [{sid}]")
+            lines.append(f"CONTEXT: {cyclical_context}")
+            lines.append("DATA:")
+            for o in tactical_obs:
+                lines.append(f"  {o['date'][:7]}: {float(o['value']):>10.3f}")
+            lines.append("-" * 40)
+        except Exception: continue
+        
+    return "\n".join(lines)
 
 def build_chart_data(release_id: int, api_key: str, n_months: int = 24) -> list[dict]:
     """Fetch 1-2 featured series for inline Chart.js charts (24 months of history)."""
@@ -1005,7 +1061,7 @@ def main():
 
         print(f"\n--- {release_name} ---", file=sys.stderr)
         print(f"  Fetching FRED series ...", file=sys.stderr)
-        data_block = build_data_block(release_id, release_name, fred_key)
+        data_block = build_enhanced_data_block(release_id, release_name, fred_key)
         ref_month  = get_ref_month(data_block)
 
         # Skip generation if an existing file for this slug already covers the
