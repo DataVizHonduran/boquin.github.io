@@ -275,6 +275,26 @@ RELEASE_SERIES = {
         ("C&I Loan Delinquency Rate (%)",               "DRBLACBS"),
         ("Credit Card Charge-Off Rate (%)",             "CORCCACBS"),
     ],
+    192: [  # JOLTS (Job Openings and Labor Turnover Survey)
+        ("Job Openings (thousands, SA)", "JTSJOL"),
+        ("Hires (thousands, SA)", "JTSHIL"),
+        ("Quits (thousands, SA)", "JTSQUL"),
+        ("Quits Rate (%, SA)", "JTSQUR"),
+        ("Layoffs & Discharges Rate (%, SA)", "JTSLDR"),
+    ],
+    14: [  # G.19 Consumer Credit
+        ("Total Consumer Credit (bn $, SA)", "TOTALSL"),
+        ("Revolving Credit (bn $, SA)", "REVOLSL"),
+        ("Nonrevolving Credit (bn $, SA)", "NONREVSL"),
+    ],
+    351: [  # Philly Fed Manufacturing
+        ("Philly Fed Business Activity Index", "GAPHIFRBPHI"),
+        ("Philly Fed New Orders Index", "GAPHIFRBPHINO"), # Highly cyclical
+    ],
+    374: [  # Texas Manufacturing (Dallas Fed)
+        ("Texas Mfg Business Activity Index", "TXMFGBCINDX"),
+        ("Texas Mfg Outlook Index", "TXMFGGTINDX"),
+    ],
 }
 
 # Which 1-2 series to feature as inline charts per release.
@@ -306,6 +326,10 @@ CHART_SERIES = {
     323: ["PCETRIM12M159SFRBDAL"],
     190: ["MORTGAGE30US", "MORTGAGE15US"],
     231: ["DRCCLACBS", "CORCCACBS"],
+    192: ["JTSJOL", "JTSQUR"],      # Track openings vs quits for labor tightness
+    14:  ["REVOLSL", "NONREVSL"],   # Compare credit card vs auto/student loans
+    351: ["GAPHIFRBPHI"],           # Standard headline index
+    374: ["TXMFGBCINDX"],           # Standard headline index
 }
 
 SYSTEM_PROMPT = """\
@@ -386,6 +410,8 @@ def fred_get(endpoint: str, params: dict, api_key: str, retries: int = 3) -> dic
 # For these, we detect updates by checking last_updated on a representative series.
 CALENDAR_EXEMPT = {
     291: "EXHOSLUSM495S",  # Existing Home Sales — NAR; no FRED calendar entries
+    351: "GAPHIFRBPHI",    # Philly Fed Fallback
+    374: "TXMFGBCINDX",    # Dallas Fed Fallback
 }
 
 
