@@ -410,8 +410,8 @@ def fred_get(endpoint: str, params: dict, api_key: str, retries: int = 3) -> dic
 # For these, we detect updates by checking last_updated on a representative series.
 CALENDAR_EXEMPT = {
     291: "EXHOSLUSM495S",  # Existing Home Sales — NAR; no FRED calendar entries
-    351: "GAPHIFRBPHI",    # Philly Fed Fallback
-    374: "TXMFGBCINDX",    # Dallas Fed Fallback
+    351: "GACDFSA066MSFRBPHI", # Corrected Philly Fed
+    374: "BACTSAMFRBDAL",      # Corrected Dallas Fed
 }
 
 
