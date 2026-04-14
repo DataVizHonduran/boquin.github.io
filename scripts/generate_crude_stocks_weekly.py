@@ -134,7 +134,7 @@ def fetch_all_areas(api_key: str) -> dict[str, pd.Series]:
 def check_freshness(series_dict: dict) -> None:
     latest = max(s.index.max() for s in series_dict.values())
     age = (pd.Timestamp(date.today()) - latest).days
-    if age > 8:
+    if age > 14:
         print(
             f"EIA update not yet available. Most recent: {latest.date()} "
             f"({age} days ago). Check back after Wednesday 10:30 AM ET."
