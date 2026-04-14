@@ -471,7 +471,7 @@ def build_enhanced_data_block(release_id, release_name, api_key):
             lines.append(f"CONTEXT: {cyclical_context}")
             lines.append("DATA:")
             for o in tactical_obs:
-                lines.append(f"  {o['date'][:7]}: {float(o['value']):>10.3f}")
+                lines.append(f"  {o['date'][:7]}  {float(o['value']):>12.3f}")
             lines.append("-" * 40)
         except Exception: continue
         
