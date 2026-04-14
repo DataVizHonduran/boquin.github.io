@@ -287,13 +287,13 @@ RELEASE_SERIES = {
         ("Revolving Credit (bn $, SA)", "REVOLSL"),
         ("Nonrevolving Credit (bn $, SA)", "NONREVSL"),
     ],
-    351: [  # Philly Fed Manufacturing
-        ("Philly Fed Business Activity Index", "GAPHIFRBPHI"),
-        ("Philly Fed New Orders Index", "GAPHIFRBPHINO"), # Highly cyclical
+    351: [  # Philly Fed: Use GACDFSA066MSFRBPHI for General Business Activity
+        ("Philly Fed Business Activity Index", "GACDFSA066MSFRBPHI"),
+        ("Philly Fed New Orders Index",        "NOBNDIF066MSFRBPHI"),
     ],
-    374: [  # Texas Manufacturing (Dallas Fed)
-        ("Texas Mfg Business Activity Index", "TXMFGBCINDX"),
-        ("Texas Mfg Outlook Index", "TXMFGGTINDX"),
+    374: [  # Dallas Fed: Use BACTSAMFRBDAL for General Business Activity
+        ("Texas Mfg Business Activity Index", "BACTSAMFRBDAL"),
+        ("Texas Mfg Outlook Index",           "TXMFGGTINDX"),
     ],
 }
 
@@ -328,8 +328,8 @@ CHART_SERIES = {
     231: ["DRCCLACBS", "CORCCACBS"],
     192: ["JTSJOL", "JTSQUR"],      # Track openings vs quits for labor tightness
     14:  ["REVOLSL", "NONREVSL"],   # Compare credit card vs auto/student loans
-    351: ["GAPHIFRBPHI"],           # Standard headline index
-    374: ["TXMFGBCINDX"],           # Standard headline index
+    351: ["GACDFSA066MSFRBPHI"],
+    374: ["BACTSAMFRBDAL"],
 }
 
 SYSTEM_PROMPT = """\
