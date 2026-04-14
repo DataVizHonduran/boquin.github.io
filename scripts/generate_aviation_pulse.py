@@ -81,7 +81,7 @@ REGIONS_ME: dict[str, dict] = {
 ALL_REGIONS: dict[str, dict] = {**REGIONS_EM, **REGIONS_ME}
 
 ALERT_CI_THRESHOLD  = 0.80
-ROLLING_WINDOW_DAYS = 7
+MAX_OBSERVATIONS = 240
 OPENSKY_URL         = "https://opensky-network.org/api/states/all"
 REQUEST_TIMEOUT_S   = 20
 
@@ -159,8 +159,7 @@ def load_history() -> list[dict]:
 
 def append_and_save_history(history: list[dict], new_row: dict) -> list[dict]:
     history.append(new_row)
-    cutoff = time.time() - ROLLING_WINDOW_DAYS * 86400
-    history = [r for r in history if r["ts"] >= cutoff]
+    history = history[-MAX_OBSERVATIONS:]
     HISTORY_FILE.write_text(json.dumps(history, indent=2))
     return history
 
