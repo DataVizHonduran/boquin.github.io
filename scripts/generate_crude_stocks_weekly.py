@@ -316,7 +316,7 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str, ts
 <body>
   <header>
     <h1>&#x1F6E2;&#xFE0F; Crude Oil Stocks by PAD District</h1>
-    <p>Last 252 days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
+    <p>Last {window_days} days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
   </header>
   <div class="chart-wrapper">
     <img src="{filename}?v={ts}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
