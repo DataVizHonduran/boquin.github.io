@@ -226,21 +226,28 @@ def draw_panel(ax, s: pd.Series, title: str) -> None:
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
 
-    trans = ax.get_xaxis_transform()
-    for yr in sorted(set(current.index.year)):
-        yr_start = mdates.date2num(pd.Timestamp(f"{yr}-01-01").to_pydatetime())
-        yr_end   = mdates.date2num(pd.Timestamp(f"{yr}-12-31").to_pydatetime())
-        xl = max(yr_start, ax_xmin)
-        xr = min(yr_end,   ax_xmax)
-        if xr <= xl:
-            continue
-        xmid = (xl + xr) / 2
-        xmid_frac = (xmid - ax_xmin) / (ax_xmax - ax_xmin)
-        ln = mlines.Line2D([xl, xr], [-0.10, -0.10],
-                           transform=trans, color="#555", lw=0.7, clip_on=False)
-        ax.add_line(ln)
-        ax.text(xmid_frac, -0.16, str(yr), transform=ax.transAxes,
-                ha="center", va="top", fontsize=7, color="#333")
+    # Interval=2 sets the "every two months" frequency
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    
+    # %b is short month (Jul), %y is short year (26)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b%y"))
+
+    ## original way Claude was having me do the x axis
+    # trans = ax.get_xaxis_transform()
+    # for yr in sorted(set(current.index.year)):
+    #     yr_start = mdates.date2num(pd.Timestamp(f"{yr}-01-01").to_pydatetime())
+    #     yr_end   = mdates.date2num(pd.Timestamp(f"{yr}-12-31").to_pydatetime())
+    #     xl = max(yr_start, ax_xmin)
+    #     xr = min(yr_end,   ax_xmax)
+    #     if xr <= xl:
+    #         continue
+    #     xmid = (xl + xr) / 2
+    #     xmid_frac = (xmid - ax_xmin) / (ax_xmax - ax_xmin)
+    #     ln = mlines.Line2D([xl, xr], [-0.10, -0.10],
+    #                        transform=trans, color="#555", lw=0.7, clip_on=False)
+    #     ax.add_line(ln)
+    #     ax.text(xmid_frac, -0.16, str(yr), transform=ax.transAxes,
+    #             ha="center", va="top", fontsize=7, color="#333")
 
     # ---- panel title ------------------------------------------------------
     ax.set_title(title, fontsize=8.5, color="#222", pad=4)
