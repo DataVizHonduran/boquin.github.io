@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — April 2026 (Month to Date)
 
-**Coverage Period:** Month to date: April 2026 (5 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: April 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -8,28 +8,35 @@
 
 To: Investment Team
 From: Senior Economist
-Date: April 14, 2026
+Date: April 15, 2026
 Subject: Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Federal Reserve districts. The following five papers provide the most critical insights for our current macro positioning and risk management:
+I have reviewed the latest research from the Federal Reserve districts. The following five publications are the most analytically significant for our current macro positioning and risk models.
 
-1. **[NY] Homeowner’s Insurance and Risk Sharing:** This research highlights the systemic vulnerability of the $48 trillion US housing asset base to natural disasters and the potential failure of private insurance to share that risk. For our outlook, this suggests a growing "hidden" tail risk where climate-driven insurance gaps could trigger a significant negative wealth effect for households.
+1. **Use of Gen AI in the Workplace (NY):** This research highlights that while Gen AI adoption is rapid, the actual productivity gain is bottlenecked by unequal access to training. For our outlook, this suggests a "lag effect" in GDP growth; we should not expect a productivity miracle until human capital investment catches up to software deployment.
 
-2. **[RIC] Bank Failures: Solvency and Liquidity:** The authors argue that bank failures are driven by weak fundamentals rather than spontaneous depositor panics. This reinforces the need for our credit team to prioritize deep-dive solvency analysis and asset quality over simple liquidity ratios when assessing banking sector stability.
+2. **Homeowner’s Insurance Contracts and Risk Sharing (NY):** With U.S. housing assets totaling $48 trillion, this paper examines how natural disaster risks are distributed across insurance contracts. This is critical for our systemic risk assessment, as gaps in risk sharing could lead to sudden, large-scale wealth shocks that dampen consumer spending.
 
-3. **[STL] Wealth Returns and Labor Supply:** This paper examines how expected returns on wealth influence labor participation during the current retirement boom. This is critical for our inflation models, as it suggests that asset market performance could exacerbate labor shortages and sustain wage-push inflation.
+3. **Bank Failures: Solvency and Liquidity (RIC):** The key insight here is that bank failures are fundamentally driven by weak solvency rather than simple liquidity panics. This implies that the Fed's "lender of last resort" facilities are secondary to the primary risk of asset-liability mismatches, necessitating a tighter focus on bank balance sheet quality in our financial sector coverage.
 
-4. **[NY] Emerging Market Resilience:** The analysis indicates that EM economies have developed significantly better financial buffers to withstand global shocks compared to previous cycles. This supports a more constructive allocation to EM assets, as the risk of systemic contagion from US volatility has likely diminished.
+4. **Expectations on Wealth Returns and Labor Supply (STL):** This study explores how the "retirement boom" is accelerated by high expected returns on portfolios, drawing workers out of the labor force. This creates a structural headwind for labor supply, which may keep wage pressure elevated and complicate the Fed's efforts to anchor inflation.
 
-5. **[NY] Fed Tools for Money Market Conditions:** This piece clarifies the interplay between administrative rates and balance sheet size in managing liquidity. Understanding this duality is essential for our short-term trading desk to accurately predict overnight rate volatility and the Fed's liquidity provision trajectory.
+5. **Fed Tools to Influence Money Market Conditions (NY):** This analysis clarifies the interplay between administrative rates and balance sheet size (QT/QE) in managing liquidity. Understanding this duality is essential for our short-term interest rate forecasts and for predicting volatility in the repo markets.
 
 **Synthesis:**
-The collective research signals a shift in focus toward structural vulnerabilities—specifically climate-related housing risk and demographic pressures on labor—while noting improved stability in global EM markets. Overall, the Fed is emphasizing that fundamental solvency, rather than market sentiment, remains the primary driver of systemic financial risk.
+The current research indicates a shift in focus from immediate pandemic-era volatility toward structural vulnerabilities in labor supply and financial solvency. We must weigh the long-term upside of AI-driven productivity against the immediate risks of a tightening labor market and systemic fragility in the housing and banking sectors.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+
+### (cached) [Use of Gen AI in the Workplace and the Value of Access to Training](https://libertystreeteconomics.newyorkfed.org/2026/04/use-of-gen-ai-in-the-workplace-and-the-value-of-access-to-training/)
+**Published:** 2026-04-14 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [What Millions of Homeowner’s Insurance Contracts Reveal About Risk Sharing](https://libertystreeteconomics.newyorkfed.org/2026/04/what-millions-of-homeowners-insurance-contracts-reveal-about-risk-sharing/)
 **Published:** 2026-04-13 | **Authors:** 
@@ -76,5 +83,5 @@ The study explores how expectations regarding wealth returns impact labor supply
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 5
-- Total cache size: 5 items
+- Already cached: 6
+- Total cache size: 6 items
