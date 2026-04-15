@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-04">
+    <meta name="release-date" content="2026-04-15">
+    <title>Empire State Manufacturing Survey — 2026-04-15</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Empire State Manufacturing Survey</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-04-15 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>-5.000</h3>
+            <p>CONTEXT: 10Y REGIME: 25.0th Percentile | Z-Score: -0.58σ | 10Y Range:</p>
+            <p class="card-period">2025-04</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">NY Fed General Business Conditions
+                <span class="mu-chart-latest">19.6</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+                        datasets: [{
+                            data: [18.7, 26.4, 27.1, 23.3, 29.5, 32.2, 36.0, 24.9, 33.9, 21.4, 14.3, -5.0, 2.5, 21.9, 22.7, 16.9, 15.6, 27.6, 19.3, 33.5, 30.3, 34.7, 31.0, 19.6],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: April 2026</strong></p>
+<p><strong>Subject: Empire State Manufacturing Survey – April Print Analysis</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The April Empire State Manufacturing Survey indicates a notable cooling in regional industrial activity, with the General Business Conditions index falling to 19.6. While the reading remains firmly in expansionary territory, the sharp deceleration from the March print (31.0) suggests that the momentum peak seen in early 2026 has passed.</p>
+
+<p>The overall tone is one of "normalization" rather than contraction. The data signals a moderation in industrial demand that may provide the Federal Reserve with additional headroom to maintain a neutral stance, as the risk of a manufacturing-led inflationary spike diminishes.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Momentum Deceleration:</strong> The index dropped 11.4 points month-on-month (MoM), representing a significant loss of velocity compared to the Q1 2026 average.</li>
+<li>  <strong>Sustained Expansion:</strong> Despite the drop, the 19.6 reading is substantially higher than the 10-year range floor (-6.40), confirming that the sector is not in a recessionary state.</li>
+<li>  <strong>Peak Cycle Signal:</strong> The sequence from December 2025 (33.5) through March 2026 (31.0) suggests a plateau has been reached, with April marking the first clear break from that high-growth cluster.</li>
+<li>  <strong>Relative Positioning:</strong> At the 25th percentile of the 10-year range, current conditions are modest relative to historical peaks, suggesting the "boom" phase of the recovery was transitory.</li>
+<li>  <strong>Volatility Return:</strong> The sharp swing from March to April indicates increased sensitivity to external headwinds or tightening financial conditions.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> Industrial growth is decelerating. The transition from a March reading of 31.0 to 19.6 in April suggests a cooling of the capital expenditure and production cycle, moving from "strong" to "moderate" growth.</p>
+
+<p><strong>(ii) Labor Market:</strong> While specific employment data was not provided, the General Business Conditions index remains positive. This implies that while the urgency for aggressive hiring may be waning, there is likely no immediate catalyst for widespread industrial layoffs.</p>
+
+<p><strong>(iii) Inflation:</strong> The moderation in business conditions typically correlates with a softening of pricing power. The downward trend in the index suggests a reduction in the "overheating" pressures that characterized the late 2025 period.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>With a <strong>Z-score of -0.58σ</strong> and a position at the <strong>25.0th percentile</strong>, the current regime is firmly categorized as a <strong>"mid-cycle pause."</strong> </p>
+
+<p>The Z-score is well within the |2.0| threshold, indicating that this print is not a regime-defining shock or a structural shift. Instead, the data reflects a standard cyclical oscillation. We are seeing a retreat from the overheating levels of early 2026 toward a more sustainable, long-term average.</p>
+
+<h3>5. Policy Outlook</h3>
+<p>The April data supports a <strong>"Hold"</strong> or a <strong>dovish tilt</strong> for the next FOMC meeting. The significant MoM decline in manufacturing sentiment reduces the risk of a pro-cyclical inflation surge, alleviating the pressure on the Fed to hike rates further. Given that the index remains positive (19.6), there is no immediate urgency for emergency cuts. We forecast the Fed will maintain current rates in the next window, monitoring whether the April deceleration is a one-month anomaly or the start of a broader industrial softening.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- EMPIRE STATE MANUFACTURING SURVEY: CYCLE-AWARE SUMMARY ---
+
+SERIES: NY Fed General Business Conditions [GAFDISA066MSFRBNY]
+CONTEXT: 10Y REGIME: 25.0th Percentile | Z-Score: -0.58σ | 10Y Range: [-6.40, 54.10]
+DATA:
+  2025-04        -5.000
+  2025-05         2.500
+  2025-06        21.900
+  2025-07        22.700
+  2025-08        16.900
+  2025-09        15.600
+  2025-10        27.600
+  2025-11        19.300
+  2025-12        33.500
+  2026-01        30.300
+  2026-02        34.700
+  2026-03        31.000
+  2026-04        19.600
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
