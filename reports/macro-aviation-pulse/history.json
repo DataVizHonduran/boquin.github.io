@@ -663,5 +663,19 @@
       "Turkey": 30,
       "Kuwait / Bahrain": 2
     }
+  },
+  {
+    "ts": 1776253836,
+    "counts": {
+      "Brazil": 161,
+      "Mexico": 277,
+      "South Korea": 68,
+      "China": 456,
+      "UAE": 37,
+      "Qatar": 2,
+      "Saudi Arabia": 0,
+      "Turkey": 36,
+      "Kuwait / Bahrain": 5
+    }
   }
 ]
