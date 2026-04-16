@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-15T08:34:59.242348+00:00",
-    "totalItems": 30
+    "lastRun": "2026-04-16T08:29:26.511286+00:00",
+    "totalItems": 33
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -58,7 +58,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-08T21:37:43.600815+00:00",
-      "lastChecked": "2026-04-15T08:34:59.242348+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Insufficient data provided to analyze the content of the article.",
       "tags": [
@@ -157,7 +157,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-10T08:25:12.411287+00:00",
-      "lastChecked": "2026-04-15T08:34:59.242348+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Insufficient data provided to analyze the content of the article.",
       "tags": [
@@ -593,7 +593,7 @@
       "publicationDate": "2026-04-13",
       "authors": [],
       "firstSeen": "2026-04-14T08:31:46.342020+00:00",
-      "lastChecked": "2026-04-15T08:34:59.242348+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
       "scrapedSnippet": "Housing is the largest component of assets held by households in the United States, totaling $48 trillion in 2025. When natural disasters strike, the resulting damage to homes can be large relative to households’ liquid savings. Homeowner’s insurance is the primary financial tool households use to protect themselves against property risk. Despite the economic importance of homeowner’s insurance, we know surprisingly little about how insurance contracts are actually designed with respect to property risk. In this post, which is based on our new paper, “Economics of Property Insurance,” we exami",
       "aiSummary": "This paper examines the role of homeowner's insurance as a primary mechanism for risk sharing and asset protection for U.S. households. It highlights the systemic importance of insurance in mitigating the financial shocks caused by natural disasters to the nation's largest household asset class.",
       "tags": [
@@ -615,11 +615,17 @@
       "publicationDate": "2026-04-14",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-15T08:34:59.242348+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
       "scrapedSnippet": "The rapid spread of generative AI (AI) tools is reshaping the workplace at a remarkable rate. Yet relatively little is known about whether workers have access to these tools, how the tools affect workers’ daily productivity, and how much workers value the training needed to use the tools effectively. In this post, we shed light on these issues by drawing on supplemental questions in the November 2025 Survey of Consumer Expectations (SCE), fielded to a representative sample of the U.S. population. We find that adoption of AI tools at work is heterogeneous, that a sizable share of workers see AI",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-15T08:34:59.242348+00:00"
+      "aiSummary": "This study examines the integration of generative AI in the workplace, focusing on tool accessibility and productivity gains. It highlights the significant value workers place on specialized training to utilize these technologies effectively.",
+      "tags": [
+        "AI & economy",
+        "labor markets",
+        "employment",
+        "wages",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
     },
     "de2e02df8e897d545c98494d37dc2fa439114b17fc6f20073934b0f44419acad": {
       "url": "https://www.dallasfed.org/research/economics/2026/0414",
@@ -630,11 +636,82 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-15T08:34:59.242348+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
-      "tags": [],
-      "tagsGeneratedAt": "2026-04-15T08:34:59.242348+00:00"
+      "aiSummary": "No content provided for analysis.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "GDP growth",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
+    },
+    "8c28f3c69381a007302cc8c08c799810261ffbe6bd9cdf1c053c727a75de9119": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/04/the-r-labor-share-nexus/",
+      "title": "The R*–Labor Share Nexus",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-04-15",
+      "authors": [
+        "Sophia Cho and John C. Williams"
+      ],
+      "firstSeen": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "scrapedSnippet": "Over the past quarter century, the U.S. economy has experienced significant declines in both the labor share of income and the natural rate of interest, referred to as R*. Existing research has largely analyzed these two developments in isolation. In this post, we provide a simple model that captures the joint evolution of the labor share and R*, which we call the R*–labor share nexus. Our key finding is that structural changes affecting R* also influence the evolution of the labor share, and thereby wages and prices. This highlights a potentially important channel, absent from many macroecono",
+      "aiSummary": "The paper proposes a model to analyze the simultaneous decline of the natural rate of interest (R*) and the labor share of income. It argues that these two macroeconomic trends are fundamentally linked rather than isolated phenomena.",
+      "tags": [
+        "monetary policy",
+        "interest rates",
+        "labor markets",
+        "wages",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
+    },
+    "f428b6f9c48de5306e22c888b32a4554033f16983b2dbeda47d4858ef0c6a413": {
+      "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-13",
+      "title": "Reserve Demand Estimation: A Proposal",
+      "district": "Richmond Fed (5th District)",
+      "districtCode": "RIC",
+      "contentType": "Economic Briefs",
+      "publicationDate": "2026-04-15",
+      "authors": [],
+      "firstSeen": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "scrapedSnippet": "Reserve-demand estimation is central to monetary policy implementation but tricky in practice. This discusses a proposal that could improve it.",
+      "aiSummary": "The author presents a new methodology for estimating reserve demand to enhance the precision of monetary policy implementation. The proposal aims to resolve practical difficulties inherent in current estimation techniques.",
+      "tags": [
+        "monetary policy",
+        "banking",
+        "financial stability",
+        "financial regulation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
+    },
+    "56662ad817d095d569a4459e0be4bd933db36e3aa9fe6c8b7284ee52897887c9": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98542/103041",
+      "title": "An Empirical Analysis of the Cost of Borrowing",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-04-15",
+      "authors": [],
+      "firstSeen": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper provides an empirical investigation into the determinants and trends of borrowing costs. It analyzes the factors influencing the pricing of credit across different market segments.",
+      "tags": [
+        "interest rates",
+        "credit",
+        "banking",
+        "financial stability",
+        "monetary policy"
+      ],
+      "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
     }
   }
 }
