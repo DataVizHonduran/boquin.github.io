@@ -1,36 +1,40 @@
 # 🏛️ Federal Reserve District Monitor — April 2026 (Month to Date)
 
-**Coverage Period:** Month to date: April 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: April 2026 (12 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+Team, I have reviewed the latest research coming out of the Fed districts. While there is a fair amount of noise, there are several critical pieces that impact our views on monetary policy transmission, financial stability, and structural growth.
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** April 16, 2026
-**RE:** Analysis of Recent Federal Reserve District Research
+Here are the most analytically significant publications:
 
-I have reviewed the latest research cycle from the Fed districts. While several papers focus on technical implementation, the following selections provide the most critical signals for our macro positioning and risk models.
+1. **[NY/RIC] Bank Failures: Solvency vs. Liquidity:** These papers collectively argue that while "runs" are the visible trigger, weak fundamentals and insolvency are the root causes of bank failures. For us, this means monitoring balance sheet quality and asset-liability mismatches is far more predictive of systemic risk than simply tracking short-term liquidity metrics.
 
-1. **[NY] The R*–Labor Share Nexus:** This research links the long-term decline in the natural rate of interest (R*) to the falling labor share of national income. If the structural decline in R* is tied to income distribution, it suggests that traditional monetary policy may have diminished potency in stimulating growth without exacerbating inequality.
+2. **[NY] The R*–Labor Share Nexus:** This research links the long-term decline in the natural rate of interest (R*) to the falling labor share of national income. If the structural decline in R* is tied to labor dynamics, any policy or economic shift that restores labor's bargaining power could put upward pressure on the neutral rate, complicating the Fed's long-term terminal rate projections.
 
-2. **[NY] Use of Gen AI in the Workplace:** This study evaluates the actual penetration of Gen AI and the critical role of corporate training in realizing productivity gains. For our equity valuations, this highlights that "AI adoption" is a lagging indicator of training infrastructure, meaning the productivity boom may be more concentrated and slower to scale than the market currently prices.
+3. **[NY] Use of Gen AI in the Workplace:** This study examines the actual penetration of AI and the necessity of training to realize productivity gains. From a macro perspective, this suggests that the "AI productivity miracle" will not be automatic; the pace of GDP growth will depend heavily on corporate investment in human capital and training, not just software procurement.
 
-3. **[RIC] Bank Failures: Solvency and Liquidity:** The authors argue that depositor panics are symptoms rather than causes, with weak fundamentals almost always preceding the collapse. This reinforces our view that we should prioritize solvency metrics (asset quality) over liquidity ratios when screening regional bank exposure.
+4. **[NY] Emerging Market Resilience:** This analysis questions the perceived resilience of EMs during recent global shocks. For our global macro strategy, this serves as a warning that current EM stability may be fragile or superficial, increasing the risk of sudden capital outflows if U.S. real rates remain elevated.
 
-4. **[NY] Emerging Market Resilience During Recent Shocks:** This analysis questions whether the perceived resilience of EMs is sustainable or a temporary byproduct of specific shock profiles. It suggests a potential vulnerability in EM assets if the next cycle of shocks hits different structural pressure points, warranting a more cautious approach to EM duration.
+5. **[NY] Homeowner’s Insurance and Risk Sharing:** With $48 trillion in housing assets, this research highlights how insurance contracts are failing to effectively share the risk of natural disasters. This points to a growing "hidden" fiscal liability and a potential catalyst for localized financial instability as insurance gaps widen in high-risk zones.
 
-5. **[NY] Homeowner’s Insurance and Risk Sharing:** With $48 trillion in residential assets, this paper examines how insurance contracts distribute disaster risk. As climate-related volatility increases, a failure in this risk-sharing mechanism could lead to sudden household wealth shocks, creating a direct transmission channel to reduced consumer spending.
+6. **[NY] Fed Tools for Money Market Conditions:** This clarifies the interplay between administrative rates and balance sheet size (QT/QE) in controlling short-term funding. Understanding this duality is essential for our trading desk to anticipate how the Fed will manage liquidity drains without triggering a repeat of the 2019 repo spike.
 
-**Synthesis:** The current research suggests a transition from "liquidity-driven" concerns to "structural-driven" risks, specifically regarding AI productivity lags and the fragility of household wealth. We must adjust our models to account for a potentially lower structural R* and heightened vulnerability in EM and residential asset stability.
+**Synthesis:** The research suggests a transition from a regime of "liquidity-driven" concerns to "structural" ones, specifically regarding labor's role in R* and the actual implementation of AI. We should shift our focus toward fundamental solvency and productivity bottlenecks rather than relying on surface-level liquidity indicators.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 6
+
+### (cached) [Bank Failures: The Roles of Solvency and Liquidity](https://libertystreeteconomics.newyorkfed.org/2026/04/bank-failures-the-roles-of-solvency-and-liquidity/)
+**Published:** 2026-04-16 | **Authors:** Sergio Correia, Stephan Luck, and Emil Verner
+
+The paper examines the primary drivers of bank failures, arguing that insolvency is typically the root cause rather than liquidity runs. It suggests that while bank runs accelerate failure, they are often symptoms of underlying insolvency.
+
+**Tags:** financial stability · banking · credit · financial regulation
 
 ### (cached) [The R*–Labor Share Nexus](https://libertystreeteconomics.newyorkfed.org/2026/04/the-r-labor-share-nexus/)
 **Published:** 2026-04-15 | **Authors:** Sophia Cho and John C. Williams
@@ -84,8 +88,25 @@ The paper argues that bank failures are primarily driven by weak underlying fund
 
 **Tags:** banking · financial stability · financial regulation · credit · recession
 
+## Atlanta Fed (6th District)
+**Content Type:** Macroblog | **New:** 0 of 1
+
+### (cached) [Can Export Promotion Help Close the Trade Gap?](https://www.atlantafed.org/research-and-data/publications/policy-hub-macroblog/2026/04/15/can-export-promotion-help-close-trade-gap)
+**Published:** 2026-04-15 | **Authors:** 
+
+The analysis evaluates the effectiveness of export promotion strategies in reducing trade deficits. It specifically highlights the historical role of the Export-Import Bank in shaping US trade policy.
+
+**Tags:** trade · international · gdp growth · fiscal policy
+
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 2
+**Content Type:** Working Papers | **New:** 0 of 3
+
+### (cached) [Stabilization vs. Growth](https://www.fedinprint.org/item/fedlwp/103046/original)
+**Published:** 2026-04-16 | **Authors:** 
+
+No content provided for analysis.
+
+**Tags:** 
 
 ### (cached) [An Empirical Analysis of the Cost of Borrowing](https://www.fedinprint.org/item/fedlwp/98542/103041)
 **Published:** 2026-04-15 | **Authors:** 
@@ -105,5 +126,5 @@ The study explores how expectations regarding wealth returns impact labor supply
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 9
-- Total cache size: 9 items
+- Already cached: 12
+- Total cache size: 12 items

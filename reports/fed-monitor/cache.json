@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-16T08:29:26.511286+00:00",
-    "totalItems": 33
+    "lastRun": "2026-04-17T08:29:47.002020+00:00",
+    "totalItems": 37
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -157,7 +157,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-10T08:25:12.411287+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Insufficient data provided to analyze the content of the article.",
       "tags": [
@@ -615,7 +615,7 @@
       "publicationDate": "2026-04-14",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "The rapid spread of generative AI (AI) tools is reshaping the workplace at a remarkable rate. Yet relatively little is known about whether workers have access to these tools, how the tools affect workers’ daily productivity, and how much workers value the training needed to use the tools effectively. In this post, we shed light on these issues by drawing on supplemental questions in the November 2025 Survey of Consumer Expectations (SCE), fielded to a representative sample of the U.S. population. We find that adoption of AI tools at work is heterogeneous, that a sizable share of workers see AI",
       "aiSummary": "This study examines the integration of generative AI in the workplace, focusing on tool accessibility and productivity gains. It highlights the significant value workers place on specialized training to utilize these technologies effectively.",
       "tags": [
@@ -636,7 +636,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -659,7 +659,7 @@
         "Sophia Cho and John C. Williams"
       ],
       "firstSeen": "2026-04-16T08:29:26.511286+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "Over the past quarter century, the U.S. economy has experienced significant declines in both the labor share of income and the natural rate of interest, referred to as R*. Existing research has largely analyzed these two developments in isolation. In this post, we provide a simple model that captures the joint evolution of the labor share and R*, which we call the R*–labor share nexus. Our key finding is that structural changes affecting R* also influence the evolution of the labor share, and thereby wages and prices. This highlights a potentially important channel, absent from many macroecono",
       "aiSummary": "The paper proposes a model to analyze the simultaneous decline of the natural rate of interest (R*) and the labor share of income. It argues that these two macroeconomic trends are fundamentally linked rather than isolated phenomena.",
       "tags": [
@@ -680,7 +680,7 @@
       "publicationDate": "2026-04-15",
       "authors": [],
       "firstSeen": "2026-04-16T08:29:26.511286+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "Reserve-demand estimation is central to monetary policy implementation but tricky in practice. This discusses a proposal that could improve it.",
       "aiSummary": "The author presents a new methodology for estimating reserve demand to enhance the precision of monetary policy implementation. The proposal aims to resolve practical difficulties inherent in current estimation techniques.",
       "tags": [
@@ -701,7 +701,7 @@
       "publicationDate": "2026-04-15",
       "authors": [],
       "firstSeen": "2026-04-16T08:29:26.511286+00:00",
-      "lastChecked": "2026-04-16T08:29:26.511286+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The paper provides an empirical investigation into the determinants and trends of borrowing costs. It analyzes the factors influencing the pricing of credit across different market segments.",
       "tags": [
@@ -712,6 +712,78 @@
         "monetary policy"
       ],
       "tagsGeneratedAt": "2026-04-16T08:29:26.511286+00:00"
+    },
+    "96a0b587e6613588488ae0b6fe8fbbcdbc34e54878b8d2dda9273df068d52364": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/04/bank-failures-the-roles-of-solvency-and-liquidity/",
+      "title": "Bank Failures: The Roles of Solvency and Liquidity",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-04-16",
+      "authors": [
+        "Sergio Correia, Stephan Luck, and Emil Verner"
+      ],
+      "firstSeen": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "scrapedSnippet": "Do banks fail because of runs or because they become insolvent? Answering this question is central to understanding financial crises and designing effective financial stability policies. Long-run historical evidence reveals that the root cause of bank failures is usually insolvency. The importance of bank runs is somewhat overstated. Runs matter, but in most cases they trigger or accelerate failure at already weak banks, rather than cause otherwise sound banks to fail.",
+      "aiSummary": "The paper examines the primary drivers of bank failures, arguing that insolvency is typically the root cause rather than liquidity runs. It suggests that while bank runs accelerate failure, they are often symptoms of underlying insolvency.",
+      "tags": [
+        "financial stability",
+        "banking",
+        "credit",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
+    },
+    "d77c1af6aff8b8da9a83d439decf3abbd7f6b92c4dfd93b0cbd5fb30dbc14963": {
+      "url": "https://www.atlantafed.org/research-and-data/publications/policy-hub-macroblog/2026/04/15/can-export-promotion-help-close-trade-gap",
+      "title": "Can Export Promotion Help Close the Trade Gap?",
+      "district": "Atlanta Fed (6th District)",
+      "districtCode": "ATL",
+      "contentType": "Macroblog",
+      "publicationDate": "2026-04-15",
+      "authors": [],
+      "firstSeen": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "scrapedSnippet": "A post looks at the role of the Export-Import Bank, which in years past has played an effective role in US trade policy.",
+      "aiSummary": "The analysis evaluates the effectiveness of export promotion strategies in reducing trade deficits. It specifically highlights the historical role of the Export-Import Bank in shaping US trade policy.",
+      "tags": [
+        "trade",
+        "international",
+        "gdp growth",
+        "fiscal policy"
+      ],
+      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
+    },
+    "1c75583571787d27bc991e25a961fdfacc290fe3c2c9f28250c90ff8bdded844": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0416",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
+    },
+    "80596e43f7d6ae6691a5a5961c47cbed74a4c74bafb5662e07bef5c9fa355177": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103046/original",
+      "title": "Stabilization vs. Growth",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-04-16",
+      "authors": [],
+      "firstSeen": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
     }
   }
 }
