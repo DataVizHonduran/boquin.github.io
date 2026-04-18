@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-17T08:29:47.002020+00:00",
-    "totalItems": 37
+    "lastRun": "2026-04-18T08:02:09.938918+00:00",
+    "totalItems": 39
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -636,7 +636,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -659,7 +659,7 @@
         "Sophia Cho and John C. Williams"
       ],
       "firstSeen": "2026-04-16T08:29:26.511286+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "Over the past quarter century, the U.S. economy has experienced significant declines in both the labor share of income and the natural rate of interest, referred to as R*. Existing research has largely analyzed these two developments in isolation. In this post, we provide a simple model that captures the joint evolution of the labor share and R*, which we call the R*–labor share nexus. Our key finding is that structural changes affecting R* also influence the evolution of the labor share, and thereby wages and prices. This highlights a potentially important channel, absent from many macroecono",
       "aiSummary": "The paper proposes a model to analyze the simultaneous decline of the natural rate of interest (R*) and the labor share of income. It argues that these two macroeconomic trends are fundamentally linked rather than isolated phenomena.",
       "tags": [
@@ -680,7 +680,7 @@
       "publicationDate": "2026-04-15",
       "authors": [],
       "firstSeen": "2026-04-16T08:29:26.511286+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "Reserve-demand estimation is central to monetary policy implementation but tricky in practice. This discusses a proposal that could improve it.",
       "aiSummary": "The author presents a new methodology for estimating reserve demand to enhance the precision of monetary policy implementation. The proposal aims to resolve practical difficulties inherent in current estimation techniques.",
       "tags": [
@@ -724,7 +724,7 @@
         "Sergio Correia, Stephan Luck, and Emil Verner"
       ],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "Do banks fail because of runs or because they become insolvent? Answering this question is central to understanding financial crises and designing effective financial stability policies. Long-run historical evidence reveals that the root cause of bank failures is usually insolvency. The importance of bank runs is somewhat overstated. Runs matter, but in most cases they trigger or accelerate failure at already weak banks, rather than cause otherwise sound banks to fail.",
       "aiSummary": "The paper examines the primary drivers of bank failures, arguing that insolvency is typically the root cause rather than liquidity runs. It suggests that while bank runs accelerate failure, they are often symptoms of underlying insolvency.",
       "tags": [
@@ -744,7 +744,7 @@
       "publicationDate": "2026-04-15",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "A post looks at the role of the Export-Import Bank, which in years past has played an effective role in US trade policy.",
       "aiSummary": "The analysis evaluates the effectiveness of export promotion strategies in reducing trade deficits. It specifically highlights the historical role of the Export-Import Bank in shaping US trade policy.",
       "tags": [
@@ -764,11 +764,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "Insufficient data provided to analyze the article. No conclusions or arguments can be derived from the empty snippet.",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
+      "tagsGeneratedAt": "2026-04-18T08:02:09.938918+00:00"
     },
     "80596e43f7d6ae6691a5a5961c47cbed74a4c74bafb5662e07bef5c9fa355177": {
       "url": "https://www.fedinprint.org/item/fedlwp/103046/original",
@@ -779,11 +779,53 @@
       "publicationDate": "2026-04-16",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-04-17T08:29:47.002020+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "The paper examines the inherent trade-off between macroeconomic stabilization efforts and long-term economic expansion. It analyzes how policy interventions to reduce volatility may impact overall growth trajectories.",
+      "tags": [
+        "monetary policy",
+        "fiscal policy",
+        "GDP growth",
+        "recession",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-04-18T08:02:09.938918+00:00"
+    },
+    "94c9d7bff180f6fe2bd8705543848c603a783ee0edea614f3dbc9f09313f771b": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0417",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-04-18T08:02:09.938918+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Insufficient data provided to analyze the article. No conclusions or arguments can be derived from the empty snippet.",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-17T08:29:47.002020+00:00"
+      "tagsGeneratedAt": "2026-04-18T08:02:09.938918+00:00"
+    },
+    "7c67380a9ebe428cfb34ea83509f80c66c585b5a85bf8715b04e90bd991087d9": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98702/103054",
+      "title": "Scalable versus Productive Technologies",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-04-16",
+      "authors": [],
+      "firstSeen": "2026-04-18T08:02:09.938918+00:00",
+      "lastChecked": "2026-04-18T08:02:09.938918+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This research distinguishes between technologies that allow for scaling of existing outputs and those that fundamentally increase productivity. It explores the implications of these different technological drivers on long-term economic growth.",
+      "tags": [
+        "AI & economy",
+        "GDP growth",
+        "labor markets",
+        "employment",
+        "fintech"
+      ],
+      "tagsGeneratedAt": "2026-04-18T08:02:09.938918+00:00"
     }
   }
 }

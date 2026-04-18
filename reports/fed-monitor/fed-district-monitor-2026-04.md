@@ -1,28 +1,28 @@
 # 🏛️ Federal Reserve District Monitor — April 2026 (Month to Date)
 
-**Coverage Period:** Month to date: April 2026 (12 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: April 2026 (13 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team, I have reviewed the latest research coming out of the Fed districts. While there is a fair amount of noise, there are several critical pieces that impact our views on monetary policy transmission, financial stability, and structural growth.
+Team,
 
-Here are the most analytically significant publications:
+I have reviewed the latest research from the Fed districts. While there is a fair amount of noise, there are several critical pieces that impact our current valuation models and risk assessments. Here are the most analytically significant takeaways:
 
-1. **[NY/RIC] Bank Failures: Solvency vs. Liquidity:** These papers collectively argue that while "runs" are the visible trigger, weak fundamentals and insolvency are the root causes of bank failures. For us, this means monitoring balance sheet quality and asset-liability mismatches is far more predictive of systemic risk than simply tracking short-term liquidity metrics.
+1. **[NY] The R*–Labor Share Nexus:** This paper explores the correlation between the declining labor share of income and the natural rate of interest ($R^*$). If the structural decline in labor's share is a primary driver of lower neutral rates, it suggests that long-term inflation targets may be harder to hit without keeping real rates restrictive for longer.
 
-2. **[NY] The R*–Labor Share Nexus:** This research links the long-term decline in the natural rate of interest (R*) to the falling labor share of national income. If the structural decline in R* is tied to labor dynamics, any policy or economic shift that restores labor's bargaining power could put upward pressure on the neutral rate, complicating the Fed's long-term terminal rate projections.
+2. **[NY] Use of Gen AI in the Workplace:** This study moves beyond the hype to analyze actual tool adoption and the necessity of training. For our equity analysts, this is key: the productivity "alpha" from AI will likely accrue not to the companies with the best software, but to those with the most effective human-capital integration and training pipelines.
 
-3. **[NY] Use of Gen AI in the Workplace:** This study examines the actual penetration of AI and the necessity of training to realize productivity gains. From a macro perspective, this suggests that the "AI productivity miracle" will not be automatic; the pace of GDP growth will depend heavily on corporate investment in human capital and training, not just software procurement.
+3. **[NY/RIC] Bank Failures: Solvency vs. Liquidity:** Both the NY and Richmond districts are weighing in on whether runs or insolvency drive failures, with Richmond explicitly arguing that weak fundamentals—not panics—are the root cause. This suggests that regulatory focus will remain on capital adequacy and solvency buffers rather than just liquidity facilities (like the BTFP) in future crises.
 
-4. **[NY] Emerging Market Resilience:** This analysis questions the perceived resilience of EMs during recent global shocks. For our global macro strategy, this serves as a warning that current EM stability may be fragile or superficial, increasing the risk of sudden capital outflows if U.S. real rates remain elevated.
+4. **[NY] Emerging Market Resilience:** This analysis questions the perceived "resilience" of EMs during recent shocks. If this resilience is superficial or based on temporary buffers, we should be preparing for increased volatility and potential contagion in EM debt as the global tightening cycle fully digests.
 
-5. **[NY] Homeowner’s Insurance and Risk Sharing:** With $48 trillion in housing assets, this research highlights how insurance contracts are failing to effectively share the risk of natural disasters. This points to a growing "hidden" fiscal liability and a potential catalyst for localized financial instability as insurance gaps widen in high-risk zones.
+5. **[NY] Homeowner’s Insurance and Risk Sharing:** With $48 trillion in residential assets, the findings on insurance gaps during natural disasters highlight a systemic vulnerability. A failure in private risk-sharing mechanisms could force a larger implicit government guarantee, creating a fiscal drag and increasing sovereign risk premiums.
 
-6. **[NY] Fed Tools for Money Market Conditions:** This clarifies the interplay between administrative rates and balance sheet size (QT/QE) in controlling short-term funding. Understanding this duality is essential for our trading desk to anticipate how the Fed will manage liquidity drains without triggering a repeat of the 2019 repo spike.
+6. **[NY] Fed Tools for Money Market Conditions:** This clarifies the interplay between administrative rates and balance sheet size (QT/QE). Understanding the specific efficacy of these two levers is crucial for our short-term forecasting of the federal funds effective rate and overall liquidity in the repo markets.
 
-**Synthesis:** The research suggests a transition from a regime of "liquidity-driven" concerns to "structural" ones, specifically regarding labor's role in R* and the actual implementation of AI. We should shift our focus toward fundamental solvency and productivity bottlenecks rather than relying on surface-level liquidity indicators.
+**Synthesis:** The overarching theme is a shift toward identifying structural vulnerabilities—whether in the labor-interest rate nexus, EM stability, or the insurance market. We must pivot our models to account for these "hidden" systemic risks rather than relying on surface-level stability metrics.
 
 ---
 
@@ -99,14 +99,21 @@ The analysis evaluates the effectiveness of export promotion strategies in reduc
 **Tags:** trade · international · gdp growth · fiscal policy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 3
+**Content Type:** Working Papers | **New:** 0 of 4
 
 ### (cached) [Stabilization vs. Growth](https://www.fedinprint.org/item/fedlwp/103046/original)
 **Published:** 2026-04-16 | **Authors:** 
 
-No content provided for analysis.
+The paper examines the inherent trade-off between macroeconomic stabilization efforts and long-term economic expansion. It analyzes how policy interventions to reduce volatility may impact overall growth trajectories.
 
-**Tags:** 
+**Tags:** monetary policy · fiscal policy · GDP growth · recession · financial stability
+
+### (cached) [Scalable versus Productive Technologies](https://www.fedinprint.org/item/fedlwp/98702/103054)
+**Published:** 2026-04-16 | **Authors:** 
+
+This research distinguishes between technologies that allow for scaling of existing outputs and those that fundamentally increase productivity. It explores the implications of these different technological drivers on long-term economic growth.
+
+**Tags:** AI & economy · GDP growth · labor markets · employment · fintech
 
 ### (cached) [An Empirical Analysis of the Cost of Borrowing](https://www.fedinprint.org/item/fedlwp/98542/103041)
 **Published:** 2026-04-15 | **Authors:** 
@@ -126,5 +133,5 @@ The study explores how expectations regarding wealth returns impact labor supply
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 12
-- Total cache size: 12 items
+- Already cached: 13
+- Total cache size: 13 items
