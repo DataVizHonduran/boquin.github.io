@@ -1,8 +1,6 @@
-## EIA Weekly Petroleum Analysis: April 22, 2026
+## EIA Weekly Petroleum Analysis: Week Ending 2026-04-10
 
 ### Executive Summary
-The latest EIA data reveals a broad-based draw across all major product categories. While crude remains balanced, the refined product complex—specifically distillates—is flashing severe scarcity signals.
-
 | Product | MMBbl | WoW | Seasonal % | Signal |
 | :--- | :--- | :--- | :--- | :--- |
 | **Crude Oil** | 463.8 | -0.9 | 55.7% | Neutral |
@@ -12,24 +10,23 @@ The latest EIA data reveals a broad-based draw across all major product categori
 ---
 
 ### 1. Crude Oil Positioning
-* **Overall:** A modest draw of 0.9 MMBbl keeps total NUS stocks near the seasonal median (55.7%), suggesting a well-balanced market.
-* **PADD 3 Focus:** The Gulf Coast remains the primary storage hub at 271.0 MMBbl, sitting high in its 5-year range (74.9%). This provides a significant buffer for refineries as they ramp up for summer grades.
+* **NUS Total:** A modest draw of 0.9 MMBbl keeps total stocks near the median of the 5-year seasonal range (55.7%), suggesting a balanced market.
+* **PADD 3 Highlight:** The Gulf Coast remains the primary outlier at 74.9% of its seasonal range. This concentration of supply in the refining hub acts as a ceiling for WTI upside, offsetting draws in other regions.
 
 ### 2. Gasoline Positioning
-* **Demand Signal:** A robust 6.3 MMBbl draw indicates strong early-season demand as the U.S. enters the spring driving window.
-* **Tightness:** At 26.8% of the 5-year range, stocks are leaning toward a deficit. PADD 5 (West Coast) is particularly lean at 14.7%, suggesting localized price volatility.
+* **Seasonal Tightness:** Stocks are leaning tight at 26.8% of the 5-year range.
+* **Demand Signal:** A significant WoW draw of 6.3 MMBbl indicates a strong ramp-up in demand as the market enters the spring driving season. PADD 5 (West Coast) is particularly lean at 14.7%, suggesting localized price volatility.
 
 ### 3. Distillate Positioning
-* **Critical Scarcity:** Distillates are in a severe seasonal deficit, sitting at just 8.1% of the 5-year range.
-* **Demand Signal:** The 3.1 MMBbl draw is significant given the already low base. PADD 5 is effectively depleted (-0.4% of range), indicating extreme tightness in diesel/heating oil availability on the West Coast.
+* **Seasonal Tightness:** Distillates are in a critical deficit, sitting at only 8.1% of the 5-year seasonal range.
+* **Demand Signal:** The 3.1 MMBbl draw, coupled with near-zero stocks in PADD 5 (-0.4%), suggests an aggressive burn-off of winter heating oil reserves and robust diesel demand for spring agricultural activity.
 
 ### 4. Cross-Product Divergences
-* **Crude vs. Products:** There is a clear divergence between "loose" crude (median positioning) and "tight" products. Refineries are successfully converting crude into products, but the consumption rate for distillates is outstripping production capacity.
-* **Gasoline vs. Diesel:** While gasoline is tight, distillates are in a state of emergency, suggesting a stronger industrial/logistics demand signal than a consumer travel signal.
+* **Refining Shift:** We see a clear divergence between crude and products. While crude stocks are neutral/balanced, refined products (Gasoline and Distillates) are significantly undersupplied relative to seasonal norms. This indicates high refinery utilization rates and a shift in the "bottleneck" from raw material to finished product.
 
 ### 5. Price Implications
-* **WTI:** **Neutral.** Balanced stocks and a modest draw provide no strong catalyst for a breakout.
-* **Refined Products:** **Bullish.** The extreme deficit in distillates should support a widening crack spread, particularly for diesel. Gasoline prices likely have a firm floor due to the 6.3 MMBbl draw.
+* **WTI:** **Neutral.** The modest draw is offset by the heavy inventory concentration in PADD 3.
+* **Refined Products:** **Bullish.** Both Gasoline and Distillates are trading in a tight seasonal window with active draws. Expect RBOB and ULSD cracks to widen as inventories move toward the bottom of the 5-year range.
 
 ### 6. Watchlist for Next Wednesday
-**PADD 3 Distillate Levels:** With the national average at 8.1% of the range, any further draw in the Gulf Coast (PADD 3) could trigger a sharp spike in diesel futures as the market realizes there is no remaining safety margin.
+* **PADD 3 Crude Levels:** Watch for any significant draw in the Gulf Coast. If PADD 3 begins to clear its surplus, it will remove the primary bearish anchor for WTI and could trigger a sharp price rally.
