@@ -188,12 +188,14 @@ def _parse_date(text: str) -> datetime | None:
 # ---------------------------------------------------------------------------
 
 def _extract_speaker(title: str) -> str:
-    """Match known Junta de Gobierno member names from title or byline."""
-    known_names = list(BASELINES.keys())
-    for full_name in known_names:
-        last = full_name.split()[-1]
-        if last in title:
-            return full_name
+    """Match known Junta de Gobierno member names from title or byline.
+    Checks every individual name token so 'Victoria Rodríguez' matches
+    'Victoria Rodríguez Ceja' even when the apellido materno is absent.
+    """
+    for full_name in BASELINES:
+        for token in full_name.split():
+            if len(token) > 3 and token in title:
+                return full_name
     return ""
 
 
