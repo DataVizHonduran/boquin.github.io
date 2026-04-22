@@ -110,7 +110,7 @@ def build_commentary_block(commentary_md: str, generated_at: str) -> str:
   <div style="background:white;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);padding:30px;">
     <div style="border-left:4px solid #007bff;padding-left:16px;margin-bottom:20px;">
       <h2 style="color:#333;margin:0 0 4px;">AI Commentary</h2>
-      <p style="color:#666;font-size:0.85em;margin:0;">Generated {{generated_at}} UTC · google/gemma-4-31B-it</p>
+      <p style="color:#666;font-size:0.85em;margin:0;">Generated {generated_at} UTC · google/gemma-4-31B-it</p>
     </div>
     <div class="commentary" style="line-height:1.7;color:#444;">
       <style>
@@ -121,7 +121,7 @@ def build_commentary_block(commentary_md: str, generated_at: str) -> str:
         .commentary ul {{padding-left:20px;}}
         .commentary li {{margin:4px 0;}}
       </style>
-      {{body_html}}
+      {body_html}
     </div>
   </div>
 </div>
