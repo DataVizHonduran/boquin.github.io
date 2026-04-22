@@ -1,0 +1,41 @@
+name: Update TSA Tracker
+
+on:
+  schedule:
+    # 15:00 UTC daily (~11 AM ET — after TSA typically pushes updates)
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install playwright pandas openpyxl plotly
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Generate TSA Tracker
+        run: python scripts/generate_tsa_tracker.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/tsa-tracker/index.html reports/tsa-tracker/historical.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update: TSA Tracker $(date +'%Y-%m-%d')"
+            git push
+          fi
