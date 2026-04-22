@@ -148,26 +148,38 @@ def check_freshness(series_dict: dict) -> None:
 # ---------------------------------------------------------------------------
 def seasonal_band(s: pd.Series, window: pd.Series) -> tuple[np.ndarray, np.ndarray]:
     """
-    For each date in window, find the nearest EIA data point from exactly
-    1, 2, 3, 4, and 5 years prior (within ±10 days), then return min/max.
-    E.g. for Sep 1 2025 → looks up ~Sep 1 of 2024, 2023, 2022, 2021, 2020.
+    Calculates the 5-year seasonal envelope using Day-of-Year normalization.
+    Aligns historical data by relative calendar position to ensure a smooth
+    continuous range, mitigating weekly date-shift jitter.
     """
+    end_date = window.index.min() - pd.Timedelta(days=1)
+    start_date = end_date - pd.DateOffset(years=5)
+    hist_data = s[start_date:end_date].copy()
+
+    df_hist = hist_data.to_frame(name='value')
+    df_hist['doy'] = df_hist.index.dayofyear
+    df_hist['year'] = df_hist.index.year
+
     lo_vals, hi_vals = [], []
 
     for dt in window.index:
-        bucket = []
-        for years_back in range(1, 6):
-            target = dt - pd.DateOffset(years=years_back)
-            days_diff = pd.Series(
-                (s.index - target).days, index=s.index
-            ).abs()
-            candidates = s[days_diff <= 10]
-            if not candidates.empty:
-                bucket.append(float(candidates.iloc[days_diff[days_diff <= 10].values.argmin()]))
-        lo_vals.append(min(bucket) if bucket else np.nan)
-        hi_vals.append(max(bucket) if bucket else np.nan)
+        target_doy = dt.dayofyear
+        doy_min = target_doy - 7
+        doy_max = target_doy + 7
+        mask = (df_hist['doy'] >= doy_min) & (df_hist['doy'] <= doy_max)
+        bucket = df_hist.loc[mask, 'value']
 
-    return np.array(lo_vals), np.array(hi_vals)
+        if len(bucket) >= 3:
+            lo_vals.append(bucket.min())
+            hi_vals.append(bucket.max())
+        else:
+            lo_vals.append(np.nan)
+            hi_vals.append(np.nan)
+
+    lo_series = pd.Series(lo_vals).interpolate(limit_direction='both').values
+    hi_series = pd.Series(hi_vals).interpolate(limit_direction='both').values
+
+    return lo_series, hi_series
 
 
 # ---------------------------------------------------------------------------
@@ -316,7 +328,7 @@ def generate_index_html(filename: str, latest_date_str: str, output_dir: str, ts
 <body>
   <header>
     <h1>&#x1F6E2;&#xFE0F; Crude Oil Stocks by PAD District</h1>
-    <p>Last {window_days} days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
+    <p>Last {WINDOW_DAYS} days with 5-year seasonal range &mdash; week ending {latest_date_str}</p>
   </header>
   <div class="chart-wrapper">
     <img src="{filename}?v={ts}" alt="Crude Oil Stocks by PADD {latest_date_str}" />
