@@ -278,6 +278,49 @@ def build_figure(series_dict: dict, figure_title: str) -> plt.Figure:
 
 
 # ---------------------------------------------------------------------------
+# CSV export
+# ---------------------------------------------------------------------------
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "reports", "petroleum-stocks", "data")
+
+def save_csvs(series_dict: dict, product_id: str) -> None:
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+    # -- raw: full history, long format (date, duoarea, value_mmbbl) ---------
+    raw_rows = []
+    for da, s in series_dict.items():
+        for dt, val in s.items():
+            raw_rows.append({"date": dt.date(), "duoarea": da, "value_mmbbl": round(val, 3)})
+    raw_df = pd.DataFrame(raw_rows).sort_values(["date", "duoarea"])
+    raw_path = os.path.join(DATA_DIR, f"{product_id}_raw.csv")
+    raw_df.to_csv(raw_path, index=False)
+    print(f"Saved: {raw_path}")
+
+    # -- seasonal: last WINDOW_DAYS, includes lo/hi and % of range ----------
+    seasonal_rows = []
+    for da, s in series_dict.items():
+        cutoff  = s.index.max() - pd.Timedelta(days=WINDOW_DAYS)
+        current = s[s.index >= cutoff]
+        lo, hi  = seasonal_band(s, current)
+        for i, (dt, val) in enumerate(current.items()):
+            lo_v = round(float(lo[i]), 3)
+            hi_v = round(float(hi[i]), 3)
+            spread = hi_v - lo_v
+            pct = round((val - lo_v) / spread * 100, 1) if spread > 0 else None
+            seasonal_rows.append({
+                "date":         dt.date(),
+                "duoarea":      da,
+                "value_mmbbl":  round(val, 3),
+                "seasonal_lo":  lo_v,
+                "seasonal_hi":  hi_v,
+                "pct_of_range": pct,
+            })
+    seasonal_df = pd.DataFrame(seasonal_rows).sort_values(["date", "duoarea"])
+    seasonal_path = os.path.join(DATA_DIR, f"{product_id}_seasonal.csv")
+    seasonal_df.to_csv(seasonal_path, index=False)
+    print(f"Saved: {seasonal_path}")
+
+
+# ---------------------------------------------------------------------------
 # HTML wrapper (three tabs)
 # ---------------------------------------------------------------------------
 def generate_index_html(
@@ -398,6 +441,7 @@ def main():
         plt.close(fig)
         print(f"Saved: {out_path}")
 
+        save_csvs(series_dict, product["id"])
         output_files[product["id"]] = filename
 
     if len(output_files) == 3:
