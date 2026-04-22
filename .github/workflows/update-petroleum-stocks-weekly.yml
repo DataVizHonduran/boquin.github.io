@@ -2,9 +2,9 @@ name: Update Petroleum Stocks Weekly Chart
 
 on:
   schedule:
-    # 15:30 UTC = 10:30 AM ET (UTC-5 standard) / 11:30 AM ET (UTC-4 DST)
-    # EIA publishes every Wednesday by 10:30 AM ET — this clears both DST windows.
-    - cron: '30 15 * * 3'
+    # 17:00 UTC = 1:00 PM ET (UTC-4 DST) / 12:00 PM ET (UTC-5 standard)
+    # 2.5h buffer during DST, 1.5h during standard — covers late EIA publishes.
+    - cron: '0 17 * * 3'
   workflow_dispatch:
 
 jobs:
