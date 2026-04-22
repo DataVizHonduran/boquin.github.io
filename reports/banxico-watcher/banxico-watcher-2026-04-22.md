@@ -1,41 +1,40 @@
 # Banxico Watcher — 2026-04-22
 
-**Generated:** 2026-04-22 09:50 UTC  
+**Generated:** 2026-04-22 10:08 UTC  
 **Coverage:** 30 days ending 2026-04-22  
 **Model:** google/gemma-4-31B-it
 
 ---
 
-# Banxico Watcher Report
-**Date:** 2026-04-22
-**Coverage Period:** 2026-03-22 to 2026-04-22
+# Banxico Watcher: April 22, 2026
 
 ### Executive Summary
-The last 30 days were dominated by the March 26 monetary policy decision, where the Junta de Gobierno cut the overnight interbank funding rate by 25bps to **6.75%**. The decision was split 3-2, reflecting a growing divide within the board. Governor Rodríguez Ceja signaled that the easing cycle is "close to finishing," suggesting a shift toward a restrictive or neutral hold. However, recent data from early April indicates that inflation is "heating up," providing ammunition to the hawkish minority (Heath and Borja) who voted against the cut. While the MXN has remained resilient post-cut, market analysts remain concerned about currency exposure as the real rate differential narrows.
+The last 30 days were dominated by the March 26 monetary policy decision, where the Junta de Gobierno decreased the overnight interbank funding rate by 25 basis points to **6.75%**. The decision revealed a significant split within the board (3-2), highlighting a growing divide between the dovish majority and a hawkish minority concerned about persistent inflation. Governor Victoria Rodríguez Ceja has signaled that the easing cycle is "close to finishing," suggesting a shift toward a restrictive or neutral hold. However, recent financial reports indicate that inflation is "heating up," which may empower the dissenting voices on the board in upcoming meetings.
 
 ### Board Member Pronouncements
 
 | Date | Official | Role | Venue/Context | Key Statement | Policy Signal | Evolution vs Baseline |
 |------|----------|------|---------------|---------------|---------------|-----------------------|
-| 2026-03-30 | Victoria Rodríguez Ceja | Governor | Reuters Interview | Banxico is "close to finishing" the rate cut cycle. | Neutral/Hawkish | Consistent with Dovish baseline but signaling an end to easing. |
-| 2026-03-26 | Jonathan Heath | Subgobernador | March Meeting | Voted AGAINST the cut to 6.75%. | Hawkish | Consistent with baseline. |
-| 2026-03-26 | Galia Borja | Subgobernadora | March Meeting | Voted AGAINST the cut to 6.75%. | Hawkish | Consistent with recent shift. |
-| 2026-03-26 | José Gabriel Cuadra | Subgobernador | March Meeting | Voted FOR the cut to 6.75%. | Dovish | Consistent with baseline. |
-| 2026-03-26 | Omar Mejía | Subgobernador | March Meeting | Voted FOR the cut to 6.75%. | Dovish | Consistent with baseline. |
+| 2026-03-30 | Victoria Rodríguez Ceja | Governor | Reuters Interview | Banxico is "close to finishing" the rate cut cycle. | Neutral/Hawkish | Consistent with baseline (guiding easing) |
+| N/A | José Gabriel Cuadra García | Subgobernador | N/A | No public comments found | N/A | Consistent with Dovish baseline |
+| N/A | Omar Mejía Castelazo | Subgobernador | N/A | No public comments found | N/A | Consistent with Dovish baseline |
+| N/A | Jonathan Heath Constable | Subgobernador | N/A | No public comments found | N/A | Consistent with Hawkish baseline |
+| N/A | Galia Borja Gómez | Subgobernadora | N/A | No public comments found | N/A | Consistent with Hawkish baseline |
 
 ### Official Communications
 
 | Date | Document Type | Title | Key Takeaways | Policy Implications |
 |------|---------------|-------|---------------|---------------------|
-| 2026-03-26 | Rate Decision | Monetary Policy Statement | Rate cut to 6.75% via 3-2 vote. | Easing continues but with significant internal dissent. |
+| 2026-03-26 | Rate Decision | Target for overnight interbank funding rate | Rate decreased by 25 bps to 6.75%. | Continuation of easing cycle, though contested. |
+| 2026-03-26 | Meeting Minutes | Minuta de la reunión de la Junta de Gobierno | Decision passed 3-2. Dissenters cited persistent inflation. | Board is fragmented; future cuts face higher hurdles. |
 
 ### Thematic Analysis
 
 **1. Core CPI & Headline Inflation (3% ±1pp target)**
-Inflation remains the primary point of contention. While the majority cut rates in March, reports from April 7 and April 9 indicate that consumer prices are "heating up," which puts further rate cuts in doubt and supports the hawkish view that inflation is not converging to the 3% target.
+Inflation remains the primary point of contention. While the majority voted for a cut, financial news reports from early April indicate that "inflation is heating up," putting further rate cuts in doubt and supporting the hawkish minority's concerns.
 
 **2. MXN / Real Exchange Rate & FX Intervention Mandate**
-The Peso has shown surprising strength following the March cut (per EBC Financial), though ING analysis suggests the cut may have left the MXN "dangerously exposed." The board remains mindful of the currency's stability against global headwinds.
+Market reactions to the March cut were mixed. Some analysts viewed the cut as leaving the Peso "dangerously exposed," while others noted the MXN remained strong, suggesting that "strategic patience" or other fundamentals are offsetting the lower carry.
 
 **3. Wage Growth & Labor Market (IMSS formal employment)**
 No specific data provided in the current coverage period.
@@ -44,45 +43,45 @@ No specific data provided in the current coverage period.
 No specific data provided in the current coverage period.
 
 **5. US Spillovers (Fed policy, tariffs, nearshoring)**
-Market commentary highlights the MXN's sensitivity to global headwinds, though specific Fed or tariff-related statements from the board were not captured in this window.
+No specific data provided in the current coverage period, though general market sensitivity to the MXN remains a noted risk factor.
 
 **6. Neutral Rate Estimate & Real Rate Stance**
-The cut to 6.75% reduces the real rate. The 3-2 split suggests a lack of consensus on whether the current real rate is sufficiently restrictive to ensure inflation convergence.
+The move to 6.75% represents a continued reduction in the real rate stance, though the Governor's comment about the cycle "finishing" suggests Banxico believes it is approaching the neutral rate.
 
 **7. Forward Guidance Evolution**
-Governor Rodríguez Ceja has shifted the narrative from "easing" to "close to finishing" the cycle, suggesting that the board is approaching a terminal rate for this cycle.
+Forward guidance has shifted from "easing" to "near the end of easing." The Governor's statement on March 30 provides a clear signal that the window for further cuts is closing.
 
 ### Hawk-Dove Spectrum Analysis
 
 ```
 HAWKISH (favor slower easing / higher-for-longer)
-├─ Jonathan Heath (Voted AGAINST March cut; concerned about credibility/convergence)
-└─ Galia Borja (Voted AGAINST March cut; citing persistent inflation)
+├─ Jonathan Heath Constable (Voted AGAINST March cut; concerns over 3% convergence)
+└─ Galia Borja Gómez (Voted AGAINST March cut; citing persistent inflation)
 
 NEUTRAL/DATA-DEPENDENT
-└─ Victoria Rodríguez Ceja (Voted FOR March cut, but signaled easing cycle is nearly over)
+├─ Victoria Rodríguez Ceja (Voted FOR March cut; but signaled cycle is "close to finishing")
 
 DOVISH (favor faster easing / lower rates)
-├─ José Gabriel Cuadra (Voted FOR March cut)
-└─ Omar Mejía (Voted FOR March cut)
+├─ José Gabriel Cuadra García (Voted FOR March cut)
+└─ Omar Mejía Castelazo (Voted FOR March cut)
 ```
 
 **Key Shifts Identified:**
-Governor Rodríguez Ceja is moving toward a "Neutral" stance by signaling the end of the easing cycle, despite her historical dovish baseline.
+The board remains split 3-2. The most notable shift is the Governor's transition from guiding an easing cycle to signaling its imminent conclusion.
 
 ### All 5 Junta de Gobierno Members Focus
 
 | Official | Role | Current Stance | Key Quote |
 |----------|------|----------------|-----------|
 | Victoria Rodríguez Ceja | Governor | Neutral/Dovish | "Close to finishing" [rate cut cycle] |
-| Jonathan Heath | Subgobernador | Hawkish | No public quote; voted AGAINST March cut |
-| Galia Borja | Subgobernadora | Hawkish | No public quote; voted AGAINST March cut |
-| José Gabriel Cuadra | Subgobernador | Dovish | No public quote; voted FOR March cut |
-| Omar Mejía | Subgobernador | Dovish | No public quote; voted FOR March cut |
+| José Gabriel Cuadra García | Subgobernador | Dovish | No public comments found |
+| Omar Mejía Castelazo | Subgobernador | Dovish | No public comments found |
+| Jonathan Heath Constable | Subgobernador | Hawkish | No public comments found |
+| Galia Borja Gómez | Subgobernadora | Hawkish | No public comments found |
 
 ### Dissent & Vote Record Watch
 The March 26 decision was a **split 3-2 vote**. 
-- **Majority (FOR cut):** Rodríguez, Cuadra, Mejía.
-- **Dissent (AGAINST cut):** Heath, Borja.
+- **FOR (Cut to 6.75%):** Rodríguez, Cuadra, Mejía.
+- **AGAINST (Hold):** Heath, Borja.
 
-This maintains the 3-2 pattern of division. The dissent from Heath and Borja is rooted in persistent inflationary pressures and concerns over the 3% target convergence. Note that Jonathan Heath's term ends 12/31/2026, which may eventually alter this board dynamic.
+**Analysis:** The dissent from Heath and Borja is consistent with their hawkish baselines, specifically regarding the lack of confidence in inflation converging to the 3% target. This 3-2 split confirms a fragile consensus for easing; any further uptick in CPI data will likely shift the balance toward a hold.
