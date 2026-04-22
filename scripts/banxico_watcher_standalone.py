@@ -155,31 +155,51 @@ def _parse_rss_date(entry) -> datetime | None:
 def _parse_date(text: str) -> datetime | None:
     """
     Parse date strings from Banxico pages.
-    Handles English and Spanish month names: '21 de abril de 2026', '21 April 2026', '2026-04-21'.
+    Handles English and Spanish month names, plus MM/DD/YY and DD/MM/YY short formats.
+    For ambiguous N/N/YY dates (both N ≤ 12), tries both formats and picks the non-future one.
     """
     text = text.strip()
-    # Normalize Spanish month names to English
     text_norm = text.lower()
     for es, en in ES_MONTHS.items():
         text_norm = text_norm.replace(es, en)
-    # Reconstruct with original casing for remaining parts
     text_norm = re.sub(r"\bde\b", " ", text_norm).strip()
     text_norm = re.sub(r"\s{2,}", " ", text_norm)
 
-    patterns = [
-        ("%d %B %Y",  r"\d{1,2} \w+ \d{4}"),
-        ("%B %Y",     r"\w+ \d{4}"),
-        ("%Y-%m-%d",  r"\d{4}-\d{2}-\d{2}"),
-        ("%m/%d/%y",  r"\d{1,2}/\d{1,2}/\d{2}"),   # Banxico uses MM/DD/YY
-        ("%d/%m/%Y",  r"\d{1,2}/\d{1,2}/\d{4}"),
-    ]
-    for fmt, pat in patterns:
+    now = datetime.now(timezone.utc)
+
+    # Named-month patterns (unambiguous)
+    for fmt, pat in [
+        ("%d %B %Y", r"\d{1,2} \w+ \d{4}"),
+        ("%B %Y",    r"\w+ \d{4}"),
+        ("%Y-%m-%d", r"\d{4}-\d{2}-\d{2}"),
+        ("%d/%m/%Y", r"\d{1,2}/\d{1,2}/\d{4}"),
+    ]:
         m = re.search(pat, text_norm, re.IGNORECASE)
         if m:
             try:
                 return datetime.strptime(m.group().strip(), fmt).replace(tzinfo=timezone.utc)
             except ValueError:
                 continue
+
+    # Short 2-digit year: try MM/DD/YY and DD/MM/YY, pick the non-future result
+    m = re.search(r"(\d{1,2})/(\d{1,2})/(\d{2})\b", text_norm)
+    if m:
+        a, b, yy = int(m.group(1)), int(m.group(2)), m.group(3)
+        candidates = []
+        for fmt, mo, dy in [("%m/%d/%y", a, b), ("%d/%m/%y", b, a)]:
+            if 1 <= mo <= 12 and 1 <= dy <= 31:
+                try:
+                    d = datetime.strptime(m.group(), fmt).replace(tzinfo=timezone.utc)
+                    candidates.append(d)
+                except ValueError:
+                    pass
+        # Prefer the candidate that isn't in the future; if both or neither, take first
+        past = [d for d in candidates if d <= now]
+        if past:
+            return max(past)   # most recent non-future date
+        if candidates:
+            return candidates[0]
+
     return None
 
 
@@ -253,7 +273,8 @@ def scrape_banxico_speeches(days: int = 30) -> list[dict]:
 def scrape_board_documents(days: int = 30) -> list[dict]:
     """
     Scrape minutes, decisions, and quarterly report pages for recent links.
-    Returns combined list of official Junta de Gobierno communications.
+    Both pages use <tr> rows: date | title | "Full text"/"Minuta" PDF link.
+    Minutes use DD/MM/YY; decisions use MM/DD/YY — _parse_date handles both.
     """
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     items  = []
@@ -271,33 +292,44 @@ def scrape_board_documents(days: int = 30) -> list[dict]:
             continue
 
         seen_hrefs: set[str] = set()
-        for link in soup.find_all("a", href=True):
-            href  = link.get("href", "")
-            label = link.get_text(strip=True)
-            if not label or len(label) < 8 or href in seen_hrefs:
+        for row in soup.find_all("tr"):
+            row_text = row.get_text(separator="|", strip=True)
+            if not row_text:
                 continue
-            href_lower = href.lower()
-            if not any(k in href_lower for k in
-                       ["minuta", "minutes", "decision", "anuncio", "announcement",
-                        "politica-monetaria", "monetary-policy", "2025", "2026"]):
-                continue
-            seen_hrefs.add(href)
 
-            pub_date = _parse_date(label) or _parse_date(href)
+            # Find the document PDF link in this row
+            pdf_link = None
+            for a in row.find_all("a", href=True):
+                href = a.get("href", "")
+                if any(k in href.lower() for k in
+                       ["minuta", "minutes", "decision", "announcement",
+                        "politica-monetaria", "monetary-policy"]):
+                    if href not in seen_hrefs:
+                        pdf_link = href if href.startswith("http") else BANXICO_BASE + href
+                        seen_hrefs.add(href)
+                        break
+            if not pdf_link:
+                continue
+
+            pub_date = _parse_date(row_text)
             if pub_date and pub_date < cutoff:
                 continue
 
-            full_url = href if href.startswith("http") else BANXICO_BASE + href
+            # Extract title: strip leading date and trailing link text
+            title = re.sub(r"^\d{1,2}/\d{1,2}/\d{2,4}\s*\|?\s*", "", row_text)
+            title = re.sub(r"\s*\|\s*(Full text|Minuta|Texto completo)\s*.*$", "",
+                           title, flags=re.IGNORECASE).strip()
+            if not title or len(title) < 10:
+                continue
+
             items.append({
                 "source":  source_label,
                 "date":    pub_date.strftime("%Y-%m-%d") if pub_date else "",
-                "title":   label,
+                "title":   title[:250],
                 "speaker": "Junta de Gobierno",
-                "url":     full_url,
+                "url":     pdf_link,
                 "text":    "",
             })
-            if len(items) >= 16:
-                break
 
         time.sleep(0.3)
 
@@ -306,21 +338,27 @@ def scrape_board_documents(days: int = 30) -> list[dict]:
     soup_q = _soup(BANXICO_PAGES["quarterly"])
     if soup_q:
         q_count = 0
-        for link in soup_q.find_all("a", href=True)[:40]:
-            href  = link.get("href", "")
-            label = link.get_text(strip=True)
-            if not label or len(label) < 8:
-                continue
-            if not any(k in href.lower() for k in
+        for row in soup_q.find_all("tr"):
+            row_text = row.get_text(separator="|", strip=True)
+            pdf_link = None
+            for a in row.find_all("a", href=True):
+                href = a.get("href", "")
+                if any(k in href.lower() for k in
                        ["informe", "trimestral", "quarterly", "inflation-report"]):
+                    pdf_link = href if href.startswith("http") else BANXICO_BASE + href
+                    break
+            if not pdf_link:
                 continue
-            full_url = href if href.startswith("http") else BANXICO_BASE + href
+            pub_date = _parse_date(row_text)
+            title = re.sub(r"^\d{1,2}/\d{1,2}/\d{2,4}\s*\|?\s*", "", row_text)
+            title = re.sub(r"\s*\|?\s*(Full text|Texto completo|Ver)\s*.*$", "",
+                           title, flags=re.IGNORECASE).strip()
             items.append({
                 "source":  "Quarterly Inflation Report",
-                "date":    "",
-                "title":   label,
+                "date":    pub_date.strftime("%Y-%m-%d") if pub_date else "",
+                "title":   title[:250] if title else row_text[:100],
                 "speaker": "Junta de Gobierno",
-                "url":     full_url,
+                "url":     pdf_link,
                 "text":    "",
             })
             q_count += 1
