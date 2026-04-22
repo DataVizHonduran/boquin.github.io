@@ -1,36 +1,39 @@
-## CTA Positioning & Exhaustion Analysis: 2026-04-22
+## CTA Positioning Analysis: 2026-04-22
 
-**Executive Summary:** The current dashboard indicates a high-frequency environment with significant signal noise (572 Fast signals). While the raw data provided lacks the specific currency-level score table, the systemic architecture suggests a market transitioning from trend-following to a mean-reversion regime.
+### Executive Summary Table
+| Currency | Position | Fast Signal | Slow Signal | Key Observation |
+| :--- | :---: | :---: | :---: | :--- |
+| **INR** | +26.9 | Long | Long | Overextended; momentum fading |
+| **HUF** | -23.8 | Short | Short | Aggressive acceleration; high risk |
+| **AUD** | +15.8 | Long | Long | Strong slow-mode conviction |
+| **EUR** | 0.0 | Neutral | Neutral | Mean-reverting from short bias |
+| **NOK** | -12.3 | Short | Short | Slow-mode conviction > Fast-mode |
+
+---
 
 ### 1. Positioning Extremes
-Based on the current triple EMA convergence framework:
-*   **Overbought/Oversold:** With 572 Fast Mode signals active, we are seeing a systemic "cluster" of exhaustion. This suggests that a majority of the 25 tracked currencies have hit 2-year percentile extremes.
-*   **Trend State:** The high volume of signals indicates that CTA books are likely "maxed out" in their current directional bets, leaving little room for further trend-following inflows.
+*   **Overbought:** **INR (+26.9)** and **AUD (+15.8)**. INR is the most crowded long trade across both modes, signaling a potential "top" as positioning reaches the upper bound of the scale.
+*   **Oversold:** **HUF (-23.8)**. The Hungarian Forint is the most aggressive short. This extremity suggests a crowded trade prone to a violent short-squeeze if a catalyst emerges.
 
-### 2. Exhaustion Signals & Momentum
-*   **Signal Count:** 572 Fast Mode signals.
-*   **Implication:** This is an abnormally high signal density. When exhaustion signals spike across the board, it implies **Trend Saturation**. 
-*   **Momentum Outlook:** Bearish for current trends. We are moving from a "Trend-Following" phase to a "Positioning Unwind" phase. Expect increased volatility as CTAs trigger stop-losses or take profits simultaneously.
+### 2. Fast vs. Slow Mode Divergences
+*   **Conviction Alignment:** AUD, INR, and HUF show strong alignment across both modes, confirming established trends.
+*   **Divergence (The "Warning" Zone):** 
+    *   **NOK:** Slow mode (-19.5) is significantly more bearish than Fast mode (-12.3). This suggests the short-term selling pressure is easing while the structural trend remains down.
+    *   **CHF/SEK:** Slow mode remains firmly short, while Fast mode is neutralizing. This implies a potential trend reversal or a shift to a range-bound environment.
 
-### 3. Fast vs. Slow Mode Divergence
-*   **Fast Mode (20/50/100):** Highly reactive. The massive signal count suggests short-term momentum has peaked and is currently correcting.
-*   **Slow Mode (50/100/200):** These windows act as the "anchor." If Slow Mode remains bullish while Fast Mode triggers exhaustion, we see a **"Bullish Pullback."** If both align in exhaustion, we are witnessing a **"Major Trend Reversal."**
+### 3. MA Divergences (Momentum Shift)
+*   **Acceleration Risk:** **HUF** shows a massive -19.0 deviation from its 20d-MA in Fast mode. This is a "blow-off" move—momentum is accelerating too fast to be sustainable.
+*   **Reversal Signals:** **EUR (+7.5)** and **GBP (+6.2)** have moved sharply away from their negative 20d-MAs toward neutral. This indicates a rapid exit of short positions (short-covering).
+*   **Fading Momentum:** **INR (-4.8)** and **KRW (-6.0)** are trading below their 20d-MAs despite being long, signaling a loss of bullish conviction.
 
-### 4. Overall Risk Sentiment
-**Sentiment: Mixed to Risk-Off**
-The prevalence of exhaustion signals typically precedes a "de-risking" event. As trend-followers exit their winning positions, the lack of new buyers often leads to a temporary vacuum in liquidity, favoring a flight to safety or a sharp mean-reversion move.
+### 4. High-Conviction Exhaustion Signals
+*   **GBP Short (2026-04-14):** The high-strength short signal (23.8) followed by a move to 0.0 positioning suggests a "V-shaped" exhaustion and rapid liquidation.
+*   **KRW Long (2026-04-14):** Similar to GBP, the peak position (+22.4) has already begun to recede to +12.5, indicating the trade is no longer in its expansion phase.
 
-### 5. Summary Table (Representative Framework)
-*Note: Specific currency scores were not provided in the scrape; the following represents the current systemic state.*
+### 5. Overall Risk Sentiment
+**Mixed / Transitioning.** 
+While the "Slow Mode" remains anchored in a classic Risk-Off profile (Shorts in NOK, HUF, COP, CHF), the "Fast Mode" is seeing a rapid unwind of G10 shorts (EUR, GBP) and a cooling of EM longs (INR, KRW). We are moving from a high-conviction trend phase into a volatile distribution phase.
 
-| Currency | Mode | Signal | Score (Est.) | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **Major G10** | Fast | Exhaustion | 70-90 | Overextended |
-| **EM FX** | Fast | Exhaustion | 60-80 | Profit Taking |
-| **Safe Havens**| Slow | Trend | 30-50 | Accumulating |
-
-### 6. Actionable Watch-list (Next 5 Trading Days)
-**Watch Item: The "Fast-to-Slow" Flip**
-Monitor for the first 3-5 currencies where the **Fast Mode Exhaustion** signal is confirmed by a **Slow Mode crossover**. 
-*   **Trade Trigger:** Short the currency showing the highest Fast Mode score (0-100) once the 20-day EMA crosses below the 50-day EMA.
-*   **Target:** Mean reversion to the 100-day EMA.
+### 6. Actionable Watch-list (Next 5 Days)
+**Watch HUF for a Mean-Reversion Long.** 
+The combination of extreme negative positioning (-23.8) and a massive negative MA divergence (-19.0) creates a textbook exhaustion setup. Any positive macro headline for HUF will likely trigger a rapid CTA short-covering rally.
