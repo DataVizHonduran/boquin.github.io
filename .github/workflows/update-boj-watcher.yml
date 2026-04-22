@@ -42,5 +42,6 @@ jobs:
           git add reports/boj-watcher/
           git diff --staged --quiet || (
             git commit -m "BOJ Watcher — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
             git push
           )
