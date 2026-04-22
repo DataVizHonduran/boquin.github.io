@@ -1,0 +1,40 @@
+name: Petroleum Stocks Commentary
+
+on:
+  schedule:
+    - cron: '30 16 * * 3'   # 16:30 UTC Wed — 1h after generator (15:30 UTC)
+  workflow_dispatch:
+
+jobs:
+  commentary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull latest (generator may have pushed charts just before)
+        run: git pull
+
+      - name: Run commentary script
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/petroleum_stocks_commentary.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/petroleum-stocks/
+          git diff --staged --quiet || (
+            git commit -m "Petroleum Stocks Commentary — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
+            git push
+          )
