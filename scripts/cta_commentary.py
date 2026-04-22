@@ -189,15 +189,15 @@ def inject_into_index(block: str) -> None:
 
     html = INDEX_HTML.read_text(encoding="utf-8")
 
-    if MARKER_START in html:
-        html = re.sub(
-            re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
-            block,
-            html,
-            flags=re.DOTALL,
-        )
-    else:
-        html = html.replace("</body>", block + "\n</body>")
+    # Strip ALL existing blocks regardless of count, then insert once before last </body>
+    html = re.sub(
+        re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
+        "",
+        html,
+        flags=re.DOTALL,
+    )
+    last_body = html.rfind("</body>")
+    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
 
     INDEX_HTML.write_text(html, encoding="utf-8")
     print(f"  Injected commentary into {INDEX_HTML}")
