@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 CTA Signals Commentary — Daily AI Analysis
-Scrapes boquin.xyz/reports/cta-signals/, feeds content to Gemma 4,
-and injects a structured commentary section at the bottom of index.html.
+Reads reports/cta-signals/summary.json, feeds structured data to Gemma 4,
+and injects a Markdown commentary section into reports/cta-signals/index.html.
 
 Usage:
     HF_TOKEN=hf_xxx python3 scripts/cta_commentary.py
@@ -19,49 +19,78 @@ import os
 import sys
 import re
 import time
+import json
 import markdown as md_lib
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-import requests
-from bs4 import BeautifulSoup
 from huggingface_hub import InferenceClient
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
 
-MODEL_ID = "google/gemma-4-31B-it"
-TARGET_URL = "https://boquin.xyz/reports/cta-signals/"
+MODEL_ID   = "google/gemma-4-31B-it"
 OUTPUT_DIR = Path("reports/cta-signals")
 INDEX_HTML = OUTPUT_DIR / "index.html"
+SUMMARY    = OUTPUT_DIR / "summary.json"
 
 MARKER_START = "<!-- cta-commentary-start -->"
 MARKER_END   = "<!-- cta-commentary-end -->"
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (compatible; CTACommentary/1.0; "
-        "+https://github.com/DataVizHonduran/boquin.github.io)"
-    ),
-    "Accept": "text/html,application/xhtml+xml,*/*",
-}
-
 # ---------------------------------------------------------------------------
-# Scraper
+# Data loader
 # ---------------------------------------------------------------------------
 
-def scrape_data() -> str:
-    resp = requests.get(TARGET_URL, headers=HEADERS, timeout=30)
-    resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
+def load_data() -> str:
+    with open(SUMMARY) as f:
+        d = json.load(f)
 
-    for tag in soup(["script", "style", "nav", "footer"]):
-        tag.decompose()
+    lines = []
 
-    text = soup.get_text(separator="\n", strip=True)
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    return text[:8000]
+    for mode in ("fast", "slow"):
+        m = d[mode]
+        lines.append(f"=== {mode.upper()} MODE (windows: {m['windows']}) ===")
+        lines.append(f"Signal count: {m['signal_count']}  |  High-conviction: {m['high_conviction_count']}")
+
+        # Sorted positions (most short → most long)
+        pos = sorted(m["latest_positions"].items(), key=lambda x: x[1])
+        lines.append("Positioning (most short to most long, scale -50 to +50):")
+        lines.append("  " + ", ".join(f"{ccy}: {v:+.1f}" for ccy, v in pos))
+
+        # MA divergence: current position vs 20-day MA (scatter tab)
+        ma20 = m.get("ma_positions", {}).get("20", {})
+        if ma20:
+            divs = []
+            for ccy, ma_val in ma20.items():
+                cur = m["latest_positions"].get(ccy)
+                if cur is not None:
+                    divs.append((ccy, cur, ma_val, cur - ma_val))
+            divs.sort(key=lambda x: abs(x[3]), reverse=True)
+            lines.append("Largest divergences from 20-day MA (current vs MA, diff):")
+            for ccy, cur, ma, diff in divs[:8]:
+                lines.append(f"  {ccy}: current={cur:+.1f}, 20d-MA={ma:+.1f}, diff={diff:+.1f}")
+
+        # Recent high-conviction signals (last 14 days, top by strength_score)
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d")
+        recent = [
+            s for s in m.get("signal_metadata", [])
+            if s.get("date", "") >= cutoff
+        ]
+        recent.sort(key=lambda x: x.get("strength_score", 0), reverse=True)
+        if recent:
+            lines.append(f"Recent signals (last 14 days, top by strength):")
+            for s in recent[:6]:
+                lines.append(
+                    f"  {s['date']} {s['currency']} {s['direction']} | "
+                    f"strength={s['strength_score']:.1f} "
+                    f"(extremity={s['extremity_score']:.1f}, speed={s['speed_score']:.1f}, "
+                    f"consensus={s['consensus_score']:.1f}) | "
+                    f"peak_pos={s['peak_position']:+.2f}"
+                )
+        lines.append("")
+
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -102,19 +131,20 @@ def generate_report(data: str, hf_token: str) -> str:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     prompt = f"""[ROLE]: Senior Macro/Quant Analyst specializing in CTA trend-following and exhaustion signals.
 
-[TASK]: Analyze the following content scraped from a live CTA positioning dashboard as of {today}.
+[TASK]: Analyze the following CTA positioning snapshot as of {today}.
 Produce a structured Markdown commentary covering:
-1. Current positioning extremes (most overbought/oversold currencies)
-2. Exhaustion signal count and what it implies for trend momentum
-3. Key divergences between fast and slow mode signals
-4. Overall risk sentiment (risk-on / risk-off / mixed)
-5. One actionable watch-list item for the next 5 trading days
+1. Positioning extremes — which currencies are most overbought / oversold and what it signals
+2. Fast vs slow mode divergences — where the two modes disagree and what that implies for trend conviction
+3. MA divergences — currencies where current positioning has moved furthest from its 20-day MA (momentum acceleration or reversal risk)
+4. Recent high-conviction exhaustion signals — what they suggest about crowded trades
+5. Overall risk sentiment (risk-on / risk-off / mixed)
+6. One actionable watch-list item for the next 5 trading days
 
 [FORMAT]:
-- Use Markdown headers (##, ###)
-- Include a summary table: | Currency | Mode | Signal | Score |
-- Use bullet points for observations
-- Keep total length under 600 words
+- Markdown headers (##, ###)
+- Summary table: | Currency | Position | Fast Signal | Slow Signal | Key Observation |
+- Bullet points for each section
+- Under 600 words total
 
 [DATA]:
 {data}"""
@@ -159,7 +189,6 @@ def inject_into_index(block: str) -> None:
 
     html = INDEX_HTML.read_text(encoding="utf-8")
 
-    # Replace existing block if present, otherwise insert before </body>
     if MARKER_START in html:
         html = re.sub(
             re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
@@ -184,23 +213,21 @@ if __name__ == "__main__":
         print("ERROR: HF_TOKEN environment variable not set", file=sys.stderr)
         sys.exit(1)
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today        = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
 
-    print(f"Scraping {TARGET_URL} ...")
-    data = scrape_data()
-    print(f"  Extracted {len(data)} chars of page content")
+    print(f"Loading {SUMMARY} ...")
+    data = load_data()
+    print(f"  Built {len(data)} chars of structured data")
 
     print("\nGenerating commentary via Gemma 4 ...")
     commentary = generate_report(data, hf_token)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Archive copy
     dated_path = OUTPUT_DIR / f"commentary-{today}.md"
     dated_path.write_text(commentary, encoding="utf-8")
     print(f"\nWrote archive: {dated_path}")
 
-    # Inject into index.html
     block = build_commentary_block(commentary, generated_at)
     inject_into_index(block)
