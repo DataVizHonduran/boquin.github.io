@@ -2,9 +2,8 @@ name: Update Crude Oil Stocks Weekly Chart
 
 on:
   schedule:
-    # 15:30 UTC = 10:30 AM ET (UTC-5 standard) / 11:30 AM ET (UTC-4 DST)
-    # EIA publishes every Wednesday by 10:30 AM ET — this clears both DST windows.
-    - cron: '30 15 * * 3'
+    # 17:30 UTC = 1:30 PM ET — gives EIA API 3h to ingest after 10:30 AM report
+    - cron: '30 17 * * 3'
   workflow_dispatch:
 
 jobs:
