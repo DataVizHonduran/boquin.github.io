@@ -142,17 +142,20 @@ Two cases handled automatically:
 ```python
 def inject_into_html(index_html: Path, block: str) -> None:
     html = index_html.read_text(encoding="utf-8")
-    if MARKER_START in html:
-        html = re.sub(
-            re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
-            block,
-            html,
-            flags=re.DOTALL,
-        )
-    else:
-        html = html.replace("</body>", block + "\n</body>")
+    # Strip ALL existing blocks (handles re-runs and any duplication)
+    html = re.sub(
+        re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
+        "",
+        html,
+        flags=re.DOTALL,
+    )
+    # Use rfind — str.replace hits every </body>, causing duplication on re-runs
+    last_body = html.rfind("</body>")
+    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
     index_html.write_text(html, encoding="utf-8")
 ```
+
+> **Never use `str.replace("</body>", ...)`** — it replaces every occurrence. If a previous run left extra `</body>` tags, you get duplicate blocks. Always use `rfind`.
 
 ---
 
