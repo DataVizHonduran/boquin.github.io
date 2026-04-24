@@ -21,9 +21,9 @@ WTI_TICKERS = ["CLN26.NYM", "CLZ26.NYM", "CLZ27.NYM", "CLZ28.NYM", "CLZ29.NYM", 
 WTI_LABELS  = ["Jul 2026",  "Dec 2026",   "Dec 2027",   "Dec 2028",   "Dec 2029",   "Dec 2030"]
 WTI_SHORT   = ["N26", "Z26", "Z27", "Z28", "Z29", "Z30"]
 
-BRT_TICKERS = ["BZN26.NYM", "BZZ26.NYM", "BZZ27.NYM", "BZZ28.NYM", "BZZ29.NYM", "BZZ30.NYM"]
-BRT_LABELS  = ["Jul 2026",  "Dec 2026",   "Dec 2027",   "Dec 2028",   "Dec 2029",   "Dec 2030"]
-BRT_SHORT   = ["N26", "Z26", "Z27", "Z28", "Z29", "Z30"]
+BRT_TICKERS = ["BZN26.NYM", "BZZ26.NYM", "BZZ27.NYM", "BZZ28.NYM", "BZZ29.NYM"]
+BRT_LABELS  = ["Jul 2026",  "Dec 2026",   "Dec 2027",   "Dec 2028",   "Dec 2029"]
+BRT_SHORT   = ["N26", "Z26", "Z27", "Z28", "Z29"]
 
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT   = os.path.dirname(SCRIPT_DIR)
