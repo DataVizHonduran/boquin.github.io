@@ -6,28 +6,26 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: April 25, 2026**
+**Subject: Key Takeaways from Recent Federal Reserve District Research**
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** April 24, 2026
-**RE:** Analysis of Recent Federal Reserve District Research
+I have reviewed the latest research cycle from the Fed districts. While much of the output is technical, there are several critical pieces that impact our views on systemic risk, the neutral rate, and productivity. Here are the most analytically significant publications:
 
-I have filtered the recent Fed publications to isolate the drivers most likely to impact our portfolio positioning and macro forecasts. Here are the key takeaways:
+1. **[NY] The R*–Labor Share Nexus:** This paper links the long-term decline in the natural rate of interest (R*) to the falling labor share of national income. If the structural decline in labor's share is reversing or stabilizing, it suggests that the "lower-for-longer" era of R* is permanently over, necessitating a higher long-term floor for our discount rates.
 
-1. **[NY] The R*–Labor Share Nexus:** This research links the long-term decline in the natural rate of interest (R*) to a falling labor share of income. If the structural decline in R* is tied to labor dynamics, we must reassess our long-term terminal rate assumptions and the sustainability of current equity valuation multiples.
+2. **[NY/RIC] Bank Failures: Solvency vs. Liquidity:** Across two papers, the consensus is that while "runs" are the visible trigger, weak fundamentals and insolvency are the root causes. For our credit outlook, this confirms that liquidity injections (like the BTFP) are merely bandages; the real risk remains concentrated in balance sheet insolvency and asset-quality deterioration.
 
-2. **[NY/RIC] Bank Failures: Solvency vs. Liquidity:** Across both NY and Richmond papers, the consensus is that weak fundamentals (solvency) almost always precede depositor panics (liquidity). This suggests that monitoring capital adequacy and asset quality is a more reliable leading indicator of systemic risk than monitoring short-term liquidity ratios alone.
+3. **[NY] Use of Gen AI in the Workplace:** This research examines the gap between AI tool availability and actual worker training. This is a critical productivity signal: the "AI boom" will not translate into macro GDP growth until the training bottleneck is resolved, suggesting a lag in the expected productivity surge.
 
-3. **[NY] Use of Gen AI in the Workplace:** This study examines the actual diffusion of AI and the necessity of training to realize productivity gains. For our thematic AI plays, this underscores that hardware deployment is a lagging indicator; the real alpha will come from firms demonstrating successful workforce integration and training.
+4. **[NY] Emerging Market Resilience:** This analysis questions the perceived resilience of EMs during recent shocks. If the perceived stability of these markets is an illusion or fragile, we should anticipate higher volatility and potential contagion risks in EM sovereign debt as global funding conditions tighten.
 
-4. **[NY] Emerging Market Resilience:** The analysis suggests that while EMs appear more resilient to global shocks, this stability may be fragile or uneven. This warrants a more granular, country-specific approach to our EM debt allocations rather than treating the asset class as a monolithic block.
+5. **[NY] Homeowner’s Insurance and Risk Sharing:** With $48 trillion in residential assets, the fragility of insurance contracts against natural disasters represents a massive, underpriced systemic risk. A failure in risk-sharing mechanisms could lead to a sudden devaluation of housing assets, impacting household consumption and mortgage stability.
 
-5. **[NY] Homeowner’s Insurance and Risk Sharing:** With US housing assets at $48 trillion, the gaps in insurance risk sharing represent a massive latent vulnerability. As natural disasters increase in frequency, the lack of adequate coverage could lead to sudden wealth shocks for households, dampening consumer spending.
+6. **[NY] Fed Tools for Money Market Conditions:** This clarifies the interplay between administrative rates and balance sheet size (QT/QE). Understanding how the Fed pivots between these two tools is essential for our short-term positioning in the repo markets and our forecasts for liquidity drains.
 
-6. **[NY] Fed Tools for Money Market Conditions:** The distinction between administrative rate changes and balance sheet sizing is critical for predicting short-term liquidity. Understanding which lever the Fed prioritizes will allow us to better time our positions in the front end of the curve and repo markets.
-
-**Synthesis:** The research indicates a shift toward analyzing structural "hidden" vulnerabilities—specifically in labor-driven interest rate trends, AI productivity gaps, and housing insurance. We should pivot our risk models to prioritize fundamental solvency and structural productivity over superficial liquidity and adoption metrics.
+**Synthesis:** The research suggests a transition toward a higher structural interest rate environment coupled with latent systemic risks in housing and EM stability. Furthermore, the "AI productivity miracle" remains contingent on human capital investment rather than just software deployment.
 
 ---
 
