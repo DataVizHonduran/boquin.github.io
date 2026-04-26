@@ -319,8 +319,8 @@ def main():
   <title>TSA &amp; Flight Tracker</title>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
-    body {{ font-family: system-ui, sans-serif; background: #f8f9fa; margin: 0; padding: 16px; }}
-    .tab-bar {{ display: flex; gap: 8px; margin-bottom: 16px; }}
+    body {{ font-family: system-ui, sans-serif; background: #f8f9fa; margin: 0; padding: 0; }}
+    .tab-bar {{ display: flex; gap: 8px; margin-bottom: 16px; padding: 16px 16px 0; }}
     .tab-btn {{
       padding: 8px 22px; border: none; border-radius: 6px; cursor: pointer;
       background: #e2e8f0; font-size: 14px; font-weight: 600; color: #4a5568;
@@ -328,6 +328,8 @@ def main():
     .tab-btn.active {{ background: #2563EB; color: #fff; }}
     .tab-panel {{ display: none; }}
     .tab-panel.active {{ display: block; }}
+    #tsa {{ padding: 0 16px; }}
+    #fr24 .plotly-graph-div {{ width: 100% !important; }}
   </style>
 </head>
 <body>
