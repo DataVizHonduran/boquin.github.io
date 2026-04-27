@@ -330,6 +330,7 @@ def main():
     .tab-panel.active {{ display: block; }}
     #tsa {{ padding: 0 16px; }}
     #fr24 .plotly-graph-div {{ width: 100% !important; }}
+    .fr24-footnote {{ font-size: 12px; color: #6b7280; padding: 4px 16px 12px; }}
   </style>
 </head>
 <body>
@@ -338,7 +339,12 @@ def main():
     <button class="tab-btn" onclick="showTab('fr24', this)">FlightRadar24</button>
   </div>
   <div id="tsa" class="tab-panel active">{div_tsa}</div>
-  <div id="fr24" class="tab-panel">{div_general}{div_commercial}</div>
+  <div id="fr24" class="tab-panel">
+    {div_general}
+    <p class="fr24-footnote"><strong>Total flights:</strong> Commercial flights above + rest of business jet flights + private flights + gliders + most helicopter flights + most ambulance flights + government flights + some military flights + drones</p>
+    {div_commercial}
+    <p class="fr24-footnote"><strong>Commercial flights:</strong> Commercial passenger flights + cargo flights + charter flights + some business jet flights</p>
+  </div>
   <script>
     function showTab(id, btn) {{
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
