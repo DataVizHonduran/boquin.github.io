@@ -116,11 +116,14 @@ side-by-side comparison and produce the following analysis:
 
 ---
 
-## 1. Redline Analysis
+## 1. Redlined Statement ({curr_date})
 
-Present every phrase or sentence that has changed, been added, or removed in a \
-Markdown table with three columns: **Old Text** | **New Text** | **Significance of Change**.
-If a sentence is unchanged, omit it.
+Reproduce the full text of the **current statement** with inline redline markup:
+- ~~Struck-through text~~ for every phrase or sentence **removed** vs. the previous statement.
+- **Bold text** for every phrase or sentence **added** vs. the previous statement.
+- Unchanged text shown normally.
+
+Then present a summary table with three columns: **Removed** | **Added** | **Significance**.
 
 ## 2. Thematic Shifts
 
