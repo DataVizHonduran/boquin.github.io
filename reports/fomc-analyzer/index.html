@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analyzer — Archive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px; margin: 0 auto; padding: 20px;
+            background: #f5f5f5; color: #333;
+        }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+        .description { color: #555; margin: 16px 0 32px; line-height: 1.6; }
+        .report-list { list-style: none; padding: 0; }
+        .report-list li {
+            border-left: 4px solid #1565c0; padding: 12px 16px; margin: 10px 0;
+            background: #f8f9fa; border-radius: 0 6px 6px 0;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .report-list a { color: #1565c0; text-decoration: none; font-weight: 500; font-size: 1.05em; }
+        .report-list a:hover { text-decoration: underline; }
+        .report-date { color: #888; font-size: 0.85em; }
+        .badge-latest {
+            font-size: 0.75em; background: #e8f5e9; color: #2e7d32;
+            padding: 3px 8px; border-radius: 10px; margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📋 FOMC Statement Analyzer</h1>
+    <p class="description">
+        Side-by-side redline comparison of consecutive FOMC monetary policy statements —
+        thematic shifts in inflation, labor market, and forward guidance language,
+        with a hawkish/dovish tonal verdict, powered by Gemma 4.
+    </p>
+    <ul class="report-list">
+        <li><a href="fomc-2000-03-21.html">FOMC Analysis — 2000-03-21<span class="badge-latest">latest</span></a><span class="report-date">2000-03-21</span></li>
+    </ul>
+</div>
+</body>
+</html>
