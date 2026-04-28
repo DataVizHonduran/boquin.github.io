@@ -186,7 +186,8 @@ def call_gemma(messages: list[dict], hf_token: str, max_tokens: int = 3000) -> s
         except Exception as e:
             is_rate_limit = any(
                 x in str(e)
-                for x in ("429", "503", "Too Many Requests", "Service Temporarily Unavailable")
+                for x in ("429", "503", "504", "Too Many Requests",
+                          "Service Temporarily Unavailable", "Gateway Time-out")
             )
             if is_rate_limit and attempt < 4:
                 wait = 60 * (attempt + 1)
