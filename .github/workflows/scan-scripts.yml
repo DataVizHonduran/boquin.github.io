@@ -1,0 +1,47 @@
+name: Script Inventory Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest
+        run: git pull
+
+      - name: Run script inventory scan
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          mkdir -p reports/script-inventory
+          python scripts/scan_scripts.py \
+            --dirs . \
+            --output reports/script-inventory/script_inventory.csv \
+            --max-files 200
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/script-inventory/
+          git diff --staged --quiet || (
+            git commit -m "Script Inventory — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
+            git push
+          )
