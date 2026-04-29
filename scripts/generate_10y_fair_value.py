@@ -32,9 +32,7 @@ FRED_API_KEY = os.environ.get("FRED_API_KEY", _FRED_KEY_DEFAULT)
 START_DATE = "1990-01-01"
 RSTAR_WINDOW_QUARTERS = 40  # 10-year rolling window for r*
 
-OUTPUT_PATH = os.path.expanduser(
-    "~/boquin.github.io/reports/us-10y-fair-value/index.html"
-)
+OUTPUT_PATH = "reports/us-10y-fair-value/index.html"
 
 # ---------------------------------------------------------------------------
 # Data fetching
@@ -388,8 +386,8 @@ def main():
 
     print("[4/4] Writing HTML report...")
     html = build_html(fig, df)
-    os.makedirs(os.path.dirname(os.path.expanduser(OUTPUT_PATH)), exist_ok=True)
-    with open(os.path.expanduser(OUTPUT_PATH), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(html)
 
     print(f"\n      Done → {OUTPUT_PATH}")
