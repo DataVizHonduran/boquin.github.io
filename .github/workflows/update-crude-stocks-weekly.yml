@@ -2,8 +2,8 @@ name: Update Crude Oil Stocks Weekly Chart
 
 on:
   schedule:
-    # 17:30 UTC = 1:30 PM ET — gives EIA API 3h to ingest after 10:30 AM report
-    - cron: '30 17 * * 3'
+    # 15:30 UTC = 1:30 PM ET — gives EIA API 3h to ingest after 10:30 AM report
+    - cron: '30 15 * * 3'
   workflow_dispatch:
 
 jobs:
