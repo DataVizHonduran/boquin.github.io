@@ -1,6 +1,6 @@
 {
   "fast": {
-    "generated_at": "2026-04-28T05:34:35.675948",
+    "generated_at": "2026-04-29T05:30:42.382508",
     "mode": "fast",
     "windows": "20/50/100",
     "currencies": 25,
@@ -7483,7 +7483,7 @@
     }
   },
   "slow": {
-    "generated_at": "2026-04-28T05:34:46.236434",
+    "generated_at": "2026-04-29T05:30:53.177876",
     "mode": "slow",
     "windows": "50/100/200",
     "currencies": 25,
