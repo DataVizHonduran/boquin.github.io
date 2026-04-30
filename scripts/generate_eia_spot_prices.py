@@ -381,7 +381,7 @@ function showChart(label) {{
     line: {{ color: '#3d5a8a', width: 2 }},
     fill: 'tozeroy',
     fillcolor: 'rgba(61,90,138,0.07)',
-    hovertemplate: '<b>%{{x}}</b><br>' + d.unit.replace('$','') + ' %{{y:{fmt}}}<extra></extra>',
+    hovertemplate: '<b>%{{x}}</b><br>' + d.unit.replace('$','') + ' %{{y:' + fmt + '}}<extra></extra>',
   }}], {{
     margin:      {{ t: 20, r: 20, b: 50, l: 70 }},
     paper_bgcolor: '#ffffff',
