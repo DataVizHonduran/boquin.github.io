@@ -21,9 +21,11 @@ import os
 import json
 import warnings
 import requests
-from pandas_datareader import data as pdr
+from fredapi import Fred
 
 warnings.filterwarnings("ignore")
+
+fred = Fred(api_key=os.environ.get("FRED_API_KEY"))
 
 # ── Config ────────────────────────────────────────────────────────────────────
 OUTPUT_DIR = "reports/g10-fairvalue"
@@ -67,8 +69,7 @@ frames = {}
 
 # USD — FRED DGS5 (daily 5Y Treasury)
 try:
-    s = pdr.DataReader("DGS5", "fred", start_date, end_date)["DGS5"]
-    s.index = pd.to_datetime(s.index)
+    s = fred.get_series("DGS5", observation_start=start_date, observation_end=end_date).dropna()
     frames["USD"] = s
     print("  ✓ USD (FRED DGS5)")
 except Exception as e:
@@ -182,8 +183,7 @@ except Exception as e:
 
 # CHF — FRED monthly (10Y) forward-filled to daily + Stooq current override
 try:
-    chf_monthly = pdr.DataReader("IRLTLT01CHM156N", "fred", start_date, end_date)["IRLTLT01CHM156N"]
-    chf_monthly.index = pd.to_datetime(chf_monthly.index)
+    chf_monthly = fred.get_series("IRLTLT01CHM156N", observation_start=start_date, observation_end=end_date).dropna()
     chf_daily = chf_monthly.resample("D").interpolate(method="linear")
     # Override today's value with Stooq current quote
     try:
@@ -202,8 +202,7 @@ except Exception as e:
 
 # NZD — FRED monthly (10Y) forward-filled to daily + Stooq current override
 try:
-    nzd_monthly = pdr.DataReader("IRLTLT01NZM156N", "fred", start_date, end_date)["IRLTLT01NZM156N"]
-    nzd_monthly.index = pd.to_datetime(nzd_monthly.index)
+    nzd_monthly = fred.get_series("IRLTLT01NZM156N", observation_start=start_date, observation_end=end_date).dropna()
     nzd_daily = nzd_monthly.resample("D").interpolate(method="linear")
     # Override today's value with Stooq current quote
     try:

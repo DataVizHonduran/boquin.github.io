@@ -26,6 +26,8 @@ jobs:
 
       - name: Generate G10 fair value dashboard
         run: python scripts/generate_g10_fairvalue.py
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
 
       - name: Commit and push changes
         run: |
