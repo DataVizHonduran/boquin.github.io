@@ -2,6 +2,7 @@
 generate_eia_spot_prices.py — EIA Petroleum Spot Prices Table
 Fetches daily spot prices for key petroleum products via EIA Open Data API v2
 and generates a static HTML table with % changes across 6 time horizons.
+Clicking a row renders a 2-year Plotly price chart.
 
 Required env var:
   EIA_API_KEY  — Register free at https://www.eia.gov/opendata/register.php
@@ -10,6 +11,7 @@ Run: python scripts/generate_eia_spot_prices.py
 Output: reports/eia-spot-prices/index.html
 """
 
+import json
 import os
 import sys
 import requests
@@ -39,7 +41,6 @@ PRODUCTS = [
     ("Propane (Mont Belvieu, TX)",           "$/gal", "EER_EPLLPA_PF4_Y44MB_DPG"),
 ]
 
-# Calendar-day lookback windows for each % change column
 PERIODS = [
     ("1D",   1),
     ("1W",   7),
@@ -66,7 +67,6 @@ def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
         "length":               2200,
         "offset":               0,
     }
-
     try:
         resp = requests.get(EIA_API_BASE, params=params, timeout=30)
         resp.raise_for_status()
@@ -85,65 +85,76 @@ def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
                 result[period] = float(val)
             except (TypeError, ValueError):
                 pass
-
     return result
 
 
 # ---------------------------------------------------------------------------
-# % change helper
+# Helpers
 # ---------------------------------------------------------------------------
 
 def pct_change(prices: dict[str, float], lookback_days: int) -> float | None:
-    """Return % change from ~lookback_days calendar days ago to latest."""
     if not prices:
         return None
-
-    dates     = sorted(prices.keys())
-    latest    = dates[-1]
-    latest_dt = datetime.strptime(latest, "%Y-%m-%d")
-    target_dt = latest_dt - timedelta(days=lookback_days)
-    target_str = target_dt.strftime("%Y-%m-%d")
-
-    past_dates = [d for d in dates if d <= target_str]
-    if not past_dates:
+    dates      = sorted(prices.keys())
+    latest     = dates[-1]
+    latest_dt  = datetime.strptime(latest, "%Y-%m-%d")
+    target_str = (latest_dt - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+    past       = [d for d in dates if d <= target_str]
+    if not past:
         return None
-
     px_now  = prices[latest]
-    px_then = prices[past_dates[-1]]
-
+    px_then = prices[past[-1]]
     if px_then == 0:
         return None
     return (px_now - px_then) / px_then * 100
+
+
+def history_2y(prices: dict[str, float]) -> dict:
+    """Return {dates: [...], prices: [...]} for the last 730 calendar days."""
+    if not prices:
+        return {"dates": [], "prices": []}
+    dates      = sorted(prices.keys())
+    latest_dt  = datetime.strptime(dates[-1], "%Y-%m-%d")
+    cutoff     = (latest_dt - timedelta(days=730)).strftime("%Y-%m-%d")
+    filtered   = sorted(d for d in dates if d >= cutoff)
+    return {"dates": filtered, "prices": [round(prices[d], 4) for d in filtered]}
+
+
+def fmt_pct(val: float | None) -> tuple[str, str]:
+    if val is None:
+        return "—", "na"
+    sign = "+" if val >= 0 else ""
+    return f"{sign}{val:.1f}%", "pos" if val >= 0 else "neg"
 
 
 # ---------------------------------------------------------------------------
 # HTML generation
 # ---------------------------------------------------------------------------
 
-def fmt_pct(val: float | None) -> tuple[str, str]:
-    if val is None:
-        return "—", "na"
-    sign = "+" if val >= 0 else ""
-    cls  = "pos" if val >= 0 else "neg"
-    return f"{sign}{val:.1f}%", cls
-
-
 def build_html(rows: list[dict], generated_at: str) -> str:
     period_headers = "".join(f"<th>{p}</th>" for p, _ in PERIODS)
 
     body_rows = []
-    for row in rows:
+    for i, row in enumerate(rows):
         cells = [
             f'<td class="product-name">{row["label"]}</td>',
             f'<td class="spot-price">{row["spot"]}<span class="unit">{row["unit"]}</span></td>',
         ]
         for p, days in PERIODS:
-            val       = row["changes"].get(p)
-            text, cls = fmt_pct(val)
+            text, cls = fmt_pct(row["changes"].get(p))
             cells.append(f'<td class="pct {cls}">{text}</td>')
-        body_rows.append(f"<tr>{''.join(cells)}</tr>")
+        selected = ' class="selected"' if i == 0 else ""
+        body_rows.append(f'<tr{selected} data-label="{row["label"]}">{"".join(cells)}</tr>')
 
     body_html = "\n            ".join(body_rows)
+
+    # Build JS history object  {label: {dates, prices, unit}}
+    history_obj = {}
+    for row in rows:
+        history_obj[row["label"]] = {**row["history"], "unit": row["unit"]}
+    history_json = json.dumps(history_obj)
+
+    first_label = rows[0]["label"] if rows else ""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -151,23 +162,25 @@ def build_html(rows: list[dict], generated_at: str) -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EIA Petroleum Spot Prices</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
   :root {{
-    --bg:      #f4f7fb;
-    --surface: #ffffff;
-    --navy:    #2a3f5f;
-    --navy-hd: #1a2e45;
-    --blue-md: #3d5a8a;
-    --text:    #2a3f5f;
-    --muted:   #7b8faa;
-    --border:  #d1dce9;
-    --green:   #1a7f3c;
-    --green-bg:#e8f5ee;
-    --red:     #c0392b;
-    --red-bg:  #fdecea;
-    --na:      #9aa8bb;
+    --bg:       #f4f7fb;
+    --surface:  #ffffff;
+    --navy:     #2a3f5f;
+    --navy-hd:  #1a2e45;
+    --blue-md:  #3d5a8a;
+    --blue-sel: #e8f0fa;
+    --text:     #2a3f5f;
+    --muted:    #7b8faa;
+    --border:   #d1dce9;
+    --green:    #1a7f3c;
+    --green-bg: #e8f5ee;
+    --red:      #c0392b;
+    --red-bg:   #fdecea;
+    --na:       #9aa8bb;
   }}
 
   body {{
@@ -189,13 +202,9 @@ def build_html(rows: list[dict], generated_at: str) -> str:
     font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: #ffffff;
     margin-bottom: 6px;
   }}
-  .header-meta {{
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-  }}
+  .header-meta {{ font-size: 12px; color: rgba(255,255,255,0.7); }}
   .back-link {{
     display: inline-block;
     margin-bottom: 14px;
@@ -208,10 +217,39 @@ def build_html(rows: list[dict], generated_at: str) -> str:
 
   .main-content {{
     max-width: 1100px;
-    margin: 32px auto;
+    margin: 28px auto;
     padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }}
 
+  /* ── Chart card ── */
+  .chart-card {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }}
+  .chart-header {{
+    padding: 14px 20px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }}
+  .chart-title {{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+  }}
+  .chart-hint {{
+    font-size: 11px;
+    color: var(--muted);
+  }}
+  #chart {{ width: 100%; height: 320px; }}
+
+  /* ── Table card ── */
   .table-card {{
     background: var(--surface);
     border: 1px solid var(--border);
@@ -220,10 +258,7 @@ def build_html(rows: list[dict], generated_at: str) -> str:
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }}
 
-  table {{
-    width: 100%;
-    border-collapse: collapse;
-  }}
+  table {{ width: 100%; border-collapse: collapse; }}
 
   thead th {{
     background: var(--navy);
@@ -239,15 +274,20 @@ def build_html(rows: list[dict], generated_at: str) -> str:
     top: 0;
     z-index: 1;
   }}
-  thead th.product-name,
   thead th:first-child {{ text-align: left; }}
 
   tbody tr {{
     border-bottom: 1px solid var(--border);
-    transition: background 0.12s;
+    cursor: pointer;
+    transition: background 0.1s;
   }}
   tbody tr:last-child {{ border-bottom: none; }}
   tbody tr:hover {{ background: #f0f4fa; }}
+  tbody tr.selected {{
+    background: var(--blue-sel);
+    border-left: 3px solid var(--blue-md);
+  }}
+  tbody tr.selected td.product-name {{ color: var(--blue-md); font-weight: 600; }}
 
   td {{
     padding: 11px 14px;
@@ -260,29 +300,17 @@ def build_html(rows: list[dict], generated_at: str) -> str:
     font-weight: 500;
     color: var(--navy);
   }}
-  td.spot-price {{
-    font-weight: 600;
-    color: var(--navy);
-  }}
-  .unit {{
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-left: 3px;
-  }}
+  td.spot-price {{ font-weight: 600; color: var(--navy); }}
+  .unit {{ font-size: 10px; font-weight: 400; color: var(--muted); margin-left: 3px; }}
 
-  td.pct {{
-    font-weight: 600;
-    font-size: 13px;
-    border-radius: 4px;
-  }}
+  td.pct {{ font-weight: 600; font-size: 13px; border-radius: 4px; }}
   td.pct.pos {{ color: var(--green); background: var(--green-bg); }}
   td.pct.neg {{ color: var(--red);   background: var(--red-bg);   }}
-  td.pct.na  {{ color: var(--na);   font-weight: 400;             }}
+  td.pct.na  {{ color: var(--na);    font-weight: 400;            }}
 
   .footer {{
     text-align: center;
-    margin: 28px 0 40px;
+    margin: 8px 0 40px;
     font-size: 11px;
     color: var(--muted);
   }}
@@ -291,7 +319,8 @@ def build_html(rows: list[dict], generated_at: str) -> str:
   @media (max-width: 768px) {{
     .main-content {{ padding: 0 12px; margin: 16px auto; }}
     td, th {{ padding: 9px 8px; font-size: 12px; }}
-    td.product-name {{ min-width: 160px; }}
+    td.product-name {{ min-width: 140px; }}
+    #chart {{ height: 240px; }}
   }}
 </style>
 </head>
@@ -304,11 +333,20 @@ def build_html(rows: list[dict], generated_at: str) -> str:
 </div>
 
 <div class="main-content">
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <span class="chart-title" id="chart-label">{first_label}</span>
+      <span class="chart-hint">2-year daily price history</span>
+    </div>
+    <div id="chart"></div>
+  </div>
+
   <div class="table-card">
     <table>
       <thead>
         <tr>
-          <th class="product-name">Product</th>
+          <th>Product</th>
           <th>Spot Price</th>
           {period_headers}
         </tr>
@@ -321,9 +359,55 @@ def build_html(rows: list[dict], generated_at: str) -> str:
 
   <div class="footer">
     Data: <a href="https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm" target="_blank">EIA Petroleum &amp; Other Liquids — Spot Prices</a> ·
-    % changes measured from closest available trading day.
+    % changes from closest available trading day.
   </div>
 </div>
+
+<script>
+const HISTORY = {history_json};
+
+function showChart(label) {{
+  const d = HISTORY[label];
+  if (!d || !d.dates.length) return;
+
+  const isBbl = d.unit === '$/bbl';
+  const fmt   = isBbl ? '.2f' : '.4f';
+
+  Plotly.react('chart', [{{
+    x:    d.dates,
+    y:    d.prices,
+    type: 'scatter',
+    mode: 'lines',
+    line: {{ color: '#3d5a8a', width: 2 }},
+    fill: 'tozeroy',
+    fillcolor: 'rgba(61,90,138,0.07)',
+    hovertemplate: '<b>%{{x}}</b><br>' + d.unit.replace('$','') + ' %{{y:{fmt}}}<extra></extra>',
+  }}], {{
+    margin:      {{ t: 20, r: 20, b: 50, l: 70 }},
+    paper_bgcolor: '#ffffff',
+    plot_bgcolor:  '#f8fafd',
+    font:        {{ family: '-apple-system,sans-serif', size: 12, color: '#2a3f5f' }},
+    xaxis: {{ type: 'date', gridcolor: '#d1dce9', linecolor: '#d1dce9', tickformat: '%b %Y' }},
+    yaxis: {{ title: d.unit, gridcolor: '#d1dce9', linecolor: '#d1dce9',
+              tickformat: isBbl ? '.1f' : '.3f' }},
+    hovermode: 'x unified',
+    showlegend: false,
+  }}, {{ responsive: true, displayModeBar: false }});
+
+  document.getElementById('chart-label').textContent = label;
+
+  document.querySelectorAll('tbody tr').forEach(tr => {{
+    tr.classList.toggle('selected', tr.dataset.label === label);
+  }});
+}}
+
+document.querySelectorAll('tbody tr').forEach(tr => {{
+  tr.addEventListener('click', () => showChart(tr.dataset.label));
+}});
+
+// Load first product on page render
+showChart({json.dumps(first_label)});
+</script>
 
 </body>
 </html>"""
@@ -341,7 +425,6 @@ def main():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # 6 years back covers the 5Y % change column
     start_date   = (date.today() - timedelta(days=365 * 6)).strftime("%Y-%m-%d")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
@@ -353,14 +436,22 @@ def main():
         if not prices:
             spot_str = "N/A"
             changes  = {p: None for p, _ in PERIODS}
+            hist     = {"dates": [], "prices": []}
         else:
             dates     = sorted(prices.keys())
             latest_px = prices[dates[-1]]
             spot_str  = f"{latest_px:.2f}" if unit == "$/bbl" else f"{latest_px:.4f}"
             changes   = {p: pct_change(prices, days) for p, days in PERIODS}
-            print(f"  Latest ({dates[-1]}): {latest_px}")
+            hist      = history_2y(prices)
+            print(f"  Latest ({dates[-1]}): {latest_px}  ({len(hist['dates'])} days of 2Y history)")
 
-        rows.append({"label": label, "spot": spot_str, "unit": unit, "changes": changes})
+        rows.append({
+            "label":   label,
+            "spot":    spot_str,
+            "unit":    unit,
+            "changes": changes,
+            "history": hist,
+        })
 
     html = build_html(rows, generated_at)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
