@@ -63,10 +63,15 @@ n_smooth = 30
 # DATA FETCH — Stooq first, yfinance fallback
 # ---------------------------------------------------------
 def fetch_stooq():
-    import pandas_datareader.data as web  # lazy — fails gracefully if pandas >= 3.0
+    import requests, io
+    d1 = pd.Timestamp(start).strftime("%Y%m%d")
+    d2 = pd.Timestamp(end).strftime("%Y%m%d")
     df_all = pd.DataFrame()
     for stooq_ticker in tickers:
-        df = web.DataReader(stooq_ticker, "stooq", start=start, end=end)
+        url = f"https://stooq.com/q/d/l/?s={stooq_ticker}&d1={d1}&d2={d2}&i=d"
+        r = requests.get(url, timeout=20)
+        r.raise_for_status()
+        df = pd.read_csv(io.StringIO(r.text), index_col=0, parse_dates=True)
         df = df[::-1]
         df_all[stooq_ticker] = df["Close"]
         print(f"Loaded {stooq_ticker}")
