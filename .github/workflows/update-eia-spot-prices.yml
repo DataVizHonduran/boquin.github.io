@@ -1,0 +1,37 @@
+name: Update EIA Spot Prices
+
+on:
+  schedule:
+    - cron: '0 21 * * 1-5'  # Weekdays at 21:00 UTC (after EIA ~4pm ET publish)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate dashboard
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/generate_eia_spot_prices.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/eia-spot-prices/
+          git diff --staged --quiet || (git commit -m "Update EIA Spot Prices - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
