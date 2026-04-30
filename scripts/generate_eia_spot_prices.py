@@ -13,29 +13,31 @@ Output: reports/eia-spot-prices/index.html
 import os
 import sys
 import requests
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, date, timedelta, timezone
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-EIA_API_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
-SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT    = os.path.dirname(SCRIPT_DIR)
-OUTPUT_DIR   = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
-OUTPUT_PATH  = os.path.join(OUTPUT_DIR, "index.html")
+EIA_API_BASE    = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
+EIA_FACETS_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/facets/series/"
+SCRIPT_DIR      = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT       = os.path.dirname(SCRIPT_DIR)
+OUTPUT_DIR      = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
+OUTPUT_PATH     = os.path.join(OUTPUT_DIR, "index.html")
 
-# (label, series_id, unit_label)
+# Each product: (display_label, unit, [ranked keyword sets to match against series description])
+# Keyword sets are tried in order; first series matching ALL keywords in a set wins.
 PRODUCTS = [
-    ("WTI Crude Oil (Cushing, OK)",          "RWTC",                         "$/bbl"),
-    ("Brent Crude Oil (Europe)",              "RBRTE",                        "$/bbl"),
-    ("NY Harbor No. 2 Heating Oil",          "EER_EPD2F_PF4_Y35NY_DPG",     "$/gal"),
-    ("Gulf Coast Kerosene-Type Jet Fuel",    "EER_EPJK_PF4_RGC_DPG",        "$/gal"),
-    ("NY Harbor RBOB Regular Gasoline",      "EER_EPMRR_PF4_Y35NY_DPG",     "$/gal"),
-    ("LA RBOB Regular Gasoline",             "EER_EPMRU_PF4_Y05LA_DPG",     "$/gal"),
-    ("NY Harbor ULS No. 2 Diesel",           "EER_EPD2DXL0_PF4_Y35NY_DPG",  "$/gal"),
-    ("Gulf Coast ULS No. 2 Diesel",          "EER_EPD2DXL0_PF4_RGC_DPG",    "$/gal"),
-    ("LA ULS CARB Diesel",                   "EER_EPD2DXL0_PF4_Y05LA_DPG",  "$/gal"),
-    ("Propane (Mont Belvieu, TX)",            "EER_EPLLPA_PF4_Y44MB_DPG",    "$/gal"),
+    ("WTI Crude Oil (Cushing, OK)",       "$/bbl",  [["cushing", "wti"],          ["cushing", "crude"]]),
+    ("Brent Crude Oil (Europe)",           "$/bbl",  [["brent", "europe"],         ["brent", "spot"]]),
+    ("NY Harbor No. 2 Heating Oil",        "$/gal",  [["heating oil", "new york"], ["heating oil", "harbor"]]),
+    ("Gulf Coast Kerosene-Type Jet Fuel",  "$/gal",  [["jet fuel", "gulf"],        ["kerosene", "gulf"]]),
+    ("NY Harbor RBOB Regular Gasoline",    "$/gal",  [["rbob", "new york"],        ["rbob", "harbor"]]),
+    ("LA RBOB Regular Gasoline",           "$/gal",  [["rbob", "los angeles"],     ["rbob", "angeles"]]),
+    ("NY Harbor ULS No. 2 Diesel",         "$/gal",  [["ultra-low", "diesel", "new york"], ["uls", "diesel", "harbor"]]),
+    ("Gulf Coast ULS No. 2 Diesel",        "$/gal",  [["ultra-low", "diesel", "gulf"],     ["uls", "diesel", "gulf"]]),
+    ("LA ULS CARB Diesel",                 "$/gal",  [["carb", "diesel", "los angeles"],   ["carb", "diesel", "angeles"]]),
+    ("Propane (Mont Belvieu, TX)",          "$/gal",  [["propane", "mont belvieu"],         ["propane", "belvieu"]]),
 ]
 
 # Calendar-day lookback windows for each % change column
@@ -49,18 +51,54 @@ PERIODS = [
 ]
 
 # ---------------------------------------------------------------------------
+# Series discovery
+# ---------------------------------------------------------------------------
+
+def discover_series(api_key: str) -> list[dict]:
+    """Return all series available in petroleum/pri/spt with id + description."""
+    try:
+        resp = requests.get(
+            EIA_FACETS_BASE,
+            params={"api_key": api_key, "length": 1000},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        items = resp.json().get("response", {}).get("facets", [])
+        print(f"  Discovered {len(items)} series in petroleum/pri/spt")
+        return items
+    except Exception as exc:
+        print(f"  WARNING: series discovery failed ({exc}); using fallback IDs")
+        return []
+
+
+def match_series(label: str, keyword_sets: list[list[str]], catalog: list[dict]) -> str | None:
+    """
+    Find the best series ID from catalog for a given product.
+    Tries each keyword_set in order; returns first series whose description
+    contains all keywords in the set (case-insensitive).
+    """
+    for kws in keyword_sets:
+        for item in catalog:
+            desc = item.get("description", item.get("name", "")).lower()
+            if all(k in desc for k in kws):
+                return item["id"]
+    return None
+
+
+# ---------------------------------------------------------------------------
 # EIA API fetch
 # ---------------------------------------------------------------------------
 
-def fetch_series(series_id: str, api_key: str) -> dict[str, float]:
-    """Fetch ~6 years of daily data for one series. Returns {date_str: price}."""
+def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
+    """Fetch daily data for one series from `start` date to today. Returns {date_str: price}."""
     params = {
         "api_key":              api_key,
         "frequency":            "daily",
         "data[0]":              "value",
         "facets[series][]":     series_id,
         "sort[0][column]":      "period",
-        "sort[0][direction]":   "asc",
+        "sort[0][direction]":   "desc",
+        "start":                start,
         "length":               2200,
         "offset":               0,
     }
@@ -73,7 +111,7 @@ def fetch_series(series_id: str, api_key: str) -> dict[str, float]:
         print(f"  ERROR fetching {series_id}: {exc}")
         return {}
 
-    rows = payload.get("response", {}).get("data", [])
+    rows   = payload.get("response", {}).get("data", [])
     result = {}
     for row in rows:
         period = row.get("period", "")
@@ -96,20 +134,18 @@ def pct_change(prices: dict[str, float], lookback_days: int) -> float | None:
     if not prices:
         return None
 
-    dates  = sorted(prices.keys())
-    latest = dates[-1]
+    dates     = sorted(prices.keys())
+    latest    = dates[-1]
     latest_dt = datetime.strptime(latest, "%Y-%m-%d")
     target_dt = latest_dt - timedelta(days=lookback_days)
     target_str = target_dt.strftime("%Y-%m-%d")
 
-    # find closest available date on or before target
     past_dates = [d for d in dates if d <= target_str]
     if not past_dates:
         return None
 
-    past = past_dates[-1]
     px_now  = prices[latest]
-    px_then = prices[past]
+    px_then = prices[past_dates[-1]]
 
     if px_then == 0:
         return None
@@ -121,11 +157,10 @@ def pct_change(prices: dict[str, float], lookback_days: int) -> float | None:
 # ---------------------------------------------------------------------------
 
 def fmt_pct(val: float | None) -> tuple[str, str]:
-    """Return (text, css_class) for a % change value."""
     if val is None:
         return "—", "na"
-    sign  = "+" if val >= 0 else ""
-    cls   = "pos" if val >= 0 else "neg"
+    sign = "+" if val >= 0 else ""
+    cls  = "pos" if val >= 0 else "neg"
     return f"{sign}{val:.1f}%", cls
 
 
@@ -139,7 +174,7 @@ def build_html(rows: list[dict], generated_at: str) -> str:
             f'<td class="spot-price">{row["spot"]}<span class="unit">{row["unit"]}</span></td>',
         ]
         for p, days in PERIODS:
-            val  = row["changes"].get(p)
+            val       = row["changes"].get(p)
             text, cls = fmt_pct(val)
             cells.append(f'<td class="pct {cls}">{text}</td>')
         body_rows.append(f"<tr>{''.join(cells)}</tr>")
@@ -277,18 +312,9 @@ def build_html(rows: list[dict], generated_at: str) -> str:
     font-size: 13px;
     border-radius: 4px;
   }}
-  td.pct.pos {{
-    color: var(--green);
-    background: var(--green-bg);
-  }}
-  td.pct.neg {{
-    color: var(--red);
-    background: var(--red-bg);
-  }}
-  td.pct.na {{
-    color: var(--na);
-    font-weight: 400;
-  }}
+  td.pct.pos {{ color: var(--green); background: var(--green-bg); }}
+  td.pct.neg {{ color: var(--red);   background: var(--red-bg);   }}
+  td.pct.na  {{ color: var(--na);   font-weight: 400;             }}
 
   .footer {{
     text-align: center;
@@ -351,12 +377,26 @@ def main():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+    # 6 years of history covers the 5Y % change column
+    start_date   = (date.today() - timedelta(days=365 * 6)).strftime("%Y-%m-%d")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    rows = []
 
-    for label, series_id, unit in PRODUCTS:
-        print(f"Fetching: {label} ({series_id})...")
-        prices = fetch_series(series_id, api_key)
+    # Discover all available series from EIA
+    print("Discovering available series...")
+    catalog = discover_series(api_key)
+
+    rows = []
+    for label, unit, keyword_sets in PRODUCTS:
+        series_id = match_series(label, keyword_sets, catalog)
+
+        if not series_id:
+            print(f"  WARNING: no series matched for '{label}' — skipping")
+            rows.append({"label": label, "spot": "N/A", "unit": unit,
+                         "changes": {p: None for p, _ in PERIODS}})
+            continue
+
+        print(f"Fetching: {label} → {series_id}...")
+        prices = fetch_series(series_id, api_key, start_date)
 
         if not prices:
             spot_str = "N/A"
@@ -366,14 +406,9 @@ def main():
             latest_px = prices[dates[-1]]
             spot_str  = f"{latest_px:.2f}" if unit == "$/bbl" else f"{latest_px:.4f}"
             changes   = {p: pct_change(prices, days) for p, days in PERIODS}
-            print(f"  Latest ({dates[-1]}): {unit[0]}{latest_px:.4f}")
+            print(f"  Latest ({dates[-1]}): {latest_px}")
 
-        rows.append({
-            "label":   label,
-            "spot":    spot_str,
-            "unit":    unit,
-            "changes": changes,
-        })
+        rows.append({"label": label, "spot": spot_str, "unit": unit, "changes": changes})
 
     html = build_html(rows, generated_at)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
