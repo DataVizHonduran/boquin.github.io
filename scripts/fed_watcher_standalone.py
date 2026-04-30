@@ -38,6 +38,7 @@ import feedparser
 import markdown as md_lib
 from bs4 import BeautifulSoup
 from huggingface_hub import InferenceClient
+from cb_monitor_utils import regenerate_cb_monitor
 
 # ---------------------------------------------------------------------------
 # Config
@@ -704,6 +705,7 @@ def save_output(report: str, today: str, out_dir: Path, days: int) -> Path:
 
     # Rebuild archive index
     regenerate_index(out_dir)
+    regenerate_cb_monitor(out_dir.parent.parent)
 
     print(f"\nMarkdown : {md_path}", file=sys.stderr)
     print(f"HTML     : {html_path}", file=sys.stderr)

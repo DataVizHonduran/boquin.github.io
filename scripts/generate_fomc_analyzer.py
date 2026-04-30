@@ -33,6 +33,7 @@ import requests
 import pandas as pd
 import markdown as md_lib
 from huggingface_hub import InferenceClient
+from cb_monitor_utils import regenerate_cb_monitor
 
 # ---------------------------------------------------------------------------
 # Config
@@ -440,6 +441,7 @@ def main():
 
     # 4. Rebuild archive index
     regenerate_index(out_dir)
+    regenerate_cb_monitor(out_dir.parent.parent)
     print(f"\nIndex → {out_dir / 'index.html'}", file=sys.stderr)
     print("Done.")
 

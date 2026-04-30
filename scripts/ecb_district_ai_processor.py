@@ -46,6 +46,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from huggingface_hub import InferenceClient
+from cb_monitor_utils import regenerate_cb_monitor
 
 # ---------------------------------------------------------------------------
 # Config
@@ -870,6 +871,7 @@ def run_monthly_pipeline(run_date: str, cache_path: Path,
     print(f"[ecb-monitor] MTD reports written:")
     print(f"  HTML → {html_path}")
     print(f"  MD   → {md_path}")
+    regenerate_cb_monitor(output_dir.parent.parent)
 
 
 # ---------------------------------------------------------------------------
@@ -965,6 +967,7 @@ def run_pipeline(all_articles: list, days: int, run_date: str,
     print(f"[ecb-monitor] Reports written:")
     print(f"  HTML → {html_path}")
     print(f"  MD   → {md_path}")
+    regenerate_cb_monitor(output_dir.parent.parent)
 
 
 # ---------------------------------------------------------------------------
