@@ -129,18 +129,9 @@
     font-size: 13px;
     border-radius: 4px;
   }
-  td.pct.pos {
-    color: var(--green);
-    background: var(--green-bg);
-  }
-  td.pct.neg {
-    color: var(--red);
-    background: var(--red-bg);
-  }
-  td.pct.na {
-    color: var(--na);
-    font-weight: 400;
-  }
+  td.pct.pos { color: var(--green); background: var(--green-bg); }
+  td.pct.neg { color: var(--red);   background: var(--red-bg);   }
+  td.pct.na  { color: var(--na);   font-weight: 400;             }
 
   .footer {
     text-align: center;
@@ -162,7 +153,7 @@
 <div class="dashboard-header">
   <a class="back-link" href="../../index.html">← boquin.xyz</a>
   <h1>⛽ EIA Petroleum Spot Prices</h1>
-  <div class="header-meta">Daily spot prices · Source: EIA Open Data API v2 · Updated: 2026-04-30 12:48 UTC</div>
+  <div class="header-meta">Daily spot prices · Source: EIA Open Data API v2 · Updated: 2026-04-30 13:01 UTC</div>
 </div>
 
 <div class="main-content">
@@ -176,16 +167,16 @@
         </tr>
       </thead>
       <tbody>
-            <tr><td class="product-name">WTI Crude Oil (Cushing, OK)</td><td class="spot-price">17.56<span class="unit">$/bbl</span></td><td class="pct neg">-1.0%</td><td class="pct neg">-2.7%</td><td class="pct neg">-8.3%</td><td class="pct neg">-7.2%</td><td class="pct neg">-0.5%</td><td class="pct neg">-6.7%</td></tr>
-            <tr><td class="product-name">Brent Crude Oil (Europe)</td><td class="spot-price">19.50<span class="unit">$/bbl</span></td><td class="pct pos">+1.9%</td><td class="pct pos">+4.6%</td><td class="pct pos">+11.1%</td><td class="pct pos">+23.8%</td><td class="pct pos">+20.9%</td><td class="pct neg">-19.0%</td></tr>
-            <tr><td class="product-name">NY Harbor No. 2 Heating Oil</td><td class="spot-price">0.4660<span class="unit">$/gal</span></td><td class="pct neg">-0.2%</td><td class="pct neg">-1.9%</td><td class="pct neg">-4.7%</td><td class="pct neg">-2.7%</td><td class="pct neg">-8.6%</td><td class="pct neg">-19.5%</td></tr>
-            <tr><td class="product-name">Gulf Coast Kerosene-Type Jet Fuel</td><td class="spot-price">0.2990<span class="unit">$/gal</span></td><td class="pct pos">+0.0%</td><td class="pct pos">+0.0%</td><td class="pct neg">-23.5%</td><td class="pct neg">-28.5%</td><td class="pct neg">-39.0%</td><td class="pct neg">-32.4%</td></tr>
+            <tr><td class="product-name">WTI Crude Oil (Cushing, OK)</td><td class="spot-price">N/A<span class="unit">$/bbl</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
+            <tr><td class="product-name">Brent Crude Oil (Europe)</td><td class="spot-price">N/A<span class="unit">$/bbl</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
+            <tr><td class="product-name">NY Harbor No. 2 Heating Oil</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
+            <tr><td class="product-name">Gulf Coast Kerosene-Type Jet Fuel</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
             <tr><td class="product-name">NY Harbor RBOB Regular Gasoline</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
             <tr><td class="product-name">LA RBOB Regular Gasoline</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
-            <tr><td class="product-name">NY Harbor ULS No. 2 Diesel</td><td class="spot-price">1.8610<span class="unit">$/gal</span></td><td class="pct neg">-2.6%</td><td class="pct neg">-4.7%</td><td class="pct pos">+0.2%</td><td class="pct neg">-11.9%</td><td class="pct neg">-37.8%</td><td class="pct neg">-13.1%</td></tr>
-            <tr><td class="product-name">Gulf Coast ULS No. 2 Diesel</td><td class="spot-price">1.7110<span class="unit">$/gal</span></td><td class="pct neg">-2.8%</td><td class="pct neg">-6.5%</td><td class="pct neg">-4.4%</td><td class="pct neg">-6.2%</td><td class="pct neg">-40.7%</td><td class="pct neg">-19.1%</td></tr>
+            <tr><td class="product-name">NY Harbor ULS No. 2 Diesel</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
+            <tr><td class="product-name">Gulf Coast ULS No. 2 Diesel</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
             <tr><td class="product-name">LA ULS CARB Diesel</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
-            <tr><td class="product-name">Propane (Mont Belvieu, TX)</td><td class="spot-price">0.5450<span class="unit">$/gal</span></td><td class="pct pos">+2.8%</td><td class="pct neg">-5.7%</td><td class="pct neg">-2.7%</td><td class="pct neg">-31.4%</td><td class="pct pos">+17.0%</td><td class="pct pos">+54.0%</td></tr>
+            <tr><td class="product-name">Propane (Mont Belvieu, TX)</td><td class="spot-price">N/A<span class="unit">$/gal</span></td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td><td class="pct na">—</td></tr>
       </tbody>
     </table>
   </div>
