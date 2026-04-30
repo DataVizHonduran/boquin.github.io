@@ -19,24 +19,24 @@ from datetime import datetime, date, timedelta, timezone
 # Config
 # ---------------------------------------------------------------------------
 EIA_API_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
-SCRIPT_DIR      = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT       = os.path.dirname(SCRIPT_DIR)
-OUTPUT_DIR      = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
-OUTPUT_PATH     = os.path.join(OUTPUT_DIR, "index.html")
+SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT    = os.path.dirname(SCRIPT_DIR)
+OUTPUT_DIR   = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
+OUTPUT_PATH  = os.path.join(OUTPUT_DIR, "index.html")
 
-# Each product: (display_label, unit, [ranked keyword sets to match against series description])
-# Keyword sets are tried in order; first series matching ALL keywords in a set wins.
+# (display_label, unit, series_id)
+# Series IDs confirmed from EIA API discovery on 2026-04-30.
 PRODUCTS = [
-    ("WTI Crude Oil (Cushing, OK)",       "$/bbl",  [["cushing", "wti"],          ["cushing", "crude"]]),
-    ("Brent Crude Oil (Europe)",           "$/bbl",  [["brent", "europe"],         ["brent", "spot"]]),
-    ("NY Harbor No. 2 Heating Oil",        "$/gal",  [["heating oil", "new york"], ["heating oil", "harbor"]]),
-    ("Gulf Coast Kerosene-Type Jet Fuel",  "$/gal",  [["jet fuel", "gulf"],        ["kerosene", "gulf"]]),
-    ("NY Harbor RBOB Regular Gasoline",    "$/gal",  [["rbob", "new york"],        ["rbob", "harbor"]]),
-    ("LA RBOB Regular Gasoline",           "$/gal",  [["rbob", "los angeles"],     ["rbob", "angeles"]]),
-    ("NY Harbor ULS No. 2 Diesel",         "$/gal",  [["ultra-low", "diesel", "new york"], ["uls", "diesel", "harbor"]]),
-    ("Gulf Coast ULS No. 2 Diesel",        "$/gal",  [["ultra-low", "diesel", "gulf"],     ["uls", "diesel", "gulf"]]),
-    ("LA ULS CARB Diesel",                 "$/gal",  [["carb", "diesel", "los angeles"],   ["carb", "diesel", "angeles"]]),
-    ("Propane (Mont Belvieu, TX)",          "$/gal",  [["propane", "mont belvieu"],         ["propane", "belvieu"]]),
+    ("WTI Crude Oil (Cushing, OK)",         "$/bbl", "RWTC"),
+    ("Brent Crude Oil (Europe)",             "$/bbl", "RBRTE"),
+    ("NY Harbor No. 2 Heating Oil",         "$/gal", "EER_EPD2F_PF4_Y35NY_DPG"),
+    ("Gulf Coast Kerosene-Type Jet Fuel",   "$/gal", "EER_EPJK_PF4_RGC_DPG"),
+    ("NY Harbor RBOB Regular Gasoline",     "$/gal", "EER_EPMRU_PF4_Y35NY_DPG"),
+    ("LA RBOB Regular Gasoline",            "$/gal", "EER_EPMRR_PF4_Y05LA_DPG"),
+    ("NY Harbor ULS No. 2 Diesel",          "$/gal", "EER_EPD2DXL0_PF4_Y35NY_DPG"),
+    ("Gulf Coast ULS No. 2 Diesel",         "$/gal", "EER_EPD2DXL0_PF4_RGC_DPG"),
+    ("LA ULS CARB Diesel",                  "$/gal", "EER_EPD2DC_PF4_Y05LA_DPG"),
+    ("Propane (Mont Belvieu, TX)",           "$/gal", "EER_EPLLPA_PF4_Y44MB_DPG"),
 ]
 
 # Calendar-day lookback windows for each % change column
@@ -50,68 +50,11 @@ PERIODS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Series discovery
-# ---------------------------------------------------------------------------
-
-def discover_series(api_key: str) -> list[dict]:
-    """
-    Fetch a recent slice of all series (no series filter) and collect
-    unique series IDs + descriptions from the response rows.
-    """
-    try:
-        resp = requests.get(
-            EIA_API_BASE,
-            params={
-                "api_key":              api_key,
-                "frequency":            "daily",
-                "data[0]":              "value",
-                "sort[0][column]":      "period",
-                "sort[0][direction]":   "desc",
-                "start":                "2026-04-01",
-                "length":               5000,
-            },
-            timeout=30,
-        )
-        resp.raise_for_status()
-        rows = resp.json().get("response", {}).get("data", [])
-
-        seen: dict[str, dict] = {}
-        for row in rows:
-            sid  = row.get("series", "")
-            desc = row.get("seriesDescription", "")
-            if sid and sid not in seen:
-                seen[sid] = {"id": sid, "description": desc}
-
-        catalog = list(seen.values())
-        print(f"  Discovered {len(catalog)} series in petroleum/pri/spt")
-        for item in catalog:
-            print(f"    {item['id']} — {item['description']}")
-        return catalog
-    except Exception as exc:
-        print(f"  WARNING: series discovery failed ({exc}); skipping all")
-        return []
-
-
-def match_series(label: str, keyword_sets: list[list[str]], catalog: list[dict]) -> str | None:
-    """
-    Find the best series ID from catalog for a given product.
-    Tries each keyword_set in order; returns first series whose description
-    contains all keywords in the set (case-insensitive).
-    """
-    for kws in keyword_sets:
-        for item in catalog:
-            desc = item.get("description", item.get("name", "")).lower()
-            if all(k in desc for k in kws):
-                return item["id"]
-    return None
-
-
-# ---------------------------------------------------------------------------
 # EIA API fetch
 # ---------------------------------------------------------------------------
 
 def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
-    """Fetch daily data for one series from `start` date to today. Returns {date_str: price}."""
+    """Fetch daily data for one series from `start` to today. Returns {date_str: price}."""
     params = {
         "api_key":              api_key,
         "frequency":            "daily",
@@ -398,25 +341,13 @@ def main():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # 6 years of history covers the 5Y % change column
+    # 6 years back covers the 5Y % change column
     start_date   = (date.today() - timedelta(days=365 * 6)).strftime("%Y-%m-%d")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-    # Discover all available series from EIA
-    print("Discovering available series...")
-    catalog = discover_series(api_key)
-
     rows = []
-    for label, unit, keyword_sets in PRODUCTS:
-        series_id = match_series(label, keyword_sets, catalog)
-
-        if not series_id:
-            print(f"  WARNING: no series matched for '{label}' — skipping")
-            rows.append({"label": label, "spot": "N/A", "unit": unit,
-                         "changes": {p: None for p, _ in PERIODS}})
-            continue
-
-        print(f"Fetching: {label} → {series_id}...")
+    for label, unit, series_id in PRODUCTS:
+        print(f"Fetching: {label} ({series_id})...")
         prices = fetch_series(series_id, api_key, start_date)
 
         if not prices:
