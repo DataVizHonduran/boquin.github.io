@@ -18,8 +18,7 @@ from datetime import datetime, date, timedelta, timezone
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-EIA_API_BASE    = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
-EIA_FACETS_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/facets/series/"
+EIA_API_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
 SCRIPT_DIR      = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT       = os.path.dirname(SCRIPT_DIR)
 OUTPUT_DIR      = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
@@ -55,19 +54,41 @@ PERIODS = [
 # ---------------------------------------------------------------------------
 
 def discover_series(api_key: str) -> list[dict]:
-    """Return all series available in petroleum/pri/spt with id + description."""
+    """
+    Fetch a recent slice of all series (no series filter) and collect
+    unique series IDs + descriptions from the response rows.
+    """
     try:
         resp = requests.get(
-            EIA_FACETS_BASE,
-            params={"api_key": api_key, "length": 1000},
+            EIA_API_BASE,
+            params={
+                "api_key":              api_key,
+                "frequency":            "daily",
+                "data[0]":              "value",
+                "sort[0][column]":      "period",
+                "sort[0][direction]":   "desc",
+                "start":                "2026-04-01",
+                "length":               5000,
+            },
             timeout=30,
         )
         resp.raise_for_status()
-        items = resp.json().get("response", {}).get("facets", [])
-        print(f"  Discovered {len(items)} series in petroleum/pri/spt")
-        return items
+        rows = resp.json().get("response", {}).get("data", [])
+
+        seen: dict[str, dict] = {}
+        for row in rows:
+            sid  = row.get("series", "")
+            desc = row.get("seriesDescription", "")
+            if sid and sid not in seen:
+                seen[sid] = {"id": sid, "description": desc}
+
+        catalog = list(seen.values())
+        print(f"  Discovered {len(catalog)} series in petroleum/pri/spt")
+        for item in catalog:
+            print(f"    {item['id']} — {item['description']}")
+        return catalog
     except Exception as exc:
-        print(f"  WARNING: series discovery failed ({exc}); using fallback IDs")
+        print(f"  WARNING: series discovery failed ({exc}); skipping all")
         return []
 
 
