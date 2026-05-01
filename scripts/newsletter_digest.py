@@ -39,7 +39,13 @@ POSTS_JSON = OUTPUT_DIR / "substack_posts.json"
 MARKER_START = "<!-- newsletters-commentary-start -->"
 MARKER_END   = "<!-- newsletters-commentary-end -->"
 
-FETCH_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; research-bot/1.0)"}
+FETCH_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate",
+    "Connection": "keep-alive",
+}
 
 URLS = [
     "https://junkbondinvestor.substack.com",
@@ -121,28 +127,44 @@ def fetch_posts(base_url: str) -> list[dict]:
     for feed_path in ("/feed", "/rss", "/rss.xml", "/feed.xml", "/atom.xml"):
         feed_url = base + feed_path
         try:
-            feed = feedparser.parse(feed_url, request_headers=FETCH_HEADERS)
+            r = requests.get(feed_url, headers=FETCH_HEADERS, timeout=15, allow_redirects=True)
+            if r.status_code != 200:
+                print(f"    {feed_url}: HTTP {r.status_code}", file=sys.stderr)
+                continue
+            feed = feedparser.parse(r.content)
             if feed.bozo and not feed.entries:
+                ct = r.headers.get("content-type", "")
+                print(f"    {feed_url}: bozo=True 0-entries ct={ct[:60]}", file=sys.stderr)
                 continue
             posts = []
             for entry in feed.entries[:5]:
                 title = entry.get("title", "").strip()
                 if not title:
                     continue
-                url = entry.get("link", "")
+                link = entry.get("link", "")
                 summary = entry.get("summary", "") or entry.get("subtitle", "")
-                # strip HTML tags from summary
                 summary = re.sub(r"<[^>]+>", "", summary)[:200].strip()
                 date = _parse_date(entry)
-                posts.append({"title": title, "url": url, "date": date, "description": summary})
+                posts.append({"title": title, "url": link, "date": date, "description": summary})
             if posts:
                 return posts
-        except Exception:
+        except Exception as e:
+            print(f"    {feed_url}: {type(e).__name__}: {e}", file=sys.stderr)
             continue
     return []
 
 
+def load_cache() -> dict:
+    if POSTS_JSON.exists():
+        try:
+            return json.loads(POSTS_JSON.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+
 def fetch_all() -> dict:
+    cached = load_cache()
     seen, unique = set(), []
     for u in URLS:
         if u not in seen:
@@ -153,9 +175,15 @@ def fetch_all() -> dict:
     for url in unique:
         posts = fetch_posts(url)
         domain = urlparse(url).netloc
-        results[domain] = posts
-        status = f"{len(posts)} posts" if posts else "FAILED"
-        print(f"  {domain}: {status}")
+        if posts:
+            results[domain] = posts
+            print(f"  {domain}: {len(posts)} posts")
+        elif domain in cached and cached[domain]:
+            results[domain] = cached[domain]
+            print(f"  {domain}: cached ({len(cached[domain])} posts)")
+        else:
+            results[domain] = []
+            print(f"  {domain}: FAILED")
         time.sleep(0.3)
     return results
 
