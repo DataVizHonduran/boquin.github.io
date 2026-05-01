@@ -1,0 +1,40 @@
+name: Update GVIP Holdings Monitor
+
+on:
+  schedule:
+    - cron: '0 14 * * 1-5'  # Every weekday at 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate report
+        env:
+          GVIP_CACHE_DIR: ${{ github.workspace }}/reports/gvip/cache
+          GVIP_REPORT_DIR: ${{ github.workspace }}/reports/gvip
+          GVIP_LANDING_PAGE: ${{ github.workspace }}/index.html
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/generate_gvip.py --no-publish
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/gvip/
+          git diff --staged --quiet || (git commit -m "Update GVIP Holdings Monitor — $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase && git push)
