@@ -208,3 +208,41 @@ jobs:
 - [ ] Set cron to fire after the page's generator workflow
 - [ ] Confirm `HF_TOKEN` secret exists in repo Settings → Secrets → Actions
 - [ ] Trigger `workflow_dispatch` once to verify before relying on the schedule
+- [ ] Add a dashboard card to `index.html` (see section map and card template below)
+
+---
+
+## index.html — Dashboard Card Template
+
+Copy this block verbatim, change the `<h3>`, `<p>`, and `href`:
+
+```html
+<article class="dashboard-card">
+    <div class="card-header">
+        <h3>📌 Page Title</h3>
+        <p>One-sentence description of what this page shows.</p>
+    </div>
+    <div class="card-actions">
+        <a href="reports/<page-slug>/index.html" class="btn btn-primary">Launch Dashboard</a>
+    </div>
+</article>
+```
+
+Insert the card **inside** the relevant `<div class="section-cards">` block. Find the right section by its `id` (see map below), then place the card before the closing `</div>` of `section-cards`.
+
+---
+
+## index.html — Section Map
+
+| Section ID | Heading | What belongs here |
+|---|---|---|
+| `section-risk` | 🎯 Risk Regimes | Risk regime indicators, cross-asset regime monitors |
+| `section-fx` | 💱 Currencies | FX dashboards, REER, FX baskets, G10 fair value |
+| `section-treasuries` | 🏛️ US Treasuries | Treasury dashboards, CTA signals, fair value models |
+| `section-fixed-income` | 📊 Other Fixed Income | EM bonds, credit spreads, debt holder breakdowns |
+| `section-macro` | 📊 Macro Indicators | Macro data dashboards, nowcasters, inflation, newsletter digest |
+| `section-em` | 🌍 Country Research | Country-level macro (Mexico, Brazil, China, etc.) |
+| `section-central-banks` | 🏦 Central Banks | Fed/ECB/BOJ/BOC/RBA/Banxico watcher pages |
+| `section-commodities` | 🛢️ Commodities & Geopolitics | Crude, EIA, petroleum stocks, geopolitical trackers |
+| `section-equities` | 📈 Equities | Earnings, ETF monitors, equity research tools |
+| `section-rafa` | 🎲 Rafa | Personal/fun tools |
