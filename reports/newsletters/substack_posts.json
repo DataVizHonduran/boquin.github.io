@@ -1,6 +1,37 @@
 {
   "junkbondinvestor.substack.com": [],
-  "www.semianalysis.com": [],
+  "www.semianalysis.com": [
+    {
+      "title": "xAI\u2019s Colossus 2 \u2013 First Gigawatt Datacenter In The World, Unique RL Methodology, Capital Raise",
+      "url": "https://semianalysis.com/2025/09/16/xais-colossus-2-first-gigawatt-datacenter/",
+      "date": "2025-09-16",
+      "description": "Much has been written about xAI\u2019s Colossus 1. The Memphis build belongs in the history books: the largest AI training cluster, erected from scratch in 122 days. With roughly 200,000 H100/H200s and ~30"
+    },
+    {
+      "title": "Another Giant Leap: The Rubin CPX Specialized Accelerator & Rack",
+      "url": "https://semianalysis.com/2025/09/10/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack/",
+      "date": "2025-09-10",
+      "description": "Nvidia announced the Rubin CPX, a solution that is specifically designed to be optimized for the prefill phase, with the single-die Rubin CPX heavily emphasizing compute FLOPS over memory bandwidth. T"
+    },
+    {
+      "title": "Huawei Ascend Production Ramp: Die Banks, TSMC Continued Production, HBM is The Bottleneck",
+      "url": "https://semianalysis.com/2025/09/08/huawei-ascend-production-ramp/",
+      "date": "2025-09-08",
+      "description": "Compute is the lifeblood of AI. He who controls the spice controls the universe the compute will control the production of tokens and reap the benefits of AI. Without compute you do not have a seat at"
+    },
+    {
+      "title": "Amazon\u2019s AI Resurgence: AWS & Anthropic\u2019s Multi-Gigawatt Trainium Expansion",
+      "url": "https://semianalysis.com/2025/09/03/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion/",
+      "date": "2025-09-03",
+      "description": "Two-and-a-half years ago, we flagged a looming \u201ccloud crisis\u201d at AWS. Today, the evidence has mounted. AWS is the crown jewel of the Amazon empire, generating ~60% of group profits, and dominating the"
+    },
+    {
+      "title": "H100 vs GB200 NVL72 Training Benchmarks \u2013 Power, TCO, and Reliability Analysis, Software Improvement Over Time",
+      "url": "https://semianalysis.com/2025/08/20/h100-vs-gb200-nvl72-training-benchmarks/",
+      "date": "2025-08-20",
+      "description": "Frontier model training has pushed GPUs and AI systems to their absolute limits, making cost, efficiency, power, performance per TCO, and reliability central to the discussion on effective training. T"
+    }
+  ],
   "epbresearch.substack.com": [],
   "thechangeconstant.substack.com": [],
   "hfiresearch.substack.com": [],
@@ -47,10 +78,10 @@
       "description": "How Deepgram, Wispr & Abridge customers are using voice AI in their workdays"
     },
     {
-      "title": "A Top India Fund Shows One Path for a Different Kind of VC ",
+      "title": "A Top India Fund Shows One Path for a Different Kind of VC",
       "url": "https://www.newcomer.co/p/a-top-india-fund-shows-one-path-for",
       "date": "2026-04-29",
-      "description": "Raising funds domestically in India is no picnic. Sudhir Sethi's answer has been returning cash faster, even if it hurts long-term returns. "
+      "description": "Raising funds domestically in India is no picnic. Sudhir Sethi's answer has been returning cash faster, even if it hurts long-term returns."
     },
     {
       "title": "Stakes Keep Getting Higher for the SpaceX IPO",
@@ -82,25 +113,25 @@
       "title": "WarTalk: Still Out of Ammo",
       "url": "https://www.chinatalk.media/p/wartalk-still-out-of-ammo",
       "date": "2026-05-01",
-      "description": "Two weeks into the US-Iran ceasefire, CENTCOM is requesting Dark Eagle hypersonics, the 82nd Airborne is flowing into theater, and the wargames keep telling us the same thing \u2014 there\u2019s no military solution to the Strait of Hormuz."
+      "description": "Two weeks into the US-Iran ceasefire, CENTCOM is requesting Dark Eagle hypersonics, the 82nd Airborne is flowing into theater, and the wargames keep telling us the same thing &#8212; there&#8217;s no"
     },
     {
       "title": "The Quantum Industrial Base",
       "url": "https://www.chinatalk.media/p/the-quantum-industrial-base",
       "date": "2026-04-29",
-      "description": "Quantum 201"
+      "description": "The Supply Chain"
     },
     {
       "title": "China-Proofing the American Industrial Base",
       "url": "https://www.chinatalk.media/p/china-proofing-the-american-industrial",
       "date": "2026-04-28",
-      "description": "Economic Security Essay Contest Winner! "
+      "description": "Economic Security Essay Contest Winner!"
     },
     {
-      "title": "No Jensen, Not All Compute is Created Equal ",
+      "title": "No Jensen, Not All Compute is Created Equal",
       "url": "https://www.chinatalk.media/p/no-jensen-not-all-compute-is-created",
       "date": "2026-04-28",
-      "description": "+ Cape Town!"
+      "description": "+ Nick in Cape Town!"
     },
     {
       "title": "DeepSeek V4",
@@ -112,7 +143,38 @@
   "capitalmischief.substack.com": [],
   "sovereignvibe.substack.com": [],
   "robinjbrooks.substack.com": [],
-  "www.parentdata.org": [],
+  "www.parentdata.org": [
+    {
+      "title": "What to Know About Continuous vs. Intermittent Fetal Monitoring in Labor",
+      "url": "https://parentdata.org/pregnancy/continuous-vs-intermittent-fetal-monitoring/",
+      "date": "2026-04-28",
+      "description": "The risks, benefits, and recommendations for low- and high-risk pregnancies\nEmily Oster, PhD"
+    },
+    {
+      "title": "Can You Prevent Shoulder Dystocia?",
+      "url": "https://parentdata.org/pregnancy/prevent-shoulder-dystocia-evidence/",
+      "date": "2026-04-27",
+      "description": "Q&#038;A on risk factors\nEmily Oster, PhD"
+    },
+    {
+      "title": "What\u2019s the Data on Delayed Cord Clamping?",
+      "url": "https://parentdata.org/pregnancy/delayed-cord-clamping-data-benefits/",
+      "date": "2026-04-27",
+      "description": "Q&#038;A on birth plans\nEmily Oster, PhD"
+    },
+    {
+      "title": "All About VBAC",
+      "url": "https://parentdata.org/pregnancy/vbac-risks-benefits-guide/",
+      "date": "2026-04-23",
+      "description": "The risks, benefits, and how to find a provider who supports it\nAnn Ledbetter, CNM"
+    },
+    {
+      "title": "Is the Vitamin K Shot Necessary for Newborns?",
+      "url": "https://parentdata.org/pregnancy/newborn-vitamin-k-shot/",
+      "date": "2026-04-23",
+      "description": "Q&#038;A on the post-birth injection\nEmily Oster, PhD"
+    }
+  ],
   "debtserious.substack.com": [],
   "cartadocondado.substack.com": [],
   "thecentralbankswatcher.substack.com": [],
@@ -120,7 +182,7 @@
   "yetanothervalueblog.substack.com": [],
   "www.weightythoughts.com": [
     {
-      "title": "AI Dementia\u2014Why Your Agent Gets Progressively Dumber As You Talk To It ",
+      "title": "AI Dementia\u2014Why Your Agent Gets Progressively Dumber As You Talk To It",
       "url": "https://weightythoughts.com/p/ai-dementiawhy-your-agent-gets-progressively",
       "date": "2026-04-29",
       "description": "What is context rot and how does it change how you should use AI"
@@ -135,7 +197,7 @@
       "title": "US Jobs Numbers Aren't as Bad as They Look",
       "url": "https://weightythoughts.com/p/us-jobs-numbers-arent-as-bad-as-they",
       "date": "2026-03-24",
-      "description": "It's Probably Not AI\u2014Shrinking Immigration Has Changed the Math on What \"Good\" Job Growth Means"
+      "description": "It's Probably Not AI&#8212;Shrinking Immigration Has Changed the Math on What \"Good\" Job Growth Means"
     },
     {
       "title": "AI Agents and Jobs: The Human Bottleneck",
@@ -159,6 +221,12 @@
   "neilsethi.substack.com": [],
   "www.publicnotice.co": [
     {
+      "title": "Trump\u2019s Reichstag fire presidency is immolating",
+      "url": "https://www.publicnotice.co/p/trump-reichstag-fire-presidency",
+      "date": "2026-05-01",
+      "description": "The media personality in the White House has been exposed as a crisis actor."
+    },
+    {
       "title": "The dumbest week in DOJ history",
       "url": "https://www.publicnotice.co/p/blanche-comey-ballroom",
       "date": "2026-04-30",
@@ -181,12 +249,6 @@
       "url": "https://www.publicnotice.co/p/white-house-correspondents-dinner-shooting",
       "date": "2026-04-27",
       "description": "This is the age of chaos Trump has made."
-    },
-    {
-      "title": "Matt Gertz on the Fox News presidency",
-      "url": "https://www.publicnotice.co/p/matt-gertz-on-the-fox-news-presidency",
-      "date": "2026-04-24",
-      "description": "\"The way he gets information continues to be Fox News.\""
     }
   ],
   "lbmacro.substack.com": [],
@@ -218,7 +280,7 @@
       "title": "Oil & Iran War Context Weekly (W16)",
       "url": "https://www.commoditycontext.com/p/ocw16w26",
       "date": "2026-04-17",
-      "description": "Crude prices cratered and term structure flattened on Friday following Iran\u2019s declaration that Hormuz is \u201copen\u201d despite the fact that little traffic has actually managed to cross the Strait today."
+      "description": "Crude prices cratered and term structure flattened on Friday following Iran&#8217;s declaration that Hormuz is &#8220;open&#8221; despite the fact that little traffic has actually managed to cross the"
     },
     {
       "title": "OPEC+ Data Deck (April 2026)",
