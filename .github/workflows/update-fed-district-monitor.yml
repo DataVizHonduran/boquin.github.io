@@ -55,6 +55,7 @@ jobs:
           git add -A
           git diff --staged --quiet || (
             git commit -m "Fed District Monitor — $(date +'%Y-%m-%d') 🤖" &&
+            git stash --include-untracked &&
             git pull --rebase origin main &&
             git push
           )
