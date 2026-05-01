@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Newsletter Digest — Weekly AI Synthesis
-Fetches recent posts from all Substack subscriptions via public API,
+Fetches recent posts from all subscriptions via RSS feeds (/feed),
 generates reports/newsletters/index.html, and injects Gemma 4 macro synthesis.
 
 Usage:
@@ -19,6 +19,7 @@ import re
 import time
 import json
 import requests
+import feedparser
 import markdown as md_lib
 from datetime import datetime, timezone
 from pathlib import Path
@@ -104,24 +105,40 @@ URLS = [
 # Fetch
 # ---------------------------------------------------------------------------
 
+def _parse_date(entry) -> str:
+    for field in ("published_parsed", "updated_parsed"):
+        t = getattr(entry, field, None)
+        if t:
+            try:
+                return datetime(*t[:3]).strftime("%Y-%m-%d")
+            except Exception:
+                pass
+    return ""
+
+
 def fetch_posts(base_url: str) -> list[dict]:
-    api_url = f"{base_url.rstrip('/')}/api/v1/posts?limit=5"
-    try:
-        r = requests.get(api_url, headers=FETCH_HEADERS, timeout=10)
-        if r.status_code == 200:
-            data = r.json()
+    base = base_url.rstrip("/")
+    for feed_path in ("/feed", "/rss", "/rss.xml", "/feed.xml", "/atom.xml"):
+        feed_url = base + feed_path
+        try:
+            feed = feedparser.parse(feed_url, request_headers=FETCH_HEADERS)
+            if feed.bozo and not feed.entries:
+                continue
             posts = []
-            for p in data:
-                title = p.get("title", "")
-                slug = p.get("slug", "")
-                canonical = p.get("canonical_url") or f"{base_url}/p/{slug}"
-                subtitle = p.get("subtitle") or p.get("description") or ""
-                date = (p.get("post_date") or p.get("published_at") or "")[:10]
-                if title:
-                    posts.append({"title": title, "url": canonical, "date": date, "description": subtitle})
-            return posts
-    except Exception:
-        pass
+            for entry in feed.entries[:5]:
+                title = entry.get("title", "").strip()
+                if not title:
+                    continue
+                url = entry.get("link", "")
+                summary = entry.get("summary", "") or entry.get("subtitle", "")
+                # strip HTML tags from summary
+                summary = re.sub(r"<[^>]+>", "", summary)[:200].strip()
+                date = _parse_date(entry)
+                posts.append({"title": title, "url": url, "date": date, "description": summary})
+            if posts:
+                return posts
+        except Exception:
+            continue
     return []
 
 
