@@ -532,10 +532,10 @@ def call_gemma(messages: list[dict], hf_token: str, max_tokens: int = 4096) -> s
             print()
             return "".join(parts)
         except Exception as e:
-            is_rate_limit = any(x in str(e) for x in ("429", "503", "Too Many Requests", "Service Temporarily Unavailable"))
+            is_rate_limit = any(x in str(e) for x in ("429", "503", "504", "Too Many Requests", "Service Temporarily Unavailable", "Gateway Time-out"))
             if is_rate_limit and attempt < 4:
-                wait = 60 * (attempt + 1)
-                print(f"\n  HF rate limit — waiting {wait}s (attempt {attempt+1}/5) ...", file=sys.stderr)
+                wait = 30 * (attempt + 1)
+                print(f"\n  HF transient error — waiting {wait}s (attempt {attempt+1}/5) ...", file=sys.stderr)
                 time.sleep(wait)
             else:
                 raise

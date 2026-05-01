@@ -52,9 +52,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add reports/fed-monitor/
+          git add -A
           git diff --staged --quiet || (
             git commit -m "Fed District Monitor — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase &&
+            git pull --rebase origin main &&
             git push
           )

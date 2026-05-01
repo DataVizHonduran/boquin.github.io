@@ -62,7 +62,7 @@ def fetch_all_data() -> pd.DataFrame:
 
     print(f"Total records fetched: {len(records)}")
     df = pd.DataFrame(records)
-    df["date"] = pd.to_datetime(df["epoch_ms"], unit="ms", utc=True).dt.normalize().dt.tz_localize(None)
+    df["date"] = pd.to_datetime(df["epoch_ms"], utc=True, errors="coerce").dt.normalize().dt.tz_localize(None)
     df["year"] = df["date"].dt.year
     df["doy"] = df["date"].dt.dayofyear
     df = df.dropna(subset=["n_total"]).sort_values("date").reset_index(drop=True)
