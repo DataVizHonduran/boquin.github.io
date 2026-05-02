@@ -55,6 +55,9 @@ _SECTIONS = [
     ("🇨🇦 BOC Watcher", "boc-watcher", "boc-watcher-*.html",
      "boc-watcher-", "BOC Watcher",
      "All 6 Governing Council members tracked every 3 days — hawk/dove spectrum, CPI-trim/median, CAD dynamics, and housing market thematic analysis, powered by Gemma 4."),
+    ("🇧🇷 BCB Watcher", "bcb-watcher", "bcb-watcher-*.html",
+     "bcb-watcher-", "BCB Watcher",
+     "All 9 COPOM members tracked every 3 days — hawk/dove spectrum, IPCA inflation, BRL dynamics, and individual vote dissent watch, powered by Gemma 4."),
 ]
 
 
