@@ -84,25 +84,29 @@ def load_statements() -> pd.DataFrame:
 
 def get_pairs_to_process(df: pd.DataFrame, out_dir: Path, force: bool) -> list[tuple[int, int]]:
     """
-    Return list of (prev_idx, curr_idx) pairs that need to be processed.
-    First run (empty out_dir): all consecutive pairs.
-    Subsequent runs: only the latest pair (if its HTML doesn't exist yet, or force=True).
+    Return list of (prev_idx, curr_idx) pairs that need to be processed, oldest first.
+    Unprocessed pairs are those without an existing HTML file.
+    --force re-queues the latest pair even if it already exists.
     """
     existing = {p.stem.replace("fomc-", "") for p in out_dir.glob("fomc-*.html")}
-
     all_pairs = [(i - 1, i) for i in range(1, len(df))]
 
-    if not existing:
-        print(f"  First run — processing all {len(all_pairs)} pairs.", file=sys.stderr)
-        return all_pairs
+    unprocessed = [
+        (pi, ci) for pi, ci in all_pairs
+        if df.iloc[ci]["_date"].strftime("%Y-%m-%d") not in existing
+    ]
 
-    # Subsequent run: only the latest pair
-    latest_pair = all_pairs[-1]
-    curr_date = df.iloc[latest_pair[1]]["_date"].strftime("%Y-%m-%d")
-    if curr_date in existing and not force:
-        print(f"  Latest pair ({curr_date}) already processed. Use --force to rerun.", file=sys.stderr)
+    if force:
+        latest = all_pairs[-1]
+        if latest not in unprocessed:
+            unprocessed = [latest] + unprocessed
+
+    if not unprocessed:
+        print("  All pairs already processed.", file=sys.stderr)
         return []
-    return [latest_pair]
+
+    print(f"  {len(unprocessed)} unprocessed pair(s) remaining.", file=sys.stderr)
+    return unprocessed
 
 
 # ---------------------------------------------------------------------------
