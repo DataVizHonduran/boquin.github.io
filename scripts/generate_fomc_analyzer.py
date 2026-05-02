@@ -106,7 +106,7 @@ def get_pairs_to_process(df: pd.DataFrame, out_dir: Path, force: bool) -> list[t
         return []
 
     print(f"  {len(unprocessed)} unprocessed pair(s) remaining.", file=sys.stderr)
-    return unprocessed
+    return list(reversed(unprocessed))
 
 
 # ---------------------------------------------------------------------------
