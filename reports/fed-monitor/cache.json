@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-04-30T09:14:43.611073+00:00",
-    "totalItems": 39
+    "lastRun": "2026-05-02T08:30:27.726699+00:00",
+    "totalItems": 42
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -636,7 +636,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-04-30T09:14:43.611073+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -764,11 +764,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-04-30T09:14:43.611073+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-30T09:14:43.611073+00:00"
+      "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
     },
     "80596e43f7d6ae6691a5a5961c47cbed74a4c74bafb5662e07bef5c9fa355177": {
       "url": "https://www.fedinprint.org/item/fedlwp/103046/original",
@@ -800,11 +800,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-18T08:02:09.938918+00:00",
-      "lastChecked": "2026-04-30T09:14:43.611073+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-04-30T09:14:43.611073+00:00"
+      "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
     },
     "7c67380a9ebe428cfb34ea83509f80c66c585b5a85bf8715b04e90bd991087d9": {
       "url": "https://www.fedinprint.org/item/fedlwp/98702/103054",
@@ -826,6 +826,51 @@
         "fintech"
       ],
       "tagsGeneratedAt": "2026-04-18T08:02:09.938918+00:00"
+    },
+    "aa7205ad54690c407eda28c1ab0c5860326aaf61a08c2c4d72d8ced0a9348ed5": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/explaining-the-k-shaped-economy-whats-behind-the-divide/",
+      "title": "Explaining the K‑Shaped Economy: What’s Behind the Divide?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-01",
+      "authors": [],
+      "firstSeen": "2026-05-02T08:30:27.726699+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
+      "scrapedSnippet": "In our companion post, we used a new module of our Economic Heterogeneity Indicators (EHIs) to shed light on how recent retail spending growth has been driven by high-income households. This fact is consistent with the popular press’s idea of a “K-shaped economy” in which higher-income households experience faster growth in spending than lower-income households. In this post, we dive deeper into the reasons behind this divergence by analyzing for which goods this trend holds true and ask whether it can be explained by changes in wages, inflation, or wealth. We find that, since 2023, wealth has",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
+    },
+    "5689910006925aa06e6f4fa8f01831c3b916ab32a4791f8acc52447bfd489552": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/tracking-the-k-shaped-economy-whos-driving-spending/",
+      "title": "Tracking the K‑Shaped Economy: Who’s Driving Spending?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-01",
+      "authors": [],
+      "firstSeen": "2026-05-02T08:30:27.726699+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
+      "scrapedSnippet": "Aggregate real consumer spending has risen solidly since 2023. However, it is less clear how widely shared this improvement has been across all segments of society. This is important because systematic heterogeneity may mask the dependence of aggregate growth on a relatively small group of households and thus conceal macroeconomic risks. In this post, we use consumer spending data recently added to the Economic Heterogeneity Indicators (EHIs) and find that retail spending growth has been driven by high-income households—those earning more than $125,000 per year. In the popular press, the pheno",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
+    },
+    "1723573d8c869b153e4f160da6039a0f10161672eab869c0375dae619ba95104": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103095/original",
+      "title": "Prior Knowledge, Module Design, and Student Dropout in Online K-12 Education",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-04-30",
+      "authors": [],
+      "firstSeen": "2026-05-02T08:30:27.726699+00:00",
+      "lastChecked": "2026-05-02T08:30:27.726699+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
     }
   }
 }
