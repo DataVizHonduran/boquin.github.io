@@ -58,6 +58,9 @@ _SECTIONS = [
     ("🇧🇷 BCB Watcher", "bcb-watcher", "bcb-watcher-*.html",
      "bcb-watcher-", "BCB Watcher",
      "All 9 COPOM members tracked every 3 days — hawk/dove spectrum, IPCA inflation, BRL dynamics, and individual vote dissent watch, powered by Gemma 4."),
+    ("🇨🇭 SNB Watcher", "snb-watcher", "snb-watcher-*.html",
+     "snb-watcher-", "SNB Watcher",
+     "All 3 Governing Board members tracked every 3 days — CHF/FX intervention, CPI 0-2% target, negative rate risk, powered by Gemma 4."),
 ]
 
 

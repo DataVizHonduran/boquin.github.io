@@ -1,0 +1,47 @@
+name: Update SNB Watcher
+
+on:
+  schedule:
+    - cron: '0 9 */3 * *'   # Every 3 days at 09:00 UTC
+  workflow_dispatch:          # Allow manual trigger
+
+jobs:
+  update-snb-watcher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run SNB Watcher
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/snb_watcher_standalone.py \
+            --days 30 \
+            --output-dir reports/snb-watcher/
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/snb-watcher/
+          git diff --staged --quiet || (
+            git commit -m "SNB Watcher — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
+            git push
+          )
