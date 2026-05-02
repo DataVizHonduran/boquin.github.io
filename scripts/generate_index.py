@@ -326,6 +326,7 @@ html_content = f"""<!DOCTYPE html>
         <div class="tab-bar">
             <button class="tab-btn active" data-tab="positions" onclick="switchTab('positions')">Current Positioning</button>
             <button class="tab-btn" data-tab="scatter" onclick="switchTab('scatter')">Positioning vs. MA</button>
+            <button class="tab-btn" data-tab="quadrant" onclick="switchTab('quadrant')">Fast vs. Slow</button>
         </div>
 
         <!-- Tab 1: Bar charts -->
@@ -361,6 +362,13 @@ html_content = f"""<!DOCTYPE html>
             </div>
             <div class="chart-container">
                 <div id="scatter-chart" style="height:580px; width:100%;"></div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Fast vs. Slow divergence quadrant -->
+        <div id="tab-quadrant" class="tab-panel">
+            <div class="chart-container">
+                <div id="quadrant-chart" style="height:580px; width:100%;"></div>
             </div>
         </div>
 
@@ -416,6 +424,9 @@ html_content = f"""<!DOCTYPE html>
 
             if (tab === 'scatter') {{
                 renderScatterChart();
+            }}
+            if (tab === 'quadrant') {{
+                renderQuadrantChart();
             }}
         }}
 
@@ -532,6 +543,94 @@ html_content = f"""<!DOCTYPE html>
             }};
 
             Plotly.react('scatter-chart', traces, layout, {{responsive: true}});
+        }}
+
+        // ── Quadrant chart: fast (Y) vs. slow (X) ────────────────────────────
+        function renderQuadrantChart() {{
+            const currencies = Object.keys(fastPositions).filter(c => c in slowPositions);
+
+            const x = currencies.map(c => slowPositions[c]);
+            const y = currencies.map(c => fastPositions[c]);
+
+            const colors = currencies.map(c => {{
+                const f = fastPositions[c], s = slowPositions[c];
+                if (f > 0 && s > 0) return '#28a745';
+                if (f < 0 && s < 0) return '#dc3545';
+                return '#fd7e14';
+            }});
+
+            const sizes = currencies.map(c => {{
+                const mag = Math.sqrt(fastPositions[c] ** 2 + slowPositions[c] ** 2);
+                return Math.max(9, Math.min(24, mag * 0.25 + 9));
+            }});
+
+            const AX = [-55, 55];
+
+            const traces = [
+                {{
+                    x: AX, y: AX,
+                    mode: 'lines',
+                    line: {{color: '#adb5bd', width: 1.5, dash: 'dot'}},
+                    hoverinfo: 'none',
+                    showlegend: false
+                }},
+                {{
+                    x, y,
+                    mode: 'markers+text',
+                    text: currencies,
+                    textposition: y.map(v => v >= 0 ? 'top center' : 'bottom center'),
+                    textfont: {{size: 11, color: '#333'}},
+                    marker: {{
+                        color: colors,
+                        size: sizes,
+                        opacity: 0.85,
+                        line: {{color: 'rgba(0,0,0,0.25)', width: 1}}
+                    }},
+                    customdata: currencies,
+                    hovertemplate: '<b>%{{customdata}}</b><br>Slow: %{{x:.1f}}<br>Fast: %{{y:.1f}}<extra></extra>',
+                    showlegend: false
+                }}
+            ];
+
+            const layout = {{
+                title: {{
+                    text: 'CTA Fast vs. Slow — Signal Divergence',
+                    x: 0.5, xanchor: 'center',
+                    font: {{size: 20, color: '#333'}}
+                }},
+                xaxis: {{
+                    title: 'Slow Signal (50/100/200)',
+                    range: AX,
+                    showgrid: true, gridcolor: '#e9ecef',
+                    zeroline: true, zerolinecolor: '#999', zerolinewidth: 1.5
+                }},
+                yaxis: {{
+                    title: 'Fast Signal (20/50/100)',
+                    range: AX,
+                    showgrid: true, gridcolor: '#e9ecef',
+                    zeroline: true, zerolinecolor: '#999', zerolinewidth: 1.5
+                }},
+                annotations: [
+                    {{x: 44, y: 51, xanchor: 'right', yanchor: 'top',
+                      text: 'Both Long', showarrow: false,
+                      font: {{color: '#28a745', size: 11}}}},
+                    {{x: -44, y: 51, xanchor: 'left', yanchor: 'top',
+                      text: 'Fast Long · Slow Short', showarrow: false,
+                      font: {{color: '#fd7e14', size: 11}}}},
+                    {{x: 44, y: -51, xanchor: 'right', yanchor: 'bottom',
+                      text: 'Fast Short · Slow Long', showarrow: false,
+                      font: {{color: '#fd7e14', size: 11}}}},
+                    {{x: -44, y: -51, xanchor: 'left', yanchor: 'bottom',
+                      text: 'Both Short', showarrow: false,
+                      font: {{color: '#dc3545', size: 11}}}}
+                ],
+                plot_bgcolor: 'white',
+                height: 580,
+                hovermode: 'closest',
+                margin: {{t: 60, l: 65, r: 30, b: 65}}
+            }};
+
+            Plotly.react('quadrant-chart', traces, layout, {{responsive: true}});
         }}
 
         // ── Init ──────────────────────────────────────────────────────────────
