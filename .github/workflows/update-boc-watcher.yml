@@ -42,7 +42,6 @@ jobs:
           git add reports/boc-watcher/
           git diff --staged --quiet || (
             git commit -m "BOC Watcher — $(date +'%Y-%m-%d') 🤖" &&
-            git stash --include-untracked &&
-            git pull --rebase &&
+            git pull --rebase --autostash &&
             git push
           )
