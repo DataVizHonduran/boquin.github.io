@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCB Watcher &#8212; Archive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px; margin: 0 auto; padding: 20px;
+            background: #f5f5f5; color: #333;
+        }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        h1 { color: #009C3B; border-bottom: 3px solid #009C3B; padding-bottom: 10px; }
+        .description { color: #555; margin: 16px 0 32px; line-height: 1.6; }
+        .report-list { list-style: none; padding: 0; }
+        .report-list li {
+            border-left: 4px solid #009C3B; padding: 12px 16px; margin: 10px 0;
+            background: #f8f9fa; border-radius: 0 6px 6px 0;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .report-list a { color: #009C3B; text-decoration: none; font-weight: 500; font-size: 1.05em; }
+        .report-list a:hover { text-decoration: underline; }
+        .report-date { color: #888; font-size: 0.85em; }
+        .badge-latest {
+            font-size: 0.75em; background: #e8f5e9; color: #2e7d32;
+            padding: 3px 8px; border-radius: 10px; margin-left: 8px;
+        }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #009C3B; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../../index.html" class="back-link">&#8592; Back to Portfolio</a>
+    <h1>&#127463;&#127479; BCB Watcher</h1>
+    <p class="description">
+        Banco Central do Brasil COPOM speeches, rate decisions, and monetary policy signals &#8212; tracked every 3 days
+        using <strong>BCB SGS API</strong> and Google News RSS,
+        analyzed by Gemma 4. All 9 COPOM members covered.
+    </p>
+    <ul class="report-list">
+        {items}
+    </ul>
+</div>
+</body>
+</html>
