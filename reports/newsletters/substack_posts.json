@@ -420,6 +420,18 @@
   ],
   "www.chinatalk.media": [
     {
+      "title": "Measuring America\u2019s Chokepoints",
+      "url": "https://www.chinatalk.media/p/measuring-americas-chokepoints",
+      "date": "2026-05-04",
+      "description": "Economic Security Contest Winner!"
+    },
+    {
+      "title": "The Party Gap",
+      "url": "https://www.chinatalk.media/p/no-party-no-party",
+      "date": "2026-05-03",
+      "description": "Beijing's campaign to foment loneliness abroad and good vibes at home"
+    },
+    {
       "title": "WarTalk: Still Out of Ammo",
       "url": "https://www.chinatalk.media/p/wartalk-still-out-of-ammo",
       "date": "2026-05-01",
@@ -436,18 +448,6 @@
       "url": "https://www.chinatalk.media/p/china-proofing-the-american-industrial",
       "date": "2026-04-28",
       "description": "Economic Security Essay Contest Winner!"
-    },
-    {
-      "title": "No Jensen, Not All Compute is Created Equal",
-      "url": "https://www.chinatalk.media/p/no-jensen-not-all-compute-is-created",
-      "date": "2026-04-28",
-      "description": "+ Nick in Cape Town!"
-    },
-    {
-      "title": "DeepSeek V4",
-      "url": "https://www.chinatalk.media/p/deepseek-v4",
-      "date": "2026-04-27",
-      "description": "Has the \"post-DeepSeek era\" arrived?"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -517,6 +517,12 @@
   ],
   "www.parentdata.org": [
     {
+      "title": "I Drank Broccoli Juice. Here\u2019s What I Learned About Placebos.",
+      "url": "https://parentdata.org/grown-ups/placebo-effect-wellness-research/",
+      "date": "2026-05-03",
+      "description": "How the placebo effect shows up in research and our daily lives\nEmily Oster, PhD"
+    },
+    {
       "title": "What to Know About Continuous vs. Intermittent Fetal Monitoring in Labor",
       "url": "https://parentdata.org/pregnancy/continuous-vs-intermittent-fetal-monitoring/",
       "date": "2026-04-28",
@@ -539,12 +545,6 @@
       "url": "https://parentdata.org/pregnancy/vbac-risks-benefits-guide/",
       "date": "2026-04-23",
       "description": "The risks, benefits, and how to find a provider who supports it\nAnn Ledbetter, CNM"
-    },
-    {
-      "title": "Is the Vitamin K Shot Necessary for Newborns?",
-      "url": "https://parentdata.org/pregnancy/newborn-vitamin-k-shot/",
-      "date": "2026-04-23",
-      "description": "Q&#038;A on the post-birth injection\nEmily Oster, PhD"
     }
   ],
   "debtserious.substack.com": [
@@ -879,6 +879,12 @@
   ],
   "www.publicnotice.co": [
     {
+      "title": "Chris Geidner on life after the VRA",
+      "url": "https://www.publicnotice.co/p/chris-geidner-on-life-after-the-vra",
+      "date": "2026-05-01",
+      "description": "And why Trump's Justice Department has collapsed into an utter sh*tshow."
+    },
+    {
       "title": "Trump\u2019s Reichstag fire presidency is immolating",
       "url": "https://www.publicnotice.co/p/trump-reichstag-fire-presidency",
       "date": "2026-05-01",
@@ -901,12 +907,6 @@
       "url": "https://www.publicnotice.co/p/lori-chavez-deremer",
       "date": "2026-04-28",
       "description": "Her brief, ignominious tenure is illustrative of deep dysfunction."
-    },
-    {
-      "title": "A more secure ballroom will not stop the madness",
-      "url": "https://www.publicnotice.co/p/white-house-correspondents-dinner-shooting",
-      "date": "2026-04-27",
-      "description": "This is the age of chaos Trump has made."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,6 +1010,12 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
+      "title": "Oil & Iran War Context Weekly (W18)",
+      "url": "https://www.commoditycontext.com/p/ocw18w26",
+      "date": "2026-05-01",
+      "description": "Crude prices climb amidst ongoing deadlocked diplomacy, the third month of the Iran War, breaching the billion lost barrel threshold, and the UAE announcing an abrupt departure from OPEC."
+    },
+    {
       "title": "Global Oil Data Deck (April 2026)",
       "url": "https://www.commoditycontext.com/p/global-oil-data-deck-april-2026",
       "date": "2026-04-29",
@@ -1032,12 +1038,6 @@
       "url": "https://www.commoditycontext.com/p/ocw16w26",
       "date": "2026-04-17",
       "description": "Crude prices cratered and term structure flattened on Friday following Iran&#8217;s declaration that Hormuz is &#8220;open&#8221; despite the fact that little traffic has actually managed to cross the"
-    },
-    {
-      "title": "OPEC+ Data Deck (April 2026)",
-      "url": "https://www.commoditycontext.com/p/opec-data-deck-april-2026",
-      "date": "2026-04-13",
-      "description": "Expanded producer group crude output fell to an all time low in March driven by the Hormuz closure and forced Gulf shut-ins; original OPEC output fell to the lowest level since Desert Storm in 1990."
     }
   ],
   "energyoutlookadvisors.substack.com": [],
