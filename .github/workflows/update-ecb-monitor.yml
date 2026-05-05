@@ -55,8 +55,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add reports/ecb-monitor/
+          git add reports/ecb-monitor/ reports/cb-monitor/
           git diff --staged --quiet || (
             git commit -m "ECB Monitor — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
             git push
           )
