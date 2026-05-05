@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-04T09:24:52.507692+00:00",
-    "totalItems": 42
+    "lastRun": "2026-05-05T09:09:48.579702+00:00",
+    "totalItems": 44
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -636,7 +636,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-15T08:34:59.242348+00:00",
-      "lastChecked": "2026-05-04T09:24:52.507692+00:00",
+      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -764,11 +764,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-05-04T09:24:52.507692+00:00",
+      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-04T09:24:52.507692+00:00"
+      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
     },
     "80596e43f7d6ae6691a5a5961c47cbed74a4c74bafb5662e07bef5c9fa355177": {
       "url": "https://www.fedinprint.org/item/fedlwp/103046/original",
@@ -800,11 +800,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-18T08:02:09.938918+00:00",
-      "lastChecked": "2026-05-04T09:24:52.507692+00:00",
+      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-04T09:24:52.507692+00:00"
+      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
     },
     "7c67380a9ebe428cfb34ea83509f80c66c585b5a85bf8715b04e90bd991087d9": {
       "url": "https://www.fedinprint.org/item/fedlwp/98702/103054",
@@ -883,6 +883,48 @@
       "aiSummary": "",
       "tags": [],
       "tagsGeneratedAt": "2026-05-02T08:30:27.726699+00:00"
+    },
+    "3d22803a94fe1795312d9e8ae5b7a6f0440e06e172e3a0016200508763730a8b": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/in-what-ways-has-u-s-trade-with-china-changed/",
+      "title": "In What Ways Has U.S. Trade with China Changed?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-04",
+      "authors": [],
+      "firstSeen": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "scrapedSnippet": "Over the past year, U.S. trade policy with China has undergone enormous changes, but with surprisingly little effect on overall trade balances. In fact, the U.S.’s twelve-month trade deficit, while highly volatile due to import front-running early in the year, ended 2025 at $1.2 trillion, almost unchanged from 2024. At the same time, China’s trade surplus with the world actually increased from $1 trillion to $1.2 trillion. However, when looking at changes between individual countries, one sees large shifts in bilateral balances. In this post, we will focus on changing trade flows between the U",
+      "aiSummary": "The analysis examines recent shifts in U.S.-China trade policy, noting that significant policy changes have had minimal impact on the overall trade balance. Despite volatility, the U.S. trade deficit remained stable while China's global trade surplus increased.",
+      "tags": [
+        "trade",
+        "international",
+        "emerging markets",
+        "GDP growth",
+        "supply chain"
+      ],
+      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
+    },
+    "7232d39e61342b9acce39a59b70c0c678fab7d8e3fabb6cb75f259112e43a1bd": {
+      "url": "https://www.fedinprint.org/item/fedlwp/94749/103132",
+      "title": "The Dual Beveridge Curve",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-05-04",
+      "authors": [],
+      "firstSeen": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper explores the Dual Beveridge Curve to analyze the relationship between job vacancies and unemployment. It likely examines how labor market frictions impact employment outcomes and wage dynamics.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "monetary policy",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
     }
   }
 }
