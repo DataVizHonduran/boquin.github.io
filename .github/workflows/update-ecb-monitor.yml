@@ -58,6 +58,6 @@ jobs:
           git add reports/ecb-monitor/ reports/cb-monitor/
           git diff --staged --quiet || (
             git commit -m "ECB Monitor — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase &&
+            git pull --rebase --autostash &&
             git push
           )

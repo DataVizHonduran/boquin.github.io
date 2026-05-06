@@ -38,4 +38,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/mexico-nowcast/index.html
-          git diff --staged --quiet || (git commit -m "Update Mexico GDP Nowcast - $(date +'%Y-%m-%d') [automated]" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "Update Mexico GDP Nowcast - $(date +'%Y-%m-%d') [automated]" && git pull --rebase --autostash && git push)

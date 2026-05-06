@@ -32,4 +32,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/emb-bubble/
-          git diff --staged --quiet || (git commit -m "Update EMB Holdings Bubble Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "Update EMB Holdings Bubble Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)

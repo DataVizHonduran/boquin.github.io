@@ -45,6 +45,6 @@ jobs:
           git diff --staged --quiet || (
             git commit -m "Daily markets update — $(date +'%Y-%m-%d') 🤖" &&
             git status &&
-            git pull --rebase &&
+            git pull --rebase --autostash &&
             git push
           )

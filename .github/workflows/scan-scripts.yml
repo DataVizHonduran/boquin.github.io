@@ -42,6 +42,6 @@ jobs:
           git add reports/script-inventory/
           git diff --staged --quiet || (
             git commit -m "Script Inventory — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase &&
+            git pull --rebase --autostash &&
             git push
           )

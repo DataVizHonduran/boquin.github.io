@@ -34,4 +34,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/treasury-dashboard/
-          git diff --staged --quiet || (git commit -m "Update Treasury Dashboard - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "Update Treasury Dashboard - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase --autostash && git push)

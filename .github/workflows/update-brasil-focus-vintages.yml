@@ -32,4 +32,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/brasil-focus-vintages/
-          git diff --staged --quiet || (git commit -m "Update Brasil FOCUS Vintages - $(date +'%Y-%m-%d') 🤖 Automated weekly update" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "Update Brasil FOCUS Vintages - $(date +'%Y-%m-%d') 🤖 Automated weekly update" && git pull --rebase --autostash && git push)

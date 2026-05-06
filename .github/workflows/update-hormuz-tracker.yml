@@ -32,4 +32,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/hormuz-tracker/
-          git diff --staged --quiet || (git commit -m "Update Hormuz Transit Tracker - $(date +'%Y-%m-%d') 🤖" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "Update Hormuz Transit Tracker - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
