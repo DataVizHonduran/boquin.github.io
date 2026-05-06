@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-05T09:09:48.579702+00:00",
-    "totalItems": 44
+    "lastRun": "2026-05-06T09:26:09.952088+00:00",
+    "totalItems": 45
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -764,11 +764,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-17T08:29:47.002020+00:00",
-      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-06T09:26:09.952088+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
+      "tagsGeneratedAt": "2026-05-06T09:26:09.952088+00:00"
     },
     "80596e43f7d6ae6691a5a5961c47cbed74a4c74bafb5662e07bef5c9fa355177": {
       "url": "https://www.fedinprint.org/item/fedlwp/103046/original",
@@ -800,11 +800,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-18T08:02:09.938918+00:00",
-      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-06T09:26:09.952088+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
+      "tagsGeneratedAt": "2026-05-06T09:26:09.952088+00:00"
     },
     "7c67380a9ebe428cfb34ea83509f80c66c585b5a85bf8715b04e90bd991087d9": {
       "url": "https://www.fedinprint.org/item/fedlwp/98702/103054",
@@ -893,7 +893,7 @@
       "publicationDate": "2026-05-04",
       "authors": [],
       "firstSeen": "2026-05-05T09:09:48.579702+00:00",
-      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-06T09:26:09.952088+00:00",
       "scrapedSnippet": "Over the past year, U.S. trade policy with China has undergone enormous changes, but with surprisingly little effect on overall trade balances. In fact, the U.S.’s twelve-month trade deficit, while highly volatile due to import front-running early in the year, ended 2025 at $1.2 trillion, almost unchanged from 2024. At the same time, China’s trade surplus with the world actually increased from $1 trillion to $1.2 trillion. However, when looking at changes between individual countries, one sees large shifts in bilateral balances. In this post, we will focus on changing trade flows between the U",
       "aiSummary": "The analysis examines recent shifts in U.S.-China trade policy, noting that significant policy changes have had minimal impact on the overall trade balance. Despite volatility, the U.S. trade deficit remained stable while China's global trade surplus increased.",
       "tags": [
@@ -914,7 +914,7 @@
       "publicationDate": "2026-05-04",
       "authors": [],
       "firstSeen": "2026-05-05T09:09:48.579702+00:00",
-      "lastChecked": "2026-05-05T09:09:48.579702+00:00",
+      "lastChecked": "2026-05-06T09:26:09.952088+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The paper explores the Dual Beveridge Curve to analyze the relationship between job vacancies and unemployment. It likely examines how labor market frictions impact employment outcomes and wage dynamics.",
       "tags": [
@@ -925,6 +925,21 @@
         "GDP growth"
       ],
       "tagsGeneratedAt": "2026-05-05T09:09:48.579702+00:00"
+    },
+    "1046fe6138a19275f7c6323e4037be36a6ed6024dcfd06cff498ec06e54a798e": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0505-mau",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-05-06T09:26:09.952088+00:00",
+      "lastChecked": "2026-05-06T09:26:09.952088+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-06T09:26:09.952088+00:00"
     }
   }
 }
