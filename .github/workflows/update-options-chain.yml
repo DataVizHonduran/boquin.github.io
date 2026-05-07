@@ -1,6 +1,8 @@
 name: Update Options Chain
 
 on:
+  schedule:
+    - cron: '0 21 * * 1-5'  # Weekdays at 21:00 UTC (US market close)
   workflow_dispatch:
     inputs:
       ticker:
@@ -34,7 +36,7 @@ jobs:
       - name: Run options chain publisher
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python scripts/options_chain_publisher.py ${{ github.event.inputs.ticker }}
+        run: python scripts/options_chain_publisher.py ${{ github.event.inputs.ticker || 'GOOGL' }}
 
       - name: Commit and push
         run: |
