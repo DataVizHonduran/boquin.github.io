@@ -61,6 +61,9 @@ _SECTIONS = [
     ("🇨🇭 SNB Watcher", "snb-watcher", "snb-watcher-*.html",
      "snb-watcher-", "SNB Watcher",
      "All 3 Governing Board members tracked every 3 days — CHF/FX intervention, CPI 0-2% target, negative rate risk, powered by Gemma 4."),
+    ("🇸🇪 Riksbank Watcher", "riksbank-watcher", "riksbank-watcher-*.html",
+     "riksbank-watcher-", "Riksbank Watcher",
+     "All 5 Executive Board members tracked every 3 days — hawk/dove spectrum, CPIF inflation, SEK dynamics, and individual vote dissent watch, powered by Gemma 4."),
 ]
 
 
