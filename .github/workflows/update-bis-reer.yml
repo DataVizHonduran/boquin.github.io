@@ -6,6 +6,10 @@ on:
     - cron: "0 8 8 * *"
   workflow_dispatch:   # manual trigger any time
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update-bis-reer:
     runs-on: ubuntu-latest

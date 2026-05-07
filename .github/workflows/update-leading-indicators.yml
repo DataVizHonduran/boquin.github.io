@@ -5,6 +5,10 @@ on:
     - cron: '0 12 * * 1'  # Every Monday at 12:00 UTC (same cadence as original repo)
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

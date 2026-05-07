@@ -5,6 +5,10 @@ on:
     - cron: '0 16 * * 3'    # 16:00 UTC Wed — 1h after generator (17:00 UTC)
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   commentary:
     runs-on: ubuntu-latest

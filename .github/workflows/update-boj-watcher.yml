@@ -5,6 +5,10 @@ on:
     - cron: '0 9 */3 * *'   # Every 3 days at 09:00 UTC
   workflow_dispatch:          # Allow manual trigger
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update-boj-watcher:
     runs-on: ubuntu-latest

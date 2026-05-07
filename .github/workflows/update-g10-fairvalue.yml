@@ -5,6 +5,10 @@ on:
     - cron: '0 3 * * *'  # Run daily at 3:00 AM UTC (after CTA signals at 2 AM)
   workflow_dispatch:  # Allow manual trigger
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update-g10-fairvalue:
     runs-on: ubuntu-latest

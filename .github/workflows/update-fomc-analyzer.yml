@@ -16,6 +16,10 @@ on:
         default: ''
         type: string
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update-fomc-analyzer:
     runs-on: ubuntu-latest

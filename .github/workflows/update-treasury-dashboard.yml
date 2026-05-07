@@ -5,6 +5,10 @@ on:
     - cron: '0 16 * * 1-5'  # Weekdays at 16:00 UTC (after US market close)
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

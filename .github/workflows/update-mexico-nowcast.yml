@@ -6,6 +6,10 @@ on:
     - cron: '0 13 20 * *'  # 20th of every month at 13:00 UTC (after IGAE release)
   workflow_dispatch:        # Allow manual trigger from GitHub Actions UI
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

@@ -5,6 +5,10 @@ on:
     - cron: '0 8 * * 1'   # 8am UTC every Monday
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   newsletter-digest:
     runs-on: ubuntu-latest

@@ -5,6 +5,10 @@ on:
     - cron: '0 9 * * 1-5'  # Weekdays at 09:00 UTC
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

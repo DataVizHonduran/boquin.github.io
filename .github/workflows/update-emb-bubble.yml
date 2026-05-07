@@ -5,6 +5,10 @@ on:
     - cron: '0 14 * * *'  # 2pm UTC daily — after iShares publishes holdings
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest

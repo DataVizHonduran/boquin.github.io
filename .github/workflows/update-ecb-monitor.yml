@@ -5,6 +5,10 @@ on:
     - cron: '0 8 * * *'  # Daily at 8:00 AM UTC (ECB Frankfurt opens)
   workflow_dispatch:      # Allow manual trigger
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   update-ecb-monitor:
     runs-on: ubuntu-latest

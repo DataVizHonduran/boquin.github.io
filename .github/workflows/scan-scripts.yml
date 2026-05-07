@@ -3,6 +3,10 @@ name: Script Inventory Scan
 on:
   workflow_dispatch:
 
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
 jobs:
   scan-scripts:
     runs-on: ubuntu-latest
