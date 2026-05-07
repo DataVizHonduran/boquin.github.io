@@ -1,34 +1,31 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (4 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team, I have reviewed the latest research coming out of the Fed districts. While the volume is low in this window, there are critical signals regarding consumption divergence and trade resilience that we need to bake into our models.
+Team,
 
-Here are the key takeaways:
+I have reviewed the latest research from the Federal Reserve districts. While some of the output is focused on micro-level community development, there are several critical signals regarding the "K-shaped" nature of the current recovery and geopolitical headwinds that we must integrate into our models.
 
-1. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?**
-Aggregate spending growth since 2023 masks a deep structural divide in consumer resilience. This suggests that headline retail data is an unreliable proxy for the broader consumer, as growth is concentrated in specific demographics.
-
-2. **[NY] Explaining the K-Shaped Economy: What’s Behind the Divide?**
-New Economic Heterogeneity Indicators (EHIs) confirm that high-income households are the primary engine of recent spending growth. For our outlook, this implies that lower-income cohorts are likely hitting a consumption wall, increasing the risk of a sudden pullback if credit conditions tighten further.
-
-3. **[NY] In What Ways Has U.S. Trade with China Changed?**
-Despite aggressive shifts in trade policy, the overall U.S. trade deficit remains stubbornly persistent. This indicates that "de-risking" or "de-coupling" is largely a redirection of trade flows rather than a reduction in import dependency, limiting the impact of tariffs on narrowing the deficit.
-
-4. **[STL] The Dual Beveridge Curve**
-While the provided text is brief, the focus on the Dual Beveridge Curve suggests the Fed is analyzing a mismatch between job vacancies and unemployment across different skill sets. This points to structural labor market frictions that may keep inflation sticky even as aggregate unemployment rises.
-
-**Synthesis:**
-The data reveals a fragile "K-shaped" recovery where top-tier consumption is masking systemic weakness in the broader population. Simultaneously, trade policy is failing to move the needle on deficits, suggesting that macroeconomic stability currently relies on a narrowing base of wealthy consumers.
+1. **[NY] Same Shock, Different Roads? A K‑Shaped Pattern at the Pump**: The closure of the Strait of Hormuz has triggered a massive energy price surge, but the impact is unevenly distributed across income brackets. This suggests that energy-driven inflation is acting as a regressive tax, which will likely accelerate the erosion of purchasing power for low-income consumers while leaving high-income spending largely intact.
+2. **[NY] In What Ways Has U.S. Trade with China Changed?**: Despite significant policy shifts aimed at decoupling, the overall U.S. trade deficit remains stubbornly high. This indicates that trade is simply diverting through third-party nations rather than decreasing, suggesting that trade policy is failing to meaningfully alter the macro trade balance.
+3. **[NY] Explaining the K‑Shaped Economy: What’s Behind the Divide?**: New data reveals that recent retail spending growth is being driven almost exclusively by high-income households. This is a warning sign that aggregate growth figures are masking a fragility in the broader consumer base, increasing the risk of a sharp consumption cliff if high-end spending softens.
+4. **[NY] Tracking the K‑Shaped Economy: Who’s Driving Spending?**: This research confirms that while real consumer spending has risen
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+
+### (cached) [Same Shock, Different Roads? A K‑Shaped Pattern at the Pump](https://libertystreeteconomics.newyorkfed.org/2026/05/same-shock-different-roads-a-k-shaped-pattern-at-the-pump/)
+**Published:** 2026-05-06 | **Authors:** Rajashri Chakrabarti, Thu Pham, Beck Pierce, and Maxim Pinkovskiy
+
+
+
+**Tags:** 
 
 ### (cached) [In What Ways Has U.S. Trade with China Changed?](https://libertystreeteconomics.newyorkfed.org/2026/05/in-what-ways-has-u-s-trade-with-china-changed/)
 **Published:** 2026-05-04 | **Authors:** 
@@ -51,6 +48,16 @@ This paper investigates the distribution of real consumer spending growth since 
 
 **Tags:** consumer spending · GDP growth · financial stability · recession · inflation
 
+## Richmond Fed (5th District)
+**Content Type:** Economic Briefs | **New:** 0 of 1
+
+### (cached) [Community Development Financial Institutions as a Means to Overcome Market Failures](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-14)
+**Published:** 2026-05-06 | **Authors:** 
+
+
+
+**Tags:** 
+
 ## St. Louis Fed (8th District)
 **Content Type:** Working Papers | **New:** 0 of 1
 
@@ -65,5 +72,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 4
-- Total cache size: 4 items
+- Already cached: 6
+- Total cache size: 6 items
