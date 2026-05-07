@@ -54,9 +54,15 @@ def pull_all(years=15):
     return df
 
 
-def mom_to_yoy(s):
-    """Convert mom % series to yoy % via cumproduct."""
-    cum = (1 + s.clip(lower=-0.999).fillna(0) / 100).cumprod() * 100
+def mom_to_yoy(s, max_mom_pct=15.0):
+    """Convert mom % series to yoy % via cumproduct.
+    Clips implausible monthly values (>max_mom_pct%) to NaN before compounding
+    to avoid distortion from non-mom% series or data errors.
+    """
+    s_clean = s.copy().astype(float)
+    s_clean[s_clean.abs() > max_mom_pct] = float("nan")
+    s_clean = s_clean.clip(lower=-0.999).fillna(0)
+    cum = (1 + s_clean / 100).cumprod() * 100
     return cum.pct_change(12) * 100
 
 
@@ -188,7 +194,7 @@ def contribution_bar(yoy):
         if col in yoy.columns:
             val = yoy[col].dropna().iloc[-1] if col in yoy.columns else None
             if val is not None and not np.isnan(val):
-                contribs[col] = round(w * val / 100, 3)
+                contribs[col] = round(w * val, 2)  # pp contribution
 
     cats = list(contribs.keys())
     vals = [contribs[c] for c in cats]
@@ -207,10 +213,10 @@ def contribution_bar(yoy):
         textposition="outside",
     ))
     fig.update_layout(
-        title=dict(text="IPCA — YoY Contribution by Component (pp, approx.)", font=dict(size=13, color="#222")),
+        title=dict(text="IPCA — YoY Contribution by Component (approx. pp)", font=dict(size=13, color="#222")),
         plot_bgcolor="white", paper_bgcolor="white",
         margin=dict(l=150, r=60, t=50, b=40),
-        xaxis=dict(title="Contribution (pp)", gridcolor="#eeeeee"),
+        xaxis=dict(title="Contribution (percentage points)", ticksuffix="pp", gridcolor="#eeeeee"),
         yaxis=dict(gridcolor="#eeeeee"),
     )
     return fig
@@ -228,10 +234,10 @@ def stacked_area_chart(yoy):
 
     contribs = pd.DataFrame(index=sub.index)
     for col, w in weights.items():
-        contribs[col] = sub[col] * w / 100
+        contribs[col] = sub[col] * w  # contribution in pp (yoy% × weight)
 
-    # "Other" = headline - sum of tracked
-    contribs["Other"] = sub["IPCA Headline"] / 100 - contribs.sum(axis=1)
+    # "Other" = headline - sum of tracked components
+    contribs["Other"] = sub["IPCA Headline"] - contribs.sum(axis=1)
 
     contribs = contribs.dropna()
 
@@ -253,11 +259,11 @@ def stacked_area_chart(yoy):
             fillcolor=fill_color,
             stackgroup="one",
         ))
-    # Overlay headline yoy line
+    # Overlay headline yoy line (in pp for same axis)
     fig.add_trace(go.Scatter(
         x=sub["IPCA Headline"].dropna().index,
-        y=sub["IPCA Headline"].dropna().values / 100,
-        name="IPCA %YoY (÷100)",
+        y=sub["IPCA Headline"].dropna().values,
+        name="IPCA %YoY",
         line=dict(color=GS_NAVY, width=2, dash="dot"),
     ))
     fig.update_layout(
@@ -266,7 +272,7 @@ def stacked_area_chart(yoy):
         margin=dict(l=50, r=20, t=50, b=40),
         legend=dict(orientation="h", y=-0.15, x=0),
         hovermode="x unified",
-        yaxis=dict(gridcolor="#eeeeee"),
+        yaxis=dict(ticksuffix="pp", gridcolor="#eeeeee"),
         xaxis=dict(gridcolor="#eeeeee"),
     )
     return fig
@@ -372,8 +378,9 @@ def build_heatmap_table(yoy):
     return table_html
 
 
-def to_div(fig, div_id):
-    return pio.to_html(fig, full_html=False, include_plotlyjs=False, div_id=div_id)
+def to_div(fig, div_id, first=False):
+    js = "cdn" if first else False
+    return pio.to_html(fig, full_html=False, include_plotlyjs=js, div_id=div_id)
 
 
 def key_numbers_html(yoy):
@@ -416,7 +423,6 @@ def build_html(charts_divs, table_html, kpi_html, as_of):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Brazil IPCA-15 Apr 2026 | boquin.xyz</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <style>
     * {{ box-sizing: border-box; }}
     body {{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -532,7 +538,8 @@ def main():
     kpi_html = key_numbers_html(yoy)
 
     print("Assembling HTML…")
-    divs = [to_div(fig, f"chart{i+1}") for i, fig in enumerate([c1, c2, c3, c4, c5, c6, c7])]
+    figs = [c1, c2, c3, c4, c5, c6, c7]
+    divs = [to_div(fig, f"chart{i+1}", first=(i == 0)) for i, fig in enumerate(figs)]
     html = build_html(divs, table_html, kpi_html, as_of)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
