@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOOGL — Costless Collar Matrix</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 900px; margin: 0 auto; padding: 24px;
+      background: #f5f5f5; color: #333;
+    }
+    .container { background: #fff; padding: 36px 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+    h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; margin-bottom: 6px; }
+    .meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: .85rem; color: #666; margin-bottom: 20px; }
+    .meta span strong { color: #222; }
+    .explain {
+      background: #f0f4ff; border-left: 4px solid #1565c0;
+      padding: 10px 16px; font-size: .83rem; color: #444;
+      border-radius: 0 6px 6px 0; margin-bottom: 24px; line-height: 1.55;
+    }
+    table { border-collapse: collapse; width: 100%; font-size: .87rem; }
+    th {
+      background: #e8eaf2; color: #555; text-align: left;
+      padding: 10px 14px; font-weight: 600;
+      border-bottom: 2px solid #c5cae9;
+    }
+    th.put-h { background: #fde8e8; color: #7b1a1a; }
+    th.call-h { background: #e8f5e9; color: #1b5e20; }
+    td { padding: 10px 14px; border-bottom: 1px solid #eef0f6; vertical-align: top; }
+    td.put-col { background: #fffafa; }
+    td.call-col { background: #f6fcf7; }
+    .sub { font-size: .76rem; color: #999; display: block; margin-top: 2px; }
+    .dte { font-size: .74rem; color: #bbb; }
+    td.credit { color: #1a7a3c; font-weight: 700; }
+    td.even { color: #1565c0; font-weight: 700; }
+    td.debit { color: #b03030; font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { filter: brightness(.97); }
+    .back { font-size: .82rem; margin-bottom: 20px; }
+    .back a { color: #1565c0; text-decoration: none; }
+    .back a:hover { text-decoration: underline; }
+    .ts { font-size: .78rem; color: #aaa; margin-top: 24px; text-align: right; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="back"><a href="../../../index.html">← boquin.xyz</a></div>
+  <h1>GOOGL — Costless Collar Matrix</h1>
+  <div class="meta">
+    <span>Spot <strong>$393.55</strong></span>
+    <span>Floor Input <strong>$300.00</strong> <span style="color:#b03030">(−23.8% vs spot)</span></span>
+    <span>52wk High <strong>—</strong></span>
+    <span>52wk Low <strong>—</strong></span>
+  </div>
+  <div class="explain">
+    <strong>Collar structure:</strong> Buy put @ floor strike + sell call @ cap strike.
+    For each expiry, the call is solved as the OTM strike whose bid is closest to the put ask (<strong>net cost ≈ 0</strong>).
+    <strong>Net cost</strong> = put ask − call bid.
+    <em>Credit</em> = premium received. <em>Debit</em> = premium paid.
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Expiry</th>
+        <th class="put-h">Put Strike</th>
+        <th class="put-h">Put Ask</th>
+        <th class="call-h">Call Strike (Cap)</th>
+        <th class="call-h">Call Bid</th>
+        <th>Net Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>2026-06-05</strong><br><span class="dte">29d</span></td>
+        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
+        <td class="put-col">$0.38</td>
+        <td class="call-col">$475.00<br><span class="sub">+20.7% vs spot</span></td>
+        <td class="call-col">$0.39</td>
+        <td class="credit">$0.01 credit</td>
+      </tr>
+      <tr>
+        <td><strong>2026-09-18</strong><br><span class="dte">134d</span></td>
+        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
+        <td class="put-col">$4.60</td>
+        <td class="call-col">$520.00<br><span class="sub">+32.1% vs spot</span></td>
+        <td class="call-col">$4.85</td>
+        <td class="credit">$0.25 credit</td>
+      </tr>
+      <tr>
+        <td><strong>2026-12-18</strong><br><span class="dte">225d</span></td>
+        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
+        <td class="put-col">$9.05</td>
+        <td class="call-col">$545.00<br><span class="sub">+38.5% vs spot</span></td>
+        <td class="call-col">$8.90</td>
+        <td class="debit">$0.15 debit</td>
+      </tr>
+      <tr>
+        <td><strong>2027-01-15</strong><br><span class="dte">253d</span></td>
+        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
+        <td class="put-col">$9.85</td>
+        <td class="call-col">$555.00<br><span class="sub">+41.0% vs spot</span></td>
+        <td class="call-col">$9.85</td>
+        <td class="even">even</td>
+      </tr>
+      <tr>
+        <td><strong>2028-01-21</strong><br><span class="dte">624d</span></td>
+        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
+        <td class="put-col">$24.55</td>
+        <td class="call-col">$630.00<br><span class="sub">+60.1% vs spot</span></td>
+        <td class="call-col">$24.10</td>
+        <td class="debit">$0.45 debit</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="ts">Generated 2026-05-07 | Spot as of market close | Data via yfinance</p>
+</div>
+</body>
+</html>
