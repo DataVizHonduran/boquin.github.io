@@ -1,119 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOOGL — Costless Collar Matrix</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      max-width: 900px; margin: 0 auto; padding: 24px;
-      background: #f5f5f5; color: #333;
-    }
-    .container { background: #fff; padding: 36px 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
-    h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; margin-bottom: 6px; }
-    .meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: .85rem; color: #666; margin-bottom: 20px; }
-    .meta span strong { color: #222; }
-    .explain {
-      background: #f0f4ff; border-left: 4px solid #1565c0;
-      padding: 10px 16px; font-size: .83rem; color: #444;
-      border-radius: 0 6px 6px 0; margin-bottom: 24px; line-height: 1.55;
-    }
-    table { border-collapse: collapse; width: 100%; font-size: .87rem; }
-    th {
-      background: #e8eaf2; color: #555; text-align: left;
-      padding: 10px 14px; font-weight: 600;
-      border-bottom: 2px solid #c5cae9;
-    }
-    th.put-h { background: #fde8e8; color: #7b1a1a; }
-    th.call-h { background: #e8f5e9; color: #1b5e20; }
-    td { padding: 10px 14px; border-bottom: 1px solid #eef0f6; vertical-align: top; }
-    td.put-col { background: #fffafa; }
-    td.call-col { background: #f6fcf7; }
-    .sub { font-size: .76rem; color: #999; display: block; margin-top: 2px; }
-    .dte { font-size: .74rem; color: #bbb; }
-    td.credit { color: #1a7a3c; font-weight: 700; }
-    td.even { color: #1565c0; font-weight: 700; }
-    td.debit { color: #b03030; font-weight: 700; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { filter: brightness(.97); }
-    .back { font-size: .82rem; margin-bottom: 20px; }
-    .back a { color: #1565c0; text-decoration: none; }
-    .back a:hover { text-decoration: underline; }
-    .ts { font-size: .78rem; color: #aaa; margin-top: 24px; text-align: right; }
-  </style>
+<meta charset="UTF-8">
+<title>GOOGL Options Chain</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d27;padding:24px;margin:0}
+  h1{font-size:1.4rem;font-weight:600;margin-bottom:6px;color:#111}
+  .meta{display:flex;gap:32px;margin-bottom:20px;font-size:.85rem;color:#666}
+  .meta span strong{color:#111}
+  .tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+  .tab{background:#e2e5ef;border:none;border-radius:6px;padding:6px 14px;font-size:.82rem;font-weight:600;color:#555;cursor:pointer;transition:background .15s,color .15s}
+  .tab.active{background:#3a5fc8;color:#fff}
+  .tab:hover:not(.active){background:#cdd2e8}
+  .panel{display:none}
+  .panel.active{display:block}
+  table{border-collapse:collapse;width:100%;font-size:.84rem}
+  th{background:#e8eaf2;color:#666;text-align:left;padding:8px 12px;border-bottom:2px solid #d0d5e8;font-weight:500}
+  td{padding:7px 12px;border-bottom:1px solid #e8eaf2}
+  tr.call td{background:#edf7f1}
+  tr.put td{background:#fdf0f0}
+  tr.call:hover td{background:#ddf0e6}
+  tr.put:hover td{background:#fae0e0}
+  .badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.73rem;font-weight:700}
+  .badge.call{background:#c8ecd8;color:#1a7a3c}
+  .badge.put{background:#fad4d4;color:#b03030}
+</style>
 </head>
 <body>
-<div class="container">
-  <div class="back"><a href="../../../index.html">← boquin.xyz</a></div>
-  <h1>GOOGL — Costless Collar Matrix</h1>
-  <div class="meta">
-    <span>Spot <strong>$393.55</strong></span>
-    <span>Floor Input <strong>$300.00</strong> <span style="color:#b03030">(−23.8% vs spot)</span></span>
-    <span>52wk High <strong>—</strong></span>
-    <span>52wk Low <strong>—</strong></span>
+<h1>GOOGL — OTM Options Chain</h1>
+<div class="meta">
+  <span>Spot <strong>$396.40</strong></span>
+  <span>52wk High <strong>$399.85</strong></span>
+  <span>52wk Low <strong>$152.20</strong></span>
+  <span>Generated 2026-05-07</span>
+</div>
+<div class="tabs"><button class="tab  active" onclick="show(0)">2026-06-05</button><button class="tab" onclick="show(1)">2026-09-18</button><button class="tab" onclick="show(2)">2026-12-18</button><button class="tab" onclick="show(3)">2027-01-15</button><button class="tab" onclick="show(4)">2028-01-21</button></div>
+<div class="panel active" id="p0"><table><thead><tr><th>Type</th><th>Strike</th><th>Last</th><th>52wk High</th><th>52wk Low</th><th>Open Interest</th><th>52wk Range</th></tr></thead><tbody>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$475.00</td><td>$0.48</td><td>$0.48</td><td>$0.48</td><td>1</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$485.00</td><td>$0.01</td><td>$0.01</td><td>$0.01</td><td>2</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$490.00</td><td>$0.32</td><td>$0.32</td><td>$0.27</td><td>4</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$495.00</td><td>$0.30</td><td>$0.30</td><td>$0.30</td><td>1</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$500.00</td><td>$0.15</td><td>$0.15</td><td>$0.15</td><td>6</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$305.00</td><td>$0.40</td><td>$2.94</td><td>$0.39</td><td>47</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.3" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$300.00</td><td>$0.34</td><td>$2.56</td><td>$0.04</td><td>349</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="12.6" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$295.00</td><td>$0.24</td><td>$2.34</td><td>$0.24</td><td>81</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$290.00</td><td>$0.27</td><td>$1.77</td><td>$0.27</td><td>45</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$285.00</td><td>$0.37</td><td>$1.22</td><td>$0.32</td><td>27</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="8.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+</tbody></table></div>
+<div class="panel " id="p1"><table><thead><tr><th>Type</th><th>Strike</th><th>Last</th><th>52wk High</th><th>52wk Low</th><th>Open Interest</th><th>52wk Range</th></tr></thead><tbody>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$485.00</td><td>$9.45</td><td>$9.20</td><td>$0.54</td><td>74</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$490.00</td><td>$8.51</td><td>$10.50</td><td>$0.45</td><td>101</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="61.7" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$495.00</td><td>$8.19</td><td>$8.19</td><td>$0.40</td><td>334</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$500.00</td><td>$7.30</td><td>$10.15</td><td>$0.42</td><td>403</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="54.9" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$505.00</td><td>$6.72</td><td>$8.40</td><td>$0.33</td><td>159</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="61.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$305.00</td><td>$5.10</td><td>$55.14</td><td>$5.00</td><td>1,402</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.1" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$300.00</td><td>$4.75</td><td>$119.20</td><td>$4.50</td><td>4,837</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.2" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$295.00</td><td>$4.08</td><td>$36.90</td><td>$3.96</td><td>1,533</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.3" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$290.00</td><td>$3.58</td><td>$61.75</td><td>$3.60</td><td>2,178</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$285.00</td><td>$3.22</td><td>$31.50</td><td>$3.10</td><td>2,185</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.3" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+</tbody></table></div>
+<div class="panel " id="p2"><table><thead><tr><th>Type</th><th>Strike</th><th>Last</th><th>52wk High</th><th>52wk Low</th><th>Open Interest</th><th>52wk Range</th></tr></thead><tbody>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$485.00</td><td>$14.40</td><td>$16.95</td><td>$1.45</td><td>656</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="64.2" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$490.00</td><td>$17.85</td><td>$17.71</td><td>$1.34</td><td>125</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$495.00</td><td>$16.80</td><td>$16.60</td><td>$1.37</td><td>276</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$500.00</td><td>$15.36</td><td>$16.50</td><td>$1.14</td><td>1,184</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="70.7" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$505.00</td><td>$15.00</td><td>$15.29</td><td>$1.71</td><td>172</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="74.5" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$305.00</td><td>$9.89</td><td>$58.01</td><td>$9.65</td><td>940</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.4" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$300.00</td><td>$8.86</td><td>$88.63</td><td>$8.75</td><td>4,651</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.1" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$295.00</td><td>$9.00</td><td>$17.75</td><td>$8.85</td><td>107</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="5.2" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$290.00</td><td>$7.33</td><td>$83.20</td><td>$7.35</td><td>4,901</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$285.00</td><td>$6.70</td><td>$15.00</td><td>$6.65</td><td>53</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.4" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+</tbody></table></div>
+<div class="panel " id="p3"><table><thead><tr><th>Type</th><th>Strike</th><th>Last</th><th>52wk High</th><th>52wk Low</th><th>Open Interest</th><th>52wk Range</th></tr></thead><tbody>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$485.00</td><td>$21.28</td><td>$21.90</td><td>$1.80</td><td>329</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="73.8" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$490.00</td><td>$20.25</td><td>$20.84</td><td>$1.87</td><td>364</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="73.8" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$495.00</td><td>$19.25</td><td>$20.00</td><td>$1.75</td><td>237</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="73.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$500.00</td><td>$18.15</td><td>$19.05</td><td>$1.47</td><td>1,981</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="72.3" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$505.00</td><td>$17.35</td><td>$17.90</td><td>$1.77</td><td>495</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="73.5" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$305.00</td><td>$10.50</td><td>$66.91</td><td>$10.71</td><td>1,368</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$300.00</td><td>$9.75</td><td>$68.95</td><td>$9.60</td><td>7,955</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.2" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$295.00</td><td>$9.00</td><td>$111.40</td><td>$8.95</td><td>1,544</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$290.00</td><td>$8.05</td><td>$46.85</td><td>$8.07</td><td>1,770</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$285.00</td><td>$7.32</td><td>$59.42</td><td>$7.80</td><td>2,236</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+</tbody></table></div>
+<div class="panel " id="p4"><table><thead><tr><th>Type</th><th>Strike</th><th>Last</th><th>52wk High</th><th>52wk Low</th><th>Open Interest</th><th>52wk Range</th></tr></thead><tbody>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$485.00</td><td>$49.45</td><td>$49.45</td><td>$17.85</td><td>342</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$490.00</td><td>$45.25</td><td>$45.25</td><td>$13.40</td><td>589</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$495.00</td><td>$52.07</td><td>$45.30</td><td>$14.83</td><td>570</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="76.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$500.00</td><td>$50.85</td><td>$51.50</td><td>$11.25</td><td>5,197</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="74.8" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="call"><td><span class="badge call">CALL</span></td><td>$505.00</td><td>$31.51</td><td>$33.36</td><td>$12.10</td><td>463</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="69.7" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$305.00</td><td>$26.45</td><td>$62.49</td><td>$26.45</td><td>257</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$300.00</td><td>$23.09</td><td>$72.41</td><td>$23.00</td><td>1,471</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.1" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$295.00</td><td>$24.00</td><td>$57.23</td><td>$24.00</td><td>370</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$290.00</td><td>$20.86</td><td>$67.20</td><td>$20.86</td><td>755</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+<tr class="put"><td><span class="badge put">PUT</span></td><td>$285.00</td><td>$19.60</td><td>$55.80</td><td>$20.55</td><td>346</td><td><svg width="80" height="14" style="vertical-align:middle;display:block"><rect x="4" y="5" width="72" height="4" rx="2" fill="#d0d5e0"/><circle cx="4.0" cy="7" r="4" fill="#3a5fc8"/></svg></td></tr>
+</tbody></table></div>
+
+<script>
+function show(i){
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+}
+</script>
+<!-- options-commentary-start -->
+<div style="max-width:1400px;margin:40px auto 0;padding:0 20px 40px;">
+  <div style="background:white;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);padding:30px;">
+    <div style="border-left:4px solid #007bff;padding-left:16px;margin-bottom:20px;">
+      <h2 style="color:#333;margin:0 0 4px;">AI Commentary</h2>
+      <p style="color:#666;font-size:0.85em;margin:0;">Generated 2026-05-07 15:49 UTC &nbsp;&middot;&nbsp; google/gemma-4-31B-it</p>
+    </div>
+    <div style="line-height:1.7;color:#444;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+      <style>
+        .options-commentary table {border-collapse:collapse;width:100%;margin:16px 0;}
+        .options-commentary th,
+        .options-commentary td {border:1px solid #dee2e6;padding:8px 12px;text-align:left;}
+        .options-commentary th {background:#f8f9fa;font-weight:600;}
+        .options-commentary h2,.options-commentary h3 {color:#333;margin:20px 0 8px;}
+        .options-commentary ul {padding-left:20px;}
+        .options-commentary li {margin:4px 0;}
+      </style>
+      <div class="options-commentary"><h2>GOOGL Derivatives Analysis - 2026-05-07</h2>
+<p>Spot: $396.40 | 52wk Range: $152.20–$399.85</p>
+<h2>Best Collar Combinations</h2>
+<p>Given the spot is trading at the top of its 52-week range, the priority is locking in gains via zero-cost or credit-bearing structures.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Expiry</th>
+<th style="text-align: left;">Put Strike</th>
+<th style="text-align: left;">Call Strike</th>
+<th style="text-align: left;">Net Cost</th>
+<th style="text-align: left;">Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">2026-06-05</td>
+<td style="text-align: left;">$300</td>
+<td style="text-align: left;">$495</td>
+<td style="text-align: left;">$0.04 Credit</td>
+<td style="text-align: left;"><strong>Tactical Hedge</strong>: Low-cost protection for a short-term pullback.</td>
+</tr>
+<tr>
+<td style="text-align: left;">2026-06-05</td>
+<td style="text-align: left;">$285</td>
+<td style="text-align: left;">$490</td>
+<td style="text-align: left;">$0.05 Credit</td>
+<td style="text-align: left;"><strong>Tail Hedge</strong>: Maximum credit while protecting against a systemic crash.</td>
+</tr>
+<tr>
+<td style="text-align: left;">2028-01-21</td>
+<td style="text-align: left;">$305</td>
+<td style="text-align: left;">$505</td>
+<td style="text-align: left;">$5.06 Debit</td>
+<td style="text-align: left;"><strong>Long-term Core</strong>: High-conviction growth with a deep floor.</td>
+</tr>
+</tbody>
+</table>
+<h2>OI Hot Spots</h2>
+<ul>
+<li><strong>The $300 Put Wall</strong>: Massive concentration across 2026-09, 2026-12, and 2027-01 (peaking at 7,955 contracts). This creates a significant psychological and technical floor; market makers will likely be long gamma here, providing support as the price drops toward $300.</li>
+<li><strong>The $500 Call Ceiling</strong>: Heavy OI in the 2028-01 ($5,197) and 2027-01 ($1,981) tenors. This suggests a long-term consensus resistance level. Pinning risk is high for the $500 strike in the outer years, potentially capping upside momentum.</li>
+</ul>
+<h2>52wk Range Context</h2>
+<ul>
+<li><strong>Puts are Historically Cheap</strong>: Almost all OTM puts across all expiries are trading at 0% or negative percentages of their 52-week price range. This indicates that implied volatility (IV) for downside protection is currently suppressed despite the spot being at all-time highs.</li>
+<li><strong>Calls are Expensive</strong>: Most OTM calls are trading at 80%–122% of their 52-week range. This suggests a "bull-crowded" trade where the market is pricing in continued upside, making the selling of calls (for collars) highly efficient.</li>
+</ul>
+<h2>Actionable Trade Idea: The "Cheap Floor" Collar</h2>
+<p><strong>Strategy</strong>: Long Stock + Long Put / Short Call
+*   <strong>Expiry</strong>: 2026-06-05
+*   <strong>Put Strike</strong>: $300 (Long)
+*   <strong>Call Strike</strong>: $495 (Short)
+*   <strong>Net Cost</strong>: $0.04 Credit (Net gain on entry)
+*   <strong>Max Profit</strong>: $98.60 per share (Spot $396.40 $\rightarrow$ Call $495) + $0.04 credit.
+*   <strong>Max Loss</strong>: $96.40 per share (Spot $396.40 $\rightarrow$ Put $300) - $0.04 credit.
+*   <strong>Rationale</strong>: Capitalize on historically cheap put premiums and expensive call premiums to secure a $300 floor for "free" while maintaining significant upside potential.</p></div>
+    </div>
   </div>
-  <div class="explain">
+</div>
+<!-- options-commentary-end -->
+
+<!-- costless-collar-matrix -->
+<div style="max-width:900px;margin:32px auto 0;padding:0 24px 40px">
+  <h2 style="font-size:1.15rem;font-weight:700;color:#1565c0;border-bottom:2px solid #1565c0;padding-bottom:8px;margin-bottom:6px">Costless Collar Matrix — $300 Floor</h2>
+  <div style="background:#f0f4ff;border-left:4px solid #1565c0;padding:10px 16px;font-size:.83rem;color:#444;border-radius:0 6px 6px 0;margin-bottom:18px;line-height:1.55">
     <strong>Collar structure:</strong> Buy put @ floor strike + sell call @ cap strike.
     For each expiry, the call is solved as the OTM strike whose bid is closest to the put ask (<strong>net cost ≈ 0</strong>).
-    <strong>Net cost</strong> = put ask − call bid.
-    <em>Credit</em> = premium received. <em>Debit</em> = premium paid.
+    Net cost = put ask − call bid. <em>Credit</em> = premium received. <em>Debit</em> = premium paid.
+    Spot $393.55 | Floor $300 (−23.8% vs spot) | Generated 2026-05-07.
   </div>
-  <table>
+  <table style="border-collapse:collapse;width:100%;font-size:.87rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)">
     <thead>
       <tr>
-        <th>Expiry</th>
-        <th class="put-h">Put Strike</th>
-        <th class="put-h">Put Ask</th>
-        <th class="call-h">Call Strike (Cap)</th>
-        <th class="call-h">Call Bid</th>
-        <th>Net Cost</th>
+        <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Expiry</th>
+        <th style="background:#fde8e8;color:#7b1a1a;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Put Strike</th>
+        <th style="background:#fde8e8;color:#7b1a1a;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Put Ask</th>
+        <th style="background:#e8f5e9;color:#1b5e20;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Call Strike (Cap)</th>
+        <th style="background:#e8f5e9;color:#1b5e20;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Call Bid</th>
+        <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #c5cae9">Net Cost</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>2026-06-05</strong><br><span class="dte">29d</span></td>
-        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
-        <td class="put-col">$0.38</td>
-        <td class="call-col">$475.00<br><span class="sub">+20.7% vs spot</span></td>
-        <td class="call-col">$0.39</td>
-        <td class="credit">$0.01 credit</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-06-05</strong><br><span style="font-size:.74rem;color:#bbb">29d</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.76rem;color:#999">−23.8% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$0.38</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$475.00<br><span style="font-size:.76rem;color:#999">+20.7% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$0.39</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:700">$0.01 credit</td>
       </tr>
       <tr>
-        <td><strong>2026-09-18</strong><br><span class="dte">134d</span></td>
-        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
-        <td class="put-col">$4.60</td>
-        <td class="call-col">$520.00<br><span class="sub">+32.1% vs spot</span></td>
-        <td class="call-col">$4.85</td>
-        <td class="credit">$0.25 credit</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-09-18</strong><br><span style="font-size:.74rem;color:#bbb">134d</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.76rem;color:#999">−23.8% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$4.60</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$520.00<br><span style="font-size:.76rem;color:#999">+32.1% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$4.85</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:700">$0.25 credit</td>
       </tr>
       <tr>
-        <td><strong>2026-12-18</strong><br><span class="dte">225d</span></td>
-        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
-        <td class="put-col">$9.05</td>
-        <td class="call-col">$545.00<br><span class="sub">+38.5% vs spot</span></td>
-        <td class="call-col">$8.90</td>
-        <td class="debit">$0.15 debit</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-12-18</strong><br><span style="font-size:.74rem;color:#bbb">225d</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.76rem;color:#999">−23.8% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$9.05</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$545.00<br><span style="font-size:.76rem;color:#999">+38.5% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$8.90</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#b03030;font-weight:700">$0.15 debit</td>
       </tr>
       <tr>
-        <td><strong>2027-01-15</strong><br><span class="dte">253d</span></td>
-        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
-        <td class="put-col">$9.85</td>
-        <td class="call-col">$555.00<br><span class="sub">+41.0% vs spot</span></td>
-        <td class="call-col">$9.85</td>
-        <td class="even">even</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2027-01-15</strong><br><span style="font-size:.74rem;color:#bbb">253d</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.76rem;color:#999">−23.8% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$9.85</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$555.00<br><span style="font-size:.76rem;color:#999">+41.0% vs spot</span></td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f6fcf7">$9.85</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1565c0;font-weight:700">even</td>
       </tr>
       <tr>
-        <td><strong>2028-01-21</strong><br><span class="dte">624d</span></td>
-        <td class="put-col">$300.00<br><span class="sub">−23.8% vs spot</span></td>
-        <td class="put-col">$24.55</td>
-        <td class="call-col">$630.00<br><span class="sub">+60.1% vs spot</span></td>
-        <td class="call-col">$24.10</td>
-        <td class="debit">$0.45 debit</td>
+        <td style="padding:10px 14px;vertical-align:top"><strong>2028-01-21</strong><br><span style="font-size:.74rem;color:#bbb">624d</span></td>
+        <td style="padding:10px 14px;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.76rem;color:#999">−23.8% vs spot</span></td>
+        <td style="padding:10px 14px;vertical-align:top;background:#fffafa">$24.55</td>
+        <td style="padding:10px 14px;vertical-align:top;background:#f6fcf7">$630.00<br><span style="font-size:.76rem;color:#999">+60.1% vs spot</span></td>
+        <td style="padding:10px 14px;vertical-align:top;background:#f6fcf7">$24.10</td>
+        <td style="padding:10px 14px;vertical-align:top;color:#b03030;font-weight:700">$0.45 debit</td>
       </tr>
     </tbody>
   </table>
-  <p class="ts">Generated 2026-05-07 | Spot as of market close | Data via yfinance</p>
 </div>
+<!-- costless-collar-matrix-end -->
 </body>
 </html>
