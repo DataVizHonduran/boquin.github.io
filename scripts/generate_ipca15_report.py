@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Brazil IPCA-15 Apr 2026 — Interactive Inflation Report
+Brazil IPCA Apr 2026 — Interactive Inflation Report
 Recreates GS Economics Research charts using BCB SGS data.
 """
 
@@ -425,7 +425,7 @@ def build_html(charts_divs, table_html, kpi_html, as_of):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Brazil IPCA-15 Apr 2026 | boquin.xyz</title>
+  <title>Brazil IPCA Apr 2026 | boquin.xyz</title>
   <style>
     * {{ box-sizing: border-box; }}
     body {{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
@@ -442,7 +442,7 @@ def build_html(charts_divs, table_html, kpi_html, as_of):
   </style>
 </head>
 <body>
-<h1>Brazil: IPCA-15 Apr 2026 — Inflation Dashboard</h1>
+<h1>Brazil: IPCA Apr 2026 — Inflation Dashboard</h1>
 <div class="meta">
   As of <strong>{as_of}</strong> &nbsp;|&nbsp; Data: BCB SGS / IBGE via python-sgs &nbsp;|&nbsp;
   Inspired by Goldman Sachs Economics Research (28 Apr 2026)
@@ -450,7 +450,7 @@ def build_html(charts_divs, table_html, kpi_html, as_of):
 
 <div class="bottom-line">
   <strong>Bottom line:</strong>
-  IPCA-15 printed at <strong>0.89% mom (4.37% yoy)</strong>, below the 0.98% consensus, driven by an unexpected large decline in airfares (−14.32% vs consensus for a small increase).
+  IPCA printed at <strong>0.89% mom (4.37% yoy)</strong>, below the 0.98% consensus, driven by an unexpected large decline in airfares (−14.32% vs consensus for a small increase).
   Core inflation averaged <strong>0.46% mom (4.33% yoy)</strong>. Core services printed 0.45% mom (<strong>5.32% yoy</strong>), with upside in car rental, insurance, medical services and food-away-from-home.
   Services pressures remain elevated with 3MMA SA tracking at 6.6% (from 6.5% in Mar).
   Fuel and food-away-from-home continue to press while food-at-home remains benign.
@@ -476,7 +476,7 @@ def build_html(charts_divs, table_html, kpi_html, as_of):
 <p class="note">
   ⚠ Notes: "Core Services" proxied by Non-Tradable Goods (BCB 4448). "Freely Determined Prices" back-solved from headline and administered series using ~75%/25% weights.
   3MMA charts show 3-month moving average of YoY (not seasonally adjusted). Labor/Inertia/Slack-Sensitive services use GS-proprietary classification unavailable from BCB SGS.
-  Source: BCB SGS. IPCA (full CPI) used as proxy for IPCA-15 decompositions.
+  Source: BCB SGS / IBGE via python-sgs.
 </p>
 
 <footer>
