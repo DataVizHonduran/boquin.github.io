@@ -41,6 +41,9 @@ GS_BLUE = "#2980b9"
 GS_LTBLUE = "#85c1e9"
 GS_GRAY = "#808080"
 
+CHART_START = "2018-01-01"
+CHART_END   = "2027-01-01"
+
 
 def pull_all(years=15):
     today = datetime.today()
@@ -103,7 +106,7 @@ def add_target_band(fig, row=1, col=1):
 
 
 def line_chart(yoy, cols, colors, title, years=9):
-    cutoff = yoy.index[-1] - relativedelta(years=years)
+    cutoff = pd.Timestamp(CHART_START)
     sub = yoy.loc[cutoff:][cols].dropna(how="all")
     fig = go.Figure()
     for col, color in zip(cols, colors):
@@ -122,13 +125,13 @@ def line_chart(yoy, cols, colors, title, years=9):
         legend=dict(orientation="h", y=-0.15, x=0),
         hovermode="x unified",
         yaxis=dict(ticksuffix="%", gridcolor="#eeeeee"),
-        xaxis=dict(gridcolor="#eeeeee"),
+        xaxis=dict(range=[CHART_START, CHART_END], gridcolor="#eeeeee"),
     )
     return fig
 
 
 def services_3mma_chart(yoy):
-    cutoff = yoy.index[-1] - relativedelta(years=6)
+    cutoff = pd.Timestamp(CHART_START)
     sub = yoy.loc[cutoff:]
     cols = ["Services 3MMA", "Core Services 3MMA"]
     colors = [GS_NAVY, GS_RED]
@@ -148,13 +151,13 @@ def services_3mma_chart(yoy):
         legend=dict(orientation="h", y=-0.15, x=0),
         hovermode="x unified",
         yaxis=dict(ticksuffix="%", gridcolor="#eeeeee"),
-        xaxis=dict(gridcolor="#eeeeee"),
+        xaxis=dict(range=[CHART_START, CHART_END], gridcolor="#eeeeee"),
     )
     return fig
 
 
 def food_fuel_chart(yoy):
-    cutoff = yoy.index[-1] - relativedelta(years=3)
+    cutoff = pd.Timestamp(CHART_START)
     sub = yoy.loc[cutoff:]
     cols   = ["Food at Home", "Food Away from Home", "Fuel"]
     colors = [GS_NAVY, GS_LTBLUE, GS_RED]
@@ -173,7 +176,7 @@ def food_fuel_chart(yoy):
         legend=dict(orientation="h", y=-0.15, x=0),
         hovermode="x unified",
         yaxis=dict(ticksuffix="%", gridcolor="#eeeeee"),
-        xaxis=dict(gridcolor="#eeeeee"),
+        xaxis=dict(range=[CHART_START, CHART_END], gridcolor="#eeeeee"),
     )
     return fig
 
@@ -229,7 +232,7 @@ def stacked_area_chart(yoy):
         "Food Away from Home": 0.058,
         "Fuel":                0.057,
     }
-    cutoff = yoy.index[-1] - relativedelta(years=3)
+    cutoff = pd.Timestamp(CHART_START)
     sub = yoy.loc[cutoff:]
 
     contribs = pd.DataFrame(index=sub.index)
@@ -273,7 +276,7 @@ def stacked_area_chart(yoy):
         legend=dict(orientation="h", y=-0.15, x=0),
         hovermode="x unified",
         yaxis=dict(ticksuffix="pp", gridcolor="#eeeeee"),
-        xaxis=dict(gridcolor="#eeeeee"),
+        xaxis=dict(range=[CHART_START, CHART_END], gridcolor="#eeeeee"),
     )
     return fig
 
