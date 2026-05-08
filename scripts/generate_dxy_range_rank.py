@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-DXY Four-Year Range Rank
-Rolling percentile rank of DXY within its 4-year high/low range.
-Formula: (close - rolling_4yr_min) / (rolling_4yr_max - rolling_4yr_min) * 100
+DXY Range Rank — rolling percentile of DXY within N-year high/low range.
+Formula: (close - rolling_min) / (rolling_max - rolling_min) * 100
+Supports 3yr / 4yr / 5yr lookback toggle via Plotly updatemenus.
 """
 
 import os
@@ -16,58 +16,54 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # ── Config ─────────────────────────────────────────────────────────────────────
-WINDOW       = 252 * 4   # 4-year rolling window in trading days
-OS_THRESHOLD = 10        # rank below this = Oversold
-CLUSTER_DAYS = 1260      # ~5 years: merge OS episodes closer than this into one trough
+WINDOWS = {"3-Year": 252 * 3, "4-Year": 252 * 4, "5-Year": 252 * 5}
+DEFAULT  = "4-Year"
+OS_THRESHOLD = 10
+CLUSTER_DAYS = 1260   # ~5 years between distinct OS cycle troughs
 OUTPUT_DIR   = os.path.expanduser("~/boquin.github.io/reports/dxy-range-rank")
 OUTPUT_FILE  = os.path.join(OUTPUT_DIR, "index.html")
 
 # ── Data ───────────────────────────────────────────────────────────────────────
 print("Fetching DXY data from Yahoo Finance…")
 raw = yf.download("DX-Y.NYB", period="max", auto_adjust=True, progress=False)
-
-# Flatten MultiIndex if present
 if isinstance(raw.columns, pd.MultiIndex):
     raw.columns = raw.columns.get_level_values(0)
-
 close = raw["Close"].dropna()
 print(f"  {close.index[0].date()} → {close.index[-1].date()}  ({len(close)} rows)")
 
-# ── Indicator ──────────────────────────────────────────────────────────────────
-roll_min = close.rolling(WINDOW, min_periods=int(WINDOW * 0.25)).min()
-roll_max = close.rolling(WINDOW, min_periods=int(WINDOW * 0.25)).max()
-rank = (close - roll_min) / (roll_max - roll_min) * 100
-rank = rank.clip(0, 100)
-
-current_rank  = rank.iloc[-1]
 current_price = close.iloc[-1]
 last_date     = close.index[-1]
-print(f"  Current price: {current_price:.2f}  |  Four-Year Range Rank: {current_rank:.2f}")
 
-# ── Detect OS troughs ──────────────────────────────────────────────────────────
-# Group all OS days into episodes, merge episodes within CLUSTER_DAYS, keep deepest
-os_days = rank.index[rank < OS_THRESHOLD]
-trough_dates = []
-cluster_start = None
-cluster_min_idx = None
-cluster_min_val = None
+# ── Compute rank + troughs for each window ──────────────────────────────────────
+def compute_rank(close, window):
+    rmin = close.rolling(window, min_periods=int(window * 0.25)).min()
+    rmax = close.rolling(window, min_periods=int(window * 0.25)).max()
+    return ((close - rmin) / (rmax - rmin) * 100).clip(0, 100)
 
-for dt in os_days:
-    if cluster_start is None:
-        cluster_start, cluster_min_idx, cluster_min_val = dt, dt, rank[dt]
-    elif (dt - cluster_start).days <= CLUSTER_DAYS:
-        if rank[dt] < cluster_min_val:
-            cluster_min_idx, cluster_min_val = dt, rank[dt]
-    else:
-        trough_dates.append(cluster_min_idx)
-        cluster_start, cluster_min_idx, cluster_min_val = dt, dt, rank[dt]
+def detect_troughs(rank, threshold, cluster_days):
+    os_days = rank.index[rank < threshold]
+    troughs, cluster_start, c_idx, c_val = [], None, None, None
+    for dt in os_days:
+        if cluster_start is None:
+            cluster_start, c_idx, c_val = dt, dt, rank[dt]
+        elif (dt - cluster_start).days <= cluster_days:
+            if rank[dt] < c_val:
+                c_idx, c_val = dt, rank[dt]
+        else:
+            troughs.append(c_idx)
+            cluster_start, c_idx, c_val = dt, dt, rank[dt]
+    if c_idx is not None:
+        troughs.append(c_idx)
+    return troughs
 
-if cluster_min_idx is not None:
-    trough_dates.append(cluster_min_idx)
+computed = {}
+for label, w in WINDOWS.items():
+    r = compute_rank(close, w)
+    t = detect_troughs(r, OS_THRESHOLD, CLUSTER_DAYS)
+    computed[label] = {"rank": r, "troughs": t, "current": r.iloc[-1]}
+    print(f"  {label}: rank={r.iloc[-1]:.2f}  troughs={len(t)}")
 
-print(f"  OS troughs ({len(trough_dates)}): {[str(d.date()) for d in trough_dates]}")
-
-# ── Chart ──────────────────────────────────────────────────────────────────────
+# ── Build figure ───────────────────────────────────────────────────────────────
 fig = make_subplots(
     rows=2, cols=1,
     row_heights=[0.60, 0.40],
@@ -75,7 +71,7 @@ fig = make_subplots(
     vertical_spacing=0.06,
 )
 
-# Top panel — DXY price
+# Trace 0 — DXY price (always visible)
 fig.add_trace(go.Scatter(
     x=close.index, y=close.values,
     mode="lines",
@@ -84,59 +80,118 @@ fig.add_trace(go.Scatter(
     hovertemplate="%{x|%Y-%m-%d}<br>%{y:.2f}<extra></extra>",
 ), row=1, col=1)
 
-# Red dot + label at each OS trough on price panel
-for dt in trough_dates:
-    px_val = close.loc[dt]
+# Per-window traces: rank oscillator + trough dots + vlines
+trace_indices = {}   # label → list of trace indices that belong to this window
+
+for label, data in computed.items():
+    rank    = data["rank"]
+    troughs = data["troughs"]
+    visible = (label == DEFAULT)
+    indices = []
+
+    # Rank oscillator (row 2)
     fig.add_trace(go.Scatter(
-        x=[dt], y=[px_val],
-        mode="markers+text",
-        marker=dict(color="red", size=10),
-        text=[dt.strftime("%m/%d/%Y")],
-        textposition="top right",
-        textfont=dict(size=10, color="#333333"),
-        showlegend=False,
-        hovertemplate=f"{dt.strftime('%Y-%m-%d')}<br>DXY: {px_val:.2f}<extra></extra>",
-    ), row=1, col=1)
+        x=rank.index, y=rank.values,
+        mode="lines",
+        fill="tozeroy",
+        fillcolor="rgba(100,149,237,0.30)",
+        line=dict(color="cornflowerblue", width=1.4),
+        name=f"Range Rank ({label})",
+        visible=visible,
+        hovertemplate="%{x|%Y-%m-%d}<br>Rank: %{y:.1f}<extra></extra>",
+    ), row=2, col=1)
+    indices.append(len(fig.data) - 1)
 
-# Dashed red vertical lines on both panels at OS troughs
-for dt in trough_dates:
-    fig.add_vline(
-        x=dt, line=dict(color="red", width=1.2, dash="dash"),
-        row="all", col=1,
+    # Trough dots + date labels on price panel (row 1)
+    for dt in troughs:
+        px_val = close.loc[dt]
+        fig.add_trace(go.Scatter(
+            x=[dt], y=[px_val],
+            mode="markers+text",
+            marker=dict(color="red", size=10),
+            text=[dt.strftime("%m/%d/%Y")],
+            textposition="top right",
+            textfont=dict(size=9, color="#333333"),
+            showlegend=False,
+            visible=visible,
+            hovertemplate=f"{dt.strftime('%Y-%m-%d')}<br>DXY: {px_val:.2f}<extra></extra>",
+        ), row=1, col=1)
+        indices.append(len(fig.data) - 1)
+
+    # Vlines on oscillator panel as scatter traces (row 2)
+    for dt in troughs:
+        fig.add_trace(go.Scatter(
+            x=[dt, dt], y=[0, 100],
+            mode="lines",
+            line=dict(color="rgba(200,0,0,0.55)", width=1.2, dash="dash"),
+            showlegend=False,
+            visible=visible,
+            hoverinfo="skip",
+        ), row=2, col=1)
+        indices.append(len(fig.data) - 1)
+
+    trace_indices[label] = indices
+
+n_total = len(fig.data)
+
+# OB / OS reference lines (layout hlines — always visible, not toggleable)
+for level in [90, 10]:
+    fig.add_hline(y=level, line=dict(color="rgba(200,50,50,0.35)", width=1, dash="dot"), row=2, col=1)
+
+# ── updatemenus buttons ────────────────────────────────────────────────────────
+buttons = []
+for label, data in computed.items():
+    vis = [True] + [i in trace_indices[label] for i in range(1, n_total)]
+
+    cur = data["current"]
+    subtitle = (
+        f"DXY · {label} Range Rank  "
+        f"<b style='color:red'>{cur:.2f}</b>"
     )
+    buttons.append(dict(
+        label=label,
+        method="update",
+        args=[
+            {"visible": vis},
+            {"title.text": (
+                "<b>The U.S. Dollar Index sits at a crucial inflection point</b><br>"
+                f"<span style='font-size:13px;color:#555'>{subtitle}</span>"
+            )},
+        ],
+    ))
 
-# Bottom panel — Four-Year Range Rank
-fig.add_trace(go.Scatter(
-    x=rank.index, y=rank.values,
-    mode="lines",
-    fill="tozeroy",
-    fillcolor="rgba(100, 149, 237, 0.30)",
-    line=dict(color="cornflowerblue", width=1.4),
-    name="Four-Year Range Rank",
-    hovertemplate="%{x|%Y-%m-%d}<br>Rank: %{y:.1f}<extra></extra>",
-), row=2, col=1)
+fig.update_layout(
+    updatemenus=[dict(
+        type="buttons",
+        direction="right",
+        x=0.01, y=1.08,
+        xanchor="left", yanchor="top",
+        buttons=buttons,
+        bgcolor="#f0f0f0",
+        bordercolor="#cccccc",
+        font=dict(size=12),
+        showactive=True,
+        active=list(WINDOWS.keys()).index(DEFAULT),
+    )],
+)
 
-# OB/OS reference lines
-for level, label in [(90, "OB"), (10, "OS")]:
-    fig.add_hline(
-        y=level,
-        line=dict(color="rgba(200,50,50,0.4)", width=1, dash="dot"),
-        row=2, col=1,
-    )
+# ── Static annotations ─────────────────────────────────────────────────────────
+default_rank = computed[DEFAULT]["current"]
 
-# ── Annotations ────────────────────────────────────────────────────────────────
 fig.add_annotation(
-    text=f"<b>Four-Year Range Rank</b>  <span style='color:cornflowerblue'>{current_rank:.2f}</span>",
+    text=(
+        f"<b>{DEFAULT} Range Rank</b>  "
+        f"<span style='color:cornflowerblue'>{default_rank:.2f}</span>"
+    ),
     xref="paper", yref="paper",
     x=0.01, y=0.01,
     xanchor="left", yanchor="bottom",
     showarrow=False,
     font=dict(size=12),
-    bgcolor="rgba(255,255,255,0.7)",
+    bgcolor="rgba(255,255,255,0.75)",
     borderpad=4,
 )
 
-# Current price label on right axis of top panel
 fig.add_annotation(
     text=f"<b>{current_price:.2f}</b>",
     xref="paper", yref="y",
@@ -151,18 +206,18 @@ fig.update_layout(
     title=dict(
         text=(
             "<b>The U.S. Dollar Index sits at a crucial inflection point</b><br>"
-            f"<span style='font-size:13px;color:#555'>DXY · Four-Year Range Rank from OB to OS  "
-            f"<b style='color:red'>{current_rank:.2f}</b></span>"
+            f"<span style='font-size:13px;color:#555'>DXY · {DEFAULT} Range Rank  "
+            f"<b style='color:red'>{default_rank:.2f}</b></span>"
         ),
         x=0.01, xanchor="left",
         font=dict(size=16),
     ),
-    height=700,
+    height=720,
     paper_bgcolor="#ffffff",
     plot_bgcolor="#f9f9f9",
     hovermode="x unified",
     showlegend=False,
-    margin=dict(l=40, r=80, t=90, b=40),
+    margin=dict(l=40, r=80, t=110, b=40),
     font=dict(family="Inter, sans-serif", size=11),
 )
 
@@ -189,7 +244,7 @@ html = f"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DXY Four-Year Range Rank | boquin.xyz</title>
+<title>DXY Range Rank | boquin.xyz</title>
 <style>
   body {{ margin: 0; font-family: Inter, sans-serif; background: #fff; color: #111; }}
   .header {{ padding: 18px 24px 0; border-bottom: 1px solid #eee; }}
@@ -204,9 +259,9 @@ html = f"""<!DOCTYPE html>
 <div class="meta">Last updated: {updated} &nbsp;·&nbsp; Data: Yahoo Finance (DX-Y.NYB)</div>
 <div class="chart-wrap">{html_body}</div>
 <div class="footnote">
-  Four-Year Range Rank = (close − 4yr low) / (4yr high − 4yr low) × 100.
-  Rolling window: 1,008 trading days. OB ≥ 90 · OS ≤ 10.
-  Red dashed verticals mark prior OS cycle troughs.
+  Range Rank = (close − N-year low) / (N-year high − N-year low) × 100.
+  OB ≥ 90 · OS ≤ 10. Red dashed verticals mark OS cycle troughs (5-year cluster window).
+  Toggle 3yr / 4yr / 5yr lookback with the buttons above the chart.
 </div>
 </body>
 </html>"""
