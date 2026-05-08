@@ -1,0 +1,55 @@
+name: Update FX Factor Fair Value
+
+on:
+  schedule:
+    - cron: '30 20 * * 1-5'  # Weekdays 20:30 UTC (after US close)
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest
+        run: git pull
+
+      - name: Generate dashboard
+        env:
+          OUTPUT_DIR: ${{ github.workspace }}/reports/fx-factor-fairvalue
+        run: python scripts/generate_fx_factor_fairvalue.py
+
+      - name: Inject Gemma commentary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          OUTPUT_DIR: ${{ github.workspace }}/reports/fx-factor-fairvalue
+        run: python scripts/fx_factor_fairvalue_commentary.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/fx-factor-fairvalue/
+          git diff --staged --quiet || (
+            git commit -m "FX Factor Fair Value — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase --autostash &&
+            git push
+          )

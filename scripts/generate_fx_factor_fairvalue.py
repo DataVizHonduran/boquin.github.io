@@ -405,6 +405,7 @@ body{{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a
     <div class="card-title">Actual vs Fair Value Model — Full History</div>
     <div class="card-note">Select currency from dropdown · Right axis = residual % · Red dashed = model fair value</div>
     <div id="chart-explorer"></div>
+<!-- fx-factor-commentary-start --><!-- fx-factor-commentary-end -->
   </div>
 
 </div>
@@ -454,6 +455,23 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\nDashboard → {OUTPUT_FILE}")
+
+    summary_data = []
+    for _, row in summary.iterrows():
+        ccy = row["currency"]
+        res = results[ccy]
+        summary_data.append({
+            "currency": ccy,
+            "residual": round(float(res["residual"]), 2),
+            "r2": round(float(res["r2"]), 3),
+            "actual": round(float(res["actual"]), 4),
+            "predicted": round(float(res["predicted"]), 4),
+            "selected_vars": res["selected_vars"][:6],
+        })
+    summary_json_path = os.path.join(OUTPUT_DIR, "summary.json")
+    with open(summary_json_path, "w") as f:
+        json.dump(summary_data, f, indent=2)
+    print(f"Summary JSON → {summary_json_path}")
 
 
 if __name__ == "__main__":
