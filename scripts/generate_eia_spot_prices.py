@@ -109,6 +109,14 @@ def pct_change(prices: dict[str, float], lookback_days: int) -> float | None:
     return (px_now - px_then) / px_then * 100
 
 
+def compute_spread(fn, *price_dicts: dict[str, float]) -> dict[str, float]:
+    """Compute a derived price series over the date intersection of all input dicts."""
+    common = set(price_dicts[0].keys())
+    for d in price_dicts[1:]:
+        common &= d.keys()
+    return {dt: fn(*[pd[dt] for pd in price_dicts]) for dt in common}
+
+
 def history_2y(prices: dict[str, float]) -> dict:
     """Return {dates: [...], prices: [...]} for the last 730 calendar days."""
     if not prices:
@@ -428,10 +436,12 @@ def main():
     start_date   = (date.today() - timedelta(days=365 * 6)).strftime("%Y-%m-%d")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
+    raw: dict[str, dict[str, float]] = {}
     rows = []
     for label, unit, series_id in PRODUCTS:
         print(f"Fetching: {label} ({series_id})...")
         prices = fetch_series(series_id, api_key, start_date)
+        raw[series_id] = prices
 
         if not prices:
             spot_str = "N/A"
@@ -452,6 +462,39 @@ def main():
             "changes": changes,
             "history": hist,
         })
+
+    # Crack spreads (derived — no extra API calls)
+    wti  = raw.get("RWTC", {})
+    rbob = raw.get("EER_EPMRU_PF4_Y35NY_DPG", {})
+    ho   = raw.get("EER_EPD2F_PF4_Y35NY_DPG", {})
+
+    spread_defs = [
+        (
+            "1:1 Crack Spread (RBOB–WTI)",
+            compute_spread(lambda r, w: (r * 42) - w, rbob, wti),
+        ),
+        (
+            "3:2:1 Crack Spread",
+            compute_spread(lambda r, h, w: ((2 * r * 42) + (h * 42) - (3 * w)) / 3, rbob, ho, wti),
+        ),
+    ]
+
+    for label, prices in spread_defs:
+        print(f"Computing: {label}...")
+        if not prices:
+            rows.append({"label": label, "spot": "N/A", "unit": "$/bbl",
+                         "changes": {p: None for p, _ in PERIODS}, "history": {"dates": [], "prices": []}})
+        else:
+            dates     = sorted(prices.keys())
+            latest_px = prices[dates[-1]]
+            rows.append({
+                "label":   label,
+                "spot":    f"{latest_px:.2f}",
+                "unit":    "$/bbl",
+                "changes": {p: pct_change(prices, days) for p, days in PERIODS},
+                "history": history_2y(prices),
+            })
+            print(f"  Latest ({dates[-1]}): {latest_px:.2f}")
 
     html = build_html(rows, generated_at)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
