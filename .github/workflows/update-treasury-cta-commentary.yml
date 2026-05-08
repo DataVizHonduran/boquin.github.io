@@ -1,0 +1,44 @@
+name: Daily Treasury CTA Commentary
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # 8am UTC daily — runs 3h after treasury CTA signals (5am)
+  workflow_dispatch:
+
+jobs:
+  update-treasury-cta-commentary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run Treasury CTA Commentary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/treasury_cta_commentary.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/treasury-cta-signals/
+          git diff --staged --quiet || (
+            git commit -m "Treasury CTA Commentary — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase &&
+            git push
+          )
