@@ -32,6 +32,9 @@ MODEL_ID     = "google/gemma-4-31B-it"
 REPORT_ROOT  = Path("reports/options-chain")
 MARKER_START = "<!-- options-commentary-start -->"
 MARKER_END   = "<!-- options-commentary-end -->"
+COLLAR_MARKER_START = "<!-- costless-collar-matrix -->"
+COLLAR_MARKER_END   = "<!-- costless-collar-matrix-end -->"
+COLLAR_FLOORS = {"GOOGL": 300.0}  # ticker → floor price for costless collar
 
 # ---------------------------------------------------------------------------
 # Options fetch (ported from claude_projects/options_chain/options_chain.py)
@@ -86,6 +89,90 @@ def _option_52wk(sym):
         return sym, fi.get("yearHigh"), fi.get("yearLow")
     except Exception:
         return sym, None, None
+
+
+def find_put(puts_df, floor):
+    if puts_df.empty:
+        return None
+    idx = (puts_df["strike"] - floor).abs().idxmin()
+    return puts_df.loc[idx]
+
+
+def find_nearest_costless_call(calls_df, spot, put_ask):
+    otm = calls_df[calls_df["strike"] > spot].copy()
+    if otm.empty:
+        return None
+    otm = otm[otm["bid"].notna() & (otm["bid"] > 0)]
+    if otm.empty:
+        return None
+    otm["_diff"] = (otm["bid"] - put_ask).abs()
+    return otm.loc[otm["_diff"].idxmin()]
+
+
+def fetch_collars(ticker_sym, floor_price):
+    tk = yf.Ticker(ticker_sym)
+    fi = tk.fast_info
+    spot = fi["lastPrice"]
+    h52 = fi["yearHigh"]
+    l52 = fi["yearLow"]
+
+    today = date.today()
+    available = tk.options
+    if not available:
+        return None
+
+    seen, selected = set(), []
+    for td in target_expiry_dates(today):
+        exp = find_nearest_expiry(td, available).strftime("%Y-%m-%d")
+        if exp not in seen:
+            seen.add(exp)
+            selected.append(exp)
+
+    rows = []
+    for exp in selected:
+        try:
+            chain = tk.option_chain(exp)
+        except Exception:
+            continue
+
+        dte = (datetime.strptime(exp, "%Y-%m-%d").date() - today).days
+        put_row = find_put(chain.puts, floor_price)
+        if put_row is None:
+            continue
+
+        put_strike = put_row["strike"]
+        put_ask = put_row["ask"] if pd.notna(put_row.get("ask")) and put_row["ask"] > 0 else put_row["lastPrice"]
+        put_bid = put_row["bid"] if pd.notna(put_row.get("bid")) else None
+        put_oi = int(put_row["openInterest"]) if pd.notna(put_row.get("openInterest")) else None
+
+        if pd.isna(put_ask) or put_ask <= 0:
+            continue
+
+        call_row = find_nearest_costless_call(chain.calls, spot, put_ask)
+        if call_row is None:
+            continue
+
+        call_strike = call_row["strike"]
+        call_bid = call_row["bid"]
+        call_oi = int(call_row["openInterest"]) if pd.notna(call_row.get("openInterest")) else None
+        net_cost = round(put_ask - call_bid, 2)
+
+        rows.append({
+            "expiry": exp,
+            "dte": dte,
+            "put_strike": put_strike,
+            "put_bid": put_bid,
+            "put_ask": put_ask,
+            "put_oi": put_oi,
+            "call_strike": call_strike,
+            "call_bid": call_bid,
+            "call_oi": call_oi,
+            "net_cost": net_cost,
+            "floor_pct": (put_strike / spot - 1) * 100,
+            "cap_pct": (call_strike / spot - 1) * 100,
+        })
+
+    return {"ticker": ticker_sym.upper(), "spot": spot, "h52": h52, "l52": l52, "floor": floor_price, "rows": rows}
 
 
 def fetch(ticker_sym):
@@ -416,6 +503,90 @@ def inject_into_html(index_html: Path, block: str) -> None:
     print(f"  Injected commentary into {index_html}")
 
 
+def build_collar_block(collar_data: dict, gen_at: str) -> str:
+    spot = collar_data["spot"]
+    h52 = collar_data["h52"]
+    l52 = collar_data["l52"]
+    floor = collar_data["floor"]
+    rows = collar_data["rows"]
+    floor_pct = (floor / spot - 1) * 100
+
+    tbody = ""
+    for i, r in enumerate(rows):
+        last = i == len(rows) - 1
+        border = "none" if last else "1px solid #eef0f6"
+        net = r["net_cost"]
+        if net < 0:
+            net_style = "color:#1a7a3c;font-weight:600"
+            net_lbl = f"${abs(net):.2f} credit"
+        elif net == 0:
+            net_style = "color:#3a5fc8;font-weight:600"
+            net_lbl = "even"
+        else:
+            net_style = "color:#b03030;font-weight:600"
+            net_lbl = f"${net:.2f} debit"
+        put_oi_str = f'{r["put_oi"]:,}' if r["put_oi"] else "—"
+        put_bid_str = f'${r["put_bid"]:.2f}' if r["put_bid"] else "—"
+        tbody += f"""
+    <tr>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top"><strong>{r['expiry']}</strong><br><span style="font-size:.74rem;color:#aaa">{r['dte']}d</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#fffafa">${r['put_strike']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">{r['floor_pct']:+.1f}% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#fffafa">${r['put_ask']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid {put_bid_str} | OI {put_oi_str}</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#f5fcf7">${r['call_strike']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">{r['cap_pct']:+.1f}% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#f5fcf7">${r['call_bid']:.2f}</td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;{net_style}">{net_lbl}</td>
+    </tr>"""
+
+    if not rows:
+        tbody = '<tr><td colspan="6" style="text-align:center;color:#888;padding:24px">No collar data available.</td></tr>'
+
+    return f"""{COLLAR_MARKER_START}
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d27;padding:24px 0 0;margin:0">
+<h2 style="font-size:1.2rem;font-weight:600;margin-bottom:6px">Costless Collar Matrix — ${floor:.0f} Floor</h2>
+<div style="display:flex;gap:32px;margin-bottom:14px;font-size:.85rem;color:#666;flex-wrap:wrap">
+  <span>Spot <strong style="color:#111">${spot:.2f}</strong></span>
+  <span>Floor <strong style="color:#111">${floor:.2f}</strong> ({floor_pct:+.1f}% vs spot)</span>
+  <span>52wk High <strong style="color:#111">${h52:.2f}</strong></span>
+  <span>52wk Low <strong style="color:#111">${l52:.2f}</strong></span>
+  <span>Generated {gen_at} UTC</span>
+</div>
+<div style="background:#fff;border-left:4px solid #3a5fc8;padding:10px 16px;font-size:.82rem;color:#444;border-radius:0 6px 6px 0;margin-bottom:16px;line-height:1.5">
+  <strong>Collar structure:</strong> Buy put @ floor strike + sell call @ cap strike.
+  For each expiry the call is solved as the OTM strike whose bid is closest to the put ask (net cost ≈ 0).
+  <strong>Net cost</strong> = put ask − call bid. <em>Credit</em> = you receive cash. <em>Debit</em> = you pay.
+</div>
+<table style="border-collapse:collapse;width:100%;font-size:.84rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+  <thead>
+    <tr>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Expiry</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Strike</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Ask</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Strike (Cap)</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Bid</th>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Net Cost</th>
+    </tr>
+  </thead>
+  <tbody>{tbody}
+  </tbody>
+</table>
+</div>
+{COLLAR_MARKER_END}"""
+
+
+def inject_collar_into_html(index_html: Path, block: str) -> None:
+    html = index_html.read_text(encoding="utf-8")
+    html = re.sub(
+        re.escape(COLLAR_MARKER_START) + r".*?" + re.escape(COLLAR_MARKER_END),
+        "",
+        html,
+        flags=re.DOTALL,
+    )
+    last_body = html.rfind("</body>")
+    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
+    index_html.write_text(html, encoding="utf-8")
+    print(f"  Injected collar matrix into {index_html}")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -459,6 +630,15 @@ if __name__ == "__main__":
 
     block = build_commentary_block(commentary, gen_at)
     inject_into_html(out_html, block)
+
+    floor_price = COLLAR_FLOORS.get(sym)
+    if floor_price is not None:
+        print(f"\nComputing costless collar (floor ${floor_price:.0f})...")
+        collar_data = fetch_collars(sym, floor_price)
+        if collar_data and collar_data["rows"]:
+            collar_block = build_collar_block(collar_data, gen_at)
+            inject_collar_into_html(out_html, collar_block)
+            print(f"  {len(collar_data['rows'])} collar expiries computed")
 
     print(f"\nDone — {out_html}")
     print("Next: git add reports/options-chain/ index.html && git commit -m '...' && git pull --rebase && git push")
