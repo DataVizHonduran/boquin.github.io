@@ -181,5 +181,77 @@ function show(i){
   </div>
 </div>
 <!-- options-commentary-end -->
+
+<!-- costless-collar-matrix -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d27;padding:24px 0 0;margin:0">
+<h2 style="font-size:1.2rem;font-weight:600;margin-bottom:6px">Costless Collar Matrix — $300 Floor</h2>
+<div style="display:flex;gap:32px;margin-bottom:14px;font-size:.85rem;color:#666;flex-wrap:wrap">
+  <span>Spot <strong style="color:#111">$393.55</strong></span>
+  <span>Floor <strong style="color:#111">$300.00</strong> (−23.8% vs spot)</span>
+  <span>52wk High <strong style="color:#111">$207.05</strong></span>
+  <span>52wk Low <strong style="color:#111">$140.53</strong></span>
+  <span>Generated 2026-05-08</span>
+</div>
+<div style="background:#fff;border-left:4px solid #3a5fc8;padding:10px 16px;font-size:.82rem;color:#444;border-radius:0 6px 6px 0;margin-bottom:16px;line-height:1.5">
+  <strong>Collar structure:</strong> Buy put @ floor strike + sell call @ cap strike.
+  For each expiry, the call is solved as the OTM strike whose bid is closest to the put ask (net cost ≈ 0).
+  <strong>Net cost</strong> = put ask − call bid. <em>Credit</em> = you receive cash. <em>Debit</em> = you pay.
+</div>
+<table style="border-collapse:collapse;width:100%;font-size:.84rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+  <thead>
+    <tr>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Expiry</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Strike</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Ask</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Strike (Cap)</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Bid</th>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Net Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-06-05</strong><br><span style="font-size:.74rem;color:#aaa">29d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">−23.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$0.38<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $0.25 | OI 7,955</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$475.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+20.7% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$0.39</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:600">$0.01 credit</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-09-18</strong><br><span style="font-size:.74rem;color:#aaa">134d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">−23.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$4.60<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $4.40 | OI 3,218</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$520.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+32.1% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$4.85</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:600">$0.25 credit</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-12-18</strong><br><span style="font-size:.74rem;color:#aaa">225d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">−23.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$9.05<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $8.85 | OI 1,842</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$545.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+38.5% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$8.90</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#b03030;font-weight:600">$0.15 debit</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2027-01-15</strong><br><span style="font-size:.74rem;color:#aaa">253d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">−23.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$9.85<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $9.65 | OI 2,104</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$555.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+41.0% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$9.85</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#3a5fc8;font-weight:600">even</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top"><strong>2028-01-21</strong><br><span style="font-size:.74rem;color:#aaa">624d</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#fffafa">$300.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">−23.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#fffafa">$24.55<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $24.30 | OI 987</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#f5fcf7">$630.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+60.1% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#f5fcf7">$24.10</td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;color:#b03030;font-weight:600">$0.45 debit</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- costless-collar-matrix-end -->
 </body>
 </html>
