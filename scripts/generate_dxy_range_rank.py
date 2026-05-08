@@ -17,10 +17,8 @@ from plotly.subplots import make_subplots
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 WINDOW       = 252 * 4   # 4-year rolling window in trading days
-OS_THRESHOLD  = 10       # shade/line at OS level on bottom panel
-# Reference dates for annotated OB→OS cycle marks (matching source chart labels)
-HISTORICAL_TROUGHS = ["1986-04-30", "2003-04-30"]
-RECENT_TROUGH_WINDOW = 252 * 5  # look back 5 years for auto-detected current trough
+OS_THRESHOLD = 10        # rank below this = Oversold
+CLUSTER_DAYS = 1260      # ~5 years: merge OS episodes closer than this into one trough
 OUTPUT_DIR   = os.path.expanduser("~/boquin.github.io/reports/dxy-range-rank")
 OUTPUT_FILE  = os.path.join(OUTPUT_DIR, "index.html")
 
@@ -47,16 +45,27 @@ last_date     = close.index[-1]
 print(f"  Current price: {current_price:.2f}  |  Four-Year Range Rank: {current_rank:.2f}")
 
 # ── Detect OS troughs ──────────────────────────────────────────────────────────
-# Historical reference dates match the source chart annotations
-hist_troughs = [rank.index[rank.index.searchsorted(pd.Timestamp(d))] for d in HISTORICAL_TROUGHS]
+# Group all OS days into episodes, merge episodes within CLUSTER_DAYS, keep deepest
+os_days = rank.index[rank < OS_THRESHOLD]
+trough_dates = []
+cluster_start = None
+cluster_min_idx = None
+cluster_min_val = None
 
-# Auto-detect current-cycle trough: deepest OS reading in recent window
-recent_rank = rank.iloc[-RECENT_TROUGH_WINDOW:]
-recent_os   = recent_rank[recent_rank < OS_THRESHOLD]
-current_trough = recent_os.idxmin() if not recent_os.empty else last_date
+for dt in os_days:
+    if cluster_start is None:
+        cluster_start, cluster_min_idx, cluster_min_val = dt, dt, rank[dt]
+    elif (dt - cluster_start).days <= CLUSTER_DAYS:
+        if rank[dt] < cluster_min_val:
+            cluster_min_idx, cluster_min_val = dt, rank[dt]
+    else:
+        trough_dates.append(cluster_min_idx)
+        cluster_start, cluster_min_idx, cluster_min_val = dt, dt, rank[dt]
 
-trough_dates = hist_troughs + [current_trough]
-print(f"  Annotated troughs: {[str(d.date()) for d in trough_dates]}")
+if cluster_min_idx is not None:
+    trough_dates.append(cluster_min_idx)
+
+print(f"  OS troughs ({len(trough_dates)}): {[str(d.date()) for d in trough_dates]}")
 
 # ── Chart ──────────────────────────────────────────────────────────────────────
 fig = make_subplots(
