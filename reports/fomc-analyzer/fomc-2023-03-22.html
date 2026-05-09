@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2023-03-22 vs 2023-02-01</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2023-03-22 vs 2023-02-01
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-09 09:23 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from February 1 and March 22, 2023. This period is particularly critical as it captures the Federal Reserve's immediate reaction to the regional banking crisis (Silicon Valley Bank/Signature Bank).</p>
+<hr />
+<h2>1. Redlined Statement (2023-03-22)</h2>
+<p>Recent indicators point to modest growth in spending and production. Job gains ~~have been robust~~ <strong>have picked up</strong> in recent months <strong>and are running at a robust pace</strong>; the unemployment rate has remained low. Inflation ~~has eased somewhat but~~ remains elevated.</p>
+<p>~~Russia's war against Ukraine is causing tremendous human and economic hardship and is contributing to elevated global uncertainty.~~ <strong>The U.S. banking system is sound and resilient. Recent developments are likely to result in tighter credit conditions for households and businesses and to weigh on economic activity, hiring, and inflation. The extent of these effects is uncertain.</strong> The Committee ~~is~~ <strong>remains</strong> highly attentive to inflation risks.</p>
+<p>The Committee seeks to achieve maximum employment and inflation at the rate of 2 percent over the longer run. In support of these goals, the Committee decided to raise the target range for the federal funds rate to ~~4-1/2 to 4-3/4~~ <strong>4-3/4 to 5</strong> percent. <strong>The Committee will closely monitor incoming information and assess the implications for monetary policy.</strong> The Committee anticipates that ~~ongoing increases~~ <strong>some additional policy firming</strong> in the target range ~~will~~ <strong>may</strong> be appropriate in order to attain a stance of monetary policy that is sufficiently restrictive to return inflation to 2 percent over time. In determining the extent of future increases in the target range, the Committee will take into account the cumulative tightening of monetary policy, the lags with which monetary policy affects economic activity and inflation, and economic and financial developments. In addition, the Committee will continue reducing its holdings of Treasury securities and agency debt and agency mortgage-backed securities, as described in its previously announced plans. The Committee is strongly committed to returning inflation to its 2 percent objective.</p>
+<p>In assessing the appropriate stance of monetary policy, the Committee will continue to monitor the implications of incoming information for the economic outlook. The Committee would be prepared to adjust the stance of monetary policy as appropriate if risks emerge that could impede the attainment of the Committee's goals. The Committee's assessments will take into account a wide range of information, including readings on labor market conditions, inflation pressures and inflation expectations, and financial and international developments.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"has eased somewhat"</td>
+<td style="text-align: left;">(Removed entirely)</td>
+<td style="text-align: left;"><strong>Hawkish/Cautionary:</strong> Removes the admission that inflation was trending down; emphasizes that it "remains elevated."</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Russia's war against Ukraine..."</td>
+<td style="text-align: left;">"The U.S. banking system is sound... tighter credit conditions..."</td>
+<td style="text-align: left;"><strong>Pivot in Risk:</strong> Shifts focus from geopolitical external shocks to domestic systemic financial stability risks.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"ongoing increases... will be appropriate"</td>
+<td style="text-align: left;">"some additional policy firming may be appropriate"</td>
+<td style="text-align: left;"><strong>Dovish Shift:</strong> Moves from a definitive path of multiple hikes ("ongoing") to a conditional, limited path ("some," "may").</td>
+</tr>
+<tr>
+<td style="text-align: left;">(N/A)</td>
+<td style="text-align: left;">"The Committee will closely monitor incoming information..."</td>
+<td style="text-align: left;"><strong>Data Dependency:</strong> Increases the emphasis on flexibility in the face of banking volatility.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+The Committee has removed the phrase "has eased somewhat," which previously provided a glimmer of progress. By stating simply that inflation "remains elevated," the Fed is signaling that they are not yet convinced the trend is sustainable or sufficient, maintaining a high baseline of concern.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+The language regarding jobs has shifted from "robust" to "picked up... and are running at a robust pace." This suggests the labor market is even tighter than previously thought, which theoretically provides the Fed more "room" to keep raising rates without triggering a recession. However, this is countered by the new admission that banking stress will "weigh on... hiring."</p>
+<p><strong>Forward Guidance</strong><br />
+This is the most significant shift. The transition from <strong>"ongoing increases... will be appropriate"</strong> to <strong>"some additional policy firming may be appropriate"</strong> is a classic central bank "pivot" in language. The word "some" suggests a finite number of remaining hikes, and "may" replaces the certainty of "will," introducing significant optionality.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The overall tone of the statement is <strong>Cautiously Dovish (or "Hawkishly Hesitant")</strong>. </p>
+<p>While the Committee continued to raise rates and removed language about inflation easing (Hawkish), the core of the statement is a reaction to the banking crisis. By replacing "ongoing increases" with "some additional policy firming may be appropriate," the Fed has signaled that the "terminal rate" is likely closer than previously indicated. They are acknowledging that the banking sector is now doing some of the "tightening" for them via tighter credit conditions, which reduces the need for the Fed to do the heavy lifting via the federal funds rate.</p>
+</div>
+</body>
+</html>
