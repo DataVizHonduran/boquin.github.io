@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2021-09-22 vs 2021-07-28</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2021-09-22 vs 2021-07-28
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-10 09:33 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from July 28, 2021, and September 22, 2021. This period represents a critical pivot point in the Fed's pandemic-era response.</p>
+<hr />
+<h2>1. Redlined Statement (2021-09-22)</h2>
+<p>The Federal Reserve is committed to using its full range of tools to support the U.S. economy in this challenging time, thereby promoting its maximum employment and price stability goals.</p>
+<p>With progress on vaccinations and strong policy support, indicators of economic activity and employment have continued to strengthen. The sectors most adversely affected by the pandemic ~~have shown improvement but have not fully recovered~~ <strong>have improved in recent months, but the rise in COVID-19 cases has slowed their recovery</strong>. Inflation ~~has risen~~ <strong>is elevated</strong>, largely reflecting transitory factors. Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S. households and businesses.</p>
+<p>The path of the economy continues to depend on the course of the virus. Progress on vaccinations will likely continue to reduce the effects of the public health crisis on the economy, but risks to the economic outlook remain.</p>
+<p>The Committee seeks to achieve maximum employment and inflation at the rate of 2 percent over the longer run. With inflation having run persistently below this longer-run goal, the Committee will aim to achieve inflation moderately above 2 percent for some time so that inflation averages 2 percent over time and longer-term inflation expectations remain well anchored at 2 percent. The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved. The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time. Last December, the Committee indicated that it would continue to increase its holdings of Treasury securities by at least $80 billion per month and of agency mortgage-backed securities by at least $40 billion per month until substantial further progress has been made toward its maximum employment and price stability goals. Since then, the economy has made progress toward these goals~~, and the Committee will continue to assess progress in coming meetings~~<strong>. If progress continues broadly as expected, the Committee judges that a moderation in the pace of asset purchases may soon be warranted</strong>. These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.</p>
+<p>In assessing the appropriate stance of monetary policy, the Committee will continue to monitor the implications of incoming information for the economic outlook. The Committee would be prepared to adjust the stance of monetary policy as appropriate if risks emerge that could impede the attainment of the Committee's goals. The Committee's assessments will take into account a wide range of information, including readings on public health, labor market conditions, inflation pressures and inflation expectations, and financial and international developments.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"have shown improvement but have not fully recovered"</td>
+<td style="text-align: left;">"have improved... but the rise in COVID-19 cases has slowed their recovery"</td>
+<td style="text-align: left;">Shifts the narrative from a general "recovery gap" to a specific, active headwind (the Delta variant surge).</td>
+</tr>
+<tr>
+<td style="text-align: left;">"has risen"</td>
+<td style="text-align: left;">"is elevated"</td>
+<td style="text-align: left;">A subtle but important shift from a <em>process</em> (rising) to a <em>state</em> (elevated), acknowledging a higher plateau of inflation.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"the Committee will continue to assess progress in coming meetings"</td>
+<td style="text-align: left;">"If progress continues... a moderation in the pace of asset purchases may soon be warranted"</td>
+<td style="text-align: left;"><strong>Major Policy Shift.</strong> Moves from passive observation to active signaling of "tapering" (reducing QE).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The shift from "has risen" to <strong>"is elevated"</strong> is a critical linguistic nuance. While the Committee maintains the "transitory" label, "elevated" suggests that inflation is no longer just on an upward trajectory but has reached a level that requires closer monitoring. It signals that the "inflation shock" is now a present reality rather than a future risk.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The Committee has updated its view on the "reopening trade." In July, the focus was on the fact that some sectors hadn't recovered. By September, they acknowledge improvement but introduce a new risk: the <strong>slowdown caused by rising COVID-19 cases</strong>. This indicates a more complex recovery path where public health volatility is actively hindering economic momentum in specific sectors.</p>
+<h3>Forward Guidance</h3>
+<p>This is the most significant area of change. The July statement was purely observational ("will continue to assess"). The September statement introduces <strong>conditional forward guidance</strong> regarding the balance sheet. By stating that a moderation in asset purchases "may soon be warranted," the Fed is preparing markets for the end of Quantitative Easing (QE), effectively signaling the start of the "taper" process.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted <strong>Hawkish</strong>. </p>
+<p>While the federal funds rate remains unchanged and the "transitory" narrative is preserved, the tone has moved from "patiently observing" to "preparing to withdraw stimulus." The explicit mention of moderating asset purchases is a clear signal of tightening bias. By upgrading the description of inflation from "rising" to "elevated" and providing a roadmap for tapering QE, the Fed is signaling that the economy is approaching the "substantial further progress" threshold required to begin normalizing monetary policy.</p>
+</div>
+</body>
+</html>
