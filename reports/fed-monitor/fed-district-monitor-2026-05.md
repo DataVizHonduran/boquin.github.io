@@ -10,22 +10,24 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** May 9, 2026
-**RE:** Federal Reserve District Research Briefing
+**DATE:** May 10, 2026
+**SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Fed districts. While some papers focus on structural community funding, the current macro environment is dominated by systemic fragility and divergent consumer behavior. Here are the most analytically significant findings for our portfolio positioning:
+I have reviewed the latest publications from the Fed districts. While some papers focus on structural community funding, the prevailing theme is a deepening socioeconomic divide and emerging systemic risks in the shadow banking sector.
 
-1. **[NY] Stress and Strain from NBFIs to Banks:** This research highlights the contagion risk flowing from Non-Bank Financial Institutions (NBFIs) to the traditional banking sector, specifically citing the Tricolor and First Brands bankruptcies. It suggests that "shadow banking" distress is no longer isolated and could trigger liquidity shocks within the regulated banking system.
+The following publications are the most analytically significant for our current positioning:
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump:** Following the March 2026 closure of the Strait of Hormuz, this paper analyzes how energy price spikes hit different income brackets unevenly. This indicates that energy shocks are now acting as a regressive tax, accelerating the divergence in consumer resilience.
+1. **[NY] Stress and Strain from NBFIs to Banks:** This research highlights the contagion risk stemming from Non-Bank Financial Institutions (NBFIs), specifically citing the Tricolor and First Brands bankruptcies and Blue Owl’s redemption freezes. It signals that "shadow banking" instability is now leaking into the traditional banking sector, necessitating a tighter risk premium on financials.
 
-3. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?:** This data confirms that aggregate real consumer spending growth since 2023 is being driven almost exclusively by high-income households. This suggests that headline GDP growth is masking a significant erosion of purchasing power among the lower and middle classes.
+2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump:** Following the March 2026 closure of the Strait of Hormuz, this paper demonstrates that energy price shocks are hitting low-income households disproportionately harder. This suggests that energy-driven inflation will act as a regressive tax, potentially suppressing aggregate demand faster than headline CPI would suggest.
 
-4. **[NY] Explaining the K-Shaped Economy: What’s Behind the Divide?:** Using Economic Heterogeneity Indicators (EHIs), this piece explains the structural drivers behind the spending divide. For our outlook, this means "aggregate" consumer data is now a misleading metric; we must pivot to cohort-specific analysis to forecast retail and discretionary trends.
+3. **[NY] Explaining the K-Shaped Economy: What’s Behind the Divide?:** Using Economic Heterogeneity Indicators (EHIs), the Fed confirms that recent retail growth is almost exclusively driven by high-income households. This implies that "strong" consumer spending data is a mirage of wealth concentration rather than broad-based economic health.
 
-5. **[NY] In What Ways Has U.S. Trade with China Changed?:** Despite aggressive policy shifts, the U.S. trade deficit remains stubbornly high, suggesting that trade diversion (shifting imports to other nations) has offset the impact of tariffs. This implies that trade policy is a blunt instrument that is failing to meaningfully reduce the overall trade imbalance.
+4. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?:** This companion piece warns that the lack of shared prosperity across society creates a fragile consumption base. For our outlook, this means the economy is increasingly sensitive to asset price volatility (which affects the wealthy) rather than wage growth (which affects the masses).
 
-**Synthesis:** The U.S. economy is currently characterized by a dangerous "K-shaped" divergence where high-income resilience masks systemic fragility in lower-income cohorts and the NBFI sector. We are seeing a precarious environment where geopolitical energy shocks could trigger a broader consumption collapse, despite stable headline growth figures.
+5. **[NY] In What Ways Has U.S. Trade with China Changed?:** Despite aggressive policy shifts, the overall trade deficit remains stubbornly high, suggesting that trade diversion is offsetting direct decoupling. This indicates that geopolitical tensions are rearranging supply chains without significantly improving the U.S. current account balance.
+
+**Synthesis:** The U.S. economy is currently characterized by a dangerous "K-shaped" divergence where high-end consumption masks systemic fragility among lower-income tiers and NBFIs. We are seeing a transition from a broad recovery to a fragmented one, increasing the likelihood of a policy error if the Fed relies on aggregate spending data to set rates.
 
 ---
 
