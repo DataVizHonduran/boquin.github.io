@@ -254,6 +254,49 @@ def fetch_holding_fundamentals(tickers: list[str]) -> dict:
             short[tk] = None
     return {"pe": pe, "short": short}
 
+
+def fetch_mtum_holdings() -> dict:
+    """Fetch MTUM holdings from iShares XLS. Returns {ticker: weight_pct}."""
+    import io
+    import pandas as pd
+    url = (
+        "https://www.ishares.com/us/products/251614/ishares-msci-usa-momentum-factor-etf/"
+        "1521942788811.ajax?fileType=xls&fileName=iShares-MSCI-USA-Momentum-Factor-ETF_fund&dataType=fund"
+    )
+    resp = requests.get(url, timeout=30, headers=HEADERS)
+    resp.raise_for_status()
+    try:
+        df_raw = pd.read_excel(io.BytesIO(resp.content), header=None, engine="xlrd")
+    except Exception:
+        df_raw = pd.read_excel(io.BytesIO(resp.content), header=None, engine="openpyxl")
+    header_row = None
+    for i, row in df_raw.iterrows():
+        if any(str(v).strip().lower() == "ticker" for v in row):
+            header_row = i
+            break
+    if header_row is None:
+        print("  ⚠ MTUM: could not locate 'Ticker' header row", file=sys.stderr)
+        return {}
+    df_raw.columns = df_raw.iloc[header_row].astype(str).str.strip()
+    df = df_raw.iloc[header_row + 1:].reset_index(drop=True)
+    weight_col = next((c for c in df.columns if "weight" in c.lower()), None)
+    if weight_col is None or "Ticker" not in df.columns:
+        print("  ⚠ MTUM: missing expected columns", file=sys.stderr)
+        return {}
+    result = {}
+    for _, row in df.iterrows():
+        tk = str(row["Ticker"]).strip()
+        if not tk or tk.lower() in ("", "nan", "-"):
+            continue
+        try:
+            w = float(row[weight_col])
+            if w > 0:
+                result[tk] = round(w, 4)
+        except (ValueError, TypeError):
+            continue
+    print(f"  ✓ MTUM: {len(result)} holdings fetched")
+    return result
+
 # ── Cache ─────────────────────────────────────────────────────────────────────
 
 def snapshot_path(d: str) -> Path:
@@ -292,6 +335,20 @@ def latest_snapshot_before(today: str) -> dict | None:
     if not candidates:
         return None
     with open(candidates[-1]) as fh:
+        return json.load(fh)
+
+
+def snapshot_two_weeks_ago(today: str) -> dict | None:
+    """Return cached snapshot closest to today - 14 days (falls back to oldest available)."""
+    files = sorted(CACHE_DIR.glob("*.json"))
+    candidates = [f for f in files if f.stem < today]
+    if not candidates:
+        return None
+    target = datetime.strptime(today, "%Y-%m-%d") - timedelta(days=14)
+    best = min(candidates, key=lambda f: abs(
+        (datetime.strptime(f.stem, "%Y-%m-%d") - target).days
+    ))
+    with open(best) as fh:
         return json.load(fh)
 
 # ── Diffs ─────────────────────────────────────────────────────────────────────
@@ -833,6 +890,57 @@ def sector_chart_js(sectors: dict) -> str:
 </script>"""
 
 
+def relative_positioning_chart_js(gvip_holdings: list[dict], mtum_holdings: dict) -> str:
+    if not mtum_holdings:
+        return '<p style="color:#6b7280;font-style:italic">MTUM holdings unavailable — chart skipped.</p>'
+    gvip_map = {h["ticker"]: h for h in gvip_holdings}
+    common = sorted(set(gvip_map) & set(mtum_holdings))
+    if not common:
+        return '<p style="color:#6b7280;font-style:italic">No overlapping tickers between GVIP and MTUM.</p>'
+    tickers = common
+    names   = [gvip_map[tk]["name"] for tk in tickers]
+    gvip_w  = [gvip_map[tk]["weight"] for tk in tickers]
+    mtum_w  = [mtum_holdings[tk] for tk in tickers]
+    hover = [
+        f"<b>{tk}</b><br>{nm}<br>GVIP: {gw:.2f}%<br>MTUM: {mw:.4f}%<extra></extra>"
+        for tk, nm, gw, mw in zip(tickers, names, gvip_w, mtum_w)
+    ]
+    trace = {
+        "type": "scatter",
+        "mode": "markers+text",
+        "x": gvip_w,
+        "y": mtum_w,
+        "text": tickers,
+        "textposition": "top center",
+        "textfont": {"size": 9, "color": "#374151"},
+        "hovertemplate": hover,
+        "marker": {
+            "size": 10,
+            "color": "#1a56db",
+            "opacity": 0.75,
+            "line": {"width": 1, "color": "#fff"},
+        },
+    }
+    layout = {
+        "paper_bgcolor": "#fff",
+        "plot_bgcolor": "#f8fafc",
+        "margin": {"l": 70, "r": 40, "t": 30, "b": 70},
+        "height": 500,
+        "xaxis": {"title": "GVIP Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False},
+        "yaxis": {"title": "MTUM Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False},
+    }
+    caption = (
+        f'<p style="font-size:0.78rem;color:#6b7280;text-align:center;margin-top:-0.5rem;margin-bottom:1rem">'
+        f'{len(common)} tickers in both GVIP &amp; MTUM &nbsp;|&nbsp; X = GVIP weight · Y = MTUM weight</p>'
+    )
+    return f"""
+<div id="relPositChart" style="max-width:700px;margin:0 auto 1rem;"></div>
+{caption}
+<script>
+Plotly.newPlot('relPositChart', [{json.dumps(trace)}], {json.dumps(layout)}, {{responsive: true, displayModeBar: false}});
+</script>"""
+
+
 def holdings_table_html(holdings: list[dict]) -> str:
     rows = []
     for h in holdings:
@@ -889,7 +997,8 @@ def render_html(today_data: dict, diff: dict, summary: str,
                 snapshots: list[dict], prior_date: str | None,
                 price_history: dict, momentum: dict, fundamentals: dict,
                 quadrant_commentary: str = "",
-                generated_at: str | None = None) -> str:
+                generated_at: str | None = None,
+                mtum_holdings: dict | None = None) -> str:
     today = today_data["date"]
     perf = today_data["performance"]
     sectors = today_data["sectors"]
@@ -934,9 +1043,10 @@ def render_html(today_data: dict, diff: dict, summary: str,
 
     holdings_html = holdings_table_html(holdings)
     change_html = change_log_html(diff, prior_date)
-    p_chart = price_chart_js(price_history)
-    q_chart = quadrant_chart_js(holdings, momentum, fundamentals)
-    s_chart = sector_chart_js(sectors)
+    p_chart  = price_chart_js(price_history)
+    q_chart  = quadrant_chart_js(holdings, momentum, fundamentals)
+    rp_chart = relative_positioning_chart_js(holdings, mtum_holdings or {})
+    s_chart  = sector_chart_js(sectors)
 
     holdings_as_of = today_data.get("holdings_as_of", today)
 
@@ -1025,6 +1135,9 @@ def render_html(today_data: dict, diff: dict, summary: str,
   <h2>Conviction vs Momentum — Quadrant View</h2>
   {q_chart}
   {f'<div class="quadrant-commentary-box">{quadrant_commentary.replace(chr(10), "<br>")}</div>' if quadrant_commentary else ''}
+
+  <h2>Relative Positioning — GVIP vs MTUM</h2>
+  {rp_chart}
 
   <h2>Sector Allocation</h2>
   {s_chart}
@@ -1142,8 +1255,8 @@ def main():
         }
         save_snapshot(today_data, today)
 
-    # Step 2: Prior snapshot for diff
-    prior_snapshot = latest_snapshot_before(today)
+    # Step 2: Prior snapshot for diff (~2 weeks ago)
+    prior_snapshot = snapshot_two_weeks_ago(today)
     prior_date = prior_snapshot["date"] if prior_snapshot else None
 
     diff = {}
@@ -1195,6 +1308,12 @@ def main():
     valid_pe = sum(1 for v in fundamentals["pe"].values() if v is not None)
     valid_si = sum(1 for v in fundamentals["short"].values() if v is not None)
     print(f"  ✓ Fwd P/E: {valid_pe}/{len(holding_tickers)}  Short interest: {valid_si}/{len(holding_tickers)}")
+    print("Fetching MTUM holdings...")
+    try:
+        mtum_holdings = fetch_mtum_holdings()
+    except Exception as e:
+        print(f"  ⚠ MTUM fetch failed ({e}), skipping relative positioning chart", file=sys.stderr)
+        mtum_holdings = {}
     generated_at = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC") if fresh_summary else None
 
     # Step 4b: Quadrant commentary
@@ -1222,7 +1341,7 @@ def main():
     snapshots = load_snapshots()
 
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    html = render_html(today_data, diff, summary, snapshots, prior_date, price_history, momentum, fundamentals, quadrant_commentary, generated_at)
+    html = render_html(today_data, diff, summary, snapshots, prior_date, price_history, momentum, fundamentals, quadrant_commentary, generated_at, mtum_holdings)
     out_path = REPORT_DIR / "index.html"
     out_path.write_text(html)
     print(f"  ✓ Report written: {out_path}")
