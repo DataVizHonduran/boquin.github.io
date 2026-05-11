@@ -906,7 +906,8 @@ def sector_chart_js(sectors: dict) -> str:
 </script>"""
 
 
-def relative_positioning_chart_js(gvip_holdings: list[dict], mtum_holdings: dict) -> str:
+def relative_positioning_chart_js(gvip_holdings: list[dict], mtum_holdings: dict, fundamentals: dict) -> str:
+    import math
     if not mtum_holdings:
         return '<p style="color:#6b7280;font-style:italic">MTUM holdings unavailable — chart skipped.</p>'
     gvip_map = {h["ticker"]: h for h in gvip_holdings}
@@ -917,10 +918,42 @@ def relative_positioning_chart_js(gvip_holdings: list[dict], mtum_holdings: dict
     names   = [gvip_map[tk]["name"] for tk in tickers]
     gvip_w  = [gvip_map[tk]["weight"] for tk in tickers]
     mtum_w  = [mtum_holdings[tk] for tk in tickers]
+
+    # P/E decile coloring — same methodology as quadrant chart
+    pe_data = fundamentals.get("pe", {})
+    pe_vals = [pe_data.get(tk) for tk in tickers]
+    valid_with_idx = sorted(
+        [(i, v) for i, v in enumerate(pe_vals) if v is not None and not math.isnan(v)],
+        key=lambda x: x[1],
+    )
+    n_valid = len(valid_with_idx)
+    idx_to_decile = {
+        i: min(10, int(rank * 10 / n_valid) + 1)
+        for rank, (i, _) in enumerate(valid_with_idx)
+    }
+
+    def decile_color(d):
+        norm = (d - 1) / 9.0
+        return (f"rgb({int(norm * 2 * 220)},200,60)" if norm < 0.5
+                else f"rgb(220,{int((1 - norm) * 2 * 200)},60)")
+
+    colors  = [decile_color(idx_to_decile[i]) if i in idx_to_decile else "#9ca3af" for i in range(len(pe_vals))]
+    deciles = [idx_to_decile.get(i) for i in range(len(pe_vals))]
+
+    max_gvip = max(gvip_w) if gvip_w else 1
+    sizes = [6 + (w / max_gvip) * 14 for w in gvip_w]
+
     hover = [
-        f"<b>{tk}</b><br>{nm}<br>GVIP: {gw:.2f}%<br>MTUM: {mw:.4f}%<extra></extra>"
-        for tk, nm, gw, mw in zip(tickers, names, gvip_w, mtum_w)
+        f"<b>{tk}</b><br>{nm}<br>GVIP: {gw:.2f}%<br>MTUM: {mw:.4f}%<br>"
+        f"Fwd P/E: {f'{pe:.1f} (D{d})' if pe is not None and not math.isnan(pe) else 'n/a'}<extra></extra>"
+        for tk, nm, gw, mw, pe, d in zip(tickers, names, gvip_w, mtum_w, pe_vals, deciles)
     ]
+
+    x_max  = max(gvip_w) * 1.18
+    y_max  = max(mtum_w) * 1.18
+    x_mid  = sum(gvip_w) / len(gvip_w)
+    y_mid  = sum(mtum_w) / len(mtum_w)
+
     trace = {
         "type": "scatter",
         "mode": "markers+text",
@@ -931,27 +964,59 @@ def relative_positioning_chart_js(gvip_holdings: list[dict], mtum_holdings: dict
         "textfont": {"size": 9, "color": "#374151"},
         "hovertemplate": hover,
         "marker": {
-            "size": 10,
-            "color": "#1a56db",
-            "opacity": 0.75,
-            "line": {"width": 1, "color": "#fff"},
+            "size": sizes,
+            "sizemode": "diameter",
+            "color": colors,
+            "opacity": 0.85,
+            "line": {"width": 1.5, "color": "#fff"},
         },
     }
     layout = {
         "paper_bgcolor": "#fff",
         "plot_bgcolor": "#f8fafc",
         "margin": {"l": 70, "r": 40, "t": 30, "b": 70},
-        "height": 500,
-        "xaxis": {"title": "GVIP Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False},
-        "yaxis": {"title": "MTUM Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False},
+        "height": 520,
+        "xaxis": {"title": "GVIP Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False, "range": [0, x_max]},
+        "yaxis": {"title": "MTUM Weight (%)", "gridcolor": "#e5e7eb", "zeroline": False, "range": [0, y_max]},
+        "shapes": [
+            {"type": "line", "x0": x_mid, "x1": x_mid, "y0": 0, "y1": y_max,
+             "line": {"color": "#9ca3af", "width": 1, "dash": "dash"}},
+            {"type": "line", "x0": 0, "x1": x_max, "y0": y_mid, "y1": y_mid,
+             "line": {"color": "#9ca3af", "width": 1, "dash": "dash"}},
+        ],
+        "annotations": [
+            {"x": x_max * 0.97, "y": y_max * 0.97, "xanchor": "right", "yanchor": "top",
+             "text": "Shared Conviction", "showarrow": False,
+             "font": {"size": 10, "color": "#6b7280"}, "bgcolor": "rgba(255,255,255,0.7)"},
+            {"x": x_max * 0.03, "y": y_max * 0.97, "xanchor": "left", "yanchor": "top",
+             "text": "Momentum Driven", "showarrow": False,
+             "font": {"size": 10, "color": "#6b7280"}, "bgcolor": "rgba(255,255,255,0.7)"},
+            {"x": x_max * 0.97, "y": y_max * 0.03, "xanchor": "right", "yanchor": "bottom",
+             "text": "VIP Only", "showarrow": False,
+             "font": {"size": 10, "color": "#6b7280"}, "bgcolor": "rgba(255,255,255,0.7)"},
+            {"x": x_max * 0.03, "y": y_max * 0.03, "xanchor": "left", "yanchor": "bottom",
+             "text": "Peripheral", "showarrow": False,
+             "font": {"size": 10, "color": "#6b7280"}, "bgcolor": "rgba(255,255,255,0.7)"},
+        ],
     }
+    pe_legend = (
+        '<p style="font-size:0.78rem;color:#6b7280;text-align:center;margin-top:-1rem;margin-bottom:1rem">'
+        'Dot color = forward P/E decile &nbsp;|&nbsp; '
+        '<span style="display:inline-block;width:10px;height:10px;background:rgb(0,200,60);border-radius:50%;vertical-align:middle"></span> D1 cheapest '
+        '&nbsp;→&nbsp; '
+        '<span style="display:inline-block;width:10px;height:10px;background:rgb(220,0,60);border-radius:50%;vertical-align:middle"></span> D10 priciest '
+        '&nbsp;|&nbsp; <span style="color:#9ca3af">●</span> n/a'
+        '&nbsp;|&nbsp; Bubble size = GVIP weight %'
+        '</p>'
+    )
     caption = (
-        f'<p style="font-size:0.78rem;color:#6b7280;text-align:center;margin-top:-0.5rem;margin-bottom:1rem">'
-        f'{len(common)} tickers in both GVIP &amp; MTUM &nbsp;|&nbsp; X = GVIP weight · Y = MTUM weight</p>'
+        f'<p style="font-size:0.78rem;color:#6b7280;text-align:center;margin-top:-0.5rem;margin-bottom:0">'
+        f'{len(common)} tickers in both GVIP &amp; MTUM &nbsp;|&nbsp; dividers at mean weight</p>'
     )
     return f"""
 <div id="relPositChart" style="max-width:700px;margin:0 auto 1rem;"></div>
 {caption}
+{pe_legend}
 <script>
 Plotly.newPlot('relPositChart', [{json.dumps(trace)}], {json.dumps(layout)}, {{responsive: true, displayModeBar: false}});
 </script>"""
@@ -1061,7 +1126,7 @@ def render_html(today_data: dict, diff: dict, summary: str,
     change_html = change_log_html(diff, prior_date)
     p_chart  = price_chart_js(price_history)
     q_chart  = quadrant_chart_js(holdings, momentum, fundamentals)
-    rp_chart = relative_positioning_chart_js(holdings, mtum_holdings or {})
+    rp_chart = relative_positioning_chart_js(holdings, mtum_holdings or {}, fundamentals)
     s_chart  = sector_chart_js(sectors)
 
     holdings_as_of = today_data.get("holdings_as_of", today)
