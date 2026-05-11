@@ -99,6 +99,12 @@
   "hfiresearch.substack.com": [],
   "www.notboring.co": [
     {
+      "title": "Weekly Dose of Optimism #192",
+      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-192",
+      "date": "2026-05-08",
+      "description": "UFO Disclosure, GENE-26.5, Neuralink Brain Surgeon Robot, Magnesium, Aalo DSA, GDM x EVE + Extra Doses"
+    },
+    {
       "title": "Weekly Dose of Optimism #191",
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-191",
       "date": "2026-05-01",
@@ -121,12 +127,6 @@
       "url": "https://www.notboring.co/p/the-great-blue-frontier",
       "date": "2026-04-23",
       "description": "A Co-Written Essay on the Ocean with Will O'Brien"
-    },
-    {
-      "title": "Weekly Dose of Optimism #189",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-189",
-      "date": "2026-04-17",
-      "description": "Superhot Geothermal, Panthalassa, Vital Lyfe, Mind-Reading Hat, Lucid Dreams, Sonogenetics + Science Breakthroughs + Friedberg"
     }
   ],
   "macrocreditthinking.substack.com": [
@@ -227,6 +227,12 @@
   ],
   "www.newcomer.co": [
     {
+      "title": "Customer Support & Dictation Loom Large As Voice Startup Leaders Prepare for a World of Talking Machines",
+      "url": "https://www.newcomer.co/p/customer-support-and-dictation-loom",
+      "date": "2026-05-08",
+      "description": "Voice models are a few steps behind text models but the industry is preparing for takeoff. Our takeaways from the Cerebral Valley Voice Summit."
+    },
+    {
       "title": "California's Billionaire Tax Heads for the Ballot. A Compromise Would Serve Everyone Well.",
       "url": "https://www.newcomer.co/p/californias-billionaire-tax-heads",
       "date": "2026-05-01",
@@ -249,12 +255,6 @@
       "url": "https://www.newcomer.co/p/stakes-keep-getting-higher-for-the",
       "date": "2026-04-24",
       "description": "Plus, Bill Gurley questions the supposed compute shortage & Bob Iger returns to Thrive"
-    },
-    {
-      "title": "xAI's Move to Buy Cursor Shows the Promise & the Risks for AI Applications Startups",
-      "url": "https://www.newcomer.co/p/xais-move-to-buy-cursor-shows-the",
-      "date": "2026-04-22",
-      "description": "The $60 billion acquisition, with a $10 billion breakup fee, is a huge win for a16z, Thrive, and Accel"
     }
   ],
   "globalmacromethod.substack.com": [
@@ -420,34 +420,34 @@
   ],
   "www.chinatalk.media": [
     {
-      "title": "Measuring America\u2019s Chokepoints",
-      "url": "https://www.chinatalk.media/p/measuring-americas-chokepoints",
-      "date": "2026-05-04",
-      "description": "Economic Security Contest Winner!"
+      "title": "WarTalk: Iran War with Jack Shanahan",
+      "url": "https://www.chinatalk.media/p/wartalk-iran-war-with-jack-shanahan",
+      "date": "2026-05-09",
+      "description": "'Love Tap' edition"
     },
     {
-      "title": "The Party Gap",
+      "title": "Ken Liu on AI and Freedom",
+      "url": "https://www.chinatalk.media/p/ken-liu-on-ai-and-freedom",
+      "date": "2026-05-06",
+      "description": "this show was such a treat"
+    },
+    {
+      "title": "How to Buy Cheap Claude Tokens in China",
+      "url": "https://www.chinatalk.media/p/how-to-buy-cheap-claude-tokens-in",
+      "date": "2026-05-05",
+      "description": "The Transfer Station Economy, Explained"
+    },
+    {
+      "title": "How to Score Economic Security",
+      "url": "https://www.chinatalk.media/p/measuring-americas-chokepoints",
+      "date": "2026-05-04",
+      "description": "Chokepoints, surge capacity, and accountability"
+    },
+    {
+      "title": "No Party, No Party",
       "url": "https://www.chinatalk.media/p/no-party-no-party",
       "date": "2026-05-03",
       "description": "Beijing's campaign to foment loneliness abroad and good vibes at home"
-    },
-    {
-      "title": "WarTalk: Still Out of Ammo",
-      "url": "https://www.chinatalk.media/p/wartalk-still-out-of-ammo",
-      "date": "2026-05-01",
-      "description": "Two weeks into the US-Iran ceasefire, CENTCOM is requesting Dark Eagle hypersonics, the 82nd Airborne is flowing into theater, and the wargames keep telling us the same thing &#8212; there&#8217;s no"
-    },
-    {
-      "title": "The Quantum Industrial Base",
-      "url": "https://www.chinatalk.media/p/the-quantum-industrial-base",
-      "date": "2026-04-29",
-      "description": "The Supply Chain"
-    },
-    {
-      "title": "China-Proofing the American Industrial Base",
-      "url": "https://www.chinatalk.media/p/china-proofing-the-american-industrial",
-      "date": "2026-04-28",
-      "description": "Economic Security Essay Contest Winner!"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -517,6 +517,18 @@
   ],
   "www.parentdata.org": [
     {
+      "title": "How to Fix Your Child\u2019s Sleep Issues (It Won\u2019t Happen Overnight)",
+      "url": "https://parentdata.org/kids/fix-child-sleep-issues/",
+      "date": "2026-05-10",
+      "description": "Five steps, plus a tool to help you do them\nEmily Oster, PhD"
+    },
+    {
+      "title": "New Data on Phone Bans Is \u2026 Underwhelming",
+      "url": "https://parentdata.org/kids/school-phone-bans-research/",
+      "date": "2026-05-04",
+      "description": "Two new papers offer a note of caution\nEmily Oster, PhD"
+    },
+    {
       "title": "I Drank Broccoli Juice. Here\u2019s What I Learned About Placebos.",
       "url": "https://parentdata.org/grown-ups/placebo-effect-wellness-research/",
       "date": "2026-05-03",
@@ -533,18 +545,6 @@
       "url": "https://parentdata.org/pregnancy/prevent-shoulder-dystocia-evidence/",
       "date": "2026-04-27",
       "description": "Q&#038;A on risk factors\nEmily Oster, PhD"
-    },
-    {
-      "title": "What\u2019s the Data on Delayed Cord Clamping?",
-      "url": "https://parentdata.org/pregnancy/delayed-cord-clamping-data-benefits/",
-      "date": "2026-04-27",
-      "description": "Q&#038;A on birth plans\nEmily Oster, PhD"
-    },
-    {
-      "title": "All About VBAC",
-      "url": "https://parentdata.org/pregnancy/vbac-risks-benefits-guide/",
-      "date": "2026-04-23",
-      "description": "The risks, benefits, and how to find a provider who supports it\nAnn Ledbetter, CNM"
     }
   ],
   "debtserious.substack.com": [
@@ -678,6 +678,12 @@
   ],
   "www.weightythoughts.com": [
     {
+      "title": "World Models Can Change Everything",
+      "url": "https://weightythoughts.com/p/world-models-can-change-everything",
+      "date": "2026-05-06",
+      "description": "If they work, AI can finally conquer the real world&#8230; but that&#8217;s a big &#8220;if&#8221;"
+    },
+    {
       "title": "AI Dementia\u2014Why Your Agent Gets Progressively Dumber As You Talk To It",
       "url": "https://weightythoughts.com/p/ai-dementiawhy-your-agent-gets-progressively",
       "date": "2026-04-29",
@@ -700,12 +706,6 @@
       "url": "https://weightythoughts.com/p/ai-agents-and-jobs-the-human-bottleneck",
       "date": "2026-03-20",
       "description": "AI Changes the Work, Not the Need for Judgment"
-    },
-    {
-      "title": "Oil, Iran, and AI's Energy Problem?",
-      "url": "https://weightythoughts.com/p/oil-iran-and-ais-energy-problem",
-      "date": "2026-03-16",
-      "description": "Why the Biggest Oil Shock in Modern History Isn't Threatening US Datacenters (So Far)"
     }
   ],
   "chaufa.substack.com": [
@@ -879,34 +879,34 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "Chris Geidner on life after the VRA",
-      "url": "https://www.publicnotice.co/p/chris-geidner-on-life-after-the-vra",
-      "date": "2026-05-01",
-      "description": "And why Trump's Justice Department has collapsed into an utter sh*tshow."
+      "title": "This is a crisis of democracy. What will Dems do about it?",
+      "url": "https://www.publicnotice.co/p/vra-democracy-crisis-democrats",
+      "date": "2026-05-11",
+      "description": "They need a bold and radical political reform agenda, or things will only get worse."
     },
     {
-      "title": "Trump\u2019s Reichstag fire presidency is immolating",
-      "url": "https://www.publicnotice.co/p/trump-reichstag-fire-presidency",
-      "date": "2026-05-01",
-      "description": "The media personality in the White House has been exposed as a crisis actor."
+      "title": "Why fixing America is much harder than fixing Hungary",
+      "url": "https://www.publicnotice.co/p/trump-orban",
+      "date": "2026-05-09",
+      "description": "Cleaning up Trump's wreckage will prove especially tricky."
     },
     {
-      "title": "The dumbest week in DOJ history",
-      "url": "https://www.publicnotice.co/p/blanche-comey-ballroom",
-      "date": "2026-04-30",
-      "description": "And it's only Thursday."
+      "title": "What the Virginia ruling does \u2014 and does not \u2014 mean for 2026",
+      "url": "https://www.publicnotice.co/p/what-the-virginia-ruling-does-and",
+      "date": "2026-05-08",
+      "description": "The news is not good for Democrats, but they can still win the House."
     },
     {
-      "title": "Musk aims to kneecap OpenAI with Altman trollsuit",
-      "url": "https://www.publicnotice.co/p/musk-altman-trial",
-      "date": "2026-04-29",
-      "description": "They were careless people, Elon and Sam."
+      "title": "Stephen Miller's closed system of white supremacy",
+      "url": "https://www.publicnotice.co/p/stephen-miller-america-first-legal-trump",
+      "date": "2026-05-08",
+      "description": "Won't somebody think of the white guys?"
     },
     {
-      "title": "The demise of Lori Chavez-DeRemer and Trump's clown cabinet",
-      "url": "https://www.publicnotice.co/p/lori-chavez-deremer",
-      "date": "2026-04-28",
-      "description": "Her brief, ignominious tenure is illustrative of deep dysfunction."
+      "title": "The Confederacy rises again",
+      "url": "https://www.publicnotice.co/p/trump-confederacy-rises-again",
+      "date": "2026-05-07",
+      "description": "Undoing the 1960s isn't enough. They're even taking aim at the 1860s."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,6 +1010,24 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
+      "title": "Oil & Iran War Context Weekly (W19)",
+      "url": "https://www.commoditycontext.com/p/ocw19w26",
+      "date": "2026-05-08",
+      "description": "Crude prices pull back, once again, on hopes of a diplomatic resolution to the Hormuz stoppage despite a resurgence of violence to levels not seen since the announcement of the ceasefire last month."
+    },
+    {
+      "title": "North American Oil Data Deck (May 2026)",
+      "url": "https://www.commoditycontext.com/p/north-american-oil-data-deck-may-2026",
+      "date": "2026-05-07",
+      "description": "Continental production jumped back to life in February from winter storm-depressed January levels while stateside product demand surged to the strongest February level on record."
+    },
+    {
+      "title": "Context Call: May 2026 (Video)",
+      "url": "https://www.commoditycontext.com/p/context-call-may-2026-video",
+      "date": "2026-05-06",
+      "description": "Understanding the Sanguine Strait Stoppage after more than 2 months with Hormuz closed and more than a billion barrels guaranteed already lost."
+    },
+    {
       "title": "Oil & Iran War Context Weekly (W18)",
       "url": "https://www.commoditycontext.com/p/ocw18w26",
       "date": "2026-05-01",
@@ -1020,24 +1038,6 @@
       "url": "https://www.commoditycontext.com/p/global-oil-data-deck-april-2026",
       "date": "2026-04-29",
       "description": "Balances tightened further through February before the onset of the Iran War; the >1 billion barrels of now guaranteed supply loss will prompt an unprecedented draw on global inventories."
-    },
-    {
-      "title": "Oil & Iran War Context Weekly (W17)",
-      "url": "https://www.commoditycontext.com/p/ocw17w26",
-      "date": "2026-04-24",
-      "description": "Crude notched its first weekly gain since mid-March amidst another week of waiting, seven more days with Hormuz closed, and another 91 million Middle East Gulf barrels unproduced."
-    },
-    {
-      "title": "Sanguine Strait Stoppage",
-      "url": "https://www.commoditycontext.com/p/sanguine-strait-stoppage",
-      "date": "2026-04-23",
-      "description": "Making sense of relatively low crude prices through nearly two months of the largest oil supply shock in history"
-    },
-    {
-      "title": "Oil & Iran War Context Weekly (W16)",
-      "url": "https://www.commoditycontext.com/p/ocw16w26",
-      "date": "2026-04-17",
-      "description": "Crude prices cratered and term structure flattened on Friday following Iran&#8217;s declaration that Hormuz is &#8220;open&#8221; despite the fact that little traffic has actually managed to cross the"
     }
   ],
   "energyoutlookadvisors.substack.com": [],
