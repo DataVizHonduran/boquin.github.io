@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2020-06-10 vs 2020-04-29</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2020-06-10 vs 2020-04-29
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-11 11:30 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have conducted a comparative analysis of the FOMC statements from April 29 and June 10, 2020. This period represents the acute phase of the COVID-19 induced economic shock.</p>
+<hr />
+<h2>1. Redlined Statement (2020-06-10)</h2>
+<p>The Federal Reserve is committed to using its full range of tools to support the U.S. economy in this challenging time, thereby promoting its maximum employment and price stability goals.</p>
+<p>The coronavirus outbreak is causing tremendous human and economic hardship across the United States and around the world. The virus and the measures taken to protect public health ~~are inducing~~ <strong>have induced</strong> sharp declines in economic activity and a surge in job losses. Weaker demand and significantly lower oil prices are holding down consumer price inflation. ~~The disruptions to economic activity here and abroad have significantly affected financial conditions and have impaired the flow of credit to U.S. households and businesses.~~ <strong>Financial conditions have improved, in part reflecting policy measures to support the economy and the flow of credit to U.S. households and businesses.</strong></p>
+<p>The ongoing public health crisis will weigh heavily on economic activity, employment, and inflation in the near term, and poses considerable risks to the economic outlook over the medium term. In light of these developments, the Committee decided to maintain the target range for the federal funds rate at 0 to 1/4 percent. The Committee expects to maintain this target range until it is confident that the economy has weathered recent events and is on track to achieve its maximum employment and price stability goals.</p>
+<p>The Committee will continue to monitor the implications of incoming information for the economic outlook, including information related to public health, as well as global developments and muted inflation pressures, and will use its tools and act as appropriate to support the economy. In determining the timing and size of future adjustments to the stance of monetary policy, the Committee will assess realized and expected economic conditions relative to its maximum employment objective and its symmetric 2 percent inflation objective. This assessment will take into account a wide range of information, including measures of labor market conditions, indicators of inflation pressures and inflation expectations, and readings on financial and international developments.</p>
+<p>To support the flow of credit to households and businesses, <strong>over coming months</strong> the Federal Reserve will ~~continue to purchase~~ <strong>increase its holdings of</strong> Treasury securities and agency residential and commercial mortgage-backed securities ~~in the amounts needed~~ <strong>at least at the current pace</strong> to ~~support~~ <strong>sustain</strong> smooth market functioning, thereby fostering effective transmission of monetary policy to broader financial conditions. In addition, the Open Market Desk will continue to offer large-scale overnight and term repurchase agreement operations. The Committee will closely monitor ~~market conditions~~ <strong>developments</strong> and is prepared to adjust its plans as appropriate.</p>
+<p>Voting for the monetary policy action were Jerome H. Powell, Chair; John C. Williams, Vice Chair; Michelle W. Bowman; Lael Brainard; Richard H. Clarida; Patrick Harker; Robert S. Kaplan; Neel Kashkari; Loretta J. Mester; and Randal K. Quarles.</p>
+<p>Implementation Note issued June 10, 2020</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"are inducing"</td>
+<td style="text-align: left;">"have induced"</td>
+<td style="text-align: left;">Shift from present continuous to present perfect; acknowledges the initial shock as a realized event rather than an ongoing onset.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"disruptions... impaired the flow of credit"</td>
+<td style="text-align: left;">"Financial conditions have improved"</td>
+<td style="text-align: left;">A critical pivot. The Fed is signaling that its emergency liquidity measures have successfully stabilized the financial plumbing.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"continue to purchase... in amounts needed"</td>
+<td style="text-align: left;">"increase its holdings... at least at the current pace"</td>
+<td style="text-align: left;">Transition from "emergency/discretionary" buying to "programmatic/predictable" Quantitative Easing (QE).</td>
+</tr>
+<tr>
+<td style="text-align: left;">"market conditions"</td>
+<td style="text-align: left;">"developments"</td>
+<td style="text-align: left;">Broadens the scope of monitoring beyond just financial markets to include the wider economic/health landscape.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+There is <strong>no shift</strong> in the characterization of inflation. The Committee maintains the phrase "muted inflation pressures" and reiterates its "symmetric 2 percent inflation objective." The Fed remains concerned that the shock is deflationary, justifying the continued accommodative stance.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+The shift from "are inducing" to "<strong>have induced</strong>" regarding job losses is subtle but important. It suggests the Committee views the initial "cliff-edge" drop in employment as having occurred, moving the focus toward the recovery phase, even while acknowledging that the crisis "will weigh heavily" in the near term.</p>
+<p><strong>Forward Guidance</strong><br />
+The most significant shift is in the <strong>Asset Purchase program</strong>. In April, the Fed was in "firefighting" mode, purchasing assets "in the amounts needed" (open-ended/reactive). By June, they shifted to a "predictable" framework: increasing holdings "<strong>at least at the current pace</strong>." This provides the market with a floor for liquidity and signals a commitment to sustained stimulus over the "coming months."</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee remained <strong>Dovish</strong>, but shifted from a tone of <strong>"Emergency Crisis Management"</strong> to <strong>"Sustained Accommodative Support."</strong> </p>
+<p>While the admission that "financial conditions have improved" could be read as a step toward normalization, it is countered by the formalization of the QE program ("at least at the current pace"). The Fed is essentially telling the market: <em>"The panic is over, but the pain is not; therefore, we are moving from emergency interventions to a long-term support regime."</em> The commitment to maintain rates at 0-1/4% until the economy has "weathered recent events" remains the primary dovish anchor.</p>
+</div>
+</body>
+</html>
