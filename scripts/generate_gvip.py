@@ -256,40 +256,56 @@ def fetch_holding_fundamentals(tickers: list[str]) -> dict:
 
 
 def fetch_mtum_holdings() -> dict:
-    """Fetch MTUM holdings from iShares XLS. Returns {ticker: weight_pct}."""
-    import io
-    import pandas as pd
+    """Fetch MTUM holdings from iShares SpreadsheetML. Returns {ticker: weight_pct}."""
+    from lxml import etree
     url = (
         "https://www.ishares.com/us/products/251614/ishares-msci-usa-momentum-factor-etf/"
         "1521942788811.ajax?fileType=xls&fileName=iShares-MSCI-USA-Momentum-Factor-ETF_fund&dataType=fund"
     )
     resp = requests.get(url, timeout=30, headers=HEADERS)
     resp.raise_for_status()
-    try:
-        df_raw = pd.read_excel(io.BytesIO(resp.content), header=None, engine="xlrd")
-    except Exception:
-        df_raw = pd.read_excel(io.BytesIO(resp.content), header=None, engine="openpyxl")
-    header_row = None
-    for i, row in df_raw.iterrows():
-        if any(str(v).strip().lower() == "ticker" for v in row):
-            header_row = i
-            break
-    if header_row is None:
-        print("  ⚠ MTUM: could not locate 'Ticker' header row", file=sys.stderr)
+    content = resp.content.lstrip(b"\xef\xbb\xbf")
+    root = etree.fromstring(content, etree.XMLParser(recover=True))
+    ns = {"ss": "urn:schemas-microsoft-com:office:spreadsheet"}
+    worksheets = root.findall(".//ss:Worksheet", ns)
+    holdings_ws = next(
+        (w for w in worksheets
+         if w.get("{urn:schemas-microsoft-com:office:spreadsheet}Name") == "Holdings"),
+        worksheets[1] if len(worksheets) > 1 else None,
+    )
+    if holdings_ws is None:
+        print("  ⚠ MTUM: Holdings worksheet not found", file=sys.stderr)
         return {}
-    df_raw.columns = df_raw.iloc[header_row].astype(str).str.strip()
-    df = df_raw.iloc[header_row + 1:].reset_index(drop=True)
-    weight_col = next((c for c in df.columns if "weight" in c.lower()), None)
-    if weight_col is None or "Ticker" not in df.columns:
-        print("  ⚠ MTUM: missing expected columns", file=sys.stderr)
+    rows = holdings_ws.find("ss:Table", ns).findall("ss:Row", ns)
+    ticker_col = weight_col = data_start = None
+    for i, row in enumerate(rows):
+        texts = [
+            (c.find("ss:Data", ns).text or "").strip()
+            for c in row.findall("ss:Cell", ns)
+            if c.find("ss:Data", ns) is not None
+        ]
+        if "Ticker" in texts:
+            ticker_col = texts.index("Ticker")
+            weight_col = next((j for j, t in enumerate(texts) if "Weight" in t), None)
+            data_start = i + 1
+            break
+    if ticker_col is None or weight_col is None:
+        print("  ⚠ MTUM: header row not found", file=sys.stderr)
         return {}
     result = {}
-    for _, row in df.iterrows():
-        tk = str(row["Ticker"]).strip()
+    for row in rows[data_start:]:
+        texts = [
+            (c.find("ss:Data", ns).text or "").strip()
+            for c in row.findall("ss:Cell", ns)
+            if c.find("ss:Data", ns) is not None
+        ]
+        if len(texts) <= max(ticker_col, weight_col):
+            continue
+        tk = texts[ticker_col]
         if not tk or tk.lower() in ("", "nan", "-"):
             continue
         try:
-            w = float(row[weight_col])
+            w = float(texts[weight_col])
             if w > 0:
                 result[tk] = round(w, 4)
         except (ValueError, TypeError):
