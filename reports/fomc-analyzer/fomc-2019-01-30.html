@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2019-01-30 vs 2018-12-19</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2019-01-30 vs 2018-12-19
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-12 10:42 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from December 19, 2018, and January 30, 2019. This transition represents a pivotal moment in the 2018-2019 cycle, marking the shift from an active tightening phase to a "wait-and-see" posture.</p>
+<hr />
+<h2>1. Redlined Statement (2019-01-30)</h2>
+<p>Information received since the Federal Open Market Committee met in ~~November~~ <strong>December</strong> indicates that the labor market has continued to strengthen and that economic activity has been rising at a ~~strong~~ <strong>solid</strong> rate. Job gains have been strong, on average, in recent months, and the unemployment rate has remained low. Household spending has continued to grow strongly, while growth of business fixed investment has moderated from its rapid pace earlier ~~in the year~~ <strong>last year</strong>. On a 12-month basis, both overall inflation and inflation for items other than food and energy remain near 2 percent. ~~Indicators of longer-term inflation expectations are little changed, on balance.~~ <strong>Although market-based measures of inflation compensation have moved lower in recent months, survey-based measures of longer-term inflation expectations are little changed.</strong></p>
+<p>Consistent with its statutory mandate, the Committee seeks to foster maximum employment and price stability. ~~The Committee judges that some further gradual increases in the target range for the federal funds rate will be consistent with sustained expansion of economic activity, strong labor market conditions, and inflation near the Committee's symmetric 2 percent objective over the medium term.~~ <strong>In support of these goals, the Committee decided to maintain the target range for the federal funds rate at 2-1/4 to 2-1/2 percent.</strong> ~~The Committee judges that risks to the economic outlook are roughly balanced, but will continue to monitor global economic and financial developments and assess their implications for the economic outlook.~~ <strong>The Committee continues to view sustained expansion of economic activity, strong labor market conditions, and inflation near the Committee's symmetric 2 percent objective as the most likely outcomes. In light of global economic and financial developments and muted inflation pressures, the Committee will be patient as it determines what future adjustments to the target range for the federal funds rate may be appropriate to support these outcomes.</strong></p>
+<p>In determining the timing and size of future adjustments to the target range for the federal funds rate, the Committee will assess realized and expected economic conditions relative to its maximum employment objective and its symmetric 2 percent inflation objective. This assessment will take into account a wide range of information, including measures of labor market conditions, indicators of inflation pressures and inflation expectations, and readings on financial and international developments.</p>
+<p>Voting for the FOMC monetary policy action were: [List of members updated].</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"strong rate" (economic activity)</td>
+<td style="text-align: left;">"solid rate"</td>
+<td style="text-align: left;"><strong>Downgrade.</strong> "Solid" is a softer descriptor than "strong," signaling a slight cooling in growth momentum.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Indicators of longer-term inflation expectations are little changed"</td>
+<td style="text-align: left;">"market-based measures... have moved lower"</td>
+<td style="text-align: left;"><strong>Cautionary.</strong> Acknowledges a decline in market-implied inflation, suggesting a risk of undershooting the 2% target.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"some further gradual increases... will be consistent"</td>
+<td style="text-align: left;">"decided to maintain the target range"</td>
+<td style="text-align: left;"><strong>Policy Pivot.</strong> Moves from an active hiking bias to a pause in rate increases.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"risks... are roughly balanced"</td>
+<td style="text-align: left;">"will be patient... in light of muted inflation pressures"</td>
+<td style="text-align: left;"><strong>Strategic Shift.</strong> Replaces "balanced risks" with a specific justification for caution ("muted inflation") and a commitment to "patience."</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>There is a notable shift toward concern regarding inflation undershooting. While the previous statement was brief and confident about expectations, the current statement explicitly differentiates between <strong>survey-based</strong> (stable) and <strong>market-based</strong> (falling) measures. The introduction of the phrase <strong>"muted inflation pressures"</strong> is a critical signal that the Committee is no longer solely worried about overheating, but is now concerned about a lack of inflationary momentum.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The characterization of economic growth has been subtly downgraded from <strong>"strong"</strong> to <strong>"solid."</strong> While the labor market is still described as strengthening, the change in growth terminology suggests the Committee perceives a deceleration in the broader economy, likely linked to the mentioned "global economic and financial developments."</p>
+<h3>Forward Guidance</h3>
+<p>The forward guidance has undergone a complete transformation. The December statement provided a clear roadmap for <strong>"further gradual increases."</strong> The January statement deletes this entirely, replacing it with the word <strong>"patient."</strong> In central bank parlance, "patient" is a strong signal that the hiking cycle has paused indefinitely until new data emerges.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted decisively <strong>Dovish</strong>. </p>
+<p>The transition from "further gradual increases" to "maintaining" the rate and being "patient" represents a fundamental pivot in policy trajectory. By downgrading growth descriptors (strong $\rightarrow$ solid) and explicitly acknowledging "muted inflation pressures" and falling market-based inflation expectations, the FOMC has signaled that the risks to the economy have shifted from "balanced" to skewed toward the downside. The removal of the hiking bias in favor of a "patient" stance indicates a strategic retreat from the tightening cycle.</p>
+</div>
+</body>
+</html>
