@@ -1,37 +1,47 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (7 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (8 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** May 11, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: May 12, 2026**
+**Subject: Fed District Research Briefing – Supply Shocks and Economic Divergence**
 
-I have reviewed the latest research from the Fed districts. While some papers focus on structural community finance, the prevailing theme is a dangerous divergence in the real economy coupled with emerging systemic risks in the shadow banking sector.
+I have reviewed the latest research from the Federal Reserve districts. We are seeing a clear pattern of emerging geopolitical volatility colliding with a deeply fragmented domestic economy. Here are the most analytically significant findings:
 
-The following publications are the most analytically significant for our current positioning:
+1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
+The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI infrastructure. This is critical because if the AI capex cycle is throttled by supply constraints rather than demand, we may see a deceleration in productivity gains and a valuation correction for Big Tech.
 
-1. **[NY] Stress and Strain from NBFIs to Banks:** This highlights a critical contagion channel from Non-Bank Financial Institutions (NBFIs) to the regulated banking sector, specifically citing the Tricolor and First Brands bankruptcies. It suggests that "shadow bank" distress is no longer contained and could trigger a credit contraction or liquidity crisis within traditional banks.
+2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
+The March 2026 energy price surge—driven by the closure of the Strait of Hormuz—is impacting households unevenly. This suggests that energy shocks are no longer aggregate taxes on consumption but are instead accelerating the divide between high-income resilience and low-income fragility.
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump:** This analyzes the impact of the March 2026 energy price surge following the closure of the Strait of Hormuz. It confirms that energy shocks are hitting lower-income cohorts disproportionately, which will likely accelerate a slowdown in aggregate consumption despite headline resilience.
+3. **[NY] Explaining/Tracking the K-Shaped Economy**
+Combined research indicates that aggregate real spending growth is being driven almost exclusively by high-income households, masking a stagnation or decline in lower-tier consumption. For our macro outlook, this means "headline" GDP and retail sales figures are misleading and likely overstate the health of the broader consumer base.
 
-3. **[NY] Explaining the K-Shaped Economy: What’s Behind the Divide?:** Using Economic Heterogeneity Indicators (EHIs), this research proves that recent retail growth is almost exclusively driven by high-income households. This implies that "strong" consumer data is a mirage of wealth concentration rather than broad-based economic health.
+4. **[NY] Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freezes, signal mounting instability in the Non-Bank Financial Institution (NBFI) sector. We must monitor the contagion risk as these stresses migrate from the "shadow" sector back into the regulated banking system via credit linkages.
 
-4. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?:** This companion piece emphasizes that the lack of shared improvement across society creates a fragile foundation for growth. For policy, this suggests the Fed may face a "policy error" trap: keeping rates high to fight inflation driven by the wealthy, while inadvertently crushing the lower-income consumer.
+5. **[NY] In What Ways Has U.S. Trade with China Changed?**
+Despite aggressive policy shifts, the overall U.S.-China trade balance remains surprisingly sticky. This suggests that "de-risking" is resulting in trade diversion (routing through third countries) rather than true decoupling, limiting the effectiveness of trade policy as a tool for reducing the deficit.
 
-5. **[NY] In What Ways Has U.S. Trade with China Changed?:** The finding that trade balances remain largely unchanged despite aggressive policy shifts suggests that trade diversion is offsetting direct decoupling. This indicates that geopolitical tensions are rearranging supply chains without providing the expected macroeconomic "win" in terms of deficit reduction.
-
-**Synthesis:** The U.S. economy is currently characterized by a deceptive "K-shaped" resilience, where high-income spending masks a precarious collapse in lower-income consumption exacerbated by energy shocks. Simultaneously, the migration of risk into NBFIs is creating a systemic vulnerability that could transform a consumer slowdown into a full-scale financial stability event.
+**Synthesis:**
+The U.S. economy is currently characterized by a dangerous divergence: a high-income-driven consumption engine and an AI boom that are both highly vulnerable to geopolitical supply shocks. Simultaneously, the migration of financial stress from NBFIs to banks creates a systemic fragility that could amplify the impact of these external shocks.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 6
+
+### (cached) [Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?](https://libertystreeteconomics.newyorkfed.org/2026/05/will-mounting-supply-chain-strains-hamstring-the-ai-investment-boom/)
+**Published:** 2026-05-11 | **Authors:** 
+
+The paper examines how geopolitical conflicts in the Middle East create global supply shocks that threaten U.S. economic stability. It specifically analyzes the risk of physical shortages and price increases impacting the AI investment cycle via Asian supply chains.
+
+**Tags:** supply chain · AI & economy · inflation · trade · international
 
 ### (cached) [Stress and Strain from NBFIs to Banks](https://libertystreeteconomics.newyorkfed.org/2026/05/stress-and-strain-from-nbfis-to-banks/)
 **Published:** 2026-05-08 | **Authors:** 
@@ -92,5 +102,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 7
-- Total cache size: 7 items
+- Already cached: 8
+- Total cache size: 8 items
