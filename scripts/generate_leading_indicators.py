@@ -9,6 +9,7 @@ NBER recession shading. Output: reports/leading-indicators/index.html
 """
 
 import os
+import time
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -26,22 +27,33 @@ os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 fred = Fred(api_key=FRED_API_KEY)
 
 
-def get_fred(series_id, years=10):
-    """Fetch a single FRED series. Returns a Series with DatetimeIndex."""
+def get_fred(series_id, years=10, retries=3, delay=10):
     start = date.today() - relativedelta(years=years)
-    s = fred.get_series(series_id, observation_start=start)
-    return s.dropna()
+    for attempt in range(retries):
+        try:
+            return fred.get_series(series_id, observation_start=start).dropna()
+        except Exception as e:
+            if attempt < retries - 1:
+                print(f"  ⚠️  {series_id}: {e} — retry {attempt + 1}/{retries - 1}")
+                time.sleep(delay)
+            else:
+                raise
 
 
-def get_fred_multi(series_ids, years=10):
-    """Fetch multiple FRED series. Returns a DataFrame."""
+def get_fred_multi(series_ids, years=10, retries=3, delay=10):
     start = date.today() - relativedelta(years=years)
     frames = {}
     for sid in series_ids:
-        try:
-            frames[sid] = fred.get_series(sid, observation_start=start).dropna()
-        except Exception as e:
-            print(f"  ⚠️  {sid}: {e}")
+        for attempt in range(retries):
+            try:
+                frames[sid] = fred.get_series(sid, observation_start=start).dropna()
+                break
+            except Exception as e:
+                if attempt < retries - 1:
+                    print(f"  ⚠️  {sid}: {e} — retry {attempt + 1}/{retries - 1}")
+                    time.sleep(delay)
+                else:
+                    print(f"  ⚠️  {sid}: {e} — giving up after {retries} attempts")
     return pd.DataFrame(frames)
 
 
