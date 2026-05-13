@@ -19,10 +19,13 @@ from fredapi import Fred
 warnings.filterwarnings("ignore")
 
 # ── config ──────────────────────────────────────────────────────────────────
-FRED_API_KEY = os.environ.get("FRED_API_KEY")
-START_HIST   = "2018-01-01"   # baseline for z-score normalization
-START_DISPLAY = "2025-01-01"
-END_DISPLAY   = "2026-04-30"
+FRED_API_KEY    = os.environ.get("FRED_API_KEY")
+START_HIST      = "2016-01-01"   # fetch from here (covers 2017 display)
+BASELINE_START  = "2018-01-01"   # z-score normalization window start
+BASELINE_END    = "2024-12-31"   # z-score normalization window end
+START_DISPLAY   = "2017-01-01"   # earliest selectable date in the UI
+END_DISPLAY     = "2026-04-30"   # latest date shown
+DEFAULT_START_YEAR = 2025        # default view on page load
 
 OUTPUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -42,9 +45,9 @@ def to_monthly(s: pd.Series) -> pd.Series:
     return s.resample("MS").last().ffill(limit=1)
 
 
-def zscore(s: pd.Series, baseline_end: str = "2024-12-31") -> pd.Series:
-    """Z-score relative to 2018–2024 baseline."""
-    base = s[s.index <= baseline_end]
+def zscore(s: pd.Series) -> pd.Series:
+    """Z-score relative to BASELINE_START–BASELINE_END window."""
+    base = s[(s.index >= BASELINE_START) & (s.index <= BASELINE_END)]
     mu, sigma = base.mean(), base.std()
     if sigma == 0 or np.isnan(sigma):
         return pd.Series(np.nan, index=s.index)
@@ -228,145 +231,142 @@ def zscore_to_color(z: float) -> float:
     return 0.5 - clamped / 5.0  # 0 when z=2.5, 1 when z=-2.5
 
 
-def build_matrix(data: dict, months: pd.DatetimeIndex):
-    """Build z-score matrix (rows=indicators, cols=months)."""
-    n_rows = len(ROWS)
-    n_cols = len(months)
-    z_matrix  = np.full((n_rows, n_cols), np.nan)
-    col_matrix = np.full((n_rows, n_cols), 0.5)  # neutral default
+def interp_color(v: float) -> str:
+    """Map [0,1] value → hex color via COLORSCALE."""
+    v = max(0.0, min(1.0, v))
+    for k in range(len(COLORSCALE) - 1):
+        lo, c1 = COLORSCALE[k]
+        hi, c2 = COLORSCALE[k + 1]
+        if lo <= v <= hi:
+            t = (v - lo) / (hi - lo)
+            r1, g1, b1 = int(c1[1:3],16), int(c1[3:5],16), int(c1[5:7],16)
+            r2, g2, b2 = int(c2[1:3],16), int(c2[3:5],16), int(c2[5:7],16)
+            return "#{:02x}{:02x}{:02x}".format(
+                int(r1 + t*(r2-r1)), int(g1 + t*(g2-g1)), int(b1 + t*(b2-b1))
+            )
+    return COLORSCALE[-1][1]
 
-    for i, (_, _, key) in enumerate(ROWS):
-        if key not in data:
-            continue
-        s = data[key]
-        zs = zscore(s)
-        for j, m in enumerate(months):
-            # Find nearest month
-            diffs = abs(s.index - m)
-            idx = diffs.argmin()
-            if diffs[idx].days > 45:
-                continue
-            z_val = zs.iloc[idx]
-            if np.isnan(z_val):
-                continue
-            z_matrix[i, j]  = round(float(zs.iloc[idx]), 2)
-            col_matrix[i, j] = zscore_to_color(float(zs.iloc[idx]))
-    return z_matrix, col_matrix
+
+def build_json_data(data: dict) -> list:
+    """
+    Build JSON-serialisable list of row objects covering the full display range.
+    Each row: {label, cat, months: ["YYYY-MM",...], colors: ["#hex",...], zscores: [float|null,...]}
+    """
+    import json
+    months = pd.date_range(START_DISPLAY, END_DISPLAY, freq="MS")
+    month_strs = [m.strftime("%Y-%m") for m in months]
+
+    rows_out = []
+    for label, cat, key in ROWS:
+        colors  = ["#f5f0e8"] * len(months)   # neutral default
+        zscores = [None]       * len(months)
+
+        if key in data:
+            s  = data[key]
+            zs = zscore(s)
+            for j, m in enumerate(months):
+                diffs = abs(s.index - m)
+                idx   = diffs.argmin()
+                if diffs[idx].days > 45:
+                    continue
+                z_val = zs.iloc[idx]
+                if np.isnan(z_val):
+                    continue
+                z_f = round(float(z_val), 2)
+                zscores[j] = z_f
+                colors[j]  = interp_color(zscore_to_color(z_f))
+
+        rows_out.append({"label": label, "cat": cat,
+                         "colors": colors, "zscores": zscores})
+
+    return month_strs, rows_out
 
 
 def render(data: dict) -> str:
-    months = pd.date_range(START_DISPLAY, END_DISPLAY, freq="MS")
-    z_matrix, col_matrix = build_matrix(data, months)
+    import json as _json
 
-    col_labels = [m.strftime("%b") for m in months]
-    # Group year headers
-    year_groups = {}
-    for j, m in enumerate(months):
-        year_groups.setdefault(str(m.year), []).append(j)
-
-    row_labels = [r[0] for r in ROWS]
-    cat_labels  = [r[1] for r in ROWS]
-
-    # Build cell colors from col_matrix → hex via colorscale interpolation
-    def interp_color(v: float) -> str:
-        """Interpolate through COLORSCALE."""
-        v = max(0.0, min(1.0, v))
-        for k in range(len(COLORSCALE) - 1):
-            lo, c1 = COLORSCALE[k]
-            hi, c2 = COLORSCALE[k + 1]
-            if lo <= v <= hi:
-                t = (v - lo) / (hi - lo)
-                r1, g1, b1 = int(c1[1:3],16), int(c1[3:5],16), int(c1[5:7],16)
-                r2, g2, b2 = int(c2[1:3],16), int(c2[3:5],16), int(c2[5:7],16)
-                r = int(r1 + t*(r2-r1))
-                g = int(g1 + t*(g2-g1))
-                b = int(b1 + t*(b2-b1))
-                return f"#{r:02x}{g:02x}{b:02x}"
-        return COLORSCALE[-1][1]
-
-    # Build HTML table
     now_str = datetime.now().strftime("%Y-%m-%d")
+    month_strs, rows_json = build_json_data(data)
 
-    # Year header cells
-    year_header_cells = ""
-    col_groups = {}
-    for j, m in enumerate(months):
-        col_groups.setdefault(m.year, []).append(j)
-    for year, cols in sorted(col_groups.items()):
-        year_header_cells += f'<th colspan="{len(cols)}" class="yr-header">{year}</th>'
-
-    # Month sub-header
-    month_cells = "".join(f'<th class="mo-header">{col_labels[j]}</th>' for j in range(len(months)))
-
-    # Data rows
-    table_rows = ""
+    # Category rowspan map (fixed — doesn't change with date range)
+    cat_rowspans = {}
     prev_cat = None
-    for i, (label, cat, _) in enumerate(ROWS):
-        row_html = f'<td class="ind-label">{label}</td>'
-        # category column (rowspan logic)
+    for i, (_, cat, _) in enumerate(ROWS):
         if cat and cat != prev_cat:
-            # count consecutive rows with same category
             span = sum(1 for r in ROWS[i:] if r[1] == cat)
-            row_html += f'<td class="cat-label" rowspan="{span}">{cat}</td>'
+            cat_rowspans[i] = (cat, span)
             prev_cat = cat
         elif not cat:
             prev_cat = None
-        for j in range(len(months)):
-            v = col_matrix[i, j]
-            z = z_matrix[i, j]
-            color = interp_color(v)
-            tooltip = f"z={z:.2f}" if not np.isnan(z) else "n/a"
-            row_html += f'<td class="cell" style="background:{color}" title="{tooltip}"></td>'
-        table_rows += f"<tr>{row_html}</tr>\n"
+
+    # Serialise to JS
+    js_months    = _json.dumps(month_strs)
+    js_rows      = _json.dumps(rows_json)
+    js_cat_spans = _json.dumps({str(k): list(v) for k, v in cat_rowspans.items()})
+    js_default   = DEFAULT_START_YEAR
+
+    # Build year options for the selector
+    years = sorted({int(m[:4]) for m in month_strs})
+    year_options = "\n".join(
+        f'<option value="{y}"{" selected" if y == DEFAULT_START_YEAR else ""}>{y}</option>'
+        for y in years
+    )
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inflation Pressures Heat Map 2025–26 | boquin.xyz</title>
+<title>Inflation Pressures Heat Map | boquin.xyz</title>
 <style>
   body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; }}
-  .container {{ max-width: 1100px; margin: 0 auto; }}
+  .container {{ max-width: 1200px; margin: 0 auto; }}
   h1 {{ text-align: center; color: #0a3161; font-size: 1.6rem; margin-bottom: 4px; }}
-  .subtitle {{ text-align: center; color: #1a6b9a; font-size: 1.1rem; margin-bottom: 20px; }}
-  .source-note {{ font-size: 0.72rem; color: #666; text-align: center; margin-bottom: 16px; }}
-  table {{ border-collapse: collapse; width: 100%; background: #fff; border: 1px solid #ccc; }}
-  .ind-label {{ font-size: 0.78rem; padding: 5px 8px; text-align: left; white-space: nowrap; min-width: 260px; border-bottom: 1px solid #e0e0e0; }}
-  .cat-label {{ font-size: 0.8rem; font-weight: bold; padding: 5px 8px; text-align: center; border-left: 2px solid #0a3161; border-bottom: 1px solid #e0e0e0; vertical-align: middle; white-space: pre-line; min-width: 60px; }}
-  .yr-header {{ background: #0a3161; color: white; text-align: center; font-size: 0.85rem; padding: 6px 4px; }}
-  .mo-header {{ background: #1a6b9a; color: white; text-align: center; font-size: 0.72rem; padding: 4px 2px; min-width: 38px; }}
-  .cell {{ width: 38px; height: 28px; border: 1px solid rgba(255,255,255,0.4); cursor: default; }}
-  .legend {{ display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; font-size: 0.75rem; color: #444; }}
-  .leg-box {{ width: 18px; height: 18px; border-radius: 2px; }}
+  .subtitle {{ text-align: center; color: #1a6b9a; font-size: 1.1rem; margin-bottom: 12px; }}
+  .controls {{ text-align: center; margin-bottom: 14px; }}
+  .controls label {{ font-size: 0.85rem; color: #444; margin-right: 6px; }}
+  .controls select {{ font-size: 0.85rem; padding: 3px 8px; border: 1px solid #aaa;
+                      border-radius: 4px; background: #fff; cursor: pointer; }}
+  .source-note {{ font-size: 0.72rem; color: #666; text-align: center; margin-bottom: 14px; line-height: 1.5; }}
+  .tbl-wrap {{ overflow-x: auto; }}
+  table {{ border-collapse: collapse; background: #fff; border: 1px solid #ccc; }}
+  .ind-label {{ font-size: 0.78rem; padding: 5px 8px; text-align: left; white-space: nowrap;
+                min-width: 260px; border-bottom: 1px solid #e0e0e0; }}
+  .cat-label {{ font-size: 0.8rem; font-weight: bold; padding: 5px 8px; text-align: center;
+                border-left: 2px solid #0a3161; border-bottom: 1px solid #e0e0e0;
+                vertical-align: middle; white-space: pre-line; min-width: 62px; }}
+  .yr-header {{ background: #0a3161; color: white; text-align: center;
+                font-size: 0.85rem; padding: 6px 4px; }}
+  .mo-header {{ background: #1a6b9a; color: white; text-align: center;
+                font-size: 0.72rem; padding: 4px 2px; min-width: 36px; }}
+  .cell {{ width: 36px; height: 26px; border: 1px solid rgba(255,255,255,0.4); cursor: default; }}
+  .legend {{ display: flex; align-items: center; justify-content: center;
+             gap: 8px; margin-top: 12px; font-size: 0.75rem; color: #444; flex-wrap: wrap; }}
+  .leg-box {{ width: 18px; height: 18px; border-radius: 2px; flex-shrink: 0; }}
   .updated {{ text-align: right; font-size: 0.7rem; color: #999; margin-top: 6px; }}
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Applying to Current Moment</h1>
-  <div class="subtitle">Inflation Pressures Heat Map, 2025–26</div>
-  <div class="source-note">
-    Replicates SF Fed (Daly, Hoover Institution, May 8 2026). Colors = z-score vs 2018–2024 baseline.
-    Dark red = strongly inflationary; dark green = disinflationary.
-    *SF Fed ISM index proxied with SF Fed supply-driven PCE (wp2026-10 pending public release).
-    †NY Fed labor market tightness proxied with JOLTS quits rate (HPW index has no direct download).
+  <h1>Inflation Pressures Heat Map</h1>
+  <div class="subtitle">SF Fed — Daly, Hoover Institution (May 8 2026)</div>
+
+  <div class="controls">
+    <label for="startYear">Show from:</label>
+    <select id="startYear" onchange="renderTable(+this.value)">
+{year_options}
+    </select>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th class="ind-label" style="background:#0a3161;color:white">Indicator</th>
-        {year_header_cells}
-      </tr>
-      <tr>
-        <th class="ind-label" style="background:#1a6b9a"></th>
-        {month_cells}
-      </tr>
-    </thead>
-    <tbody>
-{table_rows}
-    </tbody>
-  </table>
+
+  <div class="source-note">
+    Colors = z-score vs {BASELINE_START[:4]}–{BASELINE_END[:4]} baseline.
+    Dark red = strongly inflationary &nbsp;|&nbsp; Dark green = disinflationary.<br>
+    *SF Fed ISM proxied with SF Fed supply-driven PCE (wp2026-10 pending public release).
+    &nbsp;†NY Fed tightness proxied with JOLTS quits rate (HPW has no direct download).
+  </div>
+
+  <div class="tbl-wrap"><table id="heatmap"></table></div>
+
   <div class="legend">
     <div class="leg-box" style="background:#8B1A1A"></div> Strongly inflationary &nbsp;
     <div class="leg-box" style="background:#D97B7B"></div> Moderately inflationary &nbsp;
@@ -374,8 +374,70 @@ def render(data: dict) -> str:
     <div class="leg-box" style="background:#9DC98D"></div> Moderately disinflationary &nbsp;
     <div class="leg-box" style="background:#2D6E2D"></div> Strongly disinflationary
   </div>
-  <div class="updated">Updated: {now_str} | Sources: FRED, NY Fed, KC Fed, Cleveland Fed, SF Fed, yfinance</div>
+  <div class="updated">Updated: {now_str} | Sources: FRED, NY Fed, KC Fed, Cleveland Fed, SF Fed</div>
 </div>
+
+<script>
+const MONTHS   = {js_months};
+const ROWS     = {js_rows};
+const CAT_SPAN = {js_cat_spans};  // {{rowIndex: [catLabel, span]}}
+
+function renderTable(startYear) {{
+  // Filter column indices
+  const cols = MONTHS
+    .map((m, i) => ({{m, i}}))
+    .filter(({{m}}) => +m.slice(0,4) >= startYear);
+
+  // Build year groups for header
+  const yearGroups = {{}};
+  cols.forEach(({{m, i}}) => {{
+    const y = m.slice(0,4);
+    if (!yearGroups[y]) yearGroups[y] = [];
+    yearGroups[y].push(i);
+  }});
+
+  let html = '<thead>';
+
+  // Row 1: "Indicator" + year spans
+  html += '<tr>';
+  html += '<th class="ind-label" style="background:#0a3161;color:white">Indicator</th>';
+  Object.keys(yearGroups).sort().forEach(y => {{
+    html += `<th class="yr-header" colspan="${{yearGroups[y].length}}">${{y}}</th>`;
+  }});
+  html += '</tr>';
+
+  // Row 2: blank + month labels
+  html += '<tr>';
+  html += '<th class="ind-label" style="background:#1a6b9a"></th>';
+  cols.forEach(({{m}}) => {{
+    const mo = new Date(m + '-02').toLocaleString('en', {{month: 'short'}});
+    html += `<th class="mo-header">${{mo}}</th>`;
+  }});
+  html += '</tr></thead><tbody>';
+
+  // Data rows
+  ROWS.forEach((row, ri) => {{
+    html += '<tr>';
+    html += `<td class="ind-label">${{row.label}}</td>`;
+    if (CAT_SPAN[ri]) {{
+      const [cat, span] = CAT_SPAN[ri];
+      html += `<td class="cat-label" rowspan="${{span}}">${{cat}}</td>`;
+    }}
+    cols.forEach(({{i}}) => {{
+      const color = row.colors[i];
+      const z     = row.zscores[i];
+      const tip   = z !== null ? 'z=' + z.toFixed(2) : 'n/a';
+      html += `<td class="cell" style="background:${{color}}" title="${{tip}}"></td>`;
+    }});
+    html += '</tr>';
+  }});
+
+  html += '</tbody>';
+  document.getElementById('heatmap').innerHTML = html;
+}}
+
+renderTable({js_default});
+</script>
 </body>
 </html>"""
     return html
