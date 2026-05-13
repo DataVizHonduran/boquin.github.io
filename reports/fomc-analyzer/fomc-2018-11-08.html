@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2018-11-08 vs 2018-09-26</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2018-11-08 vs 2018-09-26
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-13 10:31 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from September 26, 2018, and November 8, 2018.</p>
+<hr />
+<h2>1. Redlined Statement (2018-11-08)</h2>
+<p>Information received since the Federal Open Market Committee met in ~~August~~ <strong>September</strong> indicates that the labor market has continued to strengthen and that economic activity has been rising at a strong rate. Job gains have been strong, on average, in recent months, and the unemployment rate has ~~stayed low~~ <strong>declined</strong>. Household spending ~~and business fixed investment have grown strongly~~ <strong>has continued to grow strongly, while growth of business fixed investment has moderated from its rapid pace earlier in the year</strong>. On a 12-month basis, both overall inflation and inflation for items other than food and energy remain near 2 percent. Indicators of longer-term inflation expectations are little changed, on balance.</p>
+<p>Consistent with its statutory mandate, the Committee seeks to foster maximum employment and price stability. The Committee expects that further gradual increases in the target range for the federal funds rate will be consistent with sustained expansion of economic activity, strong labor market conditions, and inflation near the Committee's symmetric 2 percent objective over the medium term. Risks to the economic outlook appear roughly balanced.</p>
+<p>In view of realized and expected labor market conditions and inflation, the Committee decided to ~~raise~~ <strong>maintain</strong> the target range for the federal funds rate ~~to~~ <strong>at</strong> 2 to 2-1/4 percent.</p>
+<p>In determining the timing and size of future adjustments to the target range for the federal funds rate, the Committee will assess realized and expected economic conditions relative to its maximum employment objective and its symmetric 2 percent inflation objective. This assessment will take into account a wide range of information, including measures of labor market conditions, indicators of inflation pressures and inflation expectations, and readings on financial and international developments.</p>
+<p>Voting for the FOMC monetary policy action were: Jerome H. Powell, Chairman; John C. Williams, Vice Chairman; Thomas I. Barkin; Raphael W. Bostic; Lael Brainard; Richard H. Clarida; ~~Esther L. George~~ <strong>Mary C. Daly</strong>; Loretta J. Mester; and Randal K. Quarles.</p>
+<p>Implementation Note issued ~~September 26, 2018~~ <strong>November 8, 2018</strong></p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"stayed low"</td>
+<td style="text-align: left;">"declined"</td>
+<td style="text-align: left;">Slight upgrade to labor market strength; suggests tightening slack.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"and business fixed investment have grown strongly"</td>
+<td style="text-align: left;">"while growth of business fixed investment has moderated..."</td>
+<td style="text-align: left;"><strong>Critical.</strong> Signals a cooling in capital expenditure (CapEx), a leading indicator of growth.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"raise... to"</td>
+<td style="text-align: left;">"maintain... at"</td>
+<td style="text-align: left;"><strong>Primary Action.</strong> Shift from an active tightening cycle to a pause.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Esther L. George"</td>
+<td style="text-align: left;">"Mary C. Daly"</td>
+<td style="text-align: left;">Change in voting membership.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+There is <strong>zero shift</strong> in the inflation narrative. The language regarding both headline and core inflation remaining "near 2 percent" and long-term expectations being "little changed" is identical. This suggests that inflation is not the primary driver of the current policy pause; rather, the Committee is comfortable with the current price trajectory.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+The Committee presents a bifurcated view of the economy. The labor market is characterized as even stronger than before (shifting from "stayed low" to "declined"). However, the growth narrative has shifted from a blanket "strong" growth in spending and investment to a nuanced view: consumer spending remains robust, but <strong>business fixed investment is moderating</strong>. This is a subtle warning sign that the "engine" of corporate expansion is slowing.</p>
+<p><strong>Forward Guidance</strong><br />
+The forward guidance remains remarkably stable. The Committee kept the phrase "further gradual increases," signaling that the long-term trajectory is still upward. However, the decision to <strong>maintain</strong> the rate rather than <strong>raise</strong> it indicates a shift toward a "wait-and-see" approach, increasing the weight of data-dependency regarding the moderation in business investment.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted <strong>Dovish</strong> relative to the previous statement. </p>
+<p>While the overarching framework remains "hawkish" (maintaining the intent for "further gradual increases"), the immediate action is a pivot from tightening to a pause. The most telling evidence is the specific call-out of moderating business fixed investment. By explicitly noting this slowdown while choosing to maintain rates, the FOMC is signaling that it is reacting to cooling economic headwinds. The shift from "raising" to "maintaining" is the definitive dovish signal in this release.</p>
+</div>
+</body>
+</html>
