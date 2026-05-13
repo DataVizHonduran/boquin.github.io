@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (12 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: May 2026 (16 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,30 +8,57 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: May 12, 2026**
+**Date: May 13, 2026**
 **Subject: Strategic Briefing – Recent ECB/NCB Research Analysis**
 
-I have filtered the latest research from the ECB and national central banks. While several papers focus on granular micro-trends, the following selections are the most analytically significant for our macro positioning and risk models.
+After reviewing the latest research cycle from the Eurosystem, I have filtered out the academic exercises to focus on the publications with direct implications for our macro projections and risk pricing.
 
-1. **Gas market shocks and inflation expectations [ECB]:** This research utilizes a BVAR model to quantify how natural gas volatility translates into realized inflation and shifted expectations. For our team, this underscores that energy shocks are not merely transitory "noise" but can structurally anchor inflation expectations higher, potentially forcing the ECB to maintain a "higher-for-longer" stance even after spot prices dip.
+1. **Supply chain uncertainty, energy prices, and inflation [ECB]:** This research establishes that the pass-through of energy shocks to headline inflation is non-linear and intensifies during periods of high supply chain uncertainty. For our models, this means energy price spikes are more inflationary in "fragile" regimes, suggesting the ECB may remain more hawkish than expected if geopolitical tensions disrupt logistics.
 
-2. **Geopolitical risk in the euro area: Measurement and transmission [DBB]:** The Bundesbank is refining how geopolitical risk is quantified and how it transmits through the real economy. As we navigate an increasingly fragmented global trade environment, this framework is critical for adjusting our risk premiums on Eurozone equities and sovereign spreads.
+2. **Gas market shocks and inflation expectations [ECB]:** By utilizing a BVAR model, this paper clarifies how gas shocks translate into long-term inflation expectations. This is critical for our duration positioning, as it suggests that energy volatility can "de-anchor" expectations more rapidly than previously thought, potentially forcing the ECB into preemptive tightening.
 
-3. **Ex Machina: financial stability in the age of AI [ECB]:** This paper examines the systemic risks posed by LLM and Q-learning investors, specifically regarding pro-cyclicality during mutual fund redemptions. It suggests that AI-driven trading could accelerate liquidity crises, meaning we must tighten our monitoring of "flash crash" correlations in Eurozone financial assets.
+3. **Ex Machina: financial stability in the age of AI [ECB]:** This study analyzes the behavior of LLM and Q-learning investors during mutual fund redemption shocks, highlighting new systemic risks. As AI-driven trading scales, we must account for "algorithmic herding" which could amplify liquidity crises and increase volatility in Eurozone equity and bond markets.
 
-4. **Digital banks and monetary policy pass-through [ECB]:** The finding that digital banks pass on policy rates differently than traditional incumbents suggests a fragmentation in the transmission mechanism. This implies that the ECB’s rate hikes/cuts may have uneven effects on credit demand depending on the digitalization of the banking sector in specific member states.
+4. **Geopolitical risk in the euro area: Measurement and transmission [DBB]:** This Bundesbank paper provides a new framework for quantifying how geopolitical shocks transmit through the Eurozone economy. It allows us to better price the "geopolitical risk premium" into our sovereign spreads and corporate credit valuations across the bloc.
 
-5. **Inequality and the global transmission of US monetary policy [ECB]:** This study highlights how domestic income inequality dictates the severity of US Fed spillovers to Eurozone GDP. This is a vital lens for our FX and growth forecasts, as it suggests that high-inequality Eurozone economies are more vulnerable to US monetary tightening.
+5. **Digital banks and monetary policy pass-through [ECB]:** The finding that digital banks pass on policy rate changes differently than traditional incumbents suggests a fragmentation in the transmission mechanism. This implies that the ECB’s rate cuts or hikes may have uneven effects on credit demand, depending on the digitalization level of the national banking sector.
 
-6. **Physical climate risk and lending activity [ECB]:** By linking Copernicus flood maps with AnaCredit data, the ECB is demonstrating a direct link between physical climate events and credit quality deterioration. This signals a coming shift in supervisory pressure, likely leading to tighter lending standards and higher capital requirements for banks with high geographic exposure to climate-risk zones.
+6. **Inequality and the global transmission of US monetary policy [ECB]:** This paper demonstrates that income inequality dictates how US Fed policy spillovers impact Eurozone GDP. This adds a new layer to our "Fed-watch" analysis, suggesting that the Eurozone's sensitivity to US rates is not uniform but varies based on domestic wealth distribution.
 
-**Synthesis:**
-The current research trajectory indicates a shift from broad inflation targeting toward managing "complex volatility," specifically the intersection of AI-driven financial instability and geopolitical shocks. We should expect the ECB to integrate non-traditional risk metrics—such as climate-spatial data and AI behavior—into their systemic stability framework, potentially creating new headwinds for bank valuations.
+**Synthesis:** The research indicates a shift toward "state-dependent" macroeconomics, where the impact of energy and US policy is conditioned by supply chain stability and social inequality. Simultaneously, the emergence of AI-driven financial instability and fragmented digital transmission suggests that traditional monetary policy levers may be becoming less predictable.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 10
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 14
+
+### (cached) [The role of judgement in supervisory scores and additional capital requirements assigned to banks](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3233~9e3ea8a772.en.pdf)
+**Published:** 2026-05-13 | **Authors:** 
+
+The paper examines the impact of supervisory judgement on SREP scores and Pillar 2 capital requirements for euro area banks. It finds that supervisors actively adjust weights to shape the capital requirements banks must maintain.
+
+**Tags:** banking · financial stability · eurozone · banking union · credit
+
+### (cached) [The role of biodiversity risk in shaping bank lending decisions](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3232~0420309406.en.pdf)
+**Published:** 2026-05-13 | **Authors:** 
+
+This study analyzes how biodiversity risk influences bank lending, finding that higher-risk borrowers face significantly higher loan spreads. The results suggest banks primarily use pricing mechanisms rather than volume restrictions to manage this risk.
+
+**Tags:** banking · credit · climate & transition · green finance · financial stability
+
+### (cached) [Wildfire cashflow shocks](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3231~8c7317f33a.en.pdf)
+**Published:** 2026-05-12 | **Authors:** 
+
+The research evaluates the financial impact of wildfires on hotel industry firms in Portugal using a difference-in-differences approach. It focuses on how these environmental shocks affect firm cashflows and subsequent financial decision-making.
+
+**Tags:** climate & transition · GDP growth · credit · financial stability · productivity
+
+### (cached) [Supply chain uncertainty, energy prices, and inflation](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3230~cd08ddc4c6.en.pdf)
+**Published:** 2026-05-12 | **Authors:** 
+
+The authors find that the pass-through of energy prices to inflation is amplified during periods of high supply chain uncertainty. The study suggests that energy prices serve as a proxy for logistical constraints in both the U.S. and the euro area.
+
+**Tags:** inflation · supply chains · eurozone · monetary policy · GDP growth
 
 ### (cached) [ECB exchange rate communication](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3229~be05936106.en.pdf)
 **Published:** 2026-05-11 | **Authors:** 
@@ -124,5 +151,5 @@ This study develops a framework for measuring geopolitical risk within the euro 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 12
-- Total cache size: 12 items
+- Already cached: 16
+- Total cache size: 16 items
