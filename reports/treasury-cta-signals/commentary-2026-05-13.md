@@ -1,19 +1,21 @@
 ## CTA Positioning Analysis: 2026-05-13
 
 ### 1. Duration Crowding
-* **Concentration:** CTAs are net long across the entire curve, with the heaviest concentration in the **2Y (+21.2)** and **5Y (+19.8)** tenors.
-* **Signal:** The preference for the front-end suggests a "pivot-play" or recessionary hedge. Yields are under downward pressure, but the heavy 2Y loading creates a vulnerability to any hawkish surprise.
+* **Concentration:** CTAs are net long across the entire curve, with the heaviest crowding in the **front-end (2Y: +21.2)** and **belly (5Y: +19.8)**.
+* **Signal:** The preference for shorter tenors suggests a "pivot trade" or a bet on falling short-term rates. This creates a vulnerability to "bull-flattening" exhaustion; any hawkish surprise will trigger rapid unwinding of 2Y/5Y longs.
 
 ### 2. Yield Curve Context
-* **10Y-2Y (+0.47bps) & 30Y-2Y (+1.03bps):** The curve is steep. CTAs are effectively "long the belly/front" while remaining less aggressive on the 30Y. This suggests they are riding a bull-steepening trend, betting that short-term rates will fall faster than long-term term premiums.
+* **Spreads:** The curve is steep (10Y-2Y: +47bps; 30Y-2Y: +103bps).
+* **Positioning Alignment:** CTAs are long the 2Y more aggressively than the 30Y in Fast Mode. This indicates they are chasing the "steepening" trend by longing the short end as it catches up to the long end, rather than betting on a curve inversion.
 
 ### 3. Fast vs. Slow Divergences
-* **Conviction Gap:** Fast mode is significantly more aggressive (+15 to +21) than slow mode (+8 to +10).
-* **Implication:** Trend conviction is currently driven by short-term momentum. The lack of alignment with slow-mode signals suggests this is a "tactical rally" rather than a structural regime shift. A failure to break lower in yields could trigger rapid fast-mode exits.
+* **Conviction Gap:** Fast Mode (+15 to +21) is significantly more aggressive than Slow Mode (+8 to +10).
+* **Implication:** Trend conviction is superficial. The "slow" trend is barely positive, while "fast" signals are overheating. This divergence typically precedes a mean-reversion event or a sharp correction in duration.
 
 ### 4. Exhaustion Signals
-* **High-Conviction Ratio:** Fast mode has 34 high-conviction signals vs. only 13 in slow mode. 
-* **Signal:** The divergence between fast-mode aggression and slow-mode hesitation is a classic **exhaustion warning**. The trade is becoming "crowded" at the margins, increasing the risk of a sharp mean-reversion (yield spike).
+* **High-Conviction Decay:** Only 13 signals in Slow Mode meet the $\ge 60$ score threshold, compared to 34 in Fast Mode.
+* **Verdict:** The trade is "top-heavy." The lack of slow-mode confirmation suggests the current rally is driven by momentum rather than fundamental trend shifts, signaling high exhaustion risk.
 
 ### 5. Actionable Watch-list
-* **Trigger:** Watch for a break above **4.50% on the 10Y**. This would likely flip fast-mode signals to neutral/short, triggering a cascade of CTA liquidation in the 2Y/5Y space.
+* **Trigger:** A break above **4.50% on the 10Y**.
+* **Action:** Monitor for a "cascade" of Fast Mode exits. If 10Y yields spike, expect a violent liquidation of the crowded 2Y/5Y long positions.
