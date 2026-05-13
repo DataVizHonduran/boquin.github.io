@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (8 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -8,33 +8,42 @@
 
 **To: Investment Committee**
 **From: Senior Economist**
-**Date: May 12, 2026**
-**Subject: Fed District Research Briefing – Supply Shocks and Economic Divergence**
+**Date: May 13, 2026**
+**Subject: Fed District Research Briefing – Macro Risk Assessment**
 
-I have reviewed the latest research from the Federal Reserve districts. We are seeing a clear pattern of emerging geopolitical volatility colliding with a deeply fragmented domestic economy. Here are the most analytically significant findings:
+I have reviewed the latest research from the Federal Reserve districts. While several papers touch on structural community finance and labor dynamics, the current macro environment is being dominated by a specific set of geopolitical and financial stability shocks. 
 
-1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
-The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI infrastructure. This is critical because if the AI capex cycle is throttled by supply constraints rather than demand, we may see a deceleration in productivity gains and a valuation correction for Big Tech.
+Here are the most analytically significant publications for our current positioning:
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The March 2026 energy price surge—driven by the closure of the Strait of Hormuz—is impacting households unevenly. This suggests that energy shocks are no longer aggregate taxes on consumption but are instead accelerating the divide between high-income resilience and low-income fragility.
+1. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
+The closure of the Strait of Hormuz has pushed energy prices to a four-year high, creating a regressive tax on consumers. This is critical because it suggests that while aggregate inflation may be the headline focus, the actual economic drag is concentrated among low-income households, increasing the risk of a consumption cliff.
 
-3. **[NY] Explaining/Tracking the K-Shaped Economy**
-Combined research indicates that aggregate real spending growth is being driven almost exclusively by high-income households, masking a stagnation or decline in lower-tier consumption. For our macro outlook, this means "headline" GDP and retail sales figures are misleading and likely overstate the health of the broader consumer base.
+2. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
+The Middle East conflict has triggered a third global supply shock in six years, specifically threatening the hardware pipeline for AI infrastructure. If the AI capex cycle is throttled by supply constraints rather than demand, we may see a valuation correction in Big Tech despite strong software fundamentals.
 
-4. **[NY] Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freezes, signal mounting instability in the Non-Bank Financial Institution (NBFI) sector. We must monitor the contagion risk as these stresses migrate from the "shadow" sector back into the regulated banking system via credit linkages.
+3. **[NY] Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, combined with Blue Owl’s redemption freeze, signal a contagion risk moving from Non-Bank Financial Institutions (NBFIs) to the regulated banking sector. This suggests that "shadow banking" stresses are no longer isolated and could lead to a tightening of credit conditions.
 
-5. **[NY] In What Ways Has U.S. Trade with China Changed?**
-Despite aggressive policy shifts, the overall U.S.-China trade balance remains surprisingly sticky. This suggests that "de-risking" is resulting in trade diversion (routing through third countries) rather than true decoupling, limiting the effectiveness of trade policy as a tool for reducing the deficit.
+4. **[NY] Tracking/Explaining the K-Shaped Economy**
+Recent data confirms that aggregate spending growth is being driven almost exclusively by high-income households, masking a deeper slowdown in the broader consumer base. This divergence suggests that "top-line" GDP growth is a misleading indicator of economic health and that the economy is more fragile than the headline numbers imply.
+
+5. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
+Household debt has ticked up to $18.8 trillion, with a notable return of student loan defaults in Q1 2026. This indicates that the "excess savings" buffer from the pandemic era has finally evaporated for the lower-to-middle class, increasing the probability of a systemic dip in discretionary spending.
 
 **Synthesis:**
-The U.S. economy is currently characterized by a dangerous divergence: a high-income-driven consumption engine and an AI boom that are both highly vulnerable to geopolitical supply shocks. Simultaneously, the migration of financial stress from NBFIs to banks creates a systemic fragility that could amplify the impact of these external shocks.
+The U.S. economy is currently experiencing a dangerous convergence of a geopolitical energy shock and a widening "K-shaped" divergence in consumer resilience. We are seeing a transition where systemic risk is migrating from the shadow banking sector into the real economy, necessitating a more defensive posture on consumer cyclicals and a cautious approach to AI-driven growth projections.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 6
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 7
+
+### (cached) [Federal Student Loan Defaults Return After Pandemic Pause](https://libertystreeteconomics.newyorkfed.org/2026/05/federal-student-loan-defaults-return-after-pandemic-pause/)
+**Published:** 2026-05-12 | **Authors:** 
+
+Household debt increased to $18.8 trillion in 2026:Q1, driven by rises in mortgage, HELOC, and auto balances. The data highlights a return of student loan defaults following the expiration of pandemic-era pauses.
+
+**Tags:** credit · financial stability · housing · real estate · consumer spending
 
 ### (cached) [Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?](https://libertystreeteconomics.newyorkfed.org/2026/05/will-mounting-supply-chain-strains-hamstring-the-ai-investment-boom/)
 **Published:** 2026-05-11 | **Authors:** 
@@ -102,5 +111,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 8
-- Total cache size: 8 items
+- Already cached: 9
+- Total cache size: 9 items
