@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-04">
+    <meta name="release-date" content="2026-05-13">
+    <title>Producer Price Index (PPI) — 2026-05-13</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Producer Price Index (PPI)</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-05-13 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>258.392</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.83σ | 10Y Range:</p>
+            <p class="card-period">2025-04</p>
+        </div>
+        <div class="card">
+            <h3>146.385</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.93σ | 10Y Range:</p>
+            <p class="card-period">2025-04</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">PPI All Commodities
+                <span class="mu-chart-latest">283.764</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+                        datasets: [{
+                            data: [255.313, 255.914, 257.321, 255.463, 252.682, 253.081, 253.211, 253.423, 257.36, 259.498, 258.525, 258.392, 258.678, 260.491, 262.358, 262.11, 262.054, 260.591, 261.914, 261.333, 263.537, 269.909, 276.42, 283.764],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">PPI Final Demand ex Food & Energy
+                <span class="mu-chart-latest">154.056</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+                        datasets: [{
+                            data: [142.411, 143.263, 143.186, 143.81, 144.442, 144.913, 144.908, 145.369, 146.179, 146.429, 146.691, 146.385, 146.947, 147.115, 148.281, 148.001, 148.767, 149.219, 149.594, 150.35, 151.577, 152.135, 152.481, 154.056],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: May 2026</strong></p>
+<p><strong>Subject: PPI Analysis: Accelerating Input Costs Signal Late-Cycle Overheating</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The April 2026 PPI print represents a significant escalation in inflationary pressures, with both headline and core measures hitting 10-year nominal peaks. The data reveals a sharp, non-linear acceleration in producer prices starting in Q1 2026, suggesting that the previous period of relative stability has given way to a potent inflationary impulse.</p>
+
+<p>The policy signal is clear: the "last mile" of inflation is proving elusive, and the current trajectory is inconsistent with a restrictive or neutral stance. The rapid ascent in core PPI suggests that price pressures are now broad-based and structural, significantly increasing the risk of a second-wave inflationary spike.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Parabolic Acceleration:</strong> Headline PPI has surged from 263.54 in January to 283.76 in April, a massive 7.7% increase in just three months.</li>
+<li>  <strong>Core Persistence:</strong> PPI Final Demand ex Food & Energy (Core) has reached its 10-year ceiling (154.06), confirming that the current spike is not merely a result of volatile commodity swings.</li>
+<li>  <strong>Extreme Regime Positioning:</strong> With both headline and core indices at the 100th percentile of their 10-year ranges, we are operating in an unprecedented price environment relative to the last decade.</li>
+<li>  <strong>Momentum Shift:</strong> The month-on-month jump from March (276.42) to April (283.76) represents a ~2.6% monthly increase in headline PPI, a violent acceleration compared to the modest gains seen throughout 2025.</li>
+<li>  <strong>Margin Compression Risk:</strong> The velocity of these input cost increases suggests that firms may soon be forced to pass costs to consumers, threatening a renewed surge in CPI.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The rapid rise in producer prices, particularly the jump to the 100th percentile, typically reflects overheating aggregate demand. The data suggests a growth environment that is operating well above potential, where supply constraints are failing to keep pace with demand.</p>
+
+<p><strong>(ii) Labor Market:</strong> While direct employment data is not provided, the parabolic move in PPI is a classic lead indicator of a tight labor market. Such price acceleration is usually supported by strong nominal wage growth, as firms attempt to maintain margins amidst rising input costs.</p>
+
+<p><strong>(iii) Inflation:</strong> Inflation is currently in an acceleration phase. Core PPI (ex Food & Energy) rose from 151.58 in January to 154.06 in April (+1.6% in 90 days), indicating that underlying inflationary pressures are intensifying and becoming entrenched.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>The current regime is classified as <strong>Late-Cycle Overheating</strong>. </p>
+
+<p>The 10-year Z-scores (+1.83$\sigma$ for Headline and +1.93$\sigma$ for Core) are approaching the critical $|2.0|$ threshold, signaling a statistically significant departure from the long-term mean. Combined with the 100th percentile ranking, this is not a "mid-cycle pause" or a "regime shift" toward stability, but rather a textbook example of late-cycle price instability where capacity constraints trigger exponential price increases.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Forecast: Hawkish Pivot / Immediate Rate Hike</strong></p>
+
+<p>The balance of risks has shifted decisively toward inflation. The velocity of the April print renders a "wait-and-see" approach untenable. We expect the Federal Reserve to move aggressively to tighten financial conditions to preempt a wage-price spiral. </p>
+
+<p><strong>Timing/Direction:</strong> We forecast a 25-50bps rate hike at the next FOMC meeting. The Fed cannot allow a 7.7% quarterly surge in headline PPI to go unanswered without risking a loss of credibility. The primary risk is now an "overshoot" where the Fed is forced to hike more aggressively than the market currently prices to break the momentum of this late-cycle spike.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- PRODUCER PRICE INDEX (PPI): CYCLE-AWARE SUMMARY ---
+
+SERIES: PPI All Commodities (index) [PPIACO]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.83σ | 10Y Range: [185.30, 283.76]
+DATA:
+  2025-04       258.392
+  2025-05       258.678
+  2025-06       260.491
+  2025-07       262.358
+  2025-08       262.110
+  2025-09       262.054
+  2025-10       260.591
+  2025-11       261.914
+  2025-12       261.333
+  2026-01       263.537
+  2026-02       269.909
+  2026-03       276.420
+  2026-04       283.764
+----------------------------------------
+SERIES: PPI Final Demand ex Food & Energy (index, SA) [PPIFES]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.93σ | 10Y Range: [109.90, 154.06]
+DATA:
+  2025-04       146.385
+  2025-05       146.947
+  2025-06       147.115
+  2025-07       148.281
+  2025-08       148.001
+  2025-09       148.767
+  2025-10       149.219
+  2025-11       149.594
+  2025-12       150.350
+  2026-01       151.577
+  2026-02       152.135
+  2026-03       152.481
+  2026-04       154.056
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
