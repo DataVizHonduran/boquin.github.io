@@ -1,37 +1,32 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (10 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Economist**
-**Date: May 13, 2026**
-**Subject: Fed District Research Briefing – Macro Risk Assessment**
+Team, I’ve reviewed the latest Fed district research. We are seeing a dangerous convergence of supply-side shocks and deepening structural fragility in the consumer base. 
 
-I have reviewed the latest research from the Federal Reserve districts. While several papers touch on structural community finance and labor dynamics, the current macro environment is being dominated by a specific set of geopolitical and financial stability shocks. 
+Here are the most analytically significant pieces for our current positioning:
 
-Here are the most analytically significant publications for our current positioning:
+1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
+The Middle East conflict has triggered a third global supply shock in six years, threatening the hardware pipeline essential for AI scaling. If the "AI productivity miracle" is delayed by physical supply constraints, we must revise our long-term growth forecasts and the valuation premiums on Big Tech.
 
-1. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The closure of the Strait of Hormuz has pushed energy prices to a four-year high, creating a regressive tax on consumers. This is critical because it suggests that while aggregate inflation may be the headline focus, the actual economic drag is concentrated among low-income households, increasing the risk of a consumption cliff.
+2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
+The closure of the Strait of Hormuz has pushed energy prices to a four-year high, but the impact is asymmetric. This "K-shaped" energy shock acts as a regressive tax, disproportionately crushing low-income consumption while leaving high-income spending largely intact.
 
-2. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
-The Middle East conflict has triggered a third global supply shock in six years, specifically threatening the hardware pipeline for AI infrastructure. If the AI capex cycle is throttled by supply constraints rather than demand, we may see a valuation correction in Big Tech despite strong software fundamentals.
+3. **[NY] Tracking/Explaining the K-Shaped Economy**
+Combined, these reports confirm that aggregate spending growth is a mirage driven almost exclusively by high-income households. This divergence suggests that the economy is more fragile than headline GDP implies, as the bottom half of the consumer base is hitting a wall.
 
-3. **[NY] Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, combined with Blue Owl’s redemption freeze, signal a contagion risk moving from Non-Bank Financial Institutions (NBFIs) to the regulated banking sector. This suggests that "shadow banking" stresses are no longer isolated and could lead to a tightening of credit conditions.
+4. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
+Household debt is climbing again, with a notable spike in student loan defaults in 2026:Q1. This indicates that the "excess savings" buffer from the pandemic era is officially exhausted for the lower-to-middle class, increasing the risk of a credit-driven contraction.
 
-4. **[NY] Tracking/Explaining the K-Shaped Economy**
-Recent data confirms that aggregate spending growth is being driven almost exclusively by high-income households, masking a deeper slowdown in the broader consumer base. This divergence suggests that "top-line" GDP growth is a misleading indicator of economic health and that the economy is more fragile than the headline numbers imply.
-
-5. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
-Household debt has ticked up to $18.8 trillion, with a notable return of student loan defaults in Q1 2026. This indicates that the "excess savings" buffer from the pandemic era has finally evaporated for the lower-to-middle class, increasing the probability of a systemic dip in discretionary spending.
+5. **[NY] Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This "shadow banking" instability could create a contagion loop that forces the Fed into an unplanned liquidity injection.
 
 **Synthesis:**
-The U.S. economy is currently experiencing a dangerous convergence of a geopolitical energy shock and a widening "K-shaped" divergence in consumer resilience. We are seeing a transition where systemic risk is migrating from the shadow banking sector into the real economy, necessitating a more defensive posture on consumer cyclicals and a cautious approach to AI-driven growth projections.
+We are witnessing a precarious "bifurcated economy" where headline resilience masks severe distress in low-income households and the NBFI sector. The combination of a geopolitical energy shock and systemic credit fragility suggests a higher probability of a hard landing than the current market is pricing in.
 
 ---
 
@@ -88,7 +83,14 @@ This paper investigates the distribution of real consumer spending growth since 
 **Tags:** consumer spending · GDP growth · financial stability · recession · inflation
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 1
+**Content Type:** Economic Briefs | **New:** 0 of 2
+
+### (cached) [Al Broaddus, Productivity Growth and Monetary Policy in the 1990s](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15)
+**Published:** 2026-05-13 | **Authors:** 
+
+The paper examines the relationship between productivity growth and monetary policy decisions during the 1990s. It specifically analyzes how productivity gains influence FOMC deliberations and draws parallels to the potential impact of artificial intelligence on trend growth.
+
+**Tags:** monetary policy · GDP growth · AI & economy · inflation · interest rates
 
 ### (cached) [Community Development Financial Institutions as a Means to Overcome Market Failures](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-14)
 **Published:** 2026-05-06 | **Authors:** 
@@ -111,5 +113,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 9
-- Total cache size: 9 items
+- Already cached: 10
+- Total cache size: 10 items
