@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2017-05-03 vs 2017-03-15</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2017-05-03 vs 2017-03-15
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-14 10:20 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from March 15 and May 3, 2017. This period is characterized by a "pause" in the hiking cycle following a surprising dip in Q1 GDP growth.</p>
+<hr />
+<h2>1. Redlined Statement (2017-05-03)</h2>
+<p>Information received since the Federal Open Market Committee met in ~~February~~ <strong>March</strong> indicates that the labor market has continued to strengthen ~~and that economic activity has continued to expand at a moderate pace~~ <strong>even as growth in economic activity slowed</strong>. Job gains ~~remained~~ <strong>were</strong> solid~~ and~~<strong>, on average,</strong> in recent months, and the unemployment rate ~~was little changed~~ <strong>declined</strong>. Household spending ~~has continued to rise moderately~~ <strong>rose only modestly, but the fundamentals underpinning the continued growth of consumption remained solid</strong>. Business fixed investment ~~appears to have~~ firmed. Inflation ~~has increased in recent quarters, moving~~ <strong>measured on a 12-month basis recently has been running</strong> close to the Committee's 2 percent longer-run objective~~;~~<strong>.</strong> Excluding energy and food ~~prices~~, ~~inflation was little changed and~~ <strong>consumer prices declined in March and inflation</strong> continued to run somewhat below 2 percent. Market-based measures of inflation compensation remain low; survey-based measures of longer-term inflation expectations are little changed, on balance.</p>
+<p>Consistent with its statutory mandate, the Committee seeks to foster maximum employment and price stability. The Committee <strong>views the slowing in growth during the first quarter as likely to be transitory and</strong> continues to expect that, with gradual adjustments in the stance of monetary policy, economic activity will expand at a moderate pace, labor market conditions will strengthen somewhat further, and inflation will stabilize around 2 percent over the medium term. Near-term risks to the economic outlook appear roughly balanced. The Committee continues to closely monitor inflation indicators and global economic and financial developments.</p>
+<p>In view of realized and expected labor market conditions and inflation, the Committee decided to ~~raise~~ <strong>maintain</strong> the target range for the federal funds rate ~~to~~ <strong>at</strong> 3/4 to 1 percent. The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.</p>
+<p>[... <em>Forward Guidance and Balance Sheet sections remain unchanged</em> ...]</p>
+<p>Voting for the FOMC monetary policy action were: Janet L. Yellen, Chair; William C. Dudley, Vice Chairman; Lael Brainard; Charles L. Evans; Stanley Fischer; Patrick Harker; Robert S. Kaplan; ~~Jerome H. Powell; and Daniel K. Tarullo~~ <strong>Neel Kashkari; and Jerome H. Powell</strong>.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"economic activity has continued to expand at a moderate pace"</td>
+<td style="text-align: left;">"even as growth in economic activity slowed"</td>
+<td style="text-align: left;"><strong>High.</strong> Explicit acknowledgment of a growth slowdown (Q1 GDP miss).</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Household spending has continued to rise moderately"</td>
+<td style="text-align: left;">"rose only modestly, but the fundamentals... remained solid"</td>
+<td style="text-align: left;"><strong>Medium.</strong> Softening of consumption data, but adding a "buffer" to prevent panic.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"inflation was little changed" (core)</td>
+<td style="text-align: left;">"consumer prices declined in March"</td>
+<td style="text-align: left;"><strong>Medium.</strong> Signals a recent dip in core price momentum.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"raise the target range"</td>
+<td style="text-align: left;">"maintain the target range"</td>
+<td style="text-align: left;"><strong>Critical.</strong> Shift from a hiking move to a policy hold.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Jerome H. Powell; and Daniel K. Tarullo"</td>
+<td style="text-align: left;">"Neel Kashkari; and Jerome H. Powell"</td>
+<td style="text-align: left;"><strong>Low/Medium.</strong> Neel Kashkari moves from "Dissenting" to "Voting for," showing consensus on the pause.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee has shifted from a narrative of <em>increasing</em> inflation ("Inflation has increased in recent quarters") to one of <em>stagnation or slight decline</em> ("consumer prices declined in March"). While the headline remains "close to 2%," the specific mention of a monthly decline in core prices suggests the Committee is seeing a loss of momentum, justifying the decision to hold rates.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>There is a stark divergence emerging between the labor market and GDP. The labor market is described as continuing to strengthen (with the unemployment rate actually "declining"), but this is now contrasted with a slowing in economic activity. The addition of the phrase <strong>"likely to be transitory"</strong> regarding the Q1 slowdown is a classic central bank signal: they acknowledge the bad data but are instructing the market not to overreact or expect a pivot to cuts.</p>
+<h3>Forward Guidance</h3>
+<p>Interestingly, the "Forward Guidance" section (the fourth paragraph) remains <strong>identical</strong>. By keeping the language regarding "gradual increases" and "data-dependency" unchanged, the Committee is signaling that the <em>trajectory</em> of policy remains upward, even if the <em>timing</em> of the next move has been delayed.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted <strong>Dovish</strong> in the immediate term, but remains <strong>Neutral-to-Hawkish</strong> in its long-term outlook. </p>
+<p>The decision to <strong>maintain</strong> rather than <strong>raise</strong> the federal funds rate is a clear dovish move. Furthermore, the admission that growth slowed and core prices declined provides the empirical justification for this pause. However, the tone is "Cautiously Dovish" because the Committee explicitly labeled the growth slowdown as "transitory" and left the forward guidance for future hikes completely intact. They are pausing to let the data clear, not changing the destination.</p>
+</div>
+</body>
+</html>
