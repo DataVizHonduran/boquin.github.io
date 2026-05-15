@@ -28,7 +28,7 @@ from huggingface_hub import InferenceClient
 # Config
 # ---------------------------------------------------------------------------
 
-MODEL_ID     = "meta-llama/Llama-3.3-70B-Instruct"
+MODEL_ID     = "google/gemma-4-26B-A4B-it"
 REPORT_ROOT  = Path("reports/options-chain")
 MARKER_START = "<!-- options-commentary-start -->"
 MARKER_END   = "<!-- options-commentary-end -->"
@@ -470,7 +470,7 @@ def build_commentary_block(commentary_md: str, generated_at: str) -> str:
   <div style="background:white;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);padding:30px;">
     <div style="border-left:4px solid #007bff;padding-left:16px;margin-bottom:20px;">
       <h2 style="color:#333;margin:0 0 4px;">AI Commentary</h2>
-      <p style="color:#666;font-size:0.85em;margin:0;">Generated {generated_at} UTC &nbsp;&middot;&nbsp; meta-llama/Llama-3.3-70B-Instruct</p>
+      <p style="color:#666;font-size:0.85em;margin:0;">Generated {generated_at} UTC &nbsp;&middot;&nbsp; google/gemma-4-26B-A4B-it</p>
     </div>
     <div style="line-height:1.7;color:#444;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
       <style>
