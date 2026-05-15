@@ -43,4 +43,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/options-chain/
-          git diff --staged --quiet || (git commit -m "Options Chain ${{ github.event.inputs.ticker }} — $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Options Chain ${{ github.event.inputs.ticker }} — $(date +'%Y-%m-%d') 🤖"
+          for i in 1 2 3; do
+            git pull --rebase --autostash && git push && break
+            echo "Push attempt $i failed — retrying in 15s..."
+            git rebase --abort 2>/dev/null || true
+            sleep 15
+          done
