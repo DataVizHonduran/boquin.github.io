@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2015-10-28 vs 2015-09-17</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2015-10-28 vs 2015-09-17
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-15 10:32 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from September 17 and October 28, 2015. This period was critical as the Committee was navigating the "liftoff" phase from zero-bound interest rates.</p>
+<hr />
+<h2>1. Redlined Statement (2015-10-28)</h2>
+<p>Information received since the Federal Open Market Committee met in ~~July~~ <strong>September</strong> suggests that economic activity ~~is~~ <strong>has been</strong> expanding at a moderate pace. Household spending and business fixed investment have been increasing ~~moderately~~ <strong>at solid rates in recent months</strong>, and the housing sector has improved further; however, net exports have been soft. ~~The labor market continued to improve, with solid job gains and declining unemployment.~~ <strong>The pace of job gains slowed and the unemployment rate held steady.</strong> Nonetheless, labor market indicators, on balance, show that underutilization of labor resources has diminished since early this year. Inflation has continued to run below the Committee's longer-run objective, partly reflecting declines in energy prices and in prices of non-energy imports. Market-based measures of inflation compensation moved ~~lower~~ <strong>slightly lower</strong>; survey-based measures of longer-term inflation expectations have remained stable.</p>
+<p>Consistent with its statutory mandate, the Committee seeks to foster maximum employment and price stability. ~~Recent global economic and financial developments may restrain economic activity somewhat and are likely to put further downward pressure on inflation in the near term.~~ The Committee expects that, with appropriate policy accommodation, economic activity will expand at a moderate pace, with labor market indicators continuing to move toward levels the Committee judges consistent with its dual mandate. The Committee continues to see the risks to the outlook for economic activity and the labor market as nearly balanced but is monitoring ~~developments abroad~~ <strong>global economic and financial developments</strong>. Inflation is anticipated to remain near its recent low level in the near term but the Committee expects inflation to rise gradually toward 2 percent over the medium term as the labor market improves further and the transitory effects of declines in energy and import prices dissipate. The Committee continues to monitor inflation developments closely.</p>
+<p>To support continued progress toward maximum employment and price stability, the Committee today reaffirmed its view that the current 0 to 1/4 percent target range for the federal funds rate remains appropriate. In determining ~~how long to maintain this target range~~ <strong>whether it will be appropriate to raise the target range at its next meeting</strong>, the Committee will assess progress--both realized and expected--toward its objectives of maximum employment and 2 percent inflation. This assessment will take into account a wide range of information, including measures of labor market conditions, indicators of inflation pressures and inflation expectations, and readings on financial and international developments. The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen some further improvement in the labor market and is reasonably confident that inflation will move back to its 2 percent objective over the medium term.</p>
+<p>[...Remaining text on reinvestment and balanced approach remains unchanged...]</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"increasing moderately"</td>
+<td style="text-align: left;">"increasing at solid rates in recent months"</td>
+<td style="text-align: left;"><strong>Bullish Growth:</strong> Upgrades the characterization of domestic demand.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"labor market continued to improve... declining unemployment"</td>
+<td style="text-align: left;">"pace of job gains slowed and the unemployment rate held steady"</td>
+<td style="text-align: left;"><strong>Bearish Labor:</strong> Acknowledges a cooling in the employment trend.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Recent global... developments may restrain... put further downward pressure"</td>
+<td style="text-align: left;">[Removed entirely]</td>
+<td style="text-align: left;"><strong>Reduced Risk:</strong> De-emphasizes the immediate threat of global headwinds.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"how long to maintain this target range"</td>
+<td style="text-align: left;">"whether it will be appropriate to raise the target range at its next meeting"</td>
+<td style="text-align: left;"><strong>High Significance:</strong> Shifts from an open-ended timeline to a specific "next meeting" window.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee remains cautious but slightly more optimistic. The change from "moved lower" to "<strong>moved slightly lower</strong>" regarding market-based inflation compensation is a subtle but important nuance. It suggests that the downward pressure on inflation expectations is decelerating, reducing the "deflationary scare" present in the previous statement.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>There is a notable divergence here. The Committee is upgrading its view of <strong>Growth</strong> (moving from "moderate" to "solid rates" for spending and investment), but downgrading its view of the <strong>Labor Market</strong> (acknowledging slowing job gains). This suggests the Committee sees the economy as fundamentally strong, but the labor market—a key trigger for rate hikes—is hitting a plateau.</p>
+<h3>Forward Guidance</h3>
+<p>This is the most aggressive shift in the document. The previous statement was vague about the timing of the first hike ("In determining how long to maintain..."). The current statement explicitly points to the <strong>"next meeting."</strong> This transforms the guidance from a general set of conditions to a specific calendar event, signaling that the Committee is now actively debating a hike for the December meeting.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted <strong>Hawkish</strong>. </p>
+<p>While the acknowledgment of slowing job gains is technically dovish, it is heavily outweighed by two factors: the upgrade of spending/investment to "solid rates" and, most critically, the explicit reference to the "next meeting" for a potential rate hike. By narrowing the window of deliberation from an indefinite period to a single meeting, the FOMC has significantly increased the probability of imminent policy tightening. The removal of the warning regarding global headwinds further suggests the Committee feels more confident in the domestic economy's resilience.</p>
+</div>
+</body>
+</html>

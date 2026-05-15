@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2015-06-17 vs 2015-04-29</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2015-06-17 vs 2015-04-29
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-15 10:37 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from April 29 and June 17, 2015. This period represents a critical phase in the "liftoff" preparation, where the Committee was weighing a sluggish Q1 against a recovering labor market.</p>
+<hr />
+<h2>1. Redlined Statement (2015-06-17)</h2>
+<p>Information received since the Federal Open Market Committee met in ~~March~~ <strong>April</strong> suggests that ~~economic growth slowed during the winter months, in part reflecting transitory factors~~ <strong>economic activity has been expanding moderately after having changed little during the first quarter</strong>. The pace of job gains ~~moderated~~ <strong>picked up</strong> while the unemployment rate remained steady. ~~A range of labor market indicators suggests that underutilization of labor resources was little changed.~~ <strong>On balance, a range of labor market indicators suggests that underutilization of labor resources diminished somewhat.</strong> Growth in household spending ~~declined; households' real incomes rose strongly, partly reflecting earlier declines in energy prices, and consumer sentiment remains high~~ <strong>has been moderate</strong> and the housing sector ~~remained slow~~ <strong>has shown some improvement</strong>; however, business fixed investment ~~softened~~ <strong>and net exports stayed soft</strong>. ~~exports declined.~~ Inflation continued to run below the Committee's longer-run objective, partly reflecting earlier declines in energy prices and decreasing prices of non-energy imports<strong>; energy prices appear to have stabilized</strong>. Market-based measures of inflation compensation remain low; survey-based measures of longer-term inflation expectations have remained stable.</p>
+<p>Consistent with its statutory mandate, the Committee seeks to foster maximum employment and price stability. ~~Although growth in output and employment slowed during the first quarter,~~ the Committee ~~continues to~~ expects that, with appropriate policy accommodation, economic activity will expand at a moderate pace, with labor market indicators continuing to move toward levels the Committee judges consistent with its dual mandate. The Committee continues to see the risks to the outlook for economic activity and the labor market as nearly balanced. Inflation is anticipated to remain near its recent low level in the near term, but the Committee expects inflation to rise gradually toward 2 percent over the medium term as the labor market improves further and the transitory effects of ~~declines~~ <strong>earlier declines</strong> in energy and import prices dissipate. The Committee continues to monitor inflation developments closely.</p>
+<p>[...Remaining sections on Federal Funds Rate, Balance Sheet, and Long-run Normalization remain unchanged...]</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"economic growth slowed during the winter months"</td>
+<td style="text-align: left;">"expanding moderately after having changed little during the first quarter"</td>
+<td style="text-align: left;"><strong>Positive Pivot:</strong> Shifts the narrative from a "slowdown" to a "recovery" from a flat Q1.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"job gains moderated" / "underutilization... little changed"</td>
+<td style="text-align: left;">"job gains picked up" / "underutilization... diminished somewhat"</td>
+<td style="text-align: left;"><strong>Bullish Labor:</strong> Direct signal that the labor market is improving, moving closer to the "liftoff" threshold.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"housing sector remained slow"</td>
+<td style="text-align: left;">"housing sector has shown some improvement"</td>
+<td style="text-align: left;"><strong>Sectoral Strength:</strong> Indicates broadening of the recovery beyond just services/consumption.</td>
+</tr>
+<tr>
+<td style="text-align: left;">(No mention of energy price stability)</td>
+<td style="text-align: left;">"energy prices appear to have stabilized"</td>
+<td style="text-align: left;"><strong>Inflation Floor:</strong> Suggests the downward pressure on CPI from oil is ending, clearing a path for inflation to rise.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee remains cautious, but the tone has shifted from describing a decline to identifying a floor. The addition of <strong>"energy prices appear to have stabilized"</strong> is the most critical phrase here. By noting that the primary headwind to inflation (collapsing oil prices) is neutralizing, the Fed is signaling that the "transitory" drag is ending, making the path back to 2% more plausible.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>There is a marked upgrade in the assessment of the real economy. The shift from "moderated" job gains to <strong>"picked up"</strong> and the observation that underutilization has <strong>"diminished somewhat"</strong> indicates that the labor market is strengthening. The Committee has effectively "looked past" the weak first quarter, characterizing it as a period of little change rather than a sustained slowdown.</p>
+<h3>Forward Guidance</h3>
+<p>The forward guidance remains <strong>identical</strong> in text. The "thresholds" for raising rates (further improvement in labor and reasonable confidence in inflation) have not been altered. However, the <em>factual</em> descriptions in the first paragraph suggest the economy is moving closer to meeting those thresholds.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Modestly Hawkish</strong></p>
+<p>While the Committee did not change its policy rate or its formal guidance, the statement is <strong>modestly hawkish</strong> due to the significant upgrade in the economic assessment. By upgrading the labor market ("picked up") and noting the stabilization of energy prices, the Fed is checking off the prerequisites for a rate hike. The removal of the language regarding the "winter slowdown" suggests the Committee is no longer concerned about a growth recession, thereby reducing the perceived need for indefinite accommodation. This is a "clearing the decks" statement—preparing the markets for a potential move in the coming months.</p>
+</div>
+</body>
+</html>
