@@ -57,11 +57,10 @@ def build_payload(df):
 
     angles = [(d - 1) / 365 * 360 for d in range(1, 366)]
 
-    # smoothed percentile curves
+    # raw (unsmoothed) percentile curves
     pct = {}
     for p in PCTS:
-        raw = grp.quantile(p / 100).reindex(range(1, 366)).values.astype(float)
-        pct[f"p{p}"] = smooth_circular(raw).tolist()
+        pct[f"p{p}"] = grp.quantile(p / 100).reindex(range(1, 366)).values.astype(float).tolist()
 
     # 9 pre-computed band polygons
     bands = {}
@@ -77,11 +76,10 @@ def build_payload(df):
     med_theta = angles + [360.0]
     med_r     = pct["p50"] + [pct["p50"][0]]
 
-    # current-year YTD (smoothed)
+    # current-year YTD (raw daily)
     yr = df[df["year"] == cur_year].sort_values("doy").copy()
-    yr["smooth"] = yr["tmean"].rolling(7, center=True, min_periods=1).mean()
     cur_theta = [(d - 1) / 365 * 360 for d in yr["doy"].tolist()]
-    cur_r     = yr["smooth"].round(2).tolist()
+    cur_r     = yr["tmean"].round(2).tolist()
 
     months    = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     month_doy = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
@@ -138,15 +136,15 @@ footer{{text-align:center;font-size:0.70rem;color:#bbb;padding:6px 0 18px}}
 <body>
 <header>
   <h1>Manhattan Daily Temperature</h1>
-  <p>Central Park · ERA5 reanalysis · °F · 7-day smooth · updated {updated}</p>
+  <p>Central Park · ERA5 reanalysis · °F · updated {updated}</p>
 </header>
 
 <div class="controls">
   <div class="tog">
     <label>Lower bound</label>
     <div class="btn-row" id="lo-btns">
-      <button data-val="10" onclick="setLo(this)">10th%</button>
-      <button data-val="20" onclick="setLo(this)" class="active">20th%</button>
+      <button data-val="10" onclick="setLo(this)" class="active">10th%</button>
+      <button data-val="20" onclick="setLo(this)">20th%</button>
       <button data-val="30" onclick="setLo(this)">30th%</button>
     </div>
   </div>
@@ -154,8 +152,8 @@ footer{{text-align:center;font-size:0.70rem;color:#bbb;padding:6px 0 18px}}
     <label>Upper bound</label>
     <div class="btn-row" id="hi-btns">
       <button data-val="70" onclick="setHi(this)">70th%</button>
-      <button data-val="80" onclick="setHi(this)" class="active">80th%</button>
-      <button data-val="90" onclick="setHi(this)">90th%</button>
+      <button data-val="80" onclick="setHi(this)">80th%</button>
+      <button data-val="90" onclick="setHi(this)" class="active">90th%</button>
     </div>
   </div>
 </div>
@@ -165,7 +163,7 @@ footer{{text-align:center;font-size:0.70rem;color:#bbb;padding:6px 0 18px}}
 
 <script>
 const D={data_json};
-let lo=20,hi=80;
+let lo=10,hi=90;
 
 const layout={{
   height:740,autosize:true,
