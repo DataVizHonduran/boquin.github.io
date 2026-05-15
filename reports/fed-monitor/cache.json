@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-14T09:37:40.030424+00:00",
-    "totalItems": 53
+    "lastRun": "2026-05-15T09:51:33.660660+00:00",
+    "totalItems": 56
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -935,11 +935,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-06T09:26:09.952088+00:00",
-      "lastChecked": "2026-05-14T09:37:40.030424+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-14T09:37:40.030424+00:00"
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
     },
     "78730586951efba83c364d1e7e65e41d73c1156f54d1d096ffb78c67454167d4": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/same-shock-different-roads-a-k-shaped-pattern-at-the-pump/",
@@ -992,11 +992,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-08T08:27:44.500012+00:00",
-      "lastChecked": "2026-05-14T09:37:40.030424+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-14T09:37:40.030424+00:00"
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
     },
     "c0f621b5b546c4da997f16d515a4de97665593f0f03bc9a44060db97fa4004fb": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/stress-and-strain-from-nbfis-to-banks/",
@@ -1048,7 +1048,7 @@
       "publicationDate": "2026-05-12",
       "authors": [],
       "firstSeen": "2026-05-13T09:51:08.493357+00:00",
-      "lastChecked": "2026-05-14T09:37:40.030424+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
       "scrapedSnippet": "During 2026:Q1, household debt balances increased slightly, by $18 billion, to reach $18.8 trillion, according to the latest Quarterly Report on Household Debt and Credit from the New York Fed’s Center for Microeconomic Data. Amid upticks in mortgage, HELOC, and auto balances and a seasonal decline in credit card balances, student loan balances remained unchanged. However, the share of student loan balances past due increased, nearing pre-pandemic levels at just over 10 percent. In this post, we focus on which borrowers entered default on their federal student loans over the past two quarters.",
       "aiSummary": "Household debt increased to $18.8 trillion in 2026:Q1, driven by rises in mortgage, HELOC, and auto balances. The data highlights a return of student loan defaults following the expiration of pandemic-era pauses.",
       "tags": [
@@ -1069,11 +1069,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-13T09:51:08.493357+00:00",
-      "lastChecked": "2026-05-14T09:37:40.030424+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-14T09:37:40.030424+00:00"
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
     },
     "b6b7c032a27e809527bd2da58ea3c220a26ec2beba4ad15ca7c49514e1d27771": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15",
@@ -1084,7 +1084,7 @@
       "publicationDate": "2026-05-13",
       "authors": [],
       "firstSeen": "2026-05-14T09:37:40.030424+00:00",
-      "lastChecked": "2026-05-14T09:37:40.030424+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
       "scrapedSnippet": "With the potential of artificial intelligence to raise trend productivity growth, it is illuminating to revisit Al Broaddus' contributions to late 1990s FOMC discussions.",
       "aiSummary": "The paper examines the relationship between productivity growth and monetary policy decisions during the 1990s. It specifically analyzes how productivity gains influence FOMC deliberations and draws parallels to the potential impact of artificial intelligence on trend growth.",
       "tags": [
@@ -1095,6 +1095,64 @@
         "interest rates"
       ],
       "tagsGeneratedAt": "2026-05-14T09:37:40.030424+00:00"
+    },
+    "f8bc682a4dc4dac4a0f9bc0eab1f79f65d25ae80f0676e6fcd50c8e278df87a6": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/do-job-postings-show-early-labor-market-effects-of-ai/",
+      "title": "Do Job Postings Show Early Labor‑Market Effects of AI?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-14",
+      "authors": [],
+      "firstSeen": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "scrapedSnippet": "As generative AI tools become more widely used, a key issue is the technology’s impact on labor demand. Where might we find evidence of that impact? In this post, we examine whether early evidence of AI’s effect on the labor market appears in firms’ job postings. We combine an occupational measure of AI exposure with detailed U.S. job-posting data from Lightcast, which aggregates listings from company career pages, national and local job boards, and job-listing aggregators. Using this data, we test whether postings for AI-exposed occupations declined disproportionately since the release of Cha",
+      "aiSummary": "The paper investigates whether generative AI tools are influencing labor demand by analyzing U.S. job postings. It utilizes occupational AI exposure measures to identify early shifts in hiring patterns.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "AI & economy"
+      ],
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
+    },
+    "db984be0aae28ba814caad1a4c7819e9ec0fc9161d4e473d775343dc21fb19ad": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103248/original",
+      "title": "Firm-Worker Matches: Experience or Inspection Goods?",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-05-14",
+      "authors": [],
+      "firstSeen": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The research examines the nature of firm-worker matching, analyzing whether worker quality is determined by accumulated experience or through a screening process. It explores the implications for labor market efficiency and hiring frictions.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages"
+      ],
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
+    },
+    "46e1832a451dccc75e17c97f44d76eb00e2735a4d9a73b26da19c8ca0589746c": {
+      "url": "https://www.fedinprint.org/item/fedlwp/102950/103249",
+      "title": "Mind the Gap: AI Adoption in Europe and the US",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-05-14",
+      "authors": [],
+      "firstSeen": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This study compares the rate and depth of AI adoption between European and United States economies. It analyzes the structural and regulatory drivers that create a gap in technological integration.",
+      "tags": [
+        "AI & economy",
+        "international",
+        "GDP growth",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
     }
   }
 }
