@@ -1,0 +1,49 @@
+name: Update Manhattan Temperature Wheel
+
+on:
+  schedule:
+    - cron: '0 10 * * 5'   # Fridays at 10:00 UTC (6am ET)
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate radial chart
+        run: python scripts/generate_manhattan_temp.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/manhattan-temp/index.html
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh manhattan-temp radial chart $(date +'%Y-%m-%d') 🌡️"
+          for i in 1 2 3; do
+            git pull --rebase --autostash -X ours && git push && break
+            echo "Push attempt $i failed — retrying in 15s..."
+            git rebase --abort 2>/dev/null || true
+            sleep 15
+          done
