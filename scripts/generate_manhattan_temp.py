@@ -135,7 +135,7 @@ footer{{text-align:center;font-size:0.70rem;color:#bbb;padding:6px 0 18px}}
 </head>
 <body>
 <header>
-  <h1>Manhattan Daily Temperature</h1>
+  <h1>Manhattan Daily Average Temperature</h1>
   <p>Central Park · ERA5 reanalysis · °F · updated {updated}</p>
 </header>
 
