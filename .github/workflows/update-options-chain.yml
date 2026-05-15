@@ -49,7 +49,7 @@ jobs:
           fi
           git commit -m "Options Chain ${{ github.event.inputs.ticker }} — $(date +'%Y-%m-%d') 🤖"
           for i in 1 2 3; do
-            git pull --rebase --autostash && git push && break
+            git pull --rebase --autostash -X ours && git push && break
             echo "Push attempt $i failed — retrying in 15s..."
             git rebase --abort 2>/dev/null || true
             sleep 15
