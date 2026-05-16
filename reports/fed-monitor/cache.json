@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-15T09:51:33.660660+00:00",
+    "lastRun": "2026-05-16T08:50:47.927426+00:00",
     "totalItems": 56
   },
   "items": {
@@ -935,11 +935,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-06T09:26:09.952088+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
+      "tagsGeneratedAt": "2026-05-16T08:50:47.927426+00:00"
     },
     "78730586951efba83c364d1e7e65e41d73c1156f54d1d096ffb78c67454167d4": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/same-shock-different-roads-a-k-shaped-pattern-at-the-pump/",
@@ -992,11 +992,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-08T08:27:44.500012+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
+      "tagsGeneratedAt": "2026-05-16T08:50:47.927426+00:00"
     },
     "c0f621b5b546c4da997f16d515a4de97665593f0f03bc9a44060db97fa4004fb": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/stress-and-strain-from-nbfis-to-banks/",
@@ -1069,11 +1069,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-13T09:51:08.493357+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-15T09:51:33.660660+00:00"
+      "tagsGeneratedAt": "2026-05-16T08:50:47.927426+00:00"
     },
     "b6b7c032a27e809527bd2da58ea3c220a26ec2beba4ad15ca7c49514e1d27771": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15",
@@ -1084,7 +1084,7 @@
       "publicationDate": "2026-05-13",
       "authors": [],
       "firstSeen": "2026-05-14T09:37:40.030424+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "With the potential of artificial intelligence to raise trend productivity growth, it is illuminating to revisit Al Broaddus' contributions to late 1990s FOMC discussions.",
       "aiSummary": "The paper examines the relationship between productivity growth and monetary policy decisions during the 1990s. It specifically analyzes how productivity gains influence FOMC deliberations and draws parallels to the potential impact of artificial intelligence on trend growth.",
       "tags": [
@@ -1105,7 +1105,7 @@
       "publicationDate": "2026-05-14",
       "authors": [],
       "firstSeen": "2026-05-15T09:51:33.660660+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "As generative AI tools become more widely used, a key issue is the technology’s impact on labor demand. Where might we find evidence of that impact? In this post, we examine whether early evidence of AI’s effect on the labor market appears in firms’ job postings. We combine an occupational measure of AI exposure with detailed U.S. job-posting data from Lightcast, which aggregates listings from company career pages, national and local job boards, and job-listing aggregators. Using this data, we test whether postings for AI-exposed occupations declined disproportionately since the release of Cha",
       "aiSummary": "The paper investigates whether generative AI tools are influencing labor demand by analyzing U.S. job postings. It utilizes occupational AI exposure measures to identify early shifts in hiring patterns.",
       "tags": [
@@ -1124,7 +1124,7 @@
       "publicationDate": "2026-05-14",
       "authors": [],
       "firstSeen": "2026-05-15T09:51:33.660660+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The research examines the nature of firm-worker matching, analyzing whether worker quality is determined by accumulated experience or through a screening process. It explores the implications for labor market efficiency and hiring frictions.",
       "tags": [
@@ -1143,7 +1143,7 @@
       "publicationDate": "2026-05-14",
       "authors": [],
       "firstSeen": "2026-05-15T09:51:33.660660+00:00",
-      "lastChecked": "2026-05-15T09:51:33.660660+00:00",
+      "lastChecked": "2026-05-16T08:50:47.927426+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This study compares the rate and depth of AI adoption between European and United States economies. It analyzes the structural and regulatory drivers that create a gap in technological integration.",
       "tags": [
