@@ -148,6 +148,10 @@ def render_html(state: dict, now_str: str) -> str:
         .replace(">", "&gt;")
     )
 
+    changelog_section = changelog_rows if changelog_rows else (
+        '<div class="empty-state"><span>🌱</span>No changes detected yet.</div>'
+    )
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,64 +160,106 @@ def render_html(state: dict, now_str: str) -> str:
     <title>NYRR Registration Timeline — boquin.xyz</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        .meta-bar {{
-            display: flex; gap: 2rem; flex-wrap: wrap;
-            margin: 1.5rem 0; padding: 1rem 1.2rem;
-            background: var(--card-bg, #1e2130);
-            border-radius: 8px; border: 1px solid var(--border, #2d3148);
+        body {{ background: #f0f4ff; }}
+        .page-hero {{
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            border-radius: 16px; padding: 2rem 2rem 1.5rem;
+            margin-bottom: 1.5rem; color: #fff;
         }}
-        .meta-item {{ display: flex; flex-direction: column; gap: .2rem; }}
-        .meta-label {{ font-size: .75rem; color: var(--muted, #8892b0); text-transform: uppercase; letter-spacing: .06em; }}
-        .meta-value {{ font-size: 1rem; font-weight: 600; }}
-        .highlight-recent {{ color: #5af078; }}
+        .page-hero h1 {{ font-size: 1.8rem; font-weight: 800; margin-bottom: .3rem; }}
+        .page-hero p {{ opacity: .88; font-size: .95rem; }}
+        .page-hero a {{ color: #fff; text-decoration: underline; }}
+        .meta-bar {{ display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }}
+        .meta-card {{
+            flex: 1; min-width: 160px;
+            background: #fff; border-radius: 12px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+            border-top: 4px solid var(--accent, #667eea);
+        }}
+        .meta-card:nth-child(1) {{ --accent: #667eea; }}
+        .meta-card:nth-child(2) {{ --accent: #f093fb; }}
+        .meta-card:nth-child(3) {{ --accent: #4ade80; }}
+        .meta-label {{
+            font-size: .7rem; color: #94a3b8;
+            text-transform: uppercase; letter-spacing: .07em; margin-bottom: .25rem;
+        }}
+        .meta-value {{ font-size: 1rem; font-weight: 700; color: #1e293b; }}
+        .highlight-recent {{ color: #16a34a; }}
+        .section-card {{
+            background: #fff; border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+        }}
+        .section-card h2 {{
+            font-size: .8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .08em; color: #667eea; margin-bottom: 1rem;
+        }}
         .changelog-entry {{
-            padding: .75rem 0; border-bottom: 1px solid var(--border, #2d3148);
+            padding: .65rem 0; border-bottom: 1px solid #f1f5f9;
+            display: flex; flex-wrap: wrap; gap: .4rem; align-items: baseline;
         }}
-        .changelog-date {{ font-weight: 600; margin-right: .75rem; }}
-        .changelog-msg {{ color: var(--muted, #8892b0); }}
+        .changelog-entry:last-child {{ border-bottom: none; }}
+        .changelog-date {{
+            font-weight: 700; color: #1e293b;
+            background: #ede9fe; border-radius: 6px;
+            padding: .1rem .5rem; font-size: .85rem;
+        }}
+        .changelog-msg {{ color: #64748b; font-size: .9rem; }}
         .diff-block {{
-            margin-top: .5rem; padding: .5rem .75rem;
-            background: #111320; border-radius: 4px;
-            font-size: .8rem; white-space: pre-wrap; word-break: break-word;
-            color: #a8b2d8;
+            width: 100%; margin-top: .4rem; padding: .6rem .8rem;
+            background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;
+            font-size: .78rem; white-space: pre-wrap; word-break: break-word;
+            color: #475569; font-family: ui-monospace, monospace;
         }}
+        .empty-state {{
+            text-align: center; padding: 1.5rem;
+            color: #94a3b8; font-size: .9rem;
+        }}
+        .empty-state span {{ font-size: 1.8rem; display: block; margin-bottom: .4rem; }}
         .timeline-content {{
             white-space: pre-wrap; word-break: break-word;
-            font-family: ui-monospace, monospace; font-size: .85rem;
-            line-height: 1.6; padding: 1rem 1.2rem;
-            background: var(--card-bg, #1e2130);
-            border-radius: 8px; border: 1px solid var(--border, #2d3148);
-            max-height: 60vh; overflow-y: auto;
+            font-family: ui-monospace, monospace; font-size: .82rem;
+            line-height: 1.75; color: #334155;
+            background: #f8fafc; border-radius: 8px;
+            border: 1px solid #e2e8f0; padding: 1rem 1.2rem;
+            max-height: 55vh; overflow-y: auto;
         }}
-        .muted {{ color: var(--muted, #8892b0); }}
-        h2 {{ margin-top: 2rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: .05em; }}
     </style>
 </head>
 <body>
-    <main class="container" style="max-width:900px; margin:0 auto; padding:2rem 1rem;">
-        <h1>🏃 NYRR Registration Timeline</h1>
-        <p class="muted">Monitors <a href="{TIMELINE_URL}" target="_blank">nyrr.org race registration launch timeline</a> for updates. Refreshed twice daily via GitHub Actions.</p>
+    <main style="max-width:860px; margin:0 auto; padding:2rem 1rem;">
+
+        <div class="page-hero">
+            <h1>🏃 NYRR Registration Timeline</h1>
+            <p>Watches <a href="{TIMELINE_URL}" target="_blank">nyrr.org/race-registration-launch-timeline</a> for new batch release dates. Scans 4× daily via GitHub Actions.</p>
+        </div>
 
         <div class="meta-bar">
-            <div class="meta-item">
-                <span class="meta-label">Last Checked</span>
-                <span class="meta-value">{now_str}</span>
+            <div class="meta-card">
+                <div class="meta-label">Last Checked</div>
+                <div class="meta-value">{now_str}</div>
             </div>
-            <div class="meta-item">
-                <span class="meta-label">Last Changed</span>
-                <span class="meta-value {highlight_class}">{changed_label}{"  ← recent" if changed_age_days <= 7 else ""}</span>
+            <div class="meta-card">
+                <div class="meta-label">Last Changed</div>
+                <div class="meta-value {highlight_class}">{changed_label}{"  ← recent" if changed_age_days <= 7 else ""}</div>
             </div>
-            <div class="meta-item">
-                <span class="meta-label">Changes Detected</span>
-                <span class="meta-value">{len(changelog)}</span>
+            <div class="meta-card">
+                <div class="meta-label">Changes Detected</div>
+                <div class="meta-value">{len(changelog)}</div>
             </div>
         </div>
 
-        <h2>Changelog</h2>
-        <div class="changelog-section">{changelog_rows}</div>
+        <div class="section-card">
+            <h2>Changelog</h2>
+            {changelog_section}
+        </div>
 
-        <h2>Current Content</h2>
-        <div class="timeline-content">{content_html}</div>
+        <div class="section-card">
+            <h2>Current Content</h2>
+            <div class="timeline-content">{content_html}</div>
+        </div>
+
     </main>
 </body>
 </html>"""

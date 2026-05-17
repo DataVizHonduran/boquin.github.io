@@ -6,64 +6,112 @@
     <title>NYRR Registration Timeline — boquin.xyz</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
+        body { background: #f0f4ff; }
+
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            border-radius: 16px; padding: 2rem 2rem 1.5rem;
+            margin-bottom: 1.5rem; color: #fff;
+        }
+        .page-hero h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: .3rem; }
+        .page-hero p { opacity: .88; font-size: .95rem; }
+        .page-hero a { color: #fff; text-decoration: underline; }
+
         .meta-bar {
-            display: flex; gap: 2rem; flex-wrap: wrap;
-            margin: 1.5rem 0; padding: 1rem 1.2rem;
-            background: var(--card-bg, #1e2130);
-            border-radius: 8px; border: 1px solid var(--border, #2d3148);
+            display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;
         }
-        .meta-item { display: flex; flex-direction: column; gap: .2rem; }
-        .meta-label { font-size: .75rem; color: var(--muted, #8892b0); text-transform: uppercase; letter-spacing: .06em; }
-        .meta-value { font-size: 1rem; font-weight: 600; }
-        .highlight-recent { color: #5af078; }
+        .meta-card {
+            flex: 1; min-width: 160px;
+            background: #fff; border-radius: 12px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+            border-top: 4px solid var(--accent, #667eea);
+        }
+        .meta-card:nth-child(1) { --accent: #667eea; }
+        .meta-card:nth-child(2) { --accent: #f093fb; }
+        .meta-card:nth-child(3) { --accent: #4ade80; }
+        .meta-label {
+            font-size: .7rem; color: #94a3b8;
+            text-transform: uppercase; letter-spacing: .07em;
+            margin-bottom: .25rem;
+        }
+        .meta-value { font-size: 1rem; font-weight: 700; color: #1e293b; }
+        .highlight-recent { color: #16a34a; }
+
+        .section-card {
+            background: #fff; border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+        }
+        .section-card h2 {
+            font-size: .8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .08em; color: #667eea; margin-bottom: 1rem;
+        }
+
         .changelog-entry {
-            padding: .75rem 0; border-bottom: 1px solid var(--border, #2d3148);
+            padding: .65rem 0; border-bottom: 1px solid #f1f5f9;
+            display: flex; flex-wrap: wrap; gap: .4rem; align-items: baseline;
         }
-        .changelog-date { font-weight: 600; margin-right: .75rem; }
-        .changelog-msg { color: var(--muted, #8892b0); }
+        .changelog-entry:last-child { border-bottom: none; }
+        .changelog-date {
+            font-weight: 700; color: #1e293b;
+            background: #ede9fe; border-radius: 6px;
+            padding: .1rem .5rem; font-size: .85rem;
+        }
+        .changelog-msg { color: #64748b; font-size: .9rem; }
         .diff-block {
-            margin-top: .5rem; padding: .5rem .75rem;
-            background: #111320; border-radius: 4px;
-            font-size: .8rem; white-space: pre-wrap; word-break: break-word;
-            color: #a8b2d8;
+            width: 100%; margin-top: .4rem; padding: .6rem .8rem;
+            background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;
+            font-size: .78rem; white-space: pre-wrap; word-break: break-word;
+            color: #475569; font-family: ui-monospace, monospace;
         }
+        .empty-state {
+            text-align: center; padding: 1.5rem;
+            color: #94a3b8; font-size: .9rem;
+        }
+        .empty-state span { font-size: 1.8rem; display: block; margin-bottom: .4rem; }
+
         .timeline-content {
             white-space: pre-wrap; word-break: break-word;
-            font-family: ui-monospace, monospace; font-size: .85rem;
-            line-height: 1.6; padding: 1rem 1.2rem;
-            background: var(--card-bg, #1e2130);
-            border-radius: 8px; border: 1px solid var(--border, #2d3148);
-            max-height: 60vh; overflow-y: auto;
+            font-family: ui-monospace, monospace; font-size: .82rem;
+            line-height: 1.75; color: #334155;
+            background: #f8fafc; border-radius: 8px;
+            border: 1px solid #e2e8f0; padding: 1rem 1.2rem;
+            max-height: 55vh; overflow-y: auto;
         }
-        .muted { color: var(--muted, #8892b0); }
-        h2 { margin-top: 2rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: .05em; }
     </style>
 </head>
 <body>
-    <main class="container" style="max-width:900px; margin:0 auto; padding:2rem 1rem;">
-        <h1>🏃 NYRR Registration Timeline</h1>
-        <p class="muted">Monitors <a href="https://www.nyrr.org/run/race-calendar/race-registration-launch-timeline" target="_blank">nyrr.org race registration launch timeline</a> for updates. Refreshed twice daily via GitHub Actions.</p>
+    <main style="max-width:860px; margin:0 auto; padding:2rem 1rem;">
+
+        <div class="page-hero">
+            <h1>🏃 NYRR Registration Timeline</h1>
+            <p>Watches <a href="https://www.nyrr.org/run/race-calendar/race-registration-launch-timeline" target="_blank">nyrr.org/race-registration-launch-timeline</a> for new batch release dates. Scans 4× daily via GitHub Actions.</p>
+        </div>
 
         <div class="meta-bar">
-            <div class="meta-item">
-                <span class="meta-label">Last Checked</span>
-                <span class="meta-value">2026-05-17 11:14 UTC</span>
+            <div class="meta-card">
+                <div class="meta-label">Last Checked</div>
+                <div class="meta-value">2026-05-17 11:14 UTC</div>
             </div>
-            <div class="meta-item">
-                <span class="meta-label">Last Changed</span>
-                <span class="meta-value highlight-recent">May 17, 2026  ← recent</span>
+            <div class="meta-card">
+                <div class="meta-label">Last Changed</div>
+                <div class="meta-value highlight-recent">May 17, 2026 ← recent</div>
             </div>
-            <div class="meta-item">
-                <span class="meta-label">Changes Detected</span>
-                <span class="meta-value">0</span>
+            <div class="meta-card">
+                <div class="meta-label">Changes Detected</div>
+                <div class="meta-value">0</div>
             </div>
         </div>
 
-        <h2>Changelog</h2>
-        <div class="changelog-section"><p class="muted">No changes detected yet.</p></div>
+        <div class="section-card">
+            <h2>Changelog</h2>
+            <div class="empty-state"><span>🌱</span>No changes detected yet — baseline set May 17, 2026.</div>
+        </div>
 
-        <h2>Current Content</h2>
-        <div class="timeline-content">Run
+        <div class="section-card">
+            <h2>Current Content</h2>
+            <div class="timeline-content">Run
 race-calendar
 Race Registration Launch Timeline
 Race Registration Launch Timeline
@@ -71,7 +119,7 @@ July–September 2026 Races
 Please note all information is subject to change.
 July–September 2026 races will open for registration at 12:00 p.m. ET on the following dates:
 Tuesday, May 5: Advance registration for adult races opens for members at the Member Plus and above levels.
-NYRR Grete's Great Gallop 10K, New Balance 5th Avenue Mile, and the New Balance Bronx 10 Mile open for all members.
+NYRR Grete's Great Gallop 10K, New Balance 5th Avenue Mile, and the New Balance Bronx 10 Mile open for all members.
 General registration open to the public for youth events.
 Thursday, May 7: General registration opens to the public for adult races.
 Read about the non-9+1 race entry registration pilot here.
@@ -87,11 +135,11 @@ NYRR Summer Speed Series #2	August 11
 TCS New York City Marathon Training Series 12M- SOLD OUT	August 15
 NYRR Summer Speed Series #3	August 18
 NYRR Grete's Great Gallop 10K - Members Only- SOLD OUT	August 22
-NYRR Summer Speed Series Championships 	September 2
+NYRR Summer Speed Series Championships 	September 2
 New Balance 5th Avenue Mile- SOLD OUT	September 13
 New Balance Bronx 10 Mile- SOLD OUT	September 19
-TCS New York City Marathon Training Series 18M - SOLD OUT	September 20
-*NYRR Team Champs will initially open for registration to active club teams only. Club members, please contact your team captain for registration details. Registration will open to the general public on July 7.
+TCS New York City Marathon Training Series 18M - SOLD OUT	September 20
+*NYRR Team Champs will initially open for registration to active club teams only. Club members, please contact your team captain for registration details. Registration will open to the general public on July 7.
 **If you still want to run, sign up for a 9+1 credit entry while available.
 July—September 2026 NYRR Youth Events
 Please note all information is subject to change.
@@ -114,6 +162,8 @@ Virtual New Balance 5th Avenue Mile	September 5, 2026	May 7, 2026
 FAQs
 Learn more about how to register for multiple races, update payment method, and more.
 READ OUR FAQS</div>
+        </div>
+
     </main>
 </body>
 </html>
