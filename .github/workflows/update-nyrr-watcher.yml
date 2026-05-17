@@ -1,0 +1,48 @@
+name: Update NYRR Timeline Watcher
+
+on:
+  schedule:
+    - cron: '0 13,21 * * *'   # 9am + 5pm ET (UTC-4)
+  workflow_dispatch:            # manual trigger
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update-nyrr-watcher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run NYRR Timeline Watcher
+        run: python scripts/nyrr_watcher.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/nyrr/index.html data/nyrr_timeline_state.json
+          git diff --staged --quiet || (
+            git commit -m "NYRR Timeline — $(date +'%Y-%m-%d') 🤖" &&
+            git stash --include-untracked &&
+            git pull --rebase --autostash &&
+            git push
+          )
