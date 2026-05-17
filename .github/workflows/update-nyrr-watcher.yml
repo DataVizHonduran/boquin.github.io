@@ -2,7 +2,7 @@ name: Update NYRR Timeline Watcher
 
 on:
   schedule:
-    - cron: '0 13,21 * * *'   # 9am + 5pm ET (UTC-4)
+    - cron: '0 11,15,19,23 * * *'   # 7am, 11am, 3pm, 7pm ET (UTC-4)
   workflow_dispatch:            # manual trigger
 
 concurrency:
