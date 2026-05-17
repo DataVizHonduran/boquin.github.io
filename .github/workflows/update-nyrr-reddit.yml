@@ -1,0 +1,47 @@
+name: NYRR Reddit Scanner
+
+on:
+  schedule:
+    - cron: '0 12,20 * * *'   # 8am + 4pm ET (UTC-4) — twice daily
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  nyrr-reddit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run NYRR Reddit Scanner
+        run: python scripts/nyrr_reddit.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/nyrr/index.html data/nyrr_reddit_state.json
+          git diff --staged --quiet || (
+            git commit -m "NYRR Reddit Scan — $(date +'%Y-%m-%d') 🤖" &&
+            git stash --include-untracked &&
+            git pull --rebase --autostash &&
+            git push
+          )

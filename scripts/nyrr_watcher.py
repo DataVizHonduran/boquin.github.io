@@ -252,6 +252,8 @@ def render_html(state: dict, now_str: str) -> str:
 
         <!-- nyrr-commentary-here -->
 
+        <!-- nyrr-reddit-here -->
+
         <div class="section-card">
             <h2>Changelog</h2>
             {changelog_section}
