@@ -129,16 +129,24 @@ def build_block(commentary_md: str, generated_at: str) -> str:
 {MARKER_END}"""
 
 
+PLACEHOLDER = "<!-- nyrr-commentary-here -->"
+
 def inject(index_html: Path, block: str) -> None:
     html = index_html.read_text(encoding="utf-8")
+    # Strip any existing commentary block
     html = re.sub(
         re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
         "",
         html,
         flags=re.DOTALL,
     )
-    last_body = html.rfind("</body>")
-    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
+    # Inject at placeholder (keep placeholder so re-runs find it)
+    if PLACEHOLDER in html:
+        html = html.replace(PLACEHOLDER, block + "\n\n        " + PLACEHOLDER, 1)
+    else:
+        # Fallback: before </body>
+        last_body = html.rfind("</body>")
+        html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
     index_html.write_text(html, encoding="utf-8")
 
 
