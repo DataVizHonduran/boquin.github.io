@@ -160,9 +160,9 @@ def render_html(state: dict, now_str: str) -> str:
     <title>NYRR Registration Timeline — boquin.xyz</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        body {{ background: #f0f4ff; }}
+        body {{ background: #fff9f5; }}
         .page-hero {{
-            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             border-radius: 16px; padding: 2rem 2rem 1.5rem;
             margin-bottom: 1.5rem; color: #fff;
         }}
@@ -175,10 +175,10 @@ def render_html(state: dict, now_str: str) -> str:
             background: #fff; border-radius: 12px;
             padding: 1rem 1.2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,.07);
-            border-top: 4px solid var(--accent, #667eea);
+            border-top: 4px solid var(--accent, #ff6b35);
         }}
-        .meta-card:nth-child(1) {{ --accent: #667eea; }}
-        .meta-card:nth-child(2) {{ --accent: #f093fb; }}
+        .meta-card:nth-child(1) {{ --accent: #ff6b35; }}
+        .meta-card:nth-child(2) {{ --accent: #f7931e; }}
         .meta-card:nth-child(3) {{ --accent: #4ade80; }}
         .meta-label {{
             font-size: .7rem; color: #94a3b8;
@@ -193,7 +193,7 @@ def render_html(state: dict, now_str: str) -> str:
         }}
         .section-card h2 {{
             font-size: .8rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: .08em; color: #667eea; margin-bottom: 1rem;
+            letter-spacing: .08em; color: #ff6b35; margin-bottom: 1rem;
         }}
         .changelog-entry {{
             padding: .65rem 0; border-bottom: 1px solid #f1f5f9;
@@ -202,7 +202,7 @@ def render_html(state: dict, now_str: str) -> str:
         .changelog-entry:last-child {{ border-bottom: none; }}
         .changelog-date {{
             font-weight: 700; color: #1e293b;
-            background: #ede9fe; border-radius: 6px;
+            background: #fff0e6; border-radius: 6px;
             padding: .1rem .5rem; font-size: .85rem;
         }}
         .changelog-msg {{ color: #64748b; font-size: .9rem; }}

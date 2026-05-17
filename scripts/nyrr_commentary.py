@@ -108,13 +108,13 @@ def build_block(commentary_md: str, generated_at: str) -> str:
     return f"""{MARKER_START}
 <div style="max-width:860px;margin:0 auto 0;padding:0 1rem 2rem;">
   <div style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:1.5rem;">
-    <div style="border-left:4px solid #667eea;padding-left:1rem;margin-bottom:1.2rem;">
+    <div style="border-left:4px solid #ff6b35;padding-left:1rem;margin-bottom:1.2rem;">
       <h2 style="color:#1e293b;margin:0 0 .25rem;font-size:1rem;text-transform:uppercase;letter-spacing:.07em;">AI Breakdown</h2>
       <p style="color:#94a3b8;font-size:.78rem;margin:0;">Generated {generated_at} UTC &middot; google/gemma-4-31B-it</p>
     </div>
     <div class="nyrr-commentary" style="line-height:1.75;color:#334155;font-size:.92rem;">
       <style>
-        .nyrr-commentary h2{{color:#667eea;font-size:.85rem;text-transform:uppercase;letter-spacing:.07em;margin:1.2rem 0 .5rem;}}
+        .nyrr-commentary h2{{color:#ff6b35;font-size:.85rem;text-transform:uppercase;letter-spacing:.07em;margin:1.2rem 0 .5rem;}}
         .nyrr-commentary ul{{padding-left:1.2rem;margin:.4rem 0;}}
         .nyrr-commentary li{{margin:.3rem 0;}}
         .nyrr-commentary strong{{color:#1e293b;}}
