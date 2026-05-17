@@ -1,0 +1,49 @@
+name: NYRR Timeline Commentary
+
+on:
+  schedule:
+    - cron: '30 11,15,19,23 * * *'   # 30 min after each watcher scan (7:30am, 11:30am, 3:30pm, 7:30pm ET)
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  nyrr-commentary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run NYRR Commentary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/nyrr_commentary.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/nyrr/index.html
+          git diff --staged --quiet || (
+            git commit -m "NYRR Commentary — $(date +'%Y-%m-%d') 🤖" &&
+            git stash --include-untracked &&
+            git pull --rebase --autostash &&
+            git push
+          )
