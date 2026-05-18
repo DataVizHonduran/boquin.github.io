@@ -28,6 +28,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pandas plotly
 
+      - name: Get date for cache key
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache iShares holdings CSVs
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/emb-holdings
+          key: emb-holdings-${{ steps.date.outputs.today }}
+          restore-keys: |
+            emb-holdings-
+
       - name: Generate EMB bubble chart
         run: python scripts/generate_emb_bubble.py
 

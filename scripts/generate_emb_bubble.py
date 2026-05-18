@@ -90,15 +90,16 @@ BASE_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/120.0.0.0 Safari/537.36"
+        "Chrome/124.0.0.0 Safari/537.36"
     ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept": "text/csv,application/octet-stream,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
+    "X-Requested-With": "XMLHttpRequest",
 }
 
 OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "emb-bubble"
 OUTPUT_FILE = OUTPUT_DIR / "index.html"
-CACHE_DIR = Path.home() / ".claude" / "cache" / "emb"
+CACHE_DIR = Path.home() / ".cache" / "emb-holdings"
 
 # Duration column candidates (in priority order)
 DURATION_COLS = ["Effective Duration", "Modified Duration", "Duration"]
@@ -118,6 +119,8 @@ def fetch_csv(ticker: str, etf: dict) -> tuple[str, bool]:
         resp = requests.get(etf["url"], headers=headers, timeout=45)
         resp.raise_for_status()
         text = resp.text
+        if text.lstrip().startswith(("<!DOCTYPE", "<html", "<!doctype")):
+            raise ValueError(f"iShares returned HTML instead of CSV (bot detection) — {len(text):,} chars")
         if len(text) < 500 or "Name" not in text:
             raise ValueError(f"Response too short or missing data ({len(text)} chars)")
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
