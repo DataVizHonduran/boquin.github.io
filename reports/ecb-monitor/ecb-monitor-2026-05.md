@@ -6,27 +6,18 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Eurozone Economist**
-**Date: May 17, 2026**
-**Subject: Strategic Briefing – Recent ECB/NCB Research**
+To: Investment Team
+From: Senior Eurozone Economist
+Date: May 18, 2026
+Subject: Analysis of Recent ECB and National Central Bank Research
 
-I have filtered the latest research cycle to isolate the publications with the highest implications for our macro projections and risk models. While there is a heavy focus on climate-related credit risk, the following selections provide the most critical insights into inflation dynamics, financial stability, and monetary transmission.
+I have reviewed the latest research cycle from the ECB and national central banks. While much of the output focuses on micro-prudential supervision, there are several critical findings regarding inflation transmission, systemic risk, and external spillovers that we must integrate into our current models.
 
-1. **Supply chain uncertainty, energy prices, and inflation [ECB]:** This research establishes that the pass-through of energy shocks to headline inflation is state-dependent, amplifying significantly during periods of high supply chain uncertainty. For our models, this means energy price volatility is a more potent inflationary driver when logistics are disrupted, suggesting the ECB may remain more hawkish during geopolitical flares than traditional linear models predict.
+**Key Analytical Publications:**
 
-2. **Ex Machina: financial stability in the age of artificial intelligence [ECB]:** The study analyzes how AI-driven investors (LLMs and Q-learning) behave during mutual fund redemption shocks, highlighting new systemic vulnerabilities. As AI adoption in asset management scales, we must account for "algorithmic herding" which could accelerate liquidity spirals and increase the volatility of Eurozone capital markets.
+1. **Supply chain uncertainty, energy prices, and inflation (Pub 5):** This research demonstrates that the pass-through of energy prices to headline inflation is state-dependent, accelerating significantly during periods of high supply chain uncertainty. For our forecasts, this means energy shocks are no longer "linear" inputs; we must overweight supply chain volatility as a multiplier for inflation stickiness.
 
-3. **Why apps matter: digital banks pass on monetary policy differently [ECB]:** This paper identifies a divergence in how digital-first banks transmit ECB policy rate changes compared to traditional incumbents. This suggests a fragmented transmission mechanism where the "speed" of monetary tightening or easing varies by customer demographic, potentially complicating the ECB’s efforts to calibrate the neutral rate.
-
-4. **Geopolitical risk in the euro area: Measurement and transmission [DBB]:** The Bundesbank provides a refined framework for quantifying how geopolitical shocks translate into real economic activity. Given the current volatility in Eastern Europe and the Middle East, this methodology allows us to better price the "geopolitical risk premium" into our sovereign debt and equity valuations.
-
-5. **Sectoral interconnectedness in the euro area economies [ECB]:** Using 2024 network analysis, this paper maps the "who-to-whom" financial dependencies across the bloc. It reveals specific nodes of systemic fragility, which is critical for our credit risk assessments and for predicting how a shock in one specific sector or member state could cascade through the Eurozone.
-
-6. **Inequality and the global transmission of US monetary policy [ECB]:** This research demonstrates that income inequality within Eurozone societies dictates the severity of GDP spillovers from US Fed policy. This implies that the "Fed Put" or "Fed Tightening" does not hit the Eurozone uniformly, but rather impacts member states differently based on their internal wealth distribution.
-
-**Synthesis:**
-The current research trajectory suggests the ECB is increasingly concerned with "non-linear" risks—specifically the amplifying effects of AI, supply chain fragility, and digital banking on monetary transmission. For our portfolio, this necessitates a shift from static macro forecasting toward a scenario-based approach that accounts for fragmented policy transmission and algorithmic systemic risk.
+2. **Gas market shocks and inflation expectations (Pub 8):** Using a BVAR model, this paper traces how natural gas shocks directly shift inflation expectations
 
 ---
 
