@@ -6,18 +6,27 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
-From: Senior Eurozone Economist
-Date: May 18, 2026
-Subject: Analysis of Recent ECB and National Central Bank Research
+**To: Investment Committee**
+**From: Senior Eurozone Economist**
+**Date: May 19, 2026**
+**Subject: Strategic Briefing: Recent ECB/NCB Research Trends**
 
-I have reviewed the latest research cycle from the ECB and national central banks. While much of the output focuses on micro-prudential supervision, there are several critical findings regarding inflation transmission, systemic risk, and external spillovers that we must integrate into our current models.
+I have filtered the recent output from the ECB and national central banks. While much of the research focuses on granular climate risk, the following selections provide the most critical signals for our macro-forecasting and policy-rate expectations.
 
-**Key Analytical Publications:**
+1. **Supply chain uncertainty, energy prices, and inflation (ECB):** This research establishes that the pass-through of energy shocks to headline inflation is state-dependent, amplifying significantly during periods of high supply chain uncertainty. For our models, this means energy price volatility is a more potent inflationary driver when logistics are disrupted than in stable periods, necessitating a more hawkish bias during geopolitical flares.
 
-1. **Supply chain uncertainty, energy prices, and inflation (Pub 5):** This research demonstrates that the pass-through of energy prices to headline inflation is state-dependent, accelerating significantly during periods of high supply chain uncertainty. For our forecasts, this means energy shocks are no longer "linear" inputs; we must overweight supply chain volatility as a multiplier for inflation stickiness.
+2. **Gas market shocks and inflation expectations (ECB):** Utilizing a BVAR model, this paper traces the direct transmission of gas shocks into inflation expectations and realized CPI. It underscores the sensitivity of the Eurozone's inflation anchor to energy markets, suggesting that "energy-driven" inflation can quickly become embedded in expectations if not managed aggressively.
 
-2. **Gas market shocks and inflation expectations (Pub 8):** Using a BVAR model, this paper traces how natural gas shocks directly shift inflation expectations
+3. **Ex Machina: financial stability in the age of AI (ECB):** This study analyzes the behavior of LLM and Q-learning investors during mutual fund redemption shocks, highlighting new systemic risks. As AI-driven trading scales, we must account for "algorithmic herding" which could accelerate liquidity crises and increase the volatility of Eurozone asset prices.
+
+4. **Digital banks and monetary policy pass-through (ECB):** The findings indicate that digital-first banks transmit monetary policy differently than traditional incumbents, likely due to different deposit betas and app-based customer interfaces. This suggests a fragmented transmission mechanism where the ECB’s rate hikes may hit certain demographics or sectors faster than others, complicating the "last mile" of inflation control.
+
+5. **Geopolitical risk in the euro area: Measurement and transmission (DBB):** This Deutsche Bundesbank paper provides a framework for quantifying how geopolitical shocks translate into real economic contraction. Given the current volatility, this tool is essential for adjusting our GDP growth forecasts and assessing the risk premium on European sovereign debt.
+
+6. **Inequality and the global transmission of US monetary policy (ECB):** This research demonstrates that income inequality within Eurozone societies modulates how US Fed policy spillovers affect local GDP. It implies that the "Fed put" or "Fed tightening" does not hit the Eurozone uniformly, with higher-inequality member states potentially experiencing more volatile transmission.
+
+**Synthesis:**
+The central banks are increasingly focused on "non-linear" risks—specifically how AI, digital banking, and supply chain fragility amplify traditional shocks. For our portfolio, this suggests that traditional linear correlations are breaking down, requiring a higher risk premium for Eurozone assets during periods of geopolitical or technological transition.
 
 ---
 
