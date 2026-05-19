@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (13 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (14 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -10,38 +10,43 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** May 17, 2026
+**DATE:** May 19, 2026
 **SUBJECT:** Critical Analysis of Recent Federal Reserve District Research
 
-I have filtered the recent Fed publications to isolate the systemic drivers currently impacting our portfolio. We are seeing a clear convergence of geopolitical supply shocks and a deepening socioeconomic divide that complicates the Fed's terminal rate path.
-
-**Key Analytical Takeaways:**
+I have filtered the recent Fed publications to isolate the primary drivers of macro risk and growth. We are seeing a clear convergence of geopolitical shocks and structural economic divergence.
 
 1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
-The Middle East conflict has triggered a third major global supply shock in six years, specifically threatening the hardware pipeline for AI. If the "AI Capex" cycle is throttled by physical supply constraints, we may see a significant deceleration in projected productivity gains and a valuation correction in Big Tech.
+The Middle East conflict has triggered a third major global supply shock in six years, specifically threatening the hardware pipeline for AI. If the "AI Capex" cycle is throttled by physical supply constraints, we may see a significant downward revision in productivity forecasts and a cooling of the current tech-led equity rally.
 
 2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The closure of the Strait of Hormuz has pushed energy prices to four-year highs, but the impact is asymmetric. This "K-shaped" energy shock suggests that while high-income consumers are absorbing costs, lower-income households are facing a severe liquidity crunch, which will likely drag on aggregate retail volumes.
+The Iranian closure of the Strait of Hormuz has pushed energy prices to four-year highs, but the impact is asymmetric. This "K-shaped" energy shock disproportionately burdens low-income households, potentially accelerating a consumption cliff in the lower deciles while high-income spending remains resilient.
 
 3. **[NY] Tracking/Explaining the K-Shaped Economy**
-These companion pieces confirm that recent GDP growth is being driven almost exclusively by high-income spending. This divergence is critical for policy; the Fed may see "strong" aggregate data and keep rates higher for longer, even as the bottom 60% of the economy enters a stealth recession.
+Complementing the energy data, these reports confirm that aggregate spending growth is being driven almost exclusively by high-income households. This divergence suggests that "headline" GDP and retail sales figures are masking a fragile underlying consumer base, increasing the risk of a sudden, non-linear drop in aggregate demand.
 
 4. **[NY] Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This creates a "shadow" systemic risk where credit contractions occur outside the direct regulatory view of the Fed.
+The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This creates a "shadow banking" contagion risk that could force the Fed to pivot toward liquidity provision even if inflation remains sticky.
 
 5. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s, the Richmond Fed is signaling that the FOMC is actively weighing whether AI can raise "trend productivity." If the Fed believes we are in a 1990s-style productivity boom, they will be more tolerant of higher inflation and higher nominal rates without fearing a hard landing.
+By revisiting the 1990s, the Richmond Fed is signaling that the FOMC is actively weighing whether AI can raise "trend productivity." If the Fed believes we are in a 1990s-style productivity boom, they may tolerate higher nominal growth and higher rates for longer without fearing an inflationary spiral.
 
 6. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
-The return of defaults in 2026:Q1, coupled with a rise in total household debt to $18.8 trillion, indicates that the pandemic-era cushions have finally evaporated. This increases the probability of a consumer credit event as the "exhaustion phase" of household savings hits its peak.
+The return of defaults alongside a rise in total household debt to $18.8 trillion indicates that the pandemic-era cushions have finally evaporated. This adds a layer of credit risk to the consumer sector, coinciding dangerously with the aforementioned energy price shocks.
 
 **Synthesis:**
-The U.S. economy is currently bifurcated, with AI-driven productivity optimism and high-income resilience masking severe fragility in the NBFI sector and lower-income households. We are facing a precarious "policy blind spot" where aggregate growth figures may mislead the Fed into maintaining restrictive rates despite mounting systemic stresses in credit and energy.
+The U.S. economy is currently characterized by a dangerous decoupling: high-income resilience and AI optimism are masking systemic fragility in the lower-income consumer and the NBFI sector. We must hedge for a scenario where geopolitical supply shocks trigger a liquidity crisis in shadow banking and a consumption collapse among the mass market.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 8
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 9
+
+### (cached) [Honey, Who Shrunk the U.S. Income Surplus?](https://libertystreeteconomics.newyorkfed.org/2026/05/honey-who-shrunk-the-u-s-income-surplus/)
+**Published:** 2026-05-18 | **Authors:** 
+
+The paper examines the widening gap between U.S. foreign liabilities and assets, noting a significant shortfall in holdings. It analyzes the dynamics of investment income receipts relative to the mounting deficit in foreign asset ownership.
+
+**Tags:** international · credit · financial stability · GDP growth · emerging markets
 
 ### (cached) [Do Job Postings Show Early Labor‑Market Effects of AI?](https://libertystreeteconomics.newyorkfed.org/2026/05/do-job-postings-show-early-labor-market-effects-of-ai/)
 **Published:** 2026-05-14 | **Authors:** 
@@ -144,5 +149,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 13
-- Total cache size: 13 items
+- Already cached: 14
+- Total cache size: 14 items
