@@ -35,10 +35,14 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: python scripts/generate_crude_stocks_weekly.py
 
+      - name: Generate AI commentary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/petroleum_stocks_commentary.py
+
       - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add reports/crude-stocks/
-          git diff --staged --quiet || (git commit -m "Update Crude Oil Stocks Weekly Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
-
+          git add reports/petroleum-stocks/
+          git diff --staged --quiet || (git commit -m "Update Petroleum Stocks + AI Commentary - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
