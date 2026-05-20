@@ -2,7 +2,7 @@ name: Petroleum Stocks Commentary
 
 on:
   schedule:
-    - cron: '0 18 * * 3'    # 18:00 UTC Wed — 1h after generator (17:00 UTC)
+    - cron: '30 17 * * 3'    # 17:30 UTC Wed — 30min after generator (17:00 UTC)
   workflow_dispatch:
 
 concurrency:
