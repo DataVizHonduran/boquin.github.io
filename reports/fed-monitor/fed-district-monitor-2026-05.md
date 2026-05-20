@@ -1,45 +1,47 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (14 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (16 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: May 20, 2026**
+**Subject: Fed District Research Briefing – Macro Implications**
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** May 19, 2026
-**SUBJECT:** Critical Analysis of Recent Federal Reserve District Research
+After reviewing the latest publications from the Federal Reserve districts, I have isolated the most critical papers for our current positioning. We are seeing a clear convergence of geopolitical supply shocks and structural economic divergence.
 
-I have filtered the recent Fed publications to isolate the primary drivers of macro risk and growth. We are seeing a clear convergence of geopolitical shocks and structural economic divergence.
-
-1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
-The Middle East conflict has triggered a third major global supply shock in six years, specifically threatening the hardware pipeline for AI. If the "AI Capex" cycle is throttled by physical supply constraints, we may see a significant downward revision in productivity forecasts and a cooling of the current tech-led equity rally.
+1. **[NY] Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
+The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline essential for AI scaling. If the AI investment boom is throttled by physical supply constraints rather than demand, we may see a sharp correction in tech valuations and a slowdown in projected productivity gains.
 
 2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The Iranian closure of the Strait of Hormuz has pushed energy prices to four-year highs, but the impact is asymmetric. This "K-shaped" energy shock disproportionately burdens low-income households, potentially accelerating a consumption cliff in the lower deciles while high-income spending remains resilient.
+The closure of the Strait of Hormuz in March 2026 has pushed energy prices to a four-year high, but the impact is asymmetric. This "K-shaped" energy shock suggests that while high-income households are absorbing costs, lower-income consumption is likely to crater, creating a fragmented inflationary environment that complicates the Fed's mandate.
 
-3. **[NY] Tracking/Explaining the K-Shaped Economy**
-Complementing the energy data, these reports confirm that aggregate spending growth is being driven almost exclusively by high-income households. This divergence suggests that "headline" GDP and retail sales figures are masking a fragile underlying consumer base, increasing the risk of a sudden, non-linear drop in aggregate demand.
+3. **[NY] Stress and Strain from NBFIs to Banks**
+Recent bankruptcies (Tricolor, First Brands) and redemption freezes at Blue Owl Capital indicate growing instability in the Non-Bank Financial Institution (NBFI) sector. This suggests that "shadow banking" stresses are beginning to leak back into the traditional banking system, increasing systemic risk and the likelihood of a liquidity event.
 
-4. **[NY] Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This creates a "shadow banking" contagion risk that could force the Fed to pivot toward liquidity provision even if inflation remains sticky.
+4. **[NY] Explaining/Tracking the K-Shaped Economy**
+Aggregate spending data is masking a deep divide; real consumer spending is being driven almost exclusively by high-income households. This divergence means aggregate GDP growth is a deceptive metric, and we should expect a sharper-than-anticipated decline in retail and discretionary sectors as the lower-income cohort reaches a breaking point.
 
 5. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s, the Richmond Fed is signaling that the FOMC is actively weighing whether AI can raise "trend productivity." If the Fed believes we are in a 1990s-style productivity boom, they may tolerate higher nominal growth and higher rates for longer without fearing an inflationary spiral.
-
-6. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
-The return of defaults alongside a rise in total household debt to $18.8 trillion indicates that the pandemic-era cushions have finally evaporated. This adds a layer of credit risk to the consumer sector, coinciding dangerously with the aforementioned energy price shocks.
+By revisiting the 1990s, this research explores how AI could shift the trend productivity growth upward. If AI mirrors the 90s tech boom, the Fed may have more room to maintain higher nominal rates without triggering a recession, provided the productivity gains materialize to offset current supply-side shocks.
 
 **Synthesis:**
-The U.S. economy is currently characterized by a dangerous decoupling: high-income resilience and AI optimism are masking systemic fragility in the lower-income consumer and the NBFI sector. We must hedge for a scenario where geopolitical supply shocks trigger a liquidity crisis in shadow banking and a consumption collapse among the mass market.
+The U.S. economy is currently bifurcated, with high-income resilience masking systemic fragility in the lower-income sector and the NBFI space. We are entering a volatile period where geopolitical supply shocks to energy and AI hardware could derail the productivity-led growth narrative and trigger a broader financial contagion.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 9
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 10
+
+### (cached) [The Global Credit Cycle in Corporate Bond Returns](https://libertystreeteconomics.newyorkfed.org/2026/05/the-global-credit-cycle-in-corporate-bond-returns/)
+**Published:** 2026-05-19 | **Authors:** 
+
+The paper analyzes the global corporate bond market, highlighting a significant lack of diversification due to a dominant global credit cycle. It finds that a vast majority of bonds move in tandem, impacting risk management for nonfinancial firm funding.
+
+**Tags:** credit · financial stability · interest rates · international · banking
 
 ### (cached) [Honey, Who Shrunk the U.S. Income Surplus?](https://libertystreeteconomics.newyorkfed.org/2026/05/honey-who-shrunk-the-u-s-income-surplus/)
 **Published:** 2026-05-18 | **Authors:** 
@@ -105,7 +107,14 @@ This paper investigates the distribution of real consumer spending growth since 
 **Tags:** consumer spending · GDP growth · financial stability · recession · inflation
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 2
+**Content Type:** Economic Briefs | **New:** 0 of 3
+
+### (cached) [Modelling Unemployment Insurance in the Real World](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-16)
+**Published:** 2026-05-20 | **Authors:** 
+
+The study evaluates the efficiency of unemployment insurance programs through economic modeling. It concludes that the current U.S. framework aligns closely with the theoretical optimal design for such programs.
+
+**Tags:** labor markets · employment · fiscal policy · wages · GDP growth
 
 ### (cached) [Al Broaddus, Productivity Growth and Monetary Policy in the 1990s](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15)
 **Published:** 2026-05-13 | **Authors:** 
@@ -149,5 +158,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 14
-- Total cache size: 14 items
+- Already cached: 16
+- Total cache size: 16 items

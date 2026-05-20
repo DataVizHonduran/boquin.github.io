@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-19T10:40:04.151232+00:00",
-    "totalItems": 57
+    "lastRun": "2026-05-20T10:28:12.577734+00:00",
+    "totalItems": 60
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -178,7 +178,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is insufficient to determine a specific argument, though the title suggests a focus on systemic risk. Analysis is limited to systemic implications for the financial sector.",
       "tags": [
@@ -199,7 +199,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Federal Reserve Board of Governors without specific content. It likely pertains to central bank governance and policy oversight.",
       "tags": [
@@ -220,7 +220,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Kansas City regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -241,7 +241,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Minneapolis regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -262,7 +262,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of economic conditions and business activity within the Third Federal Reserve District. Focuses on regional growth trends and local industrial performance.",
       "tags": [
@@ -284,7 +284,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of economic trends in the Twelfth District, with a heavy emphasis on technology and Pacific Rim trade. Analyzes the intersection of innovation and regional labor dynamics.",
       "tags": [
@@ -306,7 +306,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Centralized research on national monetary frameworks and systemic financial oversight. Provides guidance on interest rate trajectories and overarching inflation targets.",
       "tags": [
@@ -328,7 +328,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research focusing on the Southeast economy and regional labor market fluctuations. Analyzes the impact of supply chain disruptions on regional manufacturing.",
       "tags": [
@@ -350,7 +350,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of New England's economic landscape, focusing on housing markets and financial stability. Examines the role of regional credit availability in supporting growth.",
       "tags": [
@@ -372,7 +372,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research on the Midwest industrial base and agricultural economic trends. Evaluates the relationship between wages and regional productivity.",
       "tags": [
@@ -394,7 +394,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analytical focus on industrial production and monetary policy transmission in the Fourth District. Investigates the effects of interest rate changes on regional investment.",
       "tags": [
@@ -416,7 +416,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of the Texas and Southwestern economy, specifically energy sector volatility. Analyzes the impact of oil prices on regional GDP and employment.",
       "tags": [
@@ -438,7 +438,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication examines economic trends and policy implications within the Kansas City Federal Reserve district. It focuses on regional growth drivers and local financial conditions.",
       "tags": [
@@ -460,7 +460,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research analyzes macroeconomic indicators and monetary transmission mechanisms relevant to the Minneapolis district. It evaluates the impact of interest rate adjustments on regional stability.",
       "tags": [
@@ -482,7 +482,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report focuses on global financial markets, systemic risk, and the stability of the international banking system. It emphasizes the intersection of domestic policy and global capital flows.",
       "tags": [
@@ -505,7 +505,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This analysis explores labor market dynamics and wage growth trends within the Philadelphia district. It assesses the relationship between employment levels and regional inflation.",
       "tags": [
@@ -527,7 +527,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication investigates the impact of fiscal policy and supply chain disruptions on regional economic output. It examines the resilience of local industries to external shocks.",
       "tags": [
@@ -549,7 +549,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research provides a data-driven analysis of consumer spending patterns and credit availability. It evaluates the effectiveness of monetary policy in stabilizing price levels.",
       "tags": [
@@ -571,7 +571,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report examines the influence of emerging technologies and climate risks on the Western economy. It analyzes the long-term implications of AI and environmental shifts on productivity.",
       "tags": [
@@ -992,11 +992,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-08T08:27:44.500012+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-19T10:40:04.151232+00:00"
+      "tagsGeneratedAt": "2026-05-20T10:28:12.577734+00:00"
     },
     "c0f621b5b546c4da997f16d515a4de97665593f0f03bc9a44060db97fa4004fb": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/stress-and-strain-from-nbfis-to-banks/",
@@ -1069,11 +1069,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-13T09:51:08.493357+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-19T10:40:04.151232+00:00"
+      "tagsGeneratedAt": "2026-05-20T10:28:12.577734+00:00"
     },
     "b6b7c032a27e809527bd2da58ea3c220a26ec2beba4ad15ca7c49514e1d27771": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15",
@@ -1163,7 +1163,7 @@
       "publicationDate": "2026-05-18",
       "authors": [],
       "firstSeen": "2026-05-19T10:40:04.151232+00:00",
-      "lastChecked": "2026-05-19T10:40:04.151232+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
       "scrapedSnippet": "Foreign holdings of U.S. financial assets are immense, with official estimates putting their current market value at $69 trillion. U.S. holdings of foreign assets are also impressive but much smaller, at $41 trillion. The shortfall in U.S. foreign assets relative to foreign liabilities has been mounting for decades. Yet U.S. investment income receipts—in profits, dividends, and interest—comfortably exceeded income payments until recently. We show that the fading of the net investment income surplus stems from the upward shift in interest rates in the aftermath of the pandemic along with the co",
       "aiSummary": "The paper examines the widening gap between U.S. foreign liabilities and assets, noting a significant shortfall in holdings. It analyzes the dynamics of investment income receipts relative to the mounting deficit in foreign asset ownership.",
       "tags": [
@@ -1174,6 +1174,63 @@
         "emerging markets"
       ],
       "tagsGeneratedAt": "2026-05-19T10:40:04.151232+00:00"
+    },
+    "cecf83b8ce1ad39bb4236e6e9344e4af476d1f3497bcde250874209f51f208bc": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/the-global-credit-cycle-in-corporate-bond-returns/",
+      "title": "The Global Credit Cycle in Corporate Bond Returns",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-19",
+      "authors": [],
+      "firstSeen": "2026-05-20T10:28:12.577734+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
+      "scrapedSnippet": "The global corporate nonfinancial bond market is both a large investment asset class and a vital source of funding for nonfinancial firms. With $19 trillion outstanding at the end of 2024, a broad portfolio of corporate bonds would be expected to be well diversified. Yet, in 37 percent of months between 1998 and 2024, more than 80 percent of bonds in the ICE Global Bond Indices—a portfolio with over 10,000 constituents spanning diverse industries, credit ratings, and regions—moved in the same direction, suggesting a large degree of synchronization. In this post, we introduce the global credit ",
+      "aiSummary": "The paper analyzes the global corporate bond market, highlighting a significant lack of diversification due to a dominant global credit cycle. It finds that a vast majority of bonds move in tandem, impacting risk management for nonfinancial firm funding.",
+      "tags": [
+        "credit",
+        "financial stability",
+        "interest rates",
+        "international",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-05-20T10:28:12.577734+00:00"
+    },
+    "2c60d3275ac504bbce921d54afe325796ecc0164e388c430d37f855d7ecc58e0": {
+      "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-16",
+      "title": "Modelling Unemployment Insurance in the Real World",
+      "district": "Richmond Fed (5th District)",
+      "districtCode": "RIC",
+      "contentType": "Economic Briefs",
+      "publicationDate": "2026-05-20",
+      "authors": [],
+      "firstSeen": "2026-05-20T10:28:12.577734+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
+      "scrapedSnippet": "One model suggests that the optimal unemployment insurance program would be set up pretty close to what the U.S. currently has.",
+      "aiSummary": "The study evaluates the efficiency of unemployment insurance programs through economic modeling. It concludes that the current U.S. framework aligns closely with the theoretical optimal design for such programs.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "fiscal policy",
+        "wages",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-05-20T10:28:12.577734+00:00"
+    },
+    "882827e749114fb55e3eec92f942994540ad70f7f70949e5ce2f9043639bd805": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0519",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-05-20T10:28:12.577734+00:00",
+      "lastChecked": "2026-05-20T10:28:12.577734+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-20T10:28:12.577734+00:00"
     }
   }
 }
