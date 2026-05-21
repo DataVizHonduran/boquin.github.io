@@ -168,7 +168,7 @@ def fetch_summaries(articles, hf_token):
         )
         user_msg = f"Recent headlines:\n{article_lines}"
 
-        for attempt in range(2):
+        for attempt in range(3):
             try:
                 resp = client.chat.completions.create(
                     model="google/gemma-4-31B-it",
@@ -182,12 +182,16 @@ def fetch_summaries(articles, hf_token):
                 summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
                 break
             except Exception as e:
-                if attempt == 0 and "rate" in str(e).lower():
-                    print("    Rate limited — retrying in 10s…", flush=True)
-                    time.sleep(10)
+                is_rate_limit = "429" in str(e) or "too many" in str(e).lower()
+                if is_rate_limit and attempt < 2:
+                    wait = 30 * (attempt + 1)
+                    print(f"    Rate limited — retrying in {wait}s…", flush=True)
+                    time.sleep(wait)
                 else:
                     print(f"    Failed ({e}) — skipping", flush=True)
                     break
+
+        time.sleep(3)
 
     return summaries
 
