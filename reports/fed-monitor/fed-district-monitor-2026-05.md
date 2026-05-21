@@ -1,40 +1,47 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (16 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (17 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Economist**
-**Date: May 20, 2026**
-**Subject: Fed District Research Briefing – Macro Implications**
+Team, I have reviewed the latest research from the Fed districts. While there is a fair amount of noise, there are several critical signals regarding the "K-shaped" divergence in the domestic economy and the systemic risks surrounding the AI investment cycle.
 
-After reviewing the latest publications from the Federal Reserve districts, I have isolated the most critical papers for our current positioning. We are seeing a clear convergence of geopolitical supply shocks and structural economic divergence.
+Here are the most analytically significant publications for our current positioning:
 
-1. **[NY] Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
-The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline essential for AI scaling. If the AI investment boom is throttled by physical supply constraints rather than demand, we may see a sharp correction in tech valuations and a slowdown in projected productivity gains.
+1. **[NY] Will Mounting Supply Chain Strains Hamper the AI Investment Boom?**
+The Middle East conflict has triggered a global supply shock that threatens the hardware pipeline essential for AI scaling. If supply constraints bottleneck the massive CapEx currently being deployed by Big Tech, we face a risk of "stranded" investment and a sudden deceleration in productivity gains.
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The closure of the Strait of Hormuz in March 2026 has pushed energy prices to a four-year high, but the impact is asymmetric. This "K-shaped" energy shock suggests that while high-income households are absorbing costs, lower-income consumption is likely to crater, creating a fragmented inflationary environment that complicates the Fed's mandate.
+2. **[NY] AI’s Macroeconomic Challenges and Promises**
+For the first time in Q3 2025, the largest tech firms' capital expenditures exceeded their operating earnings. This indicates a pivot from "harvesting" AI profits to a high-stakes "build-out" phase, shifting the narrative from immediate software monetization to long-term infrastructure bets.
 
-3. **[NY] Stress and Strain from NBFIs to Banks**
-Recent bankruptcies (Tricolor, First Brands) and redemption freezes at Blue Owl Capital indicate growing instability in the Non-Bank Financial Institution (NBFI) sector. This suggests that "shadow banking" stresses are beginning to leak back into the traditional banking system, increasing systemic risk and the likelihood of a liquidity event.
+3. **[NY] Same Shock, Different Roads? / Tracking the K-Shaped Economy**
+Recent energy price surges (driven by the Strait of Hormuz closure) are impacting households unevenly, with spending growth now driven almost exclusively by high-income cohorts. This "K-shaped" divergence suggests that aggregate consumption data is masking significant fragility in lower-income segments, which could lead to a sharper-than-expected drop in demand if energy prices remain elevated.
 
-4. **[NY] Explaining/Tracking the K-Shaped Economy**
-Aggregate spending data is masking a deep divide; real consumer spending is being driven almost exclusively by high-income households. This divergence means aggregate GDP growth is a deceptive metric, and we should expect a sharper-than-anticipated decline in retail and discretionary sectors as the lower-income cohort reaches a breaking point.
+4. **[NY] Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, alongside redemption freezes at Blue Owl Capital, signal mounting stress in the Non-Bank Financial Institution (NBFI) sector. This is a critical warning sign for systemic contagion, as these stresses may eventually migrate back to the regulated banking sector through credit linkages.
 
-5. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s, this research explores how AI could shift the trend productivity growth upward. If AI mirrors the 90s tech boom, the Fed may have more room to maintain higher nominal rates without triggering a recession, provided the productivity gains materialize to offset current supply-side shocks.
+5. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
+The return of student loan defaults in 2026:Q1, coinciding with a rise in total household debt to $18.8 trillion, suggests that the pandemic-era cushions have finally evaporated. This increases the sensitivity of the consumer to further interest rate volatility or labor market softening.
+
+6. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
+By revisiting the 1990s, the Fed is signaling a framework for how to handle a potential AI-driven productivity boom. For us, this means the Fed may be more inclined to tolerate higher nominal growth without hiking rates if they perceive a structural shift in trend productivity.
 
 **Synthesis:**
-The U.S. economy is currently bifurcated, with high-income resilience masking systemic fragility in the lower-income sector and the NBFI space. We are entering a volatile period where geopolitical supply shocks to energy and AI hardware could derail the productivity-led growth narrative and trigger a broader financial contagion.
+The macro outlook is defined by a precarious tension between a massive, high-risk AI investment cycle and a fracturing consumer base. We must monitor the NBFI sector for systemic cracks and the "K-shaped" spending patterns for signs that the lower-income consumer has reached a breaking point.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 10
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 11
+
+### (cached) [AI’s Macroeconomic Challenges and Promises](https://libertystreeteconomics.newyorkfed.org/2026/05/ais-macroeconomic-challenges-and-promises/)
+**Published:** 2026-05-20 | **Authors:** 
+
+The paper examines the tension between the long-term productivity potential of AI and its current high capital costs. It finds that AI investment is currently absorbing resources faster than it is generating operational returns.
+
+**Tags:** AI & economy · GDP growth · credit · consumer spending · financial stability
 
 ### (cached) [The Global Credit Cycle in Corporate Bond Returns](https://libertystreeteconomics.newyorkfed.org/2026/05/the-global-credit-cycle-in-corporate-bond-returns/)
 **Published:** 2026-05-19 | **Authors:** 
@@ -158,5 +165,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 16
-- Total cache size: 16 items
+- Already cached: 17
+- Total cache size: 17 items
