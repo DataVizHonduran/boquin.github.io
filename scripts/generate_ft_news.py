@@ -57,6 +57,34 @@ TOPICS = [
         "bg":    "#fff7ed",
         "feed":  "https://www.ft.com/geopolitics?format=rss",
     },
+    {
+        "tag":   "us elections",
+        "label": "US Elections",
+        "color": "#0d9488",
+        "bg":    "#f0fdfa",
+        "feed":  "https://www.ft.com/us-elections?format=rss",
+    },
+    {
+        "tag":   "german politics",
+        "label": "German Politics",
+        "color": "#db2777",
+        "bg":    "#fdf2f8",
+        "feed":  "https://www.ft.com/german-politics?format=rss",
+    },
+    {
+        "tag":   "central banks",
+        "label": "Central Banks",
+        "color": "#0891b2",
+        "bg":    "#ecfeff",
+        "feed":  "https://www.ft.com/central-banks?format=rss",
+    },
+    {
+        "tag":   "us banks",
+        "label": "US Banks",
+        "color": "#4338ca",
+        "bg":    "#eef2ff",
+        "feed":  "https://www.ft.com/us-banks?format=rss",
+    },
 ]
 
 SMART_BREVITY_SYSTEM = (
