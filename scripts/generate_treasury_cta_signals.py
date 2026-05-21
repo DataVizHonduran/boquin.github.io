@@ -203,7 +203,7 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     extreme_peak[col]   = pos
                     extreme_rsi_ok[col] = pd.isna(rsi_val) or (rsi_val < 30)
 
-            # ── Long exhaustion watch (CTAs very long duration / yield falling) ─
+            # ── Long exhaustion watch (CTAs very short duration / yield rising) ─
             elif extreme_mode[col] == 'long':
                 if pos > extreme_peak[col]:
                     extreme_peak[col] = pos
@@ -223,7 +223,7 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     signal_metadata.append({
                         'date':            positions_df.index[i].strftime('%Y-%m-%d'),
                         'tenor':           col.replace('_posy', ''),
-                        'direction':       'Long',       # long duration / falling yields
+                        'direction':       'Short',      # short duration / rising yields
                         'peak_position':   round(float(extreme_peak[col]), 2),
                         'threshold':       round(float(upper_enter), 2),
                         'roc_at_signal':   round(float(roc), 4)   if not pd.isna(roc)     else None,
@@ -237,7 +237,7 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     extreme_peak[col]   = None
                     extreme_rsi_ok[col] = False
 
-            # ── Short exhaustion watch (CTAs very short duration / yield rising) ─
+            # ── Short exhaustion watch (CTAs very long duration / yield falling) ─
             elif extreme_mode[col] == 'short':
                 if pos < extreme_peak[col]:
                     extreme_peak[col] = pos
@@ -257,7 +257,7 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     signal_metadata.append({
                         'date':            positions_df.index[i].strftime('%Y-%m-%d'),
                         'tenor':           col.replace('_posy', ''),
-                        'direction':       'Short',      # short duration / rising yields
+                        'direction':       'Long',       # long duration / falling yields
                         'peak_position':   round(float(extreme_peak[col]), 2),
                         'threshold':       round(float(lower_enter), 2),
                         'roc_at_signal':   round(float(roc), 4)   if not pd.isna(roc)     else None,
@@ -368,8 +368,8 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df,
         hovermode='x unified', plot_bgcolor='white',
         width=1100, height=620,
         annotations=[dict(
-            text=("Positive = CTAs long duration (falling yields) | "
-                  "Negative = CTAs short duration (rising yields)"),
+            text=("Positive = CTAs short duration (rising yields) | "
+                  "Negative = CTAs long duration (falling yields)"),
             xref='paper', yref='paper', x=0.5, y=-0.08,
             showarrow=False, font=dict(size=11, color='grey'), align='center'
         )]

@@ -103,7 +103,7 @@ def create_position_bar_chart(positions, mode):
         showlegend=False,
     )
     fig.add_annotation(
-        text="+ = Long Duration / − = Short Duration",
+        text="+ = Short Duration / − = Long Duration",
         xref='paper', yref='paper', x=0.5, y=-0.17,
         showarrow=False, font=dict(size=11, color='grey')
     )
@@ -125,11 +125,11 @@ def render_yield_row(tenor):
     sp  = slow_positions.get(tenor, 0)
     avg = (fp + sp) / 2
 
-    pos_label = ('Long Duration' if avg > 10
-                 else 'Short Duration' if avg < -10
+    pos_label = ('Short Duration' if avg > 10
+                 else 'Long Duration' if avg < -10
                  else 'Neutral')
-    pos_class = ('dir-long' if avg > 10
-                 else 'dir-short' if avg < -10
+    pos_class = ('dir-short' if avg > 10
+                 else 'dir-long' if avg < -10
                  else '')
     return (
         f'<tr>'
@@ -372,7 +372,7 @@ html = f"""<!DOCTYPE html>
 <footer>
   Data sourced from FRED (Federal Reserve Bank of St. Louis) · DGS2, DGS5, DGS10, DGS30<br>
   CTA exhaustion model: dual-mode EMA positioning with rolling percentile thresholds, ROC filter, RSI confirmation, and strength scoring.<br>
-  Positive position = long duration (falling yields) · Negative position = short duration (rising yields)
+  Positive position = short duration (rising yields) · Negative position = long duration (falling yields)
 </footer>
 
 <script>
