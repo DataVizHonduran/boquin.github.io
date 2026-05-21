@@ -5,8 +5,14 @@ import feedparser
 import json
 import os
 import re
-import sys
+import time
 from datetime import datetime, timezone
+
+try:
+    from huggingface_hub import InferenceClient
+    _HF_AVAILABLE = True
+except ImportError:
+    _HF_AVAILABLE = False
 
 TOPICS = [
     {
@@ -53,6 +59,17 @@ TOPICS = [
     },
 ]
 
+SMART_BREVITY_SYSTEM = (
+    'Write in strict Axios "Smart Brevity" style. '
+    "Structure: 1. Start with a punchy, 1-sentence lede (no qualifiers). "
+    '2. Follow with "**Why it matters:**" and 1-2 sharp causal points. '
+    '3. Use bold headers like "**By the numbers**," "**Between the lines**," or "**What\'s next**." '
+    "Voice: Crisp, economical sentences. No metaphors, no fluff. "
+    "Prioritize clarity and causality. "
+    "Format: Bullets for data/insights. Paragraphs must be 1-2 lines max. "
+    "Output requirements: Deliver the finished note only. Topic:"
+)
+
 OUT_DIR  = os.path.join(os.path.dirname(__file__), "..", "reports", "news")
 OUT_FILE = os.path.join(OUT_DIR, "index.html")
 
@@ -88,14 +105,104 @@ def fetch_articles():
     return articles
 
 
-def build_html(articles):
-    now_str = datetime.now(timezone.utc).strftime("%d %b %Y %H:%M UTC")
-    articles_json = json.dumps(articles, ensure_ascii=False)
-    topics_json   = json.dumps(
+def md_to_html(text):
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    parts = re.split(r'\n{2,}', text.strip())
+    out = []
+    for part in parts:
+        lines = [l.strip() for l in part.split('\n') if l.strip()]
+        if not lines:
+            continue
+        is_bullet = [l.startswith('- ') or l.startswith('* ') for l in lines]
+        if all(is_bullet):
+            items = ''.join(f'<li>{l[2:]}</li>' for l in lines)
+            out.append(f'<ul>{items}</ul>')
+        elif not any(is_bullet):
+            out.append(f'<p>{" ".join(lines)}</p>')
+        else:
+            acc = []
+            mode = None
+            for l, bullet in zip(lines, is_bullet):
+                if bullet:
+                    if mode == 'p' and acc:
+                        out.append(f'<p>{" ".join(acc)}</p>')
+                        acc = []
+                    mode = 'ul'
+                    acc.append(l[2:])
+                else:
+                    if mode == 'ul' and acc:
+                        out.append('<ul>' + ''.join(f'<li>{i}</li>' for i in acc) + '</ul>')
+                        acc = []
+                    mode = 'p'
+                    acc.append(l)
+            if acc:
+                if mode == 'ul':
+                    out.append('<ul>' + ''.join(f'<li>{i}</li>' for i in acc) + '</ul>')
+                else:
+                    out.append(f'<p>{" ".join(acc)}</p>')
+    return ''.join(out)
+
+
+def fetch_summaries(articles, hf_token):
+    if not _HF_AVAILABLE:
+        print("  huggingface_hub not installed — skipping summaries")
+        return {}
+
+    client = InferenceClient(token=hf_token)
+    by_tag = {}
+    for a in articles:
+        by_tag.setdefault(a["tag"], []).append(a)
+
+    summaries = {}
+    for topic in TOPICS:
+        tag   = topic["tag"]
+        label = topic["label"]
+        tag_articles = by_tag.get(tag, [])[:40]
+        if not tag_articles:
+            continue
+
+        print(f"  Generating summary for {label} …", flush=True)
+        article_lines = "\n".join(
+            f"- {a['title']}: {a['summary']}" if a["summary"] else f"- {a['title']}"
+            for a in tag_articles
+        )
+        user_msg = f"Recent headlines:\n{article_lines}"
+
+        for attempt in range(2):
+            try:
+                resp = client.chat.completions.create(
+                    model="google/gemma-3-27b-it",
+                    messages=[
+                        {"role": "system", "content": f"{SMART_BREVITY_SYSTEM} {label}"},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.2,
+                    max_tokens=600,
+                )
+                summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
+                break
+            except Exception as e:
+                if attempt == 0 and "rate" in str(e).lower():
+                    print("    Rate limited — retrying in 10s…", flush=True)
+                    time.sleep(10)
+                else:
+                    print(f"    Failed ({e}) — skipping", flush=True)
+                    break
+
+    return summaries
+
+
+def build_html(articles, summaries=None):
+    if summaries is None:
+        summaries = {}
+    now_str        = datetime.now(timezone.utc).strftime("%d %b %Y %H:%M UTC")
+    articles_json  = json.dumps(articles, ensure_ascii=False)
+    topics_json    = json.dumps(
         [{"tag": t["tag"], "label": t["label"], "color": t["color"], "bg": t["bg"]}
          for t in TOPICS],
         ensure_ascii=False,
     )
+    summaries_json = json.dumps(summaries, ensure_ascii=False)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -140,6 +247,18 @@ body{{font-family:'Inter',system-ui,sans-serif;line-height:1.6;color:#475569;bac
 
 .meta-row{{font-size:.8rem;color:#94a3b8;padding:.25rem 0 1.25rem;border-bottom:1px solid #e4e8ef;margin-bottom:1.5rem}}
 .meta-row strong{{color:#475569}}
+
+/* ── summary banner ── */
+.summary-banner{{max-width:1200px;margin:0 auto 1.5rem;padding:0 2rem}}
+.summary-banner-inner{{background:#fff;border-radius:12px;padding:1.4rem 1.6rem;
+  border-left:4px solid #4f46e5;box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.88rem;color:#475569;line-height:1.6}}
+.summary-banner-inner strong{{color:#0f172a}}
+.summary-banner-inner p{{margin:.4rem 0}}
+.summary-banner-inner ul{{margin:.5rem 0 0 1.2rem;padding:0}}
+.summary-banner-inner li{{margin:.2rem 0}}
+.summary-banner-label{{font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.05em;color:#94a3b8;margin-bottom:.6rem}}
 
 /* ── grid ── */
 .grid{{max-width:1200px;margin:0 auto;padding:0 2rem 4rem;
@@ -210,6 +329,10 @@ body{{font-family:'Inter',system-ui,sans-serif;line-height:1.6;color:#475569;bac
     </div>
   </div>
 
+  <div class="summary-banner" id="summary-banner" style="display:none">
+    <div class="summary-banner-inner" id="summary-banner-inner"></div>
+  </div>
+
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" style="display:none">No articles match the current filters.</div>
 </main>
@@ -220,8 +343,9 @@ body{{font-family:'Inter',system-ui,sans-serif;line-height:1.6;color:#475569;bac
 </footer>
 
 <script>
-const ARTICLES = {articles_json};
-const TOPICS   = {topics_json};
+const ARTICLES  = {articles_json};
+const TOPICS    = {topics_json};
+const SUMMARIES = {summaries_json};
 
 /* build tag buttons */
 const tagBar = document.getElementById('tag-bar');
@@ -244,11 +368,13 @@ let activeTag  = 'all';
 let activeDays = 7;
 
 /* controls */
-const slider   = document.getElementById('days-slider');
-const daysVal  = document.getElementById('days-val');
-const grid     = document.getElementById('grid');
-const empty    = document.getElementById('empty');
-const metaRow  = document.getElementById('meta-row');
+const slider      = document.getElementById('days-slider');
+const daysVal     = document.getElementById('days-val');
+const grid        = document.getElementById('grid');
+const empty       = document.getElementById('empty');
+const metaRow     = document.getElementById('meta-row');
+const banner      = document.getElementById('summary-banner');
+const bannerInner = document.getElementById('summary-banner-inner');
 
 slider.addEventListener('input', () => {{
   activeDays = +slider.value;
@@ -286,6 +412,16 @@ function render() {{
 
   metaRow.innerHTML = `Showing <strong>${{filtered.length}}</strong> article${{filtered.length !== 1 ? 's' : ''}} &nbsp;·&nbsp; Fetched <strong>{now_str}</strong>`;
 
+  /* summary banner */
+  if (activeTag !== 'all' && SUMMARIES[activeTag]) {{
+    const t = topicMap[activeTag];
+    bannerInner.style.borderLeftColor = t.color;
+    bannerInner.innerHTML = '<div class="summary-banner-label">AI Briefing</div>' + SUMMARIES[activeTag];
+    banner.style.display = '';
+  }} else {{
+    banner.style.display = 'none';
+  }}
+
   if (!filtered.length) {{
     grid.innerHTML = '';
     empty.style.display = '';
@@ -322,8 +458,17 @@ def main():
     articles = fetch_articles()
     print(f"  {len(articles)} total articles fetched")
 
+    hf_token = os.environ.get("HF_TOKEN", "")
+    summaries = {}
+    if hf_token:
+        print("Generating AI summaries …")
+        summaries = fetch_summaries(articles, hf_token)
+        print(f"  {len(summaries)} summaries generated")
+    else:
+        print("  HF_TOKEN not set — skipping summaries")
+
     os.makedirs(OUT_DIR, exist_ok=True)
-    html = build_html(articles)
+    html = build_html(articles, summaries)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"  Written → {OUT_FILE}")
