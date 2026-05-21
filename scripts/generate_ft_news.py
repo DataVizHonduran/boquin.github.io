@@ -171,6 +171,11 @@ def md_to_html(text):
     return ''.join(out)
 
 
+def _is_rate_limit(e):
+    combined = str(e) + repr(e)
+    return "429" in combined or "too many" in combined.lower() or "rate limit" in combined.lower()
+
+
 def fetch_summaries(articles, hf_token):
     if not _HF_AVAILABLE:
         print("  huggingface_hub not installed — skipping summaries")
@@ -182,12 +187,17 @@ def fetch_summaries(articles, hf_token):
         by_tag.setdefault(a["tag"], []).append(a)
 
     summaries = {}
+    first = True
     for topic in TOPICS:
         tag   = topic["tag"]
         label = topic["label"]
         tag_articles = by_tag.get(tag, [])[:40]
         if not tag_articles:
             continue
+
+        if first:
+            time.sleep(8)
+            first = False
 
         print(f"  Generating summary for {label} …", flush=True)
         article_lines = "\n".join(
@@ -210,16 +220,15 @@ def fetch_summaries(articles, hf_token):
                 summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
                 break
             except Exception as e:
-                is_rate_limit = "429" in str(e) or "too many" in str(e).lower()
-                if is_rate_limit and attempt < 2:
-                    wait = 30 * (attempt + 1)
+                if _is_rate_limit(e) and attempt < 2:
+                    wait = 45 * (attempt + 1)
                     print(f"    Rate limited — retrying in {wait}s…", flush=True)
                     time.sleep(wait)
                 else:
                     print(f"    Failed ({e}) — skipping", flush=True)
                     break
 
-        time.sleep(3)
+        time.sleep(10)
 
     return summaries
 
