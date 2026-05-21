@@ -171,7 +171,7 @@ def fetch_summaries(articles, hf_token):
         for attempt in range(2):
             try:
                 resp = client.chat.completions.create(
-                    model="google/gemma-3-27b-it",
+                    model="google/gemma-4-31B-it",
                     messages=[
                         {"role": "system", "content": f"{SMART_BREVITY_SYSTEM} {label}"},
                         {"role": "user", "content": user_msg},
