@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2008-08-08 vs 2008-06-25</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2008-08-08 vs 2008-06-25
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-22 10:56 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and strategist, I have analyzed the transition between the June 25 and August 8, 2008, FOMC statements. This period is critical, as the Committee was attempting to balance a burgeoning financial crisis (the "Great Recession") against stubborn commodity-driven inflation.</p>
+<hr />
+<h2>1. Redlined Statement (2008-08-08)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 2 percent.<br />
+~~Recent information indicates that overall economic activity continues to expand, partly reflecting some firming in household spending.~~ <strong>Economic activity expanded in the second quarter, partly reflecting growth in consumer spending and exports.</strong> However, labor markets have softened further and financial markets remain under considerable stress. Tight credit conditions, the ongoing housing contraction, and ~~the rise in~~ <strong>elevated</strong> energy prices are likely to weigh on economic growth over the next few quarters. <strong>Over time, the</strong> substantial easing of monetary policy ~~to date~~, combined with ongoing measures to foster market liquidity, should help to promote moderate <strong>economic</strong> growth ~~over time~~.<br />
+<strong>Inflation has been high, spurred by the earlier increases in the prices of energy and some other commodities, and some indicators of inflation expectations have been elevated.</strong> The Committee expects inflation to moderate later this year and next year~~. However, in light of the continued increases in the prices of energy and some other commodities and the elevated state of some indicators of inflation expectations, uncertainty about the inflation outlook remains high~~<strong>, but the inflation outlook remains highly uncertain.</strong><br />
+Although downside risks to growth remain, ~~they appear to have diminished somewhat, and~~ the upside risks to inflation ~~and inflation expectations~~ are also of <strong>significant concern to the Committee</strong>. The Committee will continue to monitor economic and financial developments and will act as needed to promote sustainable economic growth and price stability.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"Recent information indicates... continues to expand"</td>
+<td style="text-align: left;">"Economic activity expanded in the second quarter"</td>
+<td style="text-align: left;">Shift from qualitative "recent info" to quantitative "quarterly" data; adds "exports" as a growth driver.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"the rise in energy prices"</td>
+<td style="text-align: left;">"elevated energy prices"</td>
+<td style="text-align: left;">Shift from a <em>trend</em> (rising) to a <em>state</em> (already high), suggesting a plateau or peak.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"they [downside risks] appear to have diminished somewhat"</td>
+<td style="text-align: left;">(Removed entirely)</td>
+<td style="text-align: left;"><strong>Critical:</strong> The Fed is no longer confident that growth risks are fading; they are now treating growth and inflation risks as equally potent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"upside risks... have increased"</td>
+<td style="text-align: left;">"upside risks... are also of significant concern"</td>
+<td style="text-align: left;">Stronger, more urgent language regarding inflation anxiety.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The characterization of inflation has shifted from a forward-looking concern to a present-tense reality. In June, the Committee noted that "uncertainty... remains high." By August, they explicitly state, <strong>"Inflation has been high."</strong> This is a significant admission. While they still expect moderation, the phrasing "significant concern" replaces the more passive "have increased," signaling that the Committee is feeling more pressure to address price stability despite the slowing economy.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The language regarding labor markets remains identical ("softened further"), indicating a persistent decline. However, the most vital shift is the <strong>deletion</strong> of the phrase "they [downside risks to growth] appear to have diminished somewhat." By removing this, the Fed is signaling that the economic outlook has deteriorated or stabilized at a low level, rather than improving. The addition of "exports" as a growth driver suggests a reliance on external demand as domestic household spending remains fragile.</p>
+<h3>Forward Guidance</h3>
+<p>The guidance remains strictly data-dependent. However, the structural movement of the sentence regarding "substantial easing" to the end of the second paragraph—and the removal of "to date"—slightly decouples the previous easing from the current moment, focusing instead on the <em>long-term</em> effect ("Over time..."). The Committee is maintaining a "wait-and-see" posture, though the tension between growth risks and inflation risks is now presented as a balanced, high-stakes conflict.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Tonal Shift: Hawkish Lean (within a Neutral Action)</strong></p>
+<p>While the target rate remained unchanged at 2%, the tone shifted <strong>Hawkish</strong>. The Committee upgraded its language on inflation from "uncertainty" to "significant concern" and explicitly stated that "Inflation has been high." Most importantly, by deleting the claim that downside risks to growth had "diminished," the Fed acknowledged a more precarious economic balance. The Committee is effectively signaling that they cannot aggressively cut rates to save growth because they are now deeply concerned about entrenched inflation. This creates a "policy deadlock" tone, where the Fed is trapped between a slowing economy and high prices.</p>
+</div>
+</body>
+</html>
