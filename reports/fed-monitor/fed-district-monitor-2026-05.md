@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (17 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (18 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -10,31 +10,28 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** May 22, 2026
-**SUBJECT:** Critical Analysis of Recent Federal Reserve District Research
+**DATE:** May 23, 2026
+**SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-After reviewing the latest publications from the Fed districts, I have isolated the following papers as the most analytically significant for our current portfolio positioning and macro outlook.
+I have reviewed the latest research cycle from the Fed districts. While there is significant academic noise, four key themes emerge that directly impact our portfolio positioning regarding inflation, growth, and systemic risk.
 
-1. **[NY] Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
-The closure of the Strait of Hormuz has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI. This introduces significant execution risk for Big Tech’s CAPEX plans and suggests that "AI-driven productivity" may be delayed by geopolitical bottlenecks.
+1. **NY: Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
+The closure of the Strait of Hormuz has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI. This suggests that the "AI productivity miracle" may face a physical bottleneck, potentially delaying the ROI on massive tech capex and fueling cost-push inflation.
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The March 2026 energy price surge is hitting households unevenly, reinforcing a "K-shaped" consumption pattern where high-income resilience masks severe distress in lower-income cohorts. This divergence complicates the Fed's mandate, as aggregate data may hide a burgeoning crisis in consumer solvency.
+2. **NY: AI’s Macroeconomic Challenges and Promises**
+For the first time in Q3 2025, Big Tech’s capital expenditures exceeded their operating earnings. This indicates a pivot from "harvesting" software profits to a high-risk "build-out" phase, shifting the macro narrative from immediate productivity gains to a massive, speculative investment cycle.
 
-3. **[NY] AI’s Macroeconomic Challenges and Promises**
-For the first time in Q3 2025, major tech firms' capital expenditures exceeded their operating earnings. This shift signals a transition from the "hype/software" phase to a massive "infrastructure build-out" phase, raising the stakes for the eventual ROI on AI investments.
+3. **NY: Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal growing instability in the Non-Bank Financial Institution (NBFI) sector. This "shadow banking" stress could migrate to the traditional banking system, necessitating a closer look at counterparty risk and liquidity buffers.
 
-4. **[NY] Stress and Strain from NBFIs to Banks**
-Recent bankruptcies (Tricolor, First Brands) and redemption freezes at Blue Owl Capital indicate growing instability in the Non-Bank Financial Institution (NBFI) sector. This suggests that "shadow banking" stresses are beginning to leak back into the traditional banking system, increasing systemic risk.
+4. **NY: Tracking/Explaining the K-Shaped Economy**
+Recent data confirms a stark divergence where aggregate spending growth is driven almost exclusively by high-income households, while lower-income segments struggle with energy price surges. This "K-shaped" reality suggests that aggregate consumption data is masking a fragile consumer base, increasing the risk of a sudden demand shock if high-end spending cools.
 
-5. **[NY] Federal Student Loan Defaults Return After Pandemic Pause**
-With household debt rising to $18.8 trillion and student loan defaults resurfacing in 2026:Q1, the "pandemic cushion" has officially evaporated. This creates a drag on discretionary spending and increases the probability of credit tightening in the consumer sector.
-
-6. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s productivity boom, this research suggests that if AI mirrors that era, the Fed may have more room to maintain higher rates without stifling growth. This provides a theoretical framework for a "higher-for-longer" regime if trend productivity actually shifts upward.
+5. **RIC: Productivity Growth and Monetary Policy in the 1990s**
+By revisiting the 1990s, the Fed is signaling a theoretical framework for how to handle "trend productivity" shifts caused by AI. This suggests the FOMC may be more inclined to tolerate higher nominal growth without hiking rates if they believe AI is permanently shifting the potential GDP ceiling.
 
 **Synthesis:**
-The U.S. economy is currently defined by a precarious "K-shaped" divergence, where AI-driven corporate investment is battling severe geopolitical supply shocks and eroding low-income consumer solvency. We are moving from a period of monetary transition into one of structural volatility, where NBFI instability and energy shocks could trigger a systemic correction despite the long-term promise of AI productivity.
+The macro outlook is currently defined by a tension between a speculative AI-driven investment boom and acute geopolitical supply shocks that are exacerbating domestic economic inequality. We are moving from a period of monetary transition into one of structural volatility, where NBFI instability and "K-shaped" consumption patterns create significant tail risks.
 
 ---
 
@@ -143,7 +140,14 @@ The paper evaluates the role of Community Development Financial Institutions (CD
 **Tags:** banking · credit · financial stability · regional economy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 3
+**Content Type:** Working Papers | **New:** 0 of 4
+
+### (cached) [Taxation and the Global Allocation of Intangibles](https://www.fedinprint.org/item/fedlwp/101822/103288)
+**Published:** 2026-05-21 | **Authors:** 
+
+The paper examines how corporate tax regimes influence the strategic placement and ownership of intangible assets across borders. It argues that tax differentials drive the global allocation of intellectual property to optimize after-tax returns.
+
+**Tags:** fiscal policy · international · emerging markets · trade · GDP growth
 
 ### (cached) [Firm-Worker Matches: Experience or Inspection Goods?](https://www.fedinprint.org/item/fedlwp/103248/original)
 **Published:** 2026-05-14 | **Authors:** 
@@ -170,5 +174,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 17
-- Total cache size: 17 items
+- Already cached: 18
+- Total cache size: 18 items

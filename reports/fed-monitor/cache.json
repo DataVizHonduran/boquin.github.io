@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-22T10:26:56.933360+00:00",
-    "totalItems": 62
+    "lastRun": "2026-05-23T09:03:59.079543+00:00",
+    "totalItems": 63
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1069,11 +1069,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-13T09:51:08.493357+00:00",
-      "lastChecked": "2026-05-22T10:26:56.933360+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-22T10:26:56.933360+00:00"
+      "tagsGeneratedAt": "2026-05-23T09:03:59.079543+00:00"
     },
     "b6b7c032a27e809527bd2da58ea3c220a26ec2beba4ad15ca7c49514e1d27771": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-15",
@@ -1205,7 +1205,7 @@
       "publicationDate": "2026-05-20",
       "authors": [],
       "firstSeen": "2026-05-20T10:28:12.577734+00:00",
-      "lastChecked": "2026-05-22T10:26:56.933360+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
       "scrapedSnippet": "One model suggests that the optimal unemployment insurance program would be set up pretty close to what the U.S. currently has.",
       "aiSummary": "The study evaluates the efficiency of unemployment insurance programs through economic modeling. It concludes that the current U.S. framework aligns closely with the theoretical optimal design for such programs.",
       "tags": [
@@ -1226,11 +1226,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-20T10:28:12.577734+00:00",
-      "lastChecked": "2026-05-22T10:26:56.933360+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-22T10:26:56.933360+00:00"
+      "tagsGeneratedAt": "2026-05-23T09:03:59.079543+00:00"
     },
     "d50d88215dd5c3db68a274413f46bc50cfd545d1751dad9295d762b0efa3d388": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/ais-macroeconomic-challenges-and-promises/",
@@ -1241,7 +1241,7 @@
       "publicationDate": "2026-05-20",
       "authors": [],
       "firstSeen": "2026-05-21T10:42:41.864700+00:00",
-      "lastChecked": "2026-05-22T10:26:56.933360+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
       "scrapedSnippet": "In the third quarter of 2025, America's largest tech firms for the first time spent more on capital investment than they earned from operations. The implication is that AI, a technology with the potential to make the economy more productive, is, for now, absorbing resources faster than it is generating returns. This post discusses how the tension between AI's long-run promise and its short-run costs affects the outlooks for inflation, real activity, and financial stability.",
       "aiSummary": "The paper examines the tension between the long-term productivity potential of AI and its current high capital costs. It finds that AI investment is currently absorbing resources faster than it is generating operational returns.",
       "tags": [
@@ -1262,11 +1262,32 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-22T10:26:56.933360+00:00",
-      "lastChecked": "2026-05-22T10:26:56.933360+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-22T10:26:56.933360+00:00"
+      "tagsGeneratedAt": "2026-05-23T09:03:59.079543+00:00"
+    },
+    "c964e8f3551f880a8f0c62db97633cc8e84574567fbaf2c1fd8ddd056ce66ae6": {
+      "url": "https://www.fedinprint.org/item/fedlwp/101822/103288",
+      "title": "Taxation and the Global Allocation of Intangibles",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-05-21",
+      "authors": [],
+      "firstSeen": "2026-05-23T09:03:59.079543+00:00",
+      "lastChecked": "2026-05-23T09:03:59.079543+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper examines how corporate tax regimes influence the strategic placement and ownership of intangible assets across borders. It argues that tax differentials drive the global allocation of intellectual property to optimize after-tax returns.",
+      "tags": [
+        "fiscal policy",
+        "international",
+        "emerging markets",
+        "trade",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-05-23T09:03:59.079543+00:00"
     }
   }
 }
