@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2006-10-25 vs 2006-09-20</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2006-10-25 vs 2006-09-20
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-24 10:12 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from September 20, 2006, and October 25, 2006.</p>
+<hr />
+<h2>1. Redlined Statement (2006-10-25)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 5-1/4 percent.<br />
+~~The moderation in economic growth appears to be continuing~~ <strong>Economic growth has slowed over the course of the year</strong>, partly reflecting a cooling of the housing market. <strong>Going forward, the economy seems likely to expand at a moderate pace.</strong><br />
+Readings on core inflation have been elevated, and the high ~~levels~~ <strong>level</strong> of resource utilization ~~and of the prices of energy and other commodities~~ have the potential to sustain inflation pressures. However, inflation pressures seem likely to moderate over time, reflecting reduced impetus from energy prices, contained inflation expectations, and the cumulative effects of monetary policy actions and other factors restraining aggregate demand.<br />
+Nonetheless, the Committee judges that some inflation risks remain. The extent and timing of any additional firming that may be needed to address these risks will depend on the evolution of the outlook for both inflation and economic growth, as implied by incoming information.<br />
+Voting for the FOMC monetary policy action were: Ben S. Bernanke, Chairman; Timothy F. Geithner, Vice Chairman; Susan S. Bies; ~~Jack Guynn;~~ Donald L. Kohn; Randall S. Kroszner; Frederic S. Mishkin; Sandra Pianalto; <strong>William Poole;</strong> Kevin M. Warsh; and Janet L. Yellen. Voting against was Jeffrey M. Lacker, who preferred an increase of 25 basis points in the federal funds rate target at this meeting.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"The moderation in economic growth appears to be continuing"</td>
+<td style="text-align: left;">"Economic growth has slowed over the course of the year"</td>
+<td style="text-align: left;"><strong>Shift from observation to conclusion.</strong> The Committee is now more certain that a slowdown has occurred rather than just "appearing" to continue.</td>
+</tr>
+<tr>
+<td style="text-align: left;">(N/A)</td>
+<td style="text-align: left;">"Going forward, the economy seems likely to expand at a moderate pace."</td>
+<td style="text-align: left;"><strong>Introduction of a growth projection.</strong> This anchors expectations for a slower growth trajectory, reducing the urgency for further hikes.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"and of the prices of energy and other commodities"</td>
+<td style="text-align: left;">(N/A)</td>
+<td style="text-align: left;"><strong>Narrowing of inflation drivers.</strong> The Committee has removed commodity prices as a primary driver of <em>sustained</em> inflation pressures.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"levels" (plural)</td>
+<td style="text-align: left;">"level" (singular)</td>
+<td style="text-align: left;">Minor grammatical adjustment.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jack Guynn</td>
+<td style="text-align: left;">William Poole</td>
+<td style="text-align: left;">Change in voting membership.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee maintains its view that core inflation is elevated, but there is a subtle yet important narrowing of the risk profile. By removing "the prices of energy and other commodities" from the list of factors that "have the potential to sustain inflation pressures," the FOMC is signaling that commodity volatility is no longer viewed as a primary structural threat to price stability. The focus has shifted almost exclusively to "resource utilization" (the output gap/labor market tightness).</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>There is a noticeable softening in the growth narrative. In September, the Committee used cautious language ("appears to be continuing"). By October, they have transitioned to a definitive statement of fact ("has slowed over the course of the year"). Furthermore, the addition of the forward-looking sentence regarding a "moderate pace" of expansion suggests the Committee is preparing the markets for a period of lower growth, which typically reduces the pressure to raise rates.</p>
+<h3>Forward Guidance</h3>
+<p>The "boilerplate" language regarding "additional firming" remains identical. This indicates that while the Committee is seeing a slowdown, they are not yet ready to signal a pivot toward rate cuts. They remain data-dependent, keeping the door open for hikes if inflation risks materialize, though the updated growth outlook makes such hikes less likely.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Slightly Dovish</strong></p>
+<p>While the federal funds rate remained unchanged and the "firming" language was preserved, the overall tone shifted in a dovish direction. The Committee moved from observing a potential moderation in growth to confirming a slowdown and projecting a "moderate" future pace. Simultaneously, they stripped away commodity prices as a key driver of sustained inflation pressures. By acknowledging a weaker economic trajectory and a narrower set of inflation risks, the Committee has effectively lowered the probability of near-term rate increases, despite the continued dissent from Jeffrey Lacker.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2006-09-20 vs 2006-08-08</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2006-09-20 vs 2006-08-08
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-24 10:15 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from August 8, 2006, and September 20, 2006.</p>
+<hr />
+<h2>1. Redlined Statement (2006-09-20)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 5-1/4 percent.<br />
+~~Economic growth has moderated from its quite strong pace earlier this year, partly reflecting a gradual cooling of the housing market and the lagged effects of increases in interest rates and energy prices.~~ <strong>The moderation in economic growth appears to be continuing, partly reflecting a cooling of the housing market.</strong><br />
+Readings on core inflation have been elevated ~~in recent months~~, and the high levels of resource utilization and of the prices of energy and other commodities have the potential to sustain inflation pressures. However, inflation pressures seem likely to moderate over time, reflecting <strong>reduced impetus from energy prices,</strong> contained inflation expectations, and the cumulative effects of monetary policy actions and other factors restraining aggregate demand.<br />
+Nonetheless, the Committee judges that some inflation risks remain. The extent and timing of any additional firming that may be needed to address these risks will depend on the evolution of the outlook for both inflation and economic growth, as implied by incoming information.<br />
+Voting for the FOMC monetary policy action were: Ben S. Bernanke, Chairman; Timothy F. Geithner, Vice Chairman; Susan S. Bies; Jack Guynn; Donald L. Kohn; Randall S. Kroszner; <strong>Frederic S. Mishkin;</strong> Sandra Pianalto; Kevin M. Warsh; and Janet L. Yellen. Voting against was Jeffrey M. Lacker, who preferred an increase of 25 basis points in the federal funds rate target at this meeting.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"Economic growth has moderated from its quite strong pace earlier this year..."</td>
+<td style="text-align: left;">"The moderation in economic growth appears to be continuing..."</td>
+<td style="text-align: left;"><strong>Bearish/Dovish:</strong> Shifts the narrative from a one-time adjustment to a continuing trend of slowing growth.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"...gradual cooling... and the lagged effects of increases in interest rates and energy prices."</td>
+<td style="text-align: left;">"...cooling of the housing market."</td>
+<td style="text-align: left;"><strong>Simplification:</strong> Removes explicit credit to previous rate hikes for the slowdown, focusing solely on the housing sector.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"...in recent months" (regarding core inflation)</td>
+<td style="text-align: left;"><em>(None)</em></td>
+<td style="text-align: left;"><strong>Neutral/Hawkish:</strong> Removing the time qualifier makes the "elevated" nature of core inflation sound more persistent.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>(None)</em></td>
+<td style="text-align: left;">"reduced impetus from energy prices"</td>
+<td style="text-align: left;"><strong>Dovish:</strong> Identifies a specific exogenous factor (falling energy costs) helping to lower inflation.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>(None)</em></td>
+<td style="text-align: left;">"Frederic S. Mishkin"</td>
+<td style="text-align: left;"><strong>Administrative:</strong> Change in voting membership.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee maintains a dual-track view of inflation. While they removed the phrase "in recent months" when describing elevated core inflation—which technically suggests a more persistent concern—they added a crucial new driver for the moderation of inflation: <strong>"reduced impetus from energy prices."</strong> This indicates that the Committee is seeing a tangible decline in headline pressures, which provides them more breathing room to hold rates steady despite elevated core readings.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>There is a notable shift in the characterization of economic activity. The August statement looked backward ("has moderated from its quite strong pace"), whereas the September statement looks forward/present ("appears to be continuing"). By framing the slowdown as a continuing process and removing the mention of "lagged effects of interest rates," the Committee is signaling a higher degree of concern regarding the trajectory of GDP and the health of the housing market.</p>
+<h3>Forward Guidance</h3>
+<p>The forward guidance remains <strong>identical</strong>. The phrase "additional firming that may be needed" is preserved, ensuring that the market does not prematurely price in a pivot to rate cuts. The Committee remains strictly data-dependent, balancing the "evolution of the outlook for both inflation and economic growth."</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Tonal Shift: Slightly Dovish</strong></p>
+<p>While the Committee kept the "firming" language to ward off market exuberance, the underlying narrative shifted toward a more cautious stance. The transition from describing growth as having "moderated" to stating that the moderation "appears to be continuing" suggests a growing concern about economic momentum. Furthermore, explicitly citing "reduced impetus from energy prices" as a reason for inflation to moderate reduces the perceived urgency for further rate hikes. The fact that Jeffrey Lacker remained the lone dissenter calling for a hike confirms that the consensus of the Committee has moved further away from tightening than it was in August.</p>
+</div>
+</body>
+</html>

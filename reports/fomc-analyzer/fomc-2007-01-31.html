@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2007-01-31 vs 2006-12-12</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2007-01-31 vs 2006-12-12
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-24 10:03 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from December 12, 2006, and January 31, 2007. </p>
+<p>The transition between these two statements is subtle but critical, reflecting a Committee attempting to balance a stabilizing housing market against a cooling inflation profile.</p>
+<hr />
+<h2>1. Redlined Statement (2007-01-31)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 5-1/4 percent. </p>
+<p>~~Economic growth has slowed over the course of the year, partly reflecting a substantial cooling of the housing market. Although recent indicators have been mixed,~~ <strong>Recent indicators have suggested somewhat firmer economic growth, and some tentative signs of stabilization have appeared in the housing market.</strong> Overall, the economy seems likely to expand at a moderate pace ~~on balance~~ over coming quarters. </p>
+<p>~~Readings on core inflation have been elevated,~~ <strong>Readings on core inflation have improved modestly in recent months,</strong> and inflation pressures seem likely to moderate over time. ~~However,~~ <strong>However,</strong> the high level of resource utilization has the potential to sustain inflation pressures. ~~reflecting reduced impetus from energy prices, contained inflation expectations, and the cumulative effects of monetary policy actions and other factors restraining aggregate demand.~~</p>
+<p>The Committee judges that some inflation risks remain. The extent and timing of any additional firming that may be needed to address these risks will depend on the evolution of the outlook for both inflation and economic growth, as implied by incoming information. </p>
+<p>Voting for the FOMC monetary policy action were: Ben S. Bernanke, Chairman; Timothy F. Geithner, Vice Chairman; Susan S. Bies; <strong>Thomas M. Hoenig;</strong> Donald L. Kohn; Randall S. Kroszner; <strong>Cathy E. Minehan;</strong> Frederic S. Mishkin; <strong>Michael H. Moskow;</strong> William Poole; and Kevin M. Warsh. ~~Voting against was Jeffrey M. Lacker, who preferred an increase of 25 basis points in the federal funds rate target at this meeting.~~</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"Economic growth has slowed... substantial cooling of the housing market."</td>
+<td style="text-align: left;">"Recent indicators have suggested somewhat firmer economic growth... tentative signs of stabilization [in housing]."</td>
+<td style="text-align: left;"><strong>Hawkish.</strong> The Committee is less concerned about a growth slump and the housing collapse than it was in December.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Readings on core inflation have been elevated"</td>
+<td style="text-align: left;">"Readings on core inflation have improved modestly"</td>
+<td style="text-align: left;"><strong>Dovish.</strong> A direct admission that inflation is trending downward.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Detailed list of reasons for inflation moderation (energy, expectations, policy effects).</td>
+<td style="text-align: left;">(Removed detailed justifications)</td>
+<td style="text-align: left;"><strong>Neutral/Technical.</strong> Simplifies the narrative; the Committee no longer feels the need to "prove" why inflation will moderate.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dissent by Jeffrey M. Lacker (+25bps).</td>
+<td style="text-align: left;">(Unanimous vote for the action)</td>
+<td style="text-align: left;"><strong>Dovish.</strong> The internal pressure to hike rates has subsided.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>There is a notable shift in the characterization of inflation. In December, the Committee described core inflation as "elevated." By January, this shifted to "improved modestly." While the Committee maintains that "resource utilization" (a reference to a tight labor market) remains a risk, the removal of the detailed list of factors restraining aggregate demand suggests they are now observing the results of their policy rather than forecasting them.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The most significant shift is in the growth narrative. The December statement was cautious, highlighting a "substantial cooling" of housing. The January statement pivots to "firmer economic growth" and "tentative signs of stabilization" in housing. This suggests the Committee believed the worst of the initial housing shock had passed, reducing the immediate urgency for a policy pivot toward easing.</p>
+<h3>Forward Guidance</h3>
+<p>The forward guidance remains virtually identical. The Committee continues to use "data-dependent" language, stating that "additional firming" (rate hikes) depends on the evolution of inflation and growth. By keeping this language unchanged while reporting "improved" inflation and "firmer" growth, the Committee is effectively keeping its options open without committing to a specific direction.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Overall Tone: Neutral to Slightly Dovish</strong></p>
+<p>While the growth and housing commentary shifted <strong>Hawkishly</strong> (suggesting the economy is stronger than previously thought), the overall tone is <strong>Slightly Dovish</strong>. This is driven by two primary factors: first, the explicit upgrade of inflation readings from "elevated" to "improved modestly"; and second, the disappearance of the hawkish dissent from Jeffrey Lacker. In December, there was an active push within the Committee to raise rates; by January, that push had vanished, and the narrative shifted toward inflation moderation. The Committee is signaling a "wait-and-see" approach, having moved from a state of active concern about inflation to a state of cautious observation.</p>
+</div>
+</body>
+</html>
