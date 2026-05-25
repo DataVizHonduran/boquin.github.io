@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2005-05-03 vs 2005-03-22</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2005-05-03 vs 2005-03-22
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-25 12:04 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from March 22, 2005, and May 3, 2005.</p>
+<hr />
+<h2>1. Redlined Statement (2005-05-03)</h2>
+<p>The Federal Open Market Committee decided today to raise its target for the federal funds rate by 25 basis points to <strong>3 percent</strong>. ~~2-3/4 percent.~~<br />
+The Committee believes that, even after this action, the stance of monetary policy remains accommodative and, coupled with robust underlying growth in productivity, is providing ongoing support to economic activity. ~~Output evidently continues to grow at a solid pace despite the rise in energy prices, and~~ <strong>Recent data suggest that the solid pace of spending growth has slowed somewhat, partly in response to the earlier increases in energy prices.</strong> labor market conditions ~~continue~~ <strong>however, apparently continue</strong> to improve gradually. ~~Though~~ <strong>Longer-term inflation expectations remain well contained.</strong> ~~longer-term inflation expectations remain well contained,~~ pressures on inflation have picked up in recent months and pricing power is more evident. ~~The rise in energy prices, however, has not notably fed through to core consumer prices.~~</p>
+<p>The Committee perceives that, with appropriate monetary policy action, the upside and downside risks to the attainment of both sustainable growth and price stability should be kept roughly equal. With underlying inflation expected to be contained, the Committee believes that policy accommodation can be removed at a pace that is likely to be measured. Nonetheless, the Committee will respond to changes in economic prospects as needed to fulfill its obligation to maintain price stability.</p>
+<hr />
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"Output evidently continues to grow at a solid pace despite the rise in energy prices"</td>
+<td style="text-align: left;">"Recent data suggest that the solid pace of spending growth has slowed somewhat..."</td>
+<td style="text-align: left;"><strong>Shift in Growth Outlook:</strong> Acknowledgment that energy prices are now actively weighing on consumption/spending.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"The rise in energy prices... has not notably fed through to core consumer prices."</td>
+<td style="text-align: left;">(Removed entirely)</td>
+<td style="text-align: left;"><strong>Inflation Caution:</strong> Removing the "buffer" language suggests the Committee is less confident that energy shocks are contained.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"continue to improve gradually"</td>
+<td style="text-align: left;">"however, apparently continue to improve gradually"</td>
+<td style="text-align: left;"><strong>Nuance:</strong> The addition of "however" and "apparently" creates a contrast with slowing spending, signaling a slight decrease in certainty.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+The Committee maintains that longer-term expectations are contained, but the structural change in the paragraph is telling. By removing the sentence stating that energy prices had <em>not</em> fed through to core prices, the FOMC is signaling a heightened vigilance. They are no longer explicitly dismissing the risk of second-round effects from energy costs.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+There is a noticeable pivot regarding economic momentum. In March, the Committee viewed growth as "solid" <em>despite</em> energy prices. By May, they admit that spending growth has "slowed somewhat" <em>because</em> of energy prices. The labor market is still viewed as improving, but the phrasing "apparently continue" introduces a layer of caution not present in the previous statement.</p>
+<p><strong>Forward Guidance</strong><br />
+The "boilerplate" guidance remains identical: the Committee still views the policy stance as "accommodative," intends to remove that accommodation at a "measured" pace, and seeks to balance upside and downside risks. The commitment to a gradual path remains the primary anchor.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Neutral to Slightly Dovish (in outlook), though Hawkish (in action).</strong></p>
+<p>While the Committee took a <strong>Hawkish action</strong> (raising rates by another 25bps), the <strong>tonal shift in the text is slightly Dovish</strong>. The Committee has moved from a position of confidence in "solid" growth to acknowledging a slowdown in spending. By admitting that energy prices are now impacting the real economy and removing the reassurance that core inflation is insulated from energy shocks, the FOMC is signaling that the economic environment is becoming more fragile. They are continuing the "measured" hiking cycle, but they are doing so with a more cautious eye on growth headwinds.</p>
+</div>
+</body>
+</html>
