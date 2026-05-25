@@ -98,7 +98,7 @@ def load_data() -> str:
 # LLM
 # ---------------------------------------------------------------------------
 
-def call_gemma(messages: list[dict], hf_token: str, max_tokens: int = 700) -> str:
+def call_gemma(messages: list[dict], hf_token: str, max_tokens: int = 1200) -> str:
     client = InferenceClient(model=MODEL_ID, token=hf_token, timeout=300)
     for attempt in range(5):
         try:
