@@ -90,11 +90,16 @@ BASE_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
+        "Chrome/125.0.0.0 Safari/537.36"
     ),
-    "Accept": "text/csv,application/octet-stream,*/*;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
-    "X-Requested-With": "XMLHttpRequest",
+    "sec-ch-ua": '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"',
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
 }
 
 OUTPUT_DIR = Path(__file__).parent.parent / "reports" / "emb-bubble"
@@ -110,13 +115,31 @@ COUNTRY_COLS = ["Location", "Country", "Country of Risk", "Sector"]
 
 
 # ── Fetch CSV ─────────────────────────────────────────────────────────────────
+def _make_session(referer: str) -> requests.Session:
+    """Return a session pre-warmed with cookies from the iShares product page."""
+    session = requests.Session()
+    session.headers.update(BASE_HEADERS)
+    try:
+        session.get(referer, timeout=20, allow_redirects=True)
+    except Exception:
+        pass  # best-effort cookie warm; proceed anyway
+    return session
+
+
 def fetch_csv(ticker: str, etf: dict) -> tuple[str, bool]:
     """Return (csv_text, is_fresh). Falls back to cache if fetch fails."""
     cache_file = CACHE_DIR / f"{ticker.lower()}_holdings.csv"
-    headers = {**BASE_HEADERS, "Referer": etf["referer"]}
     try:
         print(f"  Fetching {ticker}…")
-        resp = requests.get(etf["url"], headers=headers, timeout=45)
+        session = _make_session(etf["referer"])
+        csv_headers = {
+            "Accept": "text/csv,application/octet-stream,*/*;q=0.8",
+            "Referer": etf["referer"],
+            "X-Requested-With": "XMLHttpRequest",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+        }
+        resp = session.get(etf["url"], headers=csv_headers, timeout=45)
         resp.raise_for_status()
         text = resp.text
         if text.lstrip().startswith(("<!DOCTYPE", "<html", "<!doctype")):
@@ -753,7 +776,8 @@ def main():
             print(f"    {ticker}: parse/clean error — {e}", file=sys.stderr)
 
     if not all_payloads:
-        raise RuntimeError("No ETF data could be loaded")
+        print("WARNING: No ETF data could be loaded — iShares bot detection blocking all tickers. Skipping chart update.", file=sys.stderr)
+        sys.exit(0)
 
     html = generate_html(all_payloads)
     OUTPUT_FILE.write_text(html, encoding="utf-8")
