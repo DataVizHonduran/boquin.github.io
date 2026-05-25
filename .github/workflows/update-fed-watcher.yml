@@ -43,6 +43,6 @@ jobs:
           git add reports/fed-watcher/
           git diff --staged --quiet || (
             git commit -m "Fed Watcher — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase --autostash &&
+            git pull --rebase --autostash -X theirs &&
             git push
           )
