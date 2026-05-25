@@ -99,6 +99,12 @@
   "hfiresearch.substack.com": [],
   "www.notboring.co": [
     {
+      "title": "Weekly Dose of Optimism #194",
+      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-194",
+      "date": "2026-05-22",
+      "description": "Reta Phase 3, Colossal Eggs, SpaceX, OpenAI x Erd&#337;s, SendCutSend + Extra Doses"
+    },
+    {
       "title": "Cowboy Space Corporation",
       "url": "https://www.notboring.co/p/cowboy-space-corporation",
       "date": "2026-05-16",
@@ -121,12 +127,6 @@
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-192",
       "date": "2026-05-08",
       "description": "UFO Disclosure, GENE-26.5, Neuralink Brain Surgeon Robot, Magnesium, Aalo DSA, GDM x EVE + Extra Doses"
-    },
-    {
-      "title": "Weekly Dose of Optimism #191",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-191",
-      "date": "2026-05-01",
-      "description": "Cancer Sniffing Dogs, Zuck's Virtual Cell + Space Lasers, Rainmeasurer, De-extincting the Bluebuck, Millennial Dads + Science Breakthroughs + Extra Doses"
     }
   ],
   "macrocreditthinking.substack.com": [
@@ -227,6 +227,18 @@
   ],
   "www.newcomer.co": [
     {
+      "title": "Epic Race for AI Supremacy Hits Overdrive as SpaceX, OpenAI & Anthropic Head for IPOs. Key Investors Poised for Paydays in the Billions.",
+      "url": "https://www.newcomer.co/p/epic-race-for-ai-supremacy-hits-overdrive",
+      "date": "2026-05-22",
+      "description": "Plus, Google tweaks its search box amid agent push & Meta attributes big layoffs to AI"
+    },
+    {
+      "title": "SpaceX IPO: Orbital Data Centers Emerge as a Central Component of Musk's Grand Vision",
+      "url": "https://www.newcomer.co/p/spacex-ipo-orbital-data-centers-emerge",
+      "date": "2026-05-21",
+      "description": "Big ambitions in space-based compute show the rocket-and-AI company's drive to dominate AI infrastructure for his own purposes &#8212; and for re-sale"
+    },
+    {
       "title": "The AI Trade Keeps on Giving as Cerebras, Nvidia & Market Indexes Soar",
       "url": "https://www.newcomer.co/p/the-ai-trade-keeps-on-giving-as-cerebras",
       "date": "2026-05-15",
@@ -243,18 +255,6 @@
       "url": "https://www.newcomer.co/p/13-videos-from-the-cerebral-valley",
       "date": "2026-05-11",
       "description": "Watch our panels from the first Cerebral Valley Voice Summit"
-    },
-    {
-      "title": "Customer Support & Dictation Loom Large As Voice Startup Leaders Prepare for a World of Talking Machines",
-      "url": "https://www.newcomer.co/p/customer-support-and-dictation-loom",
-      "date": "2026-05-08",
-      "description": "Voice models are a few steps behind text models but the industry is preparing for takeoff. Our takeaways from the Cerebral Valley Voice Summit."
-    },
-    {
-      "title": "California's Billionaire Tax Heads for the Ballot. A Compromise Would Serve Everyone Well.",
-      "url": "https://www.newcomer.co/p/californias-billionaire-tax-heads",
-      "date": "2026-05-01",
-      "description": "Plus, the data center push gets bumpy & Musk v. Altman gets lively"
     }
   ],
   "globalmacromethod.substack.com": [
@@ -420,34 +420,34 @@
   ],
   "www.chinatalk.media": [
     {
-      "title": "A U.S. Economic Security \u201cLatency Fund\u201d",
-      "url": "https://www.chinatalk.media/p/a-us-economic-security-latency-fund",
-      "date": "2026-05-15",
-      "description": "'Nuclear Latency' for economic security"
+      "title": "'To the Success of our Hopeless Cause'",
+      "url": "https://www.chinatalk.media/p/the-hopeless-cause-of-the-russian",
+      "date": "2026-05-24",
+      "description": "F."
     },
     {
-      "title": "Xi-Trump to talk AI Safety, Huh?",
-      "url": "https://www.chinatalk.media/p/xi-trump-to-talk-ai-safety-huh",
-      "date": "2026-05-13",
-      "description": "+ChinaTalk in SF, impromptu meetup tonight"
+      "title": "China\u2019s AI optimism isn\u2019t what it seems",
+      "url": "https://www.chinatalk.media/p/chinas-ai-optimism-isnt-what-it-seems",
+      "date": "2026-05-22",
+      "description": "The enthusiasm seems real. But for a population that lived through the mass layoffs of the 1990s, optimism and fear can look identical from the outside."
     },
     {
-      "title": "Macartney to Mar-a-Lago",
-      "url": "https://www.chinatalk.media/p/the-stalemate-summit",
-      "date": "2026-05-12",
-      "description": "Julian Gewirtz on Trump-Xi"
+      "title": "Doing Big Things in Policy",
+      "url": "https://www.chinatalk.media/p/doing-big-things-in-policy",
+      "date": "2026-05-21",
+      "description": "A guide, of sorts"
     },
     {
-      "title": "WarTalk: Iran War with Jack Shanahan",
-      "url": "https://www.chinatalk.media/p/wartalk-iran-war-with-jack-shanahan",
-      "date": "2026-05-09",
-      "description": "'Love Tap' edition"
+      "title": "The Empire of Wuxi",
+      "url": "https://www.chinatalk.media/p/the-empire-of-wuxi",
+      "date": "2026-05-19",
+      "description": "*Not* the TSMC of biotech"
     },
     {
-      "title": "Ken Liu on AI and Freedom",
-      "url": "https://www.chinatalk.media/p/ken-liu-on-ai-and-freedom",
-      "date": "2026-05-06",
-      "description": "this show was such a treat"
+      "title": "Prestige on the Cheap",
+      "url": "https://www.chinatalk.media/p/prestige-on-the-cheap",
+      "date": "2026-05-18",
+      "description": "Reading Trump-Xi Through Cold War History"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -517,6 +517,12 @@
   ],
   "www.parentdata.org": [
     {
+      "title": "How Much Caffeine Is Safe During Pregnancy?",
+      "url": "https://parentdata.org/pregnancy/caffeine-safe-during-pregnancy/",
+      "date": "2026-05-22",
+      "description": "The research on coffee, tea, soda, and more\nEmily Oster, PhD"
+    },
+    {
       "title": "A Popular Drug for Male Hair Loss Can Impact Pregnancy",
       "url": "https://parentdata.org/grown-ups/finasteride-hair-loss-pregnancy/",
       "date": "2026-05-17",
@@ -539,12 +545,6 @@
       "url": "https://parentdata.org/grown-ups/placebo-effect-wellness-research/",
       "date": "2026-05-03",
       "description": "How the placebo effect shows up in research and our daily lives\nEmily Oster, PhD"
-    },
-    {
-      "title": "What to Know About Continuous vs. Intermittent Fetal Monitoring in Labor",
-      "url": "https://parentdata.org/pregnancy/continuous-vs-intermittent-fetal-monitoring/",
-      "date": "2026-04-28",
-      "description": "The risks, benefits, and recommendations for low- and high-risk pregnancies\nEmily Oster, PhD"
     }
   ],
   "debtserious.substack.com": [
@@ -678,6 +678,12 @@
   ],
   "www.weightythoughts.com": [
     {
+      "title": "AI's Plummeting Prices Are a Software Story, Not a Hardware One",
+      "url": "https://weightythoughts.com/p/ais-plummeting-prices-are-a-software",
+      "date": "2026-05-19",
+      "description": "This has made local, open-weight models a real competitor to the frontier"
+    },
+    {
       "title": "World Models Can Change Everything",
       "url": "https://weightythoughts.com/p/world-models-can-change-everything",
       "date": "2026-05-06",
@@ -700,12 +706,6 @@
       "url": "https://weightythoughts.com/p/us-jobs-numbers-arent-as-bad-as-they",
       "date": "2026-03-24",
       "description": "It's Probably Not AI&#8212;Shrinking Immigration Has Changed the Math on What \"Good\" Job Growth Means"
-    },
-    {
-      "title": "AI Agents and Jobs: The Human Bottleneck",
-      "url": "https://weightythoughts.com/p/ai-agents-and-jobs-the-human-bottleneck",
-      "date": "2026-03-20",
-      "description": "AI Changes the Work, Not the Need for Judgment"
     }
   ],
   "chaufa.substack.com": [
@@ -879,34 +879,34 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "Josh Marshall on how US democracy can be saved",
-      "url": "https://www.publicnotice.co/p/josh-marshall-interview-2026",
-      "date": "2026-05-16",
-      "description": "\"You simply can&#8217;t do it with the filibuster and this Supreme Court in place.\""
+      "title": "The triple toll of Trump\u2019s terrible tariffs",
+      "url": "https://www.publicnotice.co/p/trump-tariff-refunds",
+      "date": "2026-05-25",
+      "description": "Ultimately, American workers and consumers suffer three different ways."
     },
     {
-      "title": "Trump's weakness tour comes to China",
-      "url": "https://www.publicnotice.co/p/trumps-weakness-tour-comes-to-china",
-      "date": "2026-05-15",
-      "description": "Trump cowered before Xi &#8212; and threatened to sell out our allies."
+      "title": "The slow-motion humiliation of RFK Jr",
+      "url": "https://www.publicnotice.co/p/kennedy-hhs-out",
+      "date": "2026-05-23",
+      "description": "HHS is in chaos and the MAHA movement looks like a spent force."
     },
     {
-      "title": "Trump's lies disgrace everyone around him",
-      "url": "https://www.publicnotice.co/p/trump-big-lie-judges",
-      "date": "2026-05-15",
-      "description": "Including judges he nominated to lifetime roles."
+      "title": "Chris Hayes on thinking intelligently about AI",
+      "url": "https://www.publicnotice.co/p/chris-hayes-interview-ai",
+      "date": "2026-05-22",
+      "description": "\"The biggest threat is that it just makes everyone stupider, which obviously is a genuine worry.\""
     },
     {
-      "title": "The assault on higher ed goes deeper than you think",
-      "url": "https://www.publicnotice.co/p/the-assault-on-higher-ed-goes-deeper",
-      "date": "2026-05-14",
-      "description": "The regime is quietly working to create a permanent underclass."
+      "title": "How Hennepin County unwound an ICE agent's web of lies",
+      "url": "https://www.publicnotice.co/p/christian-castro-ice-shooting-north-minneapolis",
+      "date": "2026-05-21",
+      "description": "Christian Castro is now the subject of a nationwide arrest warrant."
     },
     {
-      "title": "FCC's Brendan Carr picks a fight with The View ...",
-      "url": "https://www.publicnotice.co/p/fcc-brendan-carr-the-view",
-      "date": "2026-05-13",
-      "description": "... and winds up in a battle with Mickey Mouse."
+      "title": "Trump's $1.8b slush fund could turn into giant can of worms",
+      "url": "https://www.publicnotice.co/p/trump-weaponization-fund",
+      "date": "2026-05-20",
+      "description": "At the very least, it'll make the midterms messy."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,6 +1010,18 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
+      "title": "Oil & Iran War Context Weekly (W21)",
+      "url": "https://www.commoditycontext.com/p/ocw21w26",
+      "date": "2026-05-22",
+      "description": "Crude prices sink once more on renewed Iran War negotiation optimism, though major diplomatic hurdles remain and the oil market continues to hemorrhage supply."
+    },
+    {
+      "title": "Chinese Demand Destruction or Strategic Supply?",
+      "url": "https://www.commoditycontext.com/p/chinese-demand-destruction-or-strategic-supply",
+      "date": "2026-05-21",
+      "description": "Despite a ~40% collapse in Chinese crude imports, data point to massive Chinese market support in the form of heavy SPR releases (both crude and refined products) rather than true demand destruction."
+    },
+    {
       "title": "Oil & Iran War Context Weekly (W20)",
       "url": "https://www.commoditycontext.com/p/ocw20w26",
       "date": "2026-05-15",
@@ -1026,18 +1038,6 @@
       "url": "https://www.commoditycontext.com/p/ocw19w26",
       "date": "2026-05-08",
       "description": "Crude prices pull back, once again, on hopes of a diplomatic resolution to the Hormuz stoppage despite a resurgence of violence to levels not seen since the announcement of the ceasefire last month."
-    },
-    {
-      "title": "North American Oil Data Deck (May 2026)",
-      "url": "https://www.commoditycontext.com/p/north-american-oil-data-deck-may-2026",
-      "date": "2026-05-07",
-      "description": "Continental production jumped back to life in February from winter storm-depressed January levels while stateside product demand surged to the strongest February level on record."
-    },
-    {
-      "title": "Context Call: May 2026 (Video)",
-      "url": "https://www.commoditycontext.com/p/context-call-may-2026-video",
-      "date": "2026-05-06",
-      "description": "Understanding the Sanguine Strait Stoppage after more than 2 months with Hormuz closed and more than a billion barrels guaranteed already lost."
     }
   ],
   "energyoutlookadvisors.substack.com": [],
