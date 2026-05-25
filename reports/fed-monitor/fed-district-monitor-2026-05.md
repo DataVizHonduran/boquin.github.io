@@ -10,30 +10,31 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** May 24, 2026
+**DATE:** May 25, 2026
 **SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Fed districts. While there is significant noise regarding labor market theory, four critical themes emerge that directly impact our portfolio positioning: the AI investment cycle, geopolitical energy shocks, the "K-shaped" consumer, and systemic stability in non-bank financial institutions (NBFIs).
+I have reviewed the latest research outputs from the Fed districts. While there is significant academic noise, four to six papers provide critical signals regarding the current macroeconomic regime, specifically concerning the "K-shaped" recovery, AI capital cycles, and geopolitical supply shocks.
 
-**Key Analytical Insights:**
+1. **[NY] Will Mounting Supply Chain Strains Hamster the AI Investment Boom?**
+The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI. This is a critical risk for our tech valuations, as any bottleneck in AI infrastructure could delay the productivity gains the market has already priced in.
 
-1. **NY: Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
-The closure of the Strait of Hormuz has triggered a global supply shock that threatens the hardware pipeline essential for AI scaling. This suggests a potential "bottleneck inflation" scenario where AI productivity gains are delayed by physical supply constraints, risking a valuation correction for Big Tech.
+2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
+The March 2026 energy price surge (driven by the closure of the Strait of Hormuz) is hitting low-income households disproportionately. This confirms a widening divergence in consumer resilience, suggesting that aggregate spending data may mask a looming collapse in low-end discretionary consumption.
 
-2. **NY: AI’s Macroeconomic Challenges and Promises**
-For the first time in Q3 2025, major tech firms' CapEx exceeded their operating earnings, signaling a massive bet on AI that has yet to yield commensurate operational cash flow. This shift from "earnings-driven" to "investment-driven" growth increases the sensitivity of the tech sector to interest rate volatility and ROI timelines.
+3. **[NY] AI’s Macroeconomic Challenges and Promises**
+For the first time in Q3 2025, Big Tech’s capital expenditures exceeded their operational earnings. This signals a transition from the "software" phase to a massive "infrastructure" build-out, shifting the macro narrative from immediate margin expansion to long-term capital intensity.
 
-3. **NY: Tracking/Explaining the K-Shaped Economy**
-Recent data confirms that aggregate spending growth is being driven almost exclusively by high-income households, while lower-income segments are stagnating. This divergence suggests that headline GDP and consumption figures are masking a fragile consumer base, increasing the risk of a sharp downturn if high-end spending cools.
+4. **[NY] Stress and Strain from NBFIs to Banks**
+The bankruptcies of Tricolor and First Brands, combined with Blue Owl’s redemption freeze, indicate systemic stress in Non-Bank Financial Institutions (NBFIs). We must monitor the contagion risk as these stresses migrate from the shadow banking sector back into the regulated banking system.
 
-4. **NY: Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, alongside redemption freezes at Blue Owl Capital Corp II, indicate mounting instability in the Non-Bank Financial Institution (NBFI) sector. This "shadow banking" stress could transmit to the traditional banking system via liquidity contagion, necessitating a closer look at our counterparty risk.
+5. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?**
+Recent real consumer spending growth is being driven almost exclusively by high-income households. This "K-shaped" divergence implies that the Fed may be misreading aggregate consumption data, potentially keeping rates too high for the struggling lower-income cohorts.
 
-5. **NY: Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The March 2026 energy price surge is hitting households unevenly, exacerbating the existing economic divide. Because energy is a regressive tax, this shock will likely accelerate the decline in discretionary spending among low-to-middle-income consumers, further fueling the "K-shaped" trajectory.
+6. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
+By revisiting the 1990s, this research suggests that if AI raises trend productivity, the Fed may have more room to maintain higher growth without triggering inflation. This provides a theoretical framework for a "soft landing" scenario where productivity offsets wage-push inflation.
 
 **Synthesis:**
-The U.S. economy is currently characterized by a dangerous divergence: a high-CapEx AI boom and affluent spending are masking systemic fragility in the lower-income consumer and the NBFI sector. We are entering a period where geopolitical supply shocks could simultaneously derail the AI investment thesis and trigger a consumption collapse among the vulnerable.
+The U.S. economy is currently defined by a dangerous divergence: high-income resilience and AI-driven capital booms are being countered by systemic NBFI instability and acute energy shocks hitting the vulnerable. We are moving from a period of broad recovery into a fragmented regime where geopolitical volatility is the primary threat to the AI-led productivity thesis.
 
 ---
 
