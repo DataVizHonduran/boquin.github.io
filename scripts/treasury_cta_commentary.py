@@ -66,9 +66,10 @@ def load_data() -> str:
         lines.append(f"=== {mode.upper()} MODE (windows: {m['windows']}) ===")
         lines.append(f"Signal count: {m['signal_count']}  |  High-conviction (score≥60): {m['high_conviction_count']}")
 
-        # Sorted positions (most short → most long)
+        # Sorted positions (most long-duration/negative → most short-duration/positive)
         pos = sorted(m["latest_positions"].items(), key=lambda x: x[1])
-        lines.append("Positioning (most short to most long, scale -50 to +50):")
+        lines.append("SIGN CONVENTION: + = SHORT duration (short futures, rising-yield bet) | - = LONG duration (long futures, falling-yield bet)")
+        lines.append("Positioning (most long-duration to most short-duration, scale -50 to +50):")
         lines.append("  " + ", ".join(f"{t}: {v:+.1f}" for t, v in pos))
 
         # Recent signals (last 14 days, top by strength_score)
@@ -131,9 +132,15 @@ def generate_report(data: str, hf_token: str) -> str:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     prompt = f"""[ROLE]: Senior Rates/Macro Strategist specializing in CTA trend-following and Treasury exhaustion signals.
 
+[SIGN CONVENTION - CRITICAL]:
+In this dataset, position sign is INVERTED from standard fixed-income convention:
+  POSITIVE (+) position means CTAs are SHORT duration (short Treasury futures), positioned for RISING yields / FALLING bond prices.
+  NEGATIVE (-) position means CTAs are LONG duration (long Treasury futures), positioned for FALLING yields / RISING bond prices.
+Never describe a positive position as "long bonds" or "long duration." A high positive score means crowded short-duration / rising-yield positioning.
+
 [TASK]: Analyze the following Treasury CTA positioning snapshot as of {today}.
 Produce a structured Markdown commentary covering:
-1. Duration crowding — which tenors CTAs are most long/short and what it signals for yield direction
+1. Duration crowding — which tenors CTAs are most short-duration (+) or long-duration (-) and what it signals for yield direction
 2. Yield curve context — how the 10Y-2Y and 30Y-2Y spreads relate to current positioning
 3. Fast vs slow divergences — where the two modes disagree and what that implies for trend conviction
 4. Recent exhaustion signals — what high-conviction signals suggest about crowded duration trades
@@ -220,6 +227,10 @@ if __name__ == "__main__":
 
     print("\nGenerating commentary via Gemma 4 ...")
     commentary = generate_report(data, hf_token)
+
+    if not commentary.strip():
+        print("ERROR: Gemma returned empty commentary — possible content filter or API issue. Aborting.", file=sys.stderr)
+        sys.exit(1)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
