@@ -217,7 +217,10 @@ def fetch_summaries(articles, hf_token):
                     temperature=0.2,
                     max_tokens=600,
                 )
-                summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
+                msg = resp.choices[0].message
+                raw = msg.content if msg.content is not None else ""
+                print(f"    resp content={repr(raw[:80])} finish={resp.choices[0].finish_reason}", flush=True)
+                summaries[tag] = md_to_html(raw.strip())
                 break
             except Exception as e:
                 if _is_rate_limit(e) and attempt < 2:
