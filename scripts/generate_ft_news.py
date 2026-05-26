@@ -215,7 +215,7 @@ def fetch_summaries(articles, hf_token):
                         {"role": "user", "content": user_msg},
                     ],
                     temperature=0.2,
-                    max_tokens=600,
+                    max_tokens=2000,
                 )
                 summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
                 break

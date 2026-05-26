@@ -201,8 +201,8 @@ def fetch_summaries(articles, hf_token):
 
         print(f"  Generating summary for {label} …", flush=True)
         article_lines = "\n".join(
-            f"- {a['title']}: {a['summary'][:120]}" if a["summary"] else f"- {a['title']}"
-            for a in tag_articles[:20]
+            f"- {a['title']}: {a['summary']}" if a["summary"] else f"- {a['title']}"
+            for a in tag_articles
         )
         user_msg = f"Recent headlines:\n{article_lines}"
 
@@ -215,12 +215,9 @@ def fetch_summaries(articles, hf_token):
                         {"role": "user", "content": user_msg},
                     ],
                     temperature=0.2,
-                    max_tokens=600,
+                    max_tokens=2000,
                 )
-                msg = resp.choices[0].message
-                raw = msg.content if msg.content is not None else ""
-                print(f"    resp content={repr(raw[:80])} finish={resp.choices[0].finish_reason}", flush=True)
-                summaries[tag] = md_to_html(raw.strip())
+                summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
                 break
             except Exception as e:
                 if _is_rate_limit(e) and attempt < 2:
