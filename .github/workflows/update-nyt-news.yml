@@ -1,8 +1,8 @@
-name: Hourly NYT News Feed
+name: NYT News Feed
 
 on:
   schedule:
-    - cron: '0 * * * *'   # every hour on the hour
+    - cron: '0 */6 * * *'   # every 6 hours
   workflow_dispatch:
 
 concurrency:
