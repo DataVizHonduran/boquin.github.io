@@ -201,8 +201,8 @@ def fetch_summaries(articles, hf_token):
 
         print(f"  Generating summary for {label} …", flush=True)
         article_lines = "\n".join(
-            f"- {a['title']}: {a['summary']}" if a["summary"] else f"- {a['title']}"
-            for a in tag_articles
+            f"- {a['title']}: {a['summary'][:120]}" if a["summary"] else f"- {a['title']}"
+            for a in tag_articles[:20]
         )
         user_msg = f"Recent headlines:\n{article_lines}"
 
@@ -217,10 +217,7 @@ def fetch_summaries(articles, hf_token):
                     temperature=0.2,
                     max_tokens=600,
                 )
-                raw = resp.choices[0].message.content.strip()
-                print(f"    Raw response ({len(raw)} chars): {repr(raw[:120])}", flush=True)
-                summaries[tag] = md_to_html(raw)
-                print(f"    HTML output ({len(summaries[tag])} chars)", flush=True)
+                summaries[tag] = md_to_html(resp.choices[0].message.content.strip())
                 break
             except Exception as e:
                 if _is_rate_limit(e) and attempt < 2:
