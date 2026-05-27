@@ -1,45 +1,52 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (18 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (20 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: May 27, 2026**
+**Subject: Fed District Research Briefing – Macro Implications**
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** May 25, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+I have reviewed the latest research from the Federal Reserve districts. While there is significant noise regarding labor market mechanics, the critical signals for our portfolio center on the "K-shaped" divergence in the domestic economy, the fragility of the AI investment cycle, and escalating geopolitical supply shocks.
 
-I have reviewed the latest research outputs from the Fed districts. While there is significant academic noise, four to six papers provide critical signals regarding the current macroeconomic regime, specifically concerning the "K-shaped" recovery, AI capital cycles, and geopolitical supply shocks.
+The following publications are the most analytically significant for our current positioning:
 
-1. **[NY] Will Mounting Supply Chain Strains Hamster the AI Investment Boom?**
-The Middle East conflict has triggered a third major global supply shock in six years, threatening the hardware pipeline for AI. This is a critical risk for our tech valuations, as any bottleneck in AI infrastructure could delay the productivity gains the market has already priced in.
+1. **[NY] Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
+The Fed identifies a critical risk where Middle East conflict-driven supply shocks are threatening the capital expenditure cycle of Big Tech. This suggests that the "AI trade" is now highly sensitive to geopolitical volatility and hardware bottlenecks, potentially capping the productivity gains we've priced into long-term growth.
 
-2. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The March 2026 energy price surge (driven by the closure of the Strait of Hormuz) is hitting low-income households disproportionately. This confirms a widening divergence in consumer resilience, suggesting that aggregate spending data may mask a looming collapse in low-end discretionary consumption.
+2. **[NY] Same Shock, Different Roads? A K‑Shaped Pattern at the Pump**
+Following the March 2026 closure of the Strait of Hormuz, energy price surges are hitting low-income households disproportionately. This confirms that energy shocks are acting as a regressive tax, which will likely dampen aggregate consumption despite seemingly resilient headline GDP.
 
-3. **[NY] AI’s Macroeconomic Challenges and Promises**
-For the first time in Q3 2025, Big Tech’s capital expenditures exceeded their operational earnings. This signals a transition from the "software" phase to a massive "infrastructure" build-out, shifting the macro narrative from immediate margin expansion to long-term capital intensity.
+3. **[NY] Tracking the K‑Shaped Economy: Who’s Driving Spending?**
+Recent data reveals that aggregate spending growth is being driven almost exclusively by high-income households, masking a slowdown in the broader consumer base. For our retail and consumer discretionary coverage, this means we must pivot away from "broad-market" plays toward luxury and high-end services.
 
 4. **[NY] Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, combined with Blue Owl’s redemption freeze, indicate systemic stress in Non-Bank Financial Institutions (NBFIs). We must monitor the contagion risk as these stresses migrate from the shadow banking sector back into the regulated banking system.
+The Fed is monitoring contagion from Non-Bank Financial Institutions (NBFIs), specifically citing bankruptcies at Tricolor and First Brands and redemption freezes at Blue Owl. This indicates that the "shadow banking" sector is finally feeling the cumulative pressure of the high-rate environment, raising the risk of a liquidity event that could spill over into systemic banks.
 
-5. **[NY] Tracking the K-Shaped Economy: Who’s Driving Spending?**
-Recent real consumer spending growth is being driven almost exclusively by high-income households. This "K-shaped" divergence implies that the Fed may be misreading aggregate consumption data, potentially keeping rates too high for the struggling lower-income cohorts.
+5. **[NY] AI’s Macroeconomic Challenges and Promises**
+The observation that tech giants spent more on CapEx than they earned from operations in Q3 2025 is a flashing yellow light. It suggests a "productivity gap" where the massive investment in AI has yet to translate into operational cash flow, increasing the risk of a valuation correction if ROI timelines shift.
 
 6. **[RIC] Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s, this research suggests that if AI raises trend productivity, the Fed may have more room to maintain higher growth without triggering inflation. This provides a theoretical framework for a "soft landing" scenario where productivity offsets wage-push inflation.
+By revisiting the 1990s, the Fed is signaling that it is actively looking for a "productivity miracle" to justify keeping rates higher for longer without triggering a recession. If AI mirrors the 90s internet boom, the Fed may tolerate higher inflation targets to accommodate accelerated trend growth.
 
 **Synthesis:**
-The U.S. economy is currently defined by a dangerous divergence: high-income resilience and AI-driven capital booms are being countered by systemic NBFI instability and acute energy shocks hitting the vulnerable. We are moving from a period of broad recovery into a fragmented regime where geopolitical volatility is the primary threat to the AI-led productivity thesis.
+The U.S. economy is currently characterized by a dangerous divergence: high-income resilience and AI speculation are masking systemic fragility in the lower-income consumer and the NBFI sector. We are moving from a regime of "general inflation" to one of "geopolitical supply shocks," necessitating a defensive shift toward high-margin assets and a cautious outlook on AI-driven CapEx.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 11
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 12
+
+### (cached) [Assessing the Current State of Wage Inflation](https://libertystreeteconomics.newyorkfed.org/2026/05/assessing-the-current-state-of-wage-inflation/)
+**Published:** 2026-05-26 | **Authors:** 
+
+The paper introduces Trend Wage Inflation (TWIn) as a tool to isolate underlying wage inflation from short-run fluctuations. This approach aims to better assess labor market imbalances and their subsequent impact on price pressures.
+
+**Tags:** inflation · labor markets · employment · wages · monetary policy
 
 ### (cached) [AI’s Macroeconomic Challenges and Promises](https://libertystreeteconomics.newyorkfed.org/2026/05/ais-macroeconomic-challenges-and-promises/)
 **Published:** 2026-05-20 | **Authors:** 
@@ -119,7 +126,14 @@ This paper investigates the distribution of real consumer spending growth since 
 **Tags:** consumer spending · GDP growth · financial stability · recession · inflation
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 3
+**Content Type:** Economic Briefs | **New:** 0 of 4
+
+### (cached) [The Natural Beveridge Curve](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-17)
+**Published:** 2026-05-27 | **Authors:** 
+
+The analysis examines the divergence between actual and natural Beveridge curves to evaluate labor market efficiency. It argues that this gap provides critical guidance for the effectiveness of stabilization policies.
+
+**Tags:** labor markets · employment · monetary policy · fiscal policy · GDP growth
 
 ### (cached) [Modelling Unemployment Insurance in the Real World](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-16)
 **Published:** 2026-05-20 | **Authors:** 
@@ -177,5 +191,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 18
-- Total cache size: 18 items
+- Already cached: 20
+- Total cache size: 20 items
