@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2004-05-04 vs 2004-03-16</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2004-05-04 vs 2004-03-16
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-28 11:42 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from March 16, 2004, and May 4, 2004. This period is historically significant as it marks the transition from the post-dot-com bubble recovery toward the tightening cycle of the mid-2000s.</p>
+<hr />
+<h2>1. Redlined Statement (2004-05-04)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 1 percent.</p>
+<p>The Committee continues to believe that an accommodative stance of monetary policy, coupled with robust underlying growth in productivity, is providing important ongoing support to economic activity. The evidence accumulated over the intermeeting period indicates that output is continuing to expand at a solid ~~pace~~ <strong>rate</strong> and ~~Although job losses have slowed, new hiring has lagged~~ <strong>hiring appears to have picked up</strong>. ~~Increases in core consumer prices are muted and expected to remain low~~ <strong>Although incoming inflation data have moved somewhat higher, long-term inflation expectations appear to have remained well contained</strong>.</p>
+<p>The Committee perceives the upside and downside risks to the attainment of sustainable growth for the next few quarters are roughly equal. ~~The probability of an unwelcome fall in inflation has diminished in recent months and now appears almost equal to that of a rise in inflation~~ <strong>Similarly, the risks to the goal of price stability have moved into balance</strong>. At this ~~juncture~~ <strong>juncture</strong>, with inflation ~~quite~~ low and resource use slack, the Committee believes that ~~it can be patient in removing its~~ policy accommodation can be removed at a pace that is likely to be <strong>measured</strong>.</p>
+<hr />
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"job losses have slowed, new hiring has lagged"</td>
+<td style="text-align: left;">"hiring appears to have picked up"</td>
+<td style="text-align: left;"><strong>Bullish.</strong> Shift from a "jobless recovery" narrative to active labor market strengthening.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"core consumer prices are muted... expected to remain low"</td>
+<td style="text-align: left;">"inflation data have moved somewhat higher... expectations... well contained"</td>
+<td style="text-align: left;"><strong>Hawkish.</strong> Acknowledgment of rising current inflation, though anchored by long-term expectations.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"probability of... fall in inflation... almost equal to... rise"</td>
+<td style="text-align: left;">"risks to the goal of price stability have moved into balance"</td>
+<td style="text-align: left;"><strong>Neutral/Hawkish.</strong> Simplifies the language to confirm that deflation is no longer the primary fear.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"it can be patient in removing its policy accommodation"</td>
+<td style="text-align: left;">"policy accommodation can be removed at a pace that is likely to be measured"</td>
+<td style="text-align: left;"><strong>Strongly Hawkish.</strong> "Patient" implies an indefinite hold; "measured" is a coded signal for a series of incremental rate hikes.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>There is a distinct shift from a defensive posture (worrying about "unwelcome falls" in inflation) to a monitoring posture. The Committee now explicitly admits that incoming data have "moved somewhat higher." By pivoting the focus to "long-term inflation expectations," the Fed is signaling that while they see current price pressure, they do not yet believe it is unanchored.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The narrative on the labor market has undergone a complete reversal. In March, the Fed was concerned that hiring was "lagging." By May, they state hiring has "picked up." This removes one of the primary justifications for keeping rates at 1%, as the "slack" in the labor market is visibly diminishing.</p>
+<h3>Forward Guidance</h3>
+<p>This is the most critical shift in the document. The removal of the word <strong>"patient"</strong> and the introduction of the word <strong>"measured"</strong> is a classic central bank signal. In the lexicon of the Greenspan era, "measured" was the specific telegraph that the Committee was preparing the markets for a tightening cycle (rate hikes) that would be gradual rather than aggressive.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Hawkish</strong></p>
+<p>The Committee has shifted from a <strong>Dovish/Neutral</strong> stance to a <strong>Hawkish</strong> one. While the federal funds rate remained unchanged at 1%, the underlying text prepares the market for an imminent tightening cycle. By upgrading the assessment of the labor market ("hiring... picked up") and acknowledging rising inflation data, the Fed has effectively removed the "economic weakness" justification for low rates. The pivot from "patient" to "measured" is a definitive signal that the era of maximum accommodation has ended and the path toward normalization has begun.</p>
+</div>
+</body>
+</html>

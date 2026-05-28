@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2004-03-16 vs 2004-01-28</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2004-03-16 vs 2004-01-28
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-28 11:43 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from January 28 and March 16, 2004.</p>
+<hr />
+<h2>1. Redlined Statement (2004-03-16)</h2>
+<p>The Federal Open Market Committee decided today to keep its target for the federal funds rate at 1 percent.</p>
+<p>The Committee continues to believe that an accommodative stance of monetary policy, coupled with robust underlying growth in productivity, is providing important ongoing support to economic activity. The evidence accumulated over the intermeeting period ~~confirms that output is expanding briskly~~ <strong>indicates that output is continuing to expand at a solid pace</strong>. Although ~~new hiring remains subdued, other indicators suggest an improvement in the labor market~~ <strong>job losses have slowed, new hiring has lagged</strong>. Increases in core consumer prices are muted and expected to remain low.</p>
+<p>The Committee perceives ~~that~~ the upside and downside risks to the attainment of sustainable growth for the next few quarters are roughly equal. The probability of an unwelcome fall in inflation has diminished in recent months and now appears almost equal to that of a rise in inflation. With inflation quite low and resource use slack, the Committee believes that it can be patient in removing its policy accommodation.</p>
+<p>Voting for the FOMC monetary policy action were: Alan Greenspan, Chairman; Timothy F. Geithner, Vice Chairman; Ben S. Bernanke; Susan S. Bies; Roger W. Ferguson, Jr.; Edward M. Gramlich; Thomas M. Hoenig; Donald L. Kohn; Cathy E. Minehan; Mark W. Olson; Sandra Pianalto; and William Poole.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"confirms that output is expanding briskly"</td>
+<td style="text-align: left;">"indicates that output is continuing to expand at a solid pace"</td>
+<td style="text-align: left;"><strong>Moderate Downgrade.</strong> "Confirms" $\rightarrow$ "Indicates" reduces certainty; "Briskly" $\rightarrow$ "Solid pace" suggests a slight cooling in growth momentum.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"new hiring remains subdued, other indicators suggest an improvement in the labor market"</td>
+<td style="text-align: left;">"job losses have slowed, new hiring has lagged"</td>
+<td style="text-align: left;"><strong>Dovish Shift.</strong> The previous statement highlighted "improvement"; the current statement highlights that hiring is "lagging," signaling a weaker labor recovery.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"that"</td>
+<td style="text-align: left;">[None]</td>
+<td style="text-align: left;"><strong>Negligible.</strong> Minor grammatical edit.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+There is <strong>zero shift</strong> in the inflation narrative. The language regarding core consumer prices ("muted and expected to remain low") and the balanced risk of inflation (fall vs. rise) remains verbatim. The Committee remains unconcerned about immediate inflationary pressures.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+This is the primary area of divergence. <br />
+- <strong>Growth:</strong> The shift from "expanding briskly" to "continuing to expand at a solid pace" suggests the Committee is seeing a normalization or slight deceleration of GDP growth.<br />
+- <strong>Labor:</strong> The tone has shifted from cautious optimism ("improvement in the labor market") to a more clinical observation of weakness ("new hiring has lagged"). By mentioning that "job losses have slowed" rather than focusing on "improvement," the Committee is acknowledging that the labor market is still in a recovery phase rather than a growth phase.</p>
+<p><strong>Forward Guidance</strong><br />
+The forward guidance remains <strong>unchanged</strong>. The phrase "the Committee believes that it can be patient in removing its policy accommodation" is preserved exactly. This signals that despite the slight softening in growth and labor descriptions, the Committee does not yet feel the need to change the trajectory of its policy path.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p>The Committee has shifted <strong>slightly Dovish</strong>. </p>
+<p>While the policy rate remained unchanged and the forward guidance was held constant, the "read" of the real economy was downgraded. The transition from "brisk" growth to a "solid pace" and the removal of references to "improvement" in the labor market (replaced by the observation that hiring "lagged") indicates that the Committee perceives the economic recovery as less robust than it did in January. By softening the economic outlook while maintaining the same "patient" stance, the Committee has effectively lowered the urgency for future rate hikes.</p>
+</div>
+</body>
+</html>
