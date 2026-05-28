@@ -27,7 +27,7 @@
     "residual": -6.03,
     "r2": 0.435,
     "actual": 17.3241,
-    "predicted": 18.368,
+    "predicted": 18.3681,
     "selected_vars": [
       "SPHB/SPY",
       "IWC/SPY",
@@ -107,7 +107,7 @@
     "residual": 6.7,
     "r2": 0.894,
     "actual": 1517.33,
-    "predicted": 1415.6728,
+    "predicted": 1415.6726,
     "selected_vars": [
       "MTUM/SPY",
       "SPHB/SPY",
