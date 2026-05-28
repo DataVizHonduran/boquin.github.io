@@ -1,0 +1,203 @@
+{
+  "date": "2026-05-28",
+  "holdings_as_of": "2026-05-28",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "SNDK",
+      "name": "Sandisk Corporation",
+      "weight": 5.01,
+      "shares": 20554
+    },
+    {
+      "rank": 2,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 4.61,
+      "shares": 59771
+    },
+    {
+      "rank": 3,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 4.17,
+      "shares": 30370
+    },
+    {
+      "rank": 4,
+      "ticker": "CORZ",
+      "name": "Core Scientific, Inc.",
+      "weight": 2.85,
+      "shares": 704577
+    },
+    {
+      "rank": 5,
+      "ticker": "LITE",
+      "name": "Lumentum Holdings Inc.",
+      "weight": 2.82,
+      "shares": 20226
+    },
+    {
+      "rank": 6,
+      "ticker": "APP",
+      "name": "AppLovin Corporation",
+      "weight": 2.54,
+      "shares": 32262
+    },
+    {
+      "rank": 7,
+      "ticker": "VRT",
+      "name": "Vertiv Holdings Co",
+      "weight": 2.47,
+      "shares": 49861
+    },
+    {
+      "rank": 8,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.45,
+      "shares": 60347
+    },
+    {
+      "rank": 9,
+      "ticker": "GEV",
+      "name": "GE Vernova Inc.",
+      "weight": 2.43,
+      "shares": 14821
+    },
+    {
+      "rank": 10,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.4,
+      "shares": 40200
+    },
+    {
+      "rank": 11,
+      "ticker": "AVGO",
+      "name": "Broadcom Inc.",
+      "weight": 2.36,
+      "shares": 36515
+    },
+    {
+      "rank": 12,
+      "ticker": "AMAT",
+      "name": "Applied Materials, Inc.",
+      "weight": 2.36,
+      "shares": 33795
+    },
+    {
+      "rank": 13,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.17,
+      "shares": 45996
+    },
+    {
+      "rank": 14,
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "weight": 2.16,
+      "shares": 65628
+    },
+    {
+      "rank": 15,
+      "ticker": "ASML",
+      "name": "ASML Holding N.V.",
+      "weight": 2.14,
+      "shares": 8543
+    },
+    {
+      "rank": 16,
+      "ticker": "NFLX",
+      "name": "Netflix, Inc.",
+      "weight": 2.12,
+      "shares": 157659
+    },
+    {
+      "rank": 17,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.11,
+      "shares": 33331
+    },
+    {
+      "rank": 18,
+      "ticker": "C",
+      "name": "Citigroup Inc.",
+      "weight": 2.07,
+      "shares": 106699
+    },
+    {
+      "rank": 19,
+      "ticker": "SATS",
+      "name": "EchoStar Corporation",
+      "weight": 2.03,
+      "shares": 107435
+    },
+    {
+      "rank": 20,
+      "ticker": "TSLA",
+      "name": "Tesla, Inc.",
+      "weight": 1.96,
+      "shares": 29553
+    },
+    {
+      "rank": 21,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 1.95,
+      "shares": 30578
+    },
+    {
+      "rank": 22,
+      "ticker": "UNP",
+      "name": "Union Pacific Corporation",
+      "weight": 1.92,
+      "shares": 46203
+    },
+    {
+      "rank": 23,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 1.91,
+      "shares": 11722
+    },
+    {
+      "rank": 24,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 1.9,
+      "shares": 38001
+    },
+    {
+      "rank": 25,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 1.88,
+      "shares": 38413
+    }
+  ],
+  "performance": {
+    "price": 180.31,
+    "aum": 505044672,
+    "ret_1m": 9.72,
+    "ret_3m": 15.29,
+    "ret_ytd": 15.43,
+    "ret_1y": null,
+    "week52_low": 128.85,
+    "week52_high": 180.3899,
+    "avg_volume": 14132,
+    "as_of": "2026-05-28"
+  },
+  "sectors": {
+    "consumer_cyclical": 17.79,
+    "consumer_defensive": 1.21,
+    "technology": 32.11,
+    "communication_services": 15.21,
+    "financial_services": 15.18,
+    "utilities": 1.9,
+    "industrials": 12.93,
+    "healthcare": 3.67
+  }
+}
