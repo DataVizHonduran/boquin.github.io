@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-28T10:59:27.141859+00:00",
-    "totalItems": 67
+    "lastRun": "2026-05-29T10:50:26.827596+00:00",
+    "totalItems": 70
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1262,11 +1262,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-22T10:26:56.933360+00:00",
-      "lastChecked": "2026-05-28T10:59:27.141859+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-28T10:59:27.141859+00:00"
+      "tagsGeneratedAt": "2026-05-29T10:50:26.827596+00:00"
     },
     "c964e8f3551f880a8f0c62db97633cc8e84574567fbaf2c1fd8ddd056ce66ae6": {
       "url": "https://www.fedinprint.org/item/fedlwp/101822/103288",
@@ -1298,7 +1298,7 @@
       "publicationDate": "2026-05-26",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-05-28T10:59:27.141859+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
       "scrapedSnippet": "Economists often look at nominal wage growth to gauge labor market imbalances, price pressures, and households’ spending ability. But to use wage growth for these purposes, it is important to look through short-run fluctuations and retrieve underlying wage inflation. In this post, we use our own measure of wage growth persistence—called Trend Wage Inflation (TWIn in short)—to summarize what we learned from wage growth behavior in the past years and draw conclusions for what may lie ahead. Since peaking in late 2021, TWIn has been on a steady decline, reaching levels near those of the 2017-19 p",
       "aiSummary": "The paper introduces Trend Wage Inflation (TWIn) as a tool to isolate underlying wage inflation from short-run fluctuations. This approach aims to better assess labor market imbalances and their subsequent impact on price pressures.",
       "tags": [
@@ -1319,7 +1319,7 @@
       "publicationDate": "2026-05-27",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-05-28T10:59:27.141859+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
       "scrapedSnippet": "Analyzing the gap between the actual and natural Beveridge curves gives policymakers a better sense of how much stabilization policy can accomplish.",
       "aiSummary": "The analysis examines the divergence between actual and natural Beveridge curves to evaluate labor market efficiency. It argues that this gap provides critical guidance for the effectiveness of stabilization policies.",
       "tags": [
@@ -1340,11 +1340,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-05-28T10:59:27.141859+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-28T10:59:27.141859+00:00"
+      "tagsGeneratedAt": "2026-05-29T10:50:26.827596+00:00"
     },
     "1f620e40414e31e923885883f8d9af5db3645edc39df34b9f7078ce3b3c4b5a3": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/",
@@ -1355,7 +1355,7 @@
       "publicationDate": "2026-05-27",
       "authors": [],
       "firstSeen": "2026-05-28T10:59:27.141859+00:00",
-      "lastChecked": "2026-05-28T10:59:27.141859+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
       "scrapedSnippet": "Current discussions regarding a bifurcated U.S. economy highlight the increasing economic divide between lower- and higher-income Americans in spending and earnings growth and wealth accumulation. While many households are doing fine and economic activity overall has been expanding at a solid pace, large segments of the population are facing high levels of economic insecurity and financial strain, and consumer sentiment on the whole has dropped to low levels. In this post, we use newly collected data from the Survey of Consumer Expectations (SCE) to update our 2020 analysis of disproportionate",
       "aiSummary": "The analysis examines the widening economic divide in the U.S., noting a bifurcation between high-income growth and lower-income financial strain. It highlights how food insecurity and consumer pessimism persist despite overall solid macroeconomic expansion.",
       "tags": [
@@ -1366,6 +1366,61 @@
         "inflation"
       ],
       "tagsGeneratedAt": "2026-05-28T10:59:27.141859+00:00"
+    },
+    "3e41e3cd8e8b211f8f521dd258b936cd2319536fe6deba4fa9a34970f394b0a5": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/the-regional-side-of-the-story-k-shaped-pattern-in-region-wider-gap-in-gas-spending/",
+      "title": "The Regional Side of the Story: K‑Shaped Pattern in Region, Wider Gap in Gas Spending",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-05-28",
+      "authors": [],
+      "firstSeen": "2026-05-29T10:50:26.827596+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
+      "scrapedSnippet": "In this post, we use the inaugural release of our regional consumer spending indicators to ask whether these patterns hold for a significant portion of the Second District, and how regional spending patterns by income have been similar to or different from the national patterns we documented earlier. We find similar K‑shaped patterns in both retail and gas spending in our region as we do in the nation, with the K‑shaped pattern in gasoline in response to the recent gas price shock being more pronounced in the region.",
+      "aiSummary": "The analysis examines regional consumer spending indicators within the Second District to identify income-based disparities. It finds a K-shaped spending pattern in retail and gasoline, mirroring national trends of divergent economic experiences across income levels.",
+      "tags": [
+        "consumer spending",
+        "regional economy",
+        "inflation",
+        "energy"
+      ],
+      "tagsGeneratedAt": "2026-05-29T10:50:26.827596+00:00"
+    },
+    "376976081c8eae5fef4b67d35318d1b25bf27abe38790c73fd75cec948c66f93": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0528",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-05-29T10:50:26.827596+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-05-29T10:50:26.827596+00:00"
+    },
+    "8c3c0812f4a8f96d1b360485bc37dd365bda57342b57c636c35c0d170567850d": {
+      "url": "https://www.fedinprint.org/item/fedlwp/101808/103320",
+      "title": "What Does It Take? Quantifying Cross-Country Transfers in the Eurozone",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-05-28",
+      "authors": [],
+      "firstSeen": "2026-05-29T10:50:26.827596+00:00",
+      "lastChecked": "2026-05-29T10:50:26.827596+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper quantifies the magnitude and mechanism of fiscal transfers between member states within the Eurozone. It evaluates how these cross-country flows impact regional stability and fiscal integration.",
+      "tags": [
+        "fiscal policy",
+        "international",
+        "emerging markets",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-05-29T10:50:26.827596+00:00"
     }
   }
 }

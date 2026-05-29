@@ -1,37 +1,39 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (21 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (23 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team, I have reviewed the latest research from the Federal Reserve districts. While there is a fair amount of academic noise, there are several critical signals regarding the "K-shaped" recovery, AI capital cycles, and geopolitical shocks that we need to integrate into our current models.
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: May 29, 2026**
+**Subject: Fed District Research Briefing – Macro Implications**
 
-Here are the most analytically significant publications:
+I have reviewed the latest research from the Federal Reserve districts. While there is significant academic noise, four key themes emerge that directly impact our portfolio positioning regarding inflation, AI productivity, and systemic risk.
 
-1. **NY: AI’s Macroeconomic Challenges and Promises / Will Mounting Supply Chain Strains Hamstring the AI Investment Boom?**
-The data shows a pivotal shift where Big Tech CapEx has exceeded operating earnings for the first time. However, the Iranian closure of the Strait of Hormuz creates a critical supply-side bottleneck that could stall this productivity leap, turning an AI-driven growth story into a cost-push inflation risk.
+1. **The "K-Shaped" Consumption Divide (NY #1, #4, #22, #23):** New regional indicators confirm a stark bifurcation in the U.S. economy, where aggregate spending growth is being driven almost exclusively by high-income households while lower-income tiers face food insecurity and pessimism. This suggests that headline GDP and retail sales figures are masking a fragile consumer base, increasing the risk of a sharp consumption cliff if high-end spending cools.
 
-2. **NY: Explaining/Tracking the K-Shaped Economy & Food Insecurity and Consumer Pessimism**
-These papers confirm a stark bifurcation in the U.S. consumer; aggregate spending growth is being driven almost exclusively by high-income households while lower-income tiers face food insecurity. This suggests that aggregate consumption data is masking a fragile underbelly, increasing the risk of a sudden consumption cliff if the labor market softens.
+2. **AI Investment vs. Realized Returns (NY #8, #11, #16):** For the first time in Q3 2025, Big Tech capex exceeded operating earnings, while supply chain strains from Middle East conflicts threaten the hardware pipeline. This signals a transition from the "hype" phase to a "delivery" phase; if AI does not translate into immediate labor productivity or revenue, we may face a significant valuation correction in the tech sector.
 
-3. **NY: Same Shock, Different Roads? A K-Shaped Pattern at the Pump**
-The March 2026 energy price surge highlights that geopolitical shocks are not hitting all consumers equally, with lower-income households bearing a disproportionate burden. This "K-shaped" inflation profile complicates the Fed's mandate, as headline CPI may rise while real purchasing power collapses for the bottom 40%.
+3. **Energy Shocks and the Strait of Hormuz (NY #18):** The March 2026 energy price surge caused by the closure of the Strait of Hormuz is exacerbating the K-shaped divide, hitting lower-income households disproportionately. This creates a "policy trap" for the Fed: persistent cost-push inflation that cannot be solved by tightening without further crushing the vulnerable segment of the economy.
 
-4. **NY: Stress and Strain from NBFIs to Banks**
-The bankruptcies of Tricolor and First Brands, combined with Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This creates a "shadow" systemic risk that could trigger a credit crunch even if the primary banking sector appears stable.
+4. **NBFI Contagion and Systemic Stress (NY #17):** Recent bankruptcies (Tricolor, First Brands) and the suspension of redemptions at Blue Owl Capital II indicate mounting stress in Non-Bank Financial Institutions (NBFIs). This suggests that liquidity risks are migrating from the regulated banking sector to the "shadow" space, increasing the probability of a sudden credit freeze in corporate bond markets.
 
-5. **RIC: Al Broaddus, Productivity Growth and Monetary Policy in the 1990s**
-By revisiting the 1990s, the Fed is signaling a mental shift toward the possibility that AI could raise the "trend" productivity growth rate. If the Fed believes we are in a 1990s-style productivity boom, they may be more tolerant of higher nominal growth and inflation before hiking rates.
-
-**Synthesis:**
-The U.S. economy is currently a paradox of high-end AI investment and systemic fragility, characterized by a dangerous divergence in consumer health and emerging instability in the NBFI sector. The primary risk to our outlook is a geopolitical supply shock that simultaneously fuels inflation and breaks the AI CapEx cycle.
+**Synthesis:** The U.S. economy is currently a facade of aggregate strength masking deep structural fragility and a precarious reliance on AI-driven capex. We are moving into a high-volatility regime where geopolitical energy shocks and NBFI instability could trigger a systemic correction despite seemingly resilient headline data.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 13
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 14
+
+### (cached) [The Regional Side of the Story: K‑Shaped Pattern in Region, Wider Gap in Gas Spending](https://libertystreeteconomics.newyorkfed.org/2026/05/the-regional-side-of-the-story-k-shaped-pattern-in-region-wider-gap-in-gas-spending/)
+**Published:** 2026-05-28 | **Authors:** 
+
+The analysis examines regional consumer spending indicators within the Second District to identify income-based disparities. It finds a K-shaped spending pattern in retail and gasoline, mirroring national trends of divergent economic experiences across income levels.
+
+**Tags:** consumer spending · regional economy · inflation · energy
 
 ### (cached) [Food Insecurity and Consumer Pessimism](https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/)
 **Published:** 2026-05-27 | **Authors:** 
@@ -156,7 +158,14 @@ The paper evaluates the role of Community Development Financial Institutions (CD
 **Tags:** banking · credit · financial stability · regional economy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 4
+**Content Type:** Working Papers | **New:** 0 of 5
+
+### (cached) [What Does It Take? Quantifying Cross-Country Transfers in the Eurozone](https://www.fedinprint.org/item/fedlwp/101808/103320)
+**Published:** 2026-05-28 | **Authors:** 
+
+The paper quantifies the magnitude and mechanism of fiscal transfers between member states within the Eurozone. It evaluates how these cross-country flows impact regional stability and fiscal integration.
+
+**Tags:** fiscal policy · international · emerging markets · financial stability
 
 ### (cached) [Taxation and the Global Allocation of Intangibles](https://www.fedinprint.org/item/fedlwp/101822/103288)
 **Published:** 2026-05-21 | **Authors:** 
@@ -190,5 +199,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 21
-- Total cache size: 21 items
+- Already cached: 23
+- Total cache size: 23 items
