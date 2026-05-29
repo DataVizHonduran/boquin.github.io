@@ -2,7 +2,7 @@ name: Update Fed Watcher
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # Every 3 days at 09:00 UTC
+    - cron: '0 9 */3 * *'   # Every 3 days at 09:00 UTC
   workflow_dispatch:          # Allow manual trigger
 
 concurrency:
@@ -28,6 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Pull latest before running
+        run: git pull
+
       - name: Run Fed Watcher
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -36,13 +39,19 @@ jobs:
             --days 30 \
             --output-dir reports/fed-watcher/
 
+      - name: Rebuild CB Monitor hub
+        run: |
+          PYTHONPATH=scripts python -c \
+            "from pathlib import Path; from cb_monitor_utils import regenerate_cb_monitor; regenerate_cb_monitor(Path('.'))"
+
       - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add reports/fed-watcher/
+          git add reports/fed-watcher/ reports/cb-monitor/
           git diff --staged --quiet || (
             git commit -m "Fed Watcher — $(date +'%Y-%m-%d') 🤖" &&
-            git pull --rebase --autostash -X theirs &&
+            git stash --include-untracked &&
+            git pull --rebase --autostash &&
             git push
           )

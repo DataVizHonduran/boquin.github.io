@@ -45,4 +45,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/petroleum-stocks/
-          git diff --staged --quiet || (git commit -m "Update Petroleum Stocks + AI Commentary - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
+          git diff --staged --quiet || (git commit -m "Update Petroleum Stocks + AI Commentary - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash -X theirs && git push)
