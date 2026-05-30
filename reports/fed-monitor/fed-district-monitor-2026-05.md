@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — May 2026 (Month to Date)
 
-**Coverage Period:** Month to date: May 2026 (23 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: May 2026 (25 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -8,20 +8,27 @@
 
 **To: Investment Committee**
 **From: Senior Economist**
-**Date: May 29, 2026**
-**Subject: Fed District Research Briefing – Macro Implications**
+**Date: May 30, 2026**
+**Subject: Strategic Briefing – Federal Reserve District Research Analysis**
 
-I have reviewed the latest research from the Federal Reserve districts. While there is significant academic noise, four key themes emerge that directly impact our portfolio positioning regarding inflation, AI productivity, and systemic risk.
+After reviewing the latest research from the NY, STL, and RIC districts, I have isolated the most critical signals for our portfolio positioning. We are seeing a clear convergence of three themes: a deepening socio-economic divide, the "Capex-to-Cash" tension in AI, and acute geopolitical volatility affecting energy and supply chains.
 
-1. **The "K-Shaped" Consumption Divide (NY #1, #4, #22, #23):** New regional indicators confirm a stark bifurcation in the U.S. economy, where aggregate spending growth is being driven almost exclusively by high-income households while lower-income tiers face food insecurity and pessimism. This suggests that headline GDP and retail sales figures are masking a fragile consumer base, increasing the risk of a sharp consumption cliff if high-end spending cools.
+**Key Analytical Insights:**
 
-2. **AI Investment vs. Realized Returns (NY #8, #11, #16):** For the first time in Q3 2025, Big Tech capex exceeded operating earnings, while supply chain strains from Middle East conflicts threaten the hardware pipeline. This signals a transition from the "hype" phase to a "delivery" phase; if AI does not translate into immediate labor productivity or revenue, we may face a significant valuation correction in the tech sector.
+1. **[NY] Explaining/Tracking the K-Shaped Economy (Papers 24 & 25):** These papers confirm that aggregate spending growth is a mirage, driven almost exclusively by high-income households while lower-income cohorts face food insecurity and pessimism. For our macro outlook, this suggests that "aggregate" consumer data is now a lagging or misleading indicator; we must pivot to segmented data to forecast the true resilience of the U.S. consumer.
 
-3. **Energy Shocks and the Strait of Hormuz (NY #18):** The March 2026 energy price surge caused by the closure of the Strait of Hormuz is exacerbating the K-shaped divide, hitting lower-income households disproportionately. This creates a "policy trap" for the Fed: persistent cost-push inflation that cannot be solved by tightening without further crushing the vulnerable segment of the economy.
+2. **[NY] AI’s Macroeconomic Challenges and Promises (Paper 10):** The revelation that Big Tech’s capital investment exceeded operating earnings in Q3 2025 marks a critical inflection point. This "investment phase" creates a massive productivity bet that must now transition into tangible revenue growth to avoid a valuation correction in the tech sector.
 
-4. **NBFI Contagion and Systemic Stress (NY #17):** Recent bankruptcies (Tricolor, First Brands) and the suspension of redemptions at Blue Owl Capital II indicate mounting stress in Non-Bank Financial Institutions (NBFIs). This suggests that liquidity risks are migrating from the regulated banking sector to the "shadow" space, increasing the probability of a sudden credit freeze in corporate bond markets.
+3. **[NY] Same Shock, Different Roads? A K-Shaped Pattern at the Pump (Paper 20):** The March 2026 energy surge following the closure of the Strait of Hormuz highlights a systemic vulnerability. Because energy costs hit lower-income households disproportionately, these geopolitical shocks act as a regressive tax that could accelerate the "K-shaped" divergence and trigger a sharper-than-expected slowdown in discretionary spending.
 
-**Synthesis:** The U.S. economy is currently a facade of aggregate strength masking deep structural fragility and a precarious reliance on AI-driven capex. We are moving into a high-volatility regime where geopolitical energy shocks and NBFI instability could trigger a systemic correction despite seemingly resilient headline data.
+4. **[NY] Will Mounting Supply Chain Strains Hamstring the AI Investment Boom? (Paper 18):** This research links Middle East instability directly to the AI hardware pipeline, suggesting the third global supply shock in six years. If the AI Capex boom is throttled by physical supply constraints rather than demand, we face a scenario of "stagnant productivity growth" despite massive capital commitment.
+
+5. **[NY] Stress and Strain from NBFIs to Banks (Paper 19):** The bankruptcies of Tricolor and First Brands, alongside Blue Owl’s redemption freeze, signal that liquidity stress is migrating from traditional banks to Non-Bank Financial Institutions (NBFIs). This "shadow" stress could trigger a contagion event that forces the Fed into a liquidity provision role, complicating their inflation-fighting mandate.
+
+6. **[RIC] The Natural Beveridge Curve (Paper 5):** By analyzing the gap between actual and natural labor market equilibrium, this research provides a roadmap for the Fed's "neutral" rate of unemployment. It suggests that stabilization policy has diminishing returns if the structural mismatch in the labor market is not addressed, limiting the efficacy of traditional rate cuts.
+
+**Synthesis:**
+The U.S. economy is currently a tale of two trajectories: a high-income, AI-driven growth engine and a low-income population vulnerable to geopolitical energy shocks. The primary risk to our portfolio is a "synchronization failure," where NBFI liquidity stress and supply chain disruptions derail the AI productivity promise before it can lift the broader economy.
 
 ---
 
@@ -158,7 +165,21 @@ The paper evaluates the role of Community Development Financial Institutions (CD
 **Tags:** banking · credit · financial stability · regional economy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 5
+**Content Type:** Working Papers | **New:** 0 of 7
+
+### (cached) [Algorithms as Shadow Regulation: Secondary Market Access Overrides Home Buyer Credit Risk](https://www.fedinprint.org/item/fedlwp/103329/original)
+**Published:** 2026-05-29 | **Authors:** 
+
+The paper argues that secondary market pricing algorithms act as a form of shadow regulation by dictating lending standards. This mechanism effectively overrides individual lender assessments of home buyer credit risk to ensure securitization eligibility.
+
+**Tags:** housing · real estate · credit · banking · financial regulation · fintech
+
+### (cached) [Testing for Multi-Asset Systemic Tail Risk](https://www.fedinprint.org/item/fedlwp/96490/103328)
+**Published:** 2026-05-29 | **Authors:** 
+
+The research develops a framework for detecting systemic tail risk across diverse asset classes. It focuses on identifying co-movements during extreme market downturns to improve systemic risk monitoring.
+
+**Tags:** financial stability · banking · interest rates · recession · international
 
 ### (cached) [What Does It Take? Quantifying Cross-Country Transfers in the Eurozone](https://www.fedinprint.org/item/fedlwp/101808/103320)
 **Published:** 2026-05-28 | **Authors:** 
@@ -199,5 +220,5 @@ The paper explores the Dual Beveridge Curve to analyze the relationship between 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 23
-- Total cache size: 23 items
+- Already cached: 25
+- Total cache size: 25 items
