@@ -3,695 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earnings Tearsheets</title>
+    <title>Earnings Reports Archive</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
         }
-
         h1 {
             color: #333;
             border-bottom: 3px solid #007bff;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
         }
-
-        .info-box {
+        .stats {
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin: 20px 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        .stats-grid {
+        .report-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
-
-        .stat-item {
+        .report-card {
+            background: white;
             padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 5px;
+        .report-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
-        .stat-value {
+        .ticker {
             font-size: 1.5em;
             font-weight: bold;
-            color: #333;
-        }
-
-        .search-box {
-            margin-bottom: 20px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 6px;
-            transition: border-color 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        .reports-table {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: #007bff;
-            color: white;
-        }
-
-        th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        th:hover {
-            background: #0056b3;
-        }
-
-        th::after {
-            content: ' ↕';
-            opacity: 0.5;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid #dee2e6;
-            transition: background-color 0.2s;
-        }
-
-        tbody tr:hover {
-            background: #f8f9fa;
-        }
-
-        td {
-            padding: 15px;
-        }
-
-        .ticker {
-            font-weight: bold;
             color: #007bff;
-            font-size: 1.1em;
+            margin-bottom: 5px;
         }
-
-        .quarter {
-            background: #e7f3ff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.9em;
-            color: #0056b3;
-            white-space: nowrap;
-        }
-
-        .report-link {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .report-link:hover {
-            text-decoration: underline;
-        }
-
         .date {
             color: #666;
             font-size: 0.9em;
         }
-
+        .link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
         .last-updated {
-            text-align: center;
             color: #666;
             font-size: 0.9em;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            table {
-                font-size: 0.9em;
-            }
-
-            th, td {
-                padding: 10px;
-            }
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📈 Earnings Tearsheets</h1>
-
-        <div class="info-box">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-label">Total Reports</div>
-                    <div class="stat-value">60</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Companies Covered</div>
-                    <div class="stat-value">60</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Most Recent</div>
-                    <div class="stat-value">COHR</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Search by ticker, quarter, or keywords...">
-        </div>
-
-        <div class="reports-table">
-            <table id="reportsTable">
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">Ticker</th>
-                        <th onclick="sortTable(1)">Headline</th>
-                        <th onclick="sortTable(2)">Report Date</th>
-                        <th onclick="sortTable(3)">Earnings Date</th>
-                    </tr>
-                </thead>
-                <tbody id="reportsBody">
-
-                    <tr>
-                        <td class="ticker">COHR</td>
-                        <td><a href="COHR-2026-04-12.md" class="report-link">COHR Q2 FY2026 Review: AI Datacom Surge Drives Beat; Margin Expansion On Track; Guidance Robust</a></td>
-                        <td class="date">2026-04-12</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MELI</td>
-                        <td><a href="MELI-2026-03-12.md" class="report-link">MELI Q4 2025 Review: Revenue Surges +45% but Margin Compression Drives EPS Miss; Stock -9%</a></td>
-                        <td class="date">2026-03-12</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MSFT</td>
-                        <td><a href="MSFT-2026-03-04.md" class="report-link">MSFT Q2 FY2026 Review: Cloud Surpasses $50B, But CapEx Surge and Margin Guidance Spook Market</a></td>
-                        <td class="date">2026-03-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CRCL</td>
-                        <td><a href="CRCL-2026-02-25.md" class="report-link">CRCL Q4 2025 Review: USDC Volume Surges 247%, RLDC Margin Re-Rates +1,004 bps; Rate Headwind Persists</a></td>
-                        <td class="date">2026-02-25</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CNDT</td>
-                        <td><a href="CNDT-2026-02-20.md" class="report-link">CNDT Q4 2025 Review: Margins Expand Sharply but Revenue Miss Persists; No 2026 Guidance</a></td>
-                        <td class="date">2026-02-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">RDDT</td>
-                        <td><a href="RDDT-2026-02-17.md" class="report-link">RDDT Q4 2025 Review: Ad Revenue Surges 75%; Profitability Inflects, Guidance Solid but Stock Fades</a></td>
-                        <td class="date">2026-02-17</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MGM</td>
-                        <td><a href="MGM-2026-02-16.md" class="report-link">MGM Q4 2025 Review: Macau and Digital Surge Offset Vegas Softness; Buybacks Accelerate</a></td>
-                        <td class="date">2026-02-16</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">SPHR</td>
-                        <td><a href="SPHR-2026-02-12.md" class="report-link">SPHR Q4 CY2025 Review: Sphere Segment Surges 62%; First Profitable Quarter Drives Massive EPS Beat</a></td>
-                        <td class="date">2026-02-12</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">AEHR</td>
-                        <td><a href="AEHR-2026-02-03.md" class="report-link">AEHR Q2 FY2026 Review: Revenue Misses, but $60-80M Bookings Outlook Sets Stage for FY27 Rebound</a></td>
-                        <td class="date">2026-02-03</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">NET</td>
-                        <td><a href="NET-2026-01-29.md" class="report-link">NET Q3 2025 Review: Growth Re-Accelerates to 31%; Workers AI Drives $100M+ Deal; Guidance Raised</a></td>
-                        <td class="date">2026-01-29</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">PYPL</td>
-                        <td><a href="PYPL-2026-01-20.md" class="report-link">PYPL Q3 2025 Review: Branded Checkout Accelerates; Guidance Raised on Venmo Strength; Stock Volatile on Growth Concerns</a></td>
-                        <td class="date">2026-01-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">DIS</td>
-                        <td><a href="DIS-2026-01-20.md" class="report-link">DIS Q4 FY2025 Review: Parks Record Profit; Streaming Profitable; Revenue Miss Pressures Stock Despite Bullish FY26 Outlook</a></td>
-                        <td class="date">2026-01-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">ADBE</td>
-                        <td><a href="ADBE-2026-01-20.md" class="report-link">ADBE Q4 FY2025 Review: Record Revenue but AI Monetization Timeline Pressures Valuation; Guidance Solid</a></td>
-                        <td class="date">2026-01-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">KHC</td>
-                        <td><a href="KHC-2026-01-20.md" class="report-link">KHC Q3 2025 Review: Volume Pressures Persist; Guidance Cut Again; Spin-Off on Track for 2H 2026</a></td>
-                        <td class="date">2026-01-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">TSM</td>
-                        <td><a href="TSM-2026-01-15.md" class="report-link">TSM Q4 2025 Review: AI Demand Drives Record Profit; Capex Surge Signals Aggressive 2026 Build-Out</a></td>
-                        <td class="date">2026-01-15</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">ROKU</td>
-                        <td><a href="ROKU-2026-01-12.md" class="report-link">First Profitable Quarter Since 2021</a></td>
-                        <td class="date">2026-01-12</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">TER</td>
-                        <td><a href="TER-2026-01-10.md" class="report-link">HEADLINE: TER Q3 2025 Review: AI Demand Ignites 22% Stock Surge; Compute/Memory Drives Record Q4 Guide</a></td>
-                        <td class="date">2026-01-10</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">NFLX</td>
-                        <td><a href="NFLX-2026-01-10.md" class="report-link">HEADLINE: NFLX Q3 2025 Review: Revenue Accelerates to 17%, but Brazilian Tax Hit Crushes Margins; Thesis Intact</a></td>
-                        <td class="date">2026-01-10</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MU</td>
-                        <td><a href="MU-2026-01-08.md" class="report-link">MU Q1 FY2026 Review: AI Supercycle Ignites—HBM Sold Out Through 2026, Margins Expand to 57%</a></td>
-                        <td class="date">2026-01-08</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">IOT</td>
-                        <td><a href="IOT-2026-01-03.md" class="report-link">HEADLINE: IOT Q3 FY26 Review: First GAAP Profit, 29% Growth, but Shares Drift on Muted After-Hours Reaction</a></td>
-                        <td class="date">2026-01-03</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">WRBY</td>
-                        <td><a href="WRBY-2026-01-02.md" class="report-link">Revenue miss drives 14% intraday selloff.</a></td>
-                        <td class="date">2026-01-02</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CIB</td>
-                        <td><a href="CIB-2025-12-17.md" class="report-link">HEADLINE: CIB Q3 2025 Review: Profitability Surges 30% Above Estimates; ROE Hits 20.4%</a></td>
-                        <td class="date">2025-12-17</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">DUOL</td>
-                        <td><a href="DUOL-2025-12-14.md" class="report-link">HEADLINE: DUOL Q3 2025 Review: User Growth Accelerates, Revenue Beats, but Guidance Light Triggers 25% Selloff</a></td>
-                        <td class="date">2025-12-14</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">EOSE</td>
-                        <td><a href="EOSE-2025-12-14.md" class="report-link">HEADLINE: EOSE Q3 2025 Review: Record Revenue Doubles, but Misses Guidance; Path to Profitability Reiterated</a></td>
-                        <td class="date">2025-12-14</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">TXN</td>
-                        <td><a href="TXN-2025-12-14.md" class="report-link">Primary Beat Driver</a></td>
-                        <td class="date">2025-12-14</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">ORCL</td>
-                        <td><a href="ORCL-2025-12-11.md" class="report-link">HEADLINE: ORCL Q2 FY26 Review: Cloud Backlog Surges but Revenue Miss Triggers Selloff</a></td>
-                        <td class="date">2025-12-11</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">GEV</td>
-                        <td><a href="GEV-2025-12-10.md" class="report-link">Revenue momentum accelerating, profitability lagging:</a></td>
-                        <td class="date">2025-12-10</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">SQM</td>
-                        <td><a href="SQM-2025-12-10.md" class="report-link">HEADLINE: SQM Q3 2025 Review: Record Lithium Volumes Drive Beat; Margins Compress on Pricing Headwinds</a></td>
-                        <td class="date">2025-12-10</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">AKBNK</td>
-                        <td><a href="AKBNK-2025-12-05.md" class="report-link">AKBNK Q3 2025 Review: Loan Growth Surges 28%; NIM Rebounds but ROE Guided Lower</a></td>
-                        <td class="date">2025-12-05</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">NWMD</td>
-                        <td><a href="NWMD-2025-12-05.md" class="report-link">Primary Driver:</a></td>
-                        <td class="date">2025-12-05</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">TFC</td>
-                        <td><a href="TFC-2025-12-04.md" class="report-link">Beat driven by fee income surge, margin stabilization</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CAT</td>
-                        <td><a href="CAT-2025-12-04.md" class="report-link">First positive revenue growth in seven quarters</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MTB</td>
-                        <td><a href="MTB-2025-12-04.md" class="report-link">Robust beat driven by margin expansion and expense discipline</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">NYCB</td>
-                        <td><a href="NYCB-2025-12-04.md" class="report-link">Loss narrowed significantly, beating expectations by wide margin</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">ZION</td>
-                        <td><a href="ZION-2025-12-04.md" class="report-link">Strong revenue beat (+2.7%) driven by NIM expansion and fee income growth</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">UBER</td>
-                        <td><a href="UBER-2025-12-04.md" class="report-link">HEADLINE: UBER Q3 2025 Review: Record Trip Growth Powers 20% Revenue Beat; Margins Light on Q4 Guide</a></td>
-                        <td class="date">2025-12-04</td>
-                        <td class="date">2025-11-04</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CRWV</td>
-                        <td><a href="CRWV-2025-12-03.md" class="report-link">Revenue momentum explosive, but profitability path uncertain:</a></td>
-                        <td class="date">2025-12-03</td>
-                        <td class="date">2025-11-10</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">AAPL</td>
-                        <td><a href="AAPL-2025-12-03.md" class="report-link">Services carry the narrative:</a></td>
-                        <td class="date">2025-12-03</td>
-                        <td class="date">2025-10-30</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">YPF</td>
-                        <td><a href="YPF-2025-12-03.md" class="report-link">Vaca Muerta transforms operations, but conventional decline drags results:</a></td>
-                        <td class="date">2025-12-03</td>
-                        <td class="date">2025-11-10</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">FANDF</td>
-                        <td><a href="FANDF-2025-12-01.md" class="report-link">HEADLINE: FANDF FY2025 Review: Resilient 10% Earnings Growth Despite £146M UK Motor Provision; ROE Strong at 20.2%</a></td>
-                        <td class="date">2025-12-01</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">VW</td>
-                        <td><a href="VW-2025-12-01.md" class="report-link">HEADLINE: VW Q3 2025 Review: Tariffs and Porsche Charges Drive €1.3B Operating Loss; Margin Collapses; Guidance Cut</a></td>
-                        <td class="date">2025-12-01</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">HD</td>
-                        <td><a href="HD-2025-12-01.md" class="report-link">HEADLINE: HD Q3 FY25 Review: Third Straight Miss; Demand Deteriorates; Guidance Cut Again on Storm Absence</a></td>
-                        <td class="date">2025-12-01</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">SERV</td>
-                        <td><a href="SERV-2025-11-29.md" class="report-link">HEADLINE: SERV Q3 2025 Review: Revenue Surges 210% YoY; Losses Widen on Fleet Expansion; Guidance Light</a></td>
-                        <td class="date">2025-11-29</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">MGLU3</td>
-                        <td><a href="MGLU3-2025-11-25.md" class="report-link">HEADLINE: MGLU3 Q3 2025 Review: AI Commerce Drives Conversion, Profitability Steady; Ads Surge 69%</a></td>
-                        <td class="date">2025-11-25</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">LREN3</td>
-                        <td><a href="LREN3-2025-11-25.md" class="report-link">HEADLINE: LREN3 Q3 2025 Review: Net Income Surges 49%, CFI Drives EBITDA; Climate Headwinds Persist</a></td>
-                        <td class="date">2025-11-25</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">SMTC</td>
-                        <td><a href="SMTC-2025-11-25.md" class="report-link">HEADLINE: SMTC Q3 FY2026 Review: Record Revenue, Margin Expansion; Guidance Light on EPS</a></td>
-                        <td class="date">2025-11-25</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">AMBA</td>
-                        <td><a href="AMBA-2025-11-25.md" class="report-link">HEADLINE: AMBA Q3 FY2026 Review: Record Revenue, Edge AI at 80%; Muted Guidance Pressures Stock</a></td>
-                        <td class="date">2025-11-25</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">GBOOY</td>
-                        <td><a href="GBOOY-2025-11-24.md" class="report-link">HEADLINE: GBOOY Q3 2025 Review: Core Banking Robust Despite Bineo Impairment Hit; Dividend Elevated</a></td>
-                        <td class="date">2025-11-24</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CHKP</td>
-                        <td><a href="CHKP-2025-11-24.md" class="report-link">HEADLINE: CHKP Q3 2025 Review: Billings Surge 20% on Emerging Tech; Tax Benefit Inflates EPS</a></td>
-                        <td class="date">2025-11-24</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">CREDITC1</td>
-                        <td><a href="CREDITC1-2025-11-24.md" class="report-link">HEADLINE: BAP Q3 2025 Review: ROE Hits 19.6% on NIM Expansion; Revenue Miss Overshadowed</a></td>
-                        <td class="date">2025-11-24</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">LRCX</td>
-                        <td><a href="LRCX-2025-11-24.md" class="report-link">HEADLINE: LRCX Q1 FY2026 Review: Record Revenue and Margins on AI; China Headwind Emerges</a></td>
-                        <td class="date">2025-11-24</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">PWR</td>
-                        <td><a href="PWR-2025-11-24.md" class="report-link">HEADLINE: PWR Q3 2025 Review: Revenue Beats on Power Infrastructure Demand; Record Backlog Drives 2026 Thesis</a></td>
-                        <td class="date">2025-11-24</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">VTMX</td>
-                        <td><a href="VTMX-2025-11-22.md" class="report-link">VTMX Q3 2025 Review: Nearshoring Tailwinds Drive Margin Expansion; Debt Refinanced at Investment Grade</a></td>
-                        <td class="date">2025-11-22</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">NU</td>
-                        <td><a href="NU-2025-11-22.md" class="report-link">NU Q3 2025 Review: Record Profitability on Customer Growth; Stock Dips Despite Beat</a></td>
-                        <td class="date">2025-11-22</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">WMMVY</td>
-                        <td><a href="WMMVY-2025-11-22.md" class="report-link">HEADLINE: WMMVY Q3 2025 Review: Revenue Growth Continues; Margins Compress on Investment Cycle; EPS Miss</a></td>
-                        <td class="date">2025-11-22</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">VALE</td>
-                        <td><a href="VALE-2025-11-21.md" class="report-link">HEADLINE: VALE Q3 2025 Review: Iron Ore Volume Drives Beat; Base Metals Costs Decline Sharply; Upper-End Guidance Reaffirmed</a></td>
-                        <td class="date">2025-11-21</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">DB</td>
-                        <td><a href="DB-2025-11-20.md" class="report-link">HEADLINE: DB Q3 2025 Review: Record Profitability Driven by Trading Strength; Capital Return Accelerates</a></td>
-                        <td class="date">2025-11-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">FUNO</td>
-                        <td><a href="FUNO-2025-11-20.md" class="report-link">HEADLINE: FUNO Q3 2025 Review: Revenue Grows 5% on Stable Occupancy; AFFO Accelerates 7%</a></td>
-                        <td class="date">2025-11-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">GOOGL</td>
-                        <td><a href="GOOGL-2025-11-20.md" class="report-link">HEADLINE: GOOGL Q3 2025 Review: AI Delivers Historic $100B Quarter; Cloud Accelerates, CapEx Surges</a></td>
-                        <td class="date">2025-11-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ticker">PBR</td>
-                        <td><a href="PBR-2025-11-20.md" class="report-link">HEADLINE: PBR Q3 2025 Review: Record Production Drives EPS Beat; Capex Accelerating Despite Price Headwinds</a></td>
-                        <td class="date">2025-11-20</td>
-                        <td class="date">Unknown</td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-        <div class="last-updated">
-            Last updated: 2026-05-30 15:05 UTC
-        </div>
+    <h1>📊 Earnings Reports Archive</h1>
+
+    <div class="stats">
+        <strong>Total Reports:</strong> <span id="report-count">Loading...</span><br>
+        <span class="last-updated">Last Updated: <span id="last-updated">Loading...</span></span>
+    </div>
+
+    <div class="report-grid" id="reports">
+        Loading reports...
     </div>
 
     <script>
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const reportsBody = document.getElementById('reportsBody');
-        const rows = Array.from(reportsBody.querySelectorAll('tr'));
+        async function loadReports() {
+            try {
+                const response = await fetch('https://api.github.com/repos/DataVizHonduran/boquin.github.io/contents/reports/earnings');
+                const files = await response.json();
 
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
+                const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== 'index.html');
 
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
-        });
+                document.getElementById('report-count').textContent = mdFiles.length;
+                document.getElementById('last-updated').textContent = new Date().toLocaleString();
 
-        // Sort table functionality
-        let sortDirection = {};
+                const reportsDiv = document.getElementById('reports');
+                reportsDiv.innerHTML = '';
 
-        function sortTable(columnIndex) {
-            const table = document.getElementById('reportsTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
+                mdFiles.sort((a, b) => a.name.localeCompare(b.name)).forEach(file => {
+                    const parts = file.name.replace('.md', '').split('-');
+                    const ticker = parts[0];
+                    const date = parts.slice(1).join('-');
 
-            // Determine sort direction
-            const key = `col${columnIndex}`;
-            sortDirection[key] = !sortDirection[key];
-            const ascending = sortDirection[key];
-
-            rows.sort((a, b) => {
-                const aText = a.cells[columnIndex].textContent.trim();
-                const bText = b.cells[columnIndex].textContent.trim();
-
-                // Try to parse as date for date columns
-                if (columnIndex === 2 || columnIndex === 3) {
-                    const aDate = new Date(aText);
-                    const bDate = new Date(bText);
-                    if (!isNaN(aDate) && !isNaN(bDate)) {
-                        return ascending ? aDate - bDate : bDate - aDate;
-                    }
-                }
-
-                // Default string comparison
-                return ascending
-                    ? aText.localeCompare(bText)
-                    : bText.localeCompare(aText);
-            });
-
-            // Re-append rows in sorted order
-            rows.forEach(row => tbody.appendChild(row));
+                    const card = document.createElement('div');
+                    card.className = 'report-card';
+                    card.innerHTML = `
+                        <div class="ticker">${ticker}</div>
+                        <div class="date">Report Date: ${date}</div>
+                        <a href="${file.name}" class="link">View Report →</a>
+                    `;
+                    reportsDiv.appendChild(card);
+                });
+            } catch (error) {
+                document.getElementById('reports').innerHTML = '<p>Error loading reports. Please try again later.</p>';
+                console.error('Error loading reports:', error);
+            }
         }
+
+        loadReports();
     </script>
 </body>
 </html>
