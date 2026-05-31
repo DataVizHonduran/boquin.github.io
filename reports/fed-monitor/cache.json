@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-05-30T09:21:15.963705+00:00",
+    "lastRun": "2026-05-31T09:50:10.267078+00:00",
     "totalItems": 72
   },
   "items": {
@@ -1262,11 +1262,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-22T10:26:56.933360+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-30T09:21:15.963705+00:00"
+      "tagsGeneratedAt": "2026-05-31T09:50:10.267078+00:00"
     },
     "c964e8f3551f880a8f0c62db97633cc8e84574567fbaf2c1fd8ddd056ce66ae6": {
       "url": "https://www.fedinprint.org/item/fedlwp/101822/103288",
@@ -1340,11 +1340,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-30T09:21:15.963705+00:00"
+      "tagsGeneratedAt": "2026-05-31T09:50:10.267078+00:00"
     },
     "1f620e40414e31e923885883f8d9af5db3645edc39df34b9f7078ce3b3c4b5a3": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/",
@@ -1376,7 +1376,7 @@
       "publicationDate": "2026-05-28",
       "authors": [],
       "firstSeen": "2026-05-29T10:50:26.827596+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "In this post, we use the inaugural release of our regional consumer spending indicators to ask whether these patterns hold for a significant portion of the Second District, and how regional spending patterns by income have been similar to or different from the national patterns we documented earlier. We find similar K‑shaped patterns in both retail and gas spending in our region as we do in the nation, with the K‑shaped pattern in gasoline in response to the recent gas price shock being more pronounced in the region.",
       "aiSummary": "The analysis examines regional consumer spending indicators within the Second District to identify income-based disparities. It finds a K-shaped spending pattern in retail and gasoline, mirroring national trends of divergent economic experiences across income levels.",
       "tags": [
@@ -1396,11 +1396,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-29T10:50:26.827596+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis.",
+      "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-05-30T09:21:15.963705+00:00"
+      "tagsGeneratedAt": "2026-05-31T09:50:10.267078+00:00"
     },
     "8c3c0812f4a8f96d1b360485bc37dd365bda57342b57c636c35c0d170567850d": {
       "url": "https://www.fedinprint.org/item/fedlwp/101808/103320",
@@ -1431,7 +1431,7 @@
       "publicationDate": "2026-05-29",
       "authors": [],
       "firstSeen": "2026-05-30T09:21:15.963705+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The paper argues that secondary market pricing algorithms act as a form of shadow regulation by dictating lending standards. This mechanism effectively overrides individual lender assessments of home buyer credit risk to ensure securitization eligibility.",
       "tags": [
@@ -1453,7 +1453,7 @@
       "publicationDate": "2026-05-29",
       "authors": [],
       "firstSeen": "2026-05-30T09:21:15.963705+00:00",
-      "lastChecked": "2026-05-30T09:21:15.963705+00:00",
+      "lastChecked": "2026-05-31T09:50:10.267078+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The research develops a framework for detecting systemic tail risk across diverse asset classes. It focuses on identifying co-movements during extreme market downturns to improve systemic risk monitoring.",
       "tags": [
