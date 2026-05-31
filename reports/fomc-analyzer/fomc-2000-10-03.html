@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2000-10-03 vs 2000-08-22</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2000-10-03 vs 2000-08-22
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-31 10:20 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from August 22 and October 3, 2000.</p>
+<hr />
+<h2>1. Redlined Statement (2000-10-03)</h2>
+<p>The Federal Open Market Committee at its meeting today decided to maintain the existing stance of monetary policy, keeping its target for the federal funds rate at 6-1/2 percent.</p>
+<p>Recent data have indicated that the expansion of aggregate demand ~~is moderating~~ <strong>has moderated</strong> to a pace closer to the <strong>enhanced</strong> rate of growth of the economy's potential to produce. The ~~data also have indicated that~~ more rapid advances in productivity ~~have been raising that potential growth rate as well as~~ <strong>also continue to</strong> help contain costs and hold down underlying price pressures.</p>
+<p>~~Nonetheless, the Committee remains concerned about the risk of a continuing gap between the growth of demand and potential supply at a time when~~ <strong>However,</strong> the utilization of the pool of available workers remains at an unusually high level. <strong>Moreover, the increase in energy prices, though having limited effect on core measures of prices to date, poses a risk of raising inflation expectations. The subdued behavior of those expectations so far has contributed importantly to maintaining an environment conducive to maximum sustainable growth.</strong></p>
+<p>Against the background of its long-term goals of price stability and sustainable economic growth and of the information currently available, the Committee believes the risks continue to be weighted mainly toward conditions that may generate heightened inflation pressures in the ~~foreseeable~~ future.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"is moderating"</td>
+<td style="text-align: left;">"has moderated"</td>
+<td style="text-align: left;">Shift from a process (ongoing) to a result (completed). Suggests demand has reached the target pace.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"have been raising that potential growth rate"</td>
+<td style="text-align: left;">"enhanced" / "continue to help"</td>
+<td style="text-align: left;">Acknowledges that potential growth has already shifted upward; productivity is now viewed as a stabilizer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"Committee remains concerned about the risk of a continuing gap..."</td>
+<td style="text-align: left;">"However..."</td>
+<td style="text-align: left;">Softens the language regarding the demand-supply gap, moving from "concern" to a statement of fact.</td>
+</tr>
+<tr>
+<td style="text-align: left;">(N/A)</td>
+<td style="text-align: left;">"increase in energy prices... poses a risk of raising inflation expectations"</td>
+<td style="text-align: left;"><strong>Critical Addition.</strong> Introduces a new exogenous risk (energy) and a focus on "inflation expectations."</td>
+</tr>
+<tr>
+<td style="text-align: left;">"foreseeable"</td>
+<td style="text-align: left;">(Removed)</td>
+<td style="text-align: left;">Slight reduction in the immediacy of the inflation risk timeline.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<p><strong>Inflation</strong><br />
+The Committee has shifted its focus from internal "underlying price pressures" to external shocks. The introduction of <strong>energy prices</strong> as a risk factor is a significant pivot. More importantly, the Committee is now explicitly monitoring <strong>inflation expectations</strong>. By noting that "subdued behavior" of expectations has helped growth, the Fed is signaling that it views the anchoring of expectations as a primary defense against inflation.</p>
+<p><strong>Labor Markets &amp; Growth</strong><br />
+The tone regarding growth has shifted from cautious to confirmatory. The change from "is moderating" to "has moderated" suggests the Committee believes the economy has successfully transitioned to a sustainable pace. While the labor market remains "unusually high" (tight), the removal of the phrase "remains concerned about the risk of a continuing gap" suggests the Committee is less worried about an overheating economy driven by demand.</p>
+<p><strong>Forward Guidance</strong><br />
+The guidance remains data-dependent and cautious. While the target rate is unchanged, the Committee is broadening its surveillance. It is no longer just looking at the gap between demand and supply, but is now watching the transmission of energy costs into broader inflation expectations.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Neutral to Slightly Hawkish</strong></p>
+<p>While the Committee expresses more confidence that aggregate demand "has moderated" (a dovish signal), this is offset by the introduction of energy prices as a new inflationary risk. The explicit mention of "inflation expectations" is a classic central bank signal that they are prepared to act if the public begins to expect higher prices, as this would create a self-fulfilling prophecy. The removal of "foreseeable" from the final paragraph slightly softens the urgency, but the overall stance remains skewed toward inflation risk. The Committee is essentially saying: <em>"The demand side is under control, but we are now watching the supply side (energy) and the psychological side (expectations) with vigilance."</em></p>
+</div>
+</body>
+</html>

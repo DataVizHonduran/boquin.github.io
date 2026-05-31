@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOMC Statement Analysis — 2000-08-22 vs 2000-06-28</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1565c0; border-bottom: 3px solid #1565c0; padding-bottom: 10px; }
+h2 { color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1565c0; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #1565c0; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+blockquote {
+    border-left: 4px solid #1565c0; margin: 16px 0; padding: 8px 16px;
+    background: #e3f2fd; border-radius: 0 4px 4px 0; color: #333;
+}
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #1565c0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← FOMC Analyzer Archive</a>
+    <h1>📋 FOMC Statement Analysis</h1>
+    <h2 style="border:none;margin-top:0;font-size:1.2em;color:#555;">
+        2000-08-22 vs 2000-06-28
+    </h2>
+    <p class="meta">
+        Generated: 2026-05-31 10:21 UTC &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it &nbsp;|&nbsp;
+        Source: <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" target="_blank">vtasca/fomc-statements-minutes</a>
+    </p>
+    <hr>
+    <p>As a senior economist and central bank strategist, I have performed a comparative analysis of the FOMC statements from June 28 and August 22, 2000. </p>
+<p>This period is characterized by the "productivity boom" of the late 90s, where the Committee was attempting to balance strong growth with the risk of overheating.</p>
+<hr />
+<h2>1. Redlined Statement (2000-08-22)</h2>
+<p>The Federal Open Market Committee at its meeting today decided to maintain the existing stance of monetary policy, keeping its target for the federal funds rate at 6-1/2 percent.</p>
+<p>~~Recent data suggest that~~ <strong>Recent data have indicated that</strong> the expansion of aggregate demand ~~may be~~ <strong>is</strong> moderating toward a pace closer to the rate of growth of the economy's potential to produce. ~~Although core measures of prices are rising slightly faster than a year ago, continuing~~ <strong>The data also have indicated that more</strong> rapid advances in productivity have been <strong>raising that potential growth rate as well as</strong> containing costs and holding down underlying price pressures.</p>
+<p>Nonetheless, ~~signs that growth in demand is moving to a sustainable pace are still tentative and preliminary, and~~ <strong>the Committee remains concerned about the risk of a continuing gap between the growth of demand and potential supply at a time when</strong> the utilization of the pool of available workers remains at an unusually high level.</p>
+<p>~~In these circumstances, and~~ Against the background of its long-term goals of price stability and sustainable economic growth and of the information currently available, the Committee believes the risks continue to be weighted mainly toward conditions that may generate heightened inflation pressures in the foreseeable future.</p>
+<h3>Summary of Changes</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Removed</th>
+<th style="text-align: left;">Added</th>
+<th style="text-align: left;">Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">"suggest that... may be"</td>
+<td style="text-align: left;">"have indicated that... is"</td>
+<td style="text-align: left;"><strong>Increased Conviction:</strong> Shift from speculative language to a statement of fact regarding demand moderation.</td>
+</tr>
+<tr>
+<td style="text-align: left;">"core measures of prices are rising slightly faster"</td>
+<td style="text-align: left;">"raising that potential growth rate"</td>
+<td style="text-align: left;"><strong>Structural Shift:</strong> Moves focus from current price acceleration to the long-term supply-side capacity (Potential GDP).</td>
+</tr>
+<tr>
+<td style="text-align: left;">"signs... are still tentative and preliminary"</td>
+<td style="text-align: left;">"remains concerned about the risk of a continuing gap"</td>
+<td style="text-align: left;"><strong>Risk Re-characterization:</strong> Shifts from "waiting for proof" to "managing a specific risk" (Demand-Supply gap).</td>
+</tr>
+<tr>
+<td style="text-align: left;">"In these circumstances"</td>
+<td style="text-align: left;">(Removed)</td>
+<td style="text-align: left;"><strong>Stylistic:</strong> Minor streamlining of the concluding paragraph.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Thematic Shifts</h2>
+<h3>Inflation</h3>
+<p>The Committee has subtly pivoted its inflation narrative. In June, there was an explicit admission that core prices were "rising slightly faster than a year ago." In August, this admission is removed. Instead, the Committee emphasizes that productivity is not just containing costs, but actually <strong>raising the potential growth rate</strong>. This suggests the Fed is becoming more optimistic that the economy can grow faster without triggering inflation.</p>
+<h3>Labor Markets &amp; Growth</h3>
+<p>The language regarding growth has shifted from "tentative" to "indicated." However, the concern regarding the labor market remains acute. By replacing "tentative signs" with a "concern about the risk of a continuing gap between demand and potential supply," the Committee is signaling that while demand is cooling, it is not yet cooling <em>enough</em> to offset the tight labor market.</p>
+<h3>Forward Guidance</h3>
+<p>The forward guidance remains strictly data-dependent and cautious. The final paragraph—the "risk balance" statement—remains virtually identical. By maintaining that risks are "weighted mainly toward conditions that may generate heightened inflation," the Committee is signaling that it is not yet ready to consider rate cuts, despite the moderation in demand.</p>
+<hr />
+<h2>3. Tonal Assessment</h2>
+<p><strong>Verdict: Neutral to Slightly Hawkish</strong></p>
+<p>While the Committee acknowledges that demand <strong>is</strong> (rather than <em>may be</em>) moderating, the overall tone remains restrictive. The removal of the phrase "tentative and preliminary" in favor of "remains concerned about the risk of a continuing gap" indicates that the Fed is not yet convinced the economy has reached a sustainable equilibrium. Most importantly, the preservation of the "inflation-weighted" risk balance confirms that the Committee's primary fear remains overheating. The shift is "Neutral" in terms of the rate decision (hold), but "Hawkish" in its refusal to acknowledge the moderation in demand as a reason to ease the policy stance.</p>
+</div>
+</body>
+</html>
