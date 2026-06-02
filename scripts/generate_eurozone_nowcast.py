@@ -84,7 +84,10 @@ _RAW_LEVEL_COLS_EUR = {
 #     final monthly releases.
 EUROZONE_PMI_SEED = {
     # 2026
-    "2026-02": (48.0,  50.9),   # flash Feb 2026 — update with final release
+    "2026-05": (51.4,  47.5),   # flash May 2026
+    "2026-04": (52.2,  48.8),   # final Apr 2026
+    "2026-03": (51.6,  50.7),   # final Mar 2026
+    "2026-02": (50.8,  51.9),   # final Feb 2026
     "2026-01": (46.6,  50.2),   # final Jan 2026
     # 2025
     "2025-12": (45.1,  49.6),
