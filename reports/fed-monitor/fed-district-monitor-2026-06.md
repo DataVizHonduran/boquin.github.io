@@ -1,25 +1,51 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (2 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (4 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Since only two publications were provided in the monitoring window, I have analyzed both. While the sample size is limited, these reports highlight a concerning divergence between structural labor shifts and regional business viability.
+To: Investment Team
+From: Senior Economist
+Date: June 3, 2026
+Subject: Analysis of Recent Federal Reserve District Research
 
-1. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects**
-The data indicates a sharp decline in sentiment among small businesses in the NY/NJ/CT corridor, suggesting a tightening of credit conditions or eroding consumer demand. This is a critical lead indicator for regional economic softening and may signal that higher-for-longer rates are finally breaking the resilience of the small-business sector.
+I have reviewed the latest publications from the Federal Reserve districts. While the volume is low, the thematic overlap regarding structural frictions is significant. Here are the key takeaways:
 
-2. **[NY] Remote Work Leaves Younger Workers Sidelined**
-The research establishes a correlation between the rise of remote work and increased youth unemployment, suggesting that the loss of in-person mentorship and "on-the-job" onboarding is creating a structural barrier to entry. This implies a long-term productivity drag and a potential mismatch in labor supply that could keep the natural rate of unemployment (r*) higher than pre-pandemic levels.
+1. **The Unintended Effects of Interest Rate Caps: Credit Reallocation to Safer Borrowers [NY]**
+This research demonstrates that state-mandated interest rate caps, while intended to protect consumers, actually push lenders to shift credit toward lower-risk borrowers. For our outlook, this suggests that regulatory interventions in consumer finance may inadvertently starve high-risk segments of liquidity, potentially driving them toward unregulated shadow banking.
 
-**Synthesis:** The combined data suggests a "hollowing out" effect where both the smallest firms and the newest entrants to the workforce are facing systemic headwinds. This creates a precarious macro environment where structural labor inefficiencies could coexist with a regional economic slowdown.
+2. **The Unintended Effects of Interest Rate Caps: Credit Rationing for Risky Borrowers [NY]**
+Complementing the previous study, this paper highlights the resulting credit rationing that leaves the riskiest borrowers entirely excluded from formal credit markets. This indicates a growing fragility in the lower-income consumer base, which could heighten systemic risk if a sudden economic shock hits these underserved populations.
+
+3. **Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects [NY]**
+Recent data from the Second District shows a sharp decline in sentiment among small businesses regarding their 2026 outlook. Given that small business sentiment is a leading indicator for regional CAPEX and hiring, this pessimism suggests a potential cooling of economic activity in the critical NY/NJ/CT corridor.
+
+4. **Remote Work Leaves Younger Workers Sidelined [NY]**
+This analysis links the rise of remote work to increased youth unemployment, arguing that the lack of in-person mentorship and networking is hindering entry-level integration. This points to a long-term structural risk to human capital development and productivity that may not be captured by headline unemployment figures.
+
+**Synthesis:**
+The current data reveals a troubling convergence of structural frictions, where regulatory constraints in credit markets and the evolution of remote work are marginalizing vulnerable economic cohorts. Combined with deteriorating small business sentiment, these factors suggest that underlying economic fragility is widening despite broader macroeconomic stability.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 2
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+
+### (cached) [The Unintended Effects of Interest Rate Caps: Credit Reallocation to Safer Borrowers](https://libertystreeteconomics.newyorkfed.org/2026/06/the-unintended-effects-of-interest-rate-caps-credit-reallocation-to-safer-borrowers/)
+**Published:** 2026-06-03 | **Authors:** 
+
+This research analyzes how state-imposed interest rate caps on consumer loans affect credit distribution. It finds that these regulations lead to credit rationing for risky borrowers and a reallocation of funds toward safer borrowers.
+
+**Tags:** interest rates · credit · financial regulation · consumer spending · banking · financial stability
+
+### (cached) [The Unintended Effects of Interest Rate Caps: Credit Rationing for Risky Borrowers](https://libertystreeteconomics.newyorkfed.org/2026/06/the-unintended-effects-of-interest-rate-caps-credit-rationing-for-risky-borrowers/)
+**Published:** 2026-06-03 | **Authors:** 
+
+This paper explores the effects of interest rate caps on alternative credit providers, including payday and installment lenders. It argues that such caps inadvertently cause credit rationing for high-risk borrowers despite the goal of reducing borrowing costs.
+
+**Tags:** interest rates · credit · financial regulation · consumer spending · banking · financial stability
 
 ### (cached) [Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects](https://libertystreeteconomics.newyorkfed.org/2026/06/struggling-regional-small-businesses-deeply-pessimistic-about-2026-prospects/)
 **Published:** 2026-06-02 | **Authors:** 
@@ -39,5 +65,5 @@ The paper argues that the rise of remote work has contributed to increased youth
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 2
-- Total cache size: 2 items
+- Already cached: 4
+- Total cache size: 4 items
