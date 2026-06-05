@@ -187,6 +187,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
         fig.update_yaxes(title_text="Z-Score (σ)", row=2, col=1)
 
         divs[tenor] = pio.to_html(fig, full_html=False, include_plotlyjs=False,
+                                   div_id=f'reversal-chart-{tenor}',
                                    config={"displayModeBar": False})
     return divs
 
@@ -357,6 +358,17 @@ html = f"""<!DOCTYPE html>
     background: white; border-radius: 10px; padding: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   }}
+  /* ── Range selector ── */
+  .range-bar {{
+    display: flex; align-items: center; gap: 6px; margin-bottom: 18px;
+  }}
+  .range-btn {{
+    padding: 4px 14px; border-radius: 14px; cursor: pointer;
+    border: 1.5px solid #aaa; background: white;
+    font-weight: 600; color: #555; font-size: 0.82rem;
+    transition: all 0.15s;
+  }}
+  .range-btn.active {{ background: var(--navy); color: white; border-color: var(--navy); }}
   /* ── Top-level page tabs ── */
   .page-tab-bar {{
     display: flex; gap: 0; margin: 0 0 30px;
@@ -521,12 +533,20 @@ html = f"""<!DOCTYPE html>
   <!-- ══ Tab: CTA Treasury Reversal ══ -->
   <div id="page-tab-reversal" class="page-tab-pane">
     <h2>CTA Treasury Reversal — Positioning Residuals &amp; Z-Score Signals</h2>
-    <p style="color:#666;font-size:0.9rem;margin-bottom:22px;">
+    <p style="color:#666;font-size:0.9rem;margin-bottom:14px;">
       Z-score of CTA fast-mode positioning (252-day rolling). Extremes flag crowded positions;
       crossbacks through ±1σ mark the unwind.
       <span style="color:#dc3545;font-weight:600;">▼ Short Unwind</span> = crowded short-duration bet reversing &nbsp;·&nbsp;
       <span style="color:#28a745;font-weight:600;">▲ Long Unwind</span> = crowded long-duration bet reversing.
     </p>
+    <div class="range-bar">
+      <span style="font-size:0.82rem;color:#888;margin-right:8px;">Range:</span>
+      <button class="range-btn active" onclick="setReversalRange('all', this)">All</button>
+      <button class="range-btn" onclick="setReversalRange(10, this)">10Y</button>
+      <button class="range-btn" onclick="setReversalRange(5, this)">5Y</button>
+      <button class="range-btn" onclick="setReversalRange(3, this)">3Y</button>
+      <button class="range-btn" onclick="setReversalRange(1, this)">1Y</button>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
       {reversal_grid_html}
     </div>
@@ -541,6 +561,25 @@ html = f"""<!DOCTYPE html>
 </footer>
 
 <script>
+function setReversalRange(years, btn) {{
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const ids = ['reversal-chart-2Y','reversal-chart-5Y','reversal-chart-10Y','reversal-chart-30Y'];
+  const end = new Date();
+  const endStr = end.toISOString().slice(0,10);
+  let startStr;
+  if (years === 'all') {{
+    startStr = '2010-01-01';
+  }} else {{
+    const s = new Date();
+    s.setFullYear(s.getFullYear() - years);
+    startStr = s.toISOString().slice(0,10);
+  }}
+  ids.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) Plotly.relayout(id, {{'xaxis.range': [startStr, endStr]}});
+  }});
+}}
 function switchPage(page, btn) {{
   document.querySelectorAll('.page-tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.page-tab-btn').forEach(b => b.classList.remove('active'));
