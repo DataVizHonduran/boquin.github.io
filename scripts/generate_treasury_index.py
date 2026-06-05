@@ -79,20 +79,20 @@ hc_rows        = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 # ── CTA reversal charts (z-score of positioning residuals) ───────────────────
 
-def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252, z_threshold=1.5):
+def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252, z_threshold=1.5):
     """Build one 2-row Plotly chart per tenor: yield + CTA positioning z-score.
     Returns a dict {tenor: html_div_string}."""
-    pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'),
+    pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'),
                             index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'),
                             index_col=0, parse_dates=True)
 
     divs = {}
     for tenor in tenor_order:
-        if tenor not in pos_fast.columns or tenor not in yields_df.columns:
+        if tenor not in pos_df.columns or tenor not in yields_df.columns:
             continue
 
-        pos = pos_fast[tenor].dropna()
+        pos = pos_df[tenor].dropna()
         yld = yields_df[tenor].reindex(pos.index).ffill()
 
         # Rolling z-score of positioning (1-year window)
@@ -187,22 +187,22 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252, z_threshold=
         fig.update_yaxes(title_text="Z-Score (σ)", row=2, col=1)
 
         divs[tenor] = pio.to_html(fig, full_html=False, include_plotlyjs=False,
-                                   div_id=f'reversal-chart-{tenor}',
+                                   div_id=f'reversal-chart-{mode}-{tenor}',
                                    config={"displayModeBar": False})
     return divs
 
 
-def _build_reversal_stats_html(output_dir, tenor_order, z_window=252, z_threshold=1.5):
+def _build_reversal_stats_html(output_dir, tenor_order, mode='fast', z_window=252, z_threshold=1.5):
     """Return an HTML table of hit rate / avg / median gain in bps for each tenor × signal × horizon."""
-    pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'), index_col=0, parse_dates=True)
+    pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'), index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'), index_col=0, parse_dates=True)
     horizons  = [5, 10, 21, 63]
     rows = []
 
     for tenor in tenor_order:
-        if tenor not in pos_fast.columns or tenor not in yields_df.columns:
+        if tenor not in pos_df.columns or tenor not in yields_df.columns:
             continue
-        pos = pos_fast[tenor].dropna()
+        pos = pos_df[tenor].dropna()
         yld = yields_df[tenor].reindex(pos.index).ffill()
         roll = pos.rolling(z_window, min_periods=126)
         z = (pos - roll.mean()) / roll.std()
@@ -326,13 +326,20 @@ fast_chart_div = pio.to_html(fig_fast, full_html=False, include_plotlyjs=False)
 slow_chart_div = pio.to_html(fig_slow, full_html=False, include_plotlyjs=False)
 
 print("Building CTA Treasury Reversal charts...")
-reversal_chart_divs = _build_cta_reversal_divs(OUTPUT_DIR, TENOR_ORDER)
-reversal_stats_html = _build_reversal_stats_html(OUTPUT_DIR, TENOR_ORDER)
-reversal_grid_html = ''.join(
-    f'<div style="background:white;border-radius:10px;padding:14px;'
-    f'box-shadow:0 2px 8px rgba(0,0,0,0.07);">{reversal_chart_divs.get(t,"")}</div>'
-    for t in TENOR_ORDER
-)
+reversal_chart_divs_fast = _build_cta_reversal_divs(OUTPUT_DIR, TENOR_ORDER, mode='fast')
+reversal_chart_divs_slow = _build_cta_reversal_divs(OUTPUT_DIR, TENOR_ORDER, mode='slow')
+reversal_stats_fast = _build_reversal_stats_html(OUTPUT_DIR, TENOR_ORDER, mode='fast')
+reversal_stats_slow = _build_reversal_stats_html(OUTPUT_DIR, TENOR_ORDER, mode='slow')
+
+def _reversal_grid(chart_divs):
+    return ''.join(
+        f'<div style="background:white;border-radius:10px;padding:14px;'
+        f'box-shadow:0 2px 8px rgba(0,0,0,0.07);">{chart_divs.get(t,"")}</div>'
+        for t in TENOR_ORDER
+    )
+
+reversal_grid_fast = _reversal_grid(reversal_chart_divs_fast)
+reversal_grid_slow = _reversal_grid(reversal_chart_divs_slow)
 
 
 # ── Yield snapshot table ──────────────────────────────────────────────────────
@@ -624,13 +631,18 @@ html = f"""<!DOCTYPE html>
 
   <!-- ══ Tab: CTA Treasury Reversal ══ -->
   <div id="page-tab-reversal" class="page-tab-pane">
-    <h2>CTA Treasury Reversal — Positioning Residuals &amp; Z-Score Signals</h2>
+    <h2>CTA Treasury Reversal — Positioning Z-Score Signals</h2>
     <p style="color:#666;font-size:0.9rem;margin-bottom:14px;">
-      Z-score of CTA fast-mode positioning (252-day rolling). Extremes flag crowded positions;
-      crossbacks through ±1σ mark the unwind.
+      252-day rolling z-score of CTA positioning. Extremes flag crowded positions;
+      crossbacks through ±1.5σ mark the unwind.
       <span style="color:#dc3545;font-weight:600;">▼ Short Unwind</span> = crowded short-duration bet reversing &nbsp;·&nbsp;
       <span style="color:#28a745;font-weight:600;">▲ Long Unwind</span> = crowded long-duration bet reversing.
     </p>
+    <!-- inner Fast/Slow tabs -->
+    <div class="tab-bar" id="reversal-tab-bar">
+      <button class="tab-btn active" onclick="switchReversalMode('fast', this)">Fast (20/50/100)</button>
+      <button class="tab-btn"       onclick="switchReversalMode('slow', this)">Slow (50/100/200)</button>
+    </div>
     <div class="range-bar">
       <span style="font-size:0.82rem;color:#888;margin-right:8px;">Range:</span>
       <button class="range-btn active" onclick="setReversalRange('all', this)">All</button>
@@ -639,14 +651,28 @@ html = f"""<!DOCTYPE html>
       <button class="range-btn" onclick="setReversalRange(3, this)">3Y</button>
       <button class="range-btn" onclick="setReversalRange(1, this)">1Y</button>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      {reversal_grid_html}
+    <!-- Fast mode -->
+    <div id="reversal-tab-fast" class="tab-pane active">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        {reversal_grid_fast}
+      </div>
+      <h2 style="margin-top:32px">Signal Performance — Fast Mode</h2>
+      <p style="color:#666;font-size:0.85rem;margin-bottom:14px;">
+        Positive = signal was correct. Hit% ≥ 55 highlighted green, ≤ 48 red.
+      </p>
+      {reversal_stats_fast}
     </div>
-    <h2 style="margin-top:32px">Signal Performance — Forward Yield Change (bps, direction-adjusted)</h2>
-    <p style="color:#666;font-size:0.85rem;margin-bottom:14px;">
-      Positive = signal was correct. Hit% ≥ 55 highlighted green, ≤ 48 red.
-    </p>
-    {reversal_stats_html}
+    <!-- Slow mode -->
+    <div id="reversal-tab-slow" class="tab-pane">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        {reversal_grid_slow}
+      </div>
+      <h2 style="margin-top:32px">Signal Performance — Slow Mode</h2>
+      <p style="color:#666;font-size:0.85rem;margin-bottom:14px;">
+        Positive = signal was correct. Hit% ≥ 55 highlighted green, ≤ 48 red.
+      </p>
+      {reversal_stats_slow}
+    </div>
   </div><!-- /page-tab-reversal -->
 
 </main>
@@ -661,7 +687,10 @@ html = f"""<!DOCTYPE html>
 function setReversalRange(years, btn) {{
   document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const ids = ['reversal-chart-2Y','reversal-chart-5Y','reversal-chart-10Y','reversal-chart-30Y'];
+  // Determine active reversal mode
+  const activeRPane = document.querySelector('#reversal-tab-fast.active, #reversal-tab-slow.active');
+  const rMode = (activeRPane && activeRPane.id.includes('slow')) ? 'slow' : 'fast';
+  const ids = ['2Y','5Y','10Y','30Y'].map(t => 'reversal-chart-' + rMode + '-' + t);
   const end = new Date();
   const endStr = end.toISOString().slice(0,10);
   let startStr;
@@ -710,10 +739,29 @@ function switchPage(page, btn) {{
   btn.classList.add('active');
 }}
 function switchTab(mode, btn) {{
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + mode).classList.add('active');
+  const bar = document.querySelector('#page-tab-overview .tab-bar');
+  bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  ['fast','slow'].forEach(m => {{
+    const p = document.getElementById('tab-' + m);
+    if (p) p.classList.toggle('active', m === mode);
+  }});
+}}
+function switchReversalMode(mode, btn) {{
+  const bar = document.getElementById('reversal-tab-bar');
+  bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['fast','slow'].forEach(m => {{
+    const p = document.getElementById('reversal-tab-' + m);
+    if (p) p.classList.toggle('active', m === mode);
+  }});
+  // Re-apply current range to the newly visible charts
+  const activeRangeBtn = document.querySelector('.range-btn.active');
+  if (activeRangeBtn) {{
+    const label = activeRangeBtn.textContent.trim();
+    const years = label === 'All' ? 'all' : parseInt(label);
+    setReversalRange(years, activeRangeBtn);
+  }}
 }}
 </script>
 
