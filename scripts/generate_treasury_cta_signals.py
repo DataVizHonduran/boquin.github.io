@@ -1,17 +1,9 @@
 """
-Treasury CTA Exhaustion Signal Generator - Dual Mode (Fast & Slow)
-Fetches 2Y/5Y/10Y/30Y Treasury yield data from FRED, calculates CTA positioning,
-and generates exhaustion signals using the same methodology as FX CTA.
+Treasury CTA Positioning - Dual Mode (Fast & Slow)
+Fetches 2Y/5Y/10Y/30Y Treasury yield data from FRED and calculates CTA positioning.
 
 Positive position  → CTAs positioned for RISING yields (short duration / short bonds)
 Negative position  → CTAs positioned for FALLING yields (long duration / long bonds)
-
-Filters (same as FX version):
-  P1 - Vectorized position filter
-  P2 - Rolling 500-day percentile thresholds (no look-ahead bias)
-  P3 - Rate-of-change confirmation filter
-  P4 - Signal strength score 0-100 (Extremity 40 + Speed 40 + Consensus 20)
-  P5 - RSI of positioning filter
 """
 
 import sys
