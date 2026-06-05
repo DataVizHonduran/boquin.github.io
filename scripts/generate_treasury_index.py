@@ -101,8 +101,18 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
 
         # Crossback reversal markers
         prev_z = z.shift(1)
-        sell_rev = pos.index[(prev_z > 1.0) & (z <= 1.0)]   # crowded short unwinds
-        buy_rev  = pos.index[(prev_z < -1.0) & (z >= -1.0)] # crowded long unwinds
+        sell_rev = pos.index[(prev_z > 1.0) & (z <= 1.0)]
+        buy_rev  = pos.index[(prev_z < -1.0) & (z >= -1.0)]
+
+        # Convert to plain Python lists — avoids binary bdata encoding that old Plotly CDN can't decode
+        x_dates  = [d.strftime('%Y-%m-%d') for d in yld.index]
+        y_yld    = yld.values.tolist()
+        x_z      = [d.strftime('%Y-%m-%d') for d in z.index]
+        y_z      = z.values.tolist()
+        x_sell   = [d.strftime('%Y-%m-%d') for d in sell_rev]
+        y_sell   = z.reindex(sell_rev).values.tolist()
+        x_buy    = [d.strftime('%Y-%m-%d') for d in buy_rev]
+        y_buy    = z.reindex(buy_rev).values.tolist()
 
         fig = make_subplots(
             rows=2, cols=1, shared_xaxes=True,
@@ -116,42 +126,40 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
 
         # Row 1: yield
         fig.add_trace(go.Scatter(
-            x=yld.index, y=yld,
+            x=x_dates, y=y_yld,
             name=f"{tenor} Yield",
             line=dict(color="#1f77b4", width=1.5),
-            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra></extra>",
+            hovertemplate="%{x}: %{y:.2f}%<extra></extra>",
         ), row=1, col=1)
 
         # Row 2: positioning z-score
         fig.add_trace(go.Scatter(
-            x=z.index, y=z,
+            x=x_z, y=y_z,
             name="Positioning Z",
             line=dict(color="#444", width=1.2),
-            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}σ<extra>Z-Score</extra>",
+            hovertemplate="%{x}: %{y:.2f}σ<extra>Z-Score</extra>",
         ), row=2, col=1)
 
         fig.add_hline(y=0,    line=dict(color="#aaa", width=1, dash="dot"), row=2, col=1)
         fig.add_hline(y=1.0,  line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
         fig.add_hline(y=-1.0, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
 
-        # Sell-reversal: crowded short unwind (CTAs were max short duration, now covering)
-        if len(sell_rev):
+        if x_sell:
             fig.add_trace(go.Scatter(
-                x=sell_rev, y=z.reindex(sell_rev),
+                x=x_sell, y=y_sell,
                 mode="markers", name="Short Unwind",
                 marker=dict(symbol="triangle-down", size=12, color="#dc3545",
                             line=dict(color="white", width=1)),
-                hovertemplate="%{x|%Y-%m-%d}: Z=%{y:.2f}σ<extra>Short Unwind</extra>",
+                hovertemplate="%{x}: Z=%{y:.2f}σ<extra>Short Unwind</extra>",
             ), row=2, col=1)
 
-        # Buy-reversal: crowded long unwind (CTAs were max long duration, now selling)
-        if len(buy_rev):
+        if x_buy:
             fig.add_trace(go.Scatter(
-                x=buy_rev, y=z.reindex(buy_rev),
+                x=x_buy, y=y_buy,
                 mode="markers", name="Long Unwind",
                 marker=dict(symbol="triangle-up", size=12, color="#28a745",
                             line=dict(color="white", width=1)),
-                hovertemplate="%{x|%Y-%m-%d}: Z=%{y:.2f}σ<extra>Long Unwind</extra>",
+                hovertemplate="%{x}: Z=%{y:.2f}σ<extra>Long Unwind</extra>",
             ), row=2, col=1)
 
         # Background shading on row 1: extreme z episodes
@@ -159,13 +167,13 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
             in_ep, ep_start = False, None
             for dt, zv in z.items():
                 if not in_ep and (sign * zv) > 1.0:
-                    in_ep, ep_start = True, dt
+                    in_ep, ep_start = True, dt.strftime('%Y-%m-%d')
                 elif in_ep and (sign * zv) <= 1.0:
-                    fig.add_vrect(x0=ep_start, x1=dt, fillcolor=color,
+                    fig.add_vrect(x0=ep_start, x1=dt.strftime('%Y-%m-%d'), fillcolor=color,
                                   layer="below", line_width=0, row=1, col=1)
                     in_ep = False
             if in_ep:
-                fig.add_vrect(x0=ep_start, x1=z.index[-1], fillcolor=color,
+                fig.add_vrect(x0=ep_start, x1=z.index[-1].strftime('%Y-%m-%d'), fillcolor=color,
                               layer="below", line_width=0, row=1, col=1)
 
         fig.update_layout(
