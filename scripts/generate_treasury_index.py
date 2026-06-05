@@ -674,10 +674,32 @@ function setReversalRange(years, btn) {{
   }}
   ids.forEach(id => {{
     const el = document.getElementById(id);
-    if (el) Plotly.relayout(id, {{
-      'xaxis.range': [startStr, endStr],
-      'yaxis.autorange': true,
-      'yaxis2.autorange': true
+    if (!el) return;
+    // Compute visible y ranges from trace data within the selected x window
+    let y1min = Infinity, y1max = -Infinity;
+    let y2min = Infinity, y2max = -Infinity;
+    el.data.forEach(trace => {{
+      const xs = trace.x, ys = trace.y;
+      if (!xs || !ys) return;
+      const axis = trace.yaxis || 'y';
+      for (let i = 0; i < xs.length; i++) {{
+        if (xs[i] >= startStr && xs[i] <= endStr && ys[i] != null && isFinite(ys[i])) {{
+          if (axis === 'y' || axis === 'y1') {{
+            y1min = Math.min(y1min, ys[i]);
+            y1max = Math.max(y1max, ys[i]);
+          }} else if (axis === 'y2') {{
+            y2min = Math.min(y2min, ys[i]);
+            y2max = Math.max(y2max, ys[i]);
+          }}
+        }}
+      }}
+    }});
+    const p1 = (y1max - y1min) * 0.06 || 0.1;
+    const p2 = (y2max - y2min) * 0.10 || 0.2;
+    Plotly.relayout(id, {{
+      'xaxis.range':  [startStr, endStr],
+      'yaxis.range':  [y1min - p1, y1max + p1],
+      'yaxis2.range': [Math.min(y2min - p2, -1.6), Math.max(y2max + p2, 1.6)]
     }});
   }});
 }}
