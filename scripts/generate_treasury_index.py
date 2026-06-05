@@ -192,6 +192,97 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
     return divs
 
 
+def _build_reversal_stats_html(output_dir, tenor_order, z_window=252):
+    """Return an HTML table of hit rate / avg / median gain in bps for each tenor × signal × horizon."""
+    pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'), index_col=0, parse_dates=True)
+    yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'), index_col=0, parse_dates=True)
+    horizons  = [5, 10, 21, 63]
+    rows = []
+
+    for tenor in tenor_order:
+        if tenor not in pos_fast.columns or tenor not in yields_df.columns:
+            continue
+        pos = pos_fast[tenor].dropna()
+        yld = yields_df[tenor].reindex(pos.index).ffill()
+        roll = pos.rolling(z_window, min_periods=126)
+        z = (pos - roll.mean()) / roll.std()
+        prev_z = z.shift(1)
+        signals = [
+            ('Short Unwind', pos.index[(prev_z > 1.0) & (z <= 1.0)], -1),
+            ('Long Unwind',  pos.index[(prev_z < -1.0) & (z >= -1.0)], 1),
+        ]
+        for sig_name, sig_idx, direction in signals:
+            row = {'Tenor': tenor, 'Signal': sig_name, 'N': len(sig_idx)}
+            for h in horizons:
+                gains = []
+                for dt in sig_idx:
+                    loc = yld.index.get_loc(dt)
+                    fwd = loc + h
+                    if fwd >= len(yld):
+                        continue
+                    dy = yld.iloc[fwd] - yld.iloc[loc]
+                    gains.append(-direction * dy * 100)
+                if gains:
+                    g = np.array(gains)
+                    row[f'Hit{h}']  = round((g > 0).mean() * 100, 0)
+                    row[f'Avg{h}']  = round(g.mean(), 1)
+                    row[f'Med{h}']  = round(np.median(g), 1)
+                else:
+                    row[f'Hit{h}'] = row[f'Avg{h}'] = row[f'Med{h}'] = '—'
+            rows.append(row)
+
+    def _cell(v, is_hit=False, is_bps=False):
+        if v == '—':
+            return f'<td style="color:#aaa">—</td>'
+        if is_hit:
+            color = '#155724' if v >= 55 else ('#856404' if v >= 48 else '#721c24')
+            return f'<td style="color:{color};font-weight:600">{int(v)}%</td>'
+        if is_bps:
+            color = '#155724' if v > 0 else ('#721c24' if v < 0 else '#333')
+            return f'<td style="color:{color}">{v:+.1f}</td>'
+        return f'<td>{v}</td>'
+
+    header = (
+        '<tr style="background:var(--navy);color:white">'
+        '<th rowspan="2" style="padding:8px 12px">Tenor</th>'
+        '<th rowspan="2" style="padding:8px 12px">Signal</th>'
+        '<th rowspan="2" style="padding:8px 12px">N</th>'
+        + ''.join(f'<th colspan="3" style="padding:8px 12px;text-align:center">{lbl}</th>'
+                  for lbl in ['1 Week','2 Weeks','1 Month','3 Months'])
+        + '</tr>'
+        '<tr style="background:#2a3a5e;color:white">'
+        + ''.join('<th style="padding:6px 10px;font-size:0.78rem">Hit%</th>'
+                  '<th style="padding:6px 10px;font-size:0.78rem">Avg(bp)</th>'
+                  '<th style="padding:6px 10px;font-size:0.78rem">Med(bp)</th>' for _ in horizons)
+        + '</tr>'
+    )
+
+    body = ''
+    for i, r in enumerate(rows):
+        bg = '' if i % 2 == 0 else 'background:#f9f9f9;'
+        sig_color = 'color:#dc3545' if 'Short' in r['Signal'] else 'color:#28a745'
+        body += (
+            f'<tr style="{bg}">'
+            f'<td style="padding:8px 12px;font-weight:700">{r["Tenor"]}</td>'
+            f'<td style="padding:8px 12px;font-weight:600;{sig_color}">{r["Signal"]}</td>'
+            f'<td style="padding:8px 12px;color:#666">{r["N"]}</td>'
+            + ''.join(
+                _cell(r[f'Hit{h}'], is_hit=True) +
+                _cell(r[f'Avg{h}'], is_bps=True) +
+                _cell(r[f'Med{h}'], is_bps=True)
+                for h in horizons
+            )
+            + '</tr>'
+        )
+
+    return (
+        '<table style="width:100%;border-collapse:collapse;font-size:0.87rem;'
+        'background:white;border-radius:10px;overflow:hidden;'
+        'box-shadow:0 2px 8px rgba(0,0,0,0.07)">'
+        + header + '<tbody>' + body + '</tbody></table>'
+    )
+
+
 # ── CTA positioning bar chart ─────────────────────────────────────────────────
 
 def create_position_bar_chart(positions, mode):
@@ -236,6 +327,7 @@ slow_chart_div = pio.to_html(fig_slow, full_html=False, include_plotlyjs=False)
 
 print("Building CTA Treasury Reversal charts...")
 reversal_chart_divs = _build_cta_reversal_divs(OUTPUT_DIR, TENOR_ORDER)
+reversal_stats_html = _build_reversal_stats_html(OUTPUT_DIR, TENOR_ORDER)
 reversal_grid_html = ''.join(
     f'<div style="background:white;border-radius:10px;padding:14px;'
     f'box-shadow:0 2px 8px rgba(0,0,0,0.07);">{reversal_chart_divs.get(t,"")}</div>'
@@ -550,6 +642,11 @@ html = f"""<!DOCTYPE html>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
       {reversal_grid_html}
     </div>
+    <h2 style="margin-top:32px">Signal Performance — Forward Yield Change (bps, direction-adjusted)</h2>
+    <p style="color:#666;font-size:0.85rem;margin-bottom:14px;">
+      Positive = signal was correct. Hit% ≥ 55 highlighted green, ≤ 48 red.
+    </p>
+    {reversal_stats_html}
   </div><!-- /page-tab-reversal -->
 
 </main>
