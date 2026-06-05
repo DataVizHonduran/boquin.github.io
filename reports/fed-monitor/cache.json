@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-06-04T10:41:37.238086+00:00",
-    "totalItems": 77
+    "lastRun": "2026-06-05T10:49:29.403632+00:00",
+    "totalItems": 79
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1340,11 +1340,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine the paper's arguments or findings.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-04T10:41:37.238086+00:00"
+      "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
     },
     "1f620e40414e31e923885883f8d9af5db3645edc39df34b9f7078ce3b3c4b5a3": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/",
@@ -1396,11 +1396,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-29T10:50:26.827596+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine the paper's arguments or findings.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-04T10:41:37.238086+00:00"
+      "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
     },
     "8c3c0812f4a8f96d1b360485bc37dd365bda57342b57c636c35c0d170567850d": {
       "url": "https://www.fedinprint.org/item/fedlwp/101808/103320",
@@ -1474,7 +1474,7 @@
       "publicationDate": "2026-06-02",
       "authors": [],
       "firstSeen": "2026-06-02T11:22:08.653149+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "We recently updated the suite of indicators describing the performance of small businesses in the Second District (defined, for the purpose of this study, as New York, New Jersey, and Connecticut) and nationally with data from the 2025 edition of the Small Business Credit Survey (SBCS). In this post, we find that regional small businesses reported severe declines in employment and revenue growth in 2025 and became more pessimistic about growth in 2026. In contrast, small firms in the rest of the nation enjoyed stable revenues and employment in 2025 and, while they also had lower expectations o",
       "aiSummary": "Analysis of the 2025 Small Business Credit Survey reveals severe declines in revenue and employment growth for small businesses in the Second District. The findings indicate deep pessimism regarding economic prospects heading into 2026.",
       "tags": [
@@ -1516,7 +1516,7 @@
       "publicationDate": "2026-06-03",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "Several states have recently capped consumer loan rates with the stated purpose of protecting borrowers. In a recent Staff Report, we study how these interventions have played out in three states. In our first post about that study, we showed that rate caps lead riskier borrowers to face rationing in the credit market. One question that naturally arises is what lenders do with the credit they used to provide to high-risk borrowers before the caps were imposed. Lenders that lend exclusively to high-risk borrowers (at rates above the cap) may decide to stop lending to high-risk borrowers in that",
       "aiSummary": "This research analyzes how state-imposed interest rate caps on consumer loans affect credit distribution. It finds that these regulations lead to credit rationing for risky borrowers and a reallocation of funds toward safer borrowers.",
       "tags": [
@@ -1538,7 +1538,7 @@
       "publicationDate": "2026-06-03",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "In imperial China, 3 percent was the maximum legal monthly loan rate; charging more was punishable by 40 to 100 blows with the “light cane.” (Rockoff 2003) Centuries later, many U.S. states are imposing the same cap (without corporal penalties) on alternative credit providers, such as payday, installment, and auto-title lenders, with the goal of lowering credit costs and delinquency for the high-risk borrowers that rely on these funding sources. A concern, however, is that lenders will simply refuse to lend to these borrowers at lower interest rates. Our recent Staff Report studies how interes",
       "aiSummary": "This paper explores the effects of interest rate caps on alternative credit providers, including payday and installment lenders. It argues that such caps inadvertently cause credit rationing for high-risk borrowers despite the goal of reducing borrowing costs.",
       "tags": [
@@ -1560,11 +1560,53 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-04T10:41:37.238086+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine the paper's arguments or findings.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-04T10:41:37.238086+00:00"
+      "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
+    },
+    "1a83fa428cfc29d20994958db81dd2b7d9481b9ba2bdec55ddef21eaa9326c6b": {
+      "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-18",
+      "title": "The Postpandemic City: Urban Employment Centers and Commuting in the Fifth District",
+      "district": "Richmond Fed (5th District)",
+      "districtCode": "RIC",
+      "contentType": "Economic Briefs",
+      "publicationDate": "2026-06-05",
+      "authors": [],
+      "firstSeen": "2026-06-05T10:49:29.403632+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
+      "scrapedSnippet": "Employer-reported data through 2023 reveal a divergence in postpandemic commuting patterns across four large metropolitan areas within the Fifth District.",
+      "aiSummary": "This analysis examines post-pandemic commuting trends across four major metropolitan areas in the Fifth District. It identifies a divergence in how urban employment centers are recovering based on employer-reported data.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "regional economy",
+        "consumer spending",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
+    },
+    "df809ccbf95d0f52f6549bbfc72f18cd74f63721e40f7457349a7cf7820fbe90": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98801/103360",
+      "title": "The Implications of Labor Market Heterogeneity for Unemployment Insurance Design",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-06-04",
+      "authors": [],
+      "firstSeen": "2026-06-05T10:49:29.403632+00:00",
+      "lastChecked": "2026-06-05T10:49:29.403632+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper explores how diverse characteristics within the labor market affect the efficacy of unemployment insurance. It argues for design adjustments to better accommodate labor market heterogeneity.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "fiscal policy",
+        "wages",
+        "recession"
+      ],
+      "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
     }
   }
 }
