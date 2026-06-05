@@ -674,7 +674,11 @@ function setReversalRange(years, btn) {{
   }}
   ids.forEach(id => {{
     const el = document.getElementById(id);
-    if (el) Plotly.relayout(id, {{'xaxis.range': [startStr, endStr]}});
+    if (el) Plotly.relayout(id, {{
+      'xaxis.range': [startStr, endStr],
+      'yaxis.autorange': true,
+      'yaxis2.autorange': true
+    }});
   }});
 }}
 function switchPage(page, btn) {{
