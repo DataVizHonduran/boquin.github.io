@@ -48,6 +48,11 @@ def pull_data(series_dict, years=16):
 OUTPUT_DIR           = "reports/treasury-cta-signals"
 WINDOW               = 750            # Rolling window for position normalization (~3 years)
 YEARS_HISTORY        = 16            # Years of FRED data to pull
+ROLLING_PCT_WINDOW     = 252          # 1 trading year for decile thresholds
+ROLLING_PCT_MINPERIODS = 63           # 1 quarter minimum
+RSI_PERIOD             = 14
+GAP                    = 5            # Hysteresis band for exhaustion signals
+CONSENSUS_WINDOW_DAYS  = 5
 
 # Treasury tenors
 TREASURIES = {
@@ -79,12 +84,21 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 df_display = df_raw[df_raw.index >= '2016-01-01'].copy()
 
 
-# ── Helper functions (identical logic to generate_cta_signals.py) ─────────────
+# ── Helper functions ──────────────────────────────────────────────────────────
+
+def calculate_rsi(series, period=RSI_PERIOD):
+    delta = series.diff()
+    gain  = delta.clip(lower=0).rolling(period).mean()
+    loss  = (-delta.clip(upper=0)).rolling(period).mean()
+    rs    = gain / loss.replace(0, np.nan)
+    return 100 - (100 / (1 + rs))
+
 
 def calculate_positions(df, short_window, mid_window, long_window):
     """Calculate CTA positioning for all Treasury tenors."""
     positions_latest = {}
     positions_df     = pd.DataFrame()
+    rsi_df           = pd.DataFrame()
 
     for tenor in df.columns:
         series = df[tenor].dropna()
@@ -103,21 +117,147 @@ def calculate_positions(df, short_window, mid_window, long_window):
                            .replace(0, np.nan).bfill().ffill())
         raw_pos = (d['ema_convergence'] / rolling_max_abs) * 50
 
-        # P1: Vectorized trend filter
         up   = (d['ema_short'] > d['ema_mid']) & (d['ema_mid'] > d['ema_long'])
         down = (d['ema_short'] < d['ema_mid']) & (d['ema_mid'] < d['ema_long'])
         d['position_size'] = np.where(
             up,   np.maximum(0, raw_pos),
             np.where(down, np.minimum(0, raw_pos), 0)
         )
+        d['rsi_pos'] = calculate_rsi(d['position_size'])
         d.dropna(subset=['position_size'], inplace=True)
 
         if not d.empty:
             col = f"{tenor}_posy"
             positions_latest[tenor] = d['position_size'].iloc[-1]
             positions_df[col]       = d['position_size']
+            rsi_df[col]             = d['rsi_pos']
 
-    return positions_latest, positions_df
+    return positions_latest, positions_df, rsi_df
+
+
+def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_df):
+    """Generate directional exhaustion signals using 252-day decile thresholds on position_size."""
+    signals = pd.DataFrame(0, index=positions_df.index,
+                           columns=positions_df.columns, dtype=int)
+    signal_metadata = []
+    pos_roc = positions_df.diff(1)
+
+    extreme_mode   = {col: None  for col in positions_df.columns}
+    extreme_peak   = {col: None  for col in positions_df.columns}
+    extreme_rsi_ok = {col: False for col in positions_df.columns}
+
+    for col in positions_df.columns:
+        col_idx = signals.columns.get_loc(col)
+        has_rsi = col in rsi_df.columns
+
+        for i in range(len(positions_df)):
+            pos = positions_df.iloc[i][col]
+            if pd.isna(pos):
+                continue
+
+            upper_enter = rolling_upper.iloc[i][col] if col in rolling_upper.columns else np.nan
+            lower_enter = rolling_lower.iloc[i][col] if col in rolling_lower.columns else np.nan
+            if pd.isna(upper_enter) or pd.isna(lower_enter):
+                continue
+
+            upper_exit = upper_enter - GAP if upper_enter - GAP > 0 else upper_enter - 3
+            lower_exit = lower_enter + GAP if lower_enter + GAP < 0 else lower_enter + 3
+
+            roc     = pos_roc.iloc[i][col]
+            rsi_val = rsi_df.iloc[i][col] if has_rsi else np.nan
+
+            if extreme_mode[col] is None:
+                if pos >= upper_enter:
+                    extreme_mode[col]   = 'long'
+                    extreme_peak[col]   = pos
+                    extreme_rsi_ok[col] = pd.isna(rsi_val) or (rsi_val > 70)
+                elif pos <= lower_enter:
+                    extreme_mode[col]   = 'short'
+                    extreme_peak[col]   = pos
+                    extreme_rsi_ok[col] = pd.isna(rsi_val) or (rsi_val < 30)
+
+            elif extreme_mode[col] == 'long':
+                if pos > extreme_peak[col]:
+                    extreme_peak[col] = pos
+                if not extreme_rsi_ok[col]:
+                    if pd.isna(rsi_val) or rsi_val > 70:
+                        extreme_rsi_ok[col] = True
+                roc_ok = pd.isna(roc) or (roc < 0)
+                if pos < upper_exit and roc_ok and extreme_rsi_ok[col]:
+                    signals.iloc[i, col_idx] = 1
+                    extremity_range = max(1, 50.0 - float(upper_enter))
+                    extremity = min(40.0, (float(extreme_peak[col]) - float(upper_enter))
+                                    / extremity_range * 40.0)
+                    speed = min(40.0, abs(float(roc)) / 3.0 * 40.0) if not pd.isna(roc) else 0.0
+                    signal_metadata.append({
+                        'date':            positions_df.index[i].strftime('%Y-%m-%d'),
+                        'tenor':           col.replace('_posy', ''),
+                        'direction':       'Long',
+                        'peak_position':   round(float(extreme_peak[col]), 2),
+                        'threshold':       round(float(upper_enter), 2),
+                        'roc_at_signal':   round(float(roc), 4) if not pd.isna(roc) else None,
+                        'rsi_at_signal':   round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
+                        'extremity_score': round(extremity, 1),
+                        'speed_score':     round(speed, 1),
+                        'consensus_score': 0,
+                        'strength_score':  round(extremity + speed, 1),
+                    })
+                    extreme_mode[col]   = None
+                    extreme_peak[col]   = None
+                    extreme_rsi_ok[col] = False
+
+            elif extreme_mode[col] == 'short':
+                if pos < extreme_peak[col]:
+                    extreme_peak[col] = pos
+                if not extreme_rsi_ok[col]:
+                    if pd.isna(rsi_val) or rsi_val < 30:
+                        extreme_rsi_ok[col] = True
+                roc_ok = pd.isna(roc) or (roc > 0)
+                if pos > lower_exit and roc_ok and extreme_rsi_ok[col]:
+                    signals.iloc[i, col_idx] = 1
+                    extremity_range = max(1, float(lower_enter) - (-50.0))
+                    extremity = min(40.0, (float(lower_enter) - float(extreme_peak[col]))
+                                    / extremity_range * 40.0)
+                    speed = min(40.0, abs(float(roc)) / 3.0 * 40.0) if not pd.isna(roc) else 0.0
+                    signal_metadata.append({
+                        'date':            positions_df.index[i].strftime('%Y-%m-%d'),
+                        'tenor':           col.replace('_posy', ''),
+                        'direction':       'Short',
+                        'peak_position':   round(float(extreme_peak[col]), 2),
+                        'threshold':       round(float(lower_enter), 2),
+                        'roc_at_signal':   round(float(roc), 4) if not pd.isna(roc) else None,
+                        'rsi_at_signal':   round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
+                        'extremity_score': round(extremity, 1),
+                        'speed_score':     round(speed, 1),
+                        'consensus_score': 0,
+                        'strength_score':  round(extremity + speed, 1),
+                    })
+                    extreme_mode[col]   = None
+                    extreme_peak[col]   = None
+                    extreme_rsi_ok[col] = False
+
+    return signals, signal_metadata
+
+
+def add_consensus_scores(fast_metadata, slow_metadata):
+    """Add 20-pt consensus bonus when fast & slow agree within CONSENSUS_WINDOW_DAYS."""
+    def find_consensus(signals_a, signals_b):
+        for sig in signals_a:
+            sig_date  = datetime.strptime(sig['date'], '%Y-%m-%d')
+            tenor     = sig['tenor']
+            direction = sig['direction']
+            for other in signals_b:
+                if other['tenor'] == tenor and other['direction'] == direction:
+                    other_date = datetime.strptime(other['date'], '%Y-%m-%d')
+                    if abs((sig_date - other_date).days) <= CONSENSUS_WINDOW_DAYS:
+                        sig['consensus_score'] = 20
+                        sig['strength_score']  = round(sig['strength_score'] + 20, 1)
+                        break
+        return signals_a
+
+    fast_metadata = find_consensus(fast_metadata, slow_metadata)
+    slow_metadata = find_consensus(slow_metadata, fast_metadata)
+    return fast_metadata, slow_metadata
 
 
 def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_str):
@@ -187,32 +327,57 @@ for mode, windows in CTA_MODES.items():
     print(f"Processing {mode.upper()} mode ({windows['short']}/{windows['mid']}/{windows['long']})...")
     print(f"{'='*60}")
 
-    positions_latest, positions_df = calculate_positions(
+    positions_latest, positions_df, rsi_df = calculate_positions(
         df_raw, windows['short'], windows['mid'], windows['long']
     )
     print(f"Calculated positioning for {len(positions_latest)} tenors")
+
+    rolling_upper = positions_df.rolling(
+        window=ROLLING_PCT_WINDOW, min_periods=ROLLING_PCT_MINPERIODS
+    ).quantile(0.80)
+    rolling_lower = positions_df.rolling(
+        window=ROLLING_PCT_WINDOW, min_periods=ROLLING_PCT_MINPERIODS
+    ).quantile(0.20)
+
+    signals_df, signal_metadata = generate_exhaustion_signals(
+        positions_df, rolling_upper, rolling_lower, rsi_df
+    )
+    print(f"Generated {len(signal_metadata)} exhaustion signals")
 
     latest_positions = pd.Series(positions_latest).sort_values(ascending=False)
 
     mode_data[mode] = {
         'positions_df':     positions_df,
+        'signals_df':       signals_df,
+        'signal_metadata':  signal_metadata,
         'positions_latest': positions_latest,
         'latest_positions': latest_positions,
     }
 
     all_summaries[mode] = {
-        'generated_at':     datetime.now().isoformat(),
-        'mode':             mode,
-        'windows':          f"{windows['short']}/{windows['mid']}/{windows['long']}",
-        'tenors':           len(positions_latest),
-        'latest_positions': latest_positions.to_dict(),
-        'latest_yields': {t: round(float(df_raw[t].iloc[-1]), 4)
-                          for t in df_raw.columns},
-        'data_as_of':       df_raw.index[-1].strftime('%Y-%m-%d'),
+        'generated_at':          datetime.now().isoformat(),
+        'mode':                  mode,
+        'windows':               f"{windows['short']}/{windows['mid']}/{windows['long']}",
+        'tenors':                len(positions_latest),
+        'latest_positions':      latest_positions.to_dict(),
+        'latest_yields':         {t: round(float(df_raw[t].iloc[-1]), 4)
+                                  for t in df_raw.columns},
+        'data_as_of':            df_raw.index[-1].strftime('%Y-%m-%d'),
+        'signal_count':          len(signal_metadata),
+        'high_conviction_count': sum(1 for s in signal_metadata if s['strength_score'] >= 60),
+        'signal_metadata':       signal_metadata,
     }
 
     print(f"Positions: {dict(latest_positions.round(1))}")
 
+
+# ── Consensus scoring across modes ───────────────────────────────────────────
+mode_data['fast']['signal_metadata'], mode_data['slow']['signal_metadata'] = \
+    add_consensus_scores(mode_data['fast']['signal_metadata'], mode_data['slow']['signal_metadata'])
+for mode in ('fast', 'slow'):
+    meta = mode_data[mode]['signal_metadata']
+    all_summaries[mode]['high_conviction_count'] = sum(1 for s in meta if s['strength_score'] >= 60)
+    all_summaries[mode]['signal_metadata'] = meta
 
 # ── Phase 2: Generate charts ─────────────────────────────────────────────────
 for mode, windows in CTA_MODES.items():
