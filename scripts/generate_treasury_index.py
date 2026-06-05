@@ -4,10 +4,14 @@ Reads summary.json produced by generate_treasury_cta_signals.py.
 """
 
 import os
+import sys
 import json
 from datetime import datetime
 import plotly.graph_objects as go
 import plotly.io as pio
+
+sys.path.insert(0, os.path.dirname(__file__))
+from generate_fed_policy_fv import get_reversal_chart_div
 
 OUTPUT_DIR                = "reports/treasury-cta-signals"
 HIGH_CONVICTION_THRESHOLD = 60
@@ -115,6 +119,9 @@ fig_slow = create_position_bar_chart(slow_positions, 'slow')
 
 fast_chart_div = pio.to_html(fig_fast, full_html=False, include_plotlyjs=False)
 slow_chart_div = pio.to_html(fig_slow, full_html=False, include_plotlyjs=False)
+
+print("Building CTA Treasury Reversal chart...")
+reversal_chart_div = get_reversal_chart_div()
 
 
 # ── Yield snapshot table ──────────────────────────────────────────────────────
@@ -232,7 +239,22 @@ html = f"""<!DOCTYPE html>
     background: white; border-radius: 10px; padding: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   }}
-  /* ── Mode tabs ── */
+  /* ── Top-level page tabs ── */
+  .page-tab-bar {{
+    display: flex; gap: 0; margin: 0 0 30px;
+    border-bottom: 3px solid var(--navy);
+  }}
+  .page-tab-btn {{
+    padding: 10px 28px; cursor: pointer;
+    border: none; border-radius: 8px 8px 0 0;
+    background: #e8eaf0; font-weight: 700;
+    color: var(--navy); font-size: 0.95rem;
+    transition: all 0.2s; margin-right: 4px;
+  }}
+  .page-tab-btn.active {{ background: var(--navy); color: white; }}
+  .page-tab-pane {{ display: none; }}
+  .page-tab-pane.active {{ display: block; }}
+  /* ── Mode tabs (inner) ── */
   .tab-bar {{
     display: flex; gap: 8px; margin-bottom: 14px;
   }}
@@ -330,42 +352,65 @@ html = f"""<!DOCTYPE html>
 
 <main>
 
-  <!-- ── Current yield snapshot ── -->
-  <h2>Current Treasury Yield Snapshot</h2>
-  <table class="yield-table">
-    <thead>
-      <tr>
-        <th>Tenor</th>
-        <th>Yield</th>
-        <th>Fast Position</th>
-        <th>Slow Position</th>
-        <th>CTA Lean</th>
-      </tr>
-    </thead>
-    <tbody>
-      {yield_rows}
-    </tbody>
-  </table>
-
-  <!-- ── Positioning bar charts ── -->
-  <h2>CTA Positioning by Mode</h2>
-  <div class="charts-grid">
-    <div class="chart-box">{fast_chart_div}</div>
-    <div class="chart-box">{slow_chart_div}</div>
+  <!-- ── Top-level page tabs ── -->
+  <div class="page-tab-bar">
+    <button class="page-tab-btn active" onclick="switchPage('overview', this)">CTA Exhaustion</button>
+    <button class="page-tab-btn"        onclick="switchPage('reversal', this)">CTA Treasury Reversal</button>
   </div>
 
-  <!-- ── Chart links ── -->
-  <h2>Individual Tenor Charts</h2>
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('fast', this)">Fast Mode (20/50/100)</button>
-    <button class="tab-btn"       onclick="switchTab('slow', this)">Slow Mode (50/100/200)</button>
-  </div>
-  <div id="tab-fast" class="tab-pane active">
-    <div class="chart-cards">{chart_links_fast}</div>
-  </div>
-  <div id="tab-slow" class="tab-pane">
-    <div class="chart-cards">{chart_links_slow}</div>
-  </div>
+  <!-- ══ Tab: CTA Exhaustion (existing content) ══ -->
+  <div id="page-tab-overview" class="page-tab-pane active">
+
+    <!-- ── Current yield snapshot ── -->
+    <h2>Current Treasury Yield Snapshot</h2>
+    <table class="yield-table">
+      <thead>
+        <tr>
+          <th>Tenor</th>
+          <th>Yield</th>
+          <th>Fast Position</th>
+          <th>Slow Position</th>
+          <th>CTA Lean</th>
+        </tr>
+      </thead>
+      <tbody>
+        {yield_rows}
+      </tbody>
+    </table>
+
+    <!-- ── Positioning bar charts ── -->
+    <h2>CTA Positioning by Mode</h2>
+    <div class="charts-grid">
+      <div class="chart-box">{fast_chart_div}</div>
+      <div class="chart-box">{slow_chart_div}</div>
+    </div>
+
+    <!-- ── Chart links ── -->
+    <h2>Individual Tenor Charts</h2>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('fast', this)">Fast Mode (20/50/100)</button>
+      <button class="tab-btn"       onclick="switchTab('slow', this)">Slow Mode (50/100/200)</button>
+    </div>
+    <div id="tab-fast" class="tab-pane active">
+      <div class="chart-cards">{chart_links_fast}</div>
+    </div>
+    <div id="tab-slow" class="tab-pane">
+      <div class="chart-cards">{chart_links_slow}</div>
+    </div>
+
+  </div><!-- /page-tab-overview -->
+
+  <!-- ══ Tab: CTA Treasury Reversal ══ -->
+  <div id="page-tab-reversal" class="page-tab-pane">
+    <h2>CTA Treasury Reversal — 10Y Policy Fair Value &amp; Z-Score Signal</h2>
+    <p style="color:#666;font-size:0.9rem;margin-bottom:18px;">
+      OLS fair value model (DGS2, Policy Spread, Taylor Gap) with 36-month rolling z-score.
+      ▲ green = rich-episode over (yield reverting up) &nbsp;·&nbsp; ▼ red = cheap-episode over (yield reverting down).
+    </p>
+    <div style="background:white;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+      {reversal_chart_div}
+    </div>
+  </div><!-- /page-tab-reversal -->
 
 </main>
 
@@ -376,6 +421,12 @@ html = f"""<!DOCTYPE html>
 </footer>
 
 <script>
+function switchPage(page, btn) {{
+  document.querySelectorAll('.page-tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-tab-' + page).classList.add('active');
+  btn.classList.add('active');
+}}
 function switchTab(mode, btn) {{
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));

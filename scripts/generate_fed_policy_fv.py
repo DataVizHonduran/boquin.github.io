@@ -501,5 +501,17 @@ def main():
     print(f"\n      Done → {OUTPUT_PATH}")
 
 
+def get_reversal_chart_div() -> str:
+    """Return the 4-panel reversal chart as a Plotly HTML div (no full page, no JS tag).
+    Used by generate_treasury_index.py to embed inline."""
+    fred = Fred(api_key=FRED_API_KEY)
+    df, result = build_dataset(fred)
+    fig = build_chart(df, result)
+    return fig.to_html(
+        full_html=False, include_plotlyjs=False,
+        config={"displayModeBar": True, "displaylogo": False},
+    )
+
+
 if __name__ == "__main__":
     main()
