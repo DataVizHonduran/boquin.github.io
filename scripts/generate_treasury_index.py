@@ -4,14 +4,13 @@ Reads summary.json produced by generate_treasury_cta_signals.py.
 """
 
 import os
-import sys
 import json
+import numpy as np
+import pandas as pd
 from datetime import datetime
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import plotly.io as pio
-
-sys.path.insert(0, os.path.dirname(__file__))
-from generate_fed_policy_fv import get_reversal_chart_div
 
 OUTPUT_DIR                = "reports/treasury-cta-signals"
 HIGH_CONVICTION_THRESHOLD = 60
@@ -78,6 +77,112 @@ recent_rows    = '\n'.join(render_signal_row(s) for s in recent_signals)
 hc_rows        = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 
+# ── CTA reversal charts (z-score of positioning residuals) ───────────────────
+
+def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
+    """Build one 2-row Plotly chart per tenor: yield + CTA positioning z-score.
+    Returns a dict {tenor: html_div_string}."""
+    pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'),
+                            index_col=0, parse_dates=True)
+    yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'),
+                            index_col=0, parse_dates=True)
+
+    divs = {}
+    for tenor in tenor_order:
+        if tenor not in pos_fast.columns or tenor not in yields_df.columns:
+            continue
+
+        pos = pos_fast[tenor].dropna()
+        yld = yields_df[tenor].reindex(pos.index).ffill()
+
+        # Rolling z-score of positioning (1-year window)
+        roll = pos.rolling(z_window, min_periods=126)
+        z = (pos - roll.mean()) / roll.std()
+
+        # Crossback reversal markers
+        prev_z = z.shift(1)
+        sell_rev = pos.index[(prev_z > 1.0) & (z <= 1.0)]   # crowded short unwinds
+        buy_rev  = pos.index[(prev_z < -1.0) & (z >= -1.0)] # crowded long unwinds
+
+        fig = make_subplots(
+            rows=2, cols=1, shared_xaxes=True,
+            row_heights=[0.45, 0.55],
+            vertical_spacing=0.06,
+            subplot_titles=(
+                f"{tenor} Treasury Yield",
+                f"{tenor} CTA Positioning Z-Score (252d rolling) — Reversal Signals",
+            ),
+        )
+
+        # Row 1: yield
+        fig.add_trace(go.Scatter(
+            x=yld.index, y=yld,
+            name=f"{tenor} Yield",
+            line=dict(color="#1f77b4", width=1.5),
+            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}%<extra></extra>",
+        ), row=1, col=1)
+
+        # Row 2: positioning z-score
+        fig.add_trace(go.Scatter(
+            x=z.index, y=z,
+            name="Positioning Z",
+            line=dict(color="#444", width=1.2),
+            hovertemplate="%{x|%Y-%m-%d}: %{y:.2f}σ<extra>Z-Score</extra>",
+        ), row=2, col=1)
+
+        fig.add_hline(y=0,    line=dict(color="#aaa", width=1, dash="dot"), row=2, col=1)
+        fig.add_hline(y=1.0,  line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
+        fig.add_hline(y=-1.0, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
+
+        # Sell-reversal: crowded short unwind (CTAs were max short duration, now covering)
+        if len(sell_rev):
+            fig.add_trace(go.Scatter(
+                x=sell_rev, y=z.reindex(sell_rev),
+                mode="markers", name="Short Unwind",
+                marker=dict(symbol="triangle-down", size=12, color="#dc3545",
+                            line=dict(color="white", width=1)),
+                hovertemplate="%{x|%Y-%m-%d}: Z=%{y:.2f}σ<extra>Short Unwind</extra>",
+            ), row=2, col=1)
+
+        # Buy-reversal: crowded long unwind (CTAs were max long duration, now selling)
+        if len(buy_rev):
+            fig.add_trace(go.Scatter(
+                x=buy_rev, y=z.reindex(buy_rev),
+                mode="markers", name="Long Unwind",
+                marker=dict(symbol="triangle-up", size=12, color="#28a745",
+                            line=dict(color="white", width=1)),
+                hovertemplate="%{x|%Y-%m-%d}: Z=%{y:.2f}σ<extra>Long Unwind</extra>",
+            ), row=2, col=1)
+
+        # Background shading on row 1: extreme z episodes
+        for sign, color in [(1, "rgba(220,53,69,0.07)"), (-1, "rgba(40,167,69,0.07)")]:
+            in_ep, ep_start = False, None
+            for dt, zv in z.items():
+                if not in_ep and (sign * zv) > 1.0:
+                    in_ep, ep_start = True, dt
+                elif in_ep and (sign * zv) <= 1.0:
+                    fig.add_vrect(x0=ep_start, x1=dt, fillcolor=color,
+                                  layer="below", line_width=0, row=1, col=1)
+                    in_ep = False
+            if in_ep:
+                fig.add_vrect(x0=ep_start, x1=z.index[-1], fillcolor=color,
+                              layer="below", line_width=0, row=1, col=1)
+
+        fig.update_layout(
+            height=480, template="plotly_white",
+            margin=dict(t=60, l=55, r=20, b=40),
+            hovermode="x unified",
+            legend=dict(orientation="h", x=0.01, y=-0.08, font=dict(size=11)),
+            showlegend=True,
+        )
+        fig.update_yaxes(ticksuffix="%", row=1, col=1)
+        fig.update_yaxes(title_text="Z-Score (σ)", row=2, col=1)
+
+        divs[tenor] = pio.to_html(fig, full_html=False, include_plotlyjs=False,
+                                   config={"displayModeBar": False})
+    return divs
+
+
 # ── CTA positioning bar chart ─────────────────────────────────────────────────
 
 def create_position_bar_chart(positions, mode):
@@ -120,8 +225,13 @@ fig_slow = create_position_bar_chart(slow_positions, 'slow')
 fast_chart_div = pio.to_html(fig_fast, full_html=False, include_plotlyjs=False)
 slow_chart_div = pio.to_html(fig_slow, full_html=False, include_plotlyjs=False)
 
-print("Building CTA Treasury Reversal chart...")
-reversal_chart_div = get_reversal_chart_div()
+print("Building CTA Treasury Reversal charts...")
+reversal_chart_divs = _build_cta_reversal_divs(OUTPUT_DIR, TENOR_ORDER)
+reversal_grid_html = ''.join(
+    f'<div style="background:white;border-radius:10px;padding:14px;'
+    f'box-shadow:0 2px 8px rgba(0,0,0,0.07);">{reversal_chart_divs.get(t,"")}</div>'
+    for t in TENOR_ORDER
+)
 
 
 # ── Yield snapshot table ──────────────────────────────────────────────────────
@@ -402,13 +512,15 @@ html = f"""<!DOCTYPE html>
 
   <!-- ══ Tab: CTA Treasury Reversal ══ -->
   <div id="page-tab-reversal" class="page-tab-pane">
-    <h2>CTA Treasury Reversal — 10Y Policy Fair Value &amp; Z-Score Signal</h2>
-    <p style="color:#666;font-size:0.9rem;margin-bottom:18px;">
-      OLS fair value model (DGS2, Policy Spread, Taylor Gap) with 36-month rolling z-score.
-      ▲ green = rich-episode over (yield reverting up) &nbsp;·&nbsp; ▼ red = cheap-episode over (yield reverting down).
+    <h2>CTA Treasury Reversal — Positioning Residuals &amp; Z-Score Signals</h2>
+    <p style="color:#666;font-size:0.9rem;margin-bottom:22px;">
+      Z-score of CTA fast-mode positioning (252-day rolling). Extremes flag crowded positions;
+      crossbacks through ±1σ mark the unwind.
+      <span style="color:#dc3545;font-weight:600;">▼ Short Unwind</span> = crowded short-duration bet reversing &nbsp;·&nbsp;
+      <span style="color:#28a745;font-weight:600;">▲ Long Unwind</span> = crowded long-duration bet reversing.
     </p>
-    <div style="background:white;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-      {reversal_chart_div}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      {reversal_grid_html}
     </div>
   </div><!-- /page-tab-reversal -->
 

@@ -478,6 +478,14 @@ for mode, windows in CTA_MODES.items():
 with open(os.path.join(OUTPUT_DIR, 'summary.json'), 'w') as f:
     json.dump(all_summaries, f, indent=2)
 
+# ── Save positioning time series for reversal charts ─────────────────────────
+for mode in ('fast', 'slow'):
+    pos_df = mode_data[mode]['positions_df'].copy()
+    pos_df.columns = [c.replace('_posy', '') for c in pos_df.columns]
+    pos_df.to_csv(os.path.join(OUTPUT_DIR, f'positions_{mode}.csv'))
+
+df_raw.to_csv(os.path.join(OUTPUT_DIR, 'yields.csv'))
+
 print(f"\n{'='*60}")
 print(f"✅ Treasury CTA Complete!")
 print(f"   Fast signals: {all_summaries['fast']['signal_count']}"
