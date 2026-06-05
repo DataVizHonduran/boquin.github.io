@@ -79,7 +79,7 @@ hc_rows        = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 # ── CTA reversal charts (z-score of positioning residuals) ───────────────────
 
-def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
+def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252, z_threshold=1.5):
     """Build one 2-row Plotly chart per tenor: yield + CTA positioning z-score.
     Returns a dict {tenor: html_div_string}."""
     pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'),
@@ -101,8 +101,8 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
 
         # Crossback reversal markers
         prev_z = z.shift(1)
-        sell_rev = pos.index[(prev_z > 1.0) & (z <= 1.0)]
-        buy_rev  = pos.index[(prev_z < -1.0) & (z >= -1.0)]
+        sell_rev = pos.index[(prev_z > z_threshold) & (z <= z_threshold)]
+        buy_rev  = pos.index[(prev_z < -z_threshold) & (z >= -z_threshold)]
 
         # Convert to plain Python lists — avoids binary bdata encoding that old Plotly CDN can't decode
         x_dates  = [d.strftime('%Y-%m-%d') for d in yld.index]
@@ -140,9 +140,9 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
             hovertemplate="%{x}: %{y:.2f}σ<extra>Z-Score</extra>",
         ), row=2, col=1)
 
-        fig.add_hline(y=0,    line=dict(color="#aaa", width=1, dash="dot"), row=2, col=1)
-        fig.add_hline(y=1.0,  line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
-        fig.add_hline(y=-1.0, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
+        fig.add_hline(y=0,             line=dict(color="#aaa", width=1, dash="dot"), row=2, col=1)
+        fig.add_hline(y=z_threshold,  line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
+        fig.add_hline(y=-z_threshold, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
 
         if x_sell:
             fig.add_trace(go.Scatter(
@@ -166,9 +166,9 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
         for sign, color in [(1, "rgba(220,53,69,0.07)"), (-1, "rgba(40,167,69,0.07)")]:
             in_ep, ep_start = False, None
             for dt, zv in z.items():
-                if not in_ep and (sign * zv) > 1.0:
+                if not in_ep and (sign * zv) > z_threshold:
                     in_ep, ep_start = True, dt.strftime('%Y-%m-%d')
-                elif in_ep and (sign * zv) <= 1.0:
+                elif in_ep and (sign * zv) <= z_threshold:
                     fig.add_vrect(x0=ep_start, x1=dt.strftime('%Y-%m-%d'), fillcolor=color,
                                   layer="below", line_width=0, row=1, col=1)
                     in_ep = False
@@ -192,7 +192,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, z_window=252):
     return divs
 
 
-def _build_reversal_stats_html(output_dir, tenor_order, z_window=252):
+def _build_reversal_stats_html(output_dir, tenor_order, z_window=252, z_threshold=1.5):
     """Return an HTML table of hit rate / avg / median gain in bps for each tenor × signal × horizon."""
     pos_fast  = pd.read_csv(os.path.join(output_dir, 'positions_fast.csv'), index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'), index_col=0, parse_dates=True)
@@ -208,8 +208,8 @@ def _build_reversal_stats_html(output_dir, tenor_order, z_window=252):
         z = (pos - roll.mean()) / roll.std()
         prev_z = z.shift(1)
         signals = [
-            ('Short Unwind', pos.index[(prev_z > 1.0) & (z <= 1.0)], -1),
-            ('Long Unwind',  pos.index[(prev_z < -1.0) & (z >= -1.0)], 1),
+            ('Short Unwind', pos.index[(prev_z > z_threshold) & (z <= z_threshold)], -1),
+            ('Long Unwind',  pos.index[(prev_z < -z_threshold) & (z >= -z_threshold)], 1),
         ]
         for sig_name, sig_idx, direction in signals:
             row = {'Tenor': tenor, 'Signal': sig_name, 'N': len(sig_idx)}
