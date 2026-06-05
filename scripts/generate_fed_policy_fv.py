@@ -1,5 +1,5 @@
 """
-US 10-Year Treasury: Policy-Based Fair Value Model
+CTA Treasury Reversal
 ====================================================
 A second fair value model for the 10Y yield using Fed policy stance variables
 as regressors, complementing the inflation/term-premium decomposition.
@@ -134,7 +134,7 @@ def build_chart(df: pd.DataFrame, result) -> go.Figure:
         row_heights=[0.36, 0.18, 0.20, 0.26],
         vertical_spacing=0.04,
         subplot_titles=(
-            "10-Year Yield vs. Policy-Based Fair Value",
+            "10-Year Yield vs. Policy Fair Value",
             "Residual (Actual − Fair Value)",
             "Fair Value Decomposition by Policy Factor",
             "Residual Z-Score (36m Rolling) — Reversal Signals",
@@ -316,7 +316,7 @@ def build_chart(df: pd.DataFrame, result) -> go.Figure:
 
     fig.update_layout(
         title=dict(
-            text="US 10-Year Treasury: Policy-Based Fair Value Model",
+            text="CTA Treasury Reversal",
             x=0.5, xanchor="center",
             font=dict(size=20, color="#1a1a2e"),
         ),
@@ -430,7 +430,7 @@ def build_html(fig: go.Figure, df: pd.DataFrame, result) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>US 10Y Treasury: Policy-Based Fair Value</title>
+  <title>CTA Treasury Reversal</title>
   <style>
     body {{ margin: 0; padding: 32px 16px 48px; background: #fff; }}
     h1 {{
@@ -447,7 +447,7 @@ def build_html(fig: go.Figure, df: pd.DataFrame, result) -> str:
   </style>
 </head>
 <body>
-  <h1>US 10-Year Treasury: Policy-Based Fair Value Model</h1>
+  <h1>CTA Treasury Reversal</h1>
   <p class="subtitle">
     Signal as of {latest}: <strong>{bias}</strong> ({lr:+.2f}pp vs. fair value)
     &nbsp;|&nbsp; Z-Score: <strong>{lz:+.2f}σ</strong>
