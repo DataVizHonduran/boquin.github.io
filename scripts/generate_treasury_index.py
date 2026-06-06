@@ -532,6 +532,11 @@ def generate_commentary_tab(all_summaries, latest_yields, data_as_of):
 commentary_tab_html, _ = generate_commentary_tab(all_summaries, latest_yields, data_as_of)
 has_commentary = bool(commentary_tab_html)
 
+_commentary_btn = (
+    '<button class="page-tab-btn" onclick="switchPage(\'commentary\', this)">AI Commentary</button>'
+    if has_commentary else ''
+)
+
 
 # ── Build HTML ─────────────────────────────────────────────────────────────────
 html = f"""<!DOCTYPE html>
@@ -727,7 +732,7 @@ html = f"""<!DOCTYPE html>
   <div class="page-tab-bar">
     <button class="page-tab-btn active" onclick="switchPage('overview', this)">CTA Exhaustion</button>
     <button class="page-tab-btn"        onclick="switchPage('reversal', this)">CTA Treasury Reversal</button>
-    {'<button class="page-tab-btn" onclick="switchPage(\'commentary\', this)">AI Commentary</button>' if has_commentary else ''}
+    {_commentary_btn}
   </div>
 
   <!-- ══ Tab: CTA Exhaustion (existing content) ══ -->
