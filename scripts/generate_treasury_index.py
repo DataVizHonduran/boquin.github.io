@@ -1,16 +1,27 @@
 """
 Generate index.html for Treasury CTA signals landing page.
 Reads summary.json produced by generate_treasury_cta_signals.py.
+Calls Gemma (HF_TOKEN required) to generate AI commentary tab.
 """
 
 import os
+import re
+import sys
+import time
 import json
 import numpy as np
 import pandas as pd
-from datetime import datetime
+import markdown as md_lib
+from datetime import datetime, timezone, timedelta
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
+
+try:
+    from huggingface_hub import InferenceClient
+    HF_AVAILABLE = True
+except ImportError:
+    HF_AVAILABLE = False
 
 OUTPUT_DIR                = "reports/treasury-cta-signals"
 HIGH_CONVICTION_THRESHOLD = 60
@@ -391,6 +402,132 @@ chart_links_fast = ' '.join(chart_card(t, 'fast') for t in TENOR_ORDER)
 chart_links_slow = ' '.join(chart_card(t, 'slow') for t in TENOR_ORDER)
 
 
+# ── AI Commentary (Gemma) ──────────────────────────────────────────────────────
+
+MODEL_ID = "google/gemma-4-31B-it"
+COMMENTARY_ARCHIVE = os.path.join(OUTPUT_DIR, f"commentary-{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.md")
+
+def _build_gemma_prompt(all_summaries, latest_yields, data_as_of):
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    lines = []
+
+    y = latest_yields
+    lines.append(f"=== CURRENT YIELDS (as of {data_as_of}) ===")
+    lines.append("  " + " | ".join(f"{t}: {v:.2f}%" for t, v in sorted(y.items())))
+    y2, y10, y30 = y.get("2Y", 0), y.get("10Y", 0), y.get("30Y", 0)
+    lines.append(f"  10Y-2Y: {y10-y2:+.2f}bps  |  30Y-2Y: {y30-y2:+.2f}bps\n")
+
+    for mode in ("fast", "slow"):
+        m = all_summaries[mode]
+        lines.append(f"=== {mode.upper()} MODE ({m['windows']}) ===")
+        lines.append(f"Signals: {m['signal_count']}  |  High-conviction (≥60): {m['high_conviction_count']}")
+        pos = sorted(m["latest_positions"].items(), key=lambda x: x[1])
+        lines.append("Positions (+ = short duration / - = long duration):")
+        lines.append("  " + ", ".join(f"{t}: {v:+.1f}" for t, v in pos))
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%d")
+        recent = sorted(
+            [s for s in m.get("signal_metadata", []) if s.get("date", "") >= cutoff],
+            key=lambda x: x.get("strength_score", 0), reverse=True
+        )[:6]
+        if recent:
+            lines.append("Recent signals (14d, by strength):")
+            for s in recent:
+                lines.append(
+                    f"  {s['date']} {s['tenor']} {s['direction']} | "
+                    f"strength={s['strength_score']:.1f} peak={s['peak_position']:+.1f}"
+                )
+        lines.append("")
+
+    data = "\n".join(lines)
+    return f"""[ROLE]: Senior Rates/Macro Strategist — CTA trend-following and Treasury exhaustion signals.
+
+SIGN CONVENTION: POSITIVE (+) = CTAs SHORT duration (rising-yield bet). NEGATIVE (-) = CTAs LONG duration (falling-yield bet).
+
+[TASK]: Analyze Treasury CTA positioning as of {today}. Produce structured Markdown commentary:
+1. Duration crowding — which tenors CTAs are most positioned and what it signals
+2. Yield curve context — how spreads relate to positioning
+3. Fast vs slow divergences — where modes disagree and what it implies for trend conviction
+4. Recent exhaustion signals — what high-conviction signals say about crowded duration trades
+5. One actionable watch-list item for the next 5 trading days
+
+[FORMAT]: Markdown headers (##, ###), bullet points, under 350 words.
+
+[DATA]:
+{data}"""
+
+
+def _call_gemma(prompt, hf_token):
+    client = InferenceClient(model=MODEL_ID, token=hf_token, timeout=300)
+    for attempt in range(5):
+        try:
+            stream = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.2,
+                max_tokens=1200,
+                stream=True,
+            )
+            parts = []
+            for chunk in stream:
+                if not chunk.choices:
+                    continue
+                delta = chunk.choices[0].delta.content
+                if delta:
+                    parts.append(delta)
+                    print(delta, end="", flush=True)
+            print()
+            return "".join(parts)
+        except Exception as e:
+            rate_limit = any(x in str(e) for x in ("429", "503", "Too Many Requests", "Service Temporarily Unavailable"))
+            if rate_limit and attempt < 4:
+                wait = 60 * (attempt + 1)
+                print(f"\n  HF rate limit — waiting {wait}s (attempt {attempt+1}/5)...", file=sys.stderr)
+                time.sleep(wait)
+            else:
+                raise
+
+
+def generate_commentary_tab(all_summaries, latest_yields, data_as_of):
+    hf_token = os.environ.get("HF_TOKEN")
+    if not hf_token or not HF_AVAILABLE:
+        print("  HF_TOKEN not set or huggingface_hub unavailable — skipping AI commentary tab")
+        return "", ""
+
+    print("\nGenerating AI commentary via Gemma...")
+    prompt = _build_gemma_prompt(all_summaries, latest_yields, data_as_of)
+    commentary_md = _call_gemma(prompt, hf_token)
+
+    if not commentary_md.strip():
+        print("  WARNING: Gemma returned empty output — skipping tab", file=sys.stderr)
+        return "", ""
+
+    # Archive to dated .md file
+    with open(COMMENTARY_ARCHIVE, "w") as f:
+        f.write(commentary_md)
+    print(f"  Archived → {COMMENTARY_ARCHIVE}")
+
+    generated_ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    body_html = md_lib.markdown(commentary_md, extensions=["tables"])
+    tab_html = f"""<div style="background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);padding:30px;max-width:900px;">
+  <div style="border-left:4px solid #e94560;padding-left:16px;margin-bottom:20px;">
+    <h2 style="color:#1a1a2e;margin:0 0 4px;border:none;padding:0;">AI Commentary</h2>
+    <p style="color:#888;font-size:0.83rem;margin:0;">Generated {generated_ts} UTC &nbsp;·&nbsp; {MODEL_ID}</p>
+  </div>
+  <style>
+    .ai-commentary h2,.ai-commentary h3{{color:#1a1a2e;margin:18px 0 8px;}}
+    .ai-commentary ul{{padding-left:20px;}} .ai-commentary li{{margin:4px 0;}}
+    .ai-commentary table{{border-collapse:collapse;width:100%;margin:12px 0;}}
+    .ai-commentary th,.ai-commentary td{{border:1px solid #dee2e6;padding:7px 11px;}}
+    .ai-commentary th{{background:#f8f9fa;font-weight:600;}}
+  </style>
+  <div class="ai-commentary" style="line-height:1.7;color:#444;">{body_html}</div>
+</div>"""
+    return tab_html, commentary_md
+
+
+commentary_tab_html, _ = generate_commentary_tab(all_summaries, latest_yields, data_as_of)
+has_commentary = bool(commentary_tab_html)
+
+
 # ── Build HTML ─────────────────────────────────────────────────────────────────
 html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -585,6 +722,7 @@ html = f"""<!DOCTYPE html>
   <div class="page-tab-bar">
     <button class="page-tab-btn active" onclick="switchPage('overview', this)">CTA Exhaustion</button>
     <button class="page-tab-btn"        onclick="switchPage('reversal', this)">CTA Treasury Reversal</button>
+    {'<button class="page-tab-btn" onclick="switchPage(\'commentary\', this)">AI Commentary</button>' if has_commentary else ''}
   </div>
 
   <!-- ══ Tab: CTA Exhaustion (existing content) ══ -->
@@ -674,6 +812,9 @@ html = f"""<!DOCTYPE html>
       {reversal_stats_slow}
     </div>
   </div><!-- /page-tab-reversal -->
+
+  <!-- ══ Tab: AI Commentary ══ -->
+  {'<div id="page-tab-commentary" class="page-tab-pane">' + commentary_tab_html + '</div>' if has_commentary else ''}
 
 </main>
 
