@@ -1,17 +1,9 @@
 """
-Treasury CTA Exhaustion Signal Generator - Dual Mode (Fast & Slow)
-Fetches 2Y/5Y/10Y/30Y Treasury yield data from FRED, calculates CTA positioning,
-and generates exhaustion signals using the same methodology as FX CTA.
+Treasury CTA Positioning - Dual Mode (Fast & Slow)
+Fetches 2Y/5Y/10Y/30Y Treasury yield data from FRED and calculates CTA positioning.
 
 Positive position  → CTAs positioned for RISING yields (short duration / short bonds)
 Negative position  → CTAs positioned for FALLING yields (long duration / long bonds)
-
-Filters (same as FX version):
-  P1 - Vectorized position filter
-  P2 - Rolling 500-day percentile thresholds (no look-ahead bias)
-  P3 - Rate-of-change confirmation filter
-  P4 - Signal strength score 0-100 (Extremity 40 + Speed 40 + Consensus 20)
-  P5 - RSI of positioning filter
 """
 
 import sys
@@ -54,13 +46,13 @@ def pull_data(series_dict, years=16):
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 OUTPUT_DIR           = "reports/treasury-cta-signals"
-GAP                  = 3              # Hysteresis band (smaller than FX; yields move in tighter ranges)
 WINDOW               = 750            # Rolling window for position normalization (~3 years)
-ROLLING_PCT_WINDOW   = 500            # ~2 years rolling window for percentile thresholds (P2)
-ROLLING_PCT_MINPERIODS = 252          # Minimum days before rolling percentile is valid
-RSI_PERIOD           = 14             # RSI lookback for positioning series (P5)
-CONSENSUS_WINDOW_DAYS = 5             # Max days apart for fast/slow signals to count as consensus
 YEARS_HISTORY        = 16            # Years of FRED data to pull
+ROLLING_PCT_WINDOW     = 252          # 1 trading year for decile thresholds
+ROLLING_PCT_MINPERIODS = 63           # 1 quarter minimum
+RSI_PERIOD             = 14
+GAP                    = 5            # Hysteresis band for exhaustion signals
+CONSENSUS_WINDOW_DAYS  = 5
 
 # Treasury tenors
 TREASURIES = {
@@ -92,10 +84,9 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 df_display = df_raw[df_raw.index >= '2016-01-01'].copy()
 
 
-# ── Helper functions (identical logic to generate_cta_signals.py) ─────────────
+# ── Helper functions ──────────────────────────────────────────────────────────
 
 def calculate_rsi(series, period=RSI_PERIOD):
-    """Calculate RSI of a series (P5)."""
     delta = series.diff()
     gain  = delta.clip(lower=0).rolling(period).mean()
     loss  = (-delta.clip(upper=0)).rolling(period).mean()
@@ -104,14 +95,7 @@ def calculate_rsi(series, period=RSI_PERIOD):
 
 
 def calculate_positions(df, short_window, mid_window, long_window):
-    """
-    Calculate CTA positioning for all Treasury tenors.
-
-    Returns:
-        positions_latest : dict {tenor: latest_position}
-        positions_df     : DataFrame of position_size per tenor
-        rsi_df           : DataFrame of positioning RSI per tenor
-    """
+    """Calculate CTA positioning for all Treasury tenors."""
     positions_latest = {}
     positions_df     = pd.DataFrame()
     rsi_df           = pd.DataFrame()
@@ -133,40 +117,31 @@ def calculate_positions(df, short_window, mid_window, long_window):
                            .replace(0, np.nan).bfill().ffill())
         raw_pos = (d['ema_convergence'] / rolling_max_abs) * 50
 
-        # P1: Vectorized trend filter
         up   = (d['ema_short'] > d['ema_mid']) & (d['ema_mid'] > d['ema_long'])
         down = (d['ema_short'] < d['ema_mid']) & (d['ema_mid'] < d['ema_long'])
         d['position_size'] = np.where(
             up,   np.maximum(0, raw_pos),
             np.where(down, np.minimum(0, raw_pos), 0)
         )
-
-        # P5: RSI of positioning
         d['rsi_pos'] = calculate_rsi(d['position_size'])
         d.dropna(subset=['position_size'], inplace=True)
 
         if not d.empty:
             col = f"{tenor}_posy"
-            positions_latest[tenor]  = d['position_size'].iloc[-1]
-            positions_df[col]        = d['position_size']
-            rsi_df[col]              = d['rsi_pos']
+            positions_latest[tenor] = d['position_size'].iloc[-1]
+            positions_df[col]       = d['position_size']
+            rsi_df[col]             = d['rsi_pos']
 
     return positions_latest, positions_df, rsi_df
 
 
 def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_df):
-    """
-    Generate directional exhaustion signals (P2–P5).
-
-    Returns:
-        signals         : DataFrame of 0/1 signals
-        signal_metadata : list of dicts with signal details
-    """
+    """Generate directional exhaustion signals using 252-day decile thresholds on position_size."""
     signals = pd.DataFrame(0, index=positions_df.index,
                            columns=positions_df.columns, dtype=int)
     signal_metadata = []
+    pos_roc = positions_df.diff(1)
 
-    pos_roc        = positions_df.diff(1)
     extreme_mode   = {col: None  for col in positions_df.columns}
     extreme_peak   = {col: None  for col in positions_df.columns}
     extreme_rsi_ok = {col: False for col in positions_df.columns}
@@ -182,17 +157,15 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
 
             upper_enter = rolling_upper.iloc[i][col] if col in rolling_upper.columns else np.nan
             lower_enter = rolling_lower.iloc[i][col] if col in rolling_lower.columns else np.nan
-
             if pd.isna(upper_enter) or pd.isna(lower_enter):
                 continue
 
-            upper_exit = upper_enter - GAP if upper_enter - GAP > 0 else upper_enter - 2
-            lower_exit = lower_enter + GAP if lower_enter + GAP < 0 else lower_enter + 2
+            upper_exit = upper_enter - GAP if upper_enter - GAP > 0 else upper_enter - 3
+            lower_exit = lower_enter + GAP if lower_enter + GAP < 0 else lower_enter + 3
 
             roc     = pos_roc.iloc[i][col]
             rsi_val = rsi_df.iloc[i][col] if has_rsi else np.nan
 
-            # ── Not in extreme mode ──────────────────────────────────────────
             if extreme_mode[col] is None:
                 if pos >= upper_enter:
                     extreme_mode[col]   = 'long'
@@ -203,30 +176,26 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     extreme_peak[col]   = pos
                     extreme_rsi_ok[col] = pd.isna(rsi_val) or (rsi_val < 30)
 
-            # ── Long exhaustion watch (CTAs very short duration / yield rising) ─
             elif extreme_mode[col] == 'long':
                 if pos > extreme_peak[col]:
                     extreme_peak[col] = pos
                 if not extreme_rsi_ok[col]:
                     if pd.isna(rsi_val) or rsi_val > 70:
                         extreme_rsi_ok[col] = True
-
                 roc_ok = pd.isna(roc) or (roc < 0)
                 if pos < upper_exit and roc_ok and extreme_rsi_ok[col]:
                     signals.iloc[i, col_idx] = 1
-
                     extremity_range = max(1, 50.0 - float(upper_enter))
                     extremity = min(40.0, (float(extreme_peak[col]) - float(upper_enter))
                                     / extremity_range * 40.0)
                     speed = min(40.0, abs(float(roc)) / 3.0 * 40.0) if not pd.isna(roc) else 0.0
-
                     signal_metadata.append({
                         'date':            positions_df.index[i].strftime('%Y-%m-%d'),
                         'tenor':           col.replace('_posy', ''),
-                        'direction':       'Short',      # short duration / rising yields
+                        'direction':       'Long',
                         'peak_position':   round(float(extreme_peak[col]), 2),
                         'threshold':       round(float(upper_enter), 2),
-                        'roc_at_signal':   round(float(roc), 4)   if not pd.isna(roc)     else None,
+                        'roc_at_signal':   round(float(roc), 4) if not pd.isna(roc) else None,
                         'rsi_at_signal':   round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
                         'extremity_score': round(extremity, 1),
                         'speed_score':     round(speed, 1),
@@ -237,30 +206,26 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
                     extreme_peak[col]   = None
                     extreme_rsi_ok[col] = False
 
-            # ── Short exhaustion watch (CTAs very long duration / yield falling) ─
             elif extreme_mode[col] == 'short':
                 if pos < extreme_peak[col]:
                     extreme_peak[col] = pos
                 if not extreme_rsi_ok[col]:
                     if pd.isna(rsi_val) or rsi_val < 30:
                         extreme_rsi_ok[col] = True
-
                 roc_ok = pd.isna(roc) or (roc > 0)
                 if pos > lower_exit and roc_ok and extreme_rsi_ok[col]:
                     signals.iloc[i, col_idx] = 1
-
                     extremity_range = max(1, float(lower_enter) - (-50.0))
                     extremity = min(40.0, (float(lower_enter) - float(extreme_peak[col]))
                                     / extremity_range * 40.0)
                     speed = min(40.0, abs(float(roc)) / 3.0 * 40.0) if not pd.isna(roc) else 0.0
-
                     signal_metadata.append({
                         'date':            positions_df.index[i].strftime('%Y-%m-%d'),
                         'tenor':           col.replace('_posy', ''),
-                        'direction':       'Long',       # long duration / falling yields
+                        'direction':       'Short',
                         'peak_position':   round(float(extreme_peak[col]), 2),
                         'threshold':       round(float(lower_enter), 2),
-                        'roc_at_signal':   round(float(roc), 4)   if not pd.isna(roc)     else None,
+                        'roc_at_signal':   round(float(roc), 4) if not pd.isna(roc) else None,
                         'rsi_at_signal':   round(float(rsi_val), 1) if not pd.isna(rsi_val) else None,
                         'extremity_score': round(extremity, 1),
                         'speed_score':     round(speed, 1),
@@ -275,8 +240,7 @@ def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_
 
 
 def add_consensus_scores(fast_metadata, slow_metadata):
-    """P4: Add 20-pt consensus bonus when fast & slow agree within CONSENSUS_WINDOW_DAYS."""
-
+    """Add 20-pt consensus bonus when fast & slow agree within CONSENSUS_WINDOW_DAYS."""
     def find_consensus(signals_a, signals_b):
         for sig in signals_a:
             sig_date  = datetime.strptime(sig['date'], '%Y-%m-%d')
@@ -296,8 +260,7 @@ def add_consensus_scores(fast_metadata, slow_metadata):
     return fast_metadata, slow_metadata
 
 
-def create_exhaustion_chart(df_display, tenor, col, positions_df,
-                             signals_df, signal_metadata, mode, windows_str):
+def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_str):
     """Create exhaustion model chart for a Treasury tenor."""
     fig = go.Figure()
 
@@ -316,28 +279,6 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df,
             name='CTA Positioning',
             line=dict(color='orange', width=1.5),
             yaxis='y2', opacity=0.65
-        ))
-
-    # Exhaustion signal markers
-    if col in signals_df.columns:
-        signal_pts   = signals_df[col] == 1
-        signal_dates = signals_df.index[signal_pts].intersection(df_display.index)
-        signal_ylds  = df_display.loc[signal_dates, tenor]
-
-        sig_lookup = {s['date']: s for s in signal_metadata if s['tenor'] == tenor}
-        text_labels = [
-            str(int(sig_lookup[d.strftime('%Y-%m-%d')]['strength_score']))
-            if d.strftime('%Y-%m-%d') in sig_lookup else ''
-            for d in signal_dates
-        ]
-
-        fig.add_trace(go.Scatter(
-            x=signal_dates, y=signal_ylds, mode='markers+text',
-            marker=dict(color='crimson', size=10, line=dict(color='black', width=1)),
-            text=text_labels,
-            textposition='top center',
-            textfont=dict(size=10, color='darkred'),
-            name='Exhaustion Signals', yaxis='y1'
         ))
 
     # Positioning zero-line reference
@@ -391,14 +332,12 @@ for mode, windows in CTA_MODES.items():
     )
     print(f"Calculated positioning for {len(positions_latest)} tenors")
 
-    # P2: Rolling percentile thresholds
     rolling_upper = positions_df.rolling(
         window=ROLLING_PCT_WINDOW, min_periods=ROLLING_PCT_MINPERIODS
-    ).quantile(0.85)
+    ).quantile(0.80)
     rolling_lower = positions_df.rolling(
         window=ROLLING_PCT_WINDOW, min_periods=ROLLING_PCT_MINPERIODS
-    ).quantile(0.15)
-    print(f"Computed {ROLLING_PCT_WINDOW}-day rolling percentile thresholds")
+    ).quantile(0.20)
 
     signals_df, signal_metadata = generate_exhaustion_signals(
         positions_df, rolling_upper, rolling_lower, rsi_df
@@ -416,36 +355,35 @@ for mode, windows in CTA_MODES.items():
     }
 
     all_summaries[mode] = {
-        'generated_at':     datetime.now().isoformat(),
-        'mode':             mode,
-        'windows':          f"{windows['short']}/{windows['mid']}/{windows['long']}",
-        'tenors':           len(positions_latest),
-        'latest_positions': latest_positions.to_dict(),
-        'latest_yields': {t: round(float(df_raw[t].iloc[-1]), 4)
-                          for t in df_raw.columns},
-        'data_as_of':       df_raw.index[-1].strftime('%Y-%m-%d'),
+        'generated_at':          datetime.now().isoformat(),
+        'mode':                  mode,
+        'windows':               f"{windows['short']}/{windows['mid']}/{windows['long']}",
+        'tenors':                len(positions_latest),
+        'latest_positions':      latest_positions.to_dict(),
+        'latest_yields':         {t: round(float(df_raw[t].iloc[-1]), 4)
+                                  for t in df_raw.columns},
+        'data_as_of':            df_raw.index[-1].strftime('%Y-%m-%d'),
+        'signal_count':          len(signal_metadata),
+        'high_conviction_count': sum(1 for s in signal_metadata if s['strength_score'] >= 60),
+        'signal_metadata':       signal_metadata,
     }
 
     print(f"Positions: {dict(latest_positions.round(1))}")
 
 
-# ── Phase 2: Cross-mode consensus scoring (P4) ────────────────────────────────
-print("\nComputing cross-mode consensus scores...")
-fast_meta, slow_meta = add_consensus_scores(
-    mode_data['fast']['signal_metadata'],
-    mode_data['slow']['signal_metadata']
-)
-mode_data['fast']['signal_metadata'] = fast_meta
-mode_data['slow']['signal_metadata'] = slow_meta
+# ── Consensus scoring across modes ───────────────────────────────────────────
+mode_data['fast']['signal_metadata'], mode_data['slow']['signal_metadata'] = \
+    add_consensus_scores(mode_data['fast']['signal_metadata'], mode_data['slow']['signal_metadata'])
+for mode in ('fast', 'slow'):
+    meta = mode_data[mode]['signal_metadata']
+    all_summaries[mode]['high_conviction_count'] = sum(1 for s in meta if s['strength_score'] >= 60)
+    all_summaries[mode]['signal_metadata'] = meta
 
-
-# ── Phase 3: Generate charts ──────────────────────────────────────────────────
+# ── Phase 2: Generate charts ─────────────────────────────────────────────────
 for mode, windows in CTA_MODES.items():
-    data            = mode_data[mode]
-    positions_df    = data['positions_df']
-    signals_df      = data['signals_df']
-    signal_metadata = data['signal_metadata']
-    windows_str     = f"{CTA_MODES[mode]['short']}/{CTA_MODES[mode]['mid']}/{CTA_MODES[mode]['long']}"
+    data         = mode_data[mode]
+    positions_df = data['positions_df']
+    windows_str  = f"{CTA_MODES[mode]['short']}/{CTA_MODES[mode]['mid']}/{CTA_MODES[mode]['long']}"
 
     chart_count = 0
     for tenor in df_display.columns:
@@ -454,8 +392,7 @@ for mode, windows in CTA_MODES.items():
             continue
         try:
             fig = create_exhaustion_chart(
-                df_display, tenor, col, positions_df,
-                signals_df, signal_metadata, mode, windows_str
+                df_display, tenor, col, positions_df, mode, windows_str
             )
             filename = os.path.join(OUTPUT_DIR, f"{tenor}_exhaustion_{mode}.html")
             pio.write_html(fig, file=filename, auto_open=False)
@@ -465,13 +402,7 @@ for mode, windows in CTA_MODES.items():
 
     print(f"Generated {chart_count} charts for {mode} mode")
 
-    high_conviction = [s for s in signal_metadata if s.get('strength_score', 0) >= 60]
-    all_summaries[mode]['charts_generated']      = chart_count
-    all_summaries[mode]['signal_count']          = len(signal_metadata)
-    all_summaries[mode]['high_conviction_count'] = len(high_conviction)
-    all_summaries[mode]['signal_metadata']       = sorted(
-        signal_metadata, key=lambda x: x['date'], reverse=True
-    )
+    all_summaries[mode]['charts_generated'] = chart_count
 
 
 # ── Save combined summary ──────────────────────────────────────────────────────
@@ -488,9 +419,7 @@ df_raw.to_csv(os.path.join(OUTPUT_DIR, 'yields.csv'))
 
 print(f"\n{'='*60}")
 print(f"✅ Treasury CTA Complete!")
-print(f"   Fast signals: {all_summaries['fast']['signal_count']}"
-      f"  (high conviction: {all_summaries['fast']['high_conviction_count']})")
-print(f"   Slow signals: {all_summaries['slow']['signal_count']}"
-      f"  (high conviction: {all_summaries['slow']['high_conviction_count']})")
+print(f"   Fast charts: {all_summaries['fast']['charts_generated']}")
+print(f"   Slow charts: {all_summaries['slow']['charts_generated']}")
 print(f"   Output dir: {OUTPUT_DIR}/")
 print(f"{'='*60}")
