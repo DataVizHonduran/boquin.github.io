@@ -90,7 +90,7 @@ hc_rows        = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 # ── CTA reversal charts (z-score of positioning residuals) ───────────────────
 
-def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.90, pct_lower=0.10):
+def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.95, pct_lower=0.05):
     """Build one 2-row Plotly chart per tenor: yield + CTA positioning percentile rank.
     Returns a dict {tenor: html_div_string}."""
     pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'),
@@ -206,7 +206,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', pct_window=25
     return divs
 
 
-def _build_reversal_stats_html(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.90, pct_lower=0.10):
+def _build_reversal_stats_html(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.95, pct_lower=0.05):
     """Return an HTML table of hit rate / avg / median gain in bps for each tenor × signal × horizon."""
     pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'), index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'), index_col=0, parse_dates=True)
@@ -782,7 +782,7 @@ html = f"""<!DOCTYPE html>
     <h2>CTA Treasury Reversal — Positioning Percentile Signals</h2>
     <p style="color:#666;font-size:0.9rem;margin-bottom:14px;">
       252-day rolling percentile rank of CTA positioning (100 = most short-duration in the past year, 0 = most long-duration).
-      Extremes flag crowded positions; crossbacks through the 90th/10th percentile mark the unwind.
+      Extremes flag crowded positions; crossbacks through the 95th/5th percentile mark the unwind.
       <span style="color:#dc3545;font-weight:600;">▼ Short Unwind</span> = crowded short-duration bet reversing &nbsp;·&nbsp;
       <span style="color:#28a745;font-weight:600;">▲ Long Unwind</span> = crowded long-duration bet reversing.
     </p>
