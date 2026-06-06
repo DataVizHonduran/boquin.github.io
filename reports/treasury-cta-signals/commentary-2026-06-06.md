@@ -1,20 +1,19 @@
 ## CTA Positioning Analysis: Treasury Markets (2026-06-06)
 
 ### 1. Duration Crowding
-CTAs are currently **net short duration** across the entire curve. Crowding is most acute in the **belly (5Y)** and **front-end (2Y)**, where positioning is deepest (+30.1 and +28.5 in Fast Mode). This signals a strong conviction bet on higher-for-longer rates or a hawkish policy regime, with the most aggressive positioning concentrated in the shorter tenors.
+CTAs are universally **Short Duration (+)** across the curve. Crowding is most acute in the **belly (5Y: +29.7)** and **front-end (2Y: +28.3)**. This signals a strong conviction bet on "higher for longer" or a delayed pivot, with the most aggressive positioning concentrated in the 2Y-5Y sector.
 
 ### 2. Yield Curve Context
-The curve is positively sloped (10Y-2Y: +41bps; 30Y-2Y: +91bps). CTA positioning is aligned with this steepening bias; the heavier shorting of the 2Y/5Y relative to the 30Y suggests CTAs are playing a **bear-flattening or bear-steepening** regime where they are more comfortable betting against the front end than the long bond.
+With the 10Y-2Y spread at +0.42bps and 30Y-2Y at +0.92bps, the curve is comfortably disinverted. The concentration of CTA shorts in the front-end suggests they are trading the "bear steepening" regime—betting that short-term rates remain elevated while the long end lags or reflects a term premium.
 
 ### 3. Fast vs. Slow Divergences
-There is strong **directional alignment** between Fast and Slow modes (both are positive), indicating a high-conviction trend. However, the **magnitude gap** is widening:
-* **Fast Mode:** High conviction (34 signals $\ge$ 60).
-* **Slow Mode:** Lower conviction (13 signals $\ge$ 60).
-This divergence suggests that while the long-term trend is bullish for yields, the current move is being driven by aggressive, short-term momentum acceleration.
+*   **Alignment:** Both Fast and Slow modes are positive (+), indicating a synchronized trend.
+*   **Conviction Gap:** Fast mode signals are significantly more aggressive (e.g., 5Y: +29.7 vs. Slow: +21.2). 
+*   **Implication:** The trend is accelerating. When fast modes lead slow modes to the upside (higher yields), it suggests strong momentum; however, the widening gap increases the risk of a "snap-back" if a catalyst triggers a rapid cover.
 
 ### 4. Exhaustion Signals
-We are seeing signs of **over-extension**. The Fast Mode positions are significantly more stretched than the Slow Mode anchors. When Fast Mode conviction reaches these levels (+24 to +30) while Slow Mode lags, the trade becomes susceptible to a "mean-reversion snap" if a catalyst triggers a rally in bonds. The high number of high-conviction signals (34) suggests the short-duration trade is becoming "crowded to the exit."
+High-conviction signals are elevated in the Fast mode (41 signals $\ge$ 60) compared to the Slow mode (18 signals $\ge$ 60). While the trend is intact, the extreme concentration in the 2Y/5Y tenors suggests the trade is becoming **overcrowded**. We are entering a "fragile" zone where any dovish surprise could trigger a cascade of short-covering.
 
-### 5. Actionable Watch-list
-**Watch for a "Fast-Mode Flip" in the 5Y.** 
-If the 5Y yield breaks below its 20-day moving average, expect a rapid unwind of the +30.1 positioning. This would trigger a cascade of CTA buying (long duration), potentially causing a sharp, non-fundamental drop in yields over the next 5 trading days.
+### 5. Actionable Watch-list (Next 5 Days)
+**Watch: 5Y Yield Breakout/Reversal.** 
+Monitor for a sharp dip in 5Y yields toward 4.10%. Given the +29.7 Fast Mode positioning, a break below recent support would trigger the first wave of CTA exits, potentially accelerating a rally in the belly of the curve.
