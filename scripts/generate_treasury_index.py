@@ -90,13 +90,16 @@ hc_rows        = '\n'.join(render_signal_row(s) for s in hc_signals)
 
 # ── CTA reversal charts (z-score of positioning residuals) ───────────────────
 
-def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252, z_threshold=1.5):
-    """Build one 2-row Plotly chart per tenor: yield + CTA positioning z-score.
+def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.80, pct_lower=0.20):
+    """Build one 2-row Plotly chart per tenor: yield + CTA positioning percentile rank.
     Returns a dict {tenor: html_div_string}."""
     pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'),
                             index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'),
                             index_col=0, parse_dates=True)
+
+    upper_val = pct_upper * 100
+    lower_val = pct_lower * 100
 
     divs = {}
     for tenor in tenor_order:
@@ -106,24 +109,23 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
         pos = pos_df[tenor].dropna()
         yld = yields_df[tenor].reindex(pos.index).ffill()
 
-        # Rolling z-score of positioning (1-year window)
-        roll = pos.rolling(z_window, min_periods=126)
-        z = (pos - roll.mean()) / roll.std()
+        # Rolling percentile rank (0–100) over lookback window
+        pct = pos.rolling(pct_window, min_periods=126).rank(pct=True) * 100
 
         # Crossback reversal markers
-        prev_z = z.shift(1)
-        sell_rev = pos.index[(prev_z > z_threshold) & (z <= z_threshold)]
-        buy_rev  = pos.index[(prev_z < -z_threshold) & (z >= -z_threshold)]
+        prev_pct = pct.shift(1)
+        sell_rev = pos.index[(prev_pct > upper_val) & (pct <= upper_val)]
+        buy_rev  = pos.index[(prev_pct < lower_val) & (pct >= lower_val)]
 
         # Convert to plain Python lists — avoids binary bdata encoding that old Plotly CDN can't decode
         x_dates  = [d.strftime('%Y-%m-%d') for d in yld.index]
         y_yld    = yld.values.tolist()
-        x_z      = [d.strftime('%Y-%m-%d') for d in z.index]
-        y_z      = z.values.tolist()
+        x_pct    = [d.strftime('%Y-%m-%d') for d in pct.index]
+        y_pct    = pct.values.tolist()
         x_sell   = [d.strftime('%Y-%m-%d') for d in sell_rev]
-        y_sell   = z.reindex(sell_rev).values.tolist()
+        y_sell   = pct.reindex(sell_rev).values.tolist()
         x_buy    = [d.strftime('%Y-%m-%d') for d in buy_rev]
-        y_buy    = z.reindex(buy_rev).values.tolist()
+        y_buy    = pct.reindex(buy_rev).values.tolist()
 
         fig = make_subplots(
             rows=2, cols=1, shared_xaxes=True,
@@ -131,7 +133,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
             vertical_spacing=0.06,
             subplot_titles=(
                 f"{tenor} Treasury Yield",
-                f"{tenor} CTA Positioning Z-Score (252d rolling) — Reversal Signals",
+                f"{tenor} CTA Positioning Percentile ({pct_window}d rolling) — Reversal Signals",
             ),
         )
 
@@ -143,17 +145,17 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
             hovertemplate="%{x}: %{y:.2f}%<extra></extra>",
         ), row=1, col=1)
 
-        # Row 2: positioning z-score
+        # Row 2: positioning percentile
         fig.add_trace(go.Scatter(
-            x=x_z, y=y_z,
-            name="Positioning Z",
+            x=x_pct, y=y_pct,
+            name="Positioning Pct",
             line=dict(color="#444", width=1.2),
-            hovertemplate="%{x}: %{y:.2f}σ<extra>Z-Score</extra>",
+            hovertemplate="%{x}: %{y:.1f}th pctile<extra>Percentile</extra>",
         ), row=2, col=1)
 
-        fig.add_hline(y=0,             line=dict(color="#aaa", width=1, dash="dot"), row=2, col=1)
-        fig.add_hline(y=z_threshold,  line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
-        fig.add_hline(y=-z_threshold, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
+        fig.add_hline(y=50,        line=dict(color="#aaa", width=1, dash="dot"),  row=2, col=1)
+        fig.add_hline(y=upper_val, line=dict(color="#dc3545", width=1, dash="dash"), row=2, col=1)
+        fig.add_hline(y=lower_val, line=dict(color="#28a745", width=1, dash="dash"), row=2, col=1)
 
         if x_sell:
             fig.add_trace(go.Scatter(
@@ -161,7 +163,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
                 mode="markers", name="Short Unwind",
                 marker=dict(symbol="triangle-down", size=12, color="#dc3545",
                             line=dict(color="white", width=1)),
-                hovertemplate="%{x}: Z=%{y:.2f}σ<extra>Short Unwind</extra>",
+                hovertemplate="%{x}: %{y:.1f}th pctile<extra>Short Unwind</extra>",
             ), row=2, col=1)
 
         if x_buy:
@@ -170,21 +172,22 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
                 mode="markers", name="Long Unwind",
                 marker=dict(symbol="triangle-up", size=12, color="#28a745",
                             line=dict(color="white", width=1)),
-                hovertemplate="%{x}: Z=%{y:.2f}σ<extra>Long Unwind</extra>",
+                hovertemplate="%{x}: %{y:.1f}th pctile<extra>Long Unwind</extra>",
             ), row=2, col=1)
 
-        # Background shading on row 1: extreme z episodes
-        for sign, color in [(1, "rgba(220,53,69,0.07)"), (-1, "rgba(40,167,69,0.07)")]:
+        # Background shading on row 1: extreme percentile episodes
+        for above, color in [(True, "rgba(220,53,69,0.07)"), (False, "rgba(40,167,69,0.07)")]:
             in_ep, ep_start = False, None
-            for dt, zv in z.items():
-                if not in_ep and (sign * zv) > z_threshold:
+            for dt, pv in pct.items():
+                extreme = (pv > upper_val) if above else (pv < lower_val)
+                if not in_ep and extreme:
                     in_ep, ep_start = True, dt.strftime('%Y-%m-%d')
-                elif in_ep and (sign * zv) <= z_threshold:
+                elif in_ep and not extreme:
                     fig.add_vrect(x0=ep_start, x1=dt.strftime('%Y-%m-%d'), fillcolor=color,
                                   layer="below", line_width=0, row=1, col=1)
                     in_ep = False
             if in_ep:
-                fig.add_vrect(x0=ep_start, x1=z.index[-1].strftime('%Y-%m-%d'), fillcolor=color,
+                fig.add_vrect(x0=ep_start, x1=pct.index[-1].strftime('%Y-%m-%d'), fillcolor=color,
                               layer="below", line_width=0, row=1, col=1)
 
         fig.update_layout(
@@ -195,7 +198,7 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
             showlegend=True,
         )
         fig.update_yaxes(ticksuffix="%", row=1, col=1)
-        fig.update_yaxes(title_text="Z-Score (σ)", row=2, col=1)
+        fig.update_yaxes(title_text="Percentile (0–100)", range=[0, 100], row=2, col=1)
 
         divs[tenor] = pio.to_html(fig, full_html=False, include_plotlyjs=False,
                                    div_id=f'reversal-chart-{mode}-{tenor}',
@@ -203,24 +206,26 @@ def _build_cta_reversal_divs(output_dir, tenor_order, mode='fast', z_window=252,
     return divs
 
 
-def _build_reversal_stats_html(output_dir, tenor_order, mode='fast', z_window=252, z_threshold=1.5):
+def _build_reversal_stats_html(output_dir, tenor_order, mode='fast', pct_window=252, pct_upper=0.80, pct_lower=0.20):
     """Return an HTML table of hit rate / avg / median gain in bps for each tenor × signal × horizon."""
     pos_df    = pd.read_csv(os.path.join(output_dir, f'positions_{mode}.csv'), index_col=0, parse_dates=True)
     yields_df = pd.read_csv(os.path.join(output_dir, 'yields.csv'), index_col=0, parse_dates=True)
     horizons  = [5, 10, 21, 63]
     rows = []
 
+    upper_val = pct_upper * 100
+    lower_val = pct_lower * 100
+
     for tenor in tenor_order:
         if tenor not in pos_df.columns or tenor not in yields_df.columns:
             continue
         pos = pos_df[tenor].dropna()
         yld = yields_df[tenor].reindex(pos.index).ffill()
-        roll = pos.rolling(z_window, min_periods=126)
-        z = (pos - roll.mean()) / roll.std()
-        prev_z = z.shift(1)
+        pct = pos.rolling(pct_window, min_periods=126).rank(pct=True) * 100
+        prev_pct = pct.shift(1)
         signals = [
-            ('Short Unwind', pos.index[(prev_z > z_threshold) & (z <= z_threshold)], -1),
-            ('Long Unwind',  pos.index[(prev_z < -z_threshold) & (z >= -z_threshold)], 1),
+            ('Short Unwind', pos.index[(prev_pct > upper_val) & (pct <= upper_val)], -1),
+            ('Long Unwind',  pos.index[(prev_pct < lower_val) & (pct >= lower_val)], 1),
         ]
         for sig_name, sig_idx, direction in signals:
             row = {'Tenor': tenor, 'Signal': sig_name, 'N': len(sig_idx)}
@@ -769,10 +774,10 @@ html = f"""<!DOCTYPE html>
 
   <!-- ══ Tab: CTA Treasury Reversal ══ -->
   <div id="page-tab-reversal" class="page-tab-pane">
-    <h2>CTA Treasury Reversal — Positioning Z-Score Signals</h2>
+    <h2>CTA Treasury Reversal — Positioning Percentile Signals</h2>
     <p style="color:#666;font-size:0.9rem;margin-bottom:14px;">
-      252-day rolling z-score of CTA positioning. Extremes flag crowded positions;
-      crossbacks through ±1.5σ mark the unwind.
+      252-day rolling percentile rank of CTA positioning (100 = most short-duration in the past year, 0 = most long-duration).
+      Extremes flag crowded positions; crossbacks through the 80th/20th percentile mark the unwind.
       <span style="color:#dc3545;font-weight:600;">▼ Short Unwind</span> = crowded short-duration bet reversing &nbsp;·&nbsp;
       <span style="color:#28a745;font-weight:600;">▲ Long Unwind</span> = crowded long-duration bet reversing.
     </p>
@@ -869,7 +874,7 @@ function setReversalRange(years, btn) {{
     Plotly.relayout(id, {{
       'xaxis.range':  [startStr, endStr],
       'yaxis.range':  [y1min - p1, y1max + p1],
-      'yaxis2.range': [Math.min(y2min - p2, -1.6), Math.max(y2max + p2, 1.6)]
+      'yaxis2.range': [0, 100]
     }});
   }});
 }}
