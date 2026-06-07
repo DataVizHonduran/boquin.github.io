@@ -1,4 +1,4 @@
-"""
+﻿"""
 US Leading Economic Indicators Dashboard
 Adapted from DataVizHonduran/us-leading-indicators for boquin.github.io.
 
@@ -149,6 +149,19 @@ def create_dashboard():
     rising = df1.diff().gt(0).astype(int)
     diffusion1 = (rising.sum(axis=1) / rising.shape[1] * 100).rolling(3).mean().dropna()
     plot_series(fig, 1, 1, diffusion1, recession, 0, 100, y_label='% of Industries Rising')
+    bls_diff = get_fred("SMS00000000000000021", years=100).rolling(3).mean().dropna()
+    fig.add_trace(go.Scatter(
+        x=bls_diff.index, y=bls_diff.values,
+        mode='lines', showlegend=True,
+        name='BLS Official (3M MA)',
+        line=dict(color='#e67e22', width=1.6),
+    ), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=diffusion1.index, y=diffusion1.values,
+        mode='lines', showlegend=True,
+        name='21-Series Custom (3M MA)',
+        line=dict(color='#1f77b4', width=1.8),
+    ), row=1, col=1)
 
     # ── Chart 2: EPOP from 24-month high ─────────────────────────────────────
     print("Chart 2: Employment-to-Population Ratio...")
@@ -388,3 +401,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
