@@ -278,21 +278,24 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_
     if emas_df is not None and windows is not None:
         ema_display = emas_df[emas_df.index.isin(df_display.index)]
         short_w = windows['short']; mid_w = windows['mid']; long_w = windows['long']
+        sv = ema_display['ema_short'].dropna().iloc[-1]
+        mv = ema_display['ema_mid'].dropna().iloc[-1]
+        lv = ema_display['ema_long'].dropna().iloc[-1]
         fig.add_trace(go.Scatter(
             x=ema_display.index, y=ema_display['ema_short'], mode='lines',
-            name=f'EMA {short_w}',
+            name=f'EMA {short_w} ({sv:.2f}%)',
             line=dict(color='#4db6ac', width=1, dash='dash'),
             yaxis='y1', opacity=0.75
         ))
         fig.add_trace(go.Scatter(
             x=ema_display.index, y=ema_display['ema_mid'], mode='lines',
-            name=f'EMA {mid_w}',
+            name=f'EMA {mid_w} ({mv:.2f}%)',
             line=dict(color='#9575cd', width=1, dash='dot'),
             yaxis='y1', opacity=0.75
         ))
         fig.add_trace(go.Scatter(
             x=ema_display.index, y=ema_display['ema_long'], mode='lines',
-            name=f'EMA {long_w}',
+            name=f'EMA {long_w} ({lv:.2f}%)',
             line=dict(color='#ef9a9a', width=1),
             yaxis='y1', opacity=0.75
         ))
