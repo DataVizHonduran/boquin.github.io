@@ -99,6 +99,7 @@ def calculate_positions(df, short_window, mid_window, long_window):
     positions_latest = {}
     positions_df     = pd.DataFrame()
     rsi_df           = pd.DataFrame()
+    emas_dict        = {}
 
     for tenor in df.columns:
         series = df[tenor].dropna()
@@ -131,8 +132,9 @@ def calculate_positions(df, short_window, mid_window, long_window):
             positions_latest[tenor] = d['position_size'].iloc[-1]
             positions_df[col]       = d['position_size']
             rsi_df[col]             = d['rsi_pos']
+            emas_dict[tenor]        = d[['ema_short', 'ema_mid', 'ema_long']]
 
-    return positions_latest, positions_df, rsi_df
+    return positions_latest, positions_df, rsi_df, emas_dict
 
 
 def generate_exhaustion_signals(positions_df, rolling_upper, rolling_lower, rsi_df):
@@ -260,7 +262,8 @@ def add_consensus_scores(fast_metadata, slow_metadata):
     return fast_metadata, slow_metadata
 
 
-def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_str):
+def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_str,
+                            emas_df=None, windows=None):
     """Create exhaustion model chart for a Treasury tenor."""
     fig = go.Figure()
 
@@ -270,6 +273,29 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_
         name=f'{tenor} Yield (%)',
         line=dict(color='steelblue', width=2), yaxis='y1'
     ))
+
+    # EMA overlays on yield panel
+    if emas_df is not None and windows is not None:
+        ema_display = emas_df[emas_df.index.isin(df_display.index)]
+        short_w = windows['short']; mid_w = windows['mid']; long_w = windows['long']
+        fig.add_trace(go.Scatter(
+            x=ema_display.index, y=ema_display['ema_short'], mode='lines',
+            name=f'EMA {short_w}',
+            line=dict(color='#4db6ac', width=1, dash='dash'),
+            yaxis='y1', opacity=0.75
+        ))
+        fig.add_trace(go.Scatter(
+            x=ema_display.index, y=ema_display['ema_mid'], mode='lines',
+            name=f'EMA {mid_w}',
+            line=dict(color='#9575cd', width=1, dash='dot'),
+            yaxis='y1', opacity=0.75
+        ))
+        fig.add_trace(go.Scatter(
+            x=ema_display.index, y=ema_display['ema_long'], mode='lines',
+            name=f'EMA {long_w}',
+            line=dict(color='#ef9a9a', width=1),
+            yaxis='y1', opacity=0.75
+        ))
 
     # CTA positioning overlay
     pos_filtered = positions_df[positions_df.index.isin(df_display.index)]
@@ -327,7 +353,7 @@ for mode, windows in CTA_MODES.items():
     print(f"Processing {mode.upper()} mode ({windows['short']}/{windows['mid']}/{windows['long']})...")
     print(f"{'='*60}")
 
-    positions_latest, positions_df, rsi_df = calculate_positions(
+    positions_latest, positions_df, rsi_df, emas_dict = calculate_positions(
         df_raw, windows['short'], windows['mid'], windows['long']
     )
     print(f"Calculated positioning for {len(positions_latest)} tenors")
@@ -352,6 +378,7 @@ for mode, windows in CTA_MODES.items():
         'signal_metadata':  signal_metadata,
         'positions_latest': positions_latest,
         'latest_positions': latest_positions,
+        'emas_dict':        emas_dict,
     }
 
     all_summaries[mode] = {
@@ -383,6 +410,7 @@ for mode in ('fast', 'slow'):
 for mode, windows in CTA_MODES.items():
     data         = mode_data[mode]
     positions_df = data['positions_df']
+    emas_dict    = data['emas_dict']
     windows_str  = f"{CTA_MODES[mode]['short']}/{CTA_MODES[mode]['mid']}/{CTA_MODES[mode]['long']}"
 
     chart_count = 0
@@ -392,7 +420,8 @@ for mode, windows in CTA_MODES.items():
             continue
         try:
             fig = create_exhaustion_chart(
-                df_display, tenor, col, positions_df, mode, windows_str
+                df_display, tenor, col, positions_df, mode, windows_str,
+                emas_df=emas_dict.get(tenor), windows=CTA_MODES[mode]
             )
             filename = os.path.join(OUTPUT_DIR, f"{tenor}_exhaustion_{mode}.html")
             pio.write_html(fig, file=filename, auto_open=False)
