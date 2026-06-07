@@ -132,7 +132,11 @@ def calculate_positions(df, short_window, mid_window, long_window):
             positions_latest[tenor] = d['position_size'].iloc[-1]
             positions_df[col]       = d['position_size']
             rsi_df[col]             = d['rsi_pos']
-            emas_dict[tenor]        = d[['ema_short', 'ema_mid', 'ema_long']]
+            direction = pd.Series(0, index=d.index)
+            direction[up[d.index]]   = 1
+            direction[down[d.index]] = -1
+            emas_dict[tenor]         = d[['ema_short', 'ema_mid', 'ema_long']].copy()
+            emas_dict[tenor]['direction'] = direction
 
     return positions_latest, positions_df, rsi_df, emas_dict
 
@@ -278,6 +282,22 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_
     if emas_df is not None and windows is not None:
         ema_display = emas_df[emas_df.index.isin(df_display.index)]
         short_w = windows['short']; mid_w = windows['mid']; long_w = windows['long']
+
+        # Background shading: green = up trend, red = down trend
+        if 'direction' in ema_display.columns:
+            dir_s = ema_display['direction']
+            blocks, cur, start = [], dir_s.iloc[0], dir_s.index[0]
+            for idx, val in dir_s.items():
+                if val != cur:
+                    if cur != 0:
+                        blocks.append((start, idx, cur))
+                    cur, start = val, idx
+            if cur != 0:
+                blocks.append((start, dir_s.index[-1], cur))
+            for x0, x1, d_val in blocks:
+                color = 'rgba(40,167,69,0.07)' if d_val == 1 else 'rgba(220,53,69,0.07)'
+                fig.add_vrect(x0=x0, x1=x1, fillcolor=color, layer='below', line_width=0)
+
         sv = ema_display['ema_short'].dropna().iloc[-1]
         mv = ema_display['ema_mid'].dropna().iloc[-1]
         lv = ema_display['ema_long'].dropna().iloc[-1]
