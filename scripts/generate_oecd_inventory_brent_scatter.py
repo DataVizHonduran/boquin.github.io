@@ -16,6 +16,7 @@ Output: reports/oecd-inventory-brent/index.html
 
 import os
 import requests
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from datetime import date
@@ -98,6 +99,23 @@ def build_figure(df: pd.DataFrame) -> go.Figure:
             hovertemplate="%{text}<br>Inventory: %{x:,.0f} mn bbl<br>Brent: $%{y:.1f}<extra></extra>",
             text=[d.strftime("%b %Y") for d in sub.index],
         ))
+
+    # OLS fit: brent ~ inventory
+    slope, intercept = np.polyfit(df["inventory"], df["brent"], 1)
+    fitted = slope * df["inventory"] + intercept
+    ss_res = ((df["brent"] - fitted) ** 2).sum()
+    ss_tot = ((df["brent"] - df["brent"].mean()) ** 2).sum()
+    r_squared = 1 - ss_res / ss_tot
+
+    x_line = np.array([df["inventory"].min(), df["inventory"].max()])
+    y_line = slope * x_line + intercept
+    fig.add_trace(go.Scatter(
+        x=x_line, y=y_line,
+        mode="lines",
+        name=f"OLS fit: y = {intercept:,.1f} + ({slope:.4f})·x, R² = {r_squared:.2f}",
+        line=dict(color="#444444", width=2, dash="dash"),
+        hoverinfo="skip",
+    ))
 
     iran_pts = df[df["cat"] == "Since Iran conflict"]
     for d, row in iran_pts.iterrows():
