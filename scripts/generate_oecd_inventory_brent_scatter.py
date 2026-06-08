@@ -115,10 +115,11 @@ def build_figure(df: pd.DataFrame) -> go.Figure:
         xaxis_title="OECD commercial crude oil inventories (mn barrels)",
         yaxis_title="Monthly average Brent crude oil price ($ per barrel)",
         template="plotly_white",
-        legend=dict(orientation="h", y=1.1, x=0),
+        legend=dict(orientation="v", yanchor="top", y=0.99, xanchor="right", x=0.99,
+                    bgcolor="rgba(250,246,241,0.7)"),
         width=1000, height=750,
         plot_bgcolor="#faf6f1", paper_bgcolor="#faf6f1",
-        margin=dict(t=110),
+        margin=dict(t=80),
     )
     return fig
 
