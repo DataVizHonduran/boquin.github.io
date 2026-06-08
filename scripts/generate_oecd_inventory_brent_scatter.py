@@ -87,7 +87,7 @@ def categorize(d: pd.Timestamp) -> str:
 # ---------------------------------------------------------------------------
 # Chart
 # ---------------------------------------------------------------------------
-def build_figure(df: pd.DataFrame) -> go.Figure:
+def build_figure(df: pd.DataFrame) -> tuple[go.Figure, str]:
     fig = go.Figure()
     for cat in ORDER:
         sub = df[df["cat"] == cat]
@@ -117,7 +117,24 @@ def build_figure(df: pd.DataFrame) -> go.Figure:
         hoverinfo="skip",
     ))
 
+    # Rule of thumb + sanity check vs. the highlighted drawdown episode
+    per_100mn = -100 * slope
     iran_pts = df[df["cat"] == "Since Iran conflict"]
+    start, end = iran_pts.iloc[0], iran_pts.iloc[-1]
+    inv_draw = start["inventory"] - end["inventory"]
+    actual_move = end["brent"] - start["brent"]
+    implied_move = (inv_draw / 100) * per_100mn
+    footnote = (
+        f"<b>Rule of thumb:</b> every 100 mn barrel draw in OECD commercial crude inventories &asymp; "
+        f"+${per_100mn:.1f}/bbl on Brent (and symmetrically, a 100 mn barrel build &asymp; -${per_100mn:.1f}/bbl).<br>"
+        f"<b>Sanity check:</b> inventories fell from {start['inventory']:,.0f} mn bbl "
+        f"({start.name.strftime('%b %Y')}) to {end['inventory']:,.0f} mn bbl ({end.name.strftime('%b %Y')}) "
+        f"&mdash; a {inv_draw:,.0f} mn barrel draw &mdash; which the regression would put at roughly "
+        f"+${implied_move:.0f}/bbl, while Brent actually moved from ${start['brent']:.0f} to ${end['brent']:.0f}, "
+        f"a ${actual_move:.0f}/bbl jump. The actual move ran hotter than the historical relationship alone "
+        f"would predict &mdash; consistent with a geopolitical risk premium layered on top of the inventory effect."
+    )
+
     for d, row in iran_pts.iterrows():
         fig.add_annotation(
             x=row["inventory"], y=row["brent"],
@@ -139,10 +156,10 @@ def build_figure(df: pd.DataFrame) -> go.Figure:
         plot_bgcolor="#faf6f1", paper_bgcolor="#faf6f1",
         margin=dict(t=80),
     )
-    return fig
+    return fig, footnote
 
 
-def write_page(fig: go.Figure, latest_label: str):
+def write_page(fig: go.Figure, footnote: str, latest_label: str):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     chart_html = fig.to_html(include_plotlyjs="cdn", full_html=False)
     html = f"""<!DOCTYPE html>
@@ -160,6 +177,8 @@ def write_page(fig: go.Figure, latest_label: str):
     header p{{color:#555;font-size:.85rem;margin-top:.4rem}}
     .chart-wrapper{{width:100%;max-width:1040px;background:#fff;
                    border:1px solid #ddd;border-radius:4px;padding:1rem}}
+    .footnote{{width:100%;max-width:1040px;font-size:.8rem;color:#555;
+              line-height:1.5;margin-top:.75rem;padding:0 .25rem}}
     footer{{margin-top:1.5rem;font-size:.8rem;color:#888;text-align:center}}
     footer a{{color:#2196F3;text-decoration:none}}
   </style>
@@ -172,6 +191,7 @@ def write_page(fig: go.Figure, latest_label: str):
   <div class="chart-wrapper">
     {chart_html}
   </div>
+  <p class="footnote">{footnote}</p>
   <footer>
     Source: <a href="https://www.eia.gov/outlooks/steo/" target="_blank">EIA Short-Term Energy Outlook</a>
     (series {INVENTORY_SERIES}, {BRENT_SERIES})
@@ -204,10 +224,10 @@ def main():
     df["cat"] = df.index.map(categorize)
     print(f"  {len(df)} months, {df.index.min().date()} - {df.index.max().date()}")
 
-    fig = build_figure(df)
+    fig, footnote = build_figure(df)
     latest = df.index.max()
     latest_label = f"{latest.strftime('%b %Y')} (inventory {df['inventory'].iloc[-1]:,.0f} mn bbl, Brent ${df['brent'].iloc[-1]:.1f})"
-    write_page(fig, latest_label)
+    write_page(fig, footnote, latest_label)
 
 
 if __name__ == "__main__":
