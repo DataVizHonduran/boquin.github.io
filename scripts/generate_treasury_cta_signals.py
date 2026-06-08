@@ -326,8 +326,8 @@ def create_exhaustion_chart(df_display, tenor, col, positions_df, mode, windows_
         fig.add_trace(go.Scatter(
             x=pos_filtered.index, y=pos_filtered[col], mode='lines',
             name='CTA Positioning',
-            line=dict(color='orange', width=1.5),
-            yaxis='y2', opacity=0.65
+            line=dict(color='#ff6200', width=2.5),
+            yaxis='y2', opacity=0.9
         ))
 
     # Positioning zero-line reference
