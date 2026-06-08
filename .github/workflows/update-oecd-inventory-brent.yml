@@ -1,0 +1,42 @@
+name: Update OECD Inventory vs Brent Scatter
+
+on:
+  schedule:
+    # 14:00 UTC Mondays — STEO updates monthly, weekly refresh keeps it current
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate chart
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/generate_oecd_inventory_brent_scatter.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/oecd-inventory-brent/
+          git diff --staged --quiet || (git commit -m "Update OECD Inventory vs Brent Scatter - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
