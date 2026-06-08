@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-06-07T10:24:14.259658+00:00",
-    "totalItems": 205
+    "lastRun": "2026-06-08T12:23:46.190534+00:00",
+    "totalItems": 206
   },
   "items": {
     "86758f605d84adbb1de0edc4fb4478ba21f64ee06ee528204179ad34784436a9": {
@@ -3067,7 +3067,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The document details the privacy policy regarding the collection and processing of personal data. It ensures compliance with data protection regulations for financial services users.",
       "tags": [
@@ -3088,7 +3088,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This text explains the use of cookies for website functionality and user tracking. It focuses on transparency and consent in the digital interaction layer of financial portals.",
       "tags": [
@@ -3109,7 +3109,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The legal notice defines the terms of use and liability limitations for the platform. It establishes the legal framework for accessing institutional financial information.",
       "tags": [
@@ -3130,7 +3130,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This document outlines the accessibility standards implemented to ensure inclusive access to information. It focuses on removing barriers for users interacting with financial regulatory content.",
       "tags": [
@@ -3151,7 +3151,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is a contact email address for a national central bank and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -3172,7 +3172,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to press office personnel and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -3193,7 +3193,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-06-07T10:24:14.259658+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to institutional events and exhibitions and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -4232,6 +4232,27 @@
         "GDP growth"
       ],
       "tagsGeneratedAt": "2026-06-06T09:56:23.672827+00:00"
+    },
+    "e9246f86feeb8f8955b146e16c4fcdb15ca2f680a60c1aa37ffc6431307477c8": {
+      "url": "https://www.bundesbank.de/en/publications/research/discussion-papers/bivariate-sudden-stop-analysis-of-equity-and-bond-fund-flows-to-emerging-markets-using-isolation-forest-998888",
+      "title": "Bivariate sudden stop analysis of equity and bond fund flows to emerging markets using isolation forest | Susanne Griebsch, Andreas Röthig",
+      "institution": "Deutsche Bundesbank",
+      "institutionCode": "DBB",
+      "contentType": "Discussion Papers",
+      "publicationDate": "2026-06-08",
+      "authors": [],
+      "firstSeen": "2026-06-08T12:23:46.190534+00:00",
+      "lastChecked": "2026-06-08T12:23:46.190534+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper employs an isolation forest machine learning approach to analyze sudden stops in equity and bond fund flows to emerging markets. It examines the bivariate relationship between these flows to identify systemic vulnerabilities and triggers of capital flight.",
+      "tags": [
+        "financial stability",
+        "credit",
+        "exchange rates",
+        "geopolitics",
+        "sovereign debt"
+      ],
+      "tagsGeneratedAt": "2026-06-08T12:23:46.190534+00:00"
     }
   }
 }
