@@ -53,6 +53,12 @@ df_display[inverse] = 1 / df_display[inverse]
 # Filter to start from 2016
 df_display = df_display[df_display.index >= '2016-01-01']
 
+# EUR, GBP, AUD, NZD end up quoted XXX-USD after the transforms above, the
+# opposite of every other currency's USD-XXX convention, which flips their
+# CTA signal direction. Re-invert (display data already derived) so positions
+# are computed on a USD-XXX basis like the rest.
+df_fx[["EUR", "GBP", "AUD", "NZD"]] = 1 / df_fx[["EUR", "GBP", "AUD", "NZD"]]
+
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
