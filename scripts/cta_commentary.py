@@ -131,6 +131,8 @@ def generate_report(data: str, hf_token: str) -> str:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     prompt = f"""[ROLE]: Senior Macro/Quant Analyst specializing in CTA trend-following and exhaustion signals.
 
+[CONVENTION]: Every series below is the USD/CCY exchange rate (units of CCY per 1 USD — for EUR, GBP, AUD, NZD this is the inverse of their normal market quote). A positive position / "Long" signal means CTAs are long USD vs CCY: bullish USD, BEARISH CCY. A negative position / "Short" signal means CTAs are short USD vs CCY: bearish USD, BULLISH CCY. Do NOT describe a positive/"Long" reading as "long [CCY]" or a "crowded long trade in [CCY]" — that reverses the meaning. Instead phrase it as e.g. "CTAs are crowded short INR (long USD/INR)" or "extreme bearish INR positioning". Likewise a negative/"Short" reading is bullish CCY, e.g. "crowded long HUF (short USD/HUF)".
+
 [TASK]: Analyze the following CTA positioning snapshot as of {today}.
 Produce a structured Markdown commentary covering:
 1. Positioning extremes — which currencies are most overbought / oversold and what it signals
