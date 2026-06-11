@@ -2,7 +2,7 @@ name: Petroleum Stocks Commentary
 
 on:
   schedule:
-    - cron: '0 14 * * 3'  # 14:00 UTC Wed
+    - cron: '30 17 * * 3'  # 17:30 UTC Wed — 30min after generator (17:00 UTC)
     
 concurrency:
   group: push-to-main
