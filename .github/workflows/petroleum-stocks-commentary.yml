@@ -3,7 +3,8 @@ name: Petroleum Stocks Commentary
 on:
   schedule:
     - cron: '30 17 * * 3'  # 17:30 UTC Wed — 30min after generator (17:00 UTC)
-    
+  workflow_dispatch:
+
 concurrency:
   group: push-to-main
   cancel-in-progress: false
