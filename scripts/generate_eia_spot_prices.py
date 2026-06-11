@@ -20,7 +20,8 @@ from datetime import datetime, date, timedelta, timezone
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-EIA_API_BASE = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
+EIA_API_BASE    = "https://api.eia.gov/v2/petroleum/pri/spt/data/"
+NATGAS_API_BASE = "https://api.eia.gov/v2/natural-gas/pri/fut/data/"
 SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT    = os.path.dirname(SCRIPT_DIR)
 OUTPUT_DIR   = os.path.join(REPO_ROOT, "reports", "eia-spot-prices")
@@ -33,12 +34,18 @@ PRODUCTS = [
     ("Brent Crude Oil (Europe)",             "$/bbl", "RBRTE"),
     ("NY Harbor No. 2 Heating Oil",         "$/gal", "EER_EPD2F_PF4_Y35NY_DPG"),
     ("Gulf Coast Kerosene-Type Jet Fuel",   "$/gal", "EER_EPJK_PF4_RGC_DPG"),
-    ("NY Harbor RBOB Regular Gasoline",     "$/gal", "EER_EPMRU_PF4_Y35NY_DPG"),
+    ("NY Harbor Conventional Gasoline Regular", "$/gal", "EER_EPMRU_PF4_Y35NY_DPG"),
+    ("US Gulf Coast Conventional Gasoline Regular", "$/gal", "EER_EPMRU_PF4_RGC_DPG"),
     ("LA RBOB Regular Gasoline",            "$/gal", "EER_EPMRR_PF4_Y05LA_DPG"),
     ("NY Harbor ULS No. 2 Diesel",          "$/gal", "EER_EPD2DXL0_PF4_Y35NY_DPG"),
     ("Gulf Coast ULS No. 2 Diesel",         "$/gal", "EER_EPD2DXL0_PF4_RGC_DPG"),
     ("LA ULS CARB Diesel",                  "$/gal", "EER_EPD2DC_PF4_Y05LA_DPG"),
     ("Propane (Mont Belvieu, TX)",           "$/gal", "EER_EPLLPA_PF4_Y44MB_DPG"),
+]
+
+# (display_label, unit, series_id) — fetched from NATGAS_API_BASE
+NATGAS_PRODUCTS = [
+    ("Henry Hub Natural Gas Spot Price", "$/MMBtu", "RNGWHHD"),
 ]
 
 PERIODS = [
@@ -54,7 +61,7 @@ PERIODS = [
 # EIA API fetch
 # ---------------------------------------------------------------------------
 
-def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
+def fetch_series(series_id: str, api_key: str, start: str, base: str = EIA_API_BASE) -> dict[str, float]:
     """Fetch daily data for one series from `start` to today. Returns {date_str: price}."""
     params = {
         "api_key":              api_key,
@@ -68,7 +75,7 @@ def fetch_series(series_id: str, api_key: str, start: str) -> dict[str, float]:
         "offset":               0,
     }
     try:
-        resp = requests.get(EIA_API_BASE, params=params, timeout=30)
+        resp = requests.get(base, params=params, timeout=30)
         resp.raise_for_status()
         payload = resp.json()
     except Exception as exc:
@@ -378,7 +385,7 @@ function showChart(label) {{
   const d = HISTORY[label];
   if (!d || !d.dates.length) return;
 
-  const isBbl = d.unit === '$/bbl';
+  const isBbl = d.unit === '$/bbl' || d.unit === '$/MMBtu';
   const fmt   = isBbl ? '.2f' : '.4f';
 
   Plotly.react('chart', [{{
@@ -450,7 +457,31 @@ def main():
         else:
             dates     = sorted(prices.keys())
             latest_px = prices[dates[-1]]
-            spot_str  = f"{latest_px:.2f}" if unit == "$/bbl" else f"{latest_px:.4f}"
+            spot_str  = f"{latest_px:.2f}" if unit in ("$/bbl", "$/MMBtu") else f"{latest_px:.4f}"
+            changes   = {p: pct_change(prices, days) for p, days in PERIODS}
+            hist      = history_2y(prices)
+            print(f"  Latest ({dates[-1]}): {latest_px}  ({len(hist['dates'])} days of 2Y history)")
+
+        rows.append({
+            "label":   label,
+            "spot":    spot_str,
+            "unit":    unit,
+            "changes": changes,
+            "history": hist,
+        })
+
+    for label, unit, series_id in NATGAS_PRODUCTS:
+        print(f"Fetching: {label} ({series_id})...")
+        prices = fetch_series(series_id, api_key, start_date, base=NATGAS_API_BASE)
+
+        if not prices:
+            spot_str = "N/A"
+            changes  = {p: None for p, _ in PERIODS}
+            hist     = {"dates": [], "prices": []}
+        else:
+            dates     = sorted(prices.keys())
+            latest_px = prices[dates[-1]]
+            spot_str  = f"{latest_px:.2f}"
             changes   = {p: pct_change(prices, days) for p, days in PERIODS}
             hist      = history_2y(prices)
             print(f"  Latest ({dates[-1]}): {latest_px}  ({len(hist['dates'])} days of 2Y history)")
