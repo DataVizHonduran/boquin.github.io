@@ -28,6 +28,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Discover series IDs (temp)
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/_discover_series.py
+
       - name: Generate dashboard
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
