@@ -1,31 +1,26 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (7 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+Team,
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** June 12, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+I have reviewed the latest research from the Fed districts. While some of the output is purely methodological, there are several critical signals regarding labor market structural shifts and credit availability that we need to integrate into our current models.
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While some papers are purely academic, several provide critical signals regarding labor market structural shifts and credit availability. Here are the most analytically significant findings:
+Here are the most analytically significant findings:
 
-1. **[NY] Remote Work Leaves Younger Workers Sidelined:** This research highlights a critical friction where remote work inhibits the onboarding and mentorship of junior talent, contributing to higher youth unemployment. This suggests a long-term erosion of human capital development that could constrain productivity growth for a decade.
+1. **[NY] Remote Work Leaves Younger Workers Sidelined:** The data suggests a causal link between the rise of remote work and increased youth unemployment, as junior employees lose the "learning-by-doing" benefits of in-person mentorship. This implies a long-term erosion of human capital accumulation that could lower potential GDP growth and productivity for a decade.
 
-2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** High-frequency indicators from the Second District show a sharp decline in sentiment among small businesses. Given the regional weight of NY/NJ/CT, this pessimism may be a leading indicator of a broader cooling in business investment and regional consumption.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** Small business sentiment in the Second District is deteriorating sharply, signaling a potential "credit crunch" or demand collapse in the Tri-State area. This serves as a leading indicator for a broader regional economic slowdown that may precede national data.
 
-3. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** These two reports demonstrate that state-level rate caps are pushing credit away from high-risk borrowers toward "safer" profiles. For our credit portfolios, this implies a systemic shift where riskier borrowers are pushed into unregulated shadow banking, increasing systemic fragility.
+3. **[NY] The Unintended Effects of Interest Rate Caps (Combined Reports):** These reports demonstrate that state-level rate caps are not protecting the vulnerable but are instead rationing credit away from risky borrowers toward safer ones. For our credit portfolios, this suggests that regulatory interventions in consumer finance are inadvertently tightening financial conditions for the lowest-income cohorts.
 
-4. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** The divergence in commuting patterns across the Fifth District suggests that the "death of the city" is not uniform but highly localized. This variance is critical for our real estate valuations, as it confirms that urban recovery is dependent on specific local industry clusters rather than a general return-to-office trend.
+4. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** The divergence in commuting patterns across the Fifth District indicates that the "death of the city" is not a monolith, but varies by metro area. This heterogeneity is critical for our real estate valuations and suggests that urban recovery will be fragmented rather than uniform.
 
-5. **[STL] The Implications of Labor Market Heterogeneity for UI Design:** This analysis argues that "one-size-fits-all" unemployment insurance is inefficient given the current diversity of worker skills and roles. From a policy perspective, a shift toward tailored UI could either accelerate labor reallocation or, if mismanaged, prolong unemployment durations.
-
-**Synthesis:** The overarching theme is one of structural fragmentation, where remote work and regulatory interventions are creating "winners and losers" across age groups and credit tiers. We should expect persistent labor market frictions and localized economic volatility, necessitating a more granular, bottom-up approach to our asset allocations.
+**Synthesis:** We are seeing a dangerous convergence of structural labor market scarring for youth and acute pessimism among small businesses. Combined with credit rationing caused by regulatory caps, these factors suggest a fragile recovery with significant downside risks to productivity and regional stability.
 
 ---
 
@@ -71,7 +66,14 @@ This analysis examines post-pandemic commuting trends across four major metropol
 **Tags:** labor markets · employment · regional economy · consumer spending · GDP growth
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 1
+**Content Type:** Working Papers | **New:** 0 of 2
+
+### (cached) [The St. Louis Fed DSGE Model](https://www.fedinprint.org/item/fedlwp/98405/103395)
+**Published:** 2026-06-11 | **Authors:** 
+
+The paper details the construction and application of a Dynamic Stochastic General Equilibrium (DSGE) model used by the St. Louis Fed. It focuses on simulating macroeconomic shocks to inform policy analysis and forecasting.
+
+**Tags:** monetary policy · GDP growth · interest rates · inflation · financial stability · recession
 
 ### (cached) [The Implications of Labor Market Heterogeneity for Unemployment Insurance Design](https://www.fedinprint.org/item/fedlwp/98801/103360)
 **Published:** 2026-06-04 | **Authors:** 
@@ -84,5 +86,5 @@ The paper explores how diverse characteristics within the labor market affect th
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 6
-- Total cache size: 6 items
+- Already cached: 7
+- Total cache size: 7 items

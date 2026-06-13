@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-06-12T11:04:16.198876+00:00",
-    "totalItems": 79
+    "lastRun": "2026-06-13T09:59:15.343878+00:00",
+    "totalItems": 80
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1340,11 +1340,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-06-12T11:04:16.198876+00:00",
+      "lastChecked": "2026-06-13T09:59:15.343878+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "Insufficient data provided to analyze the article. No findings or arguments could be identified.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-12T11:04:16.198876+00:00"
+      "tagsGeneratedAt": "2026-06-13T09:59:15.343878+00:00"
     },
     "1f620e40414e31e923885883f8d9af5db3645edc39df34b9f7078ce3b3c4b5a3": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/",
@@ -1396,11 +1396,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-29T10:50:26.827596+00:00",
-      "lastChecked": "2026-06-12T11:04:16.198876+00:00",
+      "lastChecked": "2026-06-13T09:59:15.343878+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "Insufficient data provided to analyze the article. No findings or arguments could be identified.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-12T11:04:16.198876+00:00"
+      "tagsGeneratedAt": "2026-06-13T09:59:15.343878+00:00"
     },
     "8c3c0812f4a8f96d1b360485bc37dd365bda57342b57c636c35c0d170567850d": {
       "url": "https://www.fedinprint.org/item/fedlwp/101808/103320",
@@ -1560,11 +1560,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-12T11:04:16.198876+00:00",
+      "lastChecked": "2026-06-13T09:59:15.343878+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Unable to determine arguments or findings.",
+      "aiSummary": "Insufficient data provided to analyze the article. No findings or arguments could be identified.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-12T11:04:16.198876+00:00"
+      "tagsGeneratedAt": "2026-06-13T09:59:15.343878+00:00"
     },
     "1a83fa428cfc29d20994958db81dd2b7d9481b9ba2bdec55ddef21eaa9326c6b": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-18",
@@ -1607,6 +1607,28 @@
         "recession"
       ],
       "tagsGeneratedAt": "2026-06-05T10:49:29.403632+00:00"
+    },
+    "d691a95e357d35a8e313c24b403a69cffc26ff35ca6764e021b6c48734e96bf3": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98405/103395",
+      "title": "The St. Louis Fed DSGE Model",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-06-11",
+      "authors": [],
+      "firstSeen": "2026-06-13T09:59:15.343878+00:00",
+      "lastChecked": "2026-06-13T09:59:15.343878+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper details the construction and application of a Dynamic Stochastic General Equilibrium (DSGE) model used by the St. Louis Fed. It focuses on simulating macroeconomic shocks to inform policy analysis and forecasting.",
+      "tags": [
+        "monetary policy",
+        "GDP growth",
+        "interest rates",
+        "inflation",
+        "financial stability",
+        "recession"
+      ],
+      "tagsGeneratedAt": "2026-06-13T09:59:15.343878+00:00"
     }
   }
 }
