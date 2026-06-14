@@ -12,15 +12,17 @@ I have reviewed the latest research from the Fed districts. While some of the ou
 
 Here are the most analytically significant findings:
 
-1. **[NY] Remote Work Leaves Younger Workers Sidelined:** The data suggests a causal link between the rise of remote work and increased youth unemployment, as junior employees lose the "learning-by-doing" benefits of in-person mentorship. This implies a long-term erosion of human capital accumulation that could lower potential GDP growth and productivity for a decade.
+1. **[NY] Remote Work Leaves Younger Workers Sidelined:** This research suggests a causal link between the rise of remote work and increased youth unemployment, as junior staff lose the "learning-by-doing" benefits of in-person mentorship. This implies a long-term erosion of human capital that could permanently lower potential GDP growth and productivity.
 
-2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** Small business sentiment in the Second District is deteriorating sharply, signaling a potential "credit crunch" or demand collapse in the Tri-State area. This serves as a leading indicator for a broader regional economic slowdown that may precede national data.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** Sentiment indicators for small businesses in the NY/NJ/CT corridor are flashing red for the remainder of the year. Given the systemic importance of the Second District, this pessimism suggests a looming contraction in regional CAPEX and a potential uptick in default rates.
 
-3. **[NY] The Unintended Effects of Interest Rate Caps (Combined Reports):** These reports demonstrate that state-level rate caps are not protecting the vulnerable but are instead rationing credit away from risky borrowers toward safer ones. For our credit portfolios, this suggests that regulatory interventions in consumer finance are inadvertently tightening financial conditions for the lowest-income cohorts.
+3. **[NY] The Unintended Effects of Interest Rate Caps (Combined Reports):** These papers demonstrate that state-level rate caps are not protecting the vulnerable, but are instead rationing credit away from risky borrowers toward safer ones. This creates a "credit gap" that may push marginalized borrowers toward unregulated shadow banking, increasing systemic fragility.
 
-4. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** The divergence in commuting patterns across the Fifth District indicates that the "death of the city" is not a monolith, but varies by metro area. This heterogeneity is critical for our real estate valuations and suggests that urban recovery will be fragmented rather than uniform.
+4. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** The divergence in commuting patterns across the Fifth District suggests that the "death of the city" is not uniform, but highly localized. For our real estate allocations, this confirms that a granular, city-by-city approach is mandatory rather than applying a broad "urban" discount.
 
-**Synthesis:** We are seeing a dangerous convergence of structural labor market scarring for youth and acute pessimism among small businesses. Combined with credit rationing caused by regulatory caps, these factors suggest a fragile recovery with significant downside risks to productivity and regional stability.
+5. **[STL] The Implications of Labor Market Heterogeneity for UI Design:** This analysis highlights that one-size-fits-all unemployment insurance is inefficient given the current diversity of worker skill sets. From a policy perspective, any shift toward targeted UI could alter the "reservation wage," impacting how quickly the labor market clears during a downturn.
+
+**Synthesis:** We are seeing a dangerous convergence of structural labor market scarring for youth and acute pessimism among small businesses. Combined with credit rationing caused by regulatory caps, these factors suggest a fragile recovery that is more susceptible to localized shocks than the headline data implies.
 
 ---
 
