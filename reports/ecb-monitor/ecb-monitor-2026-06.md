@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (7 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: June 2026 (9 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,33 +8,41 @@
 
 **To: Investment Team**
 **From: Senior Eurozone Economist**
-**Date: June 14, 2026**
-**Subject: Briefing on Recent Central Bank Research**
+**Date: June 15, 2026**
+**Subject: Strategic Briefing: Recent ECB and NCB Research**
 
-I have reviewed the latest research output from the ECB and national central banks. While some papers focus on long-term academic trends, the following selections provide the most immediate analytical value for our macro and policy positioning.
+I have filtered the recent central bank output to isolate the papers with the highest implications for our macro projections and policy expectations. While some publications are purely academic, the following are analytically significant for our current positioning:
 
-1. **[ECB] Fiscal policy transmission through production networks with heterogeneous households**
-   This research highlights how sector-specific fiscal stimuli propagate unevenly across the economy due to input-output linkages. For us, this means that the effectiveness of national fiscal supports depends heavily on *which* sectors are targeted, as certain nodes in the production network amplify growth more than others.
+1. **Financial stability considerations for monetary policy (ECB):** This paper outlines the quantitative tools the ECB uses to manage the tension between price stability and financial stability. It is critical for us to monitor, as it suggests the ECB is refining its "separation principle," potentially allowing for more aggressive stability interventions without necessarily altering the primary policy rate path.
 
-2. **[ECB] Investment composition and growth: the role of intangible and tangible ICT capital**
-   The paper suggests that the *type* of investment (intangible vs. tangible ICT) is a primary driver of growth disparities across the EU. This is critical for our long-term equity valuations, as it suggests a widening productivity gap between member states based on their digital transformation strategies.
+2. **Fiscal policy transmission through production networks (ECB):** The research demonstrates how sector-specific fiscal stimulus propagates through input-output linkages to affect heterogeneous households. This matters for our growth forecasts, as it implies that the *composition* of national fiscal spending (e.g., green energy vs. infrastructure) will have vastly different multipliers depending on the domestic industrial network.
 
-3. **[ECB] Piero Cipollone: Europe needs to act to strengthen the role of its currency**
-   Cipollone argues for structural reforms to enhance the Euro's international status and stability. This signals a policy appetite for deeper capital markets integration, which would likely lower the Eurozone's reliance on USD-denominated funding and reduce long-term volatility.
+3. **Investment composition and growth: Intangible vs. Tangible ICT (ECB):** The study finds that growth disparities in the EU are driven more by the *type* of investment (intangible ICT) than the total volume. This suggests that traditional CAPEX metrics are lagging indicators and that we should overweight firms and regions prioritizing software and digital organizational capital to identify long-term productivity winners.
 
-4. **[ECB] A tale of two energy crises – initial conditions matter**
-   By comparing energy shocks, this study demonstrates that the starting structural vulnerabilities of a country dictate the severity of the economic fallout. This provides a framework for us to differentiate "resilient" vs. "fragile" Eurozone sovereigns when assessing credit risk during future commodity price spikes.
+4. **A tale of two energy crises (ECB):** By comparing the structural drivers of recent energy shocks, this paper highlights how initial conditions dictate the persistence of inflation. This is vital for our inflation modeling, as it suggests that the "last mile" of disinflation is heavily dependent on structural energy dependencies rather than just monetary tightening.
 
-5. **[ECB] Herding in the foreign exchange market**
-   This analysis of currency trading patterns from 1995–2024 identifies the drivers of synchronized market movements. Understanding these herding behaviors allows us to better anticipate "gap" moves in EUR pairs that are driven by sentiment and positioning rather than fundamental macro shifts.
+5. **Piero Cipollone: Strengthening the role of the currency (ECB):** This piece argues for a more proactive approach to enhancing the Euro's international status. For our FX desk, this signals a long-term strategic push toward deeper Capital Markets Union (CMU) integration, which would structurally support the EUR against the USD over a multi-year horizon.
 
-**Synthesis:**
-The current research focus shifts from immediate crisis management toward structural productivity drivers and the systemic transmission of fiscal policy. For our portfolio, this emphasizes the need to pivot from broad Eurozone indices toward sector-specific and country-specific bets based on ICT investment and production network resilience.
+**Synthesis:** The ECB is shifting its focus toward the structural "plumbing" of the economy—specifically production networks, ICT composition, and financial stability frameworks. We should move away from a pure "rates-only" narrative and begin integrating these structural productivity and stability metrics into our Eurozone valuation models.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 6
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 8
+
+### (cached) [FDI, gravity, and aggregation: revisiting the distance elasticity with sector-level FDI data](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3245~4d5ee7e8ea.en.pdf)
+**Published:** 2026-06-15 | **Authors:** 
+
+The paper re-evaluates the distance elasticity of foreign direct investment using sector-level data to identify heterogeneities. It argues that aggregate gravity models may obscure critical sector-specific motives for international investment.
+
+**Tags:** trade · GDP growth · productivity · geopolitics · supply chains
+
+### (cached) [Financial stability considerations for monetary policy at the European Central Bank: conceptual framework and quantitative tools](https://www.ecb.europa.eu//pub/pdf/scpdps/ecb.dp30~efc21667a0.en.pdf)
+**Published:** 2026-06-15 | **Authors:** 
+
+This research develops a conceptual framework to analyze the trade-offs between price stability and financial stability within the ECB's mandate. It introduces quantitative tools to manage conflicts between inflation targets and financial system resilience.
+
+**Tags:** monetary policy · inflation · financial stability · banking · eurozone · interest rates
 
 ### (cached) [Fiscal policy transmission through production networks with heterogeneous households](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3244~0e92afef7d.en.pdf)
 **Published:** 2026-06-03 | **Authors:** 
@@ -92,5 +100,5 @@ The paper employs an isolation forest machine learning approach to analyze sudde
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 7
-- Total cache size: 7 items
+- Already cached: 9
+- Total cache size: 9 items
