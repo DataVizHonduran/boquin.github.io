@@ -99,6 +99,24 @@
   "hfiresearch.substack.com": [],
   "www.notboring.co": [
     {
+      "title": "Weekly Dose of Optimism #197",
+      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-197",
+      "date": "2026-06-12",
+      "description": "La Sagrada Fam&#237;lia, Life Bio Trial, Saronic, Doudna CRISPR, Standard Bots + Science Breakthroughs + Extra Doses"
+    },
+    {
+      "title": "Return on Tokens (ROT)",
+      "url": "https://www.notboring.co/p/return-on-tokens-rot",
+      "date": "2026-06-10",
+      "description": "Markie Wagner Co-Writes A Poetic Essay"
+    },
+    {
+      "title": "Expanding the Radius of Daily Life",
+      "url": "https://www.notboring.co/p/expanding-the-radius-of-daily-life",
+      "date": "2026-06-08",
+      "description": "How to Make Flying Cars an Everyday Reality"
+    },
+    {
       "title": "Weekly Dose of Optimism #196",
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-196",
       "date": "2026-06-05",
@@ -109,24 +127,6 @@
       "url": "https://www.notboring.co/p/westmag",
       "date": "2026-06-02",
       "description": "Building the Electric Stack by making motors and actuators next to drones and robots"
-    },
-    {
-      "title": "Weekly Dose of Optimism #195",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-195",
-      "date": "2026-05-29",
-      "description": "LDL Gene Therapy, GLP-1s slow Cancer, Supersonic Hermeus, Nanotech, Moon Base + Extra Doses"
-    },
-    {
-      "title": "Thank God For Data Centers",
-      "url": "https://www.notboring.co/p/thank-god-for-data-centers",
-      "date": "2026-05-27",
-      "description": "These Gigavillains Are Bringing So Many Technologies Down the Learning Curve"
-    },
-    {
-      "title": "Weekly Dose of Optimism #194",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-194",
-      "date": "2026-05-22",
-      "description": "Reta Phase 3, Colossal Eggs, SpaceX, OpenAI x Erd&#337;s, SendCutSend + Extra Doses"
     }
   ],
   "macrocreditthinking.substack.com": [
@@ -227,6 +227,18 @@
   ],
   "www.newcomer.co": [
     {
+      "title": "David Sacks' Warning About Anthropic Regulatory Pleas Misses the Mark & SpaceX Asks Investors to Dream Big in Mega IPO",
+      "url": "https://www.newcomer.co/p/david-sacks-warning-about-anthropic",
+      "date": "2026-06-12",
+      "description": "Plus, pressure on token prices, a Databricks round in the works & more"
+    },
+    {
+      "title": "VC Twitter Airs its Dirty Laundry: Our Summary of the Beefs, Bits & Quotes",
+      "url": "https://www.newcomer.co/p/vc-twitter-airs-its-dirty-laundry",
+      "date": "2026-06-08",
+      "description": "From Vinod Khosla to Sequoia Capital, founders posted through their grievances"
+    },
+    {
       "title": "AI Pushes Markets into Uncharted Territory as SpaceX & Google Seek $160 Billion Combined with OpenAI & Anthropic in the Wings",
       "url": "https://www.newcomer.co/p/ai-pushes-markets-into-uncharted",
       "date": "2026-06-05",
@@ -243,18 +255,6 @@
       "url": "https://www.newcomer.co/p/new-to-the-cerebral-valley-ai-summit",
       "date": "2026-06-02",
       "description": "Apply to secure your spot for the summit on June 24 in London"
-    },
-    {
-      "title": "Booming AI Revenues Boost Inference Startups to Decacorn Status",
-      "url": "https://www.newcomer.co/p/booming-ai-revenues-boost-inference",
-      "date": "2026-05-29",
-      "description": "Plus, Anthropic tops OpenAI in valuation & a new book by our editor at large discusses the rise & fall of tech's San Francisco values"
-    },
-    {
-      "title": "\u2018Tokenmaxxing\u2019 Starts to Fade as Companies Eye Agentic Coding Costs",
-      "url": "https://www.newcomer.co/p/tokenmaxxing-starts-to-fade-as-companies",
-      "date": "2026-05-28",
-      "description": "Salesforce & Uber are among those investing heavily. A fierce debate is roiling the industry on when & how to measure ROI."
     }
   ],
   "globalmacromethod.substack.com": [
@@ -420,6 +420,24 @@
   ],
   "www.chinatalk.media": [
     {
+      "title": "Notes on Egypt",
+      "url": "https://www.chinatalk.media/p/notes-on-egypt",
+      "date": "2026-06-14",
+      "description": "A dispatch from Egypt's new capital city in the desert. $58 billion, Chinese-financed, almost entirely empty."
+    },
+    {
+      "title": "Sen. Slotkin: NDAA, AI guardrails, and banning China's cars",
+      "url": "https://www.chinatalk.media/p/sen-slotkin-ndaa-ai-guardrails-and",
+      "date": "2026-06-12",
+      "description": "+ does Jordan \"need a life\"?"
+    },
+    {
+      "title": "Paul Kennedy on Great Powers",
+      "url": "https://www.chinatalk.media/p/paul-kennedy-on-great-powers-past",
+      "date": "2026-06-10",
+      "description": "What a profound honor to have Paul Kennedy on the ChinaTalk podcast."
+    },
+    {
       "title": "A Night at the UFC",
       "url": "https://www.chinatalk.media/p/a-night-at-the-ufc",
       "date": "2026-06-07",
@@ -430,24 +448,6 @@
       "url": "https://www.chinatalk.media/p/wartalk-the-view-from-africom",
       "date": "2026-06-05",
       "description": "with LTG John Brennan"
-    },
-    {
-      "title": "Render Unto Caesar, Not Unto Claude",
-      "url": "https://www.chinatalk.media/p/you-dont-understand-the-popes-ai",
-      "date": "2026-06-02",
-      "description": "Pope&#8217;s AI takes"
-    },
-    {
-      "title": "Adventures in Vibecoding Policy",
-      "url": "https://www.chinatalk.media/p/adventures-in-vibecoding-policy",
-      "date": "2026-05-29",
-      "description": "can policy microsites save America?"
-    },
-    {
-      "title": "Arizona's Abundance Playbook",
-      "url": "https://www.chinatalk.media/p/arizonas-abundance-playbook",
-      "date": "2026-05-28",
-      "description": "a view from the governor's office"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -517,6 +517,12 @@
   ],
   "www.parentdata.org": [
     {
+      "title": "Are Day Care Naps Ruining Bedtime? Here\u2019s What To Do.",
+      "url": "https://parentdata.org/kids/day-care-naps-ruining-bedtime/",
+      "date": "2026-06-14",
+      "description": "It turns out, a lot of you are in this boat\nEmily Oster, PhD"
+    },
+    {
       "title": "Home Births Are on the Rise",
       "url": "https://parentdata.org/pregnancy/home-births/",
       "date": "2026-06-07",
@@ -539,12 +545,6 @@
       "url": "https://parentdata.org/grown-ups/finasteride-hair-loss-pregnancy/",
       "date": "2026-05-17",
       "description": "What men should know about finasteride and its side effects\nEmily Oster, PhD"
-    },
-    {
-      "title": "How to Fix Your Child\u2019s Sleep Issues (It Won\u2019t Happen Overnight)",
-      "url": "https://parentdata.org/kids/fix-child-sleep-issues/",
-      "date": "2026-05-10",
-      "description": "Five steps, plus a tool to help you do them\nEmily Oster, PhD"
     }
   ],
   "debtserious.substack.com": [
@@ -879,34 +879,34 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "Pam Bondi was the worst AG in history. Until now.",
-      "url": "https://www.publicnotice.co/p/todd-blanche",
-      "date": "2026-06-08",
-      "description": "Todd Blanche, it&#8217;s your turn."
+      "title": "The US under Trump is a global scourge",
+      "url": "https://www.publicnotice.co/p/trump-global-pariah",
+      "date": "2026-06-15",
+      "description": "We're the baddies."
     },
     {
-      "title": "Trump's cognitive impairment endangers us all",
-      "url": "https://www.publicnotice.co/p/trump-cognitive-impairment",
-      "date": "2026-06-06",
-      "description": "It's undeniable if you actually watch him."
+      "title": "Trump's systemic attack on whistleblowers, explained by an expert",
+      "url": "https://www.publicnotice.co/p/federal-government-ndas-don-moynihan",
+      "date": "2026-06-13",
+      "description": "\"The cost to democracy is a loss of accountability and oversight.\""
     },
     {
-      "title": "Trump's corruption as 2026's overarching narrative",
-      "url": "https://www.publicnotice.co/p/trumps-corruption-as-2026s-overarching",
-      "date": "2026-06-05",
-      "description": "Introducing the new PN Pod with Aaron and Paul."
+      "title": "The Art of the Cave",
+      "url": "https://www.publicnotice.co/p/the-art-of-the-cave",
+      "date": "2026-06-12",
+      "description": "Can Trump sell his loss to Iran as a win?"
     },
     {
-      "title": "What does government oppression really look like?",
-      "url": "https://www.publicnotice.co/p/transgender-trump",
-      "date": "2026-06-05",
-      "description": "You don't have to look far."
+      "title": "Will Democrats become the party of faith?",
+      "url": "https://www.publicnotice.co/p/democrats-faith-2028",
+      "date": "2026-06-12",
+      "description": "The GOP's debasement presents an opportunity."
     },
     {
-      "title": "Why does the media ignore Trump\u2019s madness?",
-      "url": "https://www.publicnotice.co/p/trump-madness",
-      "date": "2026-06-04",
-      "description": "His Truth Social posts show he's better suited in a mental institution than at a negotiating table."
+      "title": "The murder of expertise",
+      "url": "https://www.publicnotice.co/p/omb-rule-science-funding",
+      "date": "2026-06-11",
+      "description": "Russ Vought as science czar would just about do it."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,6 +1010,18 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
+      "title": "OPEC+ Data Deck (June 2026)",
+      "url": "https://www.commoditycontext.com/p/opec-data-deck-june-2026",
+      "date": "2026-06-15",
+      "description": "Middle Eastern crude production inches higher as Gulf producers gained on incremental Hormuz Crisis logistical improvements; the Emiratis have left the building after 49 years as a member of the group"
+    },
+    {
+      "title": "Oil & Iran War Context Weekly (W24)",
+      "url": "https://www.commoditycontext.com/p/ocw24w26",
+      "date": "2026-06-12",
+      "description": "Crude prices sank to the lowest weekly close since February on the back of a whiplash shift from missiles flying across the Gulf to what most parties are now presenting as an imminent MOU-signing."
+    },
+    {
       "title": "Oil & Iran War Context Weekly (W23)",
       "url": "https://www.commoditycontext.com/p/oil-and-iran-war-context-weekly-w23",
       "date": "2026-06-05",
@@ -1026,18 +1038,6 @@
       "url": "https://www.commoditycontext.com/p/a-beginners-guide-to-reopening-the-strait",
       "date": "2026-06-04",
       "description": "Even if the Iran war ended today, rebuilding the Middle East&#8217;s energy shipping and production capacity could take months or even years."
-    },
-    {
-      "title": "North American Oil Data Deck (June 2026)",
-      "url": "https://www.commoditycontext.com/p/north-american-oil-data-deck-june-2026",
-      "date": "2026-06-03",
-      "description": "Production growth stabilizes in the US and slows in Canada; US refinery yields shifted sharply in favour of globally-scarce jet fuel but at the expense of gasoline."
-    },
-    {
-      "title": "Oil & Iran War Context Weekly (W22)",
-      "url": "https://www.commoditycontext.com/p/ocw22w26",
-      "date": "2026-05-29",
-      "description": "Crude prices crater on further&#8212;though, as always, unrealized&#8212;US-Iran deal optimism and close out largest monthly decline since 2020; more diplomacy needed before physical Hormuz unwinding"
     }
   ],
   "energyoutlookadvisors.substack.com": [],
