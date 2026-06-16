@@ -233,5 +233,60 @@ function show(i){
 </table>
 </div>
 <!-- costless-collar-matrix-end -->
+<!-- ceiling-collar-matrix -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d27;padding:24px 0 0;margin:0">
+<h2 style="font-size:1.2rem;font-weight:600;margin-bottom:6px">Costless Collar Matrix — $500 Ceiling | Floor Solved</h2>
+<div style="display:flex;gap:32px;margin-bottom:14px;font-size:.85rem;color:#666;flex-wrap:wrap">
+  <span>Spot <strong style="color:#111">$369.35</strong></span>
+  <span>Ceiling <strong style="color:#111">$500.00</strong> (+35.4% vs spot)</span>
+  <span>52wk High <strong style="color:#111">$408.61</strong></span>
+  <span>52wk Low <strong style="color:#111">$162.00</strong></span>
+  <span>Generated 2026-06-16 11:08 UTC</span>
+</div>
+<div style="background:#fff;border-left:4px solid #3a5fc8;padding:10px 16px;font-size:.82rem;color:#444;border-radius:0 6px 6px 0;margin-bottom:16px;line-height:1.5">
+  <strong>Collar structure:</strong> Sell call @ ceiling ($500) + buy put @ solved floor.
+  For each expiry the floor put is the OTM strike whose ask is closest to the call bid (net cost ≈ 0).
+  <strong>Net cost</strong> = put ask − call bid. <em>Credit</em> = you receive cash. <em>Debit</em> = you pay.
+</div>
+<table style="border-collapse:collapse;width:100%;font-size:.84rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+  <thead>
+    <tr>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Expiry</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Strike (Cap, fixed)</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Bid</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Strike (Floor, solved)</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Ask</th>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Net Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2026-09-18</strong><br><span style="font-size:.74rem;color:#aaa">94d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$500.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+35.4% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$2.10</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$70.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">-81.0% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$0.28<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid — | OI 27</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:600">$1.82 credit</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top"><strong>2027-01-15</strong><br><span style="font-size:.74rem;color:#aaa">213d</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$500.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+35.4% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#f5fcf7">$9.58</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$115.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">-68.9% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;background:#fffafa">$0.56<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $0.10 | OI 1,528</span></td>
+      <td style="padding:9px 14px;border-bottom:1px solid #eef0f6;vertical-align:top;color:#1a7a3c;font-weight:600">$9.02 credit</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top"><strong>2028-01-21</strong><br><span style="font-size:.74rem;color:#aaa">584d</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#f5fcf7">$500.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">+35.4% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#f5fcf7">$40.30</td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#fffafa">$45.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">-87.8% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;background:#fffafa">$5.00<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid $0.03 | OI 490</span></td>
+      <td style="padding:9px 14px;border-bottom:none;vertical-align:top;color:#1a7a3c;font-weight:600">$35.30 credit</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- ceiling-collar-matrix-end -->
 </body>
 </html>

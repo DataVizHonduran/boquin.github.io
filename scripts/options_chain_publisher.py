@@ -34,7 +34,10 @@ MARKER_START = "<!-- options-commentary-start -->"
 MARKER_END   = "<!-- options-commentary-end -->"
 COLLAR_MARKER_START = "<!-- costless-collar-matrix -->"
 COLLAR_MARKER_END   = "<!-- costless-collar-matrix-end -->"
-COLLAR_FLOORS = {"GOOGL": 300.0}  # ticker → floor price for costless collar
+CEILING_COLLAR_MARKER_START = "<!-- ceiling-collar-matrix -->"
+CEILING_COLLAR_MARKER_END   = "<!-- ceiling-collar-matrix-end -->"
+COLLAR_FLOORS    = {"GOOGL": 300.0}   # ticker → floor price for floor-fixed collar
+COLLAR_CEILINGS  = {"GOOGL": 500.0}   # ticker → ceiling price for ceiling-fixed collar
 
 # ---------------------------------------------------------------------------
 # Options fetch (ported from claude_projects/options_chain/options_chain.py)
@@ -107,6 +110,92 @@ def find_nearest_costless_call(calls_df, spot, put_ask):
         return None
     otm["_diff"] = (otm["bid"] - put_ask).abs()
     return otm.loc[otm["_diff"].idxmin()]
+
+
+def find_call(calls_df, ceiling):
+    """Nearest call strike to the ceiling price."""
+    if calls_df.empty:
+        return None
+    idx = (calls_df["strike"] - ceiling).abs().idxmin()
+    return calls_df.loc[idx]
+
+
+def find_nearest_costless_put(puts_df, spot, call_bid):
+    """OTM put (below spot) whose ask is closest to call_bid (net cost ≈ 0)."""
+    otm = puts_df[puts_df["strike"] < spot].copy()
+    if otm.empty:
+        return None
+    otm = otm[otm["ask"].notna() & (otm["ask"] > 0)]
+    if otm.empty:
+        return None
+    otm["_diff"] = (otm["ask"] - call_bid).abs()
+    return otm.loc[otm["_diff"].idxmin()]
+
+
+def fetch_collars_from_ceiling(ticker_sym, ceiling_price):
+    tk = yf.Ticker(ticker_sym)
+    fi = tk.fast_info
+    spot = fi["lastPrice"]
+    h52 = fi["yearHigh"]
+    l52 = fi["yearLow"]
+
+    today = date.today()
+    available = tk.options
+    if not available:
+        return None
+
+    seen, selected = set(), []
+    for td in target_expiry_dates(today):
+        exp = find_nearest_expiry(td, available).strftime("%Y-%m-%d")
+        if exp not in seen:
+            seen.add(exp)
+            selected.append(exp)
+
+    rows = []
+    for exp in selected:
+        try:
+            chain = tk.option_chain(exp)
+        except Exception:
+            continue
+
+        dte = (datetime.strptime(exp, "%Y-%m-%d").date() - today).days
+        call_row = find_call(chain.calls, ceiling_price)
+        if call_row is None:
+            continue
+
+        call_strike = call_row["strike"]
+        call_bid = call_row["bid"] if pd.notna(call_row.get("bid")) and call_row["bid"] > 0 else call_row["lastPrice"]
+        call_oi = int(call_row["openInterest"]) if pd.notna(call_row.get("openInterest")) else None
+
+        if pd.isna(call_bid) or call_bid <= 0:
+            continue
+
+        put_row = find_nearest_costless_put(chain.puts, spot, call_bid)
+        if put_row is None:
+            continue
+
+        put_strike = put_row["strike"]
+        put_ask = put_row["ask"]
+        put_bid = put_row["bid"] if pd.notna(put_row.get("bid")) else None
+        put_oi = int(put_row["openInterest"]) if pd.notna(put_row.get("openInterest")) else None
+        net_cost = round(put_ask - call_bid, 2)
+
+        rows.append({
+            "expiry": exp,
+            "dte": dte,
+            "call_strike": call_strike,
+            "call_bid": call_bid,
+            "call_oi": call_oi,
+            "put_strike": put_strike,
+            "put_ask": put_ask,
+            "put_bid": put_bid,
+            "put_oi": put_oi,
+            "net_cost": net_cost,
+            "floor_pct": (put_strike / spot - 1) * 100,
+            "cap_pct": (call_strike / spot - 1) * 100,
+        })
+
+    return {"ticker": ticker_sym.upper(), "spot": spot, "h52": h52, "l52": l52, "ceiling": ceiling_price, "rows": rows}
 
 
 def fetch_collars(ticker_sym, floor_price):
@@ -587,49 +676,142 @@ def inject_collar_into_html(index_html: Path, block: str) -> None:
     print(f"  Injected collar matrix into {index_html}")
 
 
+def build_ceiling_collar_block(collar_data: dict, gen_at: str) -> str:
+    spot = collar_data["spot"]
+    h52 = collar_data["h52"]
+    l52 = collar_data["l52"]
+    ceiling = collar_data["ceiling"]
+    rows = collar_data["rows"]
+    cap_pct = (ceiling / spot - 1) * 100
+
+    tbody = ""
+    for i, r in enumerate(rows):
+        last = i == len(rows) - 1
+        border = "none" if last else "1px solid #eef0f6"
+        net = r["net_cost"]
+        if net < 0:
+            net_style = "color:#1a7a3c;font-weight:600"
+            net_lbl = f"${abs(net):.2f} credit"
+        elif net == 0:
+            net_style = "color:#3a5fc8;font-weight:600"
+            net_lbl = "even"
+        else:
+            net_style = "color:#b03030;font-weight:600"
+            net_lbl = f"${net:.2f} debit"
+        put_oi_str = f'{r["put_oi"]:,}' if r["put_oi"] else "—"
+        put_bid_str = f'${r["put_bid"]:.2f}' if r["put_bid"] else "—"
+        tbody += f"""
+    <tr>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top"><strong>{r['expiry']}</strong><br><span style="font-size:.74rem;color:#aaa">{r['dte']}d</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#f5fcf7">${r['call_strike']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">{r['cap_pct']:+.1f}% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#f5fcf7">${r['call_bid']:.2f}</td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#fffafa">${r['put_strike']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">{r['floor_pct']:+.1f}% vs spot</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;background:#fffafa">${r['put_ask']:.2f}<br><span style="font-size:.75rem;color:#888;margin-top:2px;display:block">bid {put_bid_str} | OI {put_oi_str}</span></td>
+      <td style="padding:9px 14px;border-bottom:{border};vertical-align:top;{net_style}">{net_lbl}</td>
+    </tr>"""
+
+    if not rows:
+        tbody = '<tr><td colspan="6" style="text-align:center;color:#888;padding:24px">No collar data available.</td></tr>'
+
+    return f"""{CEILING_COLLAR_MARKER_START}
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d27;padding:24px 0 0;margin:0">
+<h2 style="font-size:1.2rem;font-weight:600;margin-bottom:6px">Costless Collar Matrix — ${ceiling:.0f} Ceiling | Floor Solved</h2>
+<div style="display:flex;gap:32px;margin-bottom:14px;font-size:.85rem;color:#666;flex-wrap:wrap">
+  <span>Spot <strong style="color:#111">${spot:.2f}</strong></span>
+  <span>Ceiling <strong style="color:#111">${ceiling:.2f}</strong> ({cap_pct:+.1f}% vs spot)</span>
+  <span>52wk High <strong style="color:#111">${h52:.2f}</strong></span>
+  <span>52wk Low <strong style="color:#111">${l52:.2f}</strong></span>
+  <span>Generated {gen_at} UTC</span>
+</div>
+<div style="background:#fff;border-left:4px solid #3a5fc8;padding:10px 16px;font-size:.82rem;color:#444;border-radius:0 6px 6px 0;margin-bottom:16px;line-height:1.5">
+  <strong>Collar structure:</strong> Sell call @ ceiling (${ceiling:.0f}) + buy put @ solved floor.
+  For each expiry the floor put is the OTM strike whose ask is closest to the call bid (net cost ≈ 0).
+  <strong>Net cost</strong> = put ask − call bid. <em>Credit</em> = you receive cash. <em>Debit</em> = you pay.
+</div>
+<table style="border-collapse:collapse;width:100%;font-size:.84rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+  <thead>
+    <tr>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Expiry</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Strike (Cap, fixed)</th>
+      <th style="background:#edf7f1;color:#1a5c30;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Call Bid</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Strike (Floor, solved)</th>
+      <th style="background:#fdf0f0;color:#8b2020;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Put Ask</th>
+      <th style="background:#e8eaf2;color:#555;text-align:left;padding:10px 14px;font-weight:600;border-bottom:2px solid #d0d5e8">Net Cost</th>
+    </tr>
+  </thead>
+  <tbody>{tbody}
+  </tbody>
+</table>
+</div>
+{CEILING_COLLAR_MARKER_END}"""
+
+
+def inject_ceiling_collar_into_html(index_html: Path, block: str) -> None:
+    html = index_html.read_text(encoding="utf-8")
+    html = re.sub(
+        re.escape(CEILING_COLLAR_MARKER_START) + r".*?" + re.escape(CEILING_COLLAR_MARKER_END),
+        "",
+        html,
+        flags=re.DOTALL,
+    )
+    last_body = html.rfind("</body>")
+    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
+    index_html.write_text(html, encoding="utf-8")
+    print(f"  Injected ceiling collar matrix into {index_html}")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python3 scripts/options_chain_publisher.py <TICKER>")
+    args = sys.argv[1:]
+    collar_only = "--collar-only" in args
+    args = [a for a in args if a != "--collar-only"]
+
+    if not args:
+        print("Usage: python3 scripts/options_chain_publisher.py <TICKER> [--collar-only]")
         sys.exit(1)
 
-    hf_token = os.environ.get("HF_TOKEN")
-    if not hf_token:
-        print("ERROR: HF_TOKEN environment variable not set", file=sys.stderr)
-        sys.exit(1)
-
-    sym = sys.argv[1].upper()
+    sym = args[0].upper()
     out_dir  = REPORT_ROOT / sym
     out_html = out_dir / "index.html"
-    today    = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     gen_at   = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    today    = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    print(f"Fetching {sym} options...")
-    data = fetch(sym)
-    expiries = list(dict.fromkeys(r["Expiry"] for r in data["rows"]))
-    print(f"  Spot ${data['spot']:.2f} | 52wk ${data['l52']:.2f}–${data['h52']:.2f} | {len(data['rows'])} rows | {len(expiries)} expiries")
+    if collar_only:
+        if not out_html.exists():
+            print(f"ERROR: {out_html} does not exist — run without --collar-only first", file=sys.stderr)
+            sys.exit(1)
+    else:
+        hf_token = os.environ.get("HF_TOKEN")
+        if not hf_token:
+            print("ERROR: HF_TOKEN environment variable not set", file=sys.stderr)
+            sys.exit(1)
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    html = build_html(data)
-    out_html.write_text(html, encoding="utf-8")
-    print(f"  Wrote {out_html}")
+        print(f"Fetching {sym} options...")
+        data = fetch(sym)
+        expiries = list(dict.fromkeys(r["Expiry"] for r in data["rows"]))
+        print(f"  Spot ${data['spot']:.2f} | 52wk ${data['l52']:.2f}–${data['h52']:.2f} | {len(data['rows'])} rows | {len(expiries)} expiries")
 
-    print("\nBuilding Gemma data summary...")
-    data_text = load_data(data)
-    print(f"  {len(data_text)} chars")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        html = build_html(data)
+        out_html.write_text(html, encoding="utf-8")
+        print(f"  Wrote {out_html}")
 
-    print("\nGenerating commentary via Gemma 4...")
-    commentary = generate_report(data_text, hf_token, sym)
+        print("\nBuilding Gemma data summary...")
+        data_text = load_data(data)
+        print(f"  {len(data_text)} chars")
 
-    archive = out_dir / f"commentary-{today}.md"
-    archive.write_text(commentary, encoding="utf-8")
-    print(f"\nWrote archive: {archive}")
+        print("\nGenerating commentary via Gemma 4...")
+        commentary = generate_report(data_text, hf_token, sym)
 
-    block = build_commentary_block(commentary, gen_at)
-    inject_into_html(out_html, block)
+        archive = out_dir / f"commentary-{today}.md"
+        archive.write_text(commentary, encoding="utf-8")
+        print(f"\nWrote archive: {archive}")
+
+        block = build_commentary_block(commentary, gen_at)
+        inject_into_html(out_html, block)
 
     floor_price = COLLAR_FLOORS.get(sym)
     if floor_price is not None:
@@ -639,6 +821,15 @@ if __name__ == "__main__":
             collar_block = build_collar_block(collar_data, gen_at)
             inject_collar_into_html(out_html, collar_block)
             print(f"  {len(collar_data['rows'])} collar expiries computed")
+
+    ceiling_price = COLLAR_CEILINGS.get(sym)
+    if ceiling_price is not None:
+        print(f"\nComputing ceiling collar (ceiling ${ceiling_price:.0f})...")
+        ceiling_data = fetch_collars_from_ceiling(sym, ceiling_price)
+        if ceiling_data and ceiling_data["rows"]:
+            ceiling_block = build_ceiling_collar_block(ceiling_data, gen_at)
+            inject_ceiling_collar_into_html(out_html, ceiling_block)
+            print(f"  {len(ceiling_data['rows'])} ceiling collar expiries computed")
 
     print(f"\nDone — {out_html}")
     print("Next: git add reports/options-chain/ index.html && git commit -m '...' && git pull --rebase && git push")
