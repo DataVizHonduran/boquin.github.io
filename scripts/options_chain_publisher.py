@@ -120,16 +120,31 @@ def find_call(calls_df, ceiling):
     return calls_df.loc[idx]
 
 
+def _effective_price(row, price_col, fallback_col="lastPrice"):
+    """Return price_col if > 0, else fallback_col."""
+    v = row.get(price_col)
+    if pd.notna(v) and v > 0:
+        return float(v)
+    fb = row.get(fallback_col)
+    return float(fb) if pd.notna(fb) and fb > 0 else None
+
+
 def find_nearest_costless_put(puts_df, spot, call_bid):
-    """OTM put (below spot) whose ask is closest to call_bid (net cost ≈ 0)."""
+    """
+    OTM put (strike < spot) that maximises floor protection while staying costless.
+    Uses ask (or lastPrice fallback). Picks the highest strike where effective_ask <= call_bid.
+    """
     otm = puts_df[puts_df["strike"] < spot].copy()
     if otm.empty:
         return None
-    otm = otm[otm["ask"].notna() & (otm["ask"] > 0)]
+    otm["_ask"] = otm.apply(lambda r: _effective_price(r, "ask"), axis=1)
+    otm = otm[otm["_ask"].notna()]
     if otm.empty:
         return None
-    otm["_diff"] = (otm["ask"] - call_bid).abs()
-    return otm.loc[otm["_diff"].idxmin()]
+    affordable = otm[otm["_ask"] <= call_bid]
+    if affordable.empty:
+        return None
+    return affordable.loc[affordable["strike"].idxmax()]
 
 
 def fetch_collars_from_ceiling(ticker_sym, ceiling_price):
@@ -164,10 +179,10 @@ def fetch_collars_from_ceiling(ticker_sym, ceiling_price):
             continue
 
         call_strike = call_row["strike"]
-        call_bid = call_row["bid"] if pd.notna(call_row.get("bid")) and call_row["bid"] > 0 else call_row["lastPrice"]
+        call_bid = _effective_price(call_row, "bid")
         call_oi = int(call_row["openInterest"]) if pd.notna(call_row.get("openInterest")) else None
 
-        if pd.isna(call_bid) or call_bid <= 0:
+        if call_bid is None:
             continue
 
         put_row = find_nearest_costless_put(chain.puts, spot, call_bid)
@@ -175,8 +190,8 @@ def fetch_collars_from_ceiling(ticker_sym, ceiling_price):
             continue
 
         put_strike = put_row["strike"]
-        put_ask = put_row["ask"]
-        put_bid = put_row["bid"] if pd.notna(put_row.get("bid")) else None
+        put_ask = put_row["_ask"]
+        put_bid = _effective_price(put_row, "bid")
         put_oi = int(put_row["openInterest"]) if pd.notna(put_row.get("openInterest")) else None
         net_cost = round(put_ask - call_bid, 2)
 
