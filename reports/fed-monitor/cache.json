@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-06-15T13:18:05.935620+00:00",
-    "totalItems": 80
+    "lastRun": "2026-06-16T12:14:32.052101+00:00",
+    "totalItems": 81
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1340,11 +1340,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-27T10:59:47.666410+00:00",
-      "lastChecked": "2026-06-15T13:18:05.935620+00:00",
+      "lastChecked": "2026-06-16T12:14:32.052101+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-15T13:18:05.935620+00:00"
+      "tagsGeneratedAt": "2026-06-16T12:14:32.052101+00:00"
     },
     "1f620e40414e31e923885883f8d9af5db3645edc39df34b9f7078ce3b3c4b5a3": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/05/food-insecurity-and-consumer-pessimism/",
@@ -1396,11 +1396,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-05-29T10:50:26.827596+00:00",
-      "lastChecked": "2026-06-15T13:18:05.935620+00:00",
+      "lastChecked": "2026-06-16T12:14:32.052101+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-15T13:18:05.935620+00:00"
+      "tagsGeneratedAt": "2026-06-16T12:14:32.052101+00:00"
     },
     "8c3c0812f4a8f96d1b360485bc37dd365bda57342b57c636c35c0d170567850d": {
       "url": "https://www.fedinprint.org/item/fedlwp/101808/103320",
@@ -1560,11 +1560,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-15T13:18:05.935620+00:00",
+      "lastChecked": "2026-06-16T12:14:32.052101+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-15T13:18:05.935620+00:00"
+      "tagsGeneratedAt": "2026-06-16T12:14:32.052101+00:00"
     },
     "1a83fa428cfc29d20994958db81dd2b7d9481b9ba2bdec55ddef21eaa9326c6b": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-18",
@@ -1629,6 +1629,27 @@
         "recession"
       ],
       "tagsGeneratedAt": "2026-06-13T09:59:15.343878+00:00"
+    },
+    "8903d43118dbdde1ee3eb7908f45332d708ce6c4f445c731341522c880c8f3e2": {
+      "url": "https://www.fedinprint.org/item/fedlwp/10330/103401",
+      "title": "Natural Resources and Sovereign Risk in Emerging Economies: A Curse and a Blessing",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-06-15",
+      "authors": [],
+      "firstSeen": "2026-06-16T12:14:32.052101+00:00",
+      "lastChecked": "2026-06-16T12:14:32.052101+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper examines the dual impact of natural resource abundance on the sovereign credit risk of emerging economies. It analyzes how resource wealth can either stabilize finances or exacerbate volatility and risk through economic dependence.",
+      "tags": [
+        "emerging markets",
+        "financial stability",
+        "credit",
+        "energy",
+        "international"
+      ],
+      "tagsGeneratedAt": "2026-06-16T12:14:32.052101+00:00"
     }
   }
 }
