@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-06">
+    <meta name="release-date" content="2026-06-19">
+    <title>H.8 Assets and Liabilities of Commercial Banks — 2026-06-19</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 H.8 Assets and Liabilities of Commercial Banks</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-06-19 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>2679.543</h3>
+            <p>CONTEXT: 10Y REGIME: 97.5th Percentile | Z-Score: +1.41σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+        <div class="card">
+            <h3>5658.864</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.57σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+        <div class="card">
+            <h3>1827.848</h3>
+            <p>CONTEXT: 10Y REGIME: 91.7th Percentile | Z-Score: +1.32σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+        <div class="card">
+            <h3>18899.343</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +2.34σ | 10Y Range:</p>
+            <p class="card-period">2026-03</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Commercial & Industrial Loans
+                <span class="mu-chart-latest">2,897.122</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"],
+                        datasets: [{
+                            data: [2765.4932, 2760.4065, 2766.5074, 2777.8894, 2784.707, 2787.6588, 2765.6634, 2664.302, 2671.3271, 2675.307, 2668.9914, 2679.5426, 2685.2841, 2674.3178, 2685.1998, 2693.9295, 2692.5473, 2698.2388, 2706.614, 2736.2772, 2787.9021, 2830.8256, 2874.0132, 2897.1215],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Real Estate Loans
+                <span class="mu-chart-latest">5,786.928</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"],
+                        datasets: [{
+                            data: [5597.3064, 5606.2702, 5609.5464, 5609.5906, 5614.114, 5618.1515, 5621.0618, 5623.9657, 5636.9654, 5640.2072, 5646.8644, 5658.8635, 5667.5814, 5673.2291, 5678.2514, 5685.5938, 5699.8319, 5718.742, 5737.8348, 5748.1061, 5760.1182, 5760.8489, 5771.4497, 5786.9279],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: June 2026</strong></p>
+<p><strong>Subject: H.8 Analysis: Credit Expansion Accelerates Amidst Peak Liquidity</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest H.8 release reveals a synchronized acceleration in credit extension across all major lending categories, signaling a robust resurgence in borrowing demand. Most striking is the non-linear jump in Commercial & Industrial (C&I) loans starting in Q1 2026, suggesting a sharp pivot toward corporate investment or working capital expansion.</p>
+
+<p>The overall tone is one of aggressive expansion. With total deposits hitting a 10-year ceiling and credit growth accelerating, the data suggests a high-liquidity environment that is actively fueling economic activity. For the Federal Reserve, this print increases the risk of overheating, as the credit impulse is now firmly positive and accelerating.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>C&I Loans Surge:</strong> Commercial lending has shifted from a stagnant phase to a rapid expansion, growing from \$2,706bn in Dec '25 to \$2,897bn in May '26—a 7% increase in just five months.</li>
+<li>  <strong>Real Estate at Absolute Peak:</strong> Real Estate loans have reached the 100th percentile of their 10-year range (\$5,786.9bn), indicating a fully saturated or overheating property credit market.</li>
+<li>  <strong>Consumer Resilience:</strong> Consumer borrowing continues a steady climb, reaching the 91.7th percentile, suggesting that household balance sheets remain capable of absorbing new debt.</li>
+<li>  <strong>Liquidity Overflow:</strong> Total deposits are in a regime-defining state (Z-score +2.34$\sigma$), hitting the 100th percentile of the 10-year range at \$19.35tn.</li>
+<li>  <strong>Positive Credit Impulse:</strong> The simultaneous rise in deposits and loans indicates a powerful credit impulse that typically acts as a leading indicator for GDP growth.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The data describes a growth environment that is accelerating. The sharp inflection point in C&I loans (rising $\sim$1.5% MoM from Jan to May '26) suggests a transition from a cautious posture to active capital expenditure or inventory accumulation.</p>
+
+<p><strong>(ii) Labor Market:</strong> While H.8 is a balance sheet report, the steady rise in consumer loans (up $\sim$4.4% since May '25) and the surge in business lending imply strong underlying demand for labor to support the expanded business activity and consumer spending.</p>
+
+<p><strong>(iii) Inflation:</strong> The combination of peak deposit levels (Z-score +2.34$\sigma$) and accelerating credit extension is inherently inflationary. This "excess liquidity" environment provides the monetary fuel for sustained demand-pull inflation.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>The current regime is classified as <strong>Late-Cycle Overheating</strong>. </p>
+
+<p>While C&I and Consumer loans are elevated (Z-scores +1.41$\sigma$ and +1.32$\sigma$ respectively), the Total Deposits figure is the primary signal here. A Z-score of <strong>+2.34$\sigma$</strong> is a significant regime-defining event, placing deposits at the absolute 100th percentile of the last decade. When combined with the fact that Real Estate loans are also at the 100th percentile, the economy is exhibiting classic late-cycle characteristics: peak liquidity and maximum credit extension.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Next Move: Hawkish Hold or 25bps Hike</strong></p>
+<p><strong>Timing: Next FOMC Meeting</strong></p>
+
+<p>The balance of risks has shifted decisively toward inflation. The rapid acceleration in C&I loans since January 2026 suggests that monetary policy may be too loose to constrain business investment. Given that deposits are at a 10-year high (+2.34$\sigma$), the Fed cannot justify further easing and may be forced to hike rates to lean against the wind of this credit surge. We forecast a "Hawkish Hold" at minimum, with a high probability of a 25bps increase if upcoming CPI prints confirm that this credit impulse is translating into price pressures.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- H.8 ASSETS AND LIABILITIES OF COMMERCIAL BANKS: CYCLE-AWARE SUMMARY ---
+
+SERIES: Commercial & Industrial Loans (bn $, SA) [BUSLOANS]
+CONTEXT: 10Y REGIME: 97.5th Percentile | Z-Score: +1.41σ | 10Y Range: [2,050.78, 3,035.80]
+DATA:
+  2025-05      2679.543
+  2025-06      2685.284
+  2025-07      2674.318
+  2025-08      2685.200
+  2025-09      2693.930
+  2025-10      2692.547
+  2025-11      2698.239
+  2025-12      2706.614
+  2026-01      2736.277
+  2026-02      2787.902
+  2026-03      2830.826
+  2026-04      2874.013
+  2026-05      2897.122
+----------------------------------------
+SERIES: Real Estate Loans (bn $, SA) [REALLN]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.57σ | 10Y Range: [4,008.47, 5,786.93]
+DATA:
+  2025-05      5658.864
+  2025-06      5667.581
+  2025-07      5673.229
+  2025-08      5678.251
+  2025-09      5685.594
+  2025-10      5699.832
+  2025-11      5718.742
+  2025-12      5737.835
+  2026-01      5748.106
+  2026-02      5760.118
+  2026-03      5760.849
+  2026-04      5771.450
+  2026-05      5786.928
+----------------------------------------
+SERIES: Consumer Loans (bn $, SA) [CONSUMER]
+CONTEXT: 10Y REGIME: 91.7th Percentile | Z-Score: +1.32σ | 10Y Range: [1,309.33, 1,925.77]
+DATA:
+  2025-05      1827.848
+  2025-06      1828.456
+  2025-07      1823.745
+  2025-08      1828.415
+  2025-09      1835.970
+  2025-10      1845.383
+  2025-11      1852.485
+  2025-12      1861.880
+  2026-01      1870.799
+  2026-02      1875.043
+  2026-03      1889.410
+  2026-04      1904.002
+  2026-05      1908.230
+----------------------------------------
+SERIES: Total Deposits (bn $, SA) [DPSACBW027SBOG]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +2.34σ | 10Y Range: [17,458.29, 19,354.40]
+DATA:
+  2026-03     18899.343
+  2026-03     18993.371
+  2026-04     19082.984
+  2026-04     19052.275
+  2026-04     19094.032
+  2026-04     19072.470
+  2026-04     19103.614
+  2026-05     19215.875
+  2026-05     19280.324
+  2026-05     19288.673
+  2026-05     19337.965
+  2026-06     19294.781
+  2026-06     19354.396
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
