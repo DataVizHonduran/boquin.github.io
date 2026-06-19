@@ -1,10 +1,10 @@
 [
   {
     "currency": "USDBRL",
-    "residual": -10.14,
-    "r2": 0.815,
+    "residual": -10.11,
+    "r2": 0.814,
     "actual": 5.0729,
-    "predicted": 5.5872,
+    "predicted": 5.5857,
     "selected_vars": [
       "IJS/SPY",
       "VYM/SPY",
@@ -13,29 +13,18 @@
   },
   {
     "currency": "USDSGD",
-    "residual": -5.3,
+    "residual": -5.29,
     "r2": -0.0,
     "actual": 1.2833,
-    "predicted": 1.3514,
+    "predicted": 1.3512,
     "selected_vars": []
   },
   {
-    "currency": "USDZAR",
-    "residual": -3.82,
-    "r2": 0.816,
-    "actual": 16.3064,
-    "predicted": 16.9293,
-    "selected_vars": [
-      "MTUM/SPY",
-      "IWC/SPY"
-    ]
-  },
-  {
     "currency": "USDMXN",
-    "residual": -3.76,
-    "r2": 0.447,
+    "residual": -4.13,
+    "r2": 0.468,
     "actual": 17.208,
-    "predicted": 17.855,
+    "predicted": 17.9188,
     "selected_vars": [
       "SPHB/SPY",
       "IWC/SPY",
@@ -44,21 +33,32 @@
     ]
   },
   {
+    "currency": "USDZAR",
+    "residual": -3.77,
+    "r2": 0.81,
+    "actual": 16.3064,
+    "predicted": 16.9212,
+    "selected_vars": [
+      "MTUM/SPY",
+      "IWC/SPY"
+    ]
+  },
+  {
     "currency": "USDCNH",
     "residual": -3.1,
-    "r2": 0.435,
+    "r2": 0.437,
     "actual": 6.7626,
-    "predicted": 6.9721,
+    "predicted": 6.9722,
     "selected_vars": [
       "IWC/SPY"
     ]
   },
   {
     "currency": "USDNOK",
-    "residual": -2.68,
-    "r2": 0.843,
+    "residual": -2.67,
+    "r2": 0.833,
     "actual": 9.5004,
-    "predicted": 9.7549,
+    "predicted": 9.7545,
     "selected_vars": [
       "MTUM/SPY",
       "IWC/SPY"
@@ -66,10 +66,10 @@
   },
   {
     "currency": "USDSEK",
-    "residual": 0.21,
-    "r2": 0.648,
+    "residual": 0.42,
+    "r2": 0.65,
     "actual": 9.4141,
-    "predicted": 9.3942,
+    "predicted": 9.3744,
     "selected_vars": [
       "MTUM/SPY",
       "IWC/SPY",
@@ -78,10 +78,10 @@
   },
   {
     "currency": "USDINR",
-    "residual": 5.6,
-    "r2": 0.918,
+    "residual": 5.74,
+    "r2": 0.917,
     "actual": 95.11,
-    "predicted": 89.7849,
+    "predicted": 89.6524,
     "selected_vars": [
       "SPHB/SPY",
       "IWC/SPY",
@@ -93,10 +93,10 @@
   },
   {
     "currency": "USDTHB",
-    "residual": 6.55,
-    "r2": 0.56,
+    "residual": 6.56,
+    "r2": 0.562,
     "actual": 32.74,
-    "predicted": 30.5951,
+    "predicted": 30.5917,
     "selected_vars": [
       "MTUM/SPY",
       "IJK/SPY"
@@ -104,10 +104,10 @@
   },
   {
     "currency": "USDKRW",
-    "residual": 7.87,
-    "r2": 0.901,
+    "residual": 7.81,
+    "r2": 0.902,
     "actual": 1518.87,
-    "predicted": 1399.3512,
+    "predicted": 1400.2659,
     "selected_vars": [
       "MTUM/SPY",
       "SPHB/SPY",
