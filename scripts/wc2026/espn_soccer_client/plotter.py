@@ -8,8 +8,8 @@ from .client import CONFEDERATION_COLORS
 
 
 def _rank_size(rank):
-    """Bigger bubble for a better (lower-numbered) FIFA ranking, mild spread."""
-    return max(16 - 2 * math.log(rank), 6)
+    """Bigger bubble for a better (lower-numbered) FIFA ranking."""
+    return max(26 - 4.5 * math.log(rank), 6)
 
 
 def _add_median_quadrants(fig, x_vals, y_vals):
