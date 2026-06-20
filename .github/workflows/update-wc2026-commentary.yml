@@ -1,4 +1,4 @@
-name: Update FIFA WC 2026 Commentary
+name: Update FIFA WC 2026 Charts & Commentary
 
 on:
   schedule:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update-wc2026-commentary:
+  update-wc2026:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Rebuild WC 2026 charts
+        run: python scripts/wc2026/build_wc2026_charts.py
+
       - name: Generate WC 2026 chart commentary
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -38,4 +41,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add reports/fifa-wc-2026/
-          git diff --staged --quiet || (git commit -m "Update FIFA WC 2026 chart commentary - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase --autostash && git push)
+          git diff --staged --quiet || (git commit -m "Update FIFA WC 2026 charts & commentary - $(date +'%Y-%m-%d') 🤖 Automated daily update" && git pull --rebase --autostash && git push)
