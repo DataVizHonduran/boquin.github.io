@@ -87,19 +87,28 @@ def team_summary(teams, x_stat, y_stat, x_label, y_label):
 def build_commentary_block(commentary_md: str, generated_at: str) -> str:
     body_html = md_lib.markdown(commentary_md, extensions=["tables"])
     return f"""{MARKER_START}
-<div style="max-width:1100px;margin:1.5rem auto 0;padding:0 1rem 2rem;">
-  <div style="background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;padding:1.25rem 1.5rem;">
+<div class="wc2026-commentary-wrap" style="max-width:1100px;margin:1.5rem auto 0;padding:0 1rem 2rem;">
+  <style>
+    .wc2026-commentary-wrap .wc2026-commentary-card {{background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;padding:1.25rem 1.5rem;}}
+    .wc2026-commentary-wrap .wc2026-commentary-body {{line-height:1.6;color:#444;font-family:system-ui,sans-serif;font-size:0.92rem;}}
+    .wc2026-commentary table {{border-collapse:collapse;width:100%;margin:12px 0;font-size:0.85rem;}}
+    .wc2026-commentary th, .wc2026-commentary td {{border:1px solid #dee2e6;padding:6px 10px;text-align:left;}}
+    .wc2026-commentary th {{background:#f1f1f1;font-weight:600;}}
+    .wc2026-commentary ul {{padding-left:20px;}}
+    @media (max-width: 600px) {{
+      .wc2026-commentary-wrap {{padding:0 0.5rem 1.5rem;}}
+      .wc2026-commentary-wrap .wc2026-commentary-card {{padding:1rem;}}
+      .wc2026-commentary-wrap .wc2026-commentary-body {{font-size:1rem;}}
+      .wc2026-commentary table, .wc2026-commentary th, .wc2026-commentary td {{font-size:0.95rem;}}
+      .wc2026-commentary th, .wc2026-commentary td {{padding:6px 8px;}}
+    }}
+  </style>
+  <div class="wc2026-commentary-card">
     <div style="border-left:4px solid #007bff;padding-left:12px;margin-bottom:12px;">
       <h2 style="color:#333;margin:0 0 4px;font-size:1.1rem;">AI Commentary</h2>
       <p style="color:#666;font-size:0.8rem;margin:0;">Generated {generated_at} UTC &nbsp;·&nbsp; google/gemma-3-27b-it</p>
     </div>
-    <div style="line-height:1.6;color:#444;font-family:system-ui,sans-serif;font-size:0.92rem;">
-      <style>
-        .wc2026-commentary table {{border-collapse:collapse;width:100%;margin:12px 0;font-size:0.85rem;}}
-        .wc2026-commentary th, .wc2026-commentary td {{border:1px solid #dee2e6;padding:6px 10px;text-align:left;}}
-        .wc2026-commentary th {{background:#f1f1f1;font-weight:600;}}
-        .wc2026-commentary ul {{padding-left:20px;}}
-      </style>
+    <div class="wc2026-commentary-body">
       <div class="wc2026-commentary">{body_html}</div>
     </div>
   </div>
