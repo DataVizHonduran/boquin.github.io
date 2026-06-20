@@ -118,9 +118,9 @@ def build_commentary_block(commentary_md: str, generated_at: str) -> str:
 
 def inject(path: Path, block: str):
     html = path.read_text(encoding="utf-8")
-    html = re.sub(re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END), "", html, flags=re.DOTALL)
-    last_body = html.rfind("</body>")
-    html = html[:last_body] + block + "\n</body>" + html[last_body + len("</body>"):]
+    html = re.sub(re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END) + r"\n?", "", html, flags=re.DOTALL)
+    body_open = html.index("<body>") + len("<body>")
+    html = html[:body_open] + "\n" + block + "\n" + html[body_open:]
     path.write_text(html, encoding="utf-8")
     print(f"  Injected commentary into {path}")
 
