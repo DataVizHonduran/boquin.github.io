@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA WC 2026 Stats — boquin.xyz</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .meta { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .card { border: 1px solid #e5e5e5; border-radius: 8px; padding: 1rem 1.25rem; }
+  .card h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+  .card p { margin: 0 0 0.75rem; font-size: 0.85rem; color: #555; }
+  .card a { font-size: 0.9rem; }
+  a { color: #1a0dab; }
+  .back { font-size: 0.85rem; margin-bottom: 1rem; display: block; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">← boquin.xyz</a>
+<h1>⚽ FIFA World Cup 2026 — Stats Dashboards</h1>
+<p class="meta">ESPN per-match boxscore data, aggregated across all completed matches · ⚠ early-tournament samples, per-90 figures noisy for low-minute players</p>
+
+<div class="grid">
+  <div class="card">
+    <h3>Goals/90 vs Shots/90 (Player)</h3>
+    <p>Top scorers' efficiency — min 1 goal, min 1 minute played</p>
+    <a href="goals_shots.html">Open chart →</a>
+  </div>
+  <div class="card">
+    <h3>Possession% vs Shots/match (Team)</h3>
+    <p>Team style vs output, per-match averages</p>
+    <a href="possession_shots.html">Open chart →</a>
+  </div>
+  <div class="card">
+    <h3>Shot Conversion% vs Shots/match (Team)</h3>
+    <p>Finishing efficiency vs shot volume</p>
+    <a href="conversion_shots.html">Open chart →</a>
+  </div>
+  <div class="card">
+    <h3>Long Ball% vs Pass% (Team)</h3>
+    <p>Playing style spectrum — direct vs possession-based</p>
+    <a href="longball_pass.html">Open chart →</a>
+  </div>
+  <div class="card">
+    <h3>Accurate Crosses vs Total Crosses/match (Team)</h3>
+    <p>Crossing volume and accuracy, per-match averages</p>
+    <a href="crosses.html">Open chart →</a>
+  </div>
+</div>
+</body>
+</html>
