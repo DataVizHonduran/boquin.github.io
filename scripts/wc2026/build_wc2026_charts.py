@@ -13,6 +13,9 @@ out_dir = os.path.join(repo_root, "reports", "fifa-wc-2026")
 
 FOOTNOTE_CSS = """
 <style>
+  body { margin: 0; padding: 0 1rem; }
+  .plot-wrap { width: 100%; max-width: 1100px; margin: 0 auto; }
+  .plot-wrap > div { width: 100% !important; }
   .chart-footnote { font-family: system-ui, sans-serif; font-size: 0.8rem; color: #555;
     max-width: 1100px; margin: 0.5rem auto 2rem; padding: 0.75rem 1rem;
     border-top: 1px solid #e5e5e5; }
@@ -20,17 +23,67 @@ FOOTNOTE_CSS = """
   .chart-footnote dd { display: inline; margin: 0 0 0 0.3rem; }
   .chart-footnote li { margin-bottom: 0.3rem; }
   .chart-footnote ul { list-style: none; padding-left: 0; }
+  @media (max-width: 600px) {
+    body { padding: 0 0.5rem; }
+    .chart-footnote { font-size: 0.95rem; line-height: 1.5; padding: 0.75rem 0.25rem; }
+  }
 </style>
 """
 
+MOBILE_RESIZE_JS = """
+<script>
+(function(){
+  function isMobile(){ return window.innerWidth <= 600; }
+  function applyLayout(gd){
+    if(!gd) return;
+    var update = isMobile() ? {
+      'font.size': 10,
+      'title.font.size': 14,
+      'legend.orientation': 'h',
+      'legend.x': 0, 'legend.xanchor': 'left',
+      'legend.y': -0.25, 'legend.yanchor': 'top',
+      'xaxis.title.font.size': 11,
+      'yaxis.title.font.size': 11,
+      'margin': {l: 45, r: 10, t: 40, b: 90},
+      'height': 480
+    } : {
+      'font.size': 12,
+      'title.font.size': 17,
+      'legend.orientation': 'v',
+      'legend.x': 0.01, 'legend.xanchor': 'left',
+      'legend.y': 0.99, 'legend.yanchor': 'top',
+      'xaxis.title.font.size': 13,
+      'yaxis.title.font.size': 13,
+      'margin': {l: 60, r: 20, t: 60, b: 60},
+      'height': 650
+    };
+    Plotly.relayout(gd, update);
+  }
+  window.addEventListener('load', function(){
+    var gd = document.querySelector('.plot-wrap .plotly-graph-div');
+    applyLayout(gd);
+    var resizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){ applyLayout(gd); }, 200);
+    });
+  });
+})();
+</script>
+"""
+
 def write_with_footnote(fig, path, terms):
-    body = fig.to_html(full_html=False, include_plotlyjs="cdn")
+    body = fig.to_html(full_html=False, include_plotlyjs="cdn", config={"responsive": True})
     items = "".join(f"<li><dt>{term}</dt><dd>— {definition}</dd></li>" for term, definition in terms)
     html = f"""<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>WC 2026 Chart</title>{FOOTNOTE_CSS}</head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WC 2026 Chart</title>{FOOTNOTE_CSS}</head>
 <body>
-{body}
+<div class="plot-wrap">{body}</div>
+{MOBILE_RESIZE_JS}
 <dl class="chart-footnote"><ul>{items}</ul></dl>
 </body>
 </html>"""

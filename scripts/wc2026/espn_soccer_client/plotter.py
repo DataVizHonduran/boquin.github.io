@@ -75,8 +75,8 @@ class SoccerPer90Plotter:
             template="plotly_white",
             legend=dict(title="Confederation", x=0.01, y=0.99,
                         xanchor="left", yanchor="top"),
-            width=1100,
-            height=750,
+            autosize=True,
+            height=650,
         )
         return fig
 
@@ -145,7 +145,7 @@ class SoccerTeamPlotter:
             xaxis_title=x_label or x_stat, yaxis_title=y_label or y_stat,
             template="plotly_white",
             legend=dict(title="Confederation", x=0.01, y=0.99, xanchor="left", yanchor="top"),
-            width=1100, height=750,
+            autosize=True, height=650,
         )
         return fig
 
