@@ -14,6 +14,12 @@
         .cb-section { margin: 36px 0; }
         .cb-section h2 { color: #1a237e; border-left: 4px solid #1a237e;
                          padding-left: 12px; margin-bottom: 6px; font-size: 1.2em; }
+        .section-summary { color: #1a237e; border-left: 4px solid #1a237e;
+                           padding-left: 12px; margin-bottom: 6px; font-size: 1.2em;
+                           font-weight: 700; cursor: pointer; list-style: none; }
+        .section-summary::-webkit-details-marker { display: none; }
+        .section-summary::after { content: " ▾"; font-size: 0.8em; color: #999; }
+        details:not([open]) > .section-summary::after { content: " ▸"; }
         .section-desc { color: #555; margin: 0 0 14px; font-size: 0.95em; line-height: 1.5; }
         .report-list { list-style: none; padding: 0; margin: 0; }
         .report-list li { border-left: 4px solid #3949ab; padding: 10px 14px; margin: 8px 0;
@@ -35,7 +41,8 @@
     <h1>🏦 Central Bank Monitor</h1>
 
     <section class="cb-section">
-        <h2>🏛️ Fed District Monitor</h2>
+        <details open>
+            <summary class="section-summary">🏛️ Fed District Monitor</summary>
         <p class="section-desc">Federal Reserve district research publications and economic analysis tracking.</p>
         <ul class="report-list">
         <li><a href="../fed-monitor/fed-district-monitor-2026-06.html">Fed District Monitor — 2026-06<span class="badge-latest">latest</span></a><span class="report-date">2026-06</span></li>
@@ -116,9 +123,11 @@
         <li><a href="../fed-monitor/fed-district-monitor-2026-01-06.html">Fed District Monitor — 2026-01-06</a><span class="report-date">2026-01-06</span></li>
         <li><a href="../fed-monitor/fed-district-monitor-2025-12-05.html">Fed District Monitor — 2025-12-05</a><span class="report-date">2025-12-05</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🦅 US Fed Watcher</h2>
+        <details open>
+            <summary class="section-summary">🦅 US Fed Watcher</summary>
         <p class="section-desc">FOMC member speeches, testimonies, and policy signals tracked every 3 days — hawk/dove spectrum, thematic analysis, and dissent watch, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../fed-watcher/fed-watcher-2026-06-20.html">Fed Watcher — 2026-06-20<span class="badge-latest">latest</span></a><span class="report-date">2026-06-20</span></li>
@@ -145,9 +154,11 @@
         <li><a href="../fed-watcher/fed-watcher-2026-04-13.html">Fed Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
         <li><a href="../fed-watcher/fed-watcher-2026-04-12.html">Fed Watcher — 2026-04-12</a><span class="report-date">2026-04-12</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>📋 FOMC Statement Analyzer</h2>
+        <details open>
+            <summary class="section-summary">📋 FOMC Statement Analyzer</summary>
         <p class="section-desc">Redline comparison of consecutive FOMC policy statements — thematic shifts in inflation and forward guidance language, and a hawkish/dovish tonal verdict, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../fomc-analyzer/fomc-2026-06-17.html">FOMC Analysis — 2026-06-17<span class="badge-latest">latest</span></a><span class="report-date">2026-06-17</span></li>
@@ -374,9 +385,11 @@
         <li><a href="../fomc-analyzer/fomc-2000-05-16.html">FOMC Analysis — 2000-05-16</a><span class="report-date">2000-05-16</span></li>
         <li><a href="../fomc-analyzer/fomc-2000-03-21.html">FOMC Analysis — 2000-03-21</a><span class="report-date">2000-03-21</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇪🇺 ECB &amp; Eurozone Monitor</h2>
+        <details open>
+            <summary class="section-summary">🇪🇺 ECB &amp; Eurozone Monitor</summary>
         <p class="section-desc">Daily AI-enriched research digest from ECB, Bundesbank, Banque de France, Banca d’Italia, Banco de España, DNB, and Central Bank of Ireland — powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../ecb-monitor/ecb-monitor-2026-06.html">ECB Monitor — 2026-06<span class="badge-latest">latest</span></a><span class="report-date">2026-06</span></li>
@@ -445,9 +458,11 @@
         <li><a href="../ecb-monitor/ecb-monitor-2026-04-17.html">ECB Monitor — 2026-04-17</a><span class="report-date">2026-04-17</span></li>
         <li><a href="../ecb-monitor/ecb-monitor-2026-04-16.html">ECB Monitor — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🏦 ECB Watcher</h2>
+        <details open>
+            <summary class="section-summary">🏦 ECB Watcher</summary>
         <p class="section-desc">All 25 Governing Council members tracked every 3 days — hawk/dove spectrum, thematic analysis, dissent watch, and policy signal evolution, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../ecb-watcher/ecb-watcher-2026-06-19.html">ECB Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
@@ -470,9 +485,11 @@
         <li><a href="../ecb-watcher/ecb-watcher-2026-04-16.html">ECB Watcher — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
         <li><a href="../ecb-watcher/ecb-watcher-2026-04-13.html">ECB Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇯🇵 BOJ Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇯🇵 BOJ Watcher</summary>
         <p class="section-desc">All 9 Policy Board members tracked every 3 days — hawk/dove spectrum, yen/inflation thematic analysis, and dissent watch, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../boj-watcher/boj-watcher-2026-06-19.html">BOJ Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
@@ -497,18 +514,22 @@
         <li><a href="../boj-watcher/boj-watcher-2026-04-16.html">BOJ Watcher — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
         <li><a href="../boj-watcher/boj-watcher-2026-04-13.html">BOJ Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇦🇺 RBA Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇦🇺 RBA Watcher</summary>
         <p class="section-desc">All 9 Monetary Policy Board members tracked every 3 days — hawk/dove spectrum, trimmed mean CPI, labor market and AUD thematic analysis, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../rba-watcher/rba-watcher-2026-06-04.html">RBA Watcher — 2026-06-04<span class="badge-latest">latest</span></a><span class="report-date">2026-06-04</span></li>
         <li><a href="../rba-watcher/rba-watcher-2026-05-01.html">RBA Watcher — 2026-05-01</a><span class="report-date">2026-05-01</span></li>
         <li><a href="../rba-watcher/rba-watcher-2026-04-21.html">RBA Watcher — 2026-04-21</a><span class="report-date">2026-04-21</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇲🇽 Banxico Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇲🇽 Banxico Watcher</summary>
         <p class="section-desc">All 5 Junta de Gobierno members tracked every 3 days — hawk/dove spectrum, core CPI, MXN dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../banxico-watcher/banxico-watcher-2026-06-01.html">Banxico Watcher — 2026-06-01<span class="badge-latest">latest</span></a><span class="report-date">2026-06-01</span></li>
@@ -519,9 +540,11 @@
         <li><a href="../banxico-watcher/banxico-watcher-2026-04-25.html">Banxico Watcher — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
         <li><a href="../banxico-watcher/banxico-watcher-2026-04-22.html">Banxico Watcher — 2026-04-22</a><span class="report-date">2026-04-22</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇨🇦 BOC Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇨🇦 BOC Watcher</summary>
         <p class="section-desc">All 6 Governing Council members tracked every 3 days — hawk/dove spectrum, CPI-trim/median, CAD dynamics, and housing market thematic analysis, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../boc-watcher/boc-watcher-2026-06-19.html">BOC Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
@@ -543,9 +566,11 @@
         <li><a href="../boc-watcher/boc-watcher-2026-05-04.html">BOC Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
         <li><a href="../boc-watcher/boc-watcher-2026-04-30.html">BOC Watcher — 2026-04-30</a><span class="report-date">2026-04-30</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇧🇷 BCB Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇧🇷 BCB Watcher</summary>
         <p class="section-desc">All 9 COPOM members tracked every 3 days — hawk/dove spectrum, IPCA inflation, BRL dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../bcb-watcher/bcb-watcher-2026-06-19.html">BCB Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
@@ -564,9 +589,11 @@
         <li><a href="../bcb-watcher/bcb-watcher-2026-05-04.html">BCB Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
         <li><a href="../bcb-watcher/bcb-watcher-2026-05-02.html">BCB Watcher — 2026-05-02</a><span class="report-date">2026-05-02</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇨🇭 SNB Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇨🇭 SNB Watcher</summary>
         <p class="section-desc">All 3 Governing Board members tracked every 3 days — CHF/FX intervention, CPI 0-2% target, negative rate risk, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../snb-watcher/snb-watcher-2026-06-16.html">SNB Watcher — 2026-06-16<span class="badge-latest">latest</span></a><span class="report-date">2026-06-16</span></li>
@@ -577,9 +604,11 @@
         <li><a href="../snb-watcher/snb-watcher-2026-05-22.html">SNB Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
         <li><a href="../snb-watcher/snb-watcher-2026-05-19.html">SNB Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
         </ul>
+        </details>
     </section>
     <section class="cb-section">
-        <h2>🇸🇪 Riksbank Watcher</h2>
+        <details open>
+            <summary class="section-summary">🇸🇪 Riksbank Watcher</summary>
         <p class="section-desc">All 5 Executive Board members tracked every 3 days — hawk/dove spectrum, CPIF inflation, SEK dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
         <ul class="report-list">
         <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-19.html">Riksbank Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
@@ -598,6 +627,7 @@
         <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-13.html">Riksbank Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
         <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-10.html">Riksbank Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
         </ul>
+        </details>
     </section>
 </div>
 </body>
