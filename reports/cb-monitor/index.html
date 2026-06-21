@@ -6,629 +6,681 @@
     <title>Central Bank Monitor</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-               max-width: 960px; margin: 0 auto; padding: 20px;
+               max-width: 1100px; margin: 0 auto; padding: 20px;
                background: #f5f5f5; color: #333; }
-        .container { background: white; padding: 40px; border-radius: 8px;
-                     box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        h1 { color: #1a237e; border-bottom: 3px solid #1a237e; padding-bottom: 10px; }
-        .cb-section { margin: 36px 0; }
-        .cb-section h2 { color: #1a237e; border-left: 4px solid #1a237e;
-                         padding-left: 12px; margin-bottom: 6px; font-size: 1.2em; }
-        .section-summary { color: #1a237e; border-left: 4px solid #1a237e;
-                           padding-left: 12px; margin-bottom: 6px; font-size: 1.2em;
-                           font-weight: 700; cursor: pointer; list-style: none; }
-        .section-summary::-webkit-details-marker { display: none; }
-        .section-summary::after { content: " ▾"; font-size: 0.8em; color: #999; }
-        details:not([open]) > .section-summary::after { content: " ▸"; }
-        .section-desc { color: #555; margin: 0 0 14px; font-size: 0.95em; line-height: 1.5; }
-        .report-list { list-style: none; padding: 0; margin: 0; }
-        .report-list li { border-left: 4px solid #3949ab; padding: 10px 14px; margin: 8px 0;
-                          background: #f8f9fa; border-radius: 0 6px 6px 0;
-                          display: flex; align-items: center; justify-content: space-between; }
-        .report-list a { color: #1a237e; text-decoration: none; font-weight: 500; font-size: 1em; }
-        .report-list a:hover { text-decoration: underline; }
-        .report-date { color: #888; font-size: 0.85em; }
-        .badge-latest { font-size: 0.75em; background: #e8f5e9; color: #2e7d32;
-                        padding: 3px 8px; border-radius: 10px; margin-left: 8px; }
-        .no-reports { color: #aaa; font-style: italic; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #1a237e; text-decoration: none; }
+        .page-header { background: white; padding: 24px 32px; border-radius: 8px;
+                       box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        .page-header h1 { color: #1a237e; border-bottom: 3px solid #1a237e;
+                          padding-bottom: 10px; margin: 0 0 8px; }
+        .back-link { display: inline-block; color: #1a237e; text-decoration: none;
+                     margin-bottom: 12px; font-size: 0.9em; }
         .back-link:hover { text-decoration: underline; }
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 580px) { .card-grid { grid-template-columns: 1fr; } }
+        .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                padding: 20px; display: flex; flex-direction: column; }
+        .card-summary { font-size: 1.05em; font-weight: 700; color: #1a237e;
+                        border-left: 4px solid #1a237e; padding-left: 10px; margin: 0 0 8px;
+                        cursor: pointer; list-style: none; }
+        .card-summary::-webkit-details-marker { display: none; }
+        .card-summary::after { content: " ▾"; font-size: 0.85em; color: #999; }
+        details:not([open]) > .card-summary::after { content: " ▸"; }
+        .card-desc { font-size: 0.82em; color: #666; line-height: 1.4; margin: 0 0 14px; }
+        .latest-link { display: block; background: #1a237e; color: white; text-decoration: none;
+                       padding: 8px 12px; border-radius: 5px; font-size: 0.88em; font-weight: 600;
+                       text-align: center; margin-bottom: 10px; }
+        .latest-link:hover { background: #283593; }
+        .badge { font-size: 0.72em; background: #e8f5e9; color: #2e7d32;
+                 padding: 2px 6px; border-radius: 8px; margin-left: 6px; }
+        .archive-toggle { margin-top: 4px; }
+        .archive-toggle summary { font-size: 0.82em; color: #3949ab; cursor: pointer;
+                                  user-select: none; padding: 4px 0; list-style: none; }
+        .archive-toggle summary::-webkit-details-marker { display: none; }
+        .archive-toggle summary::before { content: "▶ "; font-size: 0.75em; }
+        .archive-toggle[open] summary::before { content: "▼ "; }
+        .archive-toggle summary:hover { color: #1a237e; }
+        .archive-list { list-style: none; padding: 0; margin: 6px 0 0; }
+        .archive-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+        .archive-list li:last-child { border-bottom: none; }
+        .archive-list a { color: #3949ab; text-decoration: none; font-size: 0.82em; }
+        .archive-list a:hover { text-decoration: underline; }
+        .report-date { color: #aaa; font-size: 0.78em; float: right; }
+        .no-reports { color: #aaa; font-style: italic; font-size: 0.85em; }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="page-header">
     <a href="../../index.html" class="back-link">← Back to Portfolio</a>
     <h1>🏦 Central Bank Monitor</h1>
+</div>
+<div class="card-grid">
 
-    <section class="cb-section">
+    <div class="card">
         <details open>
-            <summary class="section-summary">🏛️ Fed District Monitor</summary>
-        <p class="section-desc">Federal Reserve district research publications and economic analysis tracking.</p>
-        <ul class="report-list">
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06.html">Fed District Monitor — 2026-06<span class="badge-latest">latest</span></a><span class="report-date">2026-06</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-21.html">Fed District Monitor — 2026-06-21</a><span class="report-date">2026-06-21</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-19.html">Fed District Monitor — 2026-06-19</a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-18.html">Fed District Monitor — 2026-06-18</a><span class="report-date">2026-06-18</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-17.html">Fed District Monitor — 2026-06-17</a><span class="report-date">2026-06-17</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-16.html">Fed District Monitor — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-15.html">Fed District Monitor — 2026-06-15</a><span class="report-date">2026-06-15</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-14.html">Fed District Monitor — 2026-06-14</a><span class="report-date">2026-06-14</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-13.html">Fed District Monitor — 2026-06-13</a><span class="report-date">2026-06-13</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-12.html">Fed District Monitor — 2026-06-12</a><span class="report-date">2026-06-12</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-11.html">Fed District Monitor — 2026-06-11</a><span class="report-date">2026-06-11</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-10.html">Fed District Monitor — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-09.html">Fed District Monitor — 2026-06-09</a><span class="report-date">2026-06-09</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-08.html">Fed District Monitor — 2026-06-08</a><span class="report-date">2026-06-08</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-06.html">Fed District Monitor — 2026-06-06</a><span class="report-date">2026-06-06</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-05.html">Fed District Monitor — 2026-06-05</a><span class="report-date">2026-06-05</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-04.html">Fed District Monitor — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-03.html">Fed District Monitor — 2026-06-03</a><span class="report-date">2026-06-03</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-02.html">Fed District Monitor — 2026-06-02</a><span class="report-date">2026-06-02</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-06-01.html">Fed District Monitor — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05.html">Fed District Monitor — 2026-05</a><span class="report-date">2026-05</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-31.html">Fed District Monitor — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-30.html">Fed District Monitor — 2026-05-30</a><span class="report-date">2026-05-30</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-29.html">Fed District Monitor — 2026-05-29</a><span class="report-date">2026-05-29</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-28.html">Fed District Monitor — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-27.html">Fed District Monitor — 2026-05-27</a><span class="report-date">2026-05-27</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-25.html">Fed District Monitor — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-24.html">Fed District Monitor — 2026-05-24</a><span class="report-date">2026-05-24</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-23.html">Fed District Monitor — 2026-05-23</a><span class="report-date">2026-05-23</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-22.html">Fed District Monitor — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-21.html">Fed District Monitor — 2026-05-21</a><span class="report-date">2026-05-21</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-20.html">Fed District Monitor — 2026-05-20</a><span class="report-date">2026-05-20</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-19.html">Fed District Monitor — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-17.html">Fed District Monitor — 2026-05-17</a><span class="report-date">2026-05-17</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-16.html">Fed District Monitor — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-15.html">Fed District Monitor — 2026-05-15</a><span class="report-date">2026-05-15</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-14.html">Fed District Monitor — 2026-05-14</a><span class="report-date">2026-05-14</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-13.html">Fed District Monitor — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-12.html">Fed District Monitor — 2026-05-12</a><span class="report-date">2026-05-12</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-11.html">Fed District Monitor — 2026-05-11</a><span class="report-date">2026-05-11</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-10.html">Fed District Monitor — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-09.html">Fed District Monitor — 2026-05-09</a><span class="report-date">2026-05-09</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-08.html">Fed District Monitor — 2026-05-08</a><span class="report-date">2026-05-08</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-07.html">Fed District Monitor — 2026-05-07</a><span class="report-date">2026-05-07</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-06.html">Fed District Monitor — 2026-05-06</a><span class="report-date">2026-05-06</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-05.html">Fed District Monitor — 2026-05-05</a><span class="report-date">2026-05-05</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-04.html">Fed District Monitor — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-03.html">Fed District Monitor — 2026-05-03</a><span class="report-date">2026-05-03</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-05-02.html">Fed District Monitor — 2026-05-02</a><span class="report-date">2026-05-02</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04.html">Fed District Monitor — 2026-04</a><span class="report-date">2026-04</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-30.html">Fed District Monitor — 2026-04-30</a><span class="report-date">2026-04-30</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-29.html">Fed District Monitor — 2026-04-29</a><span class="report-date">2026-04-29</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-28.html">Fed District Monitor — 2026-04-28</a><span class="report-date">2026-04-28</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-27.html">Fed District Monitor — 2026-04-27</a><span class="report-date">2026-04-27</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-26.html">Fed District Monitor — 2026-04-26</a><span class="report-date">2026-04-26</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-25.html">Fed District Monitor — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-24.html">Fed District Monitor — 2026-04-24</a><span class="report-date">2026-04-24</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-23.html">Fed District Monitor — 2026-04-23</a><span class="report-date">2026-04-23</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-22.html">Fed District Monitor — 2026-04-22</a><span class="report-date">2026-04-22</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-21.html">Fed District Monitor — 2026-04-21</a><span class="report-date">2026-04-21</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-20.html">Fed District Monitor — 2026-04-20</a><span class="report-date">2026-04-20</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-19.html">Fed District Monitor — 2026-04-19</a><span class="report-date">2026-04-19</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-18.html">Fed District Monitor — 2026-04-18</a><span class="report-date">2026-04-18</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-17.html">Fed District Monitor — 2026-04-17</a><span class="report-date">2026-04-17</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-16.html">Fed District Monitor — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-15.html">Fed District Monitor — 2026-04-15</a><span class="report-date">2026-04-15</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-14.html">Fed District Monitor — 2026-04-14</a><span class="report-date">2026-04-14</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-13.html">Fed District Monitor — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-12.html">Fed District Monitor — 2026-04-12</a><span class="report-date">2026-04-12</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-11.html">Fed District Monitor — 2026-04-11</a><span class="report-date">2026-04-11</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-10.html">Fed District Monitor — 2026-04-10</a><span class="report-date">2026-04-10</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-09.html">Fed District Monitor — 2026-04-09</a><span class="report-date">2026-04-09</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-08.html">Fed District Monitor — 2026-04-08</a><span class="report-date">2026-04-08</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-04-04.html">Fed District Monitor — 2026-04-04</a><span class="report-date">2026-04-04</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-02-02.html">Fed District Monitor — 2026-02-02</a><span class="report-date">2026-02-02</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2026-01-06.html">Fed District Monitor — 2026-01-06</a><span class="report-date">2026-01-06</span></li>
-        <li><a href="../fed-monitor/fed-district-monitor-2025-12-05.html">Fed District Monitor — 2025-12-05</a><span class="report-date">2025-12-05</span></li>
-        </ul>
+            <summary class="card-summary">🏛️ Fed District Monitor</summary>
+        <div class="card-desc">Federal Reserve district research publications and economic analysis tracking.</div>
+        <a href="../fed-monitor/fed-district-monitor-2026-06.html" class="latest-link">Fed District Monitor — 2026-06 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (76 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-21.html">2026-06-21</a><span class="report-date">2026-06-21</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-19.html">2026-06-19</a><span class="report-date">2026-06-19</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-18.html">2026-06-18</a><span class="report-date">2026-06-18</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-17.html">2026-06-17</a><span class="report-date">2026-06-17</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-15.html">2026-06-15</a><span class="report-date">2026-06-15</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-14.html">2026-06-14</a><span class="report-date">2026-06-14</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-13.html">2026-06-13</a><span class="report-date">2026-06-13</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-12.html">2026-06-12</a><span class="report-date">2026-06-12</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-11.html">2026-06-11</a><span class="report-date">2026-06-11</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-09.html">2026-06-09</a><span class="report-date">2026-06-09</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-08.html">2026-06-08</a><span class="report-date">2026-06-08</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-06.html">2026-06-06</a><span class="report-date">2026-06-06</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-05.html">2026-06-05</a><span class="report-date">2026-06-05</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-03.html">2026-06-03</a><span class="report-date">2026-06-03</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-02.html">2026-06-02</a><span class="report-date">2026-06-02</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05.html">2026-05</a><span class="report-date">2026-05</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-30.html">2026-05-30</a><span class="report-date">2026-05-30</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-29.html">2026-05-29</a><span class="report-date">2026-05-29</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-27.html">2026-05-27</a><span class="report-date">2026-05-27</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-24.html">2026-05-24</a><span class="report-date">2026-05-24</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-23.html">2026-05-23</a><span class="report-date">2026-05-23</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-21.html">2026-05-21</a><span class="report-date">2026-05-21</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-20.html">2026-05-20</a><span class="report-date">2026-05-20</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-17.html">2026-05-17</a><span class="report-date">2026-05-17</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-15.html">2026-05-15</a><span class="report-date">2026-05-15</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-14.html">2026-05-14</a><span class="report-date">2026-05-14</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-12.html">2026-05-12</a><span class="report-date">2026-05-12</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-11.html">2026-05-11</a><span class="report-date">2026-05-11</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-09.html">2026-05-09</a><span class="report-date">2026-05-09</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-08.html">2026-05-08</a><span class="report-date">2026-05-08</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-07.html">2026-05-07</a><span class="report-date">2026-05-07</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-06.html">2026-05-06</a><span class="report-date">2026-05-06</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-05.html">2026-05-05</a><span class="report-date">2026-05-05</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-03.html">2026-05-03</a><span class="report-date">2026-05-03</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-05-02.html">2026-05-02</a><span class="report-date">2026-05-02</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04.html">2026-04</a><span class="report-date">2026-04</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-30.html">2026-04-30</a><span class="report-date">2026-04-30</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-29.html">2026-04-29</a><span class="report-date">2026-04-29</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-28.html">2026-04-28</a><span class="report-date">2026-04-28</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-27.html">2026-04-27</a><span class="report-date">2026-04-27</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-26.html">2026-04-26</a><span class="report-date">2026-04-26</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-25.html">2026-04-25</a><span class="report-date">2026-04-25</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-24.html">2026-04-24</a><span class="report-date">2026-04-24</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-23.html">2026-04-23</a><span class="report-date">2026-04-23</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-22.html">2026-04-22</a><span class="report-date">2026-04-22</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-21.html">2026-04-21</a><span class="report-date">2026-04-21</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-20.html">2026-04-20</a><span class="report-date">2026-04-20</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-19.html">2026-04-19</a><span class="report-date">2026-04-19</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-18.html">2026-04-18</a><span class="report-date">2026-04-18</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-17.html">2026-04-17</a><span class="report-date">2026-04-17</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-16.html">2026-04-16</a><span class="report-date">2026-04-16</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-15.html">2026-04-15</a><span class="report-date">2026-04-15</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-14.html">2026-04-14</a><span class="report-date">2026-04-14</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-13.html">2026-04-13</a><span class="report-date">2026-04-13</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-12.html">2026-04-12</a><span class="report-date">2026-04-12</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-11.html">2026-04-11</a><span class="report-date">2026-04-11</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-10.html">2026-04-10</a><span class="report-date">2026-04-10</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-09.html">2026-04-09</a><span class="report-date">2026-04-09</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-08.html">2026-04-08</a><span class="report-date">2026-04-08</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-04-04.html">2026-04-04</a><span class="report-date">2026-04-04</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-02-02.html">2026-02-02</a><span class="report-date">2026-02-02</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2026-01-06.html">2026-01-06</a><span class="report-date">2026-01-06</span></li>
+                <li><a href="../fed-monitor/fed-district-monitor-2025-12-05.html">2025-12-05</a><span class="report-date">2025-12-05</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🦅 US Fed Watcher</summary>
-        <p class="section-desc">FOMC member speeches, testimonies, and policy signals tracked every 3 days — hawk/dove spectrum, thematic analysis, and dissent watch, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../fed-watcher/fed-watcher-2026-06-20.html">Fed Watcher — 2026-06-20<span class="badge-latest">latest</span></a><span class="report-date">2026-06-20</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-18.html">Fed Watcher — 2026-06-18</a><span class="report-date">2026-06-18</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-17.html">Fed Watcher — 2026-06-17</a><span class="report-date">2026-06-17</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-16.html">Fed Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-15.html">Fed Watcher — 2026-06-15</a><span class="report-date">2026-06-15</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-14.html">Fed Watcher — 2026-06-14</a><span class="report-date">2026-06-14</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-12.html">Fed Watcher — 2026-06-12</a><span class="report-date">2026-06-12</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-11.html">Fed Watcher — 2026-06-11</a><span class="report-date">2026-06-11</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-10.html">Fed Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-09.html">Fed Watcher — 2026-06-09</a><span class="report-date">2026-06-09</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-08.html">Fed Watcher — 2026-06-08</a><span class="report-date">2026-06-08</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-06-01.html">Fed Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-05-31.html">Fed Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-05-28.html">Fed Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-05-27.html">Fed Watcher — 2026-05-27</a><span class="report-date">2026-05-27</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-05-25.html">Fed Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-05-04.html">Fed Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-28.html">Fed Watcher — 2026-04-28</a><span class="report-date">2026-04-28</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-25.html">Fed Watcher — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-22.html">Fed Watcher — 2026-04-22</a><span class="report-date">2026-04-22</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-18.html">Fed Watcher — 2026-04-18</a><span class="report-date">2026-04-18</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-13.html">Fed Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
-        <li><a href="../fed-watcher/fed-watcher-2026-04-12.html">Fed Watcher — 2026-04-12</a><span class="report-date">2026-04-12</span></li>
-        </ul>
+            <summary class="card-summary">🦅 US Fed Watcher</summary>
+        <div class="card-desc">FOMC member speeches, testimonies, and policy signals tracked every 3 days — hawk/dove spectrum, thematic analysis, and dissent watch, powered by Gemma 4.</div>
+        <a href="../fed-watcher/fed-watcher-2026-06-20.html" class="latest-link">Fed Watcher — 2026-06-20 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (22 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../fed-watcher/fed-watcher-2026-06-18.html">2026-06-18</a><span class="report-date">2026-06-18</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-17.html">2026-06-17</a><span class="report-date">2026-06-17</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-15.html">2026-06-15</a><span class="report-date">2026-06-15</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-14.html">2026-06-14</a><span class="report-date">2026-06-14</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-12.html">2026-06-12</a><span class="report-date">2026-06-12</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-11.html">2026-06-11</a><span class="report-date">2026-06-11</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-09.html">2026-06-09</a><span class="report-date">2026-06-09</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-08.html">2026-06-08</a><span class="report-date">2026-06-08</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-05-27.html">2026-05-27</a><span class="report-date">2026-05-27</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-28.html">2026-04-28</a><span class="report-date">2026-04-28</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-25.html">2026-04-25</a><span class="report-date">2026-04-25</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-22.html">2026-04-22</a><span class="report-date">2026-04-22</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-18.html">2026-04-18</a><span class="report-date">2026-04-18</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-13.html">2026-04-13</a><span class="report-date">2026-04-13</span></li>
+                <li><a href="../fed-watcher/fed-watcher-2026-04-12.html">2026-04-12</a><span class="report-date">2026-04-12</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">📋 FOMC Statement Analyzer</summary>
-        <p class="section-desc">Redline comparison of consecutive FOMC policy statements — thematic shifts in inflation and forward guidance language, and a hawkish/dovish tonal verdict, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../fomc-analyzer/fomc-2026-06-17.html">FOMC Analysis — 2026-06-17<span class="badge-latest">latest</span></a><span class="report-date">2026-06-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2026-04-29.html">FOMC Analysis — 2026-04-29</a><span class="report-date">2026-04-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2026-03-18.html">FOMC Analysis — 2026-03-18</a><span class="report-date">2026-03-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2026-01-28.html">FOMC Analysis — 2026-01-28</a><span class="report-date">2026-01-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-12-10.html">FOMC Analysis — 2025-12-10</a><span class="report-date">2025-12-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-10-29.html">FOMC Analysis — 2025-10-29</a><span class="report-date">2025-10-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-09-17.html">FOMC Analysis — 2025-09-17</a><span class="report-date">2025-09-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-07-30.html">FOMC Analysis — 2025-07-30</a><span class="report-date">2025-07-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-06-18.html">FOMC Analysis — 2025-06-18</a><span class="report-date">2025-06-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-05-07.html">FOMC Analysis — 2025-05-07</a><span class="report-date">2025-05-07</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-03-19.html">FOMC Analysis — 2025-03-19</a><span class="report-date">2025-03-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2025-01-29.html">FOMC Analysis — 2025-01-29</a><span class="report-date">2025-01-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-12-18.html">FOMC Analysis — 2024-12-18</a><span class="report-date">2024-12-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-11-07.html">FOMC Analysis — 2024-11-07</a><span class="report-date">2024-11-07</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-09-18.html">FOMC Analysis — 2024-09-18</a><span class="report-date">2024-09-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-07-31.html">FOMC Analysis — 2024-07-31</a><span class="report-date">2024-07-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-06-12.html">FOMC Analysis — 2024-06-12</a><span class="report-date">2024-06-12</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-05-01.html">FOMC Analysis — 2024-05-01</a><span class="report-date">2024-05-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-03-20.html">FOMC Analysis — 2024-03-20</a><span class="report-date">2024-03-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2024-01-31.html">FOMC Analysis — 2024-01-31</a><span class="report-date">2024-01-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-12-13.html">FOMC Analysis — 2023-12-13</a><span class="report-date">2023-12-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-11-01.html">FOMC Analysis — 2023-11-01</a><span class="report-date">2023-11-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-09-20.html">FOMC Analysis — 2023-09-20</a><span class="report-date">2023-09-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-07-26.html">FOMC Analysis — 2023-07-26</a><span class="report-date">2023-07-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-06-14.html">FOMC Analysis — 2023-06-14</a><span class="report-date">2023-06-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-05-03.html">FOMC Analysis — 2023-05-03</a><span class="report-date">2023-05-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-03-22.html">FOMC Analysis — 2023-03-22</a><span class="report-date">2023-03-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2023-02-01.html">FOMC Analysis — 2023-02-01</a><span class="report-date">2023-02-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-12-14.html">FOMC Analysis — 2022-12-14</a><span class="report-date">2022-12-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-11-02.html">FOMC Analysis — 2022-11-02</a><span class="report-date">2022-11-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-09-21.html">FOMC Analysis — 2022-09-21</a><span class="report-date">2022-09-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-07-27.html">FOMC Analysis — 2022-07-27</a><span class="report-date">2022-07-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-06-15.html">FOMC Analysis — 2022-06-15</a><span class="report-date">2022-06-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-05-04.html">FOMC Analysis — 2022-05-04</a><span class="report-date">2022-05-04</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-03-16.html">FOMC Analysis — 2022-03-16</a><span class="report-date">2022-03-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2022-01-26.html">FOMC Analysis — 2022-01-26</a><span class="report-date">2022-01-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-12-15.html">FOMC Analysis — 2021-12-15</a><span class="report-date">2021-12-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-11-03.html">FOMC Analysis — 2021-11-03</a><span class="report-date">2021-11-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-09-22.html">FOMC Analysis — 2021-09-22</a><span class="report-date">2021-09-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-07-28.html">FOMC Analysis — 2021-07-28</a><span class="report-date">2021-07-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-06-16.html">FOMC Analysis — 2021-06-16</a><span class="report-date">2021-06-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-04-28.html">FOMC Analysis — 2021-04-28</a><span class="report-date">2021-04-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-03-17.html">FOMC Analysis — 2021-03-17</a><span class="report-date">2021-03-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2021-01-27.html">FOMC Analysis — 2021-01-27</a><span class="report-date">2021-01-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-12-16.html">FOMC Analysis — 2020-12-16</a><span class="report-date">2020-12-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-11-05.html">FOMC Analysis — 2020-11-05</a><span class="report-date">2020-11-05</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-09-16.html">FOMC Analysis — 2020-09-16</a><span class="report-date">2020-09-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-07-29.html">FOMC Analysis — 2020-07-29</a><span class="report-date">2020-07-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-06-10.html">FOMC Analysis — 2020-06-10</a><span class="report-date">2020-06-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-04-29.html">FOMC Analysis — 2020-04-29</a><span class="report-date">2020-04-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-03-23.html">FOMC Analysis — 2020-03-23</a><span class="report-date">2020-03-23</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-03-15.html">FOMC Analysis — 2020-03-15</a><span class="report-date">2020-03-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-03-03.html">FOMC Analysis — 2020-03-03</a><span class="report-date">2020-03-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2020-01-29.html">FOMC Analysis — 2020-01-29</a><span class="report-date">2020-01-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-12-11.html">FOMC Analysis — 2019-12-11</a><span class="report-date">2019-12-11</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-10-30.html">FOMC Analysis — 2019-10-30</a><span class="report-date">2019-10-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-10-04.html">FOMC Analysis — 2019-10-04</a><span class="report-date">2019-10-04</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-09-18.html">FOMC Analysis — 2019-09-18</a><span class="report-date">2019-09-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-07-31.html">FOMC Analysis — 2019-07-31</a><span class="report-date">2019-07-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-06-19.html">FOMC Analysis — 2019-06-19</a><span class="report-date">2019-06-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-05-01.html">FOMC Analysis — 2019-05-01</a><span class="report-date">2019-05-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-03-20.html">FOMC Analysis — 2019-03-20</a><span class="report-date">2019-03-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2019-01-30.html">FOMC Analysis — 2019-01-30</a><span class="report-date">2019-01-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-12-19.html">FOMC Analysis — 2018-12-19</a><span class="report-date">2018-12-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-11-08.html">FOMC Analysis — 2018-11-08</a><span class="report-date">2018-11-08</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-09-26.html">FOMC Analysis — 2018-09-26</a><span class="report-date">2018-09-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-08-01.html">FOMC Analysis — 2018-08-01</a><span class="report-date">2018-08-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-06-13.html">FOMC Analysis — 2018-06-13</a><span class="report-date">2018-06-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-05-02.html">FOMC Analysis — 2018-05-02</a><span class="report-date">2018-05-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-03-21.html">FOMC Analysis — 2018-03-21</a><span class="report-date">2018-03-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2018-01-31.html">FOMC Analysis — 2018-01-31</a><span class="report-date">2018-01-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-12-13.html">FOMC Analysis — 2017-12-13</a><span class="report-date">2017-12-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-11-01.html">FOMC Analysis — 2017-11-01</a><span class="report-date">2017-11-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-09-20.html">FOMC Analysis — 2017-09-20</a><span class="report-date">2017-09-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-07-26.html">FOMC Analysis — 2017-07-26</a><span class="report-date">2017-07-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-06-14.html">FOMC Analysis — 2017-06-14</a><span class="report-date">2017-06-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-05-03.html">FOMC Analysis — 2017-05-03</a><span class="report-date">2017-05-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-03-15.html">FOMC Analysis — 2017-03-15</a><span class="report-date">2017-03-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2017-02-01.html">FOMC Analysis — 2017-02-01</a><span class="report-date">2017-02-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-12-14.html">FOMC Analysis — 2016-12-14</a><span class="report-date">2016-12-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-11-02.html">FOMC Analysis — 2016-11-02</a><span class="report-date">2016-11-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-09-21.html">FOMC Analysis — 2016-09-21</a><span class="report-date">2016-09-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-07-27.html">FOMC Analysis — 2016-07-27</a><span class="report-date">2016-07-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-06-15.html">FOMC Analysis — 2016-06-15</a><span class="report-date">2016-06-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-04-27.html">FOMC Analysis — 2016-04-27</a><span class="report-date">2016-04-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-03-16.html">FOMC Analysis — 2016-03-16</a><span class="report-date">2016-03-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2016-01-27.html">FOMC Analysis — 2016-01-27</a><span class="report-date">2016-01-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-12-16.html">FOMC Analysis — 2015-12-16</a><span class="report-date">2015-12-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-10-28.html">FOMC Analysis — 2015-10-28</a><span class="report-date">2015-10-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-09-17.html">FOMC Analysis — 2015-09-17</a><span class="report-date">2015-09-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-07-29.html">FOMC Analysis — 2015-07-29</a><span class="report-date">2015-07-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-06-17.html">FOMC Analysis — 2015-06-17</a><span class="report-date">2015-06-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-04-29.html">FOMC Analysis — 2015-04-29</a><span class="report-date">2015-04-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-03-18.html">FOMC Analysis — 2015-03-18</a><span class="report-date">2015-03-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2015-01-28.html">FOMC Analysis — 2015-01-28</a><span class="report-date">2015-01-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-12-17.html">FOMC Analysis — 2014-12-17</a><span class="report-date">2014-12-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-10-29.html">FOMC Analysis — 2014-10-29</a><span class="report-date">2014-10-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-09-17.html">FOMC Analysis — 2014-09-17</a><span class="report-date">2014-09-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-07-30.html">FOMC Analysis — 2014-07-30</a><span class="report-date">2014-07-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-06-18.html">FOMC Analysis — 2014-06-18</a><span class="report-date">2014-06-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-04-30.html">FOMC Analysis — 2014-04-30</a><span class="report-date">2014-04-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-03-19.html">FOMC Analysis — 2014-03-19</a><span class="report-date">2014-03-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2014-01-29.html">FOMC Analysis — 2014-01-29</a><span class="report-date">2014-01-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-12-18.html">FOMC Analysis — 2013-12-18</a><span class="report-date">2013-12-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-10-30.html">FOMC Analysis — 2013-10-30</a><span class="report-date">2013-10-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-09-18.html">FOMC Analysis — 2013-09-18</a><span class="report-date">2013-09-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-07-31.html">FOMC Analysis — 2013-07-31</a><span class="report-date">2013-07-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-06-19.html">FOMC Analysis — 2013-06-19</a><span class="report-date">2013-06-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-05-01.html">FOMC Analysis — 2013-05-01</a><span class="report-date">2013-05-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-03-20.html">FOMC Analysis — 2013-03-20</a><span class="report-date">2013-03-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2013-01-30.html">FOMC Analysis — 2013-01-30</a><span class="report-date">2013-01-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-12-12.html">FOMC Analysis — 2012-12-12</a><span class="report-date">2012-12-12</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-10-24.html">FOMC Analysis — 2012-10-24</a><span class="report-date">2012-10-24</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-09-13.html">FOMC Analysis — 2012-09-13</a><span class="report-date">2012-09-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-08-01.html">FOMC Analysis — 2012-08-01</a><span class="report-date">2012-08-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-06-20.html">FOMC Analysis — 2012-06-20</a><span class="report-date">2012-06-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-04-25.html">FOMC Analysis — 2012-04-25</a><span class="report-date">2012-04-25</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-03-13.html">FOMC Analysis — 2012-03-13</a><span class="report-date">2012-03-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2012-01-25.html">FOMC Analysis — 2012-01-25</a><span class="report-date">2012-01-25</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-12-13.html">FOMC Analysis — 2011-12-13</a><span class="report-date">2011-12-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-11-02.html">FOMC Analysis — 2011-11-02</a><span class="report-date">2011-11-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-09-21.html">FOMC Analysis — 2011-09-21</a><span class="report-date">2011-09-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-08-09.html">FOMC Analysis — 2011-08-09</a><span class="report-date">2011-08-09</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-06-22.html">FOMC Analysis — 2011-06-22</a><span class="report-date">2011-06-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-04-27.html">FOMC Analysis — 2011-04-27</a><span class="report-date">2011-04-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-03-15.html">FOMC Analysis — 2011-03-15</a><span class="report-date">2011-03-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2011-01-26.html">FOMC Analysis — 2011-01-26</a><span class="report-date">2011-01-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-12-14.html">FOMC Analysis — 2010-12-14</a><span class="report-date">2010-12-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-11-03.html">FOMC Analysis — 2010-11-03</a><span class="report-date">2010-11-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-09-21.html">FOMC Analysis — 2010-09-21</a><span class="report-date">2010-09-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-08-10.html">FOMC Analysis — 2010-08-10</a><span class="report-date">2010-08-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-06-23.html">FOMC Analysis — 2010-06-23</a><span class="report-date">2010-06-23</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-05-09.html">FOMC Analysis — 2010-05-09</a><span class="report-date">2010-05-09</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-04-28.html">FOMC Analysis — 2010-04-28</a><span class="report-date">2010-04-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-03-16.html">FOMC Analysis — 2010-03-16</a><span class="report-date">2010-03-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2010-01-27.html">FOMC Analysis — 2010-01-27</a><span class="report-date">2010-01-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-12-15.html">FOMC Analysis — 2009-12-15</a><span class="report-date">2009-12-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-11-04.html">FOMC Analysis — 2009-11-04</a><span class="report-date">2009-11-04</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-09-22.html">FOMC Analysis — 2009-09-22</a><span class="report-date">2009-09-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-08-11.html">FOMC Analysis — 2009-08-11</a><span class="report-date">2009-08-11</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-06-24.html">FOMC Analysis — 2009-06-24</a><span class="report-date">2009-06-24</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-04-29.html">FOMC Analysis — 2009-04-29</a><span class="report-date">2009-04-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-03-17.html">FOMC Analysis — 2009-03-17</a><span class="report-date">2009-03-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2009-01-28.html">FOMC Analysis — 2009-01-28</a><span class="report-date">2009-01-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-12-16.html">FOMC Analysis — 2008-12-16</a><span class="report-date">2008-12-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-10-29.html">FOMC Analysis — 2008-10-29</a><span class="report-date">2008-10-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-10-07.html">FOMC Analysis — 2008-10-07</a><span class="report-date">2008-10-07</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-09-16.html">FOMC Analysis — 2008-09-16</a><span class="report-date">2008-09-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-08-08.html">FOMC Analysis — 2008-08-08</a><span class="report-date">2008-08-08</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-06-25.html">FOMC Analysis — 2008-06-25</a><span class="report-date">2008-06-25</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-04-30.html">FOMC Analysis — 2008-04-30</a><span class="report-date">2008-04-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-03-18.html">FOMC Analysis — 2008-03-18</a><span class="report-date">2008-03-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-03-10.html">FOMC Analysis — 2008-03-10</a><span class="report-date">2008-03-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-01-30.html">FOMC Analysis — 2008-01-30</a><span class="report-date">2008-01-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2008-01-21.html">FOMC Analysis — 2008-01-21</a><span class="report-date">2008-01-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-12-11.html">FOMC Analysis — 2007-12-11</a><span class="report-date">2007-12-11</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-10-31.html">FOMC Analysis — 2007-10-31</a><span class="report-date">2007-10-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-09-18.html">FOMC Analysis — 2007-09-18</a><span class="report-date">2007-09-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-08-16.html">FOMC Analysis — 2007-08-16</a><span class="report-date">2007-08-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-08-10.html">FOMC Analysis — 2007-08-10</a><span class="report-date">2007-08-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-08-07.html">FOMC Analysis — 2007-08-07</a><span class="report-date">2007-08-07</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-06-28.html">FOMC Analysis — 2007-06-28</a><span class="report-date">2007-06-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-05-09.html">FOMC Analysis — 2007-05-09</a><span class="report-date">2007-05-09</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-03-21.html">FOMC Analysis — 2007-03-21</a><span class="report-date">2007-03-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2007-01-31.html">FOMC Analysis — 2007-01-31</a><span class="report-date">2007-01-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-12-12.html">FOMC Analysis — 2006-12-12</a><span class="report-date">2006-12-12</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-10-25.html">FOMC Analysis — 2006-10-25</a><span class="report-date">2006-10-25</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-09-20.html">FOMC Analysis — 2006-09-20</a><span class="report-date">2006-09-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-08-08.html">FOMC Analysis — 2006-08-08</a><span class="report-date">2006-08-08</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-06-29.html">FOMC Analysis — 2006-06-29</a><span class="report-date">2006-06-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-05-10.html">FOMC Analysis — 2006-05-10</a><span class="report-date">2006-05-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-03-28.html">FOMC Analysis — 2006-03-28</a><span class="report-date">2006-03-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2006-01-31.html">FOMC Analysis — 2006-01-31</a><span class="report-date">2006-01-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-12-13.html">FOMC Analysis — 2005-12-13</a><span class="report-date">2005-12-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-11-01.html">FOMC Analysis — 2005-11-01</a><span class="report-date">2005-11-01</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-09-20.html">FOMC Analysis — 2005-09-20</a><span class="report-date">2005-09-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-08-09.html">FOMC Analysis — 2005-08-09</a><span class="report-date">2005-08-09</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-06-30.html">FOMC Analysis — 2005-06-30</a><span class="report-date">2005-06-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-05-03.html">FOMC Analysis — 2005-05-03</a><span class="report-date">2005-05-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-03-22.html">FOMC Analysis — 2005-03-22</a><span class="report-date">2005-03-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2005-02-02.html">FOMC Analysis — 2005-02-02</a><span class="report-date">2005-02-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-12-14.html">FOMC Analysis — 2004-12-14</a><span class="report-date">2004-12-14</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-11-10.html">FOMC Analysis — 2004-11-10</a><span class="report-date">2004-11-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-09-21.html">FOMC Analysis — 2004-09-21</a><span class="report-date">2004-09-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-08-10.html">FOMC Analysis — 2004-08-10</a><span class="report-date">2004-08-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-06-30.html">FOMC Analysis — 2004-06-30</a><span class="report-date">2004-06-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-05-04.html">FOMC Analysis — 2004-05-04</a><span class="report-date">2004-05-04</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-03-16.html">FOMC Analysis — 2004-03-16</a><span class="report-date">2004-03-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2004-01-28.html">FOMC Analysis — 2004-01-28</a><span class="report-date">2004-01-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-12-09.html">FOMC Analysis — 2003-12-09</a><span class="report-date">2003-12-09</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-10-28.html">FOMC Analysis — 2003-10-28</a><span class="report-date">2003-10-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-09-16.html">FOMC Analysis — 2003-09-16</a><span class="report-date">2003-09-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-08-12.html">FOMC Analysis — 2003-08-12</a><span class="report-date">2003-08-12</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-06-25.html">FOMC Analysis — 2003-06-25</a><span class="report-date">2003-06-25</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-05-06.html">FOMC Analysis — 2003-05-06</a><span class="report-date">2003-05-06</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-03-18.html">FOMC Analysis — 2003-03-18</a><span class="report-date">2003-03-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2003-01-29.html">FOMC Analysis — 2003-01-29</a><span class="report-date">2003-01-29</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-12-10.html">FOMC Analysis — 2002-12-10</a><span class="report-date">2002-12-10</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-11-06.html">FOMC Analysis — 2002-11-06</a><span class="report-date">2002-11-06</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-09-24.html">FOMC Analysis — 2002-09-24</a><span class="report-date">2002-09-24</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-08-13.html">FOMC Analysis — 2002-08-13</a><span class="report-date">2002-08-13</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-06-26.html">FOMC Analysis — 2002-06-26</a><span class="report-date">2002-06-26</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-05-07.html">FOMC Analysis — 2002-05-07</a><span class="report-date">2002-05-07</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-03-19.html">FOMC Analysis — 2002-03-19</a><span class="report-date">2002-03-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2002-01-30.html">FOMC Analysis — 2002-01-30</a><span class="report-date">2002-01-30</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-12-11.html">FOMC Analysis — 2001-12-11</a><span class="report-date">2001-12-11</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-11-06.html">FOMC Analysis — 2001-11-06</a><span class="report-date">2001-11-06</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-10-02.html">FOMC Analysis — 2001-10-02</a><span class="report-date">2001-10-02</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-09-17.html">FOMC Analysis — 2001-09-17</a><span class="report-date">2001-09-17</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-08-21.html">FOMC Analysis — 2001-08-21</a><span class="report-date">2001-08-21</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-06-27.html">FOMC Analysis — 2001-06-27</a><span class="report-date">2001-06-27</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-05-15.html">FOMC Analysis — 2001-05-15</a><span class="report-date">2001-05-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-04-18.html">FOMC Analysis — 2001-04-18</a><span class="report-date">2001-04-18</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-03-20.html">FOMC Analysis — 2001-03-20</a><span class="report-date">2001-03-20</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-01-31.html">FOMC Analysis — 2001-01-31</a><span class="report-date">2001-01-31</span></li>
-        <li><a href="../fomc-analyzer/fomc-2001-01-03.html">FOMC Analysis — 2001-01-03</a><span class="report-date">2001-01-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-12-19.html">FOMC Analysis — 2000-12-19</a><span class="report-date">2000-12-19</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-11-15.html">FOMC Analysis — 2000-11-15</a><span class="report-date">2000-11-15</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-10-03.html">FOMC Analysis — 2000-10-03</a><span class="report-date">2000-10-03</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-08-22.html">FOMC Analysis — 2000-08-22</a><span class="report-date">2000-08-22</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-06-28.html">FOMC Analysis — 2000-06-28</a><span class="report-date">2000-06-28</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-05-16.html">FOMC Analysis — 2000-05-16</a><span class="report-date">2000-05-16</span></li>
-        <li><a href="../fomc-analyzer/fomc-2000-03-21.html">FOMC Analysis — 2000-03-21</a><span class="report-date">2000-03-21</span></li>
-        </ul>
+            <summary class="card-summary">📋 FOMC Statement Analyzer</summary>
+        <div class="card-desc">Redline comparison of consecutive FOMC policy statements — thematic shifts in inflation and forward guidance language, and a hawkish/dovish tonal verdict, powered by Gemma 4.</div>
+        <a href="../fomc-analyzer/fomc-2026-06-17.html" class="latest-link">FOMC Analysis — 2026-06-17 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (222 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../fomc-analyzer/fomc-2026-04-29.html">2026-04-29</a><span class="report-date">2026-04-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2026-03-18.html">2026-03-18</a><span class="report-date">2026-03-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2026-01-28.html">2026-01-28</a><span class="report-date">2026-01-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-12-10.html">2025-12-10</a><span class="report-date">2025-12-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-10-29.html">2025-10-29</a><span class="report-date">2025-10-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-09-17.html">2025-09-17</a><span class="report-date">2025-09-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-07-30.html">2025-07-30</a><span class="report-date">2025-07-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-06-18.html">2025-06-18</a><span class="report-date">2025-06-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-05-07.html">2025-05-07</a><span class="report-date">2025-05-07</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-03-19.html">2025-03-19</a><span class="report-date">2025-03-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2025-01-29.html">2025-01-29</a><span class="report-date">2025-01-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-12-18.html">2024-12-18</a><span class="report-date">2024-12-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-11-07.html">2024-11-07</a><span class="report-date">2024-11-07</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-09-18.html">2024-09-18</a><span class="report-date">2024-09-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-07-31.html">2024-07-31</a><span class="report-date">2024-07-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-06-12.html">2024-06-12</a><span class="report-date">2024-06-12</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-05-01.html">2024-05-01</a><span class="report-date">2024-05-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-03-20.html">2024-03-20</a><span class="report-date">2024-03-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2024-01-31.html">2024-01-31</a><span class="report-date">2024-01-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-12-13.html">2023-12-13</a><span class="report-date">2023-12-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-11-01.html">2023-11-01</a><span class="report-date">2023-11-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-09-20.html">2023-09-20</a><span class="report-date">2023-09-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-07-26.html">2023-07-26</a><span class="report-date">2023-07-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-06-14.html">2023-06-14</a><span class="report-date">2023-06-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-05-03.html">2023-05-03</a><span class="report-date">2023-05-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-03-22.html">2023-03-22</a><span class="report-date">2023-03-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2023-02-01.html">2023-02-01</a><span class="report-date">2023-02-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-12-14.html">2022-12-14</a><span class="report-date">2022-12-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-11-02.html">2022-11-02</a><span class="report-date">2022-11-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-09-21.html">2022-09-21</a><span class="report-date">2022-09-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-07-27.html">2022-07-27</a><span class="report-date">2022-07-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-06-15.html">2022-06-15</a><span class="report-date">2022-06-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-05-04.html">2022-05-04</a><span class="report-date">2022-05-04</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-03-16.html">2022-03-16</a><span class="report-date">2022-03-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2022-01-26.html">2022-01-26</a><span class="report-date">2022-01-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-12-15.html">2021-12-15</a><span class="report-date">2021-12-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-11-03.html">2021-11-03</a><span class="report-date">2021-11-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-09-22.html">2021-09-22</a><span class="report-date">2021-09-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-07-28.html">2021-07-28</a><span class="report-date">2021-07-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-06-16.html">2021-06-16</a><span class="report-date">2021-06-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-04-28.html">2021-04-28</a><span class="report-date">2021-04-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-03-17.html">2021-03-17</a><span class="report-date">2021-03-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2021-01-27.html">2021-01-27</a><span class="report-date">2021-01-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-12-16.html">2020-12-16</a><span class="report-date">2020-12-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-11-05.html">2020-11-05</a><span class="report-date">2020-11-05</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-09-16.html">2020-09-16</a><span class="report-date">2020-09-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-07-29.html">2020-07-29</a><span class="report-date">2020-07-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-06-10.html">2020-06-10</a><span class="report-date">2020-06-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-04-29.html">2020-04-29</a><span class="report-date">2020-04-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-03-23.html">2020-03-23</a><span class="report-date">2020-03-23</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-03-15.html">2020-03-15</a><span class="report-date">2020-03-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-03-03.html">2020-03-03</a><span class="report-date">2020-03-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2020-01-29.html">2020-01-29</a><span class="report-date">2020-01-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-12-11.html">2019-12-11</a><span class="report-date">2019-12-11</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-10-30.html">2019-10-30</a><span class="report-date">2019-10-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-10-04.html">2019-10-04</a><span class="report-date">2019-10-04</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-09-18.html">2019-09-18</a><span class="report-date">2019-09-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-07-31.html">2019-07-31</a><span class="report-date">2019-07-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-06-19.html">2019-06-19</a><span class="report-date">2019-06-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-05-01.html">2019-05-01</a><span class="report-date">2019-05-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-03-20.html">2019-03-20</a><span class="report-date">2019-03-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2019-01-30.html">2019-01-30</a><span class="report-date">2019-01-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-12-19.html">2018-12-19</a><span class="report-date">2018-12-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-11-08.html">2018-11-08</a><span class="report-date">2018-11-08</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-09-26.html">2018-09-26</a><span class="report-date">2018-09-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-08-01.html">2018-08-01</a><span class="report-date">2018-08-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-06-13.html">2018-06-13</a><span class="report-date">2018-06-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-05-02.html">2018-05-02</a><span class="report-date">2018-05-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-03-21.html">2018-03-21</a><span class="report-date">2018-03-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2018-01-31.html">2018-01-31</a><span class="report-date">2018-01-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-12-13.html">2017-12-13</a><span class="report-date">2017-12-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-11-01.html">2017-11-01</a><span class="report-date">2017-11-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-09-20.html">2017-09-20</a><span class="report-date">2017-09-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-07-26.html">2017-07-26</a><span class="report-date">2017-07-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-06-14.html">2017-06-14</a><span class="report-date">2017-06-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-05-03.html">2017-05-03</a><span class="report-date">2017-05-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-03-15.html">2017-03-15</a><span class="report-date">2017-03-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2017-02-01.html">2017-02-01</a><span class="report-date">2017-02-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-12-14.html">2016-12-14</a><span class="report-date">2016-12-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-11-02.html">2016-11-02</a><span class="report-date">2016-11-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-09-21.html">2016-09-21</a><span class="report-date">2016-09-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-07-27.html">2016-07-27</a><span class="report-date">2016-07-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-06-15.html">2016-06-15</a><span class="report-date">2016-06-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-04-27.html">2016-04-27</a><span class="report-date">2016-04-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-03-16.html">2016-03-16</a><span class="report-date">2016-03-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2016-01-27.html">2016-01-27</a><span class="report-date">2016-01-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-12-16.html">2015-12-16</a><span class="report-date">2015-12-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-10-28.html">2015-10-28</a><span class="report-date">2015-10-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-09-17.html">2015-09-17</a><span class="report-date">2015-09-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-07-29.html">2015-07-29</a><span class="report-date">2015-07-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-06-17.html">2015-06-17</a><span class="report-date">2015-06-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-04-29.html">2015-04-29</a><span class="report-date">2015-04-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-03-18.html">2015-03-18</a><span class="report-date">2015-03-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2015-01-28.html">2015-01-28</a><span class="report-date">2015-01-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-12-17.html">2014-12-17</a><span class="report-date">2014-12-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-10-29.html">2014-10-29</a><span class="report-date">2014-10-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-09-17.html">2014-09-17</a><span class="report-date">2014-09-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-07-30.html">2014-07-30</a><span class="report-date">2014-07-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-06-18.html">2014-06-18</a><span class="report-date">2014-06-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-04-30.html">2014-04-30</a><span class="report-date">2014-04-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-03-19.html">2014-03-19</a><span class="report-date">2014-03-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2014-01-29.html">2014-01-29</a><span class="report-date">2014-01-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-12-18.html">2013-12-18</a><span class="report-date">2013-12-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-10-30.html">2013-10-30</a><span class="report-date">2013-10-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-09-18.html">2013-09-18</a><span class="report-date">2013-09-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-07-31.html">2013-07-31</a><span class="report-date">2013-07-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-06-19.html">2013-06-19</a><span class="report-date">2013-06-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-05-01.html">2013-05-01</a><span class="report-date">2013-05-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-03-20.html">2013-03-20</a><span class="report-date">2013-03-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2013-01-30.html">2013-01-30</a><span class="report-date">2013-01-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-12-12.html">2012-12-12</a><span class="report-date">2012-12-12</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-10-24.html">2012-10-24</a><span class="report-date">2012-10-24</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-09-13.html">2012-09-13</a><span class="report-date">2012-09-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-08-01.html">2012-08-01</a><span class="report-date">2012-08-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-06-20.html">2012-06-20</a><span class="report-date">2012-06-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-04-25.html">2012-04-25</a><span class="report-date">2012-04-25</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-03-13.html">2012-03-13</a><span class="report-date">2012-03-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2012-01-25.html">2012-01-25</a><span class="report-date">2012-01-25</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-12-13.html">2011-12-13</a><span class="report-date">2011-12-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-11-02.html">2011-11-02</a><span class="report-date">2011-11-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-09-21.html">2011-09-21</a><span class="report-date">2011-09-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-08-09.html">2011-08-09</a><span class="report-date">2011-08-09</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-06-22.html">2011-06-22</a><span class="report-date">2011-06-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-04-27.html">2011-04-27</a><span class="report-date">2011-04-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-03-15.html">2011-03-15</a><span class="report-date">2011-03-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2011-01-26.html">2011-01-26</a><span class="report-date">2011-01-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-12-14.html">2010-12-14</a><span class="report-date">2010-12-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-11-03.html">2010-11-03</a><span class="report-date">2010-11-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-09-21.html">2010-09-21</a><span class="report-date">2010-09-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-08-10.html">2010-08-10</a><span class="report-date">2010-08-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-06-23.html">2010-06-23</a><span class="report-date">2010-06-23</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-05-09.html">2010-05-09</a><span class="report-date">2010-05-09</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-04-28.html">2010-04-28</a><span class="report-date">2010-04-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-03-16.html">2010-03-16</a><span class="report-date">2010-03-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2010-01-27.html">2010-01-27</a><span class="report-date">2010-01-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-12-15.html">2009-12-15</a><span class="report-date">2009-12-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-11-04.html">2009-11-04</a><span class="report-date">2009-11-04</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-09-22.html">2009-09-22</a><span class="report-date">2009-09-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-08-11.html">2009-08-11</a><span class="report-date">2009-08-11</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-06-24.html">2009-06-24</a><span class="report-date">2009-06-24</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-04-29.html">2009-04-29</a><span class="report-date">2009-04-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-03-17.html">2009-03-17</a><span class="report-date">2009-03-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2009-01-28.html">2009-01-28</a><span class="report-date">2009-01-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-12-16.html">2008-12-16</a><span class="report-date">2008-12-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-10-29.html">2008-10-29</a><span class="report-date">2008-10-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-10-07.html">2008-10-07</a><span class="report-date">2008-10-07</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-09-16.html">2008-09-16</a><span class="report-date">2008-09-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-08-08.html">2008-08-08</a><span class="report-date">2008-08-08</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-06-25.html">2008-06-25</a><span class="report-date">2008-06-25</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-04-30.html">2008-04-30</a><span class="report-date">2008-04-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-03-18.html">2008-03-18</a><span class="report-date">2008-03-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-03-10.html">2008-03-10</a><span class="report-date">2008-03-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-01-30.html">2008-01-30</a><span class="report-date">2008-01-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2008-01-21.html">2008-01-21</a><span class="report-date">2008-01-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-12-11.html">2007-12-11</a><span class="report-date">2007-12-11</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-10-31.html">2007-10-31</a><span class="report-date">2007-10-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-09-18.html">2007-09-18</a><span class="report-date">2007-09-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-08-16.html">2007-08-16</a><span class="report-date">2007-08-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-08-10.html">2007-08-10</a><span class="report-date">2007-08-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-08-07.html">2007-08-07</a><span class="report-date">2007-08-07</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-06-28.html">2007-06-28</a><span class="report-date">2007-06-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-05-09.html">2007-05-09</a><span class="report-date">2007-05-09</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-03-21.html">2007-03-21</a><span class="report-date">2007-03-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2007-01-31.html">2007-01-31</a><span class="report-date">2007-01-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-12-12.html">2006-12-12</a><span class="report-date">2006-12-12</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-10-25.html">2006-10-25</a><span class="report-date">2006-10-25</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-09-20.html">2006-09-20</a><span class="report-date">2006-09-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-08-08.html">2006-08-08</a><span class="report-date">2006-08-08</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-06-29.html">2006-06-29</a><span class="report-date">2006-06-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-05-10.html">2006-05-10</a><span class="report-date">2006-05-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-03-28.html">2006-03-28</a><span class="report-date">2006-03-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2006-01-31.html">2006-01-31</a><span class="report-date">2006-01-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-12-13.html">2005-12-13</a><span class="report-date">2005-12-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-11-01.html">2005-11-01</a><span class="report-date">2005-11-01</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-09-20.html">2005-09-20</a><span class="report-date">2005-09-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-08-09.html">2005-08-09</a><span class="report-date">2005-08-09</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-06-30.html">2005-06-30</a><span class="report-date">2005-06-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-05-03.html">2005-05-03</a><span class="report-date">2005-05-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-03-22.html">2005-03-22</a><span class="report-date">2005-03-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2005-02-02.html">2005-02-02</a><span class="report-date">2005-02-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-12-14.html">2004-12-14</a><span class="report-date">2004-12-14</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-11-10.html">2004-11-10</a><span class="report-date">2004-11-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-09-21.html">2004-09-21</a><span class="report-date">2004-09-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-08-10.html">2004-08-10</a><span class="report-date">2004-08-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-06-30.html">2004-06-30</a><span class="report-date">2004-06-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-05-04.html">2004-05-04</a><span class="report-date">2004-05-04</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-03-16.html">2004-03-16</a><span class="report-date">2004-03-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2004-01-28.html">2004-01-28</a><span class="report-date">2004-01-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-12-09.html">2003-12-09</a><span class="report-date">2003-12-09</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-10-28.html">2003-10-28</a><span class="report-date">2003-10-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-09-16.html">2003-09-16</a><span class="report-date">2003-09-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-08-12.html">2003-08-12</a><span class="report-date">2003-08-12</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-06-25.html">2003-06-25</a><span class="report-date">2003-06-25</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-05-06.html">2003-05-06</a><span class="report-date">2003-05-06</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-03-18.html">2003-03-18</a><span class="report-date">2003-03-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2003-01-29.html">2003-01-29</a><span class="report-date">2003-01-29</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-12-10.html">2002-12-10</a><span class="report-date">2002-12-10</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-11-06.html">2002-11-06</a><span class="report-date">2002-11-06</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-09-24.html">2002-09-24</a><span class="report-date">2002-09-24</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-08-13.html">2002-08-13</a><span class="report-date">2002-08-13</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-06-26.html">2002-06-26</a><span class="report-date">2002-06-26</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-05-07.html">2002-05-07</a><span class="report-date">2002-05-07</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-03-19.html">2002-03-19</a><span class="report-date">2002-03-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2002-01-30.html">2002-01-30</a><span class="report-date">2002-01-30</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-12-11.html">2001-12-11</a><span class="report-date">2001-12-11</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-11-06.html">2001-11-06</a><span class="report-date">2001-11-06</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-10-02.html">2001-10-02</a><span class="report-date">2001-10-02</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-09-17.html">2001-09-17</a><span class="report-date">2001-09-17</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-08-21.html">2001-08-21</a><span class="report-date">2001-08-21</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-06-27.html">2001-06-27</a><span class="report-date">2001-06-27</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-05-15.html">2001-05-15</a><span class="report-date">2001-05-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-04-18.html">2001-04-18</a><span class="report-date">2001-04-18</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-03-20.html">2001-03-20</a><span class="report-date">2001-03-20</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-01-31.html">2001-01-31</a><span class="report-date">2001-01-31</span></li>
+                <li><a href="../fomc-analyzer/fomc-2001-01-03.html">2001-01-03</a><span class="report-date">2001-01-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-12-19.html">2000-12-19</a><span class="report-date">2000-12-19</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-11-15.html">2000-11-15</a><span class="report-date">2000-11-15</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-10-03.html">2000-10-03</a><span class="report-date">2000-10-03</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-08-22.html">2000-08-22</a><span class="report-date">2000-08-22</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-06-28.html">2000-06-28</a><span class="report-date">2000-06-28</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-05-16.html">2000-05-16</a><span class="report-date">2000-05-16</span></li>
+                <li><a href="../fomc-analyzer/fomc-2000-03-21.html">2000-03-21</a><span class="report-date">2000-03-21</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇪🇺 ECB &amp; Eurozone Monitor</summary>
-        <p class="section-desc">Daily AI-enriched research digest from ECB, Bundesbank, Banque de France, Banca d’Italia, Banco de España, DNB, and Central Bank of Ireland — powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06.html">ECB Monitor — 2026-06<span class="badge-latest">latest</span></a><span class="report-date">2026-06</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-21.html">ECB Monitor — 2026-06-21</a><span class="report-date">2026-06-21</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-19.html">ECB Monitor — 2026-06-19</a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-18.html">ECB Monitor — 2026-06-18</a><span class="report-date">2026-06-18</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-17.html">ECB Monitor — 2026-06-17</a><span class="report-date">2026-06-17</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-16.html">ECB Monitor — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-15.html">ECB Monitor — 2026-06-15</a><span class="report-date">2026-06-15</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-14.html">ECB Monitor — 2026-06-14</a><span class="report-date">2026-06-14</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-13.html">ECB Monitor — 2026-06-13</a><span class="report-date">2026-06-13</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-12.html">ECB Monitor — 2026-06-12</a><span class="report-date">2026-06-12</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-11.html">ECB Monitor — 2026-06-11</a><span class="report-date">2026-06-11</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-10.html">ECB Monitor — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-09.html">ECB Monitor — 2026-06-09</a><span class="report-date">2026-06-09</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-08.html">ECB Monitor — 2026-06-08</a><span class="report-date">2026-06-08</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-07.html">ECB Monitor — 2026-06-07</a><span class="report-date">2026-06-07</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-06.html">ECB Monitor — 2026-06-06</a><span class="report-date">2026-06-06</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-05.html">ECB Monitor — 2026-06-05</a><span class="report-date">2026-06-05</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-03.html">ECB Monitor — 2026-06-03</a><span class="report-date">2026-06-03</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-02.html">ECB Monitor — 2026-06-02</a><span class="report-date">2026-06-02</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-06-01.html">ECB Monitor — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05.html">ECB Monitor — 2026-05</a><span class="report-date">2026-05</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-31.html">ECB Monitor — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-30.html">ECB Monitor — 2026-05-30</a><span class="report-date">2026-05-30</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-29.html">ECB Monitor — 2026-05-29</a><span class="report-date">2026-05-29</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-28.html">ECB Monitor — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-27.html">ECB Monitor — 2026-05-27</a><span class="report-date">2026-05-27</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-25.html">ECB Monitor — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-24.html">ECB Monitor — 2026-05-24</a><span class="report-date">2026-05-24</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-23.html">ECB Monitor — 2026-05-23</a><span class="report-date">2026-05-23</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-22.html">ECB Monitor — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-21.html">ECB Monitor — 2026-05-21</a><span class="report-date">2026-05-21</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-20.html">ECB Monitor — 2026-05-20</a><span class="report-date">2026-05-20</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-19.html">ECB Monitor — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-18.html">ECB Monitor — 2026-05-18</a><span class="report-date">2026-05-18</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-17.html">ECB Monitor — 2026-05-17</a><span class="report-date">2026-05-17</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-16.html">ECB Monitor — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-15.html">ECB Monitor — 2026-05-15</a><span class="report-date">2026-05-15</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-14.html">ECB Monitor — 2026-05-14</a><span class="report-date">2026-05-14</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-13.html">ECB Monitor — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-12.html">ECB Monitor — 2026-05-12</a><span class="report-date">2026-05-12</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-11.html">ECB Monitor — 2026-05-11</a><span class="report-date">2026-05-11</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-10.html">ECB Monitor — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-09.html">ECB Monitor — 2026-05-09</a><span class="report-date">2026-05-09</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-08.html">ECB Monitor — 2026-05-08</a><span class="report-date">2026-05-08</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-07.html">ECB Monitor — 2026-05-07</a><span class="report-date">2026-05-07</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-04.html">ECB Monitor — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-03.html">ECB Monitor — 2026-05-03</a><span class="report-date">2026-05-03</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-02.html">ECB Monitor — 2026-05-02</a><span class="report-date">2026-05-02</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-05-01.html">ECB Monitor — 2026-05-01</a><span class="report-date">2026-05-01</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04.html">ECB Monitor — 2026-04</a><span class="report-date">2026-04</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-30.html">ECB Monitor — 2026-04-30</a><span class="report-date">2026-04-30</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-29.html">ECB Monitor — 2026-04-29</a><span class="report-date">2026-04-29</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-28.html">ECB Monitor — 2026-04-28</a><span class="report-date">2026-04-28</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-27.html">ECB Monitor — 2026-04-27</a><span class="report-date">2026-04-27</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-26.html">ECB Monitor — 2026-04-26</a><span class="report-date">2026-04-26</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-25.html">ECB Monitor — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-24.html">ECB Monitor — 2026-04-24</a><span class="report-date">2026-04-24</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-23.html">ECB Monitor — 2026-04-23</a><span class="report-date">2026-04-23</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-22.html">ECB Monitor — 2026-04-22</a><span class="report-date">2026-04-22</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-21.html">ECB Monitor — 2026-04-21</a><span class="report-date">2026-04-21</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-20.html">ECB Monitor — 2026-04-20</a><span class="report-date">2026-04-20</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-19.html">ECB Monitor — 2026-04-19</a><span class="report-date">2026-04-19</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-18.html">ECB Monitor — 2026-04-18</a><span class="report-date">2026-04-18</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-17.html">ECB Monitor — 2026-04-17</a><span class="report-date">2026-04-17</span></li>
-        <li><a href="../ecb-monitor/ecb-monitor-2026-04-16.html">ECB Monitor — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
-        </ul>
+            <summary class="card-summary">🇪🇺 ECB &amp; Eurozone Monitor</summary>
+        <div class="card-desc">Daily AI-enriched research digest from ECB, Bundesbank, Banque de France, Banca d’Italia, Banco de España, DNB, and Central Bank of Ireland — powered by Gemma 4.</div>
+        <a href="../ecb-monitor/ecb-monitor-2026-06.html" class="latest-link">ECB Monitor — 2026-06 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (64 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-21.html">2026-06-21</a><span class="report-date">2026-06-21</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-19.html">2026-06-19</a><span class="report-date">2026-06-19</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-18.html">2026-06-18</a><span class="report-date">2026-06-18</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-17.html">2026-06-17</a><span class="report-date">2026-06-17</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-15.html">2026-06-15</a><span class="report-date">2026-06-15</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-14.html">2026-06-14</a><span class="report-date">2026-06-14</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-13.html">2026-06-13</a><span class="report-date">2026-06-13</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-12.html">2026-06-12</a><span class="report-date">2026-06-12</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-11.html">2026-06-11</a><span class="report-date">2026-06-11</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-09.html">2026-06-09</a><span class="report-date">2026-06-09</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-08.html">2026-06-08</a><span class="report-date">2026-06-08</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-07.html">2026-06-07</a><span class="report-date">2026-06-07</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-06.html">2026-06-06</a><span class="report-date">2026-06-06</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-05.html">2026-06-05</a><span class="report-date">2026-06-05</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-03.html">2026-06-03</a><span class="report-date">2026-06-03</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-02.html">2026-06-02</a><span class="report-date">2026-06-02</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05.html">2026-05</a><span class="report-date">2026-05</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-30.html">2026-05-30</a><span class="report-date">2026-05-30</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-29.html">2026-05-29</a><span class="report-date">2026-05-29</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-27.html">2026-05-27</a><span class="report-date">2026-05-27</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-24.html">2026-05-24</a><span class="report-date">2026-05-24</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-23.html">2026-05-23</a><span class="report-date">2026-05-23</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-21.html">2026-05-21</a><span class="report-date">2026-05-21</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-20.html">2026-05-20</a><span class="report-date">2026-05-20</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-18.html">2026-05-18</a><span class="report-date">2026-05-18</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-17.html">2026-05-17</a><span class="report-date">2026-05-17</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-15.html">2026-05-15</a><span class="report-date">2026-05-15</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-14.html">2026-05-14</a><span class="report-date">2026-05-14</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-12.html">2026-05-12</a><span class="report-date">2026-05-12</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-11.html">2026-05-11</a><span class="report-date">2026-05-11</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-09.html">2026-05-09</a><span class="report-date">2026-05-09</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-08.html">2026-05-08</a><span class="report-date">2026-05-08</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-07.html">2026-05-07</a><span class="report-date">2026-05-07</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-03.html">2026-05-03</a><span class="report-date">2026-05-03</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-02.html">2026-05-02</a><span class="report-date">2026-05-02</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-05-01.html">2026-05-01</a><span class="report-date">2026-05-01</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04.html">2026-04</a><span class="report-date">2026-04</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-30.html">2026-04-30</a><span class="report-date">2026-04-30</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-29.html">2026-04-29</a><span class="report-date">2026-04-29</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-28.html">2026-04-28</a><span class="report-date">2026-04-28</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-27.html">2026-04-27</a><span class="report-date">2026-04-27</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-26.html">2026-04-26</a><span class="report-date">2026-04-26</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-25.html">2026-04-25</a><span class="report-date">2026-04-25</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-24.html">2026-04-24</a><span class="report-date">2026-04-24</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-23.html">2026-04-23</a><span class="report-date">2026-04-23</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-22.html">2026-04-22</a><span class="report-date">2026-04-22</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-21.html">2026-04-21</a><span class="report-date">2026-04-21</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-20.html">2026-04-20</a><span class="report-date">2026-04-20</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-19.html">2026-04-19</a><span class="report-date">2026-04-19</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-18.html">2026-04-18</a><span class="report-date">2026-04-18</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-17.html">2026-04-17</a><span class="report-date">2026-04-17</span></li>
+                <li><a href="../ecb-monitor/ecb-monitor-2026-04-16.html">2026-04-16</a><span class="report-date">2026-04-16</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🏦 ECB Watcher</summary>
-        <p class="section-desc">All 25 Governing Council members tracked every 3 days — hawk/dove spectrum, thematic analysis, dissent watch, and policy signal evolution, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../ecb-watcher/ecb-watcher-2026-06-19.html">ECB Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-06-16.html">ECB Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-06-10.html">ECB Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-06-04.html">ECB Watcher — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-06-01.html">ECB Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-31.html">ECB Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-28.html">ECB Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-25.html">ECB Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-22.html">ECB Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-19.html">ECB Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-16.html">ECB Watcher — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-13.html">ECB Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-10.html">ECB Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-05-04.html">ECB Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-04-28.html">ECB Watcher — 2026-04-28</a><span class="report-date">2026-04-28</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-04-27.html">ECB Watcher — 2026-04-27</a><span class="report-date">2026-04-27</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-04-19.html">ECB Watcher — 2026-04-19</a><span class="report-date">2026-04-19</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-04-16.html">ECB Watcher — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
-        <li><a href="../ecb-watcher/ecb-watcher-2026-04-13.html">ECB Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
-        </ul>
+            <summary class="card-summary">🏦 ECB Watcher</summary>
+        <div class="card-desc">All 25 Governing Council members tracked every 3 days — hawk/dove spectrum, thematic analysis, dissent watch, and policy signal evolution, powered by Gemma 4.</div>
+        <a href="../ecb-watcher/ecb-watcher-2026-06-19.html" class="latest-link">ECB Watcher — 2026-06-19 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (18 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../ecb-watcher/ecb-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-04-28.html">2026-04-28</a><span class="report-date">2026-04-28</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-04-27.html">2026-04-27</a><span class="report-date">2026-04-27</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-04-19.html">2026-04-19</a><span class="report-date">2026-04-19</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-04-16.html">2026-04-16</a><span class="report-date">2026-04-16</span></li>
+                <li><a href="../ecb-watcher/ecb-watcher-2026-04-13.html">2026-04-13</a><span class="report-date">2026-04-13</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇯🇵 BOJ Watcher</summary>
-        <p class="section-desc">All 9 Policy Board members tracked every 3 days — hawk/dove spectrum, yen/inflation thematic analysis, and dissent watch, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../boj-watcher/boj-watcher-2026-06-19.html">BOJ Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-16.html">BOJ Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-13.html">BOJ Watcher — 2026-06-13</a><span class="report-date">2026-06-13</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-10.html">BOJ Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-07.html">BOJ Watcher — 2026-06-07</a><span class="report-date">2026-06-07</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-04.html">BOJ Watcher — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-06-01.html">BOJ Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-31.html">BOJ Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-28.html">BOJ Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-22.html">BOJ Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-19.html">BOJ Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-16.html">BOJ Watcher — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-13.html">BOJ Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-10.html">BOJ Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-07.html">BOJ Watcher — 2026-05-07</a><span class="report-date">2026-05-07</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-05-04.html">BOJ Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-04-28.html">BOJ Watcher — 2026-04-28</a><span class="report-date">2026-04-28</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-04-25.html">BOJ Watcher — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-04-19.html">BOJ Watcher — 2026-04-19</a><span class="report-date">2026-04-19</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-04-16.html">BOJ Watcher — 2026-04-16</a><span class="report-date">2026-04-16</span></li>
-        <li><a href="../boj-watcher/boj-watcher-2026-04-13.html">BOJ Watcher — 2026-04-13</a><span class="report-date">2026-04-13</span></li>
-        </ul>
+            <summary class="card-summary">🇯🇵 BOJ Watcher</summary>
+        <div class="card-desc">All 9 Policy Board members tracked every 3 days — hawk/dove spectrum, yen/inflation thematic analysis, and dissent watch, powered by Gemma 4.</div>
+        <a href="../boj-watcher/boj-watcher-2026-06-19.html" class="latest-link">BOJ Watcher — 2026-06-19 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (20 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../boj-watcher/boj-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-06-13.html">2026-06-13</a><span class="report-date">2026-06-13</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-06-07.html">2026-06-07</a><span class="report-date">2026-06-07</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-07.html">2026-05-07</a><span class="report-date">2026-05-07</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-04-28.html">2026-04-28</a><span class="report-date">2026-04-28</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-04-25.html">2026-04-25</a><span class="report-date">2026-04-25</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-04-19.html">2026-04-19</a><span class="report-date">2026-04-19</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-04-16.html">2026-04-16</a><span class="report-date">2026-04-16</span></li>
+                <li><a href="../boj-watcher/boj-watcher-2026-04-13.html">2026-04-13</a><span class="report-date">2026-04-13</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇦🇺 RBA Watcher</summary>
-        <p class="section-desc">All 9 Monetary Policy Board members tracked every 3 days — hawk/dove spectrum, trimmed mean CPI, labor market and AUD thematic analysis, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../rba-watcher/rba-watcher-2026-06-04.html">RBA Watcher — 2026-06-04<span class="badge-latest">latest</span></a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../rba-watcher/rba-watcher-2026-05-01.html">RBA Watcher — 2026-05-01</a><span class="report-date">2026-05-01</span></li>
-        <li><a href="../rba-watcher/rba-watcher-2026-04-21.html">RBA Watcher — 2026-04-21</a><span class="report-date">2026-04-21</span></li>
-        </ul>
+            <summary class="card-summary">🇦🇺 RBA Watcher</summary>
+        <div class="card-desc">All 9 Monetary Policy Board members tracked every 3 days — hawk/dove spectrum, trimmed mean CPI, labor market and AUD thematic analysis, powered by Gemma 4.</div>
+        <a href="../rba-watcher/rba-watcher-2026-06-04.html" class="latest-link">RBA Watcher — 2026-06-04 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (2 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../rba-watcher/rba-watcher-2026-05-01.html">2026-05-01</a><span class="report-date">2026-05-01</span></li>
+                <li><a href="../rba-watcher/rba-watcher-2026-04-21.html">2026-04-21</a><span class="report-date">2026-04-21</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇲🇽 Banxico Watcher</summary>
-        <p class="section-desc">All 5 Junta de Gobierno members tracked every 3 days — hawk/dove spectrum, core CPI, MXN dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../banxico-watcher/banxico-watcher-2026-06-01.html">Banxico Watcher — 2026-06-01<span class="badge-latest">latest</span></a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-05-25.html">Banxico Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-05-22.html">Banxico Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-05-13.html">Banxico Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-05-04.html">Banxico Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-04-25.html">Banxico Watcher — 2026-04-25</a><span class="report-date">2026-04-25</span></li>
-        <li><a href="../banxico-watcher/banxico-watcher-2026-04-22.html">Banxico Watcher — 2026-04-22</a><span class="report-date">2026-04-22</span></li>
-        </ul>
+            <summary class="card-summary">🇲🇽 Banxico Watcher</summary>
+        <div class="card-desc">All 5 Junta de Gobierno members tracked every 3 days — hawk/dove spectrum, core CPI, MXN dynamics, and individual vote dissent watch, powered by Gemma 4.</div>
+        <a href="../banxico-watcher/banxico-watcher-2026-06-01.html" class="latest-link">Banxico Watcher — 2026-06-01 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (6 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../banxico-watcher/banxico-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../banxico-watcher/banxico-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../banxico-watcher/banxico-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../banxico-watcher/banxico-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../banxico-watcher/banxico-watcher-2026-04-25.html">2026-04-25</a><span class="report-date">2026-04-25</span></li>
+                <li><a href="../banxico-watcher/banxico-watcher-2026-04-22.html">2026-04-22</a><span class="report-date">2026-04-22</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇨🇦 BOC Watcher</summary>
-        <p class="section-desc">All 6 Governing Council members tracked every 3 days — hawk/dove spectrum, CPI-trim/median, CAD dynamics, and housing market thematic analysis, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../boc-watcher/boc-watcher-2026-06-19.html">BOC Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-16.html">BOC Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-13.html">BOC Watcher — 2026-06-13</a><span class="report-date">2026-06-13</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-10.html">BOC Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-07.html">BOC Watcher — 2026-06-07</a><span class="report-date">2026-06-07</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-04.html">BOC Watcher — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-06-01.html">BOC Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-31.html">BOC Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-28.html">BOC Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-25.html">BOC Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-22.html">BOC Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-19.html">BOC Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-16.html">BOC Watcher — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-13.html">BOC Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-10.html">BOC Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-07.html">BOC Watcher — 2026-05-07</a><span class="report-date">2026-05-07</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-05-04.html">BOC Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../boc-watcher/boc-watcher-2026-04-30.html">BOC Watcher — 2026-04-30</a><span class="report-date">2026-04-30</span></li>
-        </ul>
+            <summary class="card-summary">🇨🇦 BOC Watcher</summary>
+        <div class="card-desc">All 6 Governing Council members tracked every 3 days — hawk/dove spectrum, CPI-trim/median, CAD dynamics, and housing market thematic analysis, powered by Gemma 4.</div>
+        <a href="../boc-watcher/boc-watcher-2026-06-19.html" class="latest-link">BOC Watcher — 2026-06-19 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (17 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../boc-watcher/boc-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-06-13.html">2026-06-13</a><span class="report-date">2026-06-13</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-06-07.html">2026-06-07</a><span class="report-date">2026-06-07</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-07.html">2026-05-07</a><span class="report-date">2026-05-07</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../boc-watcher/boc-watcher-2026-04-30.html">2026-04-30</a><span class="report-date">2026-04-30</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇧🇷 BCB Watcher</summary>
-        <p class="section-desc">All 9 COPOM members tracked every 3 days — hawk/dove spectrum, IPCA inflation, BRL dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../bcb-watcher/bcb-watcher-2026-06-19.html">BCB Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-06-16.html">BCB Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-06-10.html">BCB Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-06-01.html">BCB Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-31.html">BCB Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-28.html">BCB Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-25.html">BCB Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-22.html">BCB Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-19.html">BCB Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-16.html">BCB Watcher — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-13.html">BCB Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-10.html">BCB Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-07.html">BCB Watcher — 2026-05-07</a><span class="report-date">2026-05-07</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-04.html">BCB Watcher — 2026-05-04</a><span class="report-date">2026-05-04</span></li>
-        <li><a href="../bcb-watcher/bcb-watcher-2026-05-02.html">BCB Watcher — 2026-05-02</a><span class="report-date">2026-05-02</span></li>
-        </ul>
+            <summary class="card-summary">🇧🇷 BCB Watcher</summary>
+        <div class="card-desc">All 9 COPOM members tracked every 3 days — hawk/dove spectrum, IPCA inflation, BRL dynamics, and individual vote dissent watch, powered by Gemma 4.</div>
+        <a href="../bcb-watcher/bcb-watcher-2026-06-19.html" class="latest-link">BCB Watcher — 2026-06-19 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (14 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../bcb-watcher/bcb-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-07.html">2026-05-07</a><span class="report-date">2026-05-07</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-04.html">2026-05-04</a><span class="report-date">2026-05-04</span></li>
+                <li><a href="../bcb-watcher/bcb-watcher-2026-05-02.html">2026-05-02</a><span class="report-date">2026-05-02</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇨🇭 SNB Watcher</summary>
-        <p class="section-desc">All 3 Governing Board members tracked every 3 days — CHF/FX intervention, CPI 0-2% target, negative rate risk, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../snb-watcher/snb-watcher-2026-06-16.html">SNB Watcher — 2026-06-16<span class="badge-latest">latest</span></a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-06-10.html">SNB Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-06-04.html">SNB Watcher — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-06-01.html">SNB Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-05-28.html">SNB Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-05-22.html">SNB Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../snb-watcher/snb-watcher-2026-05-19.html">SNB Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        </ul>
+            <summary class="card-summary">🇨🇭 SNB Watcher</summary>
+        <div class="card-desc">All 3 Governing Board members tracked every 3 days — CHF/FX intervention, CPI 0-2% target, negative rate risk, powered by Gemma 4.</div>
+        <a href="../snb-watcher/snb-watcher-2026-06-16.html" class="latest-link">SNB Watcher — 2026-06-16 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (6 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../snb-watcher/snb-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../snb-watcher/snb-watcher-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../snb-watcher/snb-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../snb-watcher/snb-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../snb-watcher/snb-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../snb-watcher/snb-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+            </ul>
         </details>
-    </section>
-    <section class="cb-section">
+        </details>
+    </div>
+    <div class="card">
         <details open>
-            <summary class="section-summary">🇸🇪 Riksbank Watcher</summary>
-        <p class="section-desc">All 5 Executive Board members tracked every 3 days — hawk/dove spectrum, CPIF inflation, SEK dynamics, and individual vote dissent watch, powered by Gemma 4.</p>
-        <ul class="report-list">
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-19.html">Riksbank Watcher — 2026-06-19<span class="badge-latest">latest</span></a><span class="report-date">2026-06-19</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-16.html">Riksbank Watcher — 2026-06-16</a><span class="report-date">2026-06-16</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-13.html">Riksbank Watcher — 2026-06-13</a><span class="report-date">2026-06-13</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-10.html">Riksbank Watcher — 2026-06-10</a><span class="report-date">2026-06-10</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-07.html">Riksbank Watcher — 2026-06-07</a><span class="report-date">2026-06-07</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-04.html">Riksbank Watcher — 2026-06-04</a><span class="report-date">2026-06-04</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-01.html">Riksbank Watcher — 2026-06-01</a><span class="report-date">2026-06-01</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-31.html">Riksbank Watcher — 2026-05-31</a><span class="report-date">2026-05-31</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-28.html">Riksbank Watcher — 2026-05-28</a><span class="report-date">2026-05-28</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-25.html">Riksbank Watcher — 2026-05-25</a><span class="report-date">2026-05-25</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-22.html">Riksbank Watcher — 2026-05-22</a><span class="report-date">2026-05-22</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-19.html">Riksbank Watcher — 2026-05-19</a><span class="report-date">2026-05-19</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-16.html">Riksbank Watcher — 2026-05-16</a><span class="report-date">2026-05-16</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-13.html">Riksbank Watcher — 2026-05-13</a><span class="report-date">2026-05-13</span></li>
-        <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-10.html">Riksbank Watcher — 2026-05-10</a><span class="report-date">2026-05-10</span></li>
-        </ul>
+            <summary class="card-summary">🇸🇪 Riksbank Watcher</summary>
+        <div class="card-desc">All 5 Executive Board members tracked every 3 days — hawk/dove spectrum, CPIF inflation, SEK dynamics, and individual vote dissent watch, powered by Gemma 4.</div>
+        <a href="../riksbank-watcher/riksbank-watcher-2026-06-19.html" class="latest-link">Riksbank Watcher — 2026-06-19 <span class="badge">latest</span></a>
+        <details class="archive-toggle">
+            <summary>Archive (14 reports)</summary>
+            <ul class="archive-list">
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-16.html">2026-06-16</a><span class="report-date">2026-06-16</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-13.html">2026-06-13</a><span class="report-date">2026-06-13</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-10.html">2026-06-10</a><span class="report-date">2026-06-10</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-07.html">2026-06-07</a><span class="report-date">2026-06-07</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-04.html">2026-06-04</a><span class="report-date">2026-06-04</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-06-01.html">2026-06-01</a><span class="report-date">2026-06-01</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-31.html">2026-05-31</a><span class="report-date">2026-05-31</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-28.html">2026-05-28</a><span class="report-date">2026-05-28</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-25.html">2026-05-25</a><span class="report-date">2026-05-25</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-22.html">2026-05-22</a><span class="report-date">2026-05-22</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-19.html">2026-05-19</a><span class="report-date">2026-05-19</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-16.html">2026-05-16</a><span class="report-date">2026-05-16</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-13.html">2026-05-13</a><span class="report-date">2026-05-13</span></li>
+                <li><a href="../riksbank-watcher/riksbank-watcher-2026-05-10.html">2026-05-10</a><span class="report-date">2026-05-10</span></li>
+            </ul>
         </details>
-    </section>
+        </details>
+    </div>
 </div>
 </body>
 </html>

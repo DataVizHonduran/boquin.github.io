@@ -4,27 +4,47 @@ import sys
 from pathlib import Path
 
 _CSS = """        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-               max-width: 960px; margin: 0 auto; padding: 20px;
+               max-width: 1100px; margin: 0 auto; padding: 20px;
                background: #f5f5f5; color: #333; }
-        .container { background: white; padding: 40px; border-radius: 8px;
-                     box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        h1 { color: #1a237e; border-bottom: 3px solid #1a237e; padding-bottom: 10px; }
-        .cb-section { margin: 36px 0; }
-        .cb-section h2 { color: #1a237e; border-left: 4px solid #1a237e;
-                         padding-left: 12px; margin-bottom: 6px; font-size: 1.2em; }
-        .section-desc { color: #555; margin: 0 0 14px; font-size: 0.95em; line-height: 1.5; }
-        .report-list { list-style: none; padding: 0; margin: 0; }
-        .report-list li { border-left: 4px solid #3949ab; padding: 10px 14px; margin: 8px 0;
-                          background: #f8f9fa; border-radius: 0 6px 6px 0;
-                          display: flex; align-items: center; justify-content: space-between; }
-        .report-list a { color: #1a237e; text-decoration: none; font-weight: 500; font-size: 1em; }
-        .report-list a:hover { text-decoration: underline; }
-        .report-date { color: #888; font-size: 0.85em; }
-        .badge-latest { font-size: 0.75em; background: #e8f5e9; color: #2e7d32;
-                        padding: 3px 8px; border-radius: 10px; margin-left: 8px; }
-        .no-reports { color: #aaa; font-style: italic; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #1a237e; text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }"""
+        .page-header { background: white; padding: 24px 32px; border-radius: 8px;
+                       box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        .page-header h1 { color: #1a237e; border-bottom: 3px solid #1a237e;
+                          padding-bottom: 10px; margin: 0 0 8px; }
+        .back-link { display: inline-block; color: #1a237e; text-decoration: none;
+                     margin-bottom: 12px; font-size: 0.9em; }
+        .back-link:hover { text-decoration: underline; }
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 580px) { .card-grid { grid-template-columns: 1fr; } }
+        .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                padding: 20px; display: flex; flex-direction: column; }
+        .card-summary { font-size: 1.05em; font-weight: 700; color: #1a237e;
+                        border-left: 4px solid #1a237e; padding-left: 10px; margin: 0 0 8px;
+                        cursor: pointer; list-style: none; }
+        .card-summary::-webkit-details-marker { display: none; }
+        .card-summary::after { content: " ▾"; font-size: 0.85em; color: #999; }
+        details:not([open]) > .card-summary::after { content: " ▸"; }
+        .card-desc { font-size: 0.82em; color: #666; line-height: 1.4; margin: 0 0 14px; }
+        .latest-link { display: block; background: #1a237e; color: white; text-decoration: none;
+                       padding: 8px 12px; border-radius: 5px; font-size: 0.88em; font-weight: 600;
+                       text-align: center; margin-bottom: 10px; }
+        .latest-link:hover { background: #283593; }
+        .badge { font-size: 0.72em; background: #e8f5e9; color: #2e7d32;
+                 padding: 2px 6px; border-radius: 8px; margin-left: 6px; }
+        .archive-toggle { margin-top: 4px; }
+        .archive-toggle summary { font-size: 0.82em; color: #3949ab; cursor: pointer;
+                                  user-select: none; padding: 4px 0; list-style: none; }
+        .archive-toggle summary::-webkit-details-marker { display: none; }
+        .archive-toggle summary::before { content: "▶ "; font-size: 0.75em; }
+        .archive-toggle[open] summary::before { content: "▼ "; }
+        .archive-toggle summary:hover { color: #1a237e; }
+        .archive-list { list-style: none; padding: 0; margin: 6px 0 0; }
+        .archive-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+        .archive-list li:last-child { border-bottom: none; }
+        .archive-list a { color: #3949ab; text-decoration: none; font-size: 0.82em; }
+        .archive-list a:hover { text-decoration: underline; }
+        .report-date { color: #aaa; font-size: 0.78em; float: right; }
+        .no-reports { color: #aaa; font-style: italic; font-size: 0.85em; }"""
 
 # Each entry: (html_title, dir_name, glob, filename_prefix, display_label, description)
 _SECTIONS = [
@@ -77,36 +97,56 @@ def regenerate_cb_monitor(repo_root: Path) -> None:
     cb_dir = repo_root / "reports" / "cb-monitor"
     if not cb_dir.exists():
         return
-    sections_html = []
+    cards_html = []
     for title, dir_name, glob_pat, prefix, label, desc in _SECTIONS:
         watcher_dir = repo_root / "reports" / dir_name
         reports = sorted(watcher_dir.glob(glob_pat), reverse=True) if watcher_dir.exists() else []
         if reports:
-            items = []
-            for i, p in enumerate(reports):
-                badge = '<span class="badge-latest">latest</span>' if i == 0 else ""
-                date_str = p.stem[len(prefix):]
-                items.append(
-                    f'        <li><a href="../{dir_name}/{p.name}">{label} — {date_str}{badge}</a>'
-                    f'<span class="report-date">{date_str}</span></li>'
+            latest = reports[0]
+            latest_date = latest.stem[len(prefix):]
+            latest_html = (
+                f'        <a href="../{dir_name}/{latest.name}" class="latest-link">'
+                f'{label} — {latest_date} <span class="badge">latest</span></a>\n'
+            )
+            archive = reports[1:]
+            if archive:
+                items = []
+                for p in archive:
+                    date_str = p.stem[len(prefix):]
+                    items.append(
+                        f'                <li><a href="../{dir_name}/{p.name}">{date_str}</a>'
+                        f'<span class="report-date">{date_str}</span></li>'
+                    )
+                archive_html = (
+                    f'        <details class="archive-toggle">\n'
+                    f'            <summary>Archive ({len(archive)} reports)</summary>\n'
+                    f'            <ul class="archive-list">\n' + "\n".join(items) + '\n            </ul>\n'
+                    f'        </details>\n'
                 )
-            list_html = "\n".join(items)
+            else:
+                archive_html = ""
         else:
-            list_html = '        <li class="no-reports">No reports yet.</li>'
-        sections_html.append(
-            f'\n    <section class="cb-section">\n        <h2>{title}</h2>\n'
-            f'        <p class="section-desc">{desc}</p>\n'
-            f'        <ul class="report-list">\n{list_html}\n        </ul>\n    </section>'
+            latest_html = '        <p class="no-reports">No reports yet.</p>\n'
+            archive_html = ""
+        cards_html.append(
+            f'\n    <div class="card">\n'
+            f'        <details open>\n'
+            f'            <summary class="card-summary">{title}</summary>\n'
+            f'        <div class="card-desc">{desc}</div>\n'
+            f'{latest_html}{archive_html}'
+            f'        </details>\n    </div>'
         )
     hub = (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
         '    <meta charset="UTF-8">\n'
         '    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '    <title>Central Bank Monitor</title>\n'
-        f'    <style>\n{_CSS}\n    </style>\n</head>\n<body>\n<div class="container">\n'
+        f'    <style>\n{_CSS}\n    </style>\n</head>\n<body>\n'
+        '<div class="page-header">\n'
         '    <a href="../../index.html" class="back-link">← Back to Portfolio</a>\n'
-        '    <h1>\U0001f3e6 Central Bank Monitor</h1>\n'
-        + "".join(sections_html)
+        '    <h1>\U0001f3e6 Central Bank Monitor</h1>\n</div>\n'
+        '<div class="card-grid">\n'
+        + "".join(cards_html)
         + '\n</div>\n</body>\n</html>\n'
     )
     (cb_dir / "index.html").write_text(hub, encoding="utf-8")
