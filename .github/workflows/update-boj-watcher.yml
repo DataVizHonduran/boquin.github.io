@@ -2,7 +2,7 @@ name: Update BOJ Watcher
 
 on:
   schedule:
-    - cron: '0 9 */3 * *'   # Every 3 days at 09:00 UTC
+    - cron: '0 9 * * *'   # Daily at 09:00 UTC
   workflow_dispatch:          # Allow manual trigger
 
 concurrency:
