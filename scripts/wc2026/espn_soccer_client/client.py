@@ -6,6 +6,7 @@ import json
 BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer"
 SEARCH = "https://site.web.api.espn.com/apis/search/v2"
 OVERVIEW = "https://site.web.api.espn.com/apis/common/v3/sports/soccer"
+STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer"
 
 # National-team confederation, keyed by ESPN's team displayName. Covers all
 # 48 nations in the 2026 FIFA World Cup; extend as needed for other tournaments.
@@ -106,6 +107,42 @@ class ESPNSoccerClient:
     def match_summary(self, event_id):
         return _get(f"{BASE}/{self.league}/summary?event={event_id}")
 
+    def standings(self, season=2026):
+        """Group standings: group name -> list of {team, rank, points, gamesPlayed, note}."""
+        d = _get(f"{STANDINGS}/{self.league}/standings?season={season}")
+        out = {}
+        for g in d.get("children", []):
+            entries = []
+            for e in g.get("standings", {}).get("entries", []):
+                stats = {s["name"]: s.get("value", s.get("displayValue")) for s in e["stats"]}
+                entries.append({
+                    "team": e["team"]["displayName"],
+                    "rank": int(stats.get("rank") or 0),
+                    "points": int(stats.get("points") or 0),
+                    "gamesPlayed": int(stats.get("gamesPlayed") or 0),
+                    "note": e.get("note", {}).get("description", ""),
+                })
+            out[g["name"]] = entries
+        return out
+
+    def scheduled_fixtures(self, date_range):
+        """Not-yet-played group-stage fixtures within date_range: list of {date, group, teams, event_id}."""
+        d = self.scoreboard(date_range)
+        fixtures = []
+        for e in d.get("events", []):
+            comp = e["competitions"][0]
+            if comp["status"]["type"]["description"] != "Scheduled":
+                continue
+            note = comp.get("altGameNote", "")
+            if "Group" not in note:
+                continue
+            group = note.split(", ")[-1]
+            teams = [c["team"]["displayName"] for c in comp["competitors"]]
+            if len(teams) != 2:
+                continue
+            fixtures.append({"date": e["date"], "group": group, "teams": teams, "event_id": e["id"]})
+        return fixtures
+
 
 def _stat(stats, name):
     for s in stats:
@@ -136,6 +173,42 @@ def _sub_minute_maps(summary):
         except Exception:
             continue
     return sub_in, sub_out
+
+
+def rank_matchups_by_interest(fixtures, standings_by_group, top_n=10):
+    """
+    Score each scheduled fixture by FIFA ranking (both teams highly ranked
+    scores higher) plus group stakes (neither team eliminated, points close
+    enough that the result decides who controls the group). Returns the
+    top_n fixtures sorted by score, each annotated with rank1/rank2/score/stakes.
+    """
+    scored = []
+    for fx in fixtures:
+        t1, t2 = fx["teams"]
+        r1, r2 = FIFA_RANKING.get(t1, 100), FIFA_RANKING.get(t2, 100)
+        # Weight the weaker side 2x: a top team vs. a mediocre one shouldn't
+        # outscore two genuinely strong teams (both ranks have to be good).
+        rank_score = max(0, 100 - max(r1, r2)) * 2 + max(0, 100 - min(r1, r2))
+
+        entries = {e["team"]: e for e in standings_by_group.get(fx["group"], [])}
+        e1, e2 = entries.get(t1), entries.get(t2)
+        stakes_score, stakes = 0, "stakes unknown"
+        if e1 and e2:
+            if "Eliminated" in e1["note"] or "Eliminated" in e2["note"]:
+                stakes = "one side already eliminated"
+            else:
+                pt_gap = abs(e1["points"] - e2["points"])
+                stakes_score = max(0, 6 - pt_gap) * 10
+                leader, trailer = (e1, e2) if e1["points"] >= e2["points"] else (e2, e1)
+                stakes = (f"level on points ({e1['points']}) — winner takes control of {fx['group']}"
+                           if pt_gap == 0 else
+                           f"{leader['team']} leads {leader['points']}-{trailer['points']}; "
+                           f"{trailer['team']} must win to stay in control of its own fate")
+
+        scored.append({**fx, "rank1": r1, "rank2": r2,
+                        "score": rank_score + stakes_score, "stakes": stakes})
+    scored.sort(key=lambda x: -x["score"])
+    return scored[:top_n]
 
 
 def aggregate_player_stats(client, event_ids, stat_names=("totalGoals", "totalShots", "shotsOnTarget")):
