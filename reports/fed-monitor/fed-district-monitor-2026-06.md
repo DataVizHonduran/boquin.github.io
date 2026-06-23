@@ -1,36 +1,42 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (10 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
+To: Investment Committee
+From: Senior Economist
+Date: June 23, 2026
+Subject: Analysis of Recent Federal Reserve District Research
 
-**TO:** Investment Committee
-**FROM:** Senior Economist
-**DATE:** June 22, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+I have reviewed the latest research from the Federal Reserve districts. While several papers focus on micro-level social transfers, the following five publications provide the most critical signals for our macro outlook and portfolio positioning.
 
-I have filtered the recent output from the regional banks to isolate the signals most relevant to our current portfolio positioning and macro outlook. Please see the priority briefings below:
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the latest quantitative baseline for growth and inflation expectations from one of the Fed's primary modeling tools. It is essential for aligning our house views with the New York Fed's internal projections for the remainder of the year.
 
-1. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This report indicates a sharp decline in sentiment among small businesses in the NY/NJ/CT corridor. Given the systemic importance of the Second District, this pessimism suggests a looming contraction in regional CAPEX and a potential uptick in credit defaults among small-cap borrowers.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This report indicates a sharp decline in sentiment among small businesses in the NY/NJ/CT area. This serves as a "canary in the coal mine," suggesting that headline macro data may be masking significant distress in the real economy.
 
-2. **[NY] Remote Work Leaves Younger Workers Sidelined:** The research establishes a correlation between the rise of remote work and increased youth unemployment, suggesting a breakdown in the "apprenticeship" model of on-the-job training. This implies a long-term erosion of human capital and productivity growth that may offset some of the efficiency gains from digitalization.
+3. **[NY] The Unintended Effects of Interest Rate Caps (Credit Rationing/Reallocation):** Across two reports, the NY Fed highlights how state-level rate caps are pushing lenders to ration credit for risky borrowers and pivot toward safer ones. This suggests a growing credit gap for lower-income borrowers, which could increase systemic reliance on unregulated "shadow" lending.
 
-3. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** Across two reports, the NY Fed demonstrates that state-level rate caps are pushing credit away from high-risk borrowers toward "safer" ones. For our credit desks, this signals a growing "shadow" credit market as risky borrowers are priced out of regulated channels, increasing systemic fragility.
+4. **[NY] Remote Work Leaves Younger Workers Sidelined:** This analysis links the prevalence of remote work to rising youth unemployment, citing a breakdown in traditional mentorship and onboarding. This points to a long-term structural risk to labor productivity and human capital development.
 
-4. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** Data reveals a divergence in commuting patterns across the Fifth District, suggesting that the "death of the city" narrative is too simplistic. This geographic heterogeneity means we must shift from a broad "commercial real estate" short to a more granular, city-specific strategy based on local employment resilience.
+5. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** This research reveals a divergence in commuting patterns across major metropolitan areas, suggesting the "urban flight" is not uniform. This is a critical input for our Commercial Real Estate (CRE) valuations and regional growth forecasts.
 
-5. **[STL] Natural Resources and Sovereign Risk in Emerging Economies:** This analysis examines the dual nature of resource dependence in EMs. It is critical for our EM sovereign bond allocations, as it helps distinguish between "blessed" economies with institutional capacity and those trapped in a "curse" cycle of volatility and risk.
-
-**Synthesis:** The collective data suggests a fragmented recovery characterized by structural labor market frictions and growing credit gaps for marginalized borrowers. We are seeing a transition from broad pandemic-era trends to a more granular, "K-shaped" economic reality across both urban geography and borrower risk profiles.
+**Synthesis:**
+The current data suggests a fragmented economy where structural shifts in labor and urban geography are creating hidden pockets of instability. While formal DSGE models provide a baseline
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+
+### (cached) [The New York Fed DSGE Model Forecast—June 2026](https://libertystreeteconomics.newyorkfed.org/2026/06/the-new-york-fed-dsge-model-forecast-june-2026/)
+**Published:** 2026-06-22 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [The Unintended Effects of Interest Rate Caps: Credit Reallocation to Safer Borrowers](https://libertystreeteconomics.newyorkfed.org/2026/06/the-unintended-effects-of-interest-rate-caps-credit-reallocation-to-safer-borrowers/)
 **Published:** 2026-06-03 | **Authors:** 
@@ -105,5 +111,5 @@ The paper explores how diverse characteristics within the labor market affect th
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 9
-- Total cache size: 9 items
+- Already cached: 10
+- Total cache size: 10 items
