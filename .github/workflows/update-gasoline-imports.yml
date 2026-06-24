@@ -1,0 +1,44 @@
+name: Update Gasoline Imports Seasonal Chart
+
+on:
+  schedule:
+    # 17:00 UTC = 1:00 PM ET (UTC-4 DST) / 12:00 PM ET (UTC-5 standard)
+    # 2.5h buffer during DST, 1.5h during standard — covers late EIA publishes.
+    - cron: '0 17 * * 3'
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install matplotlib
+
+      - name: Generate chart
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/generate_gasoline_imports_seasonal.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/gasoline-imports/
+          git diff --staged --quiet || (git commit -m "Update Gasoline Imports Seasonal Chart - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
