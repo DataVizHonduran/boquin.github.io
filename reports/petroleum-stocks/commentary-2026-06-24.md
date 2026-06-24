@@ -1,37 +1,36 @@
-# EIA Weekly Petroleum Stocks Analysis: June 12, 2026
+## EIA Weekly Petroleum Stocks Analysis: June 24, 2026
 
-## Executive Summary
-The latest EIA snapshot reveals a tightening refined products complex, particularly in gasoline, coinciding with a healthy draw in crude inventories. While crude remains seasonally neutral, the significant regional imbalances in gasoline suggest localized volatility.
+### Executive Summary
+The latest snapshot reveals a classic summer refinery profile: crude inventories are being drawn down to feed high seasonal demand for refined products. While total product stocks saw modest builds, significant regional deficits—particularly in Gulf Coast gasoline—suggest underlying tightness.
 
-### Inventory Snapshot
 | Product | MMBbl | WoW | Seasonal % | Signal |
 | :--- | :--- | :--- | :--- | :--- |
-| **Crude Oil** | 418.2 | -8.3 | -0.1% | Bullish/Neutral |
-| **Gasoline** | 214.2 | -0.9 | -8.2% | Bullish |
-| **Distillates** | 103.1 | +1.0 | -8.9% | Neutral/Bullish |
+| Crude Oil | 412.1 | -6.1 (Draw) | -2.7% | Bullish |
+| Gasoline | 216.3 | +2.1 (Build) | -7.3% | Bullish/Neutral |
+| Distillates | 106.1 | +3.1 (Build) | -5.0% | Neutral |
 
 ---
 
-## 1. Crude Oil Positioning
-*   **National Outlook:** A robust WoW draw of 8.3 MMBbl indicates strong refinery runs or export demand. However, the total NUS position is essentially flat relative to the 5-year seasonal norm (-0.1%), suggesting no extreme structural deficit.
-*   **PADD 3 Highlight:** The Gulf Coast remains the primary buffer, sitting 9.7% above its seasonal range. This provides a safety valve for the US system despite the national draw.
+### 1. Crude Oil Positioning
+*   **NUS Total:** The 6.1 MMBbl draw indicates strong refinery utilization as the industry maximizes throughput for the summer peak.
+*   **Seasonal Norms:** Total stocks are 2.7% below the 5-year average, providing a thin cushion against supply disruptions.
+*   **PADD 3 Highlight:** The Gulf Coast remains the primary anchor at 239.8 MMBbl (+6.8% of range). While the national trend is tight, PADD 3's slight surplus prevents an immediate price spike in WTI.
 
-## 2. Gasoline Positioning
-*   **Seasonal Tightness:** Stocks are 8.2% below the 5-year average, confirming a tight summer driving season.
-*   **Demand Signal:** The WoW draw, combined with the seasonal deficit, suggests consumption is outpacing production.
-*   **Regional Divergence:** A stark contrast exists between PADD 3 (Gulf Coast), which is critically undersupplied (-56.3%), and PADD 4 (Rocky Mtn), which is heavily oversupplied (+50.9%).
+### 2. Gasoline Positioning
+*   **Seasonal Tightness:** Despite a WoW build of 2.1 MMBbl, total stocks are 7.3% below seasonal norms.
+*   **Demand Signal:** The massive deficit in **PADD 3 (-50.6% of range)** is the critical data point. This suggests that Gulf Coast exports or regional demand are aggressively eating into inventories, signaling high sensitivity to any refinery outages.
 
-## 3. Distillate Positioning
-*   **Seasonal Tightness:** Despite a modest WoW build of 1.0 MMBbl, total stocks remain 8.9% below seasonal norms.
-*   **Demand Signal:** The slight build suggests a temporary lull in diesel demand or a shift in refinery yields, but the overall seasonal deficit keeps the floor under prices.
+### 3. Distillate Positioning
+*   **Seasonal Status:** Stocks are 5.0% below the 5-year range.
+*   **Demand Signal:** The 3.1 MMBbl build is expected for June as heating oil demand vanishes. However, the build is modest, suggesting diesel demand remains resilient despite the seasonal transition.
 
-## 4. Cross-Product Divergences
-*   **Gasoline vs. Distillates:** Gasoline is seeing active draws while distillates are building slightly. This indicates a clear seasonal pivot toward maximum gasoline production (high summer grade) at the expense of distillate yields.
-*   **Regional Imbalance:** The massive gap between PADD 3 and PADD 4 gasoline stocks suggests significant logistical bottlenecks or localized production surpluses in the Rockies.
+### 4. Cross-Product Divergences
+*   **Crude vs. Products:** We see a clear divergence: **Crude $\downarrow$ / Products $\uparrow$**. This confirms high refinery "crack" activity—crude is being converted into gasoline and diesel faster than the products are being consumed.
+*   **Regional Gasoline Split:** A stark contrast exists between PADD 4 (Rocky Mtn +48.5%) and PADD 3 (Gulf Coast -50.6%), indicating significant regional imbalances in product distribution.
 
-## 5. Price Implications
-*   **WTI:** **Net Bullish.** The 8.3 MMBbl draw provides immediate upward pressure, though the neutral seasonal position prevents a parabolic move.
-*   **Refined Products:** **Bullish for Gasoline / Neutral for Distillates.** The severe deficit in PADD 3 gasoline is a primary catalyst for higher RBOB cracks. Distillates remain supported by seasonal lows but lack a short-term catalyst.
+### 5. Price Implications
+*   **WTI:** **Net Bullish.** Weekly draws combined with stocks trending below seasonal norms support a higher price floor.
+*   **Refined Products:** **Neutral to Bullish.** The WoW builds are bearish, but the deep seasonal deficits (especially in Gasoline) make the market vulnerable to upside volatility.
 
-## 6. Watchlist for Next Wednesday
-**PADD 3 Gasoline Stocks:** Monitor if the Gulf Coast deficit deepens. If PADD 3 continues to slide while PADD 4 remains bloated, expect increased regional price volatility and potential regulatory scrutiny on refinery utilization.
+### 6. Watchlist for Next Wednesday
+*   **PADD 3 Gasoline Inventories:** If the Gulf Coast gasoline deficit widens further despite the national build, expect a sharp spike in RBOB cracks.
