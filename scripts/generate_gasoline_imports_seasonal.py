@@ -34,13 +34,13 @@ from datetime import date
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-EIA_API_BASE  = "https://api.eia.gov/v2/petroleum/move/imp/data/"
+# PET.WGTIMUS2.W = "U.S. Imports of Total Gasoline" (NUS-Z00, EPM0, IM0).
+# Weekly imports aren't exposed via /petroleum/move/imp/data/ (monthly/annual
+# only) — the weekly series is only reachable through the seriesid shortcut.
+SERIES_URL    = "https://api.eia.gov/v2/seriesid/PET.WGTIMUS2.W"
 OUTPUT_DIR    = os.path.join(os.path.dirname(__file__), "..", "reports", "gasoline-imports")
 WINDOW_DAYS   = 365
 HISTORY_YEARS = 5
-DUOAREA       = "NUS-Z00"
-PRODUCT       = "EPM0"
-PROCESS       = "IM0"
 
 
 # ---------------------------------------------------------------------------
@@ -58,19 +58,7 @@ def get_api_key() -> str:
 
 
 def fetch_imports(api_key: str) -> pd.Series:
-    weeks = HISTORY_YEARS * 53 + 60
-    qs = (
-        f"api_key={api_key}"
-        f"&frequency=weekly"
-        f"&data[0]=value"
-        f"&facets[product][]={PRODUCT}"
-        f"&facets[duoarea][]={DUOAREA}"
-        f"&facets[process][]={PROCESS}"
-        f"&sort[0][column]=period"
-        f"&sort[0][direction]=desc"
-        f"&length={weeks}"
-    )
-    resp = requests.get(f"{EIA_API_BASE}?{qs}", timeout=30)
+    resp = requests.get(SERIES_URL, params={"api_key": api_key}, timeout=30)
     resp.raise_for_status()
     rows = resp.json().get("response", {}).get("data", [])
 
