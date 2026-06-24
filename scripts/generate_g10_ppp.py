@@ -174,8 +174,8 @@ def imf_itg_series(area: str, indicator: str, transformation: str, freq: str = "
 def _terms_of_trade_price(area: str) -> pd.Series:
     """IMF's own export/import price indices (EPI/MPI) — back to 1990, but several
     G10 countries stopped reporting these years ago (Germany 2017, UK 2018, Japan 2020)."""
-    epi = imf_itg_series(area, "EPI", "FOB_IX")
-    mpi = imf_itg_series(area, "MPI", "CIF_IX")
+    epi = imf_itg_series(area, "EPI", "FOB_IX", start="1990")
+    mpi = imf_itg_series(area, "MPI", "CIF_IX", start="1990")
     return (epi / mpi).dropna()
 
 
