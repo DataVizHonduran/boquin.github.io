@@ -1,35 +1,37 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (10 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (12 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Committee
-From: Senior Economist
-Date: June 23, 2026
-Subject: Analysis of Recent Federal Reserve District Research
+Team,
 
-I have reviewed the latest research from the Federal Reserve districts. While several papers focus on micro-level social transfers, the following five publications provide the most critical signals for our macro outlook and portfolio positioning.
+I have reviewed the latest research from the Federal Reserve districts. While much of the output is methodological, there are several critical signals regarding the 2026 outlook, specifically concerning credit availability and structural labor shifts.
 
-1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the latest quantitative baseline for growth and inflation expectations from one of the Fed's primary modeling tools. It is essential for aligning our house views with the New York Fed's internal projections for the remainder of the year.
+Here are the most analytically significant publications:
 
-2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This report indicates a sharp decline in sentiment among small businesses in the NY/NJ/CT area. This serves as a "canary in the coal mine," suggesting that headline macro data may be masking significant distress in the real economy.
-
-3. **[NY] The Unintended Effects of Interest Rate Caps (Credit Rationing/Reallocation):** Across two reports, the NY Fed highlights how state-level rate caps are pushing lenders to ration credit for risky borrowers and pivot toward safer ones. This suggests a growing credit gap for lower-income borrowers, which could increase systemic reliance on unregulated "shadow" lending.
-
-4. **[NY] Remote Work Leaves Younger Workers Sidelined:** This analysis links the prevalence of remote work to rising youth unemployment, citing a breakdown in traditional mentorship and onboarding. This points to a long-term structural risk to labor productivity and human capital development.
-
-5. **[RIC] The Postpandemic City: Urban Employment Centers and Commuting:** This research reveals a divergence in commuting patterns across major metropolitan areas, suggesting the "urban flight" is not uniform. This is a critical input for our Commercial Real Estate (CRE) valuations and regional growth forecasts.
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the current baseline for the Fed's internal projections on growth and inflation. It is the primary benchmark we must use to align our proprietary models with the Fed's likely reaction function for the second half of the year.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** Sentiment among small businesses in the Second District has deteriorated sharply. This serves as a leading indicator for a broader economic slowdown and suggests that the "last mile" of the economy is feeling significant pressure.
+3. **[NY] Synthetic Stablecoins and Financial Stability:** This analysis of the October 2025 tariff shock demonstrates how aggressive trade policy triggers immediate risk-off moves across Treasuries and digital assets. It highlights the systemic fragility of the financial system when geopolitical tensions intersect with new financial technologies.
+4. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** Research indicates that state-level rate caps are pushing credit away from risky borrowers toward safer ones, effectively rationing credit. This creates a hidden credit crunch that could dampen consumer spending and drive borrowers toward unregulated, higher-risk shadow banking.
+5. **[NY] Remote Work Leaves Younger Workers Sidelined:** The data suggests a structural link between the prevalence of remote work and rising youth unemployment. This represents a long-term productivity risk, as the lack of in-person mentorship for early-career workers may erode human capital accumulation.
 
 **Synthesis:**
-The current data suggests a fragmented economy where structural shifts in labor and urban geography are creating hidden pockets of instability. While formal DSGE models provide a baseline
+The current data suggests a precarious macro environment where structural labor mismatches and credit rationing are undermining growth, compounded by deep pessimism in the small business sector. We should prepare for increased volatility as geopolitical trade shocks continue to test financial stability and the Fed's DSGE-based projections.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 6
+
+### (cached) [Synthetic Stablecoins and Financial Stability](https://libertystreeteconomics.newyorkfed.org/2026/06/synthetic-stablecoins-and-financial-stability/)
+**Published:** 2026-06-23 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [The New York Fed DSGE Model Forecast—June 2026](https://libertystreeteconomics.newyorkfed.org/2026/06/the-new-york-fed-dsge-model-forecast-june-2026/)
 **Published:** 2026-06-22 | **Authors:** 
@@ -67,7 +69,14 @@ The paper argues that the rise of remote work has contributed to increased youth
 **Tags:** labor markets · employment · AI & economy · GDP growth · wages
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 2
+**Content Type:** Economic Briefs | **New:** 0 of 3
+
+### (cached) [Forecasting Wage Growth Using Months Supply](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-20)
+**Published:** 2026-06-24 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [How Much Financial Help Do People Give and Receive? Evidence from the Understanding America Survey](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-19)
 **Published:** 2026-06-19 | **Authors:** 
@@ -111,5 +120,5 @@ The paper explores how diverse characteristics within the labor market affect th
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 10
-- Total cache size: 10 items
+- Already cached: 12
+- Total cache size: 12 items
