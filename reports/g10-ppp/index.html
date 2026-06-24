@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G10 Classic PPP Fair Value — boquin.xyz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#1a1a1a;font-size:14px}
+.hdr{background:#1a3a2f;color:#fff;padding:24px 32px}
+.hdr h1{font-size:1.5rem;font-weight:700;letter-spacing:-.4px}
+.hdr .sub{font-size:.85rem;opacity:.75;margin-top:6px;max-width:760px;line-height:1.5}
+.hdr .meta{font-size:.75rem;opacity:.55;margin-top:8px}
+.content{padding:24px 32px;max-width:1100px;margin:0 auto}
+.card{background:#fff;border:1px solid #e4e8ec;border-radius:10px;padding:18px 20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#999;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eef1f4}
+th{color:#666;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px}
+td.num{text-align:right;font-family:'SF Mono',Consolas,monospace}
+tr.rich td.num.misalign{color:#1a7a3c}
+tr.cheap td.num.misalign{color:#c0392b}
+a.pair-link{color:#1a3a2f;font-weight:600;text-decoration:none}
+a.pair-link:hover{text-decoration:underline}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.grid a{display:block;text-align:center;padding:14px 8px;border:1px solid #dfe4e8;border-radius:8px;background:#fafbfc;color:#1a3a2f;font-weight:700;text-decoration:none;transition:all .12s}
+.grid a:hover{background:#1a3a2f;color:#fff;border-color:#1a3a2f}
+.note{font-size:.78rem;color:#888;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>🧮 G10 Classic PPP Fair Value</h1>
+  <div class="sub">Relative purchasing-power-parity model for EUR/USD + 8 other G10 pairs, back to 1990. PPP-implied rate is calibrated so mean misalignment = 0 over the full sample (beta fixed at 1); an unrestricted OLS fit and an AR(1) half-life of mean reversion are reported alongside.</div>
+  <div class="meta">Sources: FRED spot FX, OECD live CPI (Eurostat HICP for the euro area), US CPI (CPIAUCSL) · Updated 2026-06-24</div>
+</div>
+
+<div class="content">
+
+  <div class="card">
+    <div class="card-title">Current Misalignment vs. PPP</div>
+    <table>
+      <thead>
+        <tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cheap"><td><a class="pair-link" href="chf.html">CHF/USD</a></td><td class="num">1.2549</td><td class="num">1.2524</td><td class="num misalign">+0.2%</td><td class="num">29 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="aud.html">AUD/USD</a></td><td class="num">0.6855</td><td class="num">0.7203</td><td class="num misalign">-4.8%</td><td class="num">14 qtr</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="eur.html">EUR/USD</a></td><td class="num">1.1710</td><td class="num">1.2797</td><td class="num misalign">-8.5%</td><td class="num">48 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="gbp.html">GBP/USD</a></td><td class="num">1.3498</td><td class="num">1.5241</td><td class="num misalign">-11.4%</td><td class="num">53 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="nzd.html">NZD/USD</a></td><td class="num">0.5710</td><td class="num">0.6451</td><td class="num misalign">-11.5%</td><td class="num">13 qtr</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="cad.html">CAD/USD</a></td><td class="num">0.7290</td><td class="num">0.8494</td><td class="num misalign">-14.2%</td><td class="num">79 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="sek.html">SEK/USD</a></td><td class="num">0.1076</td><td class="num">0.1426</td><td class="num misalign">-24.5%</td><td class="num">100 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="nok.html">NOK/USD</a></td><td class="num">0.0989</td><td class="num">0.1374</td><td class="num misalign">-28.0%</td><td class="num">109 mo</td></tr>
+        <tr class="cheap"><td><a class="pair-link" href="jpy.html">JPY/USD</a></td><td class="num">0.0063</td><td class="num">0.0124</td><td class="num misalign">-48.9%</td><td class="num">n/a*</td></tr>
+      </tbody>
+    </table>
+    <div class="note">Negative misalignment = foreign currency cheap vs. PPP (USD rich). All 9 G10 pairs currently screen cheap vs. PPP — CHF is the closest to fair value, JPY the most extreme outlier.<br>
+    *JPY's AR(1) coefficient on misalignment is ≥1 over the full sample (no finite half-life) — the most pronounced PPP breakdown in G10, consistent with the post-2022 yen carry-trade dynamics decoupling spot from relative price levels.<br>
+    AUD/NZD run on quarterly CPI (no monthly series exists for either); half-life units differ accordingly (qtr vs. mo).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Launch Pair Chart</div>
+    <div class="grid">
+      <a href="eur.html">EUR/USD</a>
+      <a href="jpy.html">JPY/USD</a>
+      <a href="gbp.html">GBP/USD</a>
+      <a href="chf.html">CHF/USD</a>
+      <a href="cad.html">CAD/USD</a>
+      <a href="aud.html">AUD/USD</a>
+      <a href="nzd.html">NZD/USD</a>
+      <a href="sek.html">SEK/USD</a>
+      <a href="nok.html">NOK/USD</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
