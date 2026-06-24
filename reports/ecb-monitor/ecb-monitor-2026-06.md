@@ -1,35 +1,41 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (14 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: June 2026 (15 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
 To: Investment Team
-From: Senior Eurozone Economist
-Date: 2026-06-23
+From: Senior Economist (Eurozone)
+Date: 2026-06-24
 Subject: Analysis of Recent ECB and National Central Bank Research
 
-I have filtered the latest research from the ECB and national central banks. While much of the output is academic, five publications provide critical signals for our macro positioning and risk assessment.
+I have reviewed the latest research cycle from the Eurosystem. While much of the output is academic, several papers provide critical insights into the ECB's current reaction function and the systemic risks facing the bloc.
 
-1. **Monetary policy under multiple financing constraints (ECB):** This research highlights a persistent asymmetry where monetary tightening exerts a stronger economic contraction than easing provides stimulus. For our models, this suggests the ECB may inadvertently over-tighten more easily than it can spark recovery, increasing the risk of a policy overshoot.
+The following publications are the most analytically significant for our current positioning:
 
-2. **Financial stability considerations for monetary policy (ECB):** The paper formalizes the quantitative tools and conceptual framework the ECB uses to manage the trade-off between price stability and financial stability. This is a key signal that the ECB is refining its "separation principle," potentially allowing for more targeted liquidity interventions even while maintaining a restrictive policy stance.
+1. **Monetary policy under multiple financing constraints (ECB):** This research addresses the "puzzle" of why monetary tightening often has a more pronounced effect on the real economy than easing. For our models, this suggests an asymmetric transmission mechanism, implying that the ECB may inadvertently over-tighten if they rely on symmetric historical data to calibrate rate hikes.
 
-3. **Effectiveness of supervisory activities in mitigating banks’ CRE risk (ECB):** This study assesses whether supervisory pressure has actually reduced credit risk in Commercial Real Estate (CRE) portfolios. Given the ongoing volatility in property valuations, this analysis is vital for determining if the banking sector's resilience is structural or merely a result of regulatory forbearance.
+2. **Effectiveness of supervisory activities in mitigating banks’ commercial real estate (CRE) risk (ECB):** This paper evaluates whether supervisory interventions are actually reducing credit risk in CRE portfolios. Given the volatility in office valuations, this is a key indicator of whether the Eurozone banking sector is truly resilient or if supervisory "buffers" are masking underlying fragility.
 
-4. **Piero Cipollone: Europe needs to act to strengthen the role of its currency (ECB):** This piece argues for strategic policy shifts to enhance the Euro's international standing and utility. It suggests a long-term institutional push toward deeper capital markets integration, which would fundamentally alter the long-term valuation and volatility profile of the EUR.
+3. **Financial stability considerations for monetary policy at the ECB (ECB):** This provides the conceptual framework the ECB uses to navigate the trade-off between price stability (inflation) and financial stability (market crashes). Understanding this framework is essential for predicting the ECB's "pivot" timing—specifically, whether they will prioritize inflation targets even in the face of systemic financial stress.
 
-5. **Fiscal policy transmission through production networks (ECB):** The research demonstrates how sector-specific fiscal impulses propagate through the economy via input-output linkages. This allows us to better predict which secondary sectors will benefit from targeted EU fiscal spending, refining our equity sector allocations.
+4. **Fiscal policy transmission through production networks with heterogeneous households (ECB):** The study demonstrates how sector-specific fiscal spending propagates through the economy via input-output linkages. This matters for our growth forecasts, as it suggests that the *composition* of government spending is more important for aggregate demand than the total fiscal impulse.
 
-**Synthesis:**
-The current research trend indicates an ECB increasingly concerned with the "asymmetric" risks of its own policy tools and the systemic fragility of the CRE sector. Simultaneously, there is a strategic pivot toward strengthening the Euro's global role and optimizing the transmission of fiscal policy
+5. **A tale of two energy crises – initial conditions matter (ECB):** This analysis highlights how the starting economic state determines the severity of an energy
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 12
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 13
+
+### (cached) [What separates firms that use AI intensively from firms that don’t?](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260624~44f70da110.en.html)
+**Published:** 2026-06-24 | **Authors:** 
+
+The paper examines the firm-level characteristics and organizational determinants that distinguish intensive adopters of artificial intelligence from non-adopters. It analyzes how human capital and digital maturity influence the integration of AI to drive operational efficiency and productivity gains.
+
+**Tags:** productivity · labor markets · employment · wages · GDP growth · supply chains
 
 ### (cached) [Monetary policy under multiple financing constraints](https://www.ecb.europa.eu//press/research-publications/resbull/2026/html/ecb.rb260623~d5784647c1.en.html)
 **Published:** 2026-06-23 | **Authors:** 
@@ -136,5 +142,5 @@ The paper employs an isolation forest machine learning approach to analyze sudde
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 14
-- Total cache size: 14 items
+- Already cached: 15
+- Total cache size: 15 items
