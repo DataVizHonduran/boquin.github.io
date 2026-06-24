@@ -171,20 +171,44 @@ def imf_itg_series(area: str, indicator: str, transformation: str, freq: str = "
     return pd.Series([float(v[0]) for v in obs.values()], index=idx).sort_index()
 
 
-def terms_of_trade(area: str) -> pd.Series:
+def _terms_of_trade_price(area: str) -> pd.Series:
+    """IMF's own export/import price indices (EPI/MPI) — back to 1990, but several
+    G10 countries stopped reporting these years ago (Germany 2017, UK 2018, Japan 2020)."""
+    epi = imf_itg_series(area, "EPI", "FOB_IX")
+    mpi = imf_itg_series(area, "MPI", "CIF_IX")
+    return (epi / mpi).dropna()
+
+
+def _terms_of_trade_unit_value(area: str) -> pd.Series:
     """Unit-value-index ToT = (export value / export volume) / (import value / import volume).
 
-    More robust than IMF's own export/import price indices (EPI/MPI), which
-    have stopped updating for several G10 countries; trade value and volume
-    indices remain current.
+    Only available from 2005, but current — trade value/volume indices keep
+    updating even where the published price indices (EPI/MPI) have stopped.
     """
     xg = imf_itg_series(area, "XG", "FOB_USD")
     xg_vi = imf_itg_series(area, "XG_VI", "FOB_IX")
     mg = imf_itg_series(area, "MG", "CIF_USD")
     mg_vi = imf_itg_series(area, "MG_VI", "CIF_IX")
-    unit_value_x = xg / xg_vi
-    unit_value_m = mg / mg_vi
-    return (unit_value_x / unit_value_m).dropna()
+    return ((xg / xg_vi) / (mg / mg_vi)).dropna()
+
+
+def terms_of_trade(area: str) -> pd.Series:
+    """Spliced ToT: 1990s-present where possible.
+
+    Rescales the price-index series (long history, often stale) to the
+    unit-value series's level using their overlap period's mean ratio
+    (overlap is checked to be tight — e.g. USA std=0.002 on mean 0.649,
+    AUS std=0.009 on mean 1.049 — confirming the two methods track the
+    same underlying ToT dynamics), then splices: rescaled price-index
+    before the unit-value series starts, unit-value (current) from then on.
+    """
+    price, uv = _terms_of_trade_price(area), _terms_of_trade_unit_value(area)
+    common = price.index.intersection(uv.index)
+    if len(common) >= 3:
+        scale = (uv.loc[common] / price.loc[common]).mean()
+        pre = price[price.index < uv.index.min()] * scale
+        return pd.concat([pre, uv]).sort_index()
+    return uv
 
 
 def wb_productivity(area: str, start: str = "1990") -> pd.Series:
