@@ -18,8 +18,6 @@ table{width:100%;border-collapse:collapse;font-size:.85rem}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eef1f4}
 th{color:#666;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px}
 td.num{text-align:right;font-family:'SF Mono',Consolas,monospace}
-tr.rich td.num.misalign{color:#1a7a3c}
-tr.cheap td.num.misalign{color:#c0392b}
 a.pair-link{color:#1a3a2f;font-weight:600;text-decoration:none}
 a.pair-link:hover{text-decoration:underline}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
@@ -41,23 +39,12 @@ a.pair-link:hover{text-decoration:underline}
   <div class="card">
     <div class="card-title">Current Misalignment vs. PPP</div>
     <table>
-      <thead>
-        <tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th></tr>
-      </thead>
+      <thead><tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th></tr></thead>
       <tbody>
-        <tr class="cheap"><td><a class="pair-link" href="chf.html">USD/CHF</a></td><td class="num">0.7969</td><td class="num">0.7985</td><td class="num misalign">+0.2%</td><td class="num">29 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="aud.html">AUD/USD</a></td><td class="num">0.6855</td><td class="num">0.7203</td><td class="num misalign">-4.8%</td><td class="num">14 qtr</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="eur.html">EUR/USD</a></td><td class="num">1.1710</td><td class="num">1.2797</td><td class="num misalign">-8.5%</td><td class="num">48 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="gbp.html">GBP/USD</a></td><td class="num">1.3498</td><td class="num">1.5241</td><td class="num misalign">-11.4%</td><td class="num">53 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="nzd.html">NZD/USD</a></td><td class="num">0.5710</td><td class="num">0.6451</td><td class="num misalign">-11.5%</td><td class="num">13 qtr</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="cad.html">USD/CAD</a></td><td class="num">1.3717</td><td class="num">1.1774</td><td class="num misalign">-14.2%</td><td class="num">79 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="sek.html">USD/SEK</a></td><td class="num">9.2935</td><td class="num">7.0121</td><td class="num misalign">-24.5%</td><td class="num">100 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="nok.html">USD/NOK</a></td><td class="num">10.1069</td><td class="num">7.2769</td><td class="num misalign">-28.0%</td><td class="num">109 mo</td></tr>
-        <tr class="cheap"><td><a class="pair-link" href="jpy.html">USD/JPY</a></td><td class="num">158.1530</td><td class="num">80.7377</td><td class="num misalign">-48.9%</td><td class="num">n/a*</td></tr>
+        <tr><td><a class="pair-link" href="chf.html">USD/CHF</a></td><td class="num">0.7969</td><td class="num">0.7985</td><td class="num misalign">+0.2%</td><td class="num">29 mo</td></tr><tr><td><a class="pair-link" href="aud.html">AUD/USD</a></td><td class="num">0.6855</td><td class="num">0.7203</td><td class="num misalign">-4.8%</td><td class="num">14 qtr</td></tr><tr><td><a class="pair-link" href="eur.html">EUR/USD</a></td><td class="num">1.1710</td><td class="num">1.2797</td><td class="num misalign">-8.5%</td><td class="num">47 mo</td></tr><tr><td><a class="pair-link" href="gbp.html">GBP/USD</a></td><td class="num">1.3498</td><td class="num">1.5241</td><td class="num misalign">-11.4%</td><td class="num">53 mo</td></tr><tr><td><a class="pair-link" href="nzd.html">NZD/USD</a></td><td class="num">0.5710</td><td class="num">0.6451</td><td class="num misalign">-11.5%</td><td class="num">13 qtr</td></tr><tr><td><a class="pair-link" href="cad.html">USD/CAD</a></td><td class="num">1.3717</td><td class="num">1.1774</td><td class="num misalign">-14.2%</td><td class="num">79 mo</td></tr><tr><td><a class="pair-link" href="sek.html">USD/SEK</a></td><td class="num">9.2935</td><td class="num">7.0121</td><td class="num misalign">-24.5%</td><td class="num">100 mo</td></tr><tr><td><a class="pair-link" href="nok.html">USD/NOK</a></td><td class="num">10.1069</td><td class="num">7.2769</td><td class="num misalign">-28.0%</td><td class="num">108 mo</td></tr><tr><td><a class="pair-link" href="jpy.html">USD/JPY</a></td><td class="num">158.1530</td><td class="num">80.7377</td><td class="num misalign">-48.9%</td><td class="num">n/a*</td></tr>
       </tbody>
     </table>
-    <div class="note">Negative misalignment = foreign currency cheap vs. PPP (USD rich). All 9 G10 pairs currently screen cheap vs. PPP — CHF is the closest to fair value, JPY the most extreme outlier.<br>
-    *JPY's AR(1) coefficient on misalignment is ≥1 over the full sample (no finite half-life) — the most pronounced PPP breakdown in G10, consistent with the post-2022 yen carry-trade dynamics decoupling spot from relative price levels.<br>
+    <div class="note">Negative misalignment = foreign currency cheap vs. PPP (USD rich).<br>*One or more pairs show an AR(1) coefficient on misalignment ≥1 over the full sample (no finite half-life) — the most pronounced PPP breakdowns in G10.<br>
     AUD/NZD run on quarterly CPI (no monthly series exists for either); half-life units differ accordingly (qtr vs. mo).</div>
   </div>
 
