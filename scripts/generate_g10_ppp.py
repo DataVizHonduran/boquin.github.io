@@ -54,6 +54,19 @@ PAIRS = {
 }
 ALL_PAIRS = ["EUR"] + list(PAIRS)
 
+# "Adjusted PPP" overlay: relative-PPP + terms of trade + productivity
+# (Balassa-Samuelson proxy), annual frequency. Only pairs with genuinely
+# current data on both factors are included:
+#   - ToT: IMF ITG export/import *unit value* indices (value ÷ volume,
+#     since several countries' published price indices stopped updating
+#     years ago — Germany 2017, UK 2019, Japan 2021). Switzerland and
+#     Norway report no ITG trade data at all; Sweden's volume index itself
+#     stopped in 2021 (a real reporting gap, not a methodology fix).
+#   - Productivity: World Bank GDP-per-person-employed (constant PPP$),
+#     complete for all G10 countries but annual-only, 1991-2024.
+# CHF, NOK (no ToT) and SEK (stale ToT) are excluded.
+ADJUSTED_AREA = {"EUR": "DEU", "GBP": "GBR", "JPY": "JPN", "AUD": "AUS", "NZD": "NZL", "CAD": "CAN"}
+
 # Market convention quotes these 5 as USD-base (USDJPY, USDCHF, USDCAD,
 # USDSEK, USDNOK = foreign units per 1 USD); EUR/GBP/AUD/NZD already quote
 # USD per 1 foreign unit. The model always works in USD-per-foreign terms
@@ -135,6 +148,55 @@ def eurostat_hicp_ea19(geo: str = "EA19", coicop: str = "CP00", unit: str = "I15
     return s.resample("MS").last()
 
 
+def _imf_period_to_date(period: str) -> str:
+    if "-Q" in period:
+        y, q = period.split("-Q")
+        return f"{y}-{(int(q) - 1) * 3 + 1:02d}-01"
+    if "-M" in period:
+        y, m = period.split("-M")
+        return f"{y}-{m}-01"
+    return f"{period}-01-01"
+
+
+def imf_itg_series(area: str, indicator: str, transformation: str, freq: str = "A", start: str = "2000") -> pd.Series:
+    url = f"https://api.imf.org/external/sdmx/2.1/data/IMF.STA,ITG,4.0.0/{area}.{indicator}.{transformation}.{freq}"
+    resp = requests.get(url, headers={"Accept": "application/json"}, params={"startPeriod": start}, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    struct = data["structure"]
+    times = [v["id"] for v in next(d for d in struct["dimensions"]["observation"] if d["id"] == "TIME_PERIOD")["values"]]
+    series_key = next(iter(data["dataSets"][0]["series"]))
+    obs = data["dataSets"][0]["series"][series_key]["observations"]
+    idx = pd.to_datetime([_imf_period_to_date(times[int(k)]) for k in obs.keys()])
+    return pd.Series([float(v[0]) for v in obs.values()], index=idx).sort_index()
+
+
+def terms_of_trade(area: str) -> pd.Series:
+    """Unit-value-index ToT = (export value / export volume) / (import value / import volume).
+
+    More robust than IMF's own export/import price indices (EPI/MPI), which
+    have stopped updating for several G10 countries; trade value and volume
+    indices remain current.
+    """
+    xg = imf_itg_series(area, "XG", "FOB_USD")
+    xg_vi = imf_itg_series(area, "XG_VI", "FOB_IX")
+    mg = imf_itg_series(area, "MG", "CIF_USD")
+    mg_vi = imf_itg_series(area, "MG_VI", "CIF_IX")
+    unit_value_x = xg / xg_vi
+    unit_value_m = mg / mg_vi
+    return (unit_value_x / unit_value_m).dropna()
+
+
+def wb_productivity(area: str, start: str = "1990") -> pd.Series:
+    """World Bank GDP per person employed, constant 2017 PPP$ (SL.GDP.PCAP.EM.KD)."""
+    url = f"https://api.worldbank.org/v2/country/{area}/indicator/SL.GDP.PCAP.EM.KD"
+    resp = requests.get(url, params={"format": "json", "per_page": "500", "date": f"{start}:2030"}, timeout=30)
+    resp.raise_for_status()
+    rows = resp.json()[1]
+    s = pd.Series({pd.Timestamp(f"{r['date']}-01-01"): r["value"] for r in rows if r["value"] is not None})
+    return s.sort_index()
+
+
 # ── Fetch + model (mirrors eurusd_ppp.py) ────────────────────────────────────
 
 def fetch_eur() -> pd.DataFrame:
@@ -198,7 +260,44 @@ def compute_model(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def plot_ppp(res: pd.DataFrame, pair: str) -> go.Figure:
+def compute_adjusted_model(raw: pd.DataFrame, area: str) -> pd.DataFrame | None:
+    """Annual relative-PPP + terms of trade + productivity (Balassa-Samuelson) OLS fit.
+
+    Unlike classic PPP (beta fixed at 1, one variable), there's no textbook fixed
+    coefficient for ToT/productivity — all three coefficients are freely estimated.
+    Frequency is forced to annual since World Bank productivity has no sub-annual data.
+    """
+    annual = raw[["FX", "US_CPI", "FOREIGN_CPI"]].resample("YS").last()
+    tot_us = terms_of_trade("USA").resample("YS").last()
+    tot_foreign = terms_of_trade(area).resample("YS").last()
+    prod_us = wb_productivity("USA").resample("YS").last()
+    prod_foreign = wb_productivity(area).resample("YS").last()
+
+    df = pd.concat({
+        "FX": annual["FX"], "US_CPI": annual["US_CPI"], "FOREIGN_CPI": annual["FOREIGN_CPI"],
+        "ToT_US": tot_us, "ToT_FOREIGN": tot_foreign,
+        "Prod_US": prod_us, "Prod_FOREIGN": prod_foreign,
+    }, axis=1).dropna()
+    if len(df) < 8:
+        return None
+
+    df["ln_FX"] = np.log(df["FX"])
+    df["ln_relP"] = np.log(df["US_CPI"]) - np.log(df["FOREIGN_CPI"])
+    df["ln_relToT"] = np.log(df["ToT_FOREIGN"]) - np.log(df["ToT_US"])
+    df["ln_relProd"] = np.log(df["Prod_FOREIGN"]) - np.log(df["Prod_US"])
+
+    X = np.column_stack([np.ones(len(df)), df["ln_relP"], df["ln_relToT"], df["ln_relProd"]])
+    y = df["ln_FX"].to_numpy()
+    (alpha, b_p, b_tot, b_prod), *_ = np.linalg.lstsq(X, y, rcond=None)
+
+    df["ln_FX_ADJ"] = X @ np.array([alpha, b_p, b_tot, b_prod])
+    df["FX_ADJ"] = np.exp(df["ln_FX_ADJ"])
+    df["Pct_Misalignment_ADJ"] = (np.exp(df["ln_FX"] - df["ln_FX_ADJ"]) - 1) * 100
+    df.attrs.update(alpha=alpha, beta_relP=b_p, beta_tot=b_tot, beta_prod=b_prod)
+    return df
+
+
+def plot_ppp(res: pd.DataFrame, pair: str, adjusted: pd.DataFrame | None = None) -> go.Figure:
     pct_dev = res["Pct_Misalignment"]
     label = market_label(pair)
     disp_fx = to_market_convention(res["FX"], pair)
@@ -223,6 +322,20 @@ def plot_ppp(res: pd.DataFrame, pair: str) -> go.Figure:
                               line=dict(color="#0057A8", width=2)), row=1, col=1)
     fig.add_trace(go.Scatter(x=res.index, y=disp_fx_ppp, name=f"{label} (PPP-implied)", mode="lines",
                               line=dict(color="#F5A623", width=2, dash="dash")), row=1, col=1)
+
+    if adjusted is not None:
+        disp_fx_adj = to_market_convention(adjusted["FX_ADJ"], pair)
+        fig.add_trace(go.Scatter(
+            x=adjusted.index, y=disp_fx_adj, name=f"{label} (Adjusted PPP: ToT + productivity)",
+            mode="lines+markers", line=dict(color="#7B2CBF", width=2, dash="dot"),
+            marker=dict(size=4), visible="legendonly",
+        ), row=1, col=1)
+        fig.add_trace(go.Scatter(
+            x=adjusted.index, y=adjusted["Pct_Misalignment_ADJ"], name="Adjusted Misalignment (%)",
+            mode="lines+markers", line=dict(color="#7B2CBF", width=2, dash="dot"),
+            marker=dict(size=4), visible="legendonly",
+        ), row=2, col=1)
+
     fig.add_trace(go.Scatter(x=res.index, y=pct_dev, name="Misalignment (%)", mode="lines",
                               line=dict(color="#00843D", width=2), fill="tozeroy"), row=2, col=1)
     fig.add_hline(y=0, line=dict(color="#888888", width=1, dash="dot"), row=2, col=1)
@@ -255,7 +368,21 @@ def run(pair: str) -> dict:
     misalignment = res["Pct_Misalignment"].iloc[-1]
     half_life = res.attrs["half_life_periods"]
 
-    fig = plot_ppp(res, pair)
+    adjusted = None
+    adj_misalignment = None
+    adj_year = None
+    if pair in ADJUSTED_AREA:
+        try:
+            adjusted = compute_adjusted_model(raw, ADJUSTED_AREA[pair])
+        except Exception as e:
+            print(f"  ! Adjusted PPP failed for {pair}: {e}")
+        if adjusted is not None:
+            adj_misalignment = adjusted["Pct_Misalignment_ADJ"].iloc[-1]
+            adj_year = adjusted.index[-1].year
+            print(f"  Adjusted PPP ({adj_year}): beta_ToT={adjusted.attrs['beta_tot']:.2f}, "
+                  f"beta_Prod={adjusted.attrs['beta_prod']:.2f}, misalignment={adj_misalignment:+.1f}%")
+
+    fig = plot_ppp(res, pair, adjusted)
     slug = pair.lower()
     fig.write_html(os.path.join(OUTPUT_DIR, f"{slug}.html"))
     print(f"  {label}: {current_fx:.4f} vs PPP {current_ppp:.4f} ({misalignment:+.1f}%)")
@@ -264,6 +391,7 @@ def run(pair: str) -> dict:
         pair=pair, slug=slug, label=label, current_fx=current_fx, current_ppp=current_ppp,
         misalignment=misalignment, half_life=half_life,
         half_life_unit="qtr" if PAIRS.get(pair, {}).get("freq") == "QS" else "mo",
+        adj_misalignment=adj_misalignment, adj_year=adj_year,
     )
 
 
@@ -273,10 +401,12 @@ def build_index_html(rows: list[dict]) -> str:
     table_rows = []
     for r in rows_sorted:
         hl = f"{r['half_life']:.0f} {r['half_life_unit']}" if pd.notna(r["half_life"]) else "n/a*"
+        adj_cell = f'{r["adj_misalignment"]:+.1f}% ({r["adj_year"]})' if r.get("adj_misalignment") is not None else "—"
         table_rows.append(
             f'<tr><td><a class="pair-link" href="{r["slug"]}.html">{r["label"]}</a></td>'
             f'<td class="num">{r["current_fx"]:.4f}</td><td class="num">{r["current_ppp"]:.4f}</td>'
-            f'<td class="num misalign">{r["misalignment"]:+.1f}%</td><td class="num">{hl}</td></tr>'
+            f'<td class="num misalign">{r["misalignment"]:+.1f}%</td><td class="num">{hl}</td>'
+            f'<td class="num">{adj_cell}</td></tr>'
         )
 
     grid_links = "\n      ".join(f'<a href="{r["slug"]}.html">{r["label"]}</a>' for r in rows)
@@ -318,8 +448,8 @@ a.pair-link:hover{{text-decoration:underline}}
 
 <div class="hdr">
   <h1>🧮 G10 Classic PPP Fair Value</h1>
-  <div class="sub">Relative purchasing-power-parity model for EUR/USD + 8 other G10 pairs, back to 1990. PPP-implied rate is calibrated so mean misalignment = 0 over the full sample (beta fixed at 1); an unrestricted OLS fit and an AR(1) half-life of mean reversion are reported alongside.</div>
-  <div class="meta">Sources: FRED spot FX, OECD live CPI (Eurostat HICP for the euro area), US CPI (CPIAUCSL) · Updated {date.today().isoformat()}</div>
+  <div class="sub">Relative purchasing-power-parity model for EUR/USD + 8 other G10 pairs, back to 1990. PPP-implied rate is calibrated so mean misalignment = 0 over the full sample (beta fixed at 1); an unrestricted OLS fit and an AR(1) half-life of mean reversion are reported alongside. EUR, GBP, JPY, AUD, NZD, and CAD also have an <strong>Adjusted PPP</strong> variant (annual, OLS-fit relative PPP + terms of trade + productivity/Balassa-Samuelson) — toggle it on via the legend on each pair's chart.</div>
+  <div class="meta">Sources: FRED spot FX, OECD live CPI (Eurostat HICP for the euro area), US CPI (CPIAUCSL), IMF trade unit values (ToT), World Bank GDP-per-worker (productivity) · Updated {date.today().isoformat()}</div>
 </div>
 
 <div class="content">
@@ -327,13 +457,14 @@ a.pair-link:hover{{text-decoration:underline}}
   <div class="card">
     <div class="card-title">Current Misalignment vs. PPP</div>
     <table>
-      <thead><tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th></tr></thead>
+      <thead><tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th><th class="num">Adj. Misalignment</th></tr></thead>
       <tbody>
         {''.join(table_rows)}
       </tbody>
     </table>
     <div class="note">Negative misalignment = foreign currency cheap vs. PPP (USD rich).{footnote}<br>
-    AUD/NZD run on quarterly CPI (no monthly series exists for either); half-life units differ accordingly (qtr vs. mo).</div>
+    AUD/NZD run on quarterly CPI (no monthly series exists for either); half-life units differ accordingly (qtr vs. mo).<br>
+    Adjusted Misalignment is annual (year shown) — CHF, NOK have no IMF trade-price data, SEK's has a reporting gap since 2021, so all three are excluded from the adjusted variant.</div>
   </div>
 
   <div class="card">
