@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-05">
+    <meta name="release-date" content="2026-06-25">
+    <title>Trimmed Mean PCE Inflation Rate (Dallas Fed) — 2026-06-25</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Trimmed Mean PCE Inflation Rate (Dallas Fed)</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-06-25 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>2.610</h3>
+            <p>CONTEXT: 10Y REGIME: 56.7th Percentile | Z-Score: -0.20σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+        <div class="card">
+            <h3>1.960</h3>
+            <p>CONTEXT: 10Y REGIME: 69.2th Percentile | Z-Score: +0.11σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">12-Month Trimmed Mean PCE Inflation
+                <span class="mu-chart-latest">2.41</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"],
+                        datasets: [{
+                            data: [2.91, 2.86, 2.81, 2.8, 2.87, 2.9, 2.98, 2.77, 2.73, 2.65, 2.64, 2.61, 2.7, 2.69, 2.8, 2.7, 2.55, 2.51, 2.44, 2.41, 2.34, 2.36, 2.34, 2.41],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Economics Strategy Team</strong></p>
+<p><strong>Date: June 2026</strong></p>
+<p><strong>Subject: Trimmed Mean PCE Analysis: Inflation Plateau and Momentum Risks</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest Trimmed Mean PCE data suggests that inflation has entered a period of stubborn stabilization, effectively plateauing above the Federal Reserve's 2% target. While the 12-month trend has retreated significantly from 2025 peaks, the recent print indicates a loss of downward momentum, with the 12-month rate ticking up to 2.41% in May 2026.</p>
+
+<p>The overarching signal is one of "stickiness." The convergence of the 12-month Z-score toward the mean, coupled with an accelerating 1-month momentum print, suggests that the "last mile" of disinflation is proving difficult. We view this as a signal for the Fed to maintain a restrictive stance, as the data lacks the definitive downward trajectory required for aggressive easing.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Trend Reversal:</strong> The 12-month trimmed mean PCE has bottomed out at 2.34% (Feb/Apr 2026) and has now reversed course, rising 7bps to 2.41% in May.</li>
+<li>  <strong>Accelerating Monthly Momentum:</strong> The 1-month print shows a sharp acceleration, rising from 2.43% in April to 2.78% in May (+35bps MoM), indicating renewed short-term price pressure.</li>
+<li>  <strong>Regression to Mean:</strong> With a 10-year Z-score of -0.20$\sigma$ and a 56.7th percentile ranking, the 12-month inflation rate is now almost exactly aligned with its long-term historical average.</li>
+<li>  <strong>Persistent Volatility:</strong> The 1-month series remains erratic, swinging between 1.97% (Feb) and 2.94% (Mar), suggesting that while the trend is stable, monthly noise remains high.</li>
+<li>  <strong>Absence of Extreme Shocks:</strong> Neither the 12-month nor 1-month Z-scores exceed the $\pm 2.0\sigma$ threshold, confirming that we are not experiencing a regime-defining shock, but rather a period of consolidation.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The stability of the trimmed mean PCE, which removes extreme outliers, suggests a baseline of aggregate demand that remains resilient. The lack of a collapse in inflation prints implies that economic activity is likely sustaining itself without a significant contractionary shock.</p>
+
+<p><strong>(ii) Labor Market:</strong> While direct employment data is not provided, the "stickiness" of the trimmed mean inflation—particularly the bounce back to 2.41%—is typically symptomatic of a tight labor market where wage-push inflation prevents a clean descent to the 2% target.</p>
+
+<p><strong>(iii) Inflation:</strong> We characterize current inflation as "plateaued." The transition from a clear downtrend (Aug '25 at 2.80% $\rightarrow$ Apr '26 at 2.34%) to a slight uptick (May '26 at 2.41%) indicates that the primary disinflationary forces have been exhausted.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>Based on the provided metrics, the current regime is classified as a <strong>"mid-cycle pause."</strong> </p>
+
+<p>The 12-month Z-score of -0.20$\sigma$ and the 1-month Z-score of +0.11$\sigma$ indicate that inflation is neither overheating (which would require a high positive Z-score indicative of late-cycle) nor crashing (which would require a Z-score below -2.0$\sigma$). The data describes a state of equilibrium where inflation is hovering near its</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- TRIMMED MEAN PCE INFLATION RATE (DALLAS FED): CYCLE-AWARE SUMMARY ---
+
+SERIES: 12-Month Trimmed Mean PCE Inflation (%) [PCETRIM12M159SFRBDAL]
+CONTEXT: 10Y REGIME: 56.7th Percentile | Z-Score: -0.20σ | 10Y Range: [1.63, 5.01]
+DATA:
+  2025-05         2.610
+  2025-06         2.700
+  2025-07         2.690
+  2025-08         2.800
+  2025-09         2.700
+  2025-10         2.550
+  2025-11         2.510
+  2025-12         2.440
+  2026-01         2.410
+  2026-02         2.340
+  2026-03         2.360
+  2026-04         2.340
+  2026-05         2.410
+----------------------------------------
+SERIES: 1-Month Trimmed Mean PCE Inflation (%) [PCETRIM1M158SFRBDAL]
+CONTEXT: 10Y REGIME: 69.2th Percentile | Z-Score: +0.11σ | 10Y Range: [0.99, 7.15]
+DATA:
+  2025-05         1.960
+  2025-06         3.590
+  2025-07         1.900
+  2025-08         3.250
+  2025-09         1.910
+  2025-10         1.570
+  2025-11         1.730
+  2025-12         2.190
+  2026-01         2.660
+  2026-02         1.970
+  2026-03         2.940
+  2026-04         2.430
+  2026-05         2.780
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
