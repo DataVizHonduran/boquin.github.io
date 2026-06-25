@@ -1,30 +1,34 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (12 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (13 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team,
+To: Investment Team
+From: Senior Economist
+Date: June 25, 2026
+Subject: Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research from the Federal Reserve districts. While much of the output is methodological, there are several critical signals regarding the 2026 outlook, specifically concerning credit availability and structural labor shifts.
+I have reviewed the latest publications from the Federal Reserve districts. While much of the research is technical, several papers signal structural shifts in the labor market and credit availability that we must integrate into our 2026 models.
 
-Here are the most analytically significant publications:
-
-1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the current baseline for the Fed's internal projections on growth and inflation. It is the primary benchmark we must use to align our proprietary models with the Fed's likely reaction function for the second half of the year.
-2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** Sentiment among small businesses in the Second District has deteriorated sharply. This serves as a leading indicator for a broader economic slowdown and suggests that the "last mile" of the economy is feeling significant pressure.
-3. **[NY] Synthetic Stablecoins and Financial Stability:** This analysis of the October 2025 tariff shock demonstrates how aggressive trade policy triggers immediate risk-off moves across Treasuries and digital assets. It highlights the systemic fragility of the financial system when geopolitical tensions intersect with new financial technologies.
-4. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** Research indicates that state-level rate caps are pushing credit away from risky borrowers toward safer ones, effectively rationing credit. This creates a hidden credit crunch that could dampen consumer spending and drive borrowers toward unregulated, higher-risk shadow banking.
-5. **[NY] Remote Work Leaves Younger Workers Sidelined:** The data suggests a structural link between the prevalence of remote work and rising youth unemployment. This represents a long-term productivity risk, as the lack of in-person mentorship for early-career workers may erode human capital accumulation.
-
-**Synthesis:**
-The current data suggests a precarious macro environment where structural labor mismatches and credit rationing are undermining growth, compounded by deep pessimism in the small business sector. We should prepare for increased volatility as geopolitical trade shocks continue to test financial stability and the Fed's DSGE-based projections.
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026**: This provides the most current quantitative baseline for growth and inflation expectations from the NY Fed. It is essential for aligning our internal rate projections with the Fed's own dynamic stochastic general equilibrium modeling.
+2. **[NY] The Post‑COVID Decline in the Labor Share**: The finding that the labor share of income is at its lowest post-war level suggests a structural shift in income distribution from workers to capital. This may dampen long-term aggregate demand and alter the traditional wage-price spiral dynamics we use to forecast inflation.
+3. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects**: High levels of pessimism in the Second District (NY, NJ, CT) serve as a critical leading indicator for a broader economic slowdown. If this sentiment is mirrored nationally, we should prepare for a contraction in small-business CAPEX and employment.
+4. **[NY] Remote Work Leaves Younger Workers Sidelined**: The correlation between the rise of remote work and increased youth unemployment suggests a structural "onboarding" failure in
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 6
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 7
+
+### (cached) [The Post‑COVID Decline in the Labor Share](https://libertystreeteconomics.newyorkfed.org/2026/06/the-post-covid-decline-in-the-labor-share/)
+**Published:** 2026-06-24 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [Synthetic Stablecoins and Financial Stability](https://libertystreeteconomics.newyorkfed.org/2026/06/synthetic-stablecoins-and-financial-stability/)
 **Published:** 2026-06-23 | **Authors:** 
@@ -120,5 +124,5 @@ The paper explores how diverse characteristics within the labor market affect th
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 12
-- Total cache size: 12 items
+- Already cached: 13
+- Total cache size: 13 items
