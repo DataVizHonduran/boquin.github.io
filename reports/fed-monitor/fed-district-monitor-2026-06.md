@@ -8,15 +8,19 @@
 
 To: Investment Team
 From: Senior Economist
-Date: June 25, 2026
+Date: June 26, 2026
 Subject: Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Federal Reserve districts. While much of the research is technical, several papers signal structural shifts in the labor market and credit availability that we must integrate into our 2026 models.
+I have reviewed the latest publications from the Federal Reserve districts. While several papers focus on technical modeling, the following five are the most analytically significant for our current portfolio positioning and macro outlook.
 
-1. **[NY] The New York Fed DSGE Model Forecast—June 2026**: This provides the most current quantitative baseline for growth and inflation expectations from the NY Fed. It is essential for aligning our internal rate projections with the Fed's own dynamic stochastic general equilibrium modeling.
-2. **[NY] The Post‑COVID Decline in the Labor Share**: The finding that the labor share of income is at its lowest post-war level suggests a structural shift in income distribution from workers to capital. This may dampen long-term aggregate demand and alter the traditional wage-price spiral dynamics we use to forecast inflation.
-3. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects**: High levels of pessimism in the Second District (NY, NJ, CT) serve as a critical leading indicator for a broader economic slowdown. If this sentiment is mirrored nationally, we should prepare for a contraction in small-business CAPEX and employment.
-4. **[NY] Remote Work Leaves Younger Workers Sidelined**: The correlation between the rise of remote work and increased youth unemployment suggests a structural "onboarding" failure in
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026**: This provides the most current baseline for growth and inflation expectations from the NY Fed’s primary forecasting tool. It is critical for aligning our house views on the terminal rate and GDP growth for the remainder of the year.
+2. **[NY] Synthetic Stablecoins and Financial Stability**: This analysis highlights the systemic volatility triggered by the October 2025 Chinese tariff announcements, noting simultaneous risk-off moves in equities and Treasuries. It underscores the fragility of digital asset linkages to traditional markets during geopolitical shocks.
+3. **[NY] The Post-COVID Decline in the Labor Share**: The finding that the labor share of income is at its lowest post-war level suggests a structural shift in income distribution toward capital. This may dampen wage-push inflation but could signal long-term headwinds for aggregate consumer spending.
+4. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects**: Deep pessimism among small businesses in the NY/NJ/CT corridor serves as a leading indicator for a broader economic slowdown. This suggests that the "real economy" is feeling pressure that may not yet be fully captured in lagging macro data.
+5. **[NY] Remote Work Leaves Younger Workers Sidelined**: This research links the rise of remote work to a dramatic increase in youth unemployment, suggesting a breakdown in traditional on-the-job training. This represents a significant structural risk to long-term labor productivity and human capital development.
+
+**Synthesis:**
+The current outlook is characterized by a stark divergence between formal DSGE forecasts and the deepening pessimism of small businesses and younger workers. We are seeing a precarious environment where structural labor market erosion and geopolitical trade volatility are creating systemic risks that may outweigh baseline growth projections.
 
 ---
 
