@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOJ Watcher — 2026-06-27</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #bf0000; border-bottom: 3px solid #bf0000; padding-bottom: 10px; }
+h2 { color: #bf0000; border-bottom: 2px solid #fce4e4; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+h4 { color: #555; margin-top: 20px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #bf0000; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #bf0000; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+pre code { background: none; padding: 0; }
+blockquote {
+    border-left: 4px solid #bf0000; margin: 16px 0; padding: 8px 16px;
+    background: #fce4e4; border-radius: 0 4px 4px 0; color: #333;
+}
+strong { color: #111; }
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #bf0000; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">&#8592; BOJ Watcher Archive</a>
+    <h1>&#127471;&#127477; BOJ Watcher &#8212; 2026-06-27</h1>
+    <p class="meta">
+        Generated: 2026-06-27 11:01 UTC &nbsp;|&nbsp;
+        Coverage: last 30 days &nbsp;|&nbsp;
+        Sources: boj.or.jp &middot; Google News RSS &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it
+    </p>
+    <hr>
+    <h1>BOJ Watcher Report</h1>
+<p><strong>Date:</strong> 2026-06-27<br />
+<strong>Coverage Period:</strong> 2026-05-28 to 2026-06-27</p>
+<h3>Executive Summary</h3>
+<p>The Bank of Japan (BOJ) has entered a decisive "inflation-fighting mode," culminating in a policy rate hike to <strong>1.0% on June 16, 2026</strong>, the highest level in 31 years. Governor Ueda has pivoted from a cautionary stance to signaling a need for continued rate increases to contain inflation. While the hike was implemented, internal divisions are widening: hawkish members, led by Naoki Tamura, are pushing for an accelerated pace (hikes every few months) and targeting a neutral rate of approximately 2%. Conversely, Deputy Governor Uchida continues to emphasize market stability. Despite significant FX intervention and the rate hike, the Yen remains volatile, and rising Tokyo inflation suggests the BOJ is on track for further tightening.</p>
+<h3>Policy Board Member Pronouncements</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Official</th>
+<th>Role</th>
+<th>Venue/Context</th>
+<th>Key Statement</th>
+<th>Policy Signal</th>
+<th>Evolution vs Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-06-03</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Kisaragi-kai Meeting</td>
+<td>BOJ needs to keep raising rates to contain inflation; will debate "pros and cons" of June action.</td>
+<td>Hawkish</td>
+<td>Shift from Neutral to Hawkish</td>
+</tr>
+<tr>
+<td>2026-06-04</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Public Remarks</td>
+<td>Pivoted to "inflation-fighting mode," clearing path for steadier hikes.</td>
+<td>Hawkish</td>
+<td>Shift from Neutral to Hawkish</td>
+</tr>
+<tr>
+<td>2026-06-16</td>
+<td>Shinichi Uchida</td>
+<td>Deputy Gov</td>
+<td>Post-MPM Press Conf</td>
+<td>Comments on uncertainties persisting despite US-Iran deal; focus on stability.</td>
+<td>Neutral/Dovish</td>
+<td>Consistent with Dovish baseline</td>
+</tr>
+<tr>
+<td>2026-06-19</td>
+<td>Ryozo Himino</td>
+<td>Deputy Gov</td>
+<td>Public Remarks</td>
+<td>Sees risk of price trend rising above the 2% target.</td>
+<td>Hawkish</td>
+<td>Shift from Neutral to Hawkish</td>
+</tr>
+<tr>
+<td>2026-06-25</td>
+<td>Naoki Tamura</td>
+<td>External Member</td>
+<td>Public Remarks</td>
+<td>Rate hikes needed "once every few months"; Japan's neutral rate is about 2%.</td>
+<td>Strongly Hawkish</td>
+<td>Consistent with Hawkish baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Kazuyuki Masu</td>
+<td>External Member</td>
+<td>N/A</td>
+<td>No public comments found in coverage period.</td>
+<td>N/A</td>
+<td>Consistent with Neutral/Hawkish baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Toichiro Asada</td>
+<td>External Member</td>
+<td>N/A</td>
+<td>No public comments found in coverage period.</td>
+<td>N/A</td>
+<td>Consistent with Dovish baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Junko Koeda</td>
+<td>External Member</td>
+<td>N/A</td>
+<td>No public comments found in coverage period.</td>
+<td>N/A</td>
+<td>Consistent with Neutral baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Junko Nakagawa</td>
+<td>External Member</td>
+<td>N/A</td>
+<td>No public comments found in coverage period.</td>
+<td>N/A</td>
+<td>Consistent with Neutral baseline</td>
+</tr>
+</tbody>
+</table>
+<h3>MPM Official Communications</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Document Type</th>
+<th>Title</th>
+<th>Key Takeaways</th>
+<th>Policy Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-06-15</td>
+<td>Policy Statement</td>
+<td>Statement on Monetary Policy</td>
+<td>Key interest rate raised to 1.0% to ward off inflation.</td>
+<td>Confirms commitment to normalization.</td>
+</tr>
+<tr>
+<td>2026-06-16</td>
+<td>Policy Decision</td>
+<td>Rate Hike Announcement</td>
+<td>Rate lifted to 31-year high (1%) citing inflation and Yen worries.</td>
+<td>Signals a new floor for policy rates.</td>
+</tr>
+</tbody>
+</table>
+<h3>Thematic Analysis</h3>
+<p><strong>1. Inflation Assessment (CPI, Core, Wages)</strong><br />
+Inflation remains the primary driver of policy. Tokyo inflation is picking up, and May's Core CPI (excluding special factors) rose 2.7%. Deputy Governor Himino explicitly warned that the price trend could exceed the 2% target, justifying the shift to "inflation-fighting mode."</p>
+<p><strong>2. Growth Outlook</strong><br />
+While specific growth data was limited in the coverage period, the BOJ's willingness to hike rates to 1% suggests a level of confidence that the economy can sustain higher borrowing costs without triggering a recession.</p>
+<p><strong>3. Yen / FX Considerations</strong><br />
+The Yen remains a critical vulnerability. Despite a rate hike to 1% and reported FX interventions exceeding $70 billion, the Yen has not seen a sustained recovery. This "inflation-import" risk is a key catalyst for the BOJ's accelerated tightening.</p>
+<p><strong>4. Financial Conditions &amp; JGB Market</strong><br />
+The policy rate has reached a three-decade high. The market is now pricing in a path toward a "neutral rate," which Naoki Tamura has explicitly identified as being around 2%.</p>
+<p><strong>5. Balance Sheet (JGB purchase taper)</strong><br />
+No specific updates on the JGB purchase taper were provided in the recent data, though the baseline indicates tapering is ongoing.</p>
+<p><strong>6. Forward Guidance Evolution</strong><br />
+The BOJ has shifted from "managing risks" to "fighting inflation." Governor Ueda's language has evolved from cautious deliberation to a signal for "steadier hikes."</p>
+<h3>Hawk-Dove Spectrum Analysis</h3>
+<pre><code>HAWKISH (favor faster normalization / rate hikes)
+├─ Naoki Tamura (Pushing for 2% neutral rate; hikes every few months)
+├─ Hajime Takata (Consistent hawkish baseline; serial dissenter)
+└─ Ryozo Himino (Now warns of prices exceeding 2% target)
+
+NEUTRAL/DATA-DEPENDENT
+├─ Kazuo Ueda (Pivoted to inflation-fighting, but manages the pace)
+├─ Kazuyuki Masu (Consistent with Neutral/Hawkish baseline)
+└─ Junko Koeda (Consistent with Neutral baseline)
+
+DOVISH (favor maintaining accommodation / slower hikes)
+├─ Shinichi Uchida (Focus on market stability and uncertainties)
+└─ Toichiro Asada (Consistent with Dovish/Reflationist baseline)
+</code></pre>
+<p><strong>Key Shifts Identified:</strong><br />
+*   <strong>Governor Ueda:</strong> Significant shift from "Neutral/Cautionary" to "Hawkish/Inflation-Fighting."<br />
+*   <strong>Deputy Governor Himino:</strong> Shift from "Neutral" to "Hawkish" regarding inflation risks.</p>
+<h3>All 9 Voting Members Focus</h3>
+<table>
+<thead>
+<tr>
+<th>Official</th>
+<th>Role</th>
+<th>Current Stance</th>
+<th>Key Quote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Hawkish</td>
+<td>"BOJ needs to keep raising rates to contain inflation."</td>
+</tr>
+<tr>
+<td>Shinichi Uchida</td>
+<td>Deputy Gov</td>
+<td>Dovish</td>
+<td>(Focus on uncertainties and market stability)</td>
+</tr>
+<tr>
+<td>Ryozo Himino</td>
+<td>Deputy Gov</td>
+<td>Hawkish</td>
+<td>"Risk of price trend rising above 2% target."</td>
+</tr>
+<tr>
+<td>Hajime Takata</td>
+<td>External</td>
+<td>Hawkish</td>
+<td>(Consistent with historical hawkish baseline)</td>
+</tr>
+<tr>
+<td>Naoki Tamura</td>
+<td>External</td>
+<td>Strongly Hawkish</td>
+<td>"Japan's neutral rate is about 2%."</td>
+</tr>
+<tr>
+<td>Kazuyuki Masu</td>
+<td>External</td>
+<td>Neutral/Hawkish</td>
+<td>(Consistent with historical baseline)</td>
+</tr>
+<tr>
+<td>Toichiro Asada</td>
+<td>External</td>
+<td>Dovish</td>
+<td>(Consistent with historical baseline)</td>
+</tr>
+<tr>
+<td>Junko Nakagawa</td>
+<td>External</td>
+<td>Neutral</td>
+<td>(Term ending Jun 29, 2026)</td>
+</tr>
+<tr>
+<td>Junko Koeda</td>
+<td>External</td>
+<td>Neutral</td>
+<td>(Consistent with historical baseline)</td>
+</tr>
+</tbody>
+</table>
+<h3>Dissent Watch</h3>
+<p>Reports indicate a dissent occurred during the June 16 meeting, specifically linked to a "Takaichi pick" (referring to the hawkish wing of the board). This suggests that even at a 1% rate, the most hawkish members (likely Takata and Tamura) believe the BOJ is not moving fast enough to combat inflation and Yen depreciation.</p>
+</div>
+</body>
+</html>
