@@ -3,102 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Most Interesting Upcoming Matchups — FIFA WC 2026 — boquin.xyz</title>
-<link rel="stylesheet" href="../../styles.css">
+<title>WC 2026 — Most Interesting Upcoming Matchups</title>
 <style>
   body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
   h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
   .meta { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #e5e5e5; vertical-align: top; }
-  th { color: #666; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.02em; }
-  td.matchup { font-weight: 600; white-space: nowrap; }
-  td.ranks { color: #555; white-space: nowrap; }
-  tr:hover { background: #fafafa; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th { background: #f5f5f5; text-align: left; padding: 0.6rem 0.75rem; border-bottom: 2px solid #ddd; white-space: nowrap; }
+  td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+  .group-badge { display: inline-block; background: #e8f0fe; color: #1a0dab; border-radius: 4px; padding: 0.15rem 0.45rem; font-size: 0.78rem; white-space: nowrap; }
+  .ranks { color: #888; font-size: 0.82rem; white-space: nowrap; }
+  .matchup { font-weight: 600; }
+  a { color: #1a0dab; }
   .back { font-size: 0.85rem; margin-bottom: 1rem; display: block; }
-  .footnote { font-size: 0.8rem; color: #555; margin-top: 1.5rem; padding-top: 0.75rem; border-top: 1px solid #e5e5e5; }
   @media (max-width: 600px) {
-    body { margin: 1rem auto; }
-    table, thead, tbody, th, td, tr { display: block; }
-    th { display: none; }
-    td { border: none; padding: 0.2rem 0; }
-    tr { padding: 0.75rem 0; border-bottom: 1px solid #e5e5e5; }
-    td.matchup { font-size: 1.05rem; }
-    td.why::before { content: "Why: "; color: #888; }
-    td.ranks::before { content: "FIFA rank: "; color: #888; }
-    td.date::before { content: "Kickoff: "; color: #888; }
+    body { margin: 1rem auto; padding: 0 0.5rem; }
+    table { font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.5rem; }
   }
 </style>
 </head>
 <body>
 <a class="back" href="index.html">← FIFA WC 2026 Stats</a>
-<h1>⚽ Most Interesting Upcoming Matchups</h1>
-<p class="meta">Scored by FIFA ranking of both sides (weaker side weighted 2x — one star paired with a scrub doesn't beat two real contenders) plus live group stakes from current standings · generated 2026-06-23</p>
+<h1>Most Interesting Upcoming Matchups</h1>
+<p class="meta">Top fixtures where both teams are highly ranked AND group stakes are live &middot; Scored by FIFA ranking (weaker side weighted 2×) + points-gap stakes &middot; Generated 2026-06-27 10:50z</p>
 
 <table>
   <thead>
-    <tr><th>Kickoff</th><th>Group</th><th>Matchup</th><th>FIFA Ranks</th><th>Why it matters</th></tr>
+    <tr>
+      <th>Date (UTC)</th>
+      <th>Group</th>
+      <th>Matchup</th>
+      <th>FIFA Ranks</th>
+      <th>Why it matters</th>
+    </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="date">Wed Jun 24, 3:00 PM ET</td>
-      <td>Group B</td>
-      <td class="matchup">Switzerland vs Canada</td>
-      <td class="ranks">#19 vs #30</td>
-      <td class="why">Level on points (4) — winner takes control of Group B</td>
-    </tr>
-    <tr>
-      <td class="date">Wed Jun 24, 6:00 PM ET</td>
-      <td>Group C</td>
-      <td class="matchup">Scotland vs Brazil</td>
-      <td class="ranks">#42 vs #6</td>
-      <td class="why">Brazil leads 4-3; Scotland must win to stay in control of its own fate</td>
-    </tr>
-    <tr>
-      <td class="date">Fri Jun 26, 3:00 PM ET</td>
-      <td>Group I</td>
-      <td class="matchup">Norway vs France</td>
-      <td class="ranks">#31 vs #3</td>
-      <td class="why">Level on points (6) — winner takes control of Group I</td>
-    </tr>
-    <tr>
-      <td class="date">Fri Jun 26, 8:00 PM ET</td>
-      <td>Group H</td>
-      <td class="matchup">Uruguay vs Spain</td>
-      <td class="ranks">#16 vs #2</td>
-      <td class="why">Spain leads 4-2; Uruguay must win to stay in control of its own fate</td>
-    </tr>
-    <tr>
-      <td class="date">Fri Jun 26, 11:00 PM ET</td>
-      <td>Group G</td>
-      <td class="matchup">Egypt vs Iran</td>
-      <td class="ranks">#29 vs #20</td>
-      <td class="why">Egypt leads 4-2; Iran must win to stay in control of its own fate</td>
-    </tr>
-    <tr>
-      <td class="date">Sat Jun 27, 5:00 PM ET</td>
-      <td>Group L</td>
-      <td class="matchup">Panama vs England</td>
-      <td class="ranks">#34 vs #4</td>
-      <td class="why">England leads 3-0; Panama must win to stay in control of its own fate</td>
-    </tr>
-    <tr>
-      <td class="date">Sat Jun 27, 7:30 PM ET</td>
-      <td>Group K</td>
-      <td class="matchup">Colombia vs Portugal</td>
-      <td class="ranks">#13 vs #5</td>
-      <td class="why">Colombia leads 3-1; Portugal must win to stay in control of its own fate</td>
-    </tr>
-    <tr>
-      <td class="date">Sat Jun 27, 10:00 PM ET</td>
-      <td>Group J</td>
-      <td class="matchup">Algeria vs Austria</td>
-      <td class="ranks">#28 vs #24</td>
-      <td class="why">Level on points (3) — winner takes control of Group J</td>
-    </tr>
+  <tr>
+    <td>Jun 27, 21:00z</td>
+    <td><span class="group-badge">Group L</span></td>
+    <td class="matchup">Panama vs England</td>
+    <td class="ranks">#34 / #4</td>
+    <td>one side already eliminated</td>
+  </tr>  <tr>
+    <td>Jun 27, 21:00z</td>
+    <td><span class="group-badge">Group L</span></td>
+    <td class="matchup">Croatia vs Ghana</td>
+    <td class="ranks">#11 / #73</td>
+    <td>Ghana leads 4-3; Croatia must win to stay in control of its own fate</td>
+  </tr>  <tr>
+    <td>Jun 27, 23:30z</td>
+    <td><span class="group-badge">Group K</span></td>
+    <td class="matchup">Colombia vs Portugal</td>
+    <td class="ranks">#13 / #5</td>
+    <td>Colombia leads 6-4; Portugal must win to stay in control of its own fate</td>
+  </tr>  <tr>
+    <td>Jun 27, 23:30z</td>
+    <td><span class="group-badge">Group K</span></td>
+    <td class="matchup">Congo DR vs Uzbekistan</td>
+    <td class="ranks">#46 / #50</td>
+    <td>one side already eliminated</td>
+  </tr>  <tr>
+    <td>Jun 28, 02:00z</td>
+    <td><span class="group-badge">Group J</span></td>
+    <td class="matchup">Algeria vs Austria</td>
+    <td class="ranks">#28 / #24</td>
+    <td>level on points (3) — winner takes control of Group J</td>
+  </tr>  <tr>
+    <td>Jun 28, 02:00z</td>
+    <td><span class="group-badge">Group J</span></td>
+    <td class="matchup">Jordan vs Argentina</td>
+    <td class="ranks">#63 / #1</td>
+    <td>one side already eliminated</td>
+  </tr>
   </tbody>
 </table>
 
-<p class="footnote">Ranks are FIFA Men's World Ranking position as of June 2026. "Level on points" groups are the highest-stakes matchups — both sides arrive unbeaten/equal, winner takes control of the group. Where one side leads, the trailing team must win to keep its own destiny in its hands rather than depending on other results. Source: ESPN scoreboard + standings APIs.</p>
+<div class="chart-footnote" style="font-family:system-ui,sans-serif;font-size:0.8rem;color:#555;max-width:1100px;margin:1.5rem auto 2rem;padding:0.75rem 1rem;border-top:1px solid #e5e5e5;">
+  <strong>Methodology:</strong> Interest score = ranking score (max 0, 100&minus;weakerRank × 2 + 100&minus;strongerRank) + stakes score (max 60 for level-on-points, decreasing as point gap widens). Fixtures where either side is already eliminated receive zero stakes score. FIFA rankings as of June 2026.
+</div>
 </body>
 </html>
