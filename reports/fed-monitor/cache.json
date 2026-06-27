@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-06-26T10:28:36.350427+00:00",
-    "totalItems": 88
+    "lastRun": "2026-06-27T09:32:12.471809+00:00",
+    "totalItems": 90
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1560,11 +1560,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-03T11:59:39.951519+00:00",
-      "lastChecked": "2026-06-26T10:28:36.350427+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
       "scrapedSnippet": "",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-26T10:28:36.350427+00:00"
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
     },
     "1a83fa428cfc29d20994958db81dd2b7d9481b9ba2bdec55ddef21eaa9326c6b": {
       "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-18",
@@ -1711,11 +1711,11 @@
       "publicationDate": "2026-06-24",
       "authors": [],
       "firstSeen": "2026-06-24T10:26:13.915768+00:00",
-      "lastChecked": "2026-06-26T10:28:36.350427+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
       "scrapedSnippet": "A new measure of labor market tightness could help produce more accurate forecasts of wage growth.",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-26T10:28:36.350427+00:00"
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
     },
     "055d2c60efe2061503c75f7d2e905e48f0d61d9aae5d35be8f76047f63ac1eea": {
       "url": "https://www.dallasfed.org/research/economics/2026/0623",
@@ -1726,11 +1726,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-24T10:26:13.915768+00:00",
-      "lastChecked": "2026-06-26T10:28:36.350427+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
       "scrapedSnippet": "",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-26T10:28:36.350427+00:00"
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
     },
     "620ab79fede0a44d7c6151a6dc26f298e3a15fb2bc651d3ab2e8069ab3ccd117": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/06/the-post-covid-decline-in-the-labor-share/",
@@ -1741,11 +1741,11 @@
       "publicationDate": "2026-06-24",
       "authors": [],
       "firstSeen": "2026-06-25T10:19:02.889043+00:00",
-      "lastChecked": "2026-06-26T10:28:36.350427+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
       "scrapedSnippet": "The labor share of income in the U.S. is currently at its lowest-ever level in the post-war period. The labor share measures the fraction of economic output paid to workers as wages and salaries. As such, it is a useful benchmark for wage growth: when the labor share falls, it means that productivity, prices, or both are growing faster than wages. After much-studied drops in the 2000s, the labor share fell sharply again after the COVID pandemic. In this post, we compare the dynamics of the labor share post-COVID to earlier periods to understand whether the recent decline represents the continu",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-26T10:28:36.350427+00:00"
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
     },
     "44775d0466bcd9d0d5eba3d867026eac532def30b7082eafd8b3cc9b2f3e661a": {
       "url": "https://www.dallasfed.org/research/economics/2026/0625",
@@ -1756,11 +1756,43 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-26T10:28:36.350427+00:00",
-      "lastChecked": "2026-06-26T10:28:36.350427+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
       "scrapedSnippet": "",
       "aiSummary": "",
       "tags": [],
-      "tagsGeneratedAt": "2026-06-26T10:28:36.350427+00:00"
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
+    },
+    "d51cb45e87233178a0b4804fd91956ec6ed8544a3f93252d4e6a2bac0b397110": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/06/how-resilient-were-emerging-market-economies-through-the-2022-23-u-s-monetary-tightening-cycle/",
+      "title": "How Resilient Were Emerging Market Economies Through the 2022‑23 U.S. Monetary Tightening Cycle?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-06-26",
+      "authors": [
+        "Shaghil Ahmed, Ozge Akinci, and Albert Queralto"
+      ],
+      "firstSeen": "2026-06-27T09:32:12.471809+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
+      "scrapedSnippet": "The cross-border spillover effects of shifts in U.S. monetary policy have long been a focus of academics and policymakers alike. A common finding in the literature is that changes in the stance of U.S. monetary policy have sizable effects on economic activity and financial markets in emerging market economies (EMEs). In this post, we analyze one specific aspect of these spillovers: how EMEs fared through the U.S. monetary policy tightening cycle of 2022-23 relative to the predictions of a model, which was calibrated to capture empirically relevant features of these economies based on historica",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
+    },
+    "e883fe6aa1390002688327f684acfdfba3622f4f42ec794ba0ac9ba43e15149b": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98267/103452",
+      "title": "Work from Home and Interstate Migration",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-06-25",
+      "authors": [],
+      "firstSeen": "2026-06-27T09:32:12.471809+00:00",
+      "lastChecked": "2026-06-27T09:32:12.471809+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "",
+      "tags": [],
+      "tagsGeneratedAt": "2026-06-27T09:32:12.471809+00:00"
     }
   }
 }

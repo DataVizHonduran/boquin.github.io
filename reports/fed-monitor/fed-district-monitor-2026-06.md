@@ -1,31 +1,41 @@
 # 🏛️ Federal Reserve District Monitor — June 2026 (Month to Date)
 
-**Coverage Period:** Month to date: June 2026 (13 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: June 2026 (15 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
+To: Investment Committee
 From: Senior Economist
-Date: June 26, 2026
+Date: June 27, 2026
 Subject: Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Federal Reserve districts. While several papers focus on technical modeling, the following five are the most analytically significant for our current portfolio positioning and macro outlook.
+I have reviewed the latest research outputs from the Federal Reserve districts. The following six publications are the most analytically significant for our current portfolio positioning and macro outlook:
 
-1. **[NY] The New York Fed DSGE Model Forecast—June 2026**: This provides the most current baseline for growth and inflation expectations from the NY Fed’s primary forecasting tool. It is critical for aligning our house views on the terminal rate and GDP growth for the remainder of the year.
-2. **[NY] Synthetic Stablecoins and Financial Stability**: This analysis highlights the systemic volatility triggered by the October 2025 Chinese tariff announcements, noting simultaneous risk-off moves in equities and Treasuries. It underscores the fragility of digital asset linkages to traditional markets during geopolitical shocks.
-3. **[NY] The Post-COVID Decline in the Labor Share**: The finding that the labor share of income is at its lowest post-war level suggests a structural shift in income distribution toward capital. This may dampen wage-push inflation but could signal long-term headwinds for aggregate consumer spending.
-4. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects**: Deep pessimism among small businesses in the NY/NJ/CT corridor serves as a leading indicator for a broader economic slowdown. This suggests that the "real economy" is feeling pressure that may not yet be fully captured in lagging macro data.
-5. **[NY] Remote Work Leaves Younger Workers Sidelined**: This research links the rise of remote work to a dramatic increase in youth unemployment, suggesting a breakdown in traditional on-the-job training. This represents a significant structural risk to long-term labor productivity and human capital development.
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the most current baseline for the NY Fed’s expectations on growth and inflation. It is critical for aligning our house views with the Fed's internal modeling as we project the terminal rate for the current cycle.
 
-**Synthesis:**
-The current outlook is characterized by a stark divergence between formal DSGE forecasts and the deepening pessimism of small businesses and younger workers. We are seeing a precarious environment where structural labor market erosion and geopolitical trade volatility are creating systemic risks that may outweigh baseline growth projections.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This report signals a sharp deterioration in sentiment among small businesses in the Second District. Such pessimism often serves as a leading indicator for a broader economic slowdown and suggests tightening credit conditions at the ground level.
+
+3. **[RIC] Forecasting Wage Growth Using Months Supply:** The introduction of "Months Supply" as a measure of labor market tightness offers a more precise tool for predicting wage inflation. If this metric diverges from traditional unemployment data, it could signal a shift in the Fed's reaction function regarding labor market cooling.
+
+4. **[NY] Synthetic Stablecoins and Financial Stability:** This analysis links the October 2025 China tariff shock to systemic volatility in digital assets and Treasuries. It highlights a critical vulnerability in the "synthetic" stablecoin ecosystem that could amplify contagion during geopolitical crises.
+
+5. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** These papers demonstrate that state-level rate caps are pushing risky borrowers out of the market and concentrating credit among safer borrowers. This creates a "hidden" credit crunch for marginalized borrowers that may not be fully captured in national aggregate lending data.
+
+6. **[NY] The Post‑COVID Decline in the Labor Share:** The finding that the labor
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 7
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 8
+
+### (cached) [How Resilient Were Emerging Market Economies Through the 2022‑23 U.S. Monetary Tightening Cycle?](https://libertystreeteconomics.newyorkfed.org/2026/06/how-resilient-were-emerging-market-economies-through-the-2022-23-u-s-monetary-tightening-cycle/)
+**Published:** 2026-06-26 | **Authors:** Shaghil Ahmed, Ozge Akinci, and Albert Queralto
+
+
+
+**Tags:** 
 
 ### (cached) [The Post‑COVID Decline in the Labor Share](https://libertystreeteconomics.newyorkfed.org/2026/06/the-post-covid-decline-in-the-labor-share/)
 **Published:** 2026-06-24 | **Authors:** 
@@ -101,7 +111,14 @@ This analysis examines post-pandemic commuting trends across four major metropol
 **Tags:** labor markets · employment · regional economy · consumer spending · GDP growth
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 3
+**Content Type:** Working Papers | **New:** 0 of 4
+
+### (cached) [Work from Home and Interstate Migration](https://www.fedinprint.org/item/fedlwp/98267/103452)
+**Published:** 2026-06-25 | **Authors:** 
+
+
+
+**Tags:** 
 
 ### (cached) [Natural Resources and Sovereign Risk in Emerging Economies: A Curse and a Blessing](https://www.fedinprint.org/item/fedlwp/10330/103401)
 **Published:** 2026-06-15 | **Authors:** 
@@ -128,5 +145,5 @@ The paper explores how diverse characteristics within the labor market affect th
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 13
-- Total cache size: 13 items
+- Already cached: 15
+- Total cache size: 15 items
