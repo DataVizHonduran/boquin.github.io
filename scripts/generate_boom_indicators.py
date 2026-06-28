@@ -199,27 +199,35 @@ def create_dashboard():
     # ── Chart 5: Building Permits 3mma vs 36mma ──────────────────────────────
     print("Chart 5: Building Permits 3mma vs 36mma...")
     permits = get_fred("PERMIT", years=75)
-    permits_3m  = permits.rolling(3).mean().dropna()
-    permits_36m = permits.rolling(36).mean().dropna()
-    common5 = permits_3m.index.intersection(permits_36m.index)
-    p3, p36 = permits_3m[common5], permits_36m[common5]
-    y0_5 = min(p3.min(), p36.min()) * 0.9
-    y1_5 = max(p3.max(), p36.max()) * 1.1
-    # Fill green when 3mma > 36mma (boom), red when below
+    permits_3m  = permits.rolling(3).mean()
+    permits_36m = permits.rolling(36).mean()
+    diff5 = (permits_3m - permits_36m).dropna()
+    covid_mask5 = (
+        (diff5.index >= pd.Timestamp('2020-02-01')) &
+        (diff5.index <= pd.Timestamp('2022-02-01'))
+    )
+    non_covid5 = diff5[~covid_mask5]
+    y0_5 = non_covid5.min() * 1.2
+    y1_5 = non_covid5.max() * 1.2
     fig.add_trace(go.Scatter(
-        x=p3.index, y=p3.values,
-        fill=None, mode='lines', showlegend=True,
-        name='3mma', line=dict(color='#1f77b4', width=1.8),
+        x=diff5.index, y=diff5.clip(lower=0).values,
+        fill='tozeroy', fillcolor='rgba(34,139,34,0.25)',
+        line=dict(width=0), showlegend=False, hoverinfo='skip',
     ), row=3, col=1)
     fig.add_trace(go.Scatter(
-        x=p36.index, y=p36.values,
-        fill='tonexty',
-        fillcolor='rgba(34,139,34,0.18)',
-        mode='lines', showlegend=True,
-        name='36mma', line=dict(color='#e67e22', width=1.6),
+        x=diff5.index, y=diff5.clip(upper=0).values,
+        fill='tozeroy', fillcolor='rgba(214,39,40,0.20)',
+        line=dict(width=0), showlegend=False, hoverinfo='skip',
     ), row=3, col=1)
+    fig.add_trace(go.Scatter(
+        x=diff5.index, y=diff5.values,
+        mode='lines', showlegend=False,
+        line=dict(color='#1f77b4', width=1.8),
+        hovertemplate='%{x|%b %Y}<br><b>3mma − 36mma: %{y:+,.0f}k</b><extra></extra>',
+    ), row=3, col=1)
+    fig.add_hline(y=0, line_color='black', line_width=1, row=3, col=1)
     add_recession_shading(fig, recession, 3, 1, y0_5, y1_5)
-    fig.update_yaxes(range=[y0_5, y1_5], title_text='000s of Units',
+    fig.update_yaxes(range=[y0_5, y1_5], title_text='3mma − 36mma (000s)',
                      title_font=dict(size=11), row=3, col=1)
     fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=3, col=1)
 
