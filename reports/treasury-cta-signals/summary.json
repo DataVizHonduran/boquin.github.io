@@ -1,6 +1,6 @@
 {
   "fast": {
-    "generated_at": "2026-06-27T07:51:53.208528",
+    "generated_at": "2026-06-28T08:23:33.325851",
     "mode": "fast",
     "windows": "20/50/100",
     "tenors": 4,
@@ -2338,7 +2338,7 @@
     "charts_generated": 4
   },
   "slow": {
-    "generated_at": "2026-06-27T07:51:55.763062",
+    "generated_at": "2026-06-28T08:23:35.899530",
     "mode": "slow",
     "windows": "50/100/200",
     "tenors": 4,
