@@ -121,7 +121,7 @@ def create_dashboard():
             "EPOP Gains from 24-Month Low (All 16+ vs 25–54)",
             "Continuing Claims — % Below 3-Year High",
             "New Orders Surge from 24-Month Low",
-            "Building Permits Surge from 24-Month Low",
+            "Building Permits: 3mma vs 36mma",
             "Mfg Orders-to-Inventories from 24-Month Low",
             "Consumer & Activity Diffusion Index (YoY, 3mma)",
             "Payrolls: Cumulative 3M MA − 36M MA Gap",
@@ -196,12 +196,32 @@ def create_dashboard():
     plot_series(fig, 2, 2, no_rel, recession, 1.0, 1.6,
                 quantile_line=0.8, y_label='Ratio vs 24M Low')
 
-    # ── Chart 5: Building Permits Surge from 24-Month Low ────────────────────
-    print("Chart 5: Building Permits Surge from 24-Month Low...")
+    # ── Chart 5: Building Permits 3mma vs 36mma ──────────────────────────────
+    print("Chart 5: Building Permits 3mma vs 36mma...")
     permits = get_fred("PERMIT", years=75)
-    permits_rel = (permits / permits.rolling(24).min()).dropna()
-    plot_series(fig, 3, 1, permits_rel, recession, 1.0, 3.5,
-                quantile_line=0.8, y_label='Ratio vs 24M Low')
+    permits_3m  = permits.rolling(3).mean().dropna()
+    permits_36m = permits.rolling(36).mean().dropna()
+    common5 = permits_3m.index.intersection(permits_36m.index)
+    p3, p36 = permits_3m[common5], permits_36m[common5]
+    y0_5 = min(p3.min(), p36.min()) * 0.9
+    y1_5 = max(p3.max(), p36.max()) * 1.1
+    # Fill green when 3mma > 36mma (boom), red when below
+    fig.add_trace(go.Scatter(
+        x=p3.index, y=p3.values,
+        fill=None, mode='lines', showlegend=True,
+        name='3mma', line=dict(color='#1f77b4', width=1.8),
+    ), row=3, col=1)
+    fig.add_trace(go.Scatter(
+        x=p36.index, y=p36.values,
+        fill='tonexty',
+        fillcolor='rgba(34,139,34,0.18)',
+        mode='lines', showlegend=True,
+        name='36mma', line=dict(color='#e67e22', width=1.6),
+    ), row=3, col=1)
+    add_recession_shading(fig, recession, 3, 1, y0_5, y1_5)
+    fig.update_yaxes(range=[y0_5, y1_5], title_text='000s of Units',
+                     title_font=dict(size=11), row=3, col=1)
+    fig.update_xaxes(title_text='Date', title_font=dict(size=11), row=3, col=1)
 
     # ── Chart 6: Mfg Orders-to-Inventories from 24-Month Low ─────────────────
     print("Chart 6: Mfg Orders-to-Inventories from 24-Month Low...")
