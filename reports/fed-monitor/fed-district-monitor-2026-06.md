@@ -8,22 +8,19 @@
 
 To: Investment Committee
 From: Senior Economist
-Date: June 27, 2026
+Date: June 28, 2026
 Subject: Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Federal Reserve districts. The following six publications are the most analytically significant for our current portfolio positioning and macro outlook:
+I have reviewed the latest publications from the Federal Reserve districts. While much of the research is academic, several papers provide critical signals regarding structural labor shifts, systemic risk, and a growing divergence between model-based forecasts and real-economy sentiment.
 
-1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the most current baseline for the NY Fed’s expectations on growth and inflation. It is critical for aligning our house views with the Fed's internal modeling as we project the terminal rate for the current cycle.
+The following publications are the most analytically significant for our current positioning:
 
-2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This report signals a sharp deterioration in sentiment among small businesses in the Second District. Such pessimism often serves as a leading indicator for a broader economic slowdown and suggests tightening credit conditions at the ground level.
-
-3. **[RIC] Forecasting Wage Growth Using Months Supply:** The introduction of "Months Supply" as a measure of labor market tightness offers a more precise tool for predicting wage inflation. If this metric diverges from traditional unemployment data, it could signal a shift in the Fed's reaction function regarding labor market cooling.
-
-4. **[NY] Synthetic Stablecoins and Financial Stability:** This analysis links the October 2025 China tariff shock to systemic volatility in digital assets and Treasuries. It highlights a critical vulnerability in the "synthetic" stablecoin ecosystem that could amplify contagion during geopolitical crises.
-
-5. **[NY] The Unintended Effects of Interest Rate Caps (Credit Reallocation/Rationing):** These papers demonstrate that state-level rate caps are pushing risky borrowers out of the market and concentrating credit among safer borrowers. This creates a "hidden" credit crunch for marginalized borrowers that may not be fully captured in national aggregate lending data.
-
-6. **[NY] The Post‑COVID Decline in the Labor Share:** The finding that the labor
+1. **[NY] The New York Fed DSGE Model Forecast—June 2026:** This provides the current baseline for the Fed’s expectations on GDP and inflation. It is the essential benchmark against which we must measure our own proprietary forecasts to identify "Fed gaps" in policy expectations.
+2. **[NY] Struggling Regional Small Businesses Deeply Pessimistic About 2026 Prospects:** This serves as a critical leading indicator, showing a sharp decline in sentiment among small businesses in the NY/NJ/CT corridor. The deep pessimism suggests that the "ground-level" economy is deteriorating faster than the aggregate DSGE models may indicate.
+3. **[NY] Synthetic Stablecoins and Financial Stability:** This analysis links the October 2025 tariff shocks to volatility in digital assets and broader credit spreads. It highlights a new transmission mechanism where geopolitical trade tensions can trigger systemic risk through the "synthetic" digital asset ecosystem.
+4. **[NY] The Post‑COVID Decline in the Labor Share:** The finding that the labor share of income is at its lowest post-war level suggests a structural shift toward capital over labor. This has long-term implications for aggregate demand and consumer spending patterns, as a smaller portion of GDP is flowing to households.
+5. **[RIC] Forecasting Wage Growth Using Months Supply:** The introduction of "months supply" as a measure of labor tightness offers a more precise tool for predicting wage inflation. This may lead the Fed to adjust its policy pivot timing based on this new metric rather than lagging unemployment data.
+6. **[NY] Remote Work Leaves Younger Workers Sidelined:** This research identifies a structural friction where remote work hinders the onboarding and development of youth
 
 ---
 
@@ -33,9 +30,9 @@ I have reviewed the latest research outputs from the Federal Reserve districts. 
 ### (cached) [How Resilient Were Emerging Market Economies Through the 2022‑23 U.S. Monetary Tightening Cycle?](https://libertystreeteconomics.newyorkfed.org/2026/06/how-resilient-were-emerging-market-economies-through-the-2022-23-u-s-monetary-tightening-cycle/)
 **Published:** 2026-06-26 | **Authors:** Shaghil Ahmed, Ozge Akinci, and Albert Queralto
 
+This research evaluates the resilience of emerging market economies during the 2022-23 U.S. monetary tightening cycle. It focuses on the cross-border spillover effects of U.S. policy shifts on international financial markets and regional economic activity.
 
-
-**Tags:** 
+**Tags:** monetary policy · interest rates · international · emerging markets · financial stability · credit
 
 ### (cached) [The Post‑COVID Decline in the Labor Share](https://libertystreeteconomics.newyorkfed.org/2026/06/the-post-covid-decline-in-the-labor-share/)
 **Published:** 2026-06-24 | **Authors:** 
