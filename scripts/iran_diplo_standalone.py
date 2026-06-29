@@ -657,6 +657,7 @@ Rules:
 - Skip actors with zero data — never write "No statements found"
 - No fabricated quotes — paraphrase and cite
 - URLs only from the data above
+- MANDATORY: Every source citation must be a clickable markdown link. Never write "(Reuters, 2026-06-24)" — always write "([Reuters](URL), 2026-06-24)". If the URL is in the data, use it. If not, omit the citation entirely rather than writing a bare outlet name.
 """
     return prompt
 
