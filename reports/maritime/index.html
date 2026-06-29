@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hormuz / Persian Gulf Maritime Tracker</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1100px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #1a3a5c; border-bottom: 3px solid #1a3a5c; padding-bottom: 10px; }
+h2 { color: #1a3a5c; border-bottom: 2px solid #d0e4f7; padding-bottom: 6px; margin-top: 36px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1a3a5c; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.note-box {
+    background: #e8f4fd; border-left: 4px solid #1a3a5c;
+    padding: 10px 16px; margin: 16px 0; border-radius: 0 4px 4px 0;
+    font-size: 0.88em;
+}
+.warn-box {
+    background: #fff3cd; border-left: 4px solid #ffc107;
+    padding: 10px 16px; margin: 16px 0; border-radius: 0 4px 4px 0;
+    font-size: 0.88em; color: #856404;
+}
+.advisory-item {
+    border: 1px solid #e0e0e0; border-radius: 6px;
+    padding: 14px 18px; margin: 12px 0;
+    background: #fafafa;
+}
+.advisory-item:hover { background: #f0f6ff; border-color: #1a3a5c; }
+.advisory-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.source-badge {
+    font-size: 0.72em; font-weight: 700; padding: 2px 8px;
+    border-radius: 12px; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.source-cmf  { background: #1a3a5c; color: white; }
+.source-nga  { background: #4a7c59; color: white; }
+.adv-date { font-size: 0.82em; color: #666; }
+.advisory-title { font-weight: 600; margin-bottom: 4px; }
+.advisory-title a { color: #1a3a5c; text-decoration: none; }
+.advisory-title a:hover { text-decoration: underline; }
+.advisory-body { font-size: 0.88em; color: #555; line-height: 1.5; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86em; margin-top: 12px; }
+th { background: #1a3a5c; color: white; padding: 10px 12px; text-align: left; white-space: nowrap; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+.td-date { white-space: nowrap; font-family: monospace; font-size: 0.82em; color: #555; }
+.sources-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin: 16px 0;
+}
+.source-card {
+    border: 1px solid #ddd; border-radius: 6px; padding: 12px 16px;
+    background: #fafafa; font-size: 0.87em;
+}
+.source-card h4 { margin: 0 0 4px; color: #1a3a5c; font-size: 0.95em; }
+.status-ok   { color: #2d7a3a; font-weight: 600; }
+.status-warn { color: #856404; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../../index.html" class="back-link">&#8592; boquin.xyz</a>
+    <h1>&#9875; Hormuz / Persian Gulf Maritime Tracker</h1>
+    <p class="meta">Sources: Combined Maritime Forces (CMF) RSS &bull; NGA MSI Broadcast Warnings &bull; Updated: 2026-06-29 01:57Z</p>
+
+    <div class="note-box">
+        Operational intelligence feed for the Strait of Hormuz, Persian Gulf, and Arabian Sea. 
+        CMF is the primary source for security events; NGA MSI covers navigational hazards. 
+        MARAD MSCI and UKMTO require email subscription (CDN-blocked to scrapers) — see source notes below.
+    </div>
+
+    <h2>&#128268; Source Status</h2>
+    <div class="sources-grid">
+        <div class="source-card">
+            <h4>Combined Maritime Forces (CMF)</h4>
+            <span class="status-ok">&#10003; Live RSS</span><br>
+            combinedmaritimeforces.com/feed/ — 47-nation naval coalition based in Bahrain; covers CTF 150/151/152/154 ops.
+        </div>
+        <div class="source-card">
+            <h4>NGA MSI Broadcast Warnings</h4>
+            <span class="status-ok">&#10003; Live JSON API</span><br>
+            msi.nga.mil — NAVAREA navigational warnings (wrecks, ops, infrastructure). Arabian Sea / Persian Gulf subregions.
+        </div>
+        <div class="source-card">
+            <h4>MARAD MSCI</h4>
+            <span class="status-warn">&#9888; Email only</span><br>
+            Akamai-blocked to scrapers. Subscribe via GovDelivery and parse inbound email. Filter: <code>MSCI.*Gulf|MSCI.*Hormuz</code>
+        </div>
+        <div class="source-card">
+            <h4>UKMTO</h4>
+            <span class="status-warn">&#9888; Email only</span><br>
+            Cloudflare JS challenge. Register at ukmto.org to receive broadcast alerts directly. No headless bypass.
+        </div>
+    </div>
+
+    <h2>&#128313; CMF Operational News (10 items)</h2>
+    
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">05 Jun 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/06/05/combined-task-force-151-conducts-focused-operation-in-gulf-of-aden/" target="_blank" rel="noopener">Combined Task Force 151 Conducts Focused Operation in Gulf of Aden</a></div>
+            <div class="advisory-body">MANAMA, Bahrain – Combined Maritime Forces (CMF) Combined Task Force (CTF) 151 has successfully conducted a focused counter piracy operation in the Gulf of Aden, aimed at deterring piracy activity and enhancing maritime security across the area of operations. 
+
+
+
+ Operation Vigilantia Maris brought …</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">29 Apr 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/04/29/operation-compass-rose-vi-strengthens-maritime-cooperation/" target="_blank" rel="noopener">Operation Compass Rose VI Strengthens Maritime Cooperation</a></div>
+            <div class="advisory-body">MANAMA, Bahrain — Combined Maritime Forces (CMF) successfully concluded Operation Compass Rose VI, its flagship multinational training engagement, April 20-22, 2026. 
+
+
+
+ This year, the engagement was conducted virtually and brought together international partners to strengthen cooperation in suppor…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">15 Apr 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/04/15/combined-task-force-151-deters-piracy-off-somali-coast/" target="_blank" rel="noopener">Combined Task Force 151 Deters Piracy Off Somali Coast</a></div>
+            <div class="advisory-body">MANAMA, Bahrain  – The Combined Maritime Forces (CMF), through Combined Task Force 151 (CTF 151), provided criticalsupport to European Union Naval Force (EUNAVFOR) Operation ATALANTA during an operation aimed to prevent further escalation of piracy off the coast of Somalia, recently. 
+
+
+
+ The operat…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">09 Apr 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/04/09/combined-maritime-forces-maintains-operations-during-middle-east-conflict/" target="_blank" rel="noopener">Combined Maritime Forces Maintains Operations During Middle East Conflict</a></div>
+            <div class="advisory-body">MANAMA, Bahrain  – Combined Maritime Forces (CMF) has continued to deliver operational outputs despite the ongoing conflict in the Middle East, maintaining uninterrupted maritime security activity since Feb. 28. 
+
+
+
+ Following the dispersal of personnel from Bahrain, the five Combined Task Forces (C…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">23 Feb 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/02/23/uk-assumes-command-of-combined-maritime-forcescombined-task-force-151/" target="_blank" rel="noopener">UK Assumes Command of Combined Maritime Forces’Combined Task Force 151</a></div>
+            <div class="advisory-body">MANAMA, Bahrain – The U.K. Royal Navy assumed command of the Combined Maritime Forces (CMF) counter-piracy task force during a change of command ceremony, presided over by Navy Vice Adm. Curt Renshaw, commander of CMF, aboard Naval Support Activity Bahrain, Feb. 23, 2026. 
+
+
+
+  Brazilian Navy Commod…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">22 Feb 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/02/22/indian-navy-led-ctf-154-conducts-staff-training-aboard-ins-surat/" target="_blank" rel="noopener">Indian Navy-led CTF 154 conducts staff training aboard INS Surat</a></div>
+            <div class="advisory-body">MANAMA, Bahrain (Feb. 22, 2026) – Combined Maritime Forces (CMF) Indian Navy-led Combined Task Force (CTF) 154 conducted its first Staff Enhancement Training aboard INS Surat one day after assuming command, Feb. 12, 2026. 
+
+
+
+ The session brought together 23 participants from 10 countries and focuse…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">11 Feb 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/02/11/india-assumes-command-of-combined-maritime-forces-combinedtask-force-154/" target="_blank" rel="noopener">India Assumes Command of Combined Maritime Forces’ CombinedTask Force 154</a></div>
+            <div class="advisory-body">MANAMA, Bahrain – The Indian Navy assumed command of Combined Task Force (CTF) 154, from the Italian Navy during a change of command ceremony, presided over by U.S. Navy Vice Adm. Curt Renshaw, commander of Combined Maritime Forces (CMF), onboard Naval Support Activity Bahrain, Feb. 11.  
+
+
+
+ Italia…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">28 Jan 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/01/28/pakistan-navy-assumes-command-of-combined-maritime-forces-combined-task-force-150/" target="_blank" rel="noopener">Pakistan Navy Assumes Command of Combined Maritime Forces’ Combined Task Force 150</a></div>
+            <div class="advisory-body">MANAMA, Bahrain  (Jan. 28, 2026) — The Pakistan Navy assumed command of Combined Task Force (CTF) 150, a multinational maritime task force, from the Royal Saudi Navy during a change of command ceremony, presided over by U.S. Navy Vice Adm. Curt Renshaw, commander of Combined Maritime Forces (CMF), o…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">08 Jan 2026</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2026/01/08/combined-maritime-forces-celebrates-new-year-with-record-drug-seizures-first-quarter-2026/" target="_blank" rel="noopener">Combined Maritime Forces Celebrates New Year with Record Drug Seizures, First Quarter, 2026</a></div>
+            <div class="advisory-body">MANAMA, Bahrain (Jan. 8, 2026) –Combined Task Force (CTF) 150, a Combined Maritime Forces (CMF) maritime security task force, broke its own record for the highest amount of meth ever seized, according to Regional Narcotics Interagency Fusion Cell (RNIFC) pricing, during two back-to-back counter-narc…</div>
+        </div>
+        <div class="advisory-item">
+            <div class="advisory-meta">
+                <span class="source-badge source-cmf">CMF</span>
+                <span class="adv-date">29 Dec 2025</span>
+            </div>
+            <div class="advisory-title"><a href="https://combinedmaritimeforces.com/2025/12/29/readout-of-ctf-150-commander-commodore-fahad-s-al-joaids-visit-with-radm-rahul-vilas-gokhale-flag-officer-commanding-of-indian-naval-western-fleet/" target="_blank" rel="noopener">Readout of CTF 150 Commander, Commodore Fahad S. Al Joaid’s visit with RADM Rahul Vilas Gokhale, Flag Officer Commanding of Indian Naval Western Fleet</a></div>
+            <div class="advisory-body">UNITED ARAB EMIRATES ALINDIEN NAVAL BASE — Commodore Fahad S. Al Joaid, commander of Saudi-led Combined Task Force (CTF) 150, visited Indian Navy RADM Rahul Vilas Gokhale, Flag Officer Commanding of Indian Naval Western Fleet, as part of CTF 150s regional engagement plan in United Arab Emirates, Dec…</div>
+        </div>
+
+    <h2>&#128205; NGA Navigational Warnings — Arabian Sea / Persian Gulf (10 items)</h2>
+    <div class="warn-box">NGA broadcast-warn dataset is a static active-warning archive (last entries: 2021–2024). Not a live threat feed — use for navigational hazard context only.</div>
+    <table>
+        <thead>
+            <tr><th>Date (DTG)</th><th>Area / Country</th><th>Notice</th></tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td class="td-date">301235Z APR 2024</td>
+            <td><strong>ARABIAN SEA.</strong><br><small>INDIA.</small></td>
+            <td>1. DANGEROUS WRECK IN VICINITY 23-51.80N 067-20.90E. 2. CANCEL HYDROPAC 1414/24.</td>
+        </tr>
+        <tr>
+            <td class="td-date">291138Z APR 2023</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>U.A.E.</small></td>
+            <td>LOST ANCHOR REPORTED IN 25-01.57N 053-03.22E.</td>
+        </tr>
+        <tr>
+            <td class="td-date">271526Z OCT 2021</td>
+            <td><strong>ARABIAN SEA.</strong><br><small>PAKISTAN.</small></td>
+            <td>1. NAVTEX STATION KARACHI (P) 24-52.8N 067-09.9E    INOPERATIVE. 2. KARACHI BROADCASTS WILL BROADCAST VIA    SAFETYNET. 3. NAVIGATIONAL WARNINGS AVAILABLE ON WEBSITE    WWW.PAKNAVY.GOV.PK/HYDRO. 4. CA</td>
+        </tr>
+        <tr>
+            <td class="td-date">251705Z NOV 2022</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>U.A.E.</small></td>
+            <td>ODAS BUOYS, Q Y, ESTABLISHED IN: A. 25-59.00N 056-02.40E. B. 25-52.22N 055-51.20E.</td>
+        </tr>
+        <tr>
+            <td class="td-date">251551Z JAN 2024</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>KUWAIT.</small></td>
+            <td>DANGEROUS WRECK MARKED BY BUOY IN 29-05.49N 048-22.09E.</td>
+        </tr>
+        <tr>
+            <td class="td-date">241603Z MAY 2022</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>BAHRAIN.</small></td>
+            <td>BAHRAIN LIGHT BUOY 26-33.00N 051-03.59E UNLIT.</td>
+        </tr>
+        <tr>
+            <td class="td-date">241509Z MAR 2023</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>KUWAIT.</small></td>
+            <td>1. WRECK OF METEOROLOGICAL TOWER MARKED BY LIGHT    IN 28-46.0N 048-26.1E. 2. CANCEL HYDROPAC 705/21</td>
+        </tr>
+        <tr>
+            <td class="td-date">232217Z MAR 2024</td>
+            <td><strong>ARABIAN SEA.</strong><br><small>INDIA.</small></td>
+            <td>SUNK F/V IFB AL HUSENI, DANGEROUS WRECK IN 23-28.00N 068-04.00E.</td>
+        </tr>
+        <tr>
+            <td class="td-date">220442Z MAR 2023</td>
+            <td><strong>PERSIAN GULF.</strong><br><small>BAHRAIN.</small></td>
+            <td>PIPELINE OPERATIONS IN PROGRESS UNTIL FURTHER NOTICE IN AREA BOUND BY 26-12.01N 050-39.61E, 26-12.07N 050-39.58E, 26-11.19N 050-39.23E, 26-11.18N 050-39.27E. WIDE BERTH REQUESTED.</td>
+        </tr>
+        <tr>
+            <td class="td-date">211707Z JUL 2023</td>
+            <td><strong>BLACK SEA.</strong><br><small>ROMANIA.</small></td>
+            <td>HAZARDOUS OPERATIONS IN PROGRESS UNTIL FURTHER NOTICE IN AREA WITHIN ONE MILE OF 44-08.61N 028-57.00E.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
