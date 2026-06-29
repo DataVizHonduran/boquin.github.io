@@ -562,101 +562,76 @@ def build_context_prompt(
             parts.append(chunk)
         return "\n\n".join(parts) if parts else "(none found)"
 
-    prompt = f"""You are a senior geopolitical analyst specializing in Middle East diplomacy and Iranian foreign policy, producing an OSINT diplomatic monitor report.
+    prompt = f"""You are a seasoned intelligence analyst covering Iranian foreign policy and Middle East diplomacy. You write for a senior audience of diplomats, investors, and policy professionals who read fast and think slow — they want blunt, specific, and surprising analysis, not diplomatic boilerplate.
 
 Today: {today}
 Coverage period: last {days} days
-CRITICAL CONSTRAINT: This report covers ONLY non-US and non-Iran official sources. Do not attribute statements to US or Iranian officials.
+HARD CONSTRAINT: Only cite non-US and non-Iranian official sources. Never attribute statements to US or Iranian government officials.
 
-## Actor Baselines (use as prior; update only with direct evidence from data below)
+## Actor Background (priors — override only with direct evidence from the data)
 
 {actors_md}
 
 ---
 
-## DATA GATHERED
+## RAW INTELLIGENCE DATA
 
-### Layer 1: Direct Official Source Scrapes ({len(official_items)} items)
-Sources: IAEA, Russia MFA, China MFA, UN Press, EU EEAS
-
+### Direct Official Scrapes ({len(official_items)} items)
 {_fmt_official(official_items)}
 
-### Layer 2: Google News RSS — Official Statement Coverage ({len(news_items)} items)
-Targets: Oman MFA, Qatar MFA, Saudi MFA, Turkey MFA, Iraq MFA, and above actors via news coverage
-
+### News Coverage of Official Statements ({len(news_items)} items)
 {_fmt_news(news_items)}
 
 ---
 
-## REQUIRED OUTPUT FORMAT
+## YOUR TASK
 
-Produce the full Iran/US Diplomacy OSINT Monitor in this exact structure:
+Write a real-time intelligence brief. This is NOT a template-filling exercise. Think like a journalist who has been covering this beat for 10 years and just read everything above — what's the actual story? What's new? What's being missed? What do the silences tell you?
 
-### Executive Summary (≤150 words)
-Current diplomatic temperature, the most significant developments from official third-party sources in the past {days} days, and what they collectively signal about the state of Iran/US diplomacy.
-
-### Official Statements Log
-
-| Date | Actor | Institution | Statement Summary | Diplomatic Signal | Source URL |
-|------|-------|-------------|------------------|-------------------|------------|
-
-(Diplomatic Signal options: Engagement-Supportive / Engagement-Skeptical / Red Line Stated / Neutral/Procedural / Escalation Warning)
-
-### Per-Actor Diplomatic Assessment
-
-For each actor below, write 2-4 sentences: current stance, any evolution from baseline, most significant recent quote or action, and what signal it sends.
-
-Actors to cover:
-- Oman MFA
-- Qatar MFA
-- EU High Representative / E3
-- Russia MFA
-- China MFA
-- IAEA
-- UN Secretary-General
-- Saudi Arabia MFA
-- Turkey MFA
-- Iraq MFA
-
-### Nuclear Track (IAEA + EU/E3 Focus)
-Summarize the current state of:
-1. Iran enrichment levels (last reported by IAEA)
-2. Inspector access and safeguards cooperation status
-3. E3/EU position on snapback sanctions and JCPOA revival
-4. Any recent UNSC-relevant developments
-
-### Engagement Signals vs. Red Lines
-
-| Actor | Signal Type | Content | Verified Source |
-|-------|-------------|---------|-----------------|
-
-(Signal Type: Engagement Signal / Red Line / Procedural / Warning)
-
-### Media Claim Cross-Check
-Based on the official sources collected above, assess the following common media claim categories. For each, state: CONFIRMED / CONTRADICTED / PARTIALLY SUPPORTED / UNVERIFIED (insufficient official data).
-
-1. Whether active back-channel negotiations are ongoing
-2. Whether a new interim nuclear agreement is imminent
-3. Whether regional actors (Gulf states) support current diplomacy trajectory
-4. Whether IAEA access has improved recently
-5. Any other significant media claims that official sources directly address
-
-For each assessment, cite the specific official source that supports it.
-
-### Overall Diplomatic Temperature
-
-State one of: 🔵 COLD / 🟡 CAUTIOUS / 🟠 TENTATIVE / 🟢 ACTIVE / ⭐ BREAKTHROUGH
-
-Explain in 2-3 sentences with reference to the most authoritative sources above.
+Structure your brief as follows:
 
 ---
 
-Rules:
-- ONLY cite verifiable information from the data above. If no data exists for an actor, state "No official statements found in this period."
-- Do NOT fabricate quotes. If no direct quote is available, describe the documented action or communiqué.
-- Do NOT include US government or Iranian government statements — this monitor covers third-party actors only.
-- For media claim cross-check: assess only based on what official third-party sources above confirm or deny. Do not use your training knowledge about what media is reporting.
-- URLs must come directly from the data above — do not construct or guess URLs.
+## The Lead
+
+One paragraph, 3-5 sentences. What is the single most important development in the past {days} days based on official third-party sources? Don't bury it. State the most surprising or consequential thing that happened, and what it means. If multiple actors moved in the same direction, say so and explain why that convergence matters.
+
+## What the Data Actually Shows
+
+3-5 focused paragraphs. Write thematically, not actor-by-actor. Connect dots across sources. Each paragraph should make a specific analytical claim and back it with the data above. Good themes to consider (use the ones that are actually supported by your data — don't force themes that aren't):
+
+- Where are mediators (Oman, Qatar) actually focusing their energy right now, and is it different from what media is covering?
+- What are Russia and China's stated positions, and do they diverge from each other in any subtle way?
+- What is the IAEA's operational stance — is the "nuclear track" moving independently of the political track?
+- What are Gulf states (Saudi, UAE) actually signaling vs. what their public statements say?
+- Who is conspicuously silent, and what does that silence suggest?
+
+## Divergence Watch
+
+2-4 bullets. Where do official third-party sources directly contradict or complicate what media is reporting? Be specific — name the claim, name the source that contradicts it. If official sources CONFIRM a media claim, that's also worth noting. Format:
+
+**[CONFIRMS / CONTRADICTS / COMPLICATES]** "[media claim]" — [actor], [date], [what they actually said]
+
+Only include bullets where you have direct sourced evidence from the data above.
+
+## What to Watch
+
+3-4 bullets of forward-looking signals. Based on what third-party officials are saying now, what specific events, statements, or actor behaviors in the next 7-14 days would confirm or deny the current trajectory? These should be concrete and testable, not vague.
+
+## Diplomatic Temperature
+
+End with one line:
+**[🔵 COLD / 🟡 CAUTIOUS / 🟠 TENTATIVE / 🟢 ACTIVE / ⭐ BREAKTHROUGH]** — one sentence explaining the call, citing the most authoritative source.
+
+---
+
+Writing rules:
+- No filler phrases: "it is worth noting", "it should be mentioned", "in conclusion", "overall".
+- Short paragraphs. No paragraph over 5 sentences.
+- If an actor has no data in this period, do not write a section about them — skip entirely. Do NOT write "No official statements found."
+- Do NOT fabricate quotes. Paraphrase what sources report officials said, and cite the source.
+- URLs must come from the data above only — do not construct or guess them.
+- Avoid repeating the actor baseline descriptions verbatim — your job is to analyze change and significance, not describe who these actors are.
 """
     return prompt
 
