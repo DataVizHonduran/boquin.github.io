@@ -535,37 +535,60 @@ def build_context_prompt(
     today: str,
 ) -> str:
 
+    now = datetime.now(timezone.utc)
+    cutoff_24h = now - timedelta(hours=24)
+    cutoff_72h = now - timedelta(hours=72)
+
+    def _age_tag(item: dict) -> str:
+        d = item.get("date", "")
+        if not d:
+            return "CONTEXT"
+        try:
+            dt = datetime.fromisoformat(d).replace(tzinfo=timezone.utc)
+            if dt >= cutoff_24h:
+                return "🔴 BREAKING"
+            if dt >= cutoff_72h:
+                return "🟡 DEVELOPING"
+            return "CONTEXT"
+        except ValueError:
+            return "CONTEXT"
+
     actors_md = "\n".join(
         f"- **{name}** ({info['role']}, {info['country']}): {info['baseline']}"
         for name, info in ACTORS.items()
     )
 
-    def _fmt_official(items: list[dict]) -> str:
+    def _fmt_items(items: list[dict], max_summary: int = 500) -> str:
         parts = []
         for it in items:
-            chunk = f"[{it.get('date', 'n/a')}] [{it['actor']}] {it['title']}"
+            tag = _age_tag(it)
+            actor = it.get("actor", "")
+            label = f"[{it.get('date', 'n/a')}] [{tag}]" + (f" [{actor}]" if actor else "")
+            chunk = f"{label} {it.get('title', '')}"
             if it.get("url"):
                 chunk += f"\n  URL: {it['url']}"
-            if it.get("summary"):
-                chunk += f"\n  Summary: {it['summary'][:600]}"
+            body = it.get("summary") or it.get("text", "")
+            if body:
+                chunk += f"\n  {body[:max_summary]}"
             parts.append(chunk)
         return "\n\n".join(parts) if parts else "(none found)"
 
-    def _fmt_news(items: list[dict]) -> str:
-        parts = []
-        for it in items:
-            chunk = f"[{it.get('date', 'n/a')}] {it['title']}"
-            if it.get("url"):
-                chunk += f"\n  URL: {it['url']}"
-            if it.get("summary"):
-                chunk += f"\n  {it['summary'][:400]}"
-            parts.append(chunk)
-        return "\n\n".join(parts) if parts else "(none found)"
+    # Separate fresh items for explicit call-out
+    all_items = official_items + news_items
+    fresh = [x for x in all_items if _age_tag(x) == "🔴 BREAKING"]
+    developing = [x for x in all_items if _age_tag(x) == "🟡 DEVELOPING"]
+
+    fresh_block = _fmt_items(fresh) if fresh else "(nothing in last 24h)"
+    developing_block = _fmt_items(developing) if developing else "(nothing in last 72h)"
+    context_block = _fmt_items(
+        [x for x in all_items if _age_tag(x) == "CONTEXT"], max_summary=300
+    )
 
     prompt = f"""You are a seasoned intelligence analyst covering Iranian foreign policy and Middle East diplomacy. You write for a senior audience of diplomats, investors, and policy professionals who read fast and think slow — they want blunt, specific, and surprising analysis, not diplomatic boilerplate.
 
 Today: {today}
-Coverage period: last {days} days
+Coverage window: last {days} days
+Reader cadence: DAILY — they read this every morning. Lead with what changed since yesterday. Skip anything they already know.
 HARD CONSTRAINT: Only cite non-US and non-Iranian official sources. Never attribute statements to US or Iranian government officials.
 
 ## Actor Background (priors — override only with direct evidence from the data)
@@ -574,64 +597,66 @@ HARD CONSTRAINT: Only cite non-US and non-Iranian official sources. Never attrib
 
 ---
 
-## RAW INTELLIGENCE DATA
+## RAW INTELLIGENCE DATA — sorted by recency
 
-### Direct Official Scrapes ({len(official_items)} items)
-{_fmt_official(official_items)}
+### 🔴 BREAKING — last 24 hours ({len(fresh)} items)
+{fresh_block}
 
-### News Coverage of Official Statements ({len(news_items)} items)
-{_fmt_news(news_items)}
+### 🟡 DEVELOPING — last 72 hours ({len(developing)} items)
+{developing_block}
+
+### CONTEXT — older ({len(all_items) - len(fresh) - len(developing)} items)
+{context_block}
 
 ---
 
 ## YOUR TASK
 
-Write a real-time intelligence brief. This is NOT a template-filling exercise. Think like a journalist who has been covering this beat for 10 years and just read everything above — what's the actual story? What's new? What's being missed? What do the silences tell you?
-
-Structure your brief as follows:
+Write a daily intelligence brief for someone who read yesterday's report. Lead with what moved in the last 24 hours. Use context only to explain why today's developments matter. Be specific, be fast, cut anything they already know.
 
 ---
 
-## The Lead
+## Since Yesterday
+*(Cover only 🔴 BREAKING items. If nothing is breaking, say so in one sentence and move on.)*
 
-One paragraph, 3-5 sentences. What is the single most important development in the past {days} days based on official third-party sources? Don't bury it. State the most surprising or consequential thing that happened, and what it means. If multiple actors moved in the same direction, say so and explain why that convergence matters.
+2-4 bullets. Each bullet = one new development from the last 24 hours, actor, what they said or did, and why it matters. If zero breaking items, write: "Nothing confirmed from official third-party sources in the last 24 hours."
 
-## What the Data Actually Shows
+Format each bullet:
+**[Actor] — [date]:** What happened. Why it matters. [Source URL if available]
 
-3-5 focused paragraphs. Write thematically, not actor-by-actor. Connect dots across sources. Each paragraph should make a specific analytical claim and back it with the data above. Good themes to consider (use the ones that are actually supported by your data — don't force themes that aren't):
+## The Story Today
 
-- Where are mediators (Oman, Qatar) actually focusing their energy right now, and is it different from what media is covering?
-- What are Russia and China's stated positions, and do they diverge from each other in any subtle way?
-- What is the IAEA's operational stance — is the "nuclear track" moving independently of the political track?
-- What are Gulf states (Saudi, UAE) actually signaling vs. what their public statements say?
-- Who is conspicuously silent, and what does that silence suggest?
+2-4 paragraphs. Write thematically from the 🟡 DEVELOPING + CONTEXT data. Each paragraph makes one specific analytical claim backed by the data. Prioritize:
+- What has shifted in the last 72 hours vs. the prior week?
+- Where are multiple actors moving in the same direction simultaneously?
+- What's the tension or contradiction in the current moment?
+- Who is conspicuously silent that you'd expect to hear from?
+
+Do NOT summarize each actor's position one by one. Connect dots. Make arguments.
 
 ## Divergence Watch
 
-2-4 bullets. Where do official third-party sources directly contradict or complicate what media is reporting? Be specific — name the claim, name the source that contradicts it. If official sources CONFIRM a media claim, that's also worth noting. Format:
+2-3 bullets only where you have direct sourced evidence. Format:
 
-**[CONFIRMS / CONTRADICTS / COMPLICATES]** "[media claim]" — [actor], [date], [what they actually said]
+**[CONFIRMS / CONTRADICTS / COMPLICATES]** "[media claim or assumption]" — [actor], [date]: [what the official source actually said]
 
-Only include bullets where you have direct sourced evidence from the data above.
+## Watch List
 
-## What to Watch
-
-3-4 bullets of forward-looking signals. Based on what third-party officials are saying now, what specific events, statements, or actor behaviors in the next 7-14 days would confirm or deny the current trajectory? These should be concrete and testable, not vague.
+3 bullets. Concrete, testable things to watch in the next 48-72 hours based on current signals. Not "watch for escalation" — specific: which actor, what action, what it would mean.
 
 ## Diplomatic Temperature
 
-End with one line:
-**[🔵 COLD / 🟡 CAUTIOUS / 🟠 TENTATIVE / 🟢 ACTIVE / ⭐ BREAKTHROUGH]** — one sentence explaining the call, citing the most authoritative source.
+**[🔵 COLD / 🟡 CAUTIOUS / 🟠 TENTATIVE / 🟢 ACTIVE / ⭐ BREAKTHROUGH]** — one sentence. Has it changed from yesterday? Why?
 
 ---
 
-Writing rules:
-- No filler phrases: "it is worth noting", "it should be mentioned", "in conclusion", "overall".
-- Short paragraphs. No paragraph over 5 sentences.
-- If an actor has no data in this period, do not write a section about them — skip entirely. Do NOT write "No official statements found."
-- Do NOT fabricate quotes. Paraphrase what sources report officials said, and cite the source.
-- URLs must come from the data above only — do not construct or guess them.
-- Avoid repeating the actor baseline descriptions verbatim — your job is to analyze change and significance, not describe who these actors are.
+Rules:
+- BREAKING items go in "Since Yesterday" — do not repeat them in "The Story Today"
+- No filler: "it is worth noting", "it should be mentioned", "in conclusion", "overall"
+- No paragraph over 4 sentences
+- Skip actors with zero data — never write "No statements found"
+- No fabricated quotes — paraphrase and cite
+- URLs only from the data above
 """
     return prompt
 
@@ -806,15 +831,21 @@ def _markdown_to_html(md_text: str) -> str:
 
 
 def regenerate_index(out_dir: Path) -> None:
-    reports = sorted(out_dir.glob("iran-diplo-*.html"), reverse=True)
+    # Exclude the index itself; sort newest first
+    reports = sorted(
+        [p for p in out_dir.glob("iran-diplo-*.html") if p.name != "index.html"],
+        reverse=True,
+    )
     items = []
     for i, path in enumerate(reports):
-        date_str = path.stem.replace("iran-diplo-", "")
+        slug = path.stem.replace("iran-diplo-", "")
+        # slug is YYYY-MM-DD-HHmm — render as "2026-06-29 09:00"
+        label = slug[:10] + " " + slug[11:13] + ":00 UTC" if len(slug) > 10 else slug
         badge = '<span class="badge-latest">latest</span>' if i == 0 else ""
         items.append(
             f'<li>'
-            f'<a href="{path.name}">Iran/US Diplomacy Monitor &#8212; {date_str}{badge}</a>'
-            f'<span class="report-date">{date_str}</span>'
+            f'<a href="{path.name}">Iran/US Diplomacy Monitor &#8212; {label}{badge}</a>'
+            f'<span class="report-date">{label}</span>'
             f'</li>'
         )
     (out_dir / "index.html").write_text(
@@ -825,29 +856,32 @@ def regenerate_index(out_dir: Path) -> None:
 
 def save_output(report: str, today: str, out_dir: Path, days: int) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    now_utc = datetime.now(timezone.utc)
+    generated_at = now_utc.strftime("%Y-%m-%d %H:%M")
+    # Include hour so morning and evening runs don't overwrite each other
+    slug = now_utc.strftime("%Y-%m-%d-%H00")
 
     md_header = (
-        f"# Iran/US Diplomacy OSINT Monitor — {today}\n\n"
+        f"# Iran/US Diplomacy OSINT Monitor — {generated_at} UTC\n\n"
         f"**Generated:** {generated_at} UTC  \n"
         f"**Coverage:** {days} days ending {today}  \n"
         f"**Sources:** IAEA, Russia MFA, China MFA, UN, EU EEAS, Google News RSS  \n"
         f"**Model:** {MODEL_ID}\n\n"
         "---\n\n"
     )
-    md_path = out_dir / f"iran-diplo-{today}.md"
+    md_path = out_dir / f"iran-diplo-{slug}.md"
     md_path.write_text(md_header + report, encoding="utf-8")
 
     body_html = _markdown_to_html(report)
     html_content = HTML_TEMPLATE.format(
-        date=today,
+        date=generated_at + " UTC",
         generated_at=generated_at,
         days=days,
         model=MODEL_ID,
         css=HTML_CSS,
         body=body_html,
     )
-    html_path = out_dir / f"iran-diplo-{today}.html"
+    html_path = out_dir / f"iran-diplo-{slug}.html"
     html_path.write_text(html_content, encoding="utf-8")
 
     regenerate_index(out_dir)
@@ -921,8 +955,8 @@ def main():
     report = call_gemma(messages, hf_token, max_tokens=4096)
 
     # --- Save ---
-    save_output(report, today, out_dir, args.days)
-    print(f"\nDone. Report: {out_dir}/iran-diplo-{today}.html", file=sys.stderr)
+    html_path = save_output(report, today, out_dir, args.days)
+    print(f"\nDone. Report: {html_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":

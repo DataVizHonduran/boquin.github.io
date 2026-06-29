@@ -2,7 +2,8 @@ name: Update Iran Diplomacy Monitor
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # Daily at 09:00 UTC
+    - cron: '0 9 * * *'    # Morning brief — 09:00 UTC
+    - cron: '0 18 * * *'   # Evening update — 18:00 UTC
   workflow_dispatch:          # Allow manual trigger
 
 concurrency:
