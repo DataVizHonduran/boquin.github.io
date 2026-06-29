@@ -1,0 +1,51 @@
+name: Update Iran Diplomacy Monitor
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # Daily at 09:00 UTC
+  workflow_dispatch:          # Allow manual trigger
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update-iran-diplo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Pull latest before running
+        run: git pull
+
+      - name: Run Iran Diplomacy Monitor
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/iran_diplo_standalone.py \
+            --days 14 \
+            --output-dir reports/iran-diplo/
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/iran-diplo/
+          git diff --staged --quiet || (
+            git commit -m "Iran Diplomacy Monitor — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase --autostash &&
+            git push
+          )
