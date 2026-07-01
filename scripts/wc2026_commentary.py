@@ -32,7 +32,7 @@ from huggingface_hub import InferenceClient
 
 MODEL_ID = "google/gemma-3-27b-it"
 OUT_DIR = Path(__file__).parent.parent / "reports" / "fifa-wc-2026"
-MATCH_RANGE = "20260601-20260620"
+MATCH_RANGE = "20260601-20260701"
 
 MARKER_START = "<!-- wc2026-commentary-start -->"
 MARKER_END = "<!-- wc2026-commentary-end -->"

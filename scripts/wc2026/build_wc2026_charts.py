@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from espn_soccer_client import ESPNSoccerClient, aggregate_player_stats, aggregate_team_stats, SoccerPer90Plotter, SoccerTeamPlotter
 
 client = ESPNSoccerClient(league='fifa.world')
-event_ids = client.completed_match_ids('20260601-20260620')
+event_ids = client.completed_match_ids('20260601-20260701')
 print(f"{len(event_ids)} completed matches")
 
 repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
