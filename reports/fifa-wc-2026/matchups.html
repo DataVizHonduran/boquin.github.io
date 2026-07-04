@@ -17,6 +17,7 @@
   .matchup { font-weight: 600; }
   a { color: #1a0dab; }
   .back { font-size: 0.85rem; margin-bottom: 1rem; display: block; }
+  .notice { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 1rem 1.25rem; color: #5d4037; margin-top: 1rem; }
   @media (max-width: 600px) {
     body { margin: 1rem auto; padding: 0 0.5rem; }
     table { font-size: 0.85rem; }
@@ -27,8 +28,10 @@
 <body>
 <a class="back" href="index.html">&larr; FIFA WC 2026 Stats</a>
 <h1>Most Interesting Upcoming Matchups</h1>
-<p class="meta">Top fixtures where both teams are highly ranked AND group stakes are live &middot; Scored by FIFA ranking (weaker side weighted 2&times;) + points-gap stakes &middot; Generated 2026-07-02 06:10z</p>
-<p>No upcoming group-stage fixtures in the next 9 days.</p>
+<p class="meta">Top fixtures where both teams are highly ranked AND group stakes are live &middot; Scored by FIFA ranking (weaker side weighted 2&times;) + points-gap stakes &middot; Generated 2026-07-04T06:08Z</p>
+<div class="notice">
+  <strong>Data unavailable.</strong> The ESPN fixtures API (<code>site.api.espn.com</code>) is currently blocked by the session egress policy. No upcoming group-stage fixtures could be retrieved for the next 9 days. Please check the network allowlist and re-run the digest job.
+</div>
 <div style="font-family:system-ui,sans-serif;font-size:0.8rem;color:#555;max-width:1100px;margin:1.5rem auto 2rem;padding:0.75rem 1rem;border-top:1px solid #e5e5e5;">
   <strong>Methodology:</strong> Interest score = ranking score (max 0, 100&minus;weakerRank &times; 2 + 100&minus;strongerRank) + stakes score (max 60 for level-on-points, decreasing as point gap widens). Fixtures where either side is already eliminated receive zero stakes score. FIFA rankings as of June 2026.
 </div>
