@@ -99,6 +99,18 @@
   "hfiresearch.substack.com": [],
   "www.notboring.co": [
     {
+      "title": "Weekly Dose of Optimism #200",
+      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-200",
+      "date": "2026-07-03",
+      "description": "Conception, Synthetic Cell, Brain2Qwerty, Nuclear Updates, America's Next 250 + Extra Doses"
+    },
+    {
+      "title": "America's Next 250",
+      "url": "https://www.notboring.co/p/americas-next-250",
+      "date": "2026-07-02",
+      "description": "An Essay with Scott Nolan, General Matter CEO and Founders Fund Partner"
+    },
+    {
       "title": "Weekly Dose of Optimism #199",
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-199",
       "date": "2026-06-26",
@@ -115,18 +127,6 @@
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-197",
       "date": "2026-06-12",
       "description": "La Sagrada Fam&#237;lia, Life Bio Trial, Saronic, Doudna CRISPR, Standard Bots + Science Breakthroughs + Extra Doses"
-    },
-    {
-      "title": "Return on Tokens (ROT)",
-      "url": "https://www.notboring.co/p/return-on-tokens-rot",
-      "date": "2026-06-10",
-      "description": "Markie Wagner Co-Writes A Poetic Essay"
-    },
-    {
-      "title": "Expanding the Radius of Daily Life",
-      "url": "https://www.notboring.co/p/expanding-the-radius-of-daily-life",
-      "date": "2026-06-08",
-      "description": "How to Make Flying Cars an Everyday Reality"
     }
   ],
   "macrocreditthinking.substack.com": [
@@ -227,6 +227,18 @@
   ],
   "www.newcomer.co": [
     {
+      "title": "Tech Investors Will Be Sweating the Dog Days of Summer in More Ways Than One",
+      "url": "https://www.newcomer.co/p/tech-investors-will-be-sweating-the",
+      "date": "2026-07-02",
+      "description": "Plus, the tawdry saga of the Sam Altman movie & Meta makes a cloud play"
+    },
+    {
+      "title": "Hollywood's AI Anxiety on Full Display as Google's A24 Investment Draws Fire",
+      "url": "https://www.newcomer.co/p/hollywoods-ai-anxiety-on-full-display",
+      "date": "2026-07-01",
+      "description": "The film purists' pushback against AI is understandable but misplaced"
+    },
+    {
       "title": "9 Videos From CVAI London: Cohere's Aidan Gomez, Index Ventures' Danny Rimer, Recursive's Josh Tobin & More",
       "url": "https://www.newcomer.co/p/9-videos-from-cvai-london-coheres",
       "date": "2026-06-26",
@@ -243,18 +255,6 @@
       "url": "https://www.newcomer.co/p/hot-ai-summer-what-the-latest-talent",
       "date": "2026-06-24",
       "description": "Seminal names including Andrej Karpathy, Noam Shazeer, John Jumper & Barret Zoph have changed horses at a key juncture. Here&#8217;s what insiders say is happening."
-    },
-    {
-      "title": "Cursor Investors Set for Epic Payout from Musk's Juggernaut. They Still Have to Stomach a Ride.",
-      "url": "https://www.newcomer.co/p/cursor-investors-set-for-epic-payout",
-      "date": "2026-06-19",
-      "description": "Plus, Gavin Newsom takes a pro-tech stance on data centers & starts to emerge as a pragmatist"
-    },
-    {
-      "title": "One Week Until the Cerebral Valley AI Summit in London! See the Speaker & Discussion Leader Lineup",
-      "url": "https://www.newcomer.co/p/one-week-until-the-cerebral-valley",
-      "date": "2026-06-17",
-      "description": "Speakers from OpenAI, Alphabet, Gradium, Cohere & more will hit the stage in London on June 24"
     }
   ],
   "globalmacromethod.substack.com": [
@@ -420,6 +420,24 @@
   ],
   "www.chinatalk.media": [
     {
+      "title": "The Robots Are Here",
+      "url": "https://www.chinatalk.media/p/the-robots-are-here",
+      "date": "2026-07-06",
+      "description": "Unitree's advantage"
+    },
+    {
+      "title": "Taiwan's War on Renewables",
+      "url": "https://www.chinatalk.media/p/taiwans-war-on-renewables",
+      "date": "2026-07-01",
+      "description": "The Political Economy of Energy Poverty"
+    },
+    {
+      "title": "Economic Security Megapod",
+      "url": "https://www.chinatalk.media/p/economic-security-megapod",
+      "date": "2026-06-29",
+      "description": "Featuring winners of our essay contest!"
+    },
+    {
       "title": "WarTalk: The BS D\u00e9tente",
       "url": "https://www.chinatalk.media/p/wartalk-the-bs-detente",
       "date": "2026-06-25",
@@ -430,24 +448,6 @@
       "url": "https://www.chinatalk.media/p/ai-nukes-20k-essay-contest",
       "date": "2026-06-24",
       "description": "hot nuke summer"
-    },
-    {
-      "title": "Rare Earths",
-      "url": "https://www.chinatalk.media/p/rare-earths",
-      "date": "2026-06-23",
-      "description": "What is to be done?"
-    },
-    {
-      "title": "Critical Mineral Security: The Endgame",
-      "url": "https://www.chinatalk.media/p/critical-mineral-security-the-endgame",
-      "date": "2026-06-22",
-      "description": "a policy framework for derisking success"
-    },
-    {
-      "title": "Transmission Dominance with Chinese Characteristics",
-      "url": "https://www.chinatalk.media/p/transmission-dominance-with-chinese",
-      "date": "2026-06-21",
-      "description": "Comparing the US and China Transmission Buildout"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -678,6 +678,12 @@
   ],
   "www.weightythoughts.com": [
     {
+      "title": "America Turns 250. Its Biggest Companies Never Do\u2014And That's Great!",
+      "url": "https://weightythoughts.com/p/america-turns-250-its-biggest-companies",
+      "date": "2026-07-03",
+      "description": "AI is speeding up business turnover, which is exactly what the US is optimized for"
+    },
+    {
       "title": "Knowledge Agents: Beat Frontier Models with Better Structure",
       "url": "https://weightythoughts.com/p/knowledge-agents-beat-frontier-models",
       "date": "2026-06-21",
@@ -700,12 +706,6 @@
       "url": "https://weightythoughts.com/p/ai-dementiawhy-your-agent-gets-progressively",
       "date": "2026-04-29",
       "description": "What is context rot and how does it change how you should use AI"
-    },
-    {
-      "title": "Is AI in Writing a Problem?",
-      "url": "https://weightythoughts.com/p/is-ai-in-writing-a-problem",
-      "date": "2026-04-03",
-      "description": "Mechanical Skills Change, But the Fundamental Art Doesn't"
     }
   ],
   "chaufa.substack.com": [
@@ -879,34 +879,34 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "Joanne Freeman on why Trump is an affront to the Founders",
-      "url": "https://www.publicnotice.co/p/joanne-freeman-interview-2026",
-      "date": "2026-06-27",
-      "description": "\"This presidency is beyond anything the founding folk could have conceived of.\""
+      "title": "How Kalshi infects the news",
+      "url": "https://www.publicnotice.co/p/kalshi-cnn-cnbc",
+      "date": "2026-07-06",
+      "description": "CNN and CNBC are pushing Kalshi on viewers but not telling them the whole story."
     },
     {
-      "title": "The housing bill and the death of policy",
-      "url": "https://www.publicnotice.co/p/the-housing-bill-and-the-death-of",
-      "date": "2026-06-26",
-      "description": "Trump's tanking of bipartisan legislation shows how power is all that matters to him."
+      "title": "Declaring War on The Declaration",
+      "url": "https://www.publicnotice.co/p/trump-declaration-of-independence",
+      "date": "2026-07-04",
+      "description": "How Trump is shredding our founding document 250 years later."
     },
     {
-      "title": "Trump's lawless witch hunt of Tim Walz crashes and burns",
-      "url": "https://www.publicnotice.co/p/walz-frey-subpoenas-quashed",
-      "date": "2026-06-26",
-      "description": "It's a remarkable setback for the DOJ."
+      "title": "Democratic voters want fighters",
+      "url": "https://www.publicnotice.co/p/democratic-voters-want-fighters",
+      "date": "2026-07-03",
+      "description": "The New York primaries are just the latest data point."
     },
     {
-      "title": "American cesspool",
-      "url": "https://www.publicnotice.co/p/reflecting-pool-trump",
-      "date": "2026-06-25",
-      "description": "Green algae, blue shards, and a red-faced megalomaniac."
+      "title": "E. Jean Carroll Beat Trump. Again.",
+      "url": "https://www.publicnotice.co/p/e-jean-carroll-case",
+      "date": "2026-07-02",
+      "description": "As the cowards in Congress prostrate themselves, an 82-year-old woman took on the president and won."
     },
     {
-      "title": "Trump's disenfranchisement machine is besieging the courts",
-      "url": "https://www.publicnotice.co/p/trump-mail-voting-rule",
-      "date": "2026-06-24",
-      "description": "They're holding strong &#8212; so far."
+      "title": "A vote away from undoing the civil war",
+      "url": "https://www.publicnotice.co/p/birthright-citizenship-ruling",
+      "date": "2026-07-01",
+      "description": "The birthright citizenship ruling was a wake-up call, not a victory."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,6 +1010,18 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
+      "title": "Oil Context Weekly (W27)",
+      "url": "https://www.commoditycontext.com/p/ocw27w26",
+      "date": "2026-07-03",
+      "description": "Crude prices were effectively flat this week amidst a comparatively-quiet stretch of summer headlines, with all eyes on the optimistic-but-lurching resumption of Middle Eastern shipping activity."
+    },
+    {
+      "title": "Getting Our Bearings Strait",
+      "url": "https://www.commoditycontext.com/p/getting-our-bearings-strait",
+      "date": "2026-07-02",
+      "description": "Assessing the pace and sustainability of the faster-than-expected post-MOU recovery in oil flows&#8212;both ways&#8212;through the Strait of Hormuz and the still-lagging pace of fresh Gulf loadings."
+    },
+    {
       "title": "Oil Context Weekly (W26)",
       "url": "https://www.commoditycontext.com/p/ocw26w26",
       "date": "2026-06-26",
@@ -1026,18 +1038,6 @@
       "url": "https://www.commoditycontext.com/p/ocw25w26",
       "date": "2026-06-19",
       "description": "Crude plunged and curves flirted with prompt contango on the back of massive speculative short-selling following the announcement and signing of the US-Iran MOU to end the Iran War and reopen Hormuz."
-    },
-    {
-      "title": "OPEC+ Data Deck (June 2026)",
-      "url": "https://www.commoditycontext.com/p/opec-data-deck-june-2026",
-      "date": "2026-06-15",
-      "description": "Middle Eastern crude production inches higher as Gulf producers gained on incremental Hormuz Crisis logistical improvements; the Emiratis have left the building after 59 years as a member of the group"
-    },
-    {
-      "title": "Oil & Iran War Context Weekly (W24)",
-      "url": "https://www.commoditycontext.com/p/ocw24w26",
-      "date": "2026-06-12",
-      "description": "Crude prices sank to the lowest weekly close since February on the back of a whiplash shift from missiles flying across the Gulf to what most parties are now presenting as an imminent MOU-signing."
     }
   ],
   "energyoutlookadvisors.substack.com": [],
