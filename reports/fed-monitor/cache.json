@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-07-06T11:29:43.459475+00:00",
-    "totalItems": 94
+    "lastRun": "2026-07-07T10:28:25.249088+00:00",
+    "totalItems": 95
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1726,7 +1726,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-24T10:26:13.915768+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1762,7 +1762,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-26T10:28:36.350427+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1868,7 +1868,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-01T10:51:41.666745+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1902,6 +1902,27 @@
         "banking"
       ],
       "tagsGeneratedAt": "2026-07-02T10:12:22.963814+00:00"
+    },
+    "8ebd5cd645e3284c7bdafa7b9a0ddfeee097a8e6bc062a869f3d8d212ff112b0": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103485/original",
+      "title": "The Tradition of Federal Reserve Independence",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-07-06",
+      "authors": [],
+      "firstSeen": "2026-07-07T10:28:25.249088+00:00",
+      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This paper examines the historical evolution and institutional importance of the Federal Reserve's operational independence. It argues that autonomy from political influence is critical for maintaining long-term price stability and effective monetary management.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "financial stability",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-07-07T10:28:25.249088+00:00"
     }
   }
 }
