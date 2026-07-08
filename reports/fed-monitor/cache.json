@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-07-07T10:28:25.249088+00:00",
-    "totalItems": 95
+    "lastRun": "2026-07-08T09:27:48.732728+00:00",
+    "totalItems": 99
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1762,7 +1762,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-26T10:28:36.350427+00:00",
-      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1868,7 +1868,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-01T10:51:41.666745+00:00",
-      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1912,7 +1912,7 @@
       "publicationDate": "2026-07-06",
       "authors": [],
       "firstSeen": "2026-07-07T10:28:25.249088+00:00",
-      "lastChecked": "2026-07-07T10:28:25.249088+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This paper examines the historical evolution and institutional importance of the Federal Reserve's operational independence. It argues that autonomy from political influence is critical for maintaining long-term price stability and effective monetary management.",
       "tags": [
@@ -1923,6 +1923,78 @@
         "financial regulation"
       ],
       "tagsGeneratedAt": "2026-07-07T10:28:25.249088+00:00"
+    },
+    "f18111e91b72a53df8769cd1d52eda608c6675633865660f64b2628c4d1f810d": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/07/what-do-over-3000-bank-runs-teach-us-about-banking-crises/",
+      "title": "What Do Over 3,000 Bank Runs Teach Us About Banking Crises?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-07-07",
+      "authors": [],
+      "firstSeen": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "scrapedSnippet": "Runs on financial institutions are one of the salient markers of financial crises. But the role of runs in crises is a topic of longstanding debate. Runs can be seen as the key turning point, whereby even small shocks can generate severe crises with widespread bank failures. Another view is that runs are mainly a symptom of deeper rot in the financial system, exacerbating crises rather than being their primary cause. Understanding this debate has first order implications for how to think about financial crises and the appropriate policy responses. In this post, we use a new database of more th",
+      "aiSummary": "The paper examines the causal role of bank runs in financial crises, debating whether they act as primary catalysts or symptoms of systemic instability. It analyzes a large dataset of runs to determine how small shocks escalate into widespread failures.",
+      "tags": [
+        "financial stability",
+        "banking",
+        "credit",
+        "recession",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
+    },
+    "5fb21bf1bc0856bbc0f49a1eed427539c343587ac5eae27dd8f7252a5f2c03fa": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/07/using-ai-to-let-history-speak-about-bank-runs/",
+      "title": "Using AI to Let History Speak About Bank Runs",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-07-07",
+      "authors": [],
+      "firstSeen": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "scrapedSnippet": "Banking crises are commonly associated with bank runs and banking panics, yet our empirical understanding of bank runs is constrained by a lack of bank-level data. In a new paper, we use large language models (LLMs) to extract information on bank runs from millions of digitized historical newspaper pages, creating the most comprehensive database of bank runs in U.S. history. Every bank run episode that we identify is documented on a companion website where users can browse and examine individual episodes, and read the original newspaper articles. In this post, we describe how we built this dat",
+      "aiSummary": "This research utilizes large language models to synthesize a comprehensive historical database of U.S. bank runs from digitized newspaper archives. The study aims to overcome data limitations to better understand the empirical patterns of banking panics.",
+      "tags": [
+        "banking",
+        "financial stability",
+        "AI & economy",
+        "fintech",
+        "credit"
+      ],
+      "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
+    },
+    "c667c9cb5492cdf5b0b2a9de236bea78c2625e4a921276adba4279f7d5b1adad": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0707",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
+    },
+    "741b1c72c5e59e66026bb6d856f6d6f021e043815d44bd7dbcc4863d2f0a6470": {
+      "url": "https://www.fedinprint.org/item/fedlwp/97969/103490",
+      "title": "Sluggish news reactions: A combinatorial approach for synchronizing stock jumps",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-07-06",
+      "authors": [],
+      "firstSeen": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
     }
   }
 }

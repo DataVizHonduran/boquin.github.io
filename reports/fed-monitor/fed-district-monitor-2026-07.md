@@ -1,32 +1,54 @@
 # 🏛️ Federal Reserve District Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (3 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: July 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team,
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: July 8, 2026**
+**Subject: Analysis of Recent Federal Reserve District Research**
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While the volume of publications is low for this window, there are specific signals regarding structural energy dependencies and market microstructure that we need to integrate into our models.
+I have reviewed the latest research outputs from the Federal Reserve districts. While some papers are purely technical, several provide critical insights into systemic risk and market microstructure that we must integrate into our current positioning.
 
-Here are the analytically significant takeaways:
+1. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
+This research re-evaluates the causal relationship between liquidity runs and broader financial collapses. Understanding whether runs are a symptom or a primary driver of crises is essential for our stress-testing models and assessing the efficacy of the Fed's current discount window facilities.
 
-1. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
-The research indicates that fossil fuel intensity in gross output has remained stubbornly constant despite the growth of renewables. This suggests that the "green transition" is currently additive rather than substitutive, implying that energy price shocks (oil/gas) will continue to have a more persistent inflationary impact on GDP than current transition narratives suggest.
-
-2. **[NY] The Disappearing Overnight Drift**
-The Fed notes the erosion of the "overnight drift"—the historical alpha found in equity futures between 2:00 and 3:00 a.m. ET. This suggests increased algorithmic efficiency and the closing of a specific liquidity window, signaling that traditional time-of-day anomalies are being priced out, which may reduce short-term volatility but tighten margins for quantitative strategies.
+2. **[NY] Using AI to Let History Speak About Bank Runs**
+By leveraging LLMs to extract bank-level data from historical archives, the Fed is creating a more granular dataset on institutional failure. This suggests a shift toward more data-driven, predictive supervision, which may lead to preemptive regulatory interventions before a crisis becomes public.
 
 3. **[STL] The Tradition of Federal Reserve Independence**
-While primarily theoretical, this piece reaffirms the institutional framework protecting the Fed from political interference. In the current polarized climate, any shift in the perceived "tradition" of independence would lead to an immediate repricing of the long end of the Treasury curve due to inflation risk premiums.
+This piece examines the institutional safeguards protecting the Fed from political interference. In an era of increasing polarization, any perceived erosion of this independence would lead to higher volatility in the long end of the Treasury curve and a potential risk premium on USD assets.
 
-**Synthesis:** The data suggests a structural rigidity in energy dependency that complicates the inflation path, paired with an increasingly efficient equity market microstructure. We should maintain a cautious stance on "green" deflationary assumptions and adjust our high-frequency trading overlays to account for the disappearing overnight drift.
+4. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
+The finding that fossil fuel reliance in gross output remains constant despite the "green transition" highlights a significant structural lag. This suggests that energy-driven inflation (cost-push) will remain a persistent risk, as the economy is not decarbonizing as rapidly as market sentiment often assumes.
+
+5. **[NY] The Disappearing Overnight Drift**
+The disappearance of the persistent return premium in U.S. equity futures during the 2:00–3:00 a.m. window indicates that algorithmic efficiency has closed a long-standing arbitrage gap. For our quantitative desks, this means that historical "overnight" alpha strategies are likely decayed and require immediate recalibration.
+
+**Synthesis:**
+The current research trend suggests a dual focus on the systemic fragility of the banking sector and the persistence of structural energy dependencies. We should maintain a cautious stance on financial sector volatility while adjusting our inflation expectations upward to account for the slower-than-expected energy transition.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 1
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+
+### (cached) [What Do Over 3,000 Bank Runs Teach Us About Banking Crises?](https://libertystreeteconomics.newyorkfed.org/2026/07/what-do-over-3000-bank-runs-teach-us-about-banking-crises/)
+**Published:** 2026-07-07 | **Authors:** 
+
+The paper examines the causal role of bank runs in financial crises, debating whether they act as primary catalysts or symptoms of systemic instability. It analyzes a large dataset of runs to determine how small shocks escalate into widespread failures.
+
+**Tags:** financial stability · banking · credit · recession · financial regulation
+
+### (cached) [Using AI to Let History Speak About Bank Runs](https://libertystreeteconomics.newyorkfed.org/2026/07/using-ai-to-let-history-speak-about-bank-runs/)
+**Published:** 2026-07-07 | **Authors:** 
+
+This research utilizes large language models to synthesize a comprehensive historical database of U.S. bank runs from digitized newspaper archives. The study aims to overcome data limitations to better understand the empirical patterns of banking panics.
+
+**Tags:** banking · financial stability · AI & economy · fintech · credit
 
 ### (cached) [The Disappearing Overnight Drift](https://libertystreeteconomics.newyorkfed.org/2026/07/the-disappearing-overnight-drift/)
 **Published:** 2026-07-01 | **Authors:** Nina Boyarchenko, Lars C. Larsen, and Paul Whelan
@@ -46,7 +68,7 @@ The paper examines the aggregate reliance of the U.S. economy on fossil fuels re
 **Tags:** energy · climate & economy · GDP growth · supply chain · fiscal policy · regional economy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 1
+**Content Type:** Working Papers | **New:** 0 of 2
 
 ### (cached) [The Tradition of Federal Reserve Independence](https://www.fedinprint.org/item/fedlwp/103485/original)
 **Published:** 2026-07-06 | **Authors:** 
@@ -55,9 +77,16 @@ This paper examines the historical evolution and institutional importance of the
 
 **Tags:** monetary policy · inflation · interest rates · financial stability · financial regulation
 
+### (cached) [Sluggish news reactions: A combinatorial approach for synchronizing stock jumps](https://www.fedinprint.org/item/fedlwp/97969/103490)
+**Published:** 2026-07-06 | **Authors:** 
+
+No content provided for analysis.
+
+**Tags:** 
+
 ---
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 3
-- Total cache size: 3 items
+- Already cached: 6
+- Total cache size: 6 items
