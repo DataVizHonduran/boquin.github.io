@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-05">
+    <meta name="release-date" content="2026-07-08">
+    <title>U.S. International Trade in Goods and Services — 2026-07-08</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 U.S. International Trade in Goods and Services</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-07-08 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>-66748.000</h3>
+            <p>CONTEXT: 10Y REGIME: 11.7th Percentile | Z-Score: -1.05σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+        <div class="card">
+            <h3>-92774.000</h3>
+            <p>CONTEXT: 10Y REGIME: 6.7th Percentile | Z-Score: -1.27σ | 10Y Range:</p>
+            <p class="card-period">2025-05</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Trade Balance, Goods & Services
+                <span class="mu-chart-latest">-77,585</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"],
+                        datasets: [{
+                            data: [-71344.0, -77000.0, -71161.0, -83301.0, -75788.0, -79756.0, -96849.0, -124704.0, -117069.0, -132983.0, -60341.0, -66748.0, -58697.0, -75062.0, -59642.0, -59392.0, -37376.0, -63868.0, -76078.0, -54185.0, -54980.0, -56585.0, -54570.0, -77585.0],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: June 2026</strong></p>
+<p><strong>Subject: Trade Balance Analysis: Widening Deficits Signal Domestic Demand Resilience</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The May 2026 trade data reveals a sharp widening of the U.S. trade deficit, with the overall balance of goods and services falling to -$77.59bn, a significant jump from the April print of -$54.57bn. This expansion is driven primarily by a surge in the goods trade deficit, which hit -$106.49bn, marking a notable acceleration in import demand.</p>
+
+<p>The overall tone is one of domestic overheating relative to external trade partners. The widening deficit suggests that U.S. consumer and business spending remains robust, potentially offsetting the restrictive effects of current monetary policy. For the Fed, this print acts as a cautionary signal that aggregate demand is not cooling as rapidly as desired.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Sharp Monthly Deterioration:</strong> The total trade balance widened by 42% month-on-month (from -$54.57bn in April to -$77.59bn in May), indicating a sudden spike in net imports.</li>
+<li>  <strong>Goods-Driven Deficit:</strong> The goods trade deficit expanded by ~28% MoM to -$106.49bn, the primary engine behind the overall balance deterioration.</li>
+<li>  <strong>Historical Weakness:</strong> With a 10Y regime percentile of 11.7% for the total balance and 6.7% for goods, the current deficit is trending toward the lower bound of the decade's range.</li>
+<li>  <strong>Volatility Persistence:</strong> The data shows high intra-year volatility (e.g., the October 2025 anomaly of -$37.38bn), but the May 2026 print suggests a return to deep deficit territory.</li>
+<li>  <strong>Demand-Pull Signal:</strong> The widening gap suggests that domestic absorption is outstripping domestic production, which typically correlates with strong internal GDP growth but adds to inflationary pressure via imports.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The data points to strong domestic demand. A widening trade deficit typically acts as a drag on headline GDP calculations; however, the underlying driver—increased imports—suggests that U.S. consumption and investment are robust, indicating a high-growth environment.</p>
+
+<p><strong>(ii) Labor Market:</strong> While trade data is an indirect proxy, the appetite for imported goods suggests high levels of disposable income and business confidence, which generally supports a tight labor market and sustained wage pressure.</p>
+
+<p><strong>(iii) Inflation:</strong> The surge in imports may provide a short-term "vent" for domestic demand, but the scale of the deficit suggests a persistent demand-pull inflationary environment. If the widening deficit is driven by capital goods, it may signal future productivity; if driven by consumer goods, it reinforces the "sticky" nature of current inflation.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>The current regime is characterized by a total trade Z-score of -1.05$\sigma$ and a goods Z-score of -1.27$\sigma$. While these figures do not reach the $\pm 2.0\sigma$ threshold for a structural regime shift, the very low percentiles (11.7% and 6.7% respectively) indicate we are operating in a deep-deficit environment. Given the sharp MoM widening amidst a broader restrictive cycle, this print aligns with <strong>'late-cycle' overheating</strong>. The economy is absorbing imports at a rate that suggests domestic demand is not yet aligned with the Fed's restrictive policy goals.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Forecast: Hold / Hawkish Bias</strong></p>
+<p>The May data reduces the probability of a near-term rate cut. The sharp widening of the deficit suggests that the "transmission" of monetary policy is being dampened by resilient domestic spending. Given that the goods deficit has surged to -$106.49bn, the Fed is likely to remain on hold to ensure that this demand-side strength does not trigger a secondary inflationary wave. We expect the Fed to maintain current rates until there is a clear deceleration in import demand or a shift in the trade balance toward the 10Y median.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- U.S. INTERNATIONAL TRADE IN GOODS AND SERVICES: CYCLE-AWARE SUMMARY ---
+
+SERIES: Trade Balance, Goods & Services (mn $, SA) [BOPGSTB]
+CONTEXT: 10Y REGIME: 11.7th Percentile | Z-Score: -1.05σ | 10Y Range: [-132,983.00, -35,508.00]
+DATA:
+  2025-05    -66748.000
+  2025-06    -58697.000
+  2025-07    -75062.000
+  2025-08    -59642.000
+  2025-09    -59392.000
+  2025-10    -37376.000
+  2025-11    -63868.000
+  2025-12    -76078.000
+  2026-01    -54185.000
+  2026-02    -54980.000
+  2026-03    -56585.000
+  2026-04    -54570.000
+  2026-05    -77585.000
+----------------------------------------
+SERIES: Goods Trade Balance (mn $, SA) [BOPGTB]
+CONTEXT: 10Y REGIME: 6.7th Percentile | Z-Score: -1.27σ | 10Y Range: [-159,453.00, -60,586.00]
+DATA:
+  2025-05    -92774.000
+  2025-06    -85639.000
+  2025-07   -102645.000
+  2025-08    -88194.000
+  2025-09    -87897.000
+  2025-10    -65299.000
+  2025-11    -91473.000
+  2025-12   -102617.000
+  2026-01    -82262.000
+  2026-02    -82520.000
+  2026-03    -86077.000
+  2026-04    -82912.000
+  2026-05   -106485.000
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
