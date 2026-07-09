@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-06">
+    <meta name="release-date" content="2026-07-09">
+    <title>Business Formation Statistics — 2026-07-09</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Business Formation Statistics</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-07-09 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>459613.000</h3>
+            <p>CONTEXT: 10Y REGIME: 98.3th Percentile | Z-Score: +1.64σ | 10Y Range:</p>
+            <p class="card-period">2025-06</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Business Applications Total
+                <span class="mu-chart-latest">531,423</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"],
+                        datasets: [{
+                            data: [424927.0, 436267.0, 427221.0, 426875.0, 446146.0, 464450.0, 385618.0, 432820.0, 461056.0, 456024.0, 448815.0, 459613.0, 474833.0, 478074.0, 510794.0, 498416.0, 537266.0, 496139.0, 526115.0, 496121.0, 493792.0, 506807.0, 525462.0, 531423.0],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: June 2026</strong></p>
+<p><strong>Subject: Business Formation Statistics: Sustained Entrepreneurial Momentum Signals Structural Resilience</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest Business Formation Statistics reveal a remarkably robust environment for new venture creation, with June 2026 applications reaching 531,423. This print underscores a persistent appetite for risk and capital investment, maintaining a level of activity that remains significantly elevated relative to the ten-year historical average.</p>
+
+<p>From a policy perspective, the data suggests that the "cost of capital" transmission mechanism is not deterring entrepreneurial entry. The sustained high volume of applications indicates that business confidence remains decoupled from restrictive monetary pressures, potentially complicating the Fed's efforts to cool aggregate demand.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Persistent High-Water Mark:</strong> Current applications are situated at the 98.3rd percentile of the 10-year range, indicating that the current level of business formation is an extreme outlier compared to the previous decade.</li>
+<li>  <strong>Positive Short-Term Momentum:</strong> The June 2026 print represents a 1.1% month-on-month increase from May and a 15.6% increase year-on-year (from 459,613 in June 2025), signaling accelerating growth in new business starts.</li>
+<li>  <strong>Resilience to Volatility:</strong> Despite a dip in late 2025 and early 2026, the series has recovered strongly, suggesting that the underlying drivers of business formation are structural rather than transitory.</li>
+<li>  <strong>Investment Appetite:</strong> The Z-score of +1.64$\sigma$ confirms that while we are not yet in a "statistical anomaly" zone (>2.0$\sigma$), we are operating in a regime of significant expansion.</li>
+<li>  <strong>Capacity Expansion:</strong> The consistent clustering of prints above the 500k mark since September 2025 suggests a new, higher baseline for US entrepreneurial activity.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The data points to a highly expansionary growth environment. The steady climb in applications suggests strong expectations for future demand and a willingness by entrepreneurs to commit resources to new ventures, which typically precedes increases in CAPEX and productivity.</p>
+
+<p><strong>(ii) Labor Market:</strong> This trend implies a tightening of the labor market. High business formation typically increases the demand for labor and encourages "job switching" or the creation of new roles, which may sustain upward pressure on nominal wages.</p>
+
+<p><strong>(iii) Inflation:</strong> From an inflationary lens, this is a "hawkish" print. Robust business formation increases competition for inputs and labor, potentially contributing to cost-push inflation and offsetting the contractionary effects of current monetary policy.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>With a Z-score of +1.64$\sigma$ and a 98.3rd percentile ranking, the current regime is classified as <strong>Late-Cycle Overheating</strong>. While the Z-score has not yet breached the +2.0$\sigma$ threshold for a definitive "regime shift," the fact that activity is nearly at the absolute ceiling of the 10-year range (546,719) suggests the economy is operating near maximum entrepreneurial capacity. This alignment is characteristic of a late-cycle phase where optimism remains high despite restrictive conditions.</p>
+
+<h3>5. Policy Outlook</h3>
+<p>The data provides a strong argument for the Federal Reserve to maintain a <strong>"Higher for Longer"</strong> stance. Given that business formation—a key proxy for economic optimism and future investment—is accelerating (15.6% YoY), there is little evidence of a "cooling" effect in the real economy. </p>
+
+<p><strong>Forecast:</strong> We expect the Fed to hold rates steady in the next meeting. A pivot toward easing would be premature given the risk of fueling an already overheated entrepreneurial sector. The balance of risks is skewed toward persistent inflation driven by robust domestic activity, making a rate cut unlikely until a meaningful decline in the application trend is observed.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- BUSINESS FORMATION STATISTICS: CYCLE-AWARE SUMMARY ---
+
+SERIES: Business Applications Total (SA) [BABATOTALSAUS]
+CONTEXT: 10Y REGIME: 98.3th Percentile | Z-Score: +1.64σ | 10Y Range: [235,568.00, 546,719.00]
+DATA:
+  2025-06    459613.000
+  2025-07    474833.000
+  2025-08    478074.000
+  2025-09    510794.000
+  2025-10    498416.000
+  2025-11    537266.000
+  2025-12    496139.000
+  2026-01    526115.000
+  2026-02    496121.000
+  2026-03    493792.000
+  2026-04    506807.000
+  2026-05    525462.000
+  2026-06    531423.000
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
