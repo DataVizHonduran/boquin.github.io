@@ -1,40 +1,48 @@
 # 🏛️ Federal Reserve District Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: July 2026 (8 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Economist**
-**Date: July 8, 2026**
-**Subject: Analysis of Recent Federal Reserve District Research**
+**MEMORANDUM**
+**TO:** Investment Committee
+**FROM:** Senior Economist
+**DATE:** July 9, 2026
+**SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While some papers are purely technical, several provide critical insights into systemic risk and market microstructure that we must integrate into our current positioning.
+I have reviewed the latest research output from the Federal Reserve districts. While some papers are purely academic or technical, several provide critical signals regarding inflationary pressures and systemic risk. Here are the most analytically significant publications for our current positioning:
 
-1. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
-This research re-evaluates the causal relationship between liquidity runs and broader financial collapses. Understanding whether runs are a symptom or a primary driver of crises is essential for our stress-testing models and assessing the efficacy of the Fed's current discount window facilities.
+1. **[NY] More Tariff Pass-Through Is in the Pipeline**
+This research indicates that the full inflationary impact of recent trade policy shifts and Supreme Court rulings has not yet hit the consumer. For our macro outlook, this suggests a "second wave" of cost-push inflation that may complicate the Fed's path toward its 2% target.
 
-2. **[NY] Using AI to Let History Speak About Bank Runs**
-By leveraging LLMs to extract bank-level data from historical archives, the Fed is creating a more granular dataset on institutional failure. This suggests a shift toward more data-driven, predictive supervision, which may lead to preemptive regulatory interventions before a crisis becomes public.
+2. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
+By analyzing historical run patterns, this paper clarifies whether runs are the *cause* or a *symptom* of systemic collapse. This is vital for our risk management team to better distinguish between idiosyncratic liquidity shocks and systemic solvency crises in the current banking environment.
 
-3. **[STL] The Tradition of Federal Reserve Independence**
-This piece examines the institutional safeguards protecting the Fed from political interference. In an era of increasing polarization, any perceived erosion of this independence would lead to higher volatility in the long end of the Treasury curve and a potential risk premium on USD assets.
+3. **[NY] Using AI to Let History Speak About Bank Runs**
+The application of LLMs to extract bank-level data from historical archives provides a new empirical baseline for predicting panic behavior. This enhances our ability to model "tail risk" events by identifying precursors to bank runs that were previously hidden in unstructured data.
 
-4. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
-The finding that fossil fuel reliance in gross output remains constant despite the "green transition" highlights a significant structural lag. This suggests that energy-driven inflation (cost-push) will remain a persistent risk, as the economy is not decarbonizing as rapidly as market sentiment often assumes.
+4. **[RIC] When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance**
+The finding that home equity levels dictate flood insurance maintenance suggests a hidden vulnerability in the housing market. As equity fluctuates, a decline in insurance coverage could lead to sharper asset value collapses following climate events, increasing the risk of localized credit shocks.
 
-5. **[NY] The Disappearing Overnight Drift**
-The disappearance of the persistent return premium in U.S. equity futures during the 2:00–3:00 a.m. window indicates that algorithmic efficiency has closed a long-standing arbitrage gap. For our quantitative desks, this means that historical "overnight" alpha strategies are likely decayed and require immediate recalibration.
+5. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
+This analysis reveals that aggregate fossil fuel reliance in gross output remains stubbornly constant despite the energy transition. This implies that "green" transitions are currently additive rather than substitutive, meaning energy price volatility will remain a primary driver of GDP volatility for longer than markets are pricing in.
 
 **Synthesis:**
-The current research trend suggests a dual focus on the systemic fragility of the banking sector and the persistence of structural energy dependencies. We should maintain a cautious stance on financial sector volatility while adjusting our inflation expectations upward to account for the slower-than-expected energy transition.
+The prevailing theme across these publications is the persistence of "hidden" risks, specifically regarding delayed inflationary pass-through from tariffs and systemic fragility in banking and housing. We should maintain a defensive posture on inflation hedges and tighten our credit risk parameters for regional banking exposures.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+
+### (cached) [More Tariff Pass‑Through Is in the Pipeline](https://libertystreeteconomics.newyorkfed.org/2026/07/more-tariff-pass-through-is-in-the-pipeline/)
+**Published:** 2026-07-08 | **Authors:** 
+
+The paper examines how businesses respond to sweeping U.S. trade policy changes and new tariffs. It analyzes the trade-off between absorbing increased costs through profit margins versus passing them on to consumers via higher prices.
+
+**Tags:** trade · inflation · consumer spending · international · supply chain
 
 ### (cached) [What Do Over 3,000 Bank Runs Teach Us About Banking Crises?](https://libertystreeteconomics.newyorkfed.org/2026/07/what-do-over-3000-bank-runs-teach-us-about-banking-crises/)
 **Published:** 2026-07-07 | **Authors:** 
@@ -58,7 +66,14 @@ The paper analyzes the 'overnight drift' in U.S. equity futures, noting a histor
 **Tags:** financial stability · international · interest rates · monetary policy · banking
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 1
+**Content Type:** Economic Briefs | **New:** 0 of 2
+
+### (cached) [When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-22)
+**Published:** 2026-07-08 | **Authors:** 
+
+This research explores the relationship between homeowner equity and the maintenance of flood insurance. It suggests that mortgage debt levels may act as a substitute for disaster insurance in the event of a loss.
+
+**Tags:** housing · real estate · credit · financial stability · banking
 
 ### (cached) [How Much Does the US Economy Rely on Fossil Fuels?](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-21)
 **Published:** 2026-07-01 | **Authors:** 
@@ -88,5 +103,5 @@ No content provided for analysis.
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 6
-- Total cache size: 6 items
+- Already cached: 8
+- Total cache size: 8 items

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-07-08T09:27:48.732728+00:00",
-    "totalItems": 99
+    "lastRun": "2026-07-09T10:27:38.056031+00:00",
+    "totalItems": 101
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -178,7 +178,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is insufficient to determine a specific argument, though the title suggests a focus on systemic risk. Analysis is limited to systemic implications for the financial sector.",
       "tags": [
@@ -199,7 +199,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Federal Reserve Board of Governors without specific content. It likely pertains to central bank governance and policy oversight.",
       "tags": [
@@ -220,7 +220,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Kansas City regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -241,7 +241,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Minneapolis regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -262,7 +262,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of economic conditions and business activity within the Third Federal Reserve District. Focuses on regional growth trends and local industrial performance.",
       "tags": [
@@ -284,7 +284,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of economic trends in the Twelfth District, with a heavy emphasis on technology and Pacific Rim trade. Analyzes the intersection of innovation and regional labor dynamics.",
       "tags": [
@@ -306,7 +306,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Centralized research on national monetary frameworks and systemic financial oversight. Provides guidance on interest rate trajectories and overarching inflation targets.",
       "tags": [
@@ -328,7 +328,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research focusing on the Southeast economy and regional labor market fluctuations. Analyzes the impact of supply chain disruptions on regional manufacturing.",
       "tags": [
@@ -350,7 +350,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of New England's economic landscape, focusing on housing markets and financial stability. Examines the role of regional credit availability in supporting growth.",
       "tags": [
@@ -372,7 +372,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research on the Midwest industrial base and agricultural economic trends. Evaluates the relationship between wages and regional productivity.",
       "tags": [
@@ -394,7 +394,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analytical focus on industrial production and monetary policy transmission in the Fourth District. Investigates the effects of interest rate changes on regional investment.",
       "tags": [
@@ -416,7 +416,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of the Texas and Southwestern economy, specifically energy sector volatility. Analyzes the impact of oil prices on regional GDP and employment.",
       "tags": [
@@ -438,7 +438,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication examines economic trends and policy implications within the Kansas City Federal Reserve district. It focuses on regional growth drivers and local financial conditions.",
       "tags": [
@@ -460,7 +460,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research analyzes macroeconomic indicators and monetary transmission mechanisms relevant to the Minneapolis district. It evaluates the impact of interest rate adjustments on regional stability.",
       "tags": [
@@ -482,7 +482,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report focuses on global financial markets, systemic risk, and the stability of the international banking system. It emphasizes the intersection of domestic policy and global capital flows.",
       "tags": [
@@ -505,7 +505,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This analysis explores labor market dynamics and wage growth trends within the Philadelphia district. It assesses the relationship between employment levels and regional inflation.",
       "tags": [
@@ -527,7 +527,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication investigates the impact of fiscal policy and supply chain disruptions on regional economic output. It examines the resilience of local industries to external shocks.",
       "tags": [
@@ -549,7 +549,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research provides a data-driven analysis of consumer spending patterns and credit availability. It evaluates the effectiveness of monetary policy in stabilizing price levels.",
       "tags": [
@@ -571,7 +571,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-07-06T11:29:43.459475+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report examines the influence of emerging technologies and climate risks on the Western economy. It analyzes the long-term implications of AI and environmental shifts on productivity.",
       "tags": [
@@ -1762,7 +1762,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-06-26T10:28:36.350427+00:00",
-      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1868,7 +1868,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-01T10:51:41.666745+00:00",
-      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1933,7 +1933,7 @@
       "publicationDate": "2026-07-07",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "Runs on financial institutions are one of the salient markers of financial crises. But the role of runs in crises is a topic of longstanding debate. Runs can be seen as the key turning point, whereby even small shocks can generate severe crises with widespread bank failures. Another view is that runs are mainly a symptom of deeper rot in the financial system, exacerbating crises rather than being their primary cause. Understanding this debate has first order implications for how to think about financial crises and the appropriate policy responses. In this post, we use a new database of more th",
       "aiSummary": "The paper examines the causal role of bank runs in financial crises, debating whether they act as primary catalysts or symptoms of systemic instability. It analyzes a large dataset of runs to determine how small shocks escalate into widespread failures.",
       "tags": [
@@ -1954,7 +1954,7 @@
       "publicationDate": "2026-07-07",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "Banking crises are commonly associated with bank runs and banking panics, yet our empirical understanding of bank runs is constrained by a lack of bank-level data. In a new paper, we use large language models (LLMs) to extract information on bank runs from millions of digitized historical newspaper pages, creating the most comprehensive database of bank runs in U.S. history. Every bank run episode that we identify is documented on a companion website where users can browse and examine individual episodes, and read the original newspaper articles. In this post, we describe how we built this dat",
       "aiSummary": "This research utilizes large language models to synthesize a comprehensive historical database of U.S. bank runs from digitized newspaper archives. The study aims to overcome data limitations to better understand the empirical patterns of banking panics.",
       "tags": [
@@ -1975,11 +1975,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-07-08T09:27:48.732728+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
+      "tagsGeneratedAt": "2026-07-09T10:27:38.056031+00:00"
     },
     "741b1c72c5e59e66026bb6d856f6d6f021e043815d44bd7dbcc4863d2f0a6470": {
       "url": "https://www.fedinprint.org/item/fedlwp/97969/103490",
@@ -1995,6 +1995,48 @@
       "aiSummary": "No content provided for analysis.",
       "tags": [],
       "tagsGeneratedAt": "2026-07-08T09:27:48.732728+00:00"
+    },
+    "40ee3a93a61e727dd01d24e4673584cad6689df93aa4332a1891c56db8a3e236": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/07/more-tariff-pass-through-is-in-the-pipeline/",
+      "title": "More Tariff Pass‑Through Is in the Pipeline",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-07-08",
+      "authors": [],
+      "firstSeen": "2026-07-09T10:27:38.056031+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
+      "scrapedSnippet": "The past year brought dramatic changes to U.S. trade policy, including sweeping new tariffs, as well as a Supreme Court decision that further reshaped the tariff landscape. Many businesses saw their costs increase significantly and faced complex decisions about whether to absorb the tariffs through lower profit margins, raise their prices to recover the higher costs, or some combination of the two. Last year, we found that most businesses had passed on at least some of these higher costs to their customers through higher prices. Now, over a year later, have businesses finished adjusting prices",
+      "aiSummary": "The paper examines how businesses respond to sweeping U.S. trade policy changes and new tariffs. It analyzes the trade-off between absorbing increased costs through profit margins versus passing them on to consumers via higher prices.",
+      "tags": [
+        "trade",
+        "inflation",
+        "consumer spending",
+        "international",
+        "supply chain"
+      ],
+      "tagsGeneratedAt": "2026-07-09T10:27:38.056031+00:00"
+    },
+    "7f436eabcc505e41297a3f4b3b1caee1decd4f2a7ce1fbe8d973dcdce78f5a6a": {
+      "url": "https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-22",
+      "title": "When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance",
+      "district": "Richmond Fed (5th District)",
+      "districtCode": "RIC",
+      "contentType": "Economic Briefs",
+      "publicationDate": "2026-07-08",
+      "authors": [],
+      "firstSeen": "2026-07-09T10:27:38.056031+00:00",
+      "lastChecked": "2026-07-09T10:27:38.056031+00:00",
+      "scrapedSnippet": "The amount of equity homeowners have may influence whether they maintain flood insurance.",
+      "aiSummary": "This research explores the relationship between homeowner equity and the maintenance of flood insurance. It suggests that mortgage debt levels may act as a substitute for disaster insurance in the event of a loss.",
+      "tags": [
+        "housing",
+        "real estate",
+        "credit",
+        "financial stability",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-07-09T10:27:38.056031+00:00"
     }
   }
 }
