@@ -1,0 +1,202 @@
+{
+  "date": "2026-07-10",
+  "holdings_as_of": "2026-07-10",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "MRVL",
+      "name": "Marvell Technology, Inc.",
+      "weight": 2.53,
+      "shares": 62136
+    },
+    {
+      "rank": 2,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 2.53,
+      "shares": 15167
+    },
+    {
+      "rank": 3,
+      "ticker": "AMAT",
+      "name": "Applied Materials, Inc.",
+      "weight": 2.52,
+      "shares": 25174
+    },
+    {
+      "rank": 4,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.51,
+      "shares": 75458
+    },
+    {
+      "rank": 5,
+      "ticker": "SNDK",
+      "name": "Sandisk Corporation",
+      "weight": 2.37,
+      "shares": 7808
+    },
+    {
+      "rank": 6,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 2.35,
+      "shares": 25916
+    },
+    {
+      "rank": 7,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.33,
+      "shares": 10937
+    },
+    {
+      "rank": 8,
+      "ticker": "ABVX",
+      "name": "ABIVAX Soci\u00c3\u00a9t\u00c3\u00a9 Anonyme",
+      "weight": 2.33,
+      "shares": 95968
+    },
+    {
+      "rank": 9,
+      "ticker": "DASH",
+      "name": "DoorDash, Inc.",
+      "weight": 2.29,
+      "shares": 69040
+    },
+    {
+      "rank": 10,
+      "ticker": "ASML",
+      "name": "ASML Holding N.V.",
+      "weight": 2.27,
+      "shares": 7319
+    },
+    {
+      "rank": 11,
+      "ticker": "LRCX",
+      "name": "Lam Research Corporation",
+      "weight": 2.26,
+      "shares": 38603
+    },
+    {
+      "rank": 12,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.25,
+      "shares": 7083
+    },
+    {
+      "rank": 13,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.13,
+      "shares": 36776
+    },
+    {
+      "rank": 14,
+      "ticker": "VST",
+      "name": "Vistra Corp.",
+      "weight": 2.13,
+      "shares": 78410
+    },
+    {
+      "rank": 15,
+      "ticker": "TLN",
+      "name": "Talen Energy Corporation",
+      "weight": 2.12,
+      "shares": 32768
+    },
+    {
+      "rank": 16,
+      "ticker": "NU",
+      "name": "Nu Holdings Ltd.",
+      "weight": 2.11,
+      "shares": 898472
+    },
+    {
+      "rank": 17,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.08,
+      "shares": 27182
+    },
+    {
+      "rank": 18,
+      "ticker": "UNH",
+      "name": "UnitedHealth Group Incorporated",
+      "weight": 2.08,
+      "shares": 27808
+    },
+    {
+      "rank": 19,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.05,
+      "shares": 27167
+    },
+    {
+      "rank": 20,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.05,
+      "shares": 33621
+    },
+    {
+      "rank": 21,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.02,
+      "shares": 22162
+    },
+    {
+      "rank": 22,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.01,
+      "shares": 36480
+    },
+    {
+      "rank": 23,
+      "ticker": "APP",
+      "name": "AppLovin Corporation",
+      "weight": 2.0,
+      "shares": 21861
+    },
+    {
+      "rank": 24,
+      "ticker": "HUT",
+      "name": "Hut 8 Corp.",
+      "weight": 1.99,
+      "shares": 106884
+    },
+    {
+      "rank": 25,
+      "ticker": "COF",
+      "name": "Capital One Financial Corporation",
+      "weight": 1.97,
+      "shares": 58516
+    }
+  ],
+  "performance": {
+    "price": 180.98,
+    "aum": 598637376,
+    "ret_1m": 4.33,
+    "ret_3m": 15.02,
+    "ret_ytd": 15.85,
+    "ret_1y": null,
+    "week52_low": 137.695,
+    "week52_high": 192.13,
+    "avg_volume": 11781,
+    "as_of": "2026-07-10"
+  },
+  "sectors": {
+    "consumer_cyclical": 9.35,
+    "technology": 37.85,
+    "communication_services": 11.68,
+    "financial_services": 15.54,
+    "utilities": 5.92,
+    "industrials": 11.11,
+    "healthcare": 8.55
+  }
+}
