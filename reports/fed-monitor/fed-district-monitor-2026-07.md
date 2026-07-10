@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (8 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: July 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -9,33 +9,34 @@
 **MEMORANDUM**
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 9, 2026
+**DATE:** July 10, 2026
 **SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research output from the Federal Reserve districts. While some papers are purely academic or technical, several provide critical signals regarding inflationary pressures and systemic risk. Here are the most analytically significant publications for our current positioning:
+I have reviewed the latest research output from the Fed districts. While some papers are purely academic, several provide critical signals regarding the current trade regime and systemic financial stability. Here are the most analytically significant findings:
 
-1. **[NY] More Tariff Pass-Through Is in the Pipeline**
-This research indicates that the full inflationary impact of recent trade policy shifts and Supreme Court rulings has not yet hit the consumer. For our macro outlook, this suggests a "second wave" of cost-push inflation that may complicate the Fed's path toward its 2% target.
+1. **[NY] Effect of Tariffs on U.S. Small Businesses:** This research utilizes new 2025 data to quantify the specific impact of recent trade barriers on the small business sector. It is critical for our macro outlook because small businesses lack the hedging capabilities of multinationals, meaning their distress could act as a primary transmission mechanism for a broader economic slowdown.
 
-2. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
-By analyzing historical run patterns, this paper clarifies whether runs are the *cause* or a *symptom* of systemic collapse. This is vital for our risk management team to better distinguish between idiosyncratic liquidity shocks and systemic solvency crises in the current banking environment.
+2. **[NY] More Tariff Pass-Through Is in the Pipeline:** The authors argue that the full inflationary impact of recent tariffs and Supreme Court rulings has not yet hit consumer prices. For our policy outlook, this suggests a "second wave" of inflation is likely, which may force the Fed to keep rates higher for longer than the market currently prices.
 
-3. **[NY] Using AI to Let History Speak About Bank Runs**
-The application of LLMs to extract bank-level data from historical archives provides a new empirical baseline for predicting panic behavior. This enhances our ability to model "tail risk" events by identifying precursors to bank runs that were previously hidden in unstructured data.
+3. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?:** This study re-evaluates the role of bank runs as either a cause or a symptom of financial collapse. Understanding this distinction is vital for our risk management, as it informs whether current liquidity stresses are idiosyncratic or indicative of a systemic solvency crisis.
 
-4. **[RIC] When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance**
-The finding that home equity levels dictate flood insurance maintenance suggests a hidden vulnerability in the housing market. As equity fluctuates, a decline in insurance coverage could lead to sharper asset value collapses following climate events, increasing the risk of localized credit shocks.
+4. **[NY] Using AI to Let History Speak About Bank Runs:** By applying LLMs to historical data, the Fed is uncovering previously hidden patterns in banking panics. This indicates that the Fed is upgrading its supervisory toolkit to detect early-warning signals of instability, potentially altering how the "discount window" is utilized in future crises.
 
-5. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
-This analysis reveals that aggregate fossil fuel reliance in gross output remains stubbornly constant despite the energy transition. This implies that "green" transitions are currently additive rather than substitutive, meaning energy price volatility will remain a primary driver of GDP volatility for longer than markets are pricing in.
+5. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?:** This analysis reveals that aggregate fossil fuel reliance in gross output has remained stubbornly constant despite the energy transition. This suggests that "green" GDP growth is slower than forecasted, implying that energy price shocks will continue to have a disproportionate impact on U.S. inflation.
 
-**Synthesis:**
-The prevailing theme across these publications is the persistence of "hidden" risks, specifically regarding delayed inflationary pass-through from tariffs and systemic fragility in banking and housing. We should maintain a defensive posture on inflation hedges and tighten our credit risk parameters for regional banking exposures.
+**Synthesis:** The prevailing theme is a heightened concern over "lagged" risks, specifically the delayed inflationary pass-through of tariffs and the systemic fragility of the banking sector. We should position our portfolios for persistent inflation and increased volatility in financial intermediaries.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+
+### (cached) [Effect of Tariffs on U.S. Small Businesses](https://libertystreeteconomics.newyorkfed.org/2026/07/effect-of-tariffs-on-u-s-small-businesses/)
+**Published:** 2026-07-09 | **Authors:** Will Aarons and Asani Sarkar
+
+This analysis utilizes the Small Business Credit Survey to evaluate the impact of tariffs on small businesses across the U.S. and the Second District. It aims to fill a data gap regarding how trade barriers affect small-scale enterprise operations and credit needs.
+
+**Tags:** trade · credit · regional economy · banking · GDP growth
 
 ### (cached) [More Tariff Pass‑Through Is in the Pipeline](https://libertystreeteconomics.newyorkfed.org/2026/07/more-tariff-pass-through-is-in-the-pipeline/)
 **Published:** 2026-07-08 | **Authors:** 
@@ -103,5 +104,5 @@ No content provided for analysis.
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 8
-- Total cache size: 8 items
+- Already cached: 9
+- Total cache size: 9 items
