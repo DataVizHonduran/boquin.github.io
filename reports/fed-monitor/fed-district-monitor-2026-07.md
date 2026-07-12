@@ -9,30 +9,22 @@
 **MEMORANDUM**
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 11, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+**DATE:** July 12, 2026
+**RE:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Fed districts. While there is some noise regarding historical banking data and market microstructure, the primary signal centers on the lagging inflationary effects of trade policy and systemic financial fragility.
+I have reviewed the latest research output from the Fed districts. While some papers are purely academic, several provide critical signals regarding the current inflationary environment and systemic risk. Here are the most analytically significant findings:
 
-The following publications are the most analytically significant for our current positioning:
+1. **[NY] More Tariff Pass‑Through Is in the Pipeline:** This research suggests that the full inflationary impact of recent trade policy shifts has not yet hit the consumer. For our outlook, this implies a "second wave" of price pressures that may complicate the Fed's path toward a neutral rate.
 
-1. **[NY] More Tariff Pass‑Through Is in the Pipeline**
-This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. For our macro outlook, this suggests a "second wave" of price pressure is likely, potentially complicating the Fed's path toward a neutral rate.
+2. **[NY] Effect of Tariffs on U.S. Small Businesses:** By utilizing 2025 data, this study highlights the disproportionate burden tariffs place on smaller firms with less pricing power. This suggests a potential bifurcation in corporate earnings, where large-cap firms absorb costs while small-cap indices face margin compression.
 
-2. **[NY] Effect of Tariffs on U.S. Small Businesses**
-By utilizing 2025 data, this study highlights the disproportionate burden of trade barriers on small-cap enterprises. This is a critical signal for our equity analysts to monitor margin compression in the small-cap space as these firms lack the hedging capabilities of multinationals.
+3. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?** This analysis re-evaluates the role of bank runs as either the cause or the symptom of financial collapse. Understanding these triggers is vital for our stress-testing of regional bank exposures in the current high-rate environment.
 
-3. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
-This analysis re-evaluates the role of bank runs as the primary catalyst versus a symptom of financial crises. Understanding this distinction is vital for our risk management team when assessing systemic contagion risks in the current banking environment.
+4. **[NY] Using AI to Let History Speak About Bank Runs:** By applying LLMs to historical data, the Fed is improving its ability to identify early-warning signals of liquidity crises. This indicates that the regulator is enhancing its surveillance capabilities, which may lead to more preemptive (and potentially disruptive) interventions.
 
-4. **[NY] Using AI to Let History Speak About Bank Runs**
-The use of LLMs to extract bank-level data from historical records provides a new empirical baseline for predicting liquidity crises. This suggests that the Fed is enhancing its supervisory toolkit, which may lead to more preemptive regulatory interventions during periods of stress.
+5. **[RIC] When the Mortgage Becomes the Backup Plan:** This paper identifies a correlation between home equity levels and the lapse of disaster insurance. As property values fluctuate, a decline in equity could trigger a systemic under-insurance crisis, increasing the likelihood of government bailouts following climate events.
 
-5. **[RIC] When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance**
-This paper identifies a correlation between home equity levels and the lapse of flood insurance. As climate-related risks increase, this reveals a hidden vulnerability in the housing market where equity volatility could trigger a spike in uninsured disaster losses.
-
-**Synthesis:**
-The prevailing theme is one of lagging risks, specifically the delayed inflationary pass-through of tariffs and the systemic fragility of small businesses and uninsured homeowners. We should brace for persistent headline inflation and increased volatility in the small-cap and real estate sectors.
+**Synthesis:** The prevailing theme is one of latent risk, specifically regarding the delayed inflationary impact of tariffs and the fragility of the banking and insurance sectors. We should pivot our strategy to hedge against persistent inflation and increase scrutiny on small-cap equity and regional financial exposures.
 
 ---
 
