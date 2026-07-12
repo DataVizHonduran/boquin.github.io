@@ -175,17 +175,22 @@ def quality_filter(
     return keep
 
 
-# ── Step 4: YoY + Diffusion ───────────────────────────────────────────────────
+# ── Step 4: Change calculations + Diffusion ──────────────────────────────────
 
 def compute_yoy(s: pd.Series) -> pd.Series:
     s = s.resample("MS").last()
     return (s / s.shift(12) - 1) * 100
 
 
-def build_diffusion(yoy_df: pd.DataFrame) -> pd.DataFrame:
-    n = yoy_df.notna().sum(axis=1).replace(0, np.nan)
-    broad_raw = (yoy_df > 0).sum(axis=1) / n * 100
-    accel_raw = (yoy_df > yoy_df.shift(1)).sum(axis=1) / n * 100
+def compute_mom(s: pd.Series) -> pd.Series:
+    s = s.resample("MS").last()
+    return (s / s.shift(1) - 1) * 100
+
+
+def build_diffusion(df: pd.DataFrame) -> pd.DataFrame:
+    n = df.notna().sum(axis=1).replace(0, np.nan)
+    broad_raw = (df > 0).sum(axis=1) / n * 100
+    accel_raw = (df > df.shift(1)).sum(axis=1) / n * 100
     return pd.DataFrame({
         "broad_raw": broad_raw,
         "accel_raw": accel_raw,
@@ -196,45 +201,64 @@ def build_diffusion(yoy_df: pd.DataFrame) -> pd.DataFrame:
 
 # ── Step 5: Bucket distribution ───────────────────────────────────────────────
 
-BUCKETS = [
-    ("<0%",   float("-inf"), 0),
-    ("0–1%",  0,  1),
-    ("1–2%",  1,  2),
-    ("2–3%",  2,  3),
-    ("3–4%",  3,  4),
-    ("4–6%",  4,  6),
-    ("≥6%",   6,  float("inf")),
-]
-
 BUCKET_COLORS = [
-    "#6A1B9A",   # <0%    purple
-    "#1565C0",   # 0–1%   dark blue
-    "#42A5F5",   # 1–2%   light blue
-    "#66BB6A",   # 2–3%   green (near target)
-    "#FFA726",   # 3–4%   orange
-    "#EF5350",   # 4–6%   red
-    "#8B0000",   # ≥6%    dark red
+    "#6A1B9A",  # purple  — deflation / very cold
+    "#1565C0",  # dark blue
+    "#42A5F5",  # light blue
+    "#66BB6A",  # green
+    "#FFA726",  # orange
+    "#EF5350",  # red
+    "#8B0000",  # dark red — very hot
 ]
 
+BUCKETS_YOY = [
+    ("<0%",    float("-inf"), 0),
+    ("0–1%",   0,  1),
+    ("1–2%",   1,  2),
+    ("2–3%",   2,  3),
+    ("3–4%",   3,  4),
+    ("4–6%",   4,  6),
+    ("≥6%",    6,  float("inf")),
+]
 
-def build_bucket_df(yoy_df: pd.DataFrame) -> pd.DataFrame:
-    """% of items in each YoY bucket per month. Columns = bucket labels."""
-    n = yoy_df.notna().sum(axis=1).replace(0, np.nan)
+BUCKETS_MOM = [
+    ("<0%",      float("-inf"), 0),
+    ("0–0.2%",   0,    0.2),
+    ("0.2–0.4%", 0.2,  0.4),
+    ("0.4–0.6%", 0.4,  0.6),
+    ("0.6–1%",   0.6,  1.0),
+    ("≥1%",      1.0,  float("inf")),
+]
+
+# MoM only has 6 buckets — drop the darkest red so colors still match 1-to-1
+BUCKET_COLORS_MOM = BUCKET_COLORS[:6]
+
+
+def build_bucket_df(df: pd.DataFrame, buckets: list) -> pd.DataFrame:
+    """% of items in each bucket per month. Columns = bucket labels."""
+    n = df.notna().sum(axis=1).replace(0, np.nan)
     out = {}
-    for label, lo, hi in BUCKETS:
+    for label, lo, hi in buckets:
         if lo == float("-inf"):
-            mask = yoy_df < hi
+            mask = df < hi
         elif hi == float("inf"):
-            mask = yoy_df >= lo
+            mask = df >= lo
         else:
-            mask = (yoy_df >= lo) & (yoy_df < hi)
+            mask = (df >= lo) & (df < hi)
         out[label] = mask.sum(axis=1) / n * 100
     return pd.DataFrame(out)
 
 
 # ── Step 6: Chart ─────────────────────────────────────────────────────────────
 
-def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -> str:
+def build_chart_json(
+    di: pd.DataFrame,
+    bucket_df: pd.DataFrame,
+    buckets: list,
+    bucket_colors: list,
+    n_series: int,
+    measure: str = "YoY",
+) -> str:
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
 
@@ -246,9 +270,9 @@ def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -
 
     diff_panels = [
         (1, "broad_raw", "broad_3m", BLUE, BLUE_FAINT,
-         f"CPI Breadth Diffusion — % of {n_series} Items with Positive YoY Inflation"),
+         f"CPI Breadth Diffusion — % of {n_series} Items with Positive {measure}"),
         (2, "accel_raw", "accel_3m", RED,  RED_FAINT,
-         f"CPI Acceleration Diffusion — % of {n_series} Items Where YoY Is Rising vs Prior Month"),
+         f"CPI Acceleration Diffusion — % of {n_series} Items Where {measure} Is Rising vs Prior Month"),
     ]
 
     fig = make_subplots(
@@ -258,7 +282,7 @@ def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -
         row_heights=[0.30, 0.30, 0.40],
         subplot_titles=[
             p[5] for p in diff_panels
-        ] + [f"YoY Distribution Across {n_series} CPI Items (% in Each Bucket)"],
+        ] + [f"{measure} Distribution Across {n_series} CPI Items (% in Each Bucket)"],
     )
 
     # ── Panels 1 & 2: diffusion lines ────────────────────────────────────────
@@ -310,7 +334,7 @@ def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -
 
     # ── Panel 3: stacked bar — bucket distribution ────────────────────────────
     bdf = bucket_df[bucket_df.index >= CLIP_START]
-    for (label, _, _), color in zip(BUCKETS, BUCKET_COLORS):
+    for (label, _, _), color in zip(buckets, bucket_colors):
         col_data = bdf[label].round(1)
         fig.add_trace(go.Bar(
             x=bdf.index,
@@ -379,7 +403,13 @@ def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -
 
 # ── Step 7: HTML ──────────────────────────────────────────────────────────────
 
-def build_html(chart_json: str, n_series: int, last_updated: str) -> str:
+def build_html(yoy_chart_json: str, mom_chart_json: str, n_series: int, last_updated: str) -> str:
+    PLOTLY_CONFIG = """{
+  responsive: true,
+  displayModeBar: true,
+  modeBarButtonsToRemove: ['lasso2d','select2d','toggleSpikelines'],
+  displaylogo: false
+}"""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -393,6 +423,7 @@ def build_html(chart_json: str, n_series: int, last_updated: str) -> str:
 <style>
   :root {{
     --forest: #1a3a2f;
+    --forest-light: #2d5a47;
     --cream: #faf9f7;
     --text: #333;
     --border: #e0e0e0;
@@ -431,15 +462,43 @@ def build_html(chart_json: str, n_series: int, last_updated: str) -> str:
     color: rgba(255,255,255,0.7);
     text-align: right;
   }}
+  .tab-bar {{
+    background: var(--forest-light);
+    display: flex;
+    gap: 0;
+    padding: 0 24px;
+  }}
+  .tab-btn {{
+    padding: 10px 24px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.65);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }}
+  .tab-btn.active {{
+    color: #fff;
+    border-bottom-color: #fff;
+  }}
+  .tab-btn:hover:not(.active) {{
+    color: rgba(255,255,255,0.9);
+  }}
   .chart-wrap {{
     background: white;
     padding: 20px 24px 24px;
     max-width: 1200px;
     margin: 0 auto;
   }}
+  .tab-panel {{ display: none; }}
+  .tab-panel.active {{ display: block; }}
   @media (max-width: 700px) {{
     header {{ padding: 16px; }}
     .chart-wrap {{ padding: 12px; }}
+    .tab-bar {{ padding: 0 12px; }}
   }}
 </style>
 </head>
@@ -454,17 +513,43 @@ def build_html(chart_json: str, n_series: int, last_updated: str) -> str:
     <a href="https://boquin.xyz" style="color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;">← boquin.xyz</a>
   </div>
 </header>
-<div class="chart-wrap">
-  <div id="chart-div"></div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('yoy', this)">Year-over-Year</button>
+  <button class="tab-btn"        onclick="switchTab('mom', this)">Month-over-Month</button>
 </div>
+
+<div class="chart-wrap">
+  <div id="tab-yoy" class="tab-panel active">
+    <div id="chart-yoy"></div>
+  </div>
+  <div id="tab-mom" class="tab-panel">
+    <div id="chart-mom"></div>
+  </div>
+</div>
+
 <script>
-var figData = {chart_json};
-Plotly.newPlot('chart-div', figData.data, figData.layout, {{
-  responsive: true,
-  displayModeBar: true,
-  modeBarButtonsToRemove: ['lasso2d','select2d','toggleSpikelines'],
-  displaylogo: false
-}});
+var yoyData = {yoy_chart_json};
+var momData = {mom_chart_json};
+var rendered = {{ yoy: false, mom: false }};
+
+function switchTab(tab, btn) {{
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  if (!rendered[tab]) {{
+    var data = tab === 'yoy' ? yoyData : momData;
+    Plotly.newPlot('chart-' + tab, data.data, data.layout, {PLOTLY_CONFIG});
+    rendered[tab] = true;
+  }} else {{
+    Plotly.Plots.resize('chart-' + tab);
+  }}
+}}
+
+// Render YoY on load
+Plotly.newPlot('chart-yoy', yoyData.data, yoyData.layout, {PLOTLY_CONFIG});
+rendered.yoy = true;
 </script>
 </body>
 </html>"""
@@ -486,37 +571,38 @@ def main():
     print("\nApplying quality filter...")
     clean = quality_filter(raw)
 
-    # 4. YoY
-    yoy_dict = {sid: compute_yoy(s) for sid, s in clean.items()}
-    yoy_df = pd.DataFrame(yoy_dict)
+    # 4. YoY + MoM matrices
+    n_series = len(clean)
+    yoy_df = pd.DataFrame({sid: compute_yoy(s) for sid, s in clean.items()})
+    mom_df = pd.DataFrame({sid: compute_mom(s) for sid, s in clean.items()})
     yoy_df = yoy_df[yoy_df.index >= "2001-01-01"]
+    mom_df = mom_df[mom_df.index >= "2001-01-01"]
     print(f"YoY matrix: {yoy_df.shape[0]} months × {yoy_df.shape[1]} series")
+    print(f"MoM matrix: {mom_df.shape[0]} months × {mom_df.shape[1]} series")
 
     # 5. Diffusion + buckets
     print("Computing diffusion indices...")
-    di = build_diffusion(yoy_df)
-    bucket_df = build_bucket_df(yoy_df)
-    n_series = yoy_df.shape[1]
+    di_yoy    = build_diffusion(yoy_df)
+    di_mom    = build_diffusion(mom_df)
+    bkt_yoy   = build_bucket_df(yoy_df, BUCKETS_YOY)
+    bkt_mom   = build_bucket_df(mom_df, BUCKETS_MOM)
 
-    broad = di["broad_3m"].dropna()
-    accel = di["accel_3m"].dropna()
+    broad = di_yoy["broad_3m"].dropna()
     if len(broad):
-        print(f"Latest broad_di (3m MA):  {broad.iloc[-1]:.1f}%  ({broad.index[-1].strftime('%Y-%m')})")
-        peak = di.loc["2021-01-01":"2022-12-31", "broad_3m"].dropna()
+        print(f"YoY broad_di (3m MA):  {broad.iloc[-1]:.1f}%  ({broad.index[-1].strftime('%Y-%m')})")
+        peak = di_yoy.loc["2021-01-01":"2022-12-31", "broad_3m"].dropna()
         if len(peak):
-            print(f"Peak broad_di (2021-22):  {peak.max():.1f}%")
-    if len(accel):
-        print(f"Latest accel_di (3m MA):  {accel.iloc[-1]:.1f}%")
-    latest_buckets = bucket_df.dropna().iloc[-1]
-    print("Latest bucket distribution:")
-    for label, _ , _ in BUCKETS:
-        print(f"  {label:8s}: {latest_buckets[label]:.1f}%")
+            print(f"YoY peak (2021-22):    {peak.max():.1f}%")
+    broad_m = di_mom["broad_3m"].dropna()
+    if len(broad_m):
+        print(f"MoM broad_di (3m MA):  {broad_m.iloc[-1]:.1f}%")
 
-    # 6. Chart + HTML
-    print("\nBuilding chart...")
-    chart_json = build_chart_json(di, bucket_df, n_series)
+    # 6. Charts + HTML
+    print("\nBuilding charts...")
+    yoy_chart = build_chart_json(di_yoy, bkt_yoy, BUCKETS_YOY, BUCKET_COLORS, n_series, "YoY")
+    mom_chart = build_chart_json(di_mom, bkt_mom, BUCKETS_MOM, BUCKET_COLORS_MOM, n_series, "MoM")
     last_updated = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    html = build_html(chart_json, n_series, last_updated)
+    html = build_html(yoy_chart, mom_chart, n_series, last_updated)
 
     OUTPUT_FILE.write_text(html, encoding="utf-8")
     print(f"\nWrote {OUTPUT_FILE}")
