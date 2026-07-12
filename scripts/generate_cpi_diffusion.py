@@ -194,9 +194,47 @@ def build_diffusion(yoy_df: pd.DataFrame) -> pd.DataFrame:
     })
 
 
-# ── Step 5: Chart ─────────────────────────────────────────────────────────────
+# ── Step 5: Bucket distribution ───────────────────────────────────────────────
 
-def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
+BUCKETS = [
+    ("<0%",   float("-inf"), 0),
+    ("0–1%",  0,  1),
+    ("1–2%",  1,  2),
+    ("2–3%",  2,  3),
+    ("3–4%",  3,  4),
+    ("4–6%",  4,  6),
+    ("≥6%",   6,  float("inf")),
+]
+
+BUCKET_COLORS = [
+    "#6A1B9A",   # <0%    purple
+    "#1565C0",   # 0–1%   dark blue
+    "#42A5F5",   # 1–2%   light blue
+    "#66BB6A",   # 2–3%   green (near target)
+    "#FFA726",   # 3–4%   orange
+    "#EF5350",   # 4–6%   red
+    "#8B0000",   # ≥6%    dark red
+]
+
+
+def build_bucket_df(yoy_df: pd.DataFrame) -> pd.DataFrame:
+    """% of items in each YoY bucket per month. Columns = bucket labels."""
+    n = yoy_df.notna().sum(axis=1).replace(0, np.nan)
+    out = {}
+    for label, lo, hi in BUCKETS:
+        if lo == float("-inf"):
+            mask = yoy_df < hi
+        elif hi == float("inf"):
+            mask = yoy_df >= lo
+        else:
+            mask = (yoy_df >= lo) & (yoy_df < hi)
+        out[label] = mask.sum(axis=1) / n * 100
+    return pd.DataFrame(out)
+
+
+# ── Step 6: Chart ─────────────────────────────────────────────────────────────
+
+def build_chart_json(di: pd.DataFrame, bucket_df: pd.DataFrame, n_series: int) -> str:
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
 
@@ -206,21 +244,25 @@ def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
     RED_FAINT  = "rgba(200,16,46,0.25)"
     CLIP_START = "2001-01-01"
 
-    panels = [
-        (1, "broad_raw", "broad_3m", BLUE,  BLUE_FAINT,
+    diff_panels = [
+        (1, "broad_raw", "broad_3m", BLUE, BLUE_FAINT,
          f"CPI Breadth Diffusion — % of {n_series} Items with Positive YoY Inflation"),
-        (2, "accel_raw", "accel_3m", RED,   RED_FAINT,
+        (2, "accel_raw", "accel_3m", RED,  RED_FAINT,
          f"CPI Acceleration Diffusion — % of {n_series} Items Where YoY Is Rising vs Prior Month"),
     ]
 
     fig = make_subplots(
-        rows=2, cols=1,
+        rows=3, cols=1,
         shared_xaxes=True,
-        vertical_spacing=0.08,
-        subplot_titles=[p[5] for p in panels],
+        vertical_spacing=0.06,
+        row_heights=[0.30, 0.30, 0.40],
+        subplot_titles=[
+            p[5] for p in diff_panels
+        ] + [f"YoY Distribution Across {n_series} CPI Items (% in Each Bucket)"],
     )
 
-    for row, raw_col, smooth_col, color, faint, _ in panels:
+    # ── Panels 1 & 2: diffusion lines ────────────────────────────────────────
+    for row, raw_col, smooth_col, color, faint, _ in diff_panels:
         s_raw    = di[raw_col].dropna()
         s_smooth = di[smooth_col].dropna()
         s_raw    = s_raw[s_raw.index >= CLIP_START]
@@ -232,6 +274,7 @@ def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
             line=dict(color=faint, width=1),
             showlegend=(row == 1),
             legendgroup="raw",
+            legendgrouptitle_text=None,
         ), row=row, col=1)
 
         fig.add_trace(go.Scatter(
@@ -265,14 +308,40 @@ def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
                 row=row, col=1,
             )
 
+    # ── Panel 3: stacked bar — bucket distribution ────────────────────────────
+    bdf = bucket_df[bucket_df.index >= CLIP_START]
+    for (label, _, _), color in zip(BUCKETS, BUCKET_COLORS):
+        col_data = bdf[label].round(1)
+        fig.add_trace(go.Bar(
+            x=bdf.index,
+            y=col_data,
+            name=label,
+            marker_color=color,
+            legendgroup=f"bucket_{label}",
+            showlegend=True,
+        ), row=3, col=1)
+
+    for rec_start, rec_end in RECESSIONS:
+        fig.add_vrect(
+            x0=rec_start, x1=rec_end,
+            fillcolor="rgba(180,180,180,0.18)",
+            line_width=0, row=3, col=1,
+        )
+
     fig.update_layout(
-        height=720,
-        margin=dict(l=55, r=20, t=55, b=55),
+        height=1000,
+        barmode="stack",
+        margin=dict(l=55, r=20, t=55, b=60),
         plot_bgcolor="white",
         paper_bgcolor="white",
         font=dict(family="DM Sans, sans-serif", size=12),
         hovermode="x unified",
-        legend=dict(orientation="h", x=0.01, y=-0.07),
+        legend=dict(
+            orientation="h",
+            x=0.01, y=-0.06,
+            traceorder="normal",
+        ),
+        bargap=0,
     )
 
     for row in range(1, 3):
@@ -283,14 +352,23 @@ def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
             dtick=25,
         )
 
-    fig.update_xaxes(showgrid=False, row=2, col=1)
+    fig.update_yaxes(
+        range=[0, 100], row=3, col=1,
+        ticksuffix="%",
+        gridcolor="rgba(0,0,0,0.06)",
+        dtick=25,
+        title_text="% of items",
+        title_font=dict(size=10),
+    )
+
+    fig.update_xaxes(showgrid=False, row=3, col=1)
 
     fig.add_annotation(
         text=(
             f"Source: BLS CPI-U, U.S. City Average, NSA. {n_series} series after quality filter "
             "(begin ≤2010, ≥10yr history, ≤20% gaps). Shaded = NBER recessions."
         ),
-        xref="paper", yref="paper", x=0, y=-0.08,
+        xref="paper", yref="paper", x=0, y=-0.07,
         showarrow=False,
         font=dict(size=10, color="#666666"),
         align="left", xanchor="left",
@@ -299,7 +377,7 @@ def build_chart_json(di: pd.DataFrame, n_series: int) -> str:
     return fig.to_json()
 
 
-# ── Step 6: HTML ──────────────────────────────────────────────────────────────
+# ── Step 7: HTML ──────────────────────────────────────────────────────────────
 
 def build_html(chart_json: str, n_series: int, last_updated: str) -> str:
     return f"""<!DOCTYPE html>
@@ -414,9 +492,10 @@ def main():
     yoy_df = yoy_df[yoy_df.index >= "2001-01-01"]
     print(f"YoY matrix: {yoy_df.shape[0]} months × {yoy_df.shape[1]} series")
 
-    # 5. Diffusion
+    # 5. Diffusion + buckets
     print("Computing diffusion indices...")
     di = build_diffusion(yoy_df)
+    bucket_df = build_bucket_df(yoy_df)
     n_series = yoy_df.shape[1]
 
     broad = di["broad_3m"].dropna()
@@ -428,10 +507,14 @@ def main():
             print(f"Peak broad_di (2021-22):  {peak.max():.1f}%")
     if len(accel):
         print(f"Latest accel_di (3m MA):  {accel.iloc[-1]:.1f}%")
+    latest_buckets = bucket_df.dropna().iloc[-1]
+    print("Latest bucket distribution:")
+    for label, _ , _ in BUCKETS:
+        print(f"  {label:8s}: {latest_buckets[label]:.1f}%")
 
     # 6. Chart + HTML
     print("\nBuilding chart...")
-    chart_json = build_chart_json(di, n_series)
+    chart_json = build_chart_json(di, bucket_df, n_series)
     last_updated = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     html = build_html(chart_json, n_series, last_updated)
 
