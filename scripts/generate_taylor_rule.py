@@ -1,18 +1,20 @@
 """
-Taylor Rule & Balanced Approach Rule Calculator
-================================================
+Monetary Policy Rules Tracker (Fed MPR Box 4 style)
+====================================================
 Fetches FRED data, computes historical rule paths, and generates a self-contained
 interactive HTML page with both a historical chart and a live calculator.
 
-FRED series:
-  FEDFUNDS  – Effective federal funds rate (monthly)
-  PCEPILFE  – Core PCE price index → YoY %
-  UNRATE    – Unemployment rate (monthly)
-  NROU      – CBO NAIRU (quarterly → forward-filled monthly)
+FRED series (quarterly):
+  FEDFUNDS  – Effective federal funds rate
+  PCEPILFE  – Core PCE price index → 4-quarter YoY %
+  UNRATE    – Unemployment rate
+  NROU      – CBO NAIRU
 
 Formulas (using Okun's Law form with unemployment gap):
   Taylor (1993):       R = r* + π + 0.5·(π − π*) − 1.0·(U − U*)
+  Adjusted Taylor:      R = max(R_T93 − Z, ELB), Z_t = max(0, Z_{t-1} + (ELB − R_T93_{t-1}))
   Balanced Approach:   R = r* + π + 0.5·(π − π*) − 2.0·(U − U*)
+  First-Difference:    R = FFR_{t-1} + 0.5·(π − π*) − (U_t − U_{t-4})
 """
 
 import json
@@ -29,6 +31,7 @@ FRED_API_KEY = os.environ.get("FRED_API_KEY", _FRED_KEY_DEFAULT)
 START_DATE = "1990-01-01"
 PI_STAR = 2.0   # inflation target
 R_STAR  = 0.5   # neutral real rate
+ELB     = 0.125 # effective lower bound (midpoint of 0-0.25% range)
 
 OUTPUT_PATH = os.path.join(
     os.path.dirname(__file__), "..", "reports", "taylor-rule", "index.html"
@@ -44,13 +47,12 @@ def fetch(fred: Fred, series_id: str) -> pd.Series:
 
 
 def build_dataset(fred: Fred) -> pd.DataFrame:
-    ffr   = fetch(fred, "FEDFUNDS").resample("ME").last().rename("FEDFUNDS")
-    pce   = fetch(fred, "PCEPILFE").resample("ME").last()
-    urate = fetch(fred, "UNRATE").resample("ME").last().rename("UNRATE")
-    nrou_q = fetch(fred, "NROU").resample("QE").last()
-    nrou  = nrou_q.resample("ME").ffill().rename("NROU")
+    ffr   = fetch(fred, "FEDFUNDS").resample("QE").mean().rename("FEDFUNDS")
+    pce   = fetch(fred, "PCEPILFE").resample("QE").last()
+    urate = fetch(fred, "UNRATE").resample("QE").mean().rename("UNRATE")
+    nrou  = fetch(fred, "NROU").resample("QE").last().rename("NROU")
 
-    pce_yoy = pce.pct_change(12).mul(100).rename("CorePCE_YoY")
+    pce_yoy = pce.pct_change(4).mul(100).rename("CorePCE_YoY")
 
     df = pd.concat([ffr, pce_yoy, urate, nrou], axis=1).dropna()
 
@@ -60,26 +62,45 @@ def build_dataset(fred: Fred) -> pd.DataFrame:
     df["Taylor"]   = R_STAR + pi + 0.5 * (pi - PI_STAR) - 1.0 * ugap
     df["Balanced"] = R_STAR + pi + 0.5 * (pi - PI_STAR) - 2.0 * ugap
 
-    return df
+    # Adjusted Taylor (1993) — Reifschneider-Williams ELB makeup recursion.
+    taylor = df["Taylor"].to_numpy()
+    z = 0.0
+    adjusted = []
+    for i, t93 in enumerate(taylor):
+        if i > 0:
+            z = max(0.0, z + (ELB - taylor[i - 1]))
+        adjusted.append(max(t93 - z, ELB))
+    df["Adjusted"] = adjusted
+
+    # First-difference rule — uses actual lagged FFR, not a lagged rule value.
+    df["FirstDiff"] = (
+        df["FEDFUNDS"].shift(1) + 0.5 * (pi - PI_STAR) - (df["UNRATE"] - df["UNRATE"].shift(4))
+    )
+
+    return df.dropna()
 
 
 def to_json_payload(df: pd.DataFrame) -> str:
     payload = {
-        "dates":    [d.strftime("%Y-%m-%d") for d in df.index],
-        "fedfunds": [round(v, 4) for v in df["FEDFUNDS"]],
-        "taylor":   [round(v, 4) for v in df["Taylor"]],
-        "balanced": [round(v, 4) for v in df["Balanced"]],
-        "pce":      [round(v, 4) for v in df["CorePCE_YoY"]],
-        "unrate":   [round(v, 4) for v in df["UNRATE"]],
-        "nrou":     [round(v, 4) for v in df["NROU"]],
+        "dates":     [d.strftime("%Y-%m-%d") for d in df.index],
+        "fedfunds":  [round(v, 4) for v in df["FEDFUNDS"]],
+        "taylor":    [round(v, 4) for v in df["Taylor"]],
+        "adjusted":  [round(v, 4) for v in df["Adjusted"]],
+        "balanced":  [round(v, 4) for v in df["Balanced"]],
+        "firstdiff": [round(v, 4) for v in df["FirstDiff"]],
+        "pce":       [round(v, 4) for v in df["CorePCE_YoY"]],
+        "unrate":    [round(v, 4) for v in df["UNRATE"]],
+        "nrou":      [round(v, 4) for v in df["NROU"]],
         "latest": {
-            "fedfunds": round(df["FEDFUNDS"].iloc[-1], 2),
-            "pce":      round(df["CorePCE_YoY"].iloc[-1], 2),
-            "unrate":   round(df["UNRATE"].iloc[-1], 2),
-            "nrou":     round(df["NROU"].iloc[-1], 2),
-            "taylor":   round(df["Taylor"].iloc[-1], 2),
-            "balanced": round(df["Balanced"].iloc[-1], 2),
-            "date":     df.index[-1].strftime("%B %Y"),
+            "fedfunds":  round(df["FEDFUNDS"].iloc[-1], 2),
+            "pce":       round(df["CorePCE_YoY"].iloc[-1], 2),
+            "unrate":    round(df["UNRATE"].iloc[-1], 2),
+            "nrou":      round(df["NROU"].iloc[-1], 2),
+            "taylor":    round(df["Taylor"].iloc[-1], 2),
+            "adjusted":  round(df["Adjusted"].iloc[-1], 2),
+            "balanced":  round(df["Balanced"].iloc[-1], 2),
+            "firstdiff": round(df["FirstDiff"].iloc[-1], 2),
+            "date":      df.index[-1].strftime("%B %Y"),
         },
     }
     return json.dumps(payload)
@@ -90,7 +111,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taylor Rule &amp; Balanced Approach Calculator</title>
+<title>Monetary Policy Rules Tracker</title>
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <style>
 :root {{
@@ -158,8 +179,8 @@ header .meta {{ color: var(--muted); font-size: 0.8rem; }}
 
 <header>
   <div>
-    <h1>📐 Taylor Rule &amp; Balanced Approach Rule</h1>
-    <div style="color:var(--muted);font-size:.75rem;margin-top:2px;">Historical policy rule benchmarks vs. actual fed funds · Live calculator · Source: FRED</div>
+    <h1>📐 Monetary Policy Rules Tracker</h1>
+    <div style="color:var(--muted);font-size:.75rem;margin-top:2px;">Taylor (1993), Adjusted Taylor, Balanced Approach &amp; First-Difference rules vs. actual fed funds · Fed MPR Box 4 style · Source: FRED</div>
   </div>
   <div class="meta">Updated: {updated}</div>
 </header>
@@ -167,13 +188,15 @@ header .meta {{ color: var(--muted); font-size: 0.8rem; }}
 <div class="container">
 
   <!-- Historical chart -->
-  <p class="section-title">Historical: Actual FFR vs. Policy Rules (1990–present)</p>
+  <p class="section-title">Historical: Actual FFR vs. Policy Rules (1990–present, quarterly)</p>
   <div class="chart-box">
     <div id="hist-chart" style="height:420px;"></div>
-    <div style="display:flex;gap:24px;margin-top:10px;font-size:0.75rem;color:var(--muted);">
+    <div style="display:flex;gap:24px;margin-top:10px;font-size:0.75rem;color:var(--muted);flex-wrap:wrap;">
       <span><span class="legend-dot" style="background:#374151;"></span>Actual FFR</span>
       <span><span class="legend-dot" style="background:#4f46e5;"></span>Taylor Rule (1993)</span>
+      <span><span class="legend-dot" style="background:#16a34a;"></span>Adjusted Taylor (1993)</span>
       <span><span class="legend-dot" style="background:#d97706;"></span>Balanced Approach Rule</span>
+      <span><span class="legend-dot" style="background:#dc2626;"></span>First-Difference Rule</span>
     </div>
   </div>
 
@@ -229,6 +252,20 @@ header .meta {{ color: var(--muted); font-size: 0.8rem; }}
     </div>
   </div>
 
+  <div class="divergence-box">
+    <div>
+      <div class="label">Current Adjusted Taylor (1993)</div>
+      <div class="value">{adjusted_latest}%</div>
+    </div>
+    <div>
+      <div class="label">Current First-Difference Rule</div>
+      <div class="value">{firstdiff_latest}%</div>
+    </div>
+    <div style="color:var(--muted);font-size:0.75rem;max-width:420px;">
+      Both are path-dependent (accumulated ELB shortfall / lagged actual FFR), so they're shown as latest computed values rather than live-editable — see historical chart above.
+    </div>
+  </div>
+
   <!-- Sensitivity chart -->
   <p class="section-title">Sensitivity — Prescribed rate vs. unemployment (other inputs held fixed)</p>
   <div class="chart-box">
@@ -240,9 +277,11 @@ header .meta {{ color: var(--muted); font-size: 0.8rem; }}
   <!-- Explainer -->
   <div class="explainer">
     <p style="margin-bottom:8px;"><b>Taylor Rule (1993):</b> R = r* + π + 0.5·(π − π*) − 1.0·(U − U*)</p>
+    <p style="margin-bottom:8px;"><b>Adjusted Taylor (1993):</b> R = max(R_T93 − Z, ELB), where Z is the cumulative sum of past Taylor-rule shortfalls below the ELB (Reifschneider-Williams "lower-for-longer" makeup).</p>
     <p style="margin-bottom:8px;"><b>Balanced Approach Rule:</b> R = r* + π + 0.5·(π − π*) − 2.0·(U − U*)</p>
-    <p style="margin-bottom:8px;">Both rules written using the unemployment gap (via Okun's Law), where a 1% rise in unemployment ≈ 2% drop in output. The Balanced Approach doubles the unemployment coefficient from −1.0 to −2.0, prescribing 200 bps of cuts per 1% of excess unemployment vs. 100 bps under Taylor. Championed by former Fed Chair Janet Yellen to reflect a more symmetric response to the dual mandate.</p>
-    <p style="color:var(--muted);font-size:0.72rem;">Sources: FRED — FEDFUNDS, PCEPILFE (Core PCE YoY), UNRATE, NROU (CBO NAIRU). r* held constant at 0.5% (standard Fed Research assumption).</p>
+    <p style="margin-bottom:8px;"><b>First-Difference Rule:</b> R = FFR_(t−1) + 0.5·(π − π*) − (U_t − U_(t−4))</p>
+    <p style="margin-bottom:8px;">The first three rules are written using the unemployment gap (via Okun's Law), where a 1% rise in unemployment ≈ 2% drop in output. The Balanced Approach doubles the unemployment coefficient from −1.0 to −2.0, prescribing 200 bps of cuts per 1% of excess unemployment vs. 100 bps under Taylor. The Adjusted Taylor rule accounts for periods when the Taylor rule prescribes a rate below the effective lower bound (ELB) by holding the prescribed rate lower for longer once liftoff occurs, to make up for the shortfall in accommodation. The First-Difference rule instead anchors off the prior quarter's actual fed funds rate and reacts to the year-over-year change in unemployment, making it inertial and less sensitive to real-time estimates of r* or U*.</p>
+    <p style="color:var(--muted);font-size:0.72rem;">Sources: FRED — FEDFUNDS, PCEPILFE (Core PCE 4-quarter YoY), UNRATE, NROU (CBO NAIRU), quarterly. r* held constant at 0.5%, ELB at 0.125% (standard Fed Research assumptions).</p>
   </div>
 
 </div>
@@ -263,9 +302,11 @@ const DATA = {data_json};
     hoverlabel: {{ bgcolor: '#ffffff', bordercolor: '#e2e8f0', font: {{ color: '#0f172a' }} }},
   }};
   const traces = [
-    {{ x: DATA.dates, y: DATA.fedfunds, name: 'Actual FFR', line: {{ color: '#374151', width: 1.5 }}, hovertemplate: '%{{y:.2f}}%' }},
-    {{ x: DATA.dates, y: DATA.taylor,   name: 'Taylor (1993)', line: {{ color: '#4f46e5', width: 1.5, dash: 'dot' }}, hovertemplate: '%{{y:.2f}}%' }},
-    {{ x: DATA.dates, y: DATA.balanced, name: 'Balanced Approach', line: {{ color: '#d97706', width: 1.5, dash: 'dash' }}, hovertemplate: '%{{y:.2f}}%' }},
+    {{ x: DATA.dates, y: DATA.fedfunds,  name: 'Actual FFR', line: {{ color: '#374151', width: 1.5 }}, hovertemplate: '%{{y:.2f}}%' }},
+    {{ x: DATA.dates, y: DATA.taylor,    name: 'Taylor (1993)', line: {{ color: '#4f46e5', width: 1.5, dash: 'dot' }}, hovertemplate: '%{{y:.2f}}%' }},
+    {{ x: DATA.dates, y: DATA.adjusted,  name: 'Adjusted Taylor (1993)', line: {{ color: '#16a34a', width: 1.5, dash: 'dashdot' }}, hovertemplate: '%{{y:.2f}}%' }},
+    {{ x: DATA.dates, y: DATA.balanced,  name: 'Balanced Approach', line: {{ color: '#d97706', width: 1.5, dash: 'dash' }}, hovertemplate: '%{{y:.2f}}%' }},
+    {{ x: DATA.dates, y: DATA.firstdiff, name: 'First-Difference', line: {{ color: '#dc2626', width: 1.5, dash: 'longdash' }}, hovertemplate: '%{{y:.2f}}%' }},
   ];
   Plotly.newPlot('hist-chart', traces, layout, {{responsive: true, displayModeBar: false}});
 }})();
@@ -351,6 +392,8 @@ def main():
     html = HTML_TEMPLATE.format(
         data_json=data_json,
         updated=updated,
+        adjusted_latest=round(df["Adjusted"].iloc[-1], 2),
+        firstdiff_latest=round(df["FirstDiff"].iloc[-1], 2),
     )
 
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
