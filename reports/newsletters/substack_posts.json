@@ -99,6 +99,12 @@
   "hfiresearch.substack.com": [],
   "www.notboring.co": [
     {
+      "title": "Weekly Dose of Optimism #201",
+      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-201",
+      "date": "2026-07-10",
+      "description": "Aalo, Data Centers, American Turbines, OXMAN Ink, Neo Hands + Extra Doses"
+    },
+    {
       "title": "Weekly Dose of Optimism #200",
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-200",
       "date": "2026-07-03",
@@ -121,12 +127,6 @@
       "url": "https://www.notboring.co/p/weekly-dose-of-optimism-198",
       "date": "2026-06-19",
       "description": "Midjourney Scanner, Laser Phase Plate, Valar Goes Critical, Anduril CCA, Reindustrialize + Extra Doses"
-    },
-    {
-      "title": "Weekly Dose of Optimism #197",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-197",
-      "date": "2026-06-12",
-      "description": "La Sagrada Fam&#237;lia, Life Bio Trial, Saronic, Doudna CRISPR, Standard Bots + Science Breakthroughs + Extra Doses"
     }
   ],
   "macrocreditthinking.substack.com": [
@@ -227,6 +227,12 @@
   ],
   "www.newcomer.co": [
     {
+      "title": "Political Risk & Threat Analysis Expertise Are Hot Tickets in Silicon Valley as Trump & AI Shake the World Order",
+      "url": "https://www.newcomer.co/p/political-risk-and-threat-analysis",
+      "date": "2026-07-10",
+      "description": "Plus, new models from OpenAI, SpaceX & Meta fuel a major AI price war"
+    },
+    {
       "title": "Tech Investors Will Be Sweating the Dog Days of Summer in More Ways Than One",
       "url": "https://www.newcomer.co/p/tech-investors-will-be-sweating-the",
       "date": "2026-07-02",
@@ -249,12 +255,6 @@
       "url": "https://www.newcomer.co/p/cvai-london-european-democracies",
       "date": "2026-06-25",
       "description": "Notes from talks with Cohere's Aidan Gomez, Alphabet's R. Martin Chavez, Recursive's Josh Tobin, Index's Danny Rimer, Sequoia's Luciana Lixandru & More"
-    },
-    {
-      "title": "Hot AI Summer: What the Latest Talent Moves Mean in the Great Foundation Model Race",
-      "url": "https://www.newcomer.co/p/hot-ai-summer-what-the-latest-talent",
-      "date": "2026-06-24",
-      "description": "Seminal names including Andrej Karpathy, Noam Shazeer, John Jumper & Barret Zoph have changed horses at a key juncture. Here&#8217;s what insiders say is happening."
     }
   ],
   "globalmacromethod.substack.com": [
@@ -420,34 +420,34 @@
   ],
   "www.chinatalk.media": [
     {
-      "title": "The Robots Are Here",
-      "url": "https://www.chinatalk.media/p/the-robots-are-here",
-      "date": "2026-07-06",
-      "description": "Unitree's advantage"
+      "title": "WarTalk: Randy Schriver on Asian Defense",
+      "url": "https://www.chinatalk.media/p/wartalk-randy-schriver-on-asian-defense",
+      "date": "2026-07-12",
+      "description": "More own goals than Scotland"
     },
     {
-      "title": "Taiwan's War on Renewables",
-      "url": "https://www.chinatalk.media/p/taiwans-war-on-renewables",
-      "date": "2026-07-01",
-      "description": "The Political Economy of Energy Poverty"
+      "title": "\u201cEastern Data, Western Compute\u201d is Fake",
+      "url": "https://www.chinatalk.media/p/eastern-data-western-compute-is-fake",
+      "date": "2026-07-10",
+      "description": "China promised to move its data centers west. Now it&#8217;s backtracking."
     },
     {
-      "title": "Economic Security Megapod",
-      "url": "https://www.chinatalk.media/p/economic-security-megapod",
-      "date": "2026-06-29",
-      "description": "Featuring winners of our essay contest!"
+      "title": "Does Mythos change cyber risk on Chinese hardware?",
+      "url": "https://www.chinatalk.media/p/does-mythos-change-cyber-risk-on",
+      "date": "2026-07-09",
+      "description": "yes, says Mieke Eoyang"
     },
     {
-      "title": "WarTalk: The BS D\u00e9tente",
-      "url": "https://www.chinatalk.media/p/wartalk-the-bs-detente",
-      "date": "2026-06-25",
-      "description": "Ely Ratner on Taiwan, allies, and getting China right"
+      "title": "We're Hiring to Make Great Video!",
+      "url": "https://www.chinatalk.media/p/were-hiring-to-make-great-video",
+      "date": "2026-07-08",
+      "description": "we need help on YouTube + have real money to invest in production"
     },
     {
-      "title": "AI + Nukes $20k Essay Contest!",
-      "url": "https://www.chinatalk.media/p/ai-nukes-20k-essay-contest",
-      "date": "2026-06-24",
-      "description": "hot nuke summer"
+      "title": "The Chemistry of Chips",
+      "url": "https://www.chinatalk.media/p/the-chemistry-of-chips",
+      "date": "2026-07-08",
+      "description": "The unseen infrastructure of chipmaking"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -517,6 +517,24 @@
   ],
   "www.parentdata.org": [
     {
+      "title": "What \u201cTrimester Zero\u201d Should Teach Us Instead",
+      "url": "https://parentdata.org/grown-ups/trimester-zero-fertility-education/",
+      "date": "2026-07-12",
+      "description": "We need comprehensive fertility education \u2014 not supplements\nEmily Oster, PhD"
+    },
+    {
+      "title": "What the Data Says About Preschool and Pre-K",
+      "url": "https://parentdata.org/kids/data-preschool-prek-value/",
+      "date": "2026-07-09",
+      "description": "Is it worth it?\nEmily Oster, PhD"
+    },
+    {
+      "title": "How to Choose a School for Your Child",
+      "url": "https://parentdata.org/kids/choose-school-your-child/",
+      "date": "2026-07-09",
+      "description": "What the data says actually matters\nEmily Oster, PhD"
+    },
+    {
       "title": "There Have Been Two Botulism Outbreaks in Infant Formula. Why?",
       "url": "https://parentdata.org/babies/infant-formula-botulism-outbreaks/",
       "date": "2026-06-28",
@@ -527,24 +545,6 @@
       "url": "https://parentdata.org/grown-ups/dad-friends-loneliness-fatherhood/",
       "date": "2026-06-20",
       "description": "Male loneliness is real. It's time to build your own \"dadvisory board.\"\nKevin Maguire"
-    },
-    {
-      "title": "Nara Organics Has Recalled All Of Its Infant Formula",
-      "url": "https://parentdata.org/babies/nara-organics-infant-formula-recall/",
-      "date": "2026-06-15",
-      "description": "Here\u2019s what to do\nEmily Oster, PhD"
-    },
-    {
-      "title": "Are Day Care Naps Ruining Bedtime? Here\u2019s What To Do.",
-      "url": "https://parentdata.org/kids/day-care-naps-ruining-bedtime/",
-      "date": "2026-06-14",
-      "description": "It turns out, a lot of you are in this boat\nEmily Oster, PhD"
-    },
-    {
-      "title": "The Data on Home Birth",
-      "url": "https://parentdata.org/pregnancy/home-births/",
-      "date": "2026-06-07",
-      "description": "How safe is it, really?\nEmily Oster, PhD"
     }
   ],
   "debtserious.substack.com": [
@@ -879,34 +879,34 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "How Kalshi infects the news",
-      "url": "https://www.publicnotice.co/p/kalshi-cnn-cnbc",
-      "date": "2026-07-06",
-      "description": "CNN and CNBC are pushing Kalshi on viewers but not telling them the whole story."
+      "title": "Lindsey Graham and the rot of modern conservatism",
+      "url": "https://www.publicnotice.co/p/lindsey-graham-death",
+      "date": "2026-07-13",
+      "description": "From Gingrich to Trump, Graham was a fixture as the GOP became increasingly malignant."
     },
     {
-      "title": "Declaring War on The Declaration",
-      "url": "https://www.publicnotice.co/p/trump-declaration-of-independence",
-      "date": "2026-07-04",
-      "description": "How Trump is shredding our founding document 250 years later."
+      "title": "Trump's tantrum, Platner's implosion, and McConnell's non-legacy",
+      "url": "https://www.publicnotice.co/p/trumps-tantrum-platners-implosion",
+      "date": "2026-07-10",
+      "description": "Paul and I discuss the week's big political stories."
     },
     {
-      "title": "Democratic voters want fighters",
-      "url": "https://www.publicnotice.co/p/democratic-voters-want-fighters",
-      "date": "2026-07-03",
-      "description": "The New York primaries are just the latest data point."
+      "title": "A sentient collection of red flags",
+      "url": "https://www.publicnotice.co/p/graham-platner",
+      "date": "2026-07-10",
+      "description": "Graham Platner's campaign should never have gotten this far."
     },
     {
-      "title": "E. Jean Carroll Beat Trump. Again.",
-      "url": "https://www.publicnotice.co/p/e-jean-carroll-case",
-      "date": "2026-07-02",
-      "description": "As the cowards in Congress prostrate themselves, an 82-year-old woman took on the president and won."
+      "title": "Trump's red-baiting won't work",
+      "url": "https://www.publicnotice.co/p/trump-communism",
+      "date": "2026-07-09",
+      "description": "He's campaigning on an even dumber version of McCarthyism."
     },
     {
-      "title": "A vote away from undoing the civil war",
-      "url": "https://www.publicnotice.co/p/birthright-citizenship-ruling",
-      "date": "2026-07-01",
-      "description": "The birthright citizenship ruling was a wake-up call, not a victory."
+      "title": "Trump's 'great' fair limps to its conclusion",
+      "url": "https://www.publicnotice.co/p/trump-great-american-state-fair",
+      "date": "2026-07-08",
+      "description": "But the grift goes on."
     }
   ],
   "lbmacro.substack.com": [
@@ -1010,34 +1010,34 @@
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
     {
-      "title": "Oil Context Weekly (W27)",
-      "url": "https://www.commoditycontext.com/p/ocw27w26",
-      "date": "2026-07-03",
-      "description": "Crude prices were effectively flat this week amidst a comparatively-quiet stretch of summer headlines, with all eyes on the optimistic-but-lurching resumption of Middle Eastern shipping activity."
+      "title": "Oil Context Weekly (W28)",
+      "url": "https://www.commoditycontext.com/p/ocw28w26",
+      "date": "2026-07-10",
+      "description": "Crude prices jump, see largest weekly gain since mid-May as Iran&#8217;s attempt to control Hormuz shipping flows prompted another round of skirmishes that threatened a broader collapse of the MOU cea"
     },
     {
-      "title": "Getting Our Bearings Strait",
-      "url": "https://www.commoditycontext.com/p/getting-our-bearings-strait",
-      "date": "2026-07-02",
-      "description": "Assessing the pace and sustainability of the faster-than-expected post-MOU recovery in oil flows&#8212;both ways&#8212;through the Strait of Hormuz and the still-lagging pace of fresh Gulf loadings."
+      "title": "Context Call: July 2026 (Video)",
+      "url": "https://www.commoditycontext.com/p/context-call-july-2026",
+      "date": "2026-07-09",
+      "description": "Post-MOU status of shipping flows through the Strait of Hormuz, the ongoing depression in China&#8217;s crude import appetite, and the emergence of the &#8220;mini-glut&#8221; currently being digested"
     },
     {
-      "title": "Oil Context Weekly (W26)",
-      "url": "https://www.commoditycontext.com/p/ocw26w26",
-      "date": "2026-06-26",
-      "description": "Crude fell another $8.50/bbl and Brent slipped into prompt contango for the first since February as the surge of exiting Hormuz barrels hit a still weak Asian import market with China on the sidelines"
+      "title": "[FREE] Is Big Oil \u2018Price Gouging\u2019?",
+      "url": "https://www.commoditycontext.com/p/is-big-oil-price-gouging",
+      "date": "2026-07-09",
+      "description": "Reduced global refinery capacity, not corporate greed, is keeping pump prices high."
     },
     {
-      "title": "Global Oil Data Deck (June 2026)",
-      "url": "https://www.commoditycontext.com/p/global-oil-data-deck-june-2026",
-      "date": "2026-06-25",
-      "description": "Oil markets remained in deep supply deficit through April as the ongoing Middle Eastern production shut-ins were only partially offset by the pullback in Asian petrochemical feedstock demand."
+      "title": "North American Oil Data Deck (July 2026)",
+      "url": "https://www.commoditycontext.com/p/north-american-oil-data-deck-july",
+      "date": "2026-07-08",
+      "description": "Continental petroleum production jumped back to near all-time highs in April on the back of the reacceleration of previously slowing upstream growth in both the US and Canada."
     },
     {
-      "title": "Oil & Iran War Context Weekly (W25)",
-      "url": "https://www.commoditycontext.com/p/ocw25w26",
-      "date": "2026-06-19",
-      "description": "Crude plunged and curves flirted with prompt contango on the back of massive speculative short-selling following the announcement and signing of the US-Iran MOU to end the Iran War and reopen Hormuz."
+      "title": "REMINDER: Context Call Tomorrow",
+      "url": "https://www.commoditycontext.com/p/reminder-context-call-tomorrow-bcf",
+      "date": "2026-07-07",
+      "description": "Subscribe for details and registration link; paid subscribers will find link below paywall"
     }
   ],
   "energyoutlookadvisors.substack.com": [],
