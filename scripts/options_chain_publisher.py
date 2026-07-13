@@ -70,6 +70,7 @@ def target_expiry_dates(today):
         if d > today:
             targets.append(d)
     targets.append(date(today.year + 1, 1, 1))
+    targets.append(date(today.year + 1, today.month, 1))  # ~1y out
     targets.append(date(today.year + 2, 1, 1))
     return targets
 
