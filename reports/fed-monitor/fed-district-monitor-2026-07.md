@@ -7,31 +7,20 @@
 ## 🔦 Today's Most Interesting Insights
 
 **MEMORANDUM**
-
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 13, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+**DATE:** July 14, 2026
+**RE:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the Fed districts. While several papers focus on historical academic inquiries, there are critical signals regarding trade policy and financial stability that require our immediate attention.
+I have reviewed the latest research outputs from the Fed districts. While several papers are academic in nature, there are critical signals regarding trade policy transmission and systemic risk that we must integrate into our current models.
 
-1. **[NY] More Tariff Pass‑Through Is in the Pipeline**
-This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. The "pipeline" effect suggests a lagged transmission of costs, meaning we should anticipate a second wave of price pressures that could complicate the Fed's terminal rate path.
+1. **[NY] More Tariff Pass‑Through Is in the Pipeline:** This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. For our outlook, this suggests a "second wave" of price pressures is likely, potentially complicating the Fed's path toward a neutral rate.
+2. **[NY] Effect of Tariffs on U.S. Small Businesses:** By utilizing 2025 data, the NY Fed highlights the disproportionate burden of trade barriers on small enterprises. This is a key signal for credit risk; we should expect a rise in delinquency rates among small business loans as these firms lack the hedging capabilities of multinationals.
+3. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?:** This analysis re-evaluates the role of bank runs as the primary catalyst versus a symptom of financial crises. Understanding this distinction is vital for our stress-testing frameworks and for predicting how the Fed will deploy liquidity facilities in the next volatility spike.
+4. **[NY] Using AI to Let History Speak About Bank Runs:** The application of LLMs to historical bank-level data provides a new empirical baseline for identifying "silent" runs. This enhances our ability to monitor systemic fragility in the shadow banking sector where traditional reporting is lagged.
+5. **[RIC] When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance:** This paper reveals a correlation between home equity levels and the lapse of flood insurance. As property valuations fluctuate, we may see an increase in uninsured catastrophic losses, creating hidden tail risks for the mortgage-backed securities (MBS) market.
 
-2. **[NY] Effect of Tariffs on U.S. Small Businesses**
-By utilizing 2025 data, this study highlights the disproportionate vulnerability of small businesses to trade barriers compared to multinationals. This suggests a potential bifurcation in corporate earnings and a heightened risk of credit defaults within the small-cap sector as margins are squeezed.
-
-3. **[NY] Using AI to Let History Speak About Bank Runs**
-The application of LLMs to historical data provides a new empirical framework for identifying the early warning signs of systemic banking panics. For our risk models, this underscores the importance of monitoring non-traditional liquidity markers that previously lacked granular data.
-
-4. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?**
-This analysis debates whether bank runs are the catalyst or the symptom of financial crises. Understanding this causality is vital for our hedging strategy, as it determines whether liquidity injections are sufficient to stop a contagion or if deeper solvency issues are the primary driver.
-
-5. **[RIC] How Much Does the US Economy Rely on Fossil Fuels?**
-The finding that fossil fuel reliance in gross output remains constant despite the energy transition suggests a "stickier" carbon dependency than markets have priced in. This implies that energy-driven supply shocks will remain a persistent macro risk for the foreseeable future.
-
-**Synthesis:**
-The prevailing theme is a transition from theoretical risk to realized volatility, specifically regarding the lagged inflationary effects of trade policy and the fragility of small-business credit. We must pivot our portfolio to account for persistent "sticky" inflation and heightened systemic risk in the banking sector.
+**Synthesis:** The prevailing theme is the delayed transmission of trade shocks and the evolving nature of systemic financial fragility. We must pivot our strategy to account for persistent inflationary pass-through and a heightened sensitivity to liquidity shocks in the banking sector.
 
 ---
 
