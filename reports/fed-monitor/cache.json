@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-07-14T09:07:27.576938+00:00",
-    "totalItems": 102
+    "lastRun": "2026-07-15T09:11:32.886541+00:00",
+    "totalItems": 105
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1868,7 +1868,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-01T10:51:41.666745+00:00",
-      "lastChecked": "2026-07-14T09:07:27.576938+00:00",
+      "lastChecked": "2026-07-15T09:11:32.886541+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [
@@ -1975,11 +1975,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-07-14T09:07:27.576938+00:00",
+      "lastChecked": "2026-07-15T09:11:32.886541+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "No content provided for analysis. Please provide the article title and snippet to receive a research summary.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-07-14T09:07:27.576938+00:00"
+      "tagsGeneratedAt": "2026-07-15T09:11:32.886541+00:00"
     },
     "741b1c72c5e59e66026bb6d856f6d6f021e043815d44bd7dbcc4863d2f0a6470": {
       "url": "https://www.fedinprint.org/item/fedlwp/97969/103490",
@@ -2060,6 +2060,64 @@
         "GDP growth"
       ],
       "tagsGeneratedAt": "2026-07-10T10:26:25.185710+00:00"
+    },
+    "d026a3d47dbb0fecfed89ef0a99d1784cbedc8be5ed7c61a524c028a913a5a29": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0714",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-07-15T09:11:32.886541+00:00",
+      "lastChecked": "2026-07-15T09:11:32.886541+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-07-15T09:11:32.886541+00:00"
+    },
+    "705b92d154df5686a5c5cbca26d95404c00481218c2a5715ff5ca112afff9b35": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103525/original",
+      "title": "Geopolitical Distance and Targeted Trade: Evidence from Product-Level Export Controls",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-07-14",
+      "authors": [],
+      "firstSeen": "2026-07-15T09:11:32.886541+00:00",
+      "lastChecked": "2026-07-15T09:11:32.886541+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper examines how geopolitical alignment influences the implementation of product-level export controls. It finds that trade restrictions are strategically targeted based on geopolitical distance to mitigate security risks.",
+      "tags": [
+        "trade",
+        "international",
+        "emerging markets",
+        "supply chain",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-07-15T09:11:32.886541+00:00"
+    },
+    "eb68ecdf1c5920a9ad5f560e526f94e45f297030bc61d89870187c222bd00252": {
+      "url": "https://www.fedinprint.org/item/fedlwp/100099/103526",
+      "title": "The Cost of Capital and Misallocation in the United States",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-07-14",
+      "authors": [],
+      "firstSeen": "2026-07-15T09:11:32.886541+00:00",
+      "lastChecked": "2026-07-15T09:11:32.886541+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This research analyzes how variations in the cost of capital lead to resource misallocation across the U.S. economy. It argues that these inefficiencies hinder overall productivity and aggregate economic output.",
+      "tags": [
+        "interest rates",
+        "credit",
+        "GDP growth",
+        "banking",
+        "financial stability",
+        "monetary policy"
+      ],
+      "tagsGeneratedAt": "2026-07-15T09:11:32.886541+00:00"
     }
   }
 }

@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: July 2026 (11 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -9,18 +9,28 @@
 **MEMORANDUM**
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 14, 2026
-**RE:** Analysis of Recent Federal Reserve District Research
+**DATE:** July 15, 2026
+**SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Fed districts. While several papers are academic in nature, there are critical signals regarding trade policy transmission and systemic risk that we must integrate into our current models.
+I have reviewed the latest research outputs from the Federal Reserve districts. While several papers focus on historical banking and market micro-structure, the following selections are the most critical for our current macro positioning and risk models.
 
-1. **[NY] More Tariff Pass‑Through Is in the Pipeline:** This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. For our outlook, this suggests a "second wave" of price pressures is likely, potentially complicating the Fed's path toward a neutral rate.
-2. **[NY] Effect of Tariffs on U.S. Small Businesses:** By utilizing 2025 data, the NY Fed highlights the disproportionate burden of trade barriers on small enterprises. This is a key signal for credit risk; we should expect a rise in delinquency rates among small business loans as these firms lack the hedging capabilities of multinationals.
-3. **[NY] What Do Over 3,000 Bank Runs Teach Us About Banking Crises?:** This analysis re-evaluates the role of bank runs as the primary catalyst versus a symptom of financial crises. Understanding this distinction is vital for our stress-testing frameworks and for predicting how the Fed will deploy liquidity facilities in the next volatility spike.
-4. **[NY] Using AI to Let History Speak About Bank Runs:** The application of LLMs to historical bank-level data provides a new empirical baseline for identifying "silent" runs. This enhances our ability to monitor systemic fragility in the shadow banking sector where traditional reporting is lagged.
-5. **[RIC] When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance:** This paper reveals a correlation between home equity levels and the lapse of flood insurance. As property valuations fluctuate, we may see an increase in uninsured catastrophic losses, creating hidden tail risks for the mortgage-backed securities (MBS) market.
+1. **[NY] More Tariff Pass-Through Is in the Pipeline**
+This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. For our outlook, this suggests a "second wave" of price pressures is likely, potentially complicating the Fed's path toward a neutral rate and necessitating a more hawkish bias in our inflation forecasts.
 
-**Synthesis:** The prevailing theme is the delayed transmission of trade shocks and the evolving nature of systemic financial fragility. We must pivot our strategy to account for persistent inflationary pass-through and a heightened sensitivity to liquidity shocks in the banking sector.
+2. **[NY] Effect of Tariffs on U.S. Small Businesses**
+By utilizing 2025 data, this paper highlights the disproportionate burden of trade barriers on small-cap enterprises compared to multinationals. This suggests a widening divergence in earnings resilience between the S&P 500 and the Russell 2000, increasing the risk profile for small-cap equity allocations.
+
+3. **[STL] Geopolitical Distance and Targeted Trade**
+The findings demonstrate that export controls are increasingly driven by "geopolitical distance" rather than purely economic logic. This confirms that trade fragmentation is structural, not cyclical, requiring us to bake higher systemic risk premiums into valuations for firms with heavy exposure to targeted geopolitical corridors.
+
+4. **[STL] The Cost of Capital and Misallocation in the United States**
+This paper analyzes how capital is being inefficiently distributed across the economy, likely exacerbated by the recent high-rate environment. For the investment team, this signals a potential drag on long-term productivity growth (Potential GDP), suggesting that the "soft landing" may be hampered by structural inefficiency.
+
+5. **[NY] Using AI to Let History Speak About Bank Runs**
+By leveraging LLMs to synthesize historical bank-level data, the NY Fed is refining its understanding of contagion triggers. This is analytically significant as it suggests the Fed is upgrading its early-warning systems for systemic liquidity crises, which may alter how the "Fed Put" is deployed during the next banking stress event.
+
+**Synthesis:**
+The prevailing theme across these publications is the transition from monetary-driven volatility to structural volatility, specifically regarding trade fragmentation and capital misallocation. We must shift our focus from simple interest rate pivots to the long-term inflationary and productivity headwinds created by the current geopolitical and trade regime.
 
 ---
 
@@ -80,7 +90,21 @@ The paper examines the aggregate reliance of the U.S. economy on fossil fuels re
 **Tags:** energy · climate & economy · GDP growth · supply chain · fiscal policy · regional economy
 
 ## St. Louis Fed (8th District)
-**Content Type:** Working Papers | **New:** 0 of 2
+**Content Type:** Working Papers | **New:** 0 of 4
+
+### (cached) [Geopolitical Distance and Targeted Trade: Evidence from Product-Level Export Controls](https://www.fedinprint.org/item/fedlwp/103525/original)
+**Published:** 2026-07-14 | **Authors:** 
+
+The paper examines how geopolitical alignment influences the implementation of product-level export controls. It finds that trade restrictions are strategically targeted based on geopolitical distance to mitigate security risks.
+
+**Tags:** trade · international · emerging markets · supply chain · financial stability
+
+### (cached) [The Cost of Capital and Misallocation in the United States](https://www.fedinprint.org/item/fedlwp/100099/103526)
+**Published:** 2026-07-14 | **Authors:** 
+
+This research analyzes how variations in the cost of capital lead to resource misallocation across the U.S. economy. It argues that these inefficiencies hinder overall productivity and aggregate economic output.
+
+**Tags:** interest rates · credit · GDP growth · banking · financial stability · monetary policy
 
 ### (cached) [The Tradition of Federal Reserve Independence](https://www.fedinprint.org/item/fedlwp/103485/original)
 **Published:** 2026-07-06 | **Authors:** 
@@ -100,5 +124,5 @@ No content provided for analysis.
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 9
-- Total cache size: 9 items
+- Already cached: 11
+- Total cache size: 11 items
