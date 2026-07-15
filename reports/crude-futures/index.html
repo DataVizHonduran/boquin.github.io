@@ -172,7 +172,7 @@
     <h1>🛢️ Crude Oil — December Futures Strip</h1>
   </div>
   <div class="header-badges">
-    <span class="badge"><span class="dot"></span> Updated: July 14, 2026 10:44 UTC</span>
+    <span class="badge"><span class="dot"></span> Updated: July 15, 2026 10:48 UTC</span>
     <span class="badge">Data: Yahoo Finance</span>
     <span class="badge">6 contracts tracked per benchmark</span>
   </div>
@@ -271,52 +271,52 @@ const WTI_DATA   = {
     {
       "label": "Dec 2026",
       "ticker": "CLZ26.NYM",
-      "price": 75.61,
-      "chg": 4.99,
-      "pct_chg": 7.07,
+      "price": 75.34,
+      "chg": -0.27,
+      "pct_chg": -0.36,
       "hi_52": 85.63,
       "lo_52": 55.63,
-      "pct_rng": 66.6
+      "pct_rng": 65.7
     },
     {
       "label": "Dec 2027",
       "ticker": "CLZ27.NYM",
-      "price": 69.97,
-      "chg": 2.17,
-      "pct_chg": 3.2,
+      "price": 69.46,
+      "chg": -0.51,
+      "pct_chg": -0.73,
       "hi_52": 75.05,
       "lo_52": 56.96,
-      "pct_rng": 71.9
+      "pct_rng": 69.1
     },
     {
       "label": "Dec 2028",
       "ticker": "CLZ28.NYM",
-      "price": 67.54,
-      "chg": 1.24,
-      "pct_chg": 1.87,
+      "price": 67.33,
+      "chg": -0.21,
+      "pct_chg": -0.31,
       "hi_52": 72.06,
       "lo_52": 58.26,
-      "pct_rng": 67.2
+      "pct_rng": 65.7
     },
     {
       "label": "Dec 2029",
       "ticker": "CLZ29.NYM",
-      "price": 65.72,
-      "chg": 0.55,
-      "pct_chg": 0.84,
+      "price": 65.81,
+      "chg": 0.09,
+      "pct_chg": 0.14,
       "hi_52": 69.56,
       "lo_52": 60.0,
-      "pct_rng": 59.8
+      "pct_rng": 60.8
     },
     {
       "label": "Dec 2030",
       "ticker": "CLZ30.NYM",
-      "price": 63.97,
-      "chg": 0.02,
-      "pct_chg": 0.03,
+      "price": 64.27,
+      "chg": 0.3,
+      "pct_chg": 0.47,
       "hi_52": 67.23,
       "lo_52": 60.79,
-      "pct_rng": 49.4
+      "pct_rng": 54.0
     }
   ],
   "labels": [
@@ -337,11 +337,11 @@ const WTI_DATA   = {
   ],
   "prices": [
     0.0,
-    75.61,
-    69.97,
-    67.54,
-    65.72,
-    63.97
+    75.34,
+    69.46,
+    67.33,
+    65.81,
+    64.27
   ],
   "bar_colors": [
     "#4a9eda",
@@ -360,11 +360,11 @@ const WTI_DATA   = {
     "Z30\u2212Z29"
   ],
   "spread_values": [
-    75.61,
-    -5.64,
-    -2.43,
-    -1.82,
-    -1.75
+    75.34,
+    -5.88,
+    -2.13,
+    -1.52,
+    -1.54
   ],
   "spread_colors": [
     "#28a745",
@@ -875,10 +875,12 @@ const WTI_DATA   = {
     "2026-07-08",
     "2026-07-09",
     "2026-07-10",
-    "2026-07-13"
+    "2026-07-13",
+    "2026-07-14"
   ],
   "hist_series": {
     "Jul 2026": [
+      null,
       null,
       null,
       null,
@@ -1884,7 +1886,8 @@ const WTI_DATA   = {
       71.72,
       70.79,
       70.62,
-      75.61
+      75.61,
+      75.34
     ],
     "Dec 2027": [
       67.36,
@@ -2388,7 +2391,8 @@ const WTI_DATA   = {
       68.4,
       67.9,
       67.8,
-      69.97
+      69.97,
+      69.46
     ],
     "Dec 2028": [
       66.0,
@@ -2892,7 +2896,8 @@ const WTI_DATA   = {
       66.63,
       66.29,
       66.3,
-      67.54
+      67.54,
+      67.33
     ],
     "Dec 2029": [
       65.08,
@@ -3396,7 +3401,8 @@ const WTI_DATA   = {
       65.23,
       65.04,
       65.17,
-      65.72
+      65.72,
+      65.81
     ],
     "Dec 2030": [
       64.46,
@@ -3900,7 +3906,8 @@ const WTI_DATA   = {
       63.8,
       63.67,
       63.95,
-      63.97
+      63.97,
+      64.27
     ]
   },
   "range_labels": [
@@ -3929,11 +3936,11 @@ const WTI_DATA   = {
   ],
   "range_cur": [
     0.0,
-    75.61,
-    69.97,
-    67.54,
-    65.72,
-    63.97
+    75.34,
+    69.46,
+    67.33,
+    65.81,
+    64.27
   ],
   "range_colors": [
     "#e94560",
@@ -3941,7 +3948,7 @@ const WTI_DATA   = {
     "#28a745",
     "#28a745",
     "#28a745",
-    "#e94560"
+    "#28a745"
   ]
 };
 const BRENT_DATA = {
@@ -3959,29 +3966,29 @@ const BRENT_DATA = {
     {
       "label": "Dec 2026",
       "ticker": "BZZ26.NYM",
-      "price": 81.0,
-      "chg": 5.5,
-      "pct_chg": 7.28,
+      "price": 80.95,
+      "chg": -0.05,
+      "pct_chg": -0.06,
       "hi_52": 92.76,
       "lo_52": 59.17,
-      "pct_rng": 65.0
+      "pct_rng": 64.8
     },
     {
       "label": "Dec 2027",
       "ticker": "BZZ27.NYM",
-      "price": 74.65,
-      "chg": 2.54,
-      "pct_chg": 3.52,
+      "price": 74.37,
+      "chg": -0.28,
+      "pct_chg": -0.38,
       "hi_52": 80.18,
       "lo_52": 59.89,
-      "pct_rng": 72.7
+      "pct_rng": 71.4
     },
     {
       "label": "Dec 2028",
       "ticker": "BZZ28.NYM",
-      "price": 72.15,
-      "chg": 1.51,
-      "pct_chg": 2.14,
+      "price": 72.14,
+      "chg": -0.01,
+      "pct_chg": -0.01,
       "hi_52": 76.98,
       "lo_52": 61.73,
       "pct_rng": 68.3
@@ -3989,12 +3996,12 @@ const BRENT_DATA = {
     {
       "label": "Dec 2029",
       "ticker": "BZZ29.NYM",
-      "price": 70.73,
-      "chg": 0.74,
-      "pct_chg": 1.06,
+      "price": 70.98,
+      "chg": 0.25,
+      "pct_chg": 0.35,
       "hi_52": 74.94,
       "lo_52": 64.16,
-      "pct_rng": 60.9
+      "pct_rng": 63.3
     }
   ],
   "labels": [
@@ -4013,10 +4020,10 @@ const BRENT_DATA = {
   ],
   "prices": [
     0.0,
-    81.0,
-    74.65,
-    72.15,
-    70.73
+    80.95,
+    74.37,
+    72.14,
+    70.98
   ],
   "bar_colors": [
     "#4a9eda",
@@ -4033,10 +4040,10 @@ const BRENT_DATA = {
     "Z29\u2212Z28"
   ],
   "spread_values": [
-    81.0,
-    -6.35,
-    -2.5,
-    -1.42
+    80.95,
+    -6.58,
+    -2.23,
+    -1.16
   ],
   "spread_colors": [
     "#28a745",
@@ -4545,10 +4552,12 @@ const BRENT_DATA = {
     "2026-07-08",
     "2026-07-09",
     "2026-07-10",
-    "2026-07-13"
+    "2026-07-13",
+    "2026-07-14"
   ],
   "hist_series": {
     "Jul 2026": [
+      null,
       null,
       null,
       null,
@@ -5552,7 +5561,8 @@ const BRENT_DATA = {
       76.6,
       75.55,
       75.5,
-      81.0
+      81.0,
+      80.95
     ],
     "Dec 2027": [
       72.22,
@@ -6055,7 +6065,8 @@ const BRENT_DATA = {
       72.84,
       72.22,
       72.11,
-      74.65
+      74.65,
+      74.37
     ],
     "Dec 2028": [
       70.88,
@@ -6558,7 +6569,8 @@ const BRENT_DATA = {
       71.17,
       70.67,
       70.64,
-      72.15
+      72.15,
+      72.14
     ],
     "Dec 2029": [
       70.1,
@@ -7061,7 +7073,8 @@ const BRENT_DATA = {
       70.22,
       69.84,
       69.99,
-      70.73
+      70.73,
+      70.98
     ]
   },
   "range_labels": [
@@ -7087,10 +7100,10 @@ const BRENT_DATA = {
   ],
   "range_cur": [
     0.0,
-    81.0,
-    74.65,
-    72.15,
-    70.73
+    80.95,
+    74.37,
+    72.14,
+    70.98
   ],
   "range_colors": [
     "#e94560",
