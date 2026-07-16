@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (12 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: July 2026 (14 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,36 +8,36 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: July 15, 2026**
+**Date: July 16, 2026**
 **Subject: Strategic Briefing: Recent ECB/NCB Research Trends**
 
-After reviewing the latest research cycle, it is clear the ECB is shifting its analytical focus toward "geoeconomic fragmentation" and the structural frictions of the Banking Union. Below are the most significant publications for our current positioning.
+I have filtered the recent research output to isolate the publications with the highest materiality for our portfolio positioning and macro forecasts. The current focus of the ECB has shifted decisively toward "geoeconomic fragmentation" and the structural frictions of the Banking Union.
 
-1. **Measuring geoeconomic tension: a large-language-model approach (Pub 9)**
-The ECB is now utilizing LLMs to quantify geopolitical tension via local-language media, moving beyond lagging indicators. This suggests the Governing Council is seeking a real-time "tension index" to better anticipate supply shocks and volatility in the Eurozone’s trade-dependent economy.
+1. **Measuring geoeconomic tension: a large-language-model approach (Pub 11)**
+The ECB is now utilizing LLMs to quantify real-time geoeconomic tension via local-language media, moving beyond lagging indicators. This suggests the Governing Council is seeking a more responsive "early warning system" to adjust policy as geopolitical shocks hit the real economy.
 
-2. **Tariffs, production networks, and spillovers (Pub 2)**
-Using a multi-sector New Keynesian model, this research highlights how US-China trade wars leak into the Eurozone through complex input-output linkages. It underscores that "indirect" exposure via global value chains can dampen Eurozone GDP even if direct trade with the combatants is limited.
+2. **Barriers to a European Banking Union (Pub 12)**
+Using AnaCredit data, this research quantifies how persistent cross-border lending barriers continue to distort credit allocation and stifle output. For us, this confirms that the "single market" for finance remains a misnomer, implying that national credit cycles will continue to diverge despite a single monetary policy.
 
-3. **Barriers to a European Banking Union (Pub 10)**
-Utilizing AnaCredit loan-level data, this paper quantifies the persistent inefficiencies in cross-border credit allocation. For us, this confirms that the "single market" for bank lending remains a fiction, implying that credit conditions will continue to diverge sharply between the Core and Periphery during stress events.
+3. **Bank deposit pricing in the euro area (Pub 3)**
+The study confirms a persistent, asymmetric lag in passing policy rate hikes to sight deposits (2007–2024). This "deposit beta" gap provides banks with a significant net interest margin (NIM) cushion, suggesting bank profitability may remain resilient even as the ECB enters a potential easing cycle.
 
-4. **Beyond energy prices: the ripple effects of Gulf supply disruptions (Pub 12)**
-This study moves past simple headline inflation to analyze the broader macroeconomic contagion of Middle East instability. It suggests that Gulf disruptions create systemic shocks to industrial productivity and investment, not just temporary spikes in the CPI.
+4. **Tariffs, production networks, and spillovers: US-China trade war (Pub 4)**
+By modeling input-output linkages, the ECB highlights how trade wars create "ripple effects" that damage Eurozone sectors not directly involved in the primary dispute. This underscores the systemic risk to European industrial hubs that rely on complex global value chains, regardless of their direct trade volume with the US or China.
 
 5. **How banks have adjusted their lending in response to trade tensions (Pub 1)**
-This provides empirical evidence on how Eurozone banks are proactively tightening credit to sectors exposed to trade volatility. This "preemptive tightening" by banks can act as a shadow monetary tightening, potentially amplifying the effects of the ECB's own policy rate path.
+This provides empirical evidence on how trade volatility triggers a tightening of credit standards by commercial banks. It suggests that geoeconomic tension acts as a "shadow tightening" mechanism, amplifying the restrictive effects of the ECB’s own monetary policy.
 
-6. **Climate factors in the collateral framework (Pub 11)**
-The ECB is refining how it integrates climate uncertainty into its collateral eligibility. This is a critical signal for our fixed-income desks, as it suggests a gradual "greening" of the ECB balance sheet that could penalize high-carbon issuers over the medium term.
+6. **Beyond energy prices: the ripple effects of Gulf supply disruptions (Pub 14)**
+The research argues that Gulf shocks transmit through channels far beyond simple energy inflation, impacting global trade flows and financial stability. This indicates the ECB is broadening its risk perimeter to include non-linear shocks to the Eurozone's external balance.
 
 **Synthesis:**
-The ECB is aggressively upgrading its toolkit to manage a "polycrisis" environment, specifically focusing on geoeconomic fragmentation and the fragility of cross-border credit. We should expect policy responses to be increasingly driven by non-traditional, real-time data on geopolitical tension and sectoral climate risk.
+The ECB is increasingly preoccupied with "geoeconomic fragmentation," treating trade tensions and geopolitical instability as primary drivers of macroeconomic volatility and credit contraction. Simultaneously, the persistence of Banking Union frictions and asymmetric deposit pricing suggests a fragmented financial transmission mechanism that will complicate the ECB's ability to steer the economy uniformly.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 12
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 14
 
 ### (cached) [How banks have adjusted their lending in response to trade tensions](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260715~d5c83c53ee.en.html)
 **Published:** 2026-07-15 | **Authors:** 
@@ -45,6 +45,20 @@ The ECB is aggressively upgrading its toolkit to manage a "polycrisis" environme
 The study investigates the behavioral responses of the banking sector to escalating international trade tensions. It focuses on how financial institutions adjust credit allocation and lending standards in response to trade-induced risks.
 
 **Tags:** banking · credit · trade · financial stability · geopolitics
+
+### (cached) [The changing geography of banking in CESEE. Branch closures outpace openings](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3256~2bf448ead2.en.pdf)
+**Published:** 2026-07-15 | **Authors:** 
+
+The paper analyzes the contraction of bank branch networks across ten CESEE countries, noting a decline of over 30% since 2013. It identifies market consolidation as a primary driver of closures, while local economic growth and profitability act as mitigating factors.
+
+**Tags:** banking · eurozone · GDP growth · credit · financial stability
+
+### (cached) [Bank deposit pricing in the euro area](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3255~7622aab746.en.pdf)
+**Published:** 2026-07-15 | **Authors:** 
+
+This study examines the transmission of policy rates to sight deposit rates in the euro area from 2007 to 2024. The findings reveal low and asymmetric pass-through that has diminished over time, supported by an equilibrium model of depositor price sensitivity.
+
+**Tags:** monetary policy · interest rates · banking · eurozone · payments
 
 ### (cached) [Tariffs, production networks, and spillovers: the case of a US-China trade war](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3254~34fda3bdcc.en.pdf)
 **Published:** 2026-07-14 | **Authors:** 
@@ -127,5 +141,5 @@ The paper analyzes how supply disruptions in the Gulf region propagate beyond im
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 12
-- Total cache size: 12 items
+- Already cached: 14
+- Total cache size: 14 items
