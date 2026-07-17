@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (11 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: July 2026 (14 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -9,33 +9,44 @@
 **MEMORANDUM**
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 15, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+**DATE:** July 17, 2026
+**SUBJECT:** Critical Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While several papers focus on historical banking and market micro-structure, the following selections are the most critical for our current macro positioning and risk models.
+I have screened the latest research output from the Fed districts. While much of the output is academic, several papers provide critical signals regarding regulatory arbitrage, trade-induced inflation, and systemic banking risk.
 
-1. **[NY] More Tariff Pass-Through Is in the Pipeline**
-This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. For our outlook, this suggests a "second wave" of price pressures is likely, potentially complicating the Fed's path toward a neutral rate and necessitating a more hawkish bias in our inflation forecasts.
+**Key Analytical Takeaways:**
 
-2. **[NY] Effect of Tariffs on U.S. Small Businesses**
-By utilizing 2025 data, this paper highlights the disproportionate burden of trade barriers on small-cap enterprises compared to multinationals. This suggests a widening divergence in earnings resilience between the S&P 500 and the Russell 2000, increasing the risk profile for small-cap equity allocations.
+1. **[NY] Capitalizing on Nonbanks / Nonbank Subsidiaries as Equity Reservoirs:** This two-part series reveals how Bank Holding Companies (BHCs) are utilizing nonbank subsidiaries to bypass Basel III capital requirements. This suggests that "headline" capital ratios may overstate systemic stability, as risk is being shifted to less regulated pockets of the organization.
 
-3. **[STL] Geopolitical Distance and Targeted Trade**
-The findings demonstrate that export controls are increasingly driven by "geopolitical distance" rather than purely economic logic. This confirms that trade fragmentation is structural, not cyclical, requiring us to bake higher systemic risk premiums into valuations for firms with heavy exposure to targeted geopolitical corridors.
+2. **[NY] More Tariff Pass-Through Is in the Pipeline:** This research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer. We should expect a second wave of price increases as businesses exhaust their margins and begin passing costs through, complicating the Fed's inflation target.
 
-4. **[STL] The Cost of Capital and Misallocation in the United States**
-This paper analyzes how capital is being inefficiently distributed across the economy, likely exacerbated by the recent high-rate environment. For the investment team, this signals a potential drag on long-term productivity growth (Potential GDP), suggesting that the "soft landing" may be hampered by structural inefficiency.
+3. **[NY] Effect of Tariffs on U.S. Small Businesses:** By utilizing 2025 data, the NY Fed highlights the disproportionate vulnerability of small businesses to trade barriers. This suggests a potential divergence in corporate earnings, where large caps with diversified supply chains outperform small caps facing insurmountable input costs.
 
-5. **[NY] Using AI to Let History Speak About Bank Runs**
-By leveraging LLMs to synthesize historical bank-level data, the NY Fed is refining its understanding of contagion triggers. This is analytically significant as it suggests the Fed is upgrading its early-warning systems for systemic liquidity crises, which may alter how the "Fed Put" is deployed during the next banking stress event.
+4. **[NY] Using AI to Let History Speak About Bank Runs:** By applying LLMs to historical data, the Fed is refining its understanding of the triggers and velocity of bank runs. This indicates the Fed is actively upgrading its early-warning systems for liquidity crises, which may lead to more aggressive (and potentially disruptive) intervention strategies in future stress events.
+
+5. **[STL] The Cost of Capital and Misallocation in the United States:** This paper addresses the inefficiency of capital distribution across the economy. For our portfolio, this underscores the importance of identifying "misallocated" sectors where capital is trapped in low-productivity assets, signaling a rotation toward high-efficiency growth.
 
 **Synthesis:**
-The prevailing theme across these publications is the transition from monetary-driven volatility to structural volatility, specifically regarding trade fragmentation and capital misallocation. We must shift our focus from simple interest rate pivots to the long-term inflationary and productivity headwinds created by the current geopolitical and trade regime.
+The prevailing theme is a shift toward "hidden" risks, specifically regulatory arbitrage within BHCs and lagged inflationary pressures from trade policy. We must adjust our risk models to account for underestimated systemic fragility in the banking sector and a stickier-than-expected CPI trajectory.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 7
+
+### (cached) [How Basel III Changes Where Capital Sits: Nonbank Subsidiaries as Equity Reservoirs](https://libertystreeteconomics.newyorkfed.org/2026/07/how-basel-iii-changes-where-capital-sits-nonbank-subsidiaries-as-equity-reservoirs/)
+**Published:** 2026-07-16 | **Authors:** 
+
+The paper examines how Basel III regulations influence the distribution of capital within bank holding companies. It finds that nonbank subsidiaries act as equity reservoirs, leading to a divergence between bank-level and consolidated capital.
+
+**Tags:** banking · financial stability · financial regulation · credit
+
+### (cached) [Capitalizing on Nonbanks: Regulatory Arbitrage Within Bank Holding Companies](https://libertystreeteconomics.newyorkfed.org/2026/07/capitalizing-on-nonbanks-regulatory-arbitrage-within-bank-holding-companies/)
+**Published:** 2026-07-15 | **Authors:** 
+
+This research explores the phenomenon of regulatory arbitrage occurring within the organizational structures of bank holding companies. It analyzes how firms shift assets and capital to optimize regulatory treatment.
+
+**Tags:** banking · financial regulation · financial stability · credit
 
 ### (cached) [Effect of Tariffs on U.S. Small Businesses](https://libertystreeteconomics.newyorkfed.org/2026/07/effect-of-tariffs-on-u-s-small-businesses/)
 **Published:** 2026-07-09 | **Authors:** Will Aarons and Asani Sarkar
@@ -73,7 +84,14 @@ The paper analyzes the 'overnight drift' in U.S. equity futures, noting a histor
 **Tags:** financial stability · international · interest rates · monetary policy · banking
 
 ## Richmond Fed (5th District)
-**Content Type:** Economic Briefs | **New:** 0 of 2
+**Content Type:** Economic Briefs | **New:** 0 of 3
+
+### (cached) [Is the US Economy K-Shaped? Evidence From the Past Three Decades](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-23)
+**Published:** 2026-07-15 | **Authors:** 
+
+The study investigates the 'K-shaped' recovery hypothesis by analyzing economic data over the last thirty years. It finds that recovery patterns following recessions differ significantly from standard economic periods.
+
+**Tags:** GDP growth · recession · employment · labor markets · consumer spending
 
 ### (cached) [When the Mortgage Becomes the Backup Plan: Debt and Disaster Insurance](https://www.richmondfed.org/publications/research/economic_brief/2026/eb_26-22)
 **Published:** 2026-07-08 | **Authors:** 
@@ -124,5 +142,5 @@ No content provided for analysis.
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 11
-- Total cache size: 11 items
+- Already cached: 14
+- Total cache size: 14 items
