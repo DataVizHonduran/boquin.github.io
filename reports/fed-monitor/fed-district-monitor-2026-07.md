@@ -10,22 +10,22 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** July 19, 2026
-**SUBJECT:** Analysis of Recent Federal Reserve District Research
+**DATE:** July 20, 2026
+**SUBJECT:** Critical Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest output from the Fed districts. While there is a variety of academic exploration, the following publications are the most analytically significant for our current positioning and risk models.
+I have reviewed the latest research outputs from the Fed districts. While much of the output is academic, there are several high-signal papers regarding regulatory arbitrage, trade policy, and systemic risk that require our immediate attention for portfolio positioning.
 
-1. **[NY] Series on Nonbank Subsidiaries and Regulatory Arbitrage (Posts 1-3):** This research reveals how Bank Holding Companies (BHCs) are using nonbank subsidiaries as "equity reservoirs" to bypass Basel III capital constraints. This suggests a hidden fragility in internal capital markets that could lead to sudden liquidity gaps during systemic stress, as capital is not where the risk is actually concentrated.
+1. **[NY] Series on Nonbank Subsidiaries & Regulatory Arbitrage (Posts 1, 2, & 3):** This series reveals how Bank Holding Companies (BHCs) are using nonbank subsidiaries as "equity reservoirs" to bypass Basel III capital requirements. This suggests a hidden fragility in internal capital markets, as risk is being shifted to less-regulated pockets of the organization, potentially masking the true leverage of systemic banks.
 
-2. **[NY] More Tariff Pass-Through Is in the Pipeline:** The Fed finds that the initial absorption of new tariffs by corporate margins is ending, with a significant wave of price pass-through to consumers imminent. This implies a second wave of inflationary pressure that may force the FOMC to maintain a "higher for longer" stance despite cooling growth.
+2. **[NY] More Tariff Pass-Through Is in the Pipeline (Post 8):** The research indicates that the full inflationary impact of recent sweeping tariffs has not yet hit the consumer, with significant "pass-through" still pending. This implies a secondary wave of price pressures that could complicate the Fed’s inflation target and necessitate a "higher-for-longer" rate environment despite cooling growth.
 
-3. **[NY] Effect of Tariffs on U.S. Small Businesses:** Using 2025 data, this study highlights the disproportionate negative impact of trade barriers on small enterprises compared to multinationals. This signals a potential degradation in the "Main Street" economy and a rise in small-business credit defaults, which could stress regional bank balance sheets.
+3. **[NY] Effect of Tariffs on U.S. Small Businesses (Post 7):** Utilizing 2025 data, this study highlights the disproportionate vulnerability of small businesses to trade barriers compared to large caps. This suggests a widening divergence in corporate earnings and credit risk between the S&P 500 and small-cap indices (Russell 2000) as input costs rise.
 
-4. **[NY] Using AI to Analyze 3,000+ Bank Runs:** By applying LLMs to historical data, the Fed is refining its understanding of the triggers and contagion patterns of banking panics. This indicates that the Fed is actively upgrading its early-warning systems for systemic risk, which may lead to more aggressive (and potentially disruptive) regulatory interventions during the next liquidity crunch.
+4. **[NY] Using AI to Analyze Bank Runs (Post 11):** By applying LLMs to historical data, the Fed is refining its understanding of the triggers and velocity of banking panics. This indicates that the Fed is actively upgrading its early-warning systems for liquidity crises, which may lead to more aggressive—and perhaps unconventional—intervention strategies in the next stress event.
 
-5. **[STL] The Cost of Capital and Misallocation in the U.S.:** This paper examines how inefficient capital distribution is dragging on potential GDP growth. For our portfolio, this underscores the importance of focusing on "capital-efficient" firms, as the macro-drag from misallocation will likely persist even if nominal rates decline.
+5. **[STL] The Cost of Capital and Misallocation in the US (Post 6):** This paper examines how inefficient capital distribution is dragging on aggregate productivity. For our macro outlook, this suggests that nominal GDP growth may remain sluggish unless structural reforms address the misallocation of investment across sectors.
 
-**Synthesis:** The overarching theme is a transition from "hidden" risks to "realized" costs, specifically regarding regulatory arbitrage in banking and the lagging inflationary impact of tariffs. We should brace for a period of heightened volatility in the small-cap space and a more hawkish-than-expected Fed response to tariff-driven inflation.
+**Synthesis:** The overarching theme is one of "hidden risks," specifically regarding regulatory arbitrage in the banking sector and delayed inflationary pressures from trade policy. We should hedge for increased volatility in small-caps and maintain a cautious stance on bank valuations as the Fed scrutinizes internal capital reallocation.
 
 ---
 
