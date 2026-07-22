@@ -6,25 +6,26 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
-From: Senior Economist
-Date: July 21, 2026
-Subject: Analysis of Recent Federal Reserve District Research
+**MEMORANDUM**
 
-I have reviewed the latest research from the Federal Reserve districts. The following publications are the most analytically significant for our current portfolio positioning and macro outlook:
+**TO:** Investment Committee
+**FROM:** Senior Economist
+**DATE:** July 22, 2026
+**RE:** Analysis of Recent Federal Reserve District Research
 
-1. **NY: Regulatory Arbitrage and Nonbank Subsidiaries (Series 1-3):** This research reveals that bank holding companies are using nonbank subsidiaries as "equity reservoirs" to bypass Basel III capital requirements. This suggests a hidden fragility in the financial system where actual risk exposure is higher than reported regulatory ratios indicate, increasing the probability of systemic shocks.
+I have reviewed the latest research output from the Fed districts. While there is significant noise, four primary themes emerge that have direct implications for our portfolio positioning and risk models.
 
-2. **NY: More Tariff Pass-Through Is in the Pipeline:** The authors find that recent sweeping tariffs are increasingly being passed through to end consumers rather than absorbed by corporate margins. This implies a more persistent inflationary impulse for CPI, which may force the Federal Reserve to maintain a "higher for longer" interest rate stance.
+1. **Regulatory Arbitrage via Nonbank Subsidiaries (NY Series):** The New York Fed has documented a systemic trend where Bank Holding Companies (BHCs) use nonbank subsidiaries as "equity reservoirs" to bypass Basel III capital constraints. This suggests a hidden fragility in internal capital markets; if these nonbank entities face liquidity shocks, the perceived capital buffers of the parent banks may be illusory.
 
-3. **NY: Effect of Tariffs on U.S. Small Businesses:** This study highlights that small businesses lack the hedging capabilities of larger firms, making them disproportionately vulnerable to trade barriers. A degradation of the SME sector could lead to localized employment weakness and a contraction in aggregate supply.
+2. **Tariff Pass-Through and Small Business Impact (NY):** Recent data indicates that the "pipeline" for tariff pass-through to consumers is still filling, with small businesses bearing a disproportionate burden. This implies that inflationary pressures from trade policy are lagging and may persist longer than current market pricing suggests, potentially complicating the Fed's terminal rate path.
 
-4. **STL: The Cost of Capital and Misallocation in the United States:** This paper argues that significant capital misallocation is hindering overall U.S. productivity. If capital is not flowing to the most efficient firms, our long-term potential GDP growth forecasts may be overoptimistic, potentially lowering the long-run neutral rate (r*).
+3. **AI-Driven Analysis of Bank Runs (NY):** By utilizing LLMs to synthesize historical bank-level data from over 3,000 runs, the NY Fed is refining the "trigger" mechanisms of banking crises. For us, this improves our early-warning indicators for systemic contagion and suggests that historical patterns of panic are more predictable than previously thought.
 
-5. **NY: AI-Driven Analysis of Bank Runs (Publications 10-11):** By using LLMs to analyze thousands of historical bank runs, the Fed is identifying new markers of liquidity crises. This enhances our ability to model contagion risk and suggests that the Fed is refining its "early warning" systems for the next banking stress event.
+4. **Cost of Capital and Resource Misallocation (STL):** This research highlights a growing inefficiency in how capital is allocated across the U.S. economy, contributing to sluggish productivity growth. If misallocation is systemic, it suggests a lower potential GDP growth rate, which would limit the long-term upside for equity valuations despite short-term AI-driven gains.
 
-**Synthesis:**
-The prevailing theme across these papers is the emergence of "hidden" risks, specifically regarding regulatory arbitrage in banking and the lagging inflationary impact of trade policy. We should brace for a regime of higher volatility in financial stability and a more stubborn inflation profile than the consensus currently predicts.
+5. **Geopolitical Distance and Targeted Trade (STL):** The findings suggest that export controls are increasingly driven by "geopolitical distance" rather than purely economic logic. This confirms a structural shift toward "friend-shoring," necessitating a re-evaluation of our emerging market exposures and supply chain risk premiums.
+
+**Synthesis:** The overarching theme is one of "hidden fragility," whether through regulatory arbitrage in banking, lagging inflationary pressures from tariffs, or geopolitical fragmentation. We should shift toward a more defensive posture in financials and incorporate a higher "geopolitical risk premium" into our long-term discount rates.
 
 ---
 
