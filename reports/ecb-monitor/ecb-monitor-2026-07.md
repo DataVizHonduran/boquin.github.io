@@ -6,27 +6,22 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Eurozone Economist**
-**Date: July 22, 2026**
-**Subject: Strategic Briefing – Recent ECB/NCB Research**
+To: Investment Team
+From: Senior Economist (Eurozone)
+Date: 2026-07-23
+Subject: Analysis of Recent ECB and National Central Bank Research
 
-I have filtered the recent research output to highlight the publications with the highest implications for our macro projections and portfolio positioning. We are seeing a clear shift in the ECB's focus toward "geoeconomic fragmentation" and the structural frictions of the Banking Union.
+I have reviewed the latest research cycle from the ECB and national central banks. While much of the output is technical, several papers provide critical insights into the structural headwinds facing the Eurozone. Here are the most analytically significant publications for our current positioning:
 
-1. **Measuring geoeconomic tension: a large-language-model approach (Pub 11):** The ECB is now utilizing LLMs to quantify geopolitical risk in real-time via local-language media. This suggests the Governing Council is seeking more granular, leading indicators of "geoeconomic shocks" to inform their risk management and potential policy pivots.
+1. **Bank deposit pricing in the euro area (Pub 3):** This research documents a low and asymmetric pass-through of policy rates to sight deposits. For us, this suggests that the ECB’s monetary transmission is "leaky," meaning the real-economy impact of rate changes may be dampened, potentially forcing the Governing Council to move more aggressively to achieve desired tightening or easing effects.
 
-2. **Barriers to a European Banking Union (Pub 12):** Using AnaCredit data, this research quantifies how cross-border lending frictions continue to hinder credit allocation and output. For us, this confirms that the "single market" for capital remains a myth, reinforcing the need to maintain a diversified, country-specific approach to Eurozone credit exposure.
+2. **Tariffs, production networks, and spillovers (Pub 4):** The study highlights how US-China trade tensions propagate through multi-sector input-output linkages. This is critical for our equity coverage, as it proves that tariffs on specific sectors create a contagion effect that degrades overall industrial output across the Eurozone, regardless of direct exposure.
 
-3. **Bank deposit pricing in the euro area (Pub 3):** The study confirms a persistent, asymmetric lag in passing policy rate hikes to sight deposits. This "deposit beta" lag provides a temporary windfall for bank NIMs (Net Interest Margins) but suggests a potential for sudden liquidity outflows if competitive pricing catches up.
+3. **Geoeconomics and trade (Pub 7):** This paper frames the structural shift from global efficiency to geoeconomic security. It signals a long-term transition toward "friend-shoring" and strategic autonomy, which likely implies a higher structural inflation baseline and lower long-term productivity growth for the bloc.
 
-4. **Tariffs, production networks, and spillovers (Pub 4):** This model highlights how US-China trade wars leak into the Eurozone via complex input-output linkages. It underscores that Eurozone GDP is vulnerable to "secondary" trade shocks even when the EU is not a primary combatant in a tariff war.
+4. **How do economies with open labour markets work? (Pub 10):** The analysis shows that temporary migration acts as a vital macroeconomic stabilizer by absorbing labour shocks. This is a key insight for our inflation forecasting; the ability of the EU to maintain labour mobility is a primary defense against wage-push inflation during periods of tight labour markets.
 
-5. **Beyond energy prices: the ripple effects of Gulf supply disruptions (Pub 14):** This research moves past simple headline inflation to analyze the broader macroeconomic contagion of Middle East instability. It suggests that Gulf disruptions create systemic shocks to production and investment that outlast the initial energy price spike.
-
-6. **How banks have adjusted their lending in response to trade tensions (Pub 1):** This provides empirical evidence on how banks are preemptively tightening credit to sectors exposed to trade volatility. We should monitor this as a leading indicator for industrial slowdowns in export-heavy economies like Germany.
-
-**Synthesis:**
-The ECB is increasingly preoccupied with "geoeconomic" volatility and the structural failure of the Banking Union to integrate credit markets. We should expect a policy regime that is more reactive to geopolitical shocks and a banking sector where profitability is buoyed by deposit lags but threatened by fragmented lending.
+5. **Barriers to
 
 ---
 
