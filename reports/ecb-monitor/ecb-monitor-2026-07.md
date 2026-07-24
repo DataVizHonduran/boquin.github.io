@@ -1,32 +1,58 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — July 2026 (Month to Date)
 
-**Coverage Period:** Month to date: July 2026 (14 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: July 2026 (17 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
-From: Senior Economist (Eurozone)
-Date: 2026-07-23
-Subject: Analysis of Recent ECB and National Central Bank Research
+**To: Investment Committee**
+**From: Senior Eurozone Economist**
+**Date: July 24, 2026**
+**Subject: Strategic Briefing: Recent ECB/NCB Research Trends**
 
-I have reviewed the latest research cycle from the ECB and national central banks. While much of the output is technical, several papers provide critical insights into the structural headwinds facing the Eurozone. Here are the most analytically significant publications for our current positioning:
+I have reviewed the latest research cycle from the Eurosystem. While there is a steady stream of technical modeling, four key themes emerge that directly impact our portfolio positioning and macro forecasts: geoeconomic fragmentation, banking transmission, climate regulation, and the "last mile" of monetary transmission.
 
-1. **Bank deposit pricing in the euro area (Pub 3):** This research documents a low and asymmetric pass-through of policy rates to sight deposits. For us, this suggests that the ECB’s monetary transmission is "leaky," meaning the real-economy impact of rate changes may be dampened, potentially forcing the Governing Council to move more aggressively to achieve desired tightening or easing effects.
+**Key Analytical Takeaways:**
 
-2. **Tariffs, production networks, and spillovers (Pub 4):** The study highlights how US-China trade tensions propagate through multi-sector input-output linkages. This is critical for our equity coverage, as it proves that tariffs on specific sectors create a contagion effect that degrades overall industrial output across the Eurozone, regardless of direct exposure.
+1. **Measuring Geoeconomic Tension (Pub #14):** The ECB is now utilizing LLMs to quantify geoeconomic tension via local-language media, moving beyond lagging indicators. This suggests the Governing Council is seeking a more real-time, high-frequency proxy for "geopolitical risk" to inform its risk management and potential policy pivots.
 
-3. **Geoeconomics and trade (Pub 7):** This paper frames the structural shift from global efficiency to geoeconomic security. It signals a long-term transition toward "friend-shoring" and strategic autonomy, which likely implies a higher structural inflation baseline and lower long-term productivity growth for the bloc.
+2. **Bank Deposit Pricing in the Euro Area (Pub #6):** Research confirms a persistent, asymmetric lag in the pass-through of policy rates to sight deposits (2007–2024). For us, this implies that bank net interest margins (NIMs) may remain stickier than markets price in, potentially sustaining bank profitability even as the rate cycle normalizes.
 
-4. **How do economies with open labour markets work? (Pub 10):** The analysis shows that temporary migration acts as a vital macroeconomic stabilizer by absorbing labour shocks. This is a key insight for our inflation forecasting; the ability of the EU to maintain labour mobility is a primary defense against wage-push inflation during periods of tight labour markets.
+3. **Barriers to a European Banking Union (Pub #15):** Using AnaCredit data, the ECB quantifies significant remaining barriers to cross-border lending. This highlights a structural inefficiency in credit allocation that suggests Eurozone growth remains fragmented by national borders, limiting the effectiveness of a "one size fits all" monetary policy.
 
-5. **Barriers to
+4. **Climate Regulation and Green Takeovers (Pub #8):** The findings show that tightening the EU ETS drives high-emitters to cut emissions without sacrificing output, often via "green takeovers." This indicates that regulatory pressure is successfully catalyzing industrial consolidation and capital reallocation toward green assets without triggering a systemic productivity shock.
+
+5. **Import Tariff Transmission & Production Networks (Pub #1 & #7):** These papers emphasize that the impact of trade wars (specifically US-China/US-EU) is not uniform but depends on a sector's position in the production network. This means we must move away from aggregate "trade war" discounts and instead conduct granular, sector-by-sector sensitivity analyses on our industrial holdings.
+
+**Synthesis:**
+The Eurosystem is shifting its focus toward the "fragmentation" of the economy—whether through geoeconomic tensions, incomplete banking integration, or the uneven transition to a green economy. For investors, this signals a transition from a macro-regime of broad trends to one of high dispersion, where alpha will be found in identifying specific sectoral and regional winners.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 14
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 17
+
+### (cached) [Import tariff transmission in a production network](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3258~46133509d4.en.pdf)
+**Published:** 2026-07-24 | **Authors:** 
+
+The paper analyzes how import tariffs impact manufacturing sectors based on their position within a production network. It identifies both supply-side and demand-side channels that lead to sectoral output contractions.
+
+**Tags:** trade · GDP growth · supply chains · geopolitics · productivity
+
+### (cached) [The devil in the DeTail: assessing state-contingent tail effects of a releasable macroprudential capital buffer using a parsimonious agent-based framework](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3257~92e2d05000.en.pdf)
+**Published:** 2026-07-24 | **Authors:** 
+
+The study utilizes an agent-based framework to evaluate the effectiveness of releasable macroprudential capital buffers in mitigating tail risks. It focuses on the interaction between heterogeneous agents to understand endogenous credit cycles.
+
+**Tags:** financial stability · banking · credit · monetary policy · banking union
+
+### (cached) [Macroprudential policy and productivity: friends not foes](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260724~43d9337ecd.en.html)
+**Published:** 2026-07-24 | **Authors:** 
+
+This research examines the relationship between macroprudential policy frameworks and long-term productivity growth. It argues that stability-oriented regulations can complement rather than hinder economic efficiency.
+
+**Tags:** financial stability · banking · productivity · monetary policy · GDP growth
 
 ### (cached) [How banks have adjusted their lending in response to trade tensions](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260715~d5c83c53ee.en.html)
 **Published:** 2026-07-15 | **Authors:** 
@@ -130,5 +156,5 @@ The paper analyzes how supply disruptions in the Gulf region propagate beyond im
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 14
-- Total cache size: 14 items
+- Already cached: 17
+- Total cache size: 17 items
