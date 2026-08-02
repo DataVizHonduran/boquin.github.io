@@ -1,0 +1,53 @@
+name: Update Pricing Power Report
+
+on:
+  schedule:
+    - cron: '0 9 * * 6'  # Saturdays 9am UTC — after earnings-recaps generates it ~8am
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config --local user.email "alberto.boquin@gmail.com"
+          git config --local user.name "Alberto Jose Boquin"
+
+      - name: Fetch latest Pricing Power Report from earnings-recaps
+        run: |
+          mkdir -p reports/pricing-power
+
+          DOWNLOAD_URL=$(curl -sf \
+            "https://api.github.com/repos/DataVizHonduran/earnings-recaps/contents/industry_reports" \
+            | python3 -c "
+          import sys, json
+          files = [f for f in json.load(sys.stdin)
+                   if f['name'].startswith('pricing_power_') and f['name'].endswith('.html')]
+          if not files:
+              print('ERROR: no pricing_power_*.html found', file=sys.stderr)
+              sys.exit(1)
+          files.sort(key=lambda x: x['name'], reverse=True)
+          print(files[0]['download_url'])
+          ")
+
+          echo "Fetching: $DOWNLOAD_URL"
+          curl -sf "$DOWNLOAD_URL" -o reports/pricing-power/index.html
+          echo "Done — $(wc -c < reports/pricing-power/index.html) bytes"
+
+      - name: Commit and push
+        run: |
+          git add reports/pricing-power/index.html
+          git diff --staged --quiet || (
+            git commit -m "Pricing Power Report — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase --autostash &&
+            git push
+          )
