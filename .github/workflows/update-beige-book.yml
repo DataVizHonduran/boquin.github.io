@@ -1,0 +1,54 @@
+name: Update Beige Book
+
+on:
+  schedule:
+    - cron: '0 8 * * 6'  # Saturdays 8am UTC — 2h after earnings-recaps generates it
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config --local user.email "alberto.boquin@gmail.com"
+          git config --local user.name "Alberto Jose Boquin"
+
+      - name: Fetch latest Beige Book from earnings-recaps
+        run: |
+          mkdir -p reports/beige-book
+
+          # Get directory listing from public repo, find latest beige_book_*.html
+          DOWNLOAD_URL=$(curl -sf \
+            "https://api.github.com/repos/DataVizHonduran/earnings-recaps/contents/industry_reports" \
+            | python3 -c "
+          import sys, json
+          files = [f for f in json.load(sys.stdin)
+                   if f['name'].startswith('beige_book_') and f['name'].endswith('.html')]
+          if not files:
+              print('ERROR: no beige_book_*.html found', file=sys.stderr)
+              sys.exit(1)
+          files.sort(key=lambda x: x['name'], reverse=True)
+          print(files[0]['download_url'])
+          ")
+
+          echo "Fetching: $DOWNLOAD_URL"
+          curl -sf "$DOWNLOAD_URL" -o reports/beige-book/index.html
+          echo "Done — $(wc -c < reports/beige-book/index.html) bytes"
+
+      - name: Commit and push
+        run: |
+          git add reports/beige-book/index.html
+          git diff --staged --quiet || (
+            git commit -m "Beige Book — $(date +'%Y-%m-%d') 🤖" &&
+            git pull --rebase --autostash &&
+            git push
+          )

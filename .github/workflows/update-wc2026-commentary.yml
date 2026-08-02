@@ -1,8 +1,6 @@
 name: Update FIFA WC 2026 Charts & Commentary
 
 on:
-  schedule:
-    - cron: '0 6 * * *'  # 6:00 AM UTC daily
   workflow_dispatch:
 
 concurrency:

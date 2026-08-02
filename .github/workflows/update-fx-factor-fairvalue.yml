@@ -1,8 +1,6 @@
 name: Update FX Factor Fair Value
 
 on:
-  schedule:
-    - cron: '30 20 * * 1-5'  # Weekdays 20:30 UTC (after US close)
   workflow_dispatch:
 
 concurrency:
