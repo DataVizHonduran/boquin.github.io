@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Bank Credit Quality</title>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:900px; margin:0 auto; padding:32px 20px 60px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
+  .card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+          padding:24px; display:flex; flex-direction:column; gap:6px;
+          transition:transform .15s,box-shadow .15s; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 6px 14px rgba(0,0,0,.12); }
+  .card-date { font-size:1.3em; font-weight:700; color:#1a1a2e; }
+  .card-desc { font-size:.85em; color:#666; }
+  .view-link { margin-top:auto; padding-top:12px; color:#007bff; text-decoration:none;
+               font-weight:600; font-size:.9em; border-top:1px solid #f0f0f0; }
+  .view-link:hover { text-decoration:underline; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🏦 US Bank Credit Quality</h1>
+  <div class="sub">NCO rates, delinquencies, and loans past-due — JPM, BAC, WFC, C, COF, USB, PNC, TFC · FDIC call reports + FRED</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <div class="grid">
+
+    <article class="card">
+      <div class="card-date">2026-07-14</div>
+      <div class="card-desc">Latest run — Q1 2026 call report data</div>
+      <a class="view-link" href="bank-credit-2026-07-14.html">View Dashboard →</a>
+    </article>
+
+    <article class="card">
+      <div class="card-date">2026-06-19</div>
+      <div class="card-desc">Q1 2026 call report data</div>
+      <a class="view-link" href="bank-credit-2026-06-19.html">View Dashboard →</a>
+    </article>
+
+    <article class="card">
+      <div class="card-date">2026-05-13</div>
+      <div class="card-desc">Q1 2026 call report data</div>
+      <a class="view-link" href="bank-credit-2026-05-13.html">View Dashboard →</a>
+    </article>
+
+    <article class="card">
+      <div class="card-date">2026-05-12</div>
+      <div class="card-desc">Q1 2026 call report data</div>
+      <a class="view-link" href="bank-credit-2026-05-12.html">View Dashboard →</a>
+    </article>
+
+  </div>
+</div>
+</body>
+</html>
