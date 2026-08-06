@@ -1,40 +1,40 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — August 2026 (Month to Date)
 
-**Coverage Period:** Month to date: August 2026 (7 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: August 2026 (8 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Eurozone Economist**
-**Date: August 5, 2026**
-**Subject: Analysis of Recent Central Bank Research**
+Team,
 
-I have reviewed the latest output from the ECB and national central banks. While some papers are purely academic, the following selections provide critical insights into systemic risk, labor market dynamics, and the evolving banking landscape.
+I have reviewed the latest research output from the ECB and national central banks. While some of the papers are purely methodological, several provide critical insights into the current transmission mechanisms and systemic risks we need to model for our portfolios.
 
-1. **MuSE: Multiple Macro-Financial Scenario Simulation Engine (ECB)**
-The ECB is refining its ability to simulate complex, adverse macro-financial shocks via a new econometric framework. For us, this signals a shift toward more sophisticated, non-linear stress testing, which will likely lead to more targeted capital requirements for banks during the next volatility cycle.
+Here are the most analytically significant publications:
 
-2. **Forecasting Job Vacancy Rates via Earnings Calls (ECB)**
-By integrating textual data from corporate earnings calls, the ECB is attempting to reduce the lag in labor market indicators. This suggests the Governing Council is seeking "real-time" proxies for labor tightness to better time interest rate pivots before official statistics are released.
+1. **Financial frictions across the production network and the transmission of monetary policy [ECB]:** This research highlights that monetary policy doesn't just hit a sector based on its own leverage, but through "indirect frictions" via its suppliers and customers. For us, this means the "lag" in policy transmission is non-linear; a credit crunch in a small but pivotal upstream sector can paralyze downstream industries regardless of their own balance sheet health.
 
-3. **Drivers of Supervisory Capital Add-ons in IRB Models (ECB)**
-This research highlights the ECB’s scrutiny of internal ratings-based (IRB) models, focusing on the "severity" of risk rather than just the "quantity" of defaults. This implies a higher likelihood of supervisory capital add-ons for banks with flawed internal risk modeling, potentially impacting dividend payouts and buybacks.
+2. **MuSE: a multiple macro-financial scenario simulation engine [ECB]:** The ECB is refining its ability to run top-down stress tests using a new financial stress index. This suggests the supervisory board is looking for more dynamic, interconnected shock scenarios, which may lead to higher capital requirements for banks if the MuSE simulations reveal hidden systemic vulnerabilities.
 
-4. **On-the-job Search: Precautionary vs. Job Ladder Motives (ECB)**
-The analysis of employer-to-employer (E2E) transitions helps distinguish between workers seeking better opportunities (ladder) and those fearing job loss (precautionary). Understanding this distinction is vital for predicting wage-push inflation and the resilience of consumption in a slowing economy.
+3. **Severity over quantity: Drivers of supervisory capital add-ons [ECB]:** The focus here is on the "quality" of internal ratings-based models and the resulting capital add-ons. This is a signal that the ECB is becoming less tolerant of model inaccuracies, potentially forcing banks to hold more capital against riskier assets, which could tighten lending conditions in the periphery.
 
-5. **Digital Euro: Liquidity and Funding Costs in German Banking (DBB)**
-The Deutsche Bundesbank is quantifying how a digital euro could shift deposits away from commercial banks toward the central bank. This is a critical structural risk; if funding costs rise for German banks due to liquidity drains, we could see a tightening of credit conditions across the Eurozone's largest economy.
+4. **Forecasting the euro area job vacancy rate with earnings calls data [ECB]:** The ECB is increasingly integrating alternative, high-frequency textual data to lead their labor market forecasts. This indicates a shift toward more real-time monitoring of labor tightness, meaning the Governing Council may react faster to shifts in hiring intentions before they appear in official Eurostat data.
 
-**Synthesis:**
-The ECB is aggressively upgrading its "early warning systems" by integrating alternative data and more rigorous stress-testing frameworks to manage systemic fragility. Simultaneously, the focus on digital currency impacts and IRB model severity suggests a tightening supervisory environment that may constrain bank profitability and liquidity.
+5. **Long-term implications of a digital euro on liquidity and funding costs [DBB]:** The Bundesbank is analyzing how a CBDC could shift deposits away from commercial banks, potentially raising funding costs. This is a structural risk for the German banking sector; if the digital euro triggers a deposit flight, we should expect a compression in net interest margins (NIM) for retail banks.
+
+**Synthesis:** The ECB is pivoting toward a more granular, network-based understanding of how shocks propagate through the economy and the banking system. We should expect more targeted supervisory pressure on bank capital and a more reactive monetary policy stance driven by high-frequency alternative data.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 6
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 7
+
+### (cached) [Financial frictions across the production network and the transmission of monetary policy](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3271~99b37f6d9a.en.pdf)
+**Published:** 2026-08-06 | **Authors:** 
+
+The paper argues that monetary policy transmission is significantly amplified by financial frictions within the broader production network rather than just individual sector frictions. It identifies a downstream demand channel where indirect frictions dominate the direct effects on output and prices.
+
+**Tags:** monetary policy · financial stability · credit · inflation · GDP growth · supply chains
 
 ### (cached) [MuSE: a multiple macro-financial scenario simulation engine for stress testing](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3270~4eb87cfa17.en.pdf)
 **Published:** 2026-08-05 | **Authors:** 
@@ -92,5 +92,5 @@ The research evaluates the potential long-term impact of a digital euro on the G
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 7
-- Total cache size: 7 items
+- Already cached: 8
+- Total cache size: 8 items
