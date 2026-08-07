@@ -1,28 +1,42 @@
 # 🏛️ Federal Reserve District Monitor — August 2026 (Month to Date)
 
-**Coverage Period:** Month to date: August 2026 (4 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: August 2026 (5 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Team,
+**To: Investment Committee**
+**From: Senior Economist**
+**Date: August 7, 2026**
+**Subject: Federal Reserve District Research Briefing**
 
-I have reviewed the latest research coming out of the Fed districts. While the volume is light, there are critical signals regarding labor market frictions and the neutral rate that we need to integrate into our current models.
+I have reviewed the latest research outputs from the Federal Reserve districts. While some publications are introductory, several provide critical signals regarding labor market frictions and the neutral rate of interest.
 
-Here are the key takeaways:
+1. **[NY] A Window into Bond Investors’ Uncertainty About R-Star:** This research analyzes the term structure of sovereign yields to gauge market uncertainty regarding the long-run neutral real interest rate ($r^*$). For our portfolio, this is critical as it suggests that current volatility in long-end yields may be driven by a fundamental disagreement on the "terminal" neutral rate rather than short-term inflation noise.
 
-1. **[NY] A Window into Bond Investors’ Uncertainty About R-Star**: This paper analyzes the term structure of sovereign yields to gauge market uncertainty regarding the long-run neutral real interest rate. For us, this is the most critical piece; if the market is pricing in a higher R-star, we should expect a higher floor for terminal rates and a structural shift in discount rates for equity valuations.
-2. **[RIC] The Ins and Outs of Long-Term Unemployment**: The research indicates that the rise in long-term unemployment is being driven by a drop in "outflow rates" (the speed at which the unemployed find work). This suggests a growing mismatch or "scarring" effect in the labor market, which could constrain potential GDP growth even if headline unemployment remains low.
-3. **[NY] AI’s Impact on Labor and Hiring**: This series examines how generative AI is altering hiring patterns and job requirements at the firm level. From a macro perspective, this is essential for tracking productivity gains; if AI accelerates labor churn without increasing output, we may see wage volatility without the expected inflationary boost.
-4. **[STL] The Implications of Labor Market Heterogeneity for Unemployment Insurance Design**: This piece argues that "one-size-fits-all" UI policies are inefficient given the diverse needs of the modern workforce. While more granular, it signals a potential policy shift toward targeted labor interventions, which could impact future fiscal spending and labor force participation rates.
+2. **[RIC] The Ins and Outs of Long-Term Unemployment:** The findings indicate that the rise in long-term unemployment is driven by a decline in "outflow rates"—meaning workers are staying unemployed longer rather than more people entering the pool. This suggests a structural mismatch or a "scarring" effect in the labor market that could dampen potential GDP growth even if headline unemployment remains low.
 
-**Synthesis:** The overarching theme is a labor market in transition, characterized by structural frictions and AI-driven disruption. Combined with heightened uncertainty around R-star, the data suggests a "higher-for-longer" environment where productivity gains are the only viable path to non-inflationary growth.
+3. **[NY] Why Do Fewer Renters Expect to Move?:** The data shows a multi-decade decline in residential mobility, with moving rates dropping from 20% in the 80s to below 10%. This trend implies a significant reduction in labor mobility, which may hinder the economy's ability to reallocate human capital to high-growth regions, potentially acting as a drag on long-term productivity.
+
+4. **[NY] AI’s Impact on Labor and Hiring:** While part of an ongoing series, the focus on "Street Level" hiring trends indicates the Fed is closely monitoring how AI is altering the composition of job openings. We should watch this closely to determine if AI is creating a "jobless productivity" cycle or simply shifting the skill-set requirements for the workforce.
+
+5. **[STL] The Implications of Labor Market Heterogeneity for UI Design:** This paper argues that one-size-fits-all unemployment insurance (UI) may be inefficient given the diverse nature of the modern workforce. From a policy perspective, any shift toward "heterogeneous" UI design could alter consumer spending floors during downturns, changing our risk models for retail and discretionary sectors.
+
+**Synthesis:**
+The collective research points toward deepening structural frictions in the U.S. economy, specifically regarding labor immobility and a slowing re-employment rate for the long-term unemployed. Combined with market uncertainty over $r^*$, these factors suggest a more fragile growth trajectory that may be less responsive to traditional monetary easing.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 2
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+
+### (cached) [Why Do Fewer Renters Expect to Move?](https://libertystreeteconomics.newyorkfed.org/2026/08/why-do-fewer-renters-expect-to-move/)
+**Published:** 2026-08-06 | **Authors:** 
+
+The paper analyzes a long-term decline in residential mobility rates among Americans since the 1980s. It argues that reduced moving rates hinder households' ability to access employment opportunities and optimize labor market matching.
+
+**Tags:** housing · real estate · labor markets · employment · regional economy
 
 ### (cached) [AI’s Impact on Labor and Hiring](https://libertystreeteconomics.newyorkfed.org/2026/08/ais-impact-on-labor-and-hiring/)
 **Published:** 2026-08-05 | **Authors:** 
@@ -62,5 +76,5 @@ The research examines how differences in worker characteristics affect the effic
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 4
-- Total cache size: 4 items
+- Already cached: 5
+- Total cache size: 5 items

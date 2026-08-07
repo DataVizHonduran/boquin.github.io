@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-08-06T09:42:08.857924+00:00",
-    "totalItems": 116
+    "lastRun": "2026-08-07T08:16:21.048844+00:00",
+    "totalItems": 117
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1975,11 +1975,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "Insufficient data provided to analyze the article.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-06T09:42:08.857924+00:00"
+      "tagsGeneratedAt": "2026-08-07T08:16:21.048844+00:00"
     },
     "741b1c72c5e59e66026bb6d856f6d6f021e043815d44bd7dbcc4863d2f0a6470": {
       "url": "https://www.fedinprint.org/item/fedlwp/97969/103490",
@@ -2070,11 +2070,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-15T09:11:32.886541+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "Insufficient data provided to analyze the article.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-06T09:42:08.857924+00:00"
+      "tagsGeneratedAt": "2026-08-07T08:16:21.048844+00:00"
     },
     "705b92d154df5686a5c5cbca26d95404c00481218c2a5715ff5ca112afff9b35": {
       "url": "https://www.fedinprint.org/item/fedlwp/103525/original",
@@ -2239,7 +2239,7 @@
       "publicationDate": "2026-08-04",
       "authors": [],
       "firstSeen": "2026-08-05T09:38:56.433533+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "Monetary policymakers closely monitor the term structure of sovereign bond yields to uncover market participants’ beliefs about the future monetary policy stance, inflation, and activity. A particular object of interest is the natural real rate of return, or “r-star,” which acts as a guide for monetary policy decisions. Numerous papers have questioned how much information investors possess, and how precisely they know r-star. In this post based on a recent Staff Report, we explore what the term structure of interest rates can teach us about r-star and its perception by investors.",
       "aiSummary": "The paper examines how sovereign bond yields reflect market participants' beliefs and uncertainty regarding the natural real rate of return (r-star). It analyzes the term structure of yields to determine the extent to which investors can accurately signal the neutral rate to policymakers.",
       "tags": [
@@ -2260,11 +2260,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-08-05T09:38:56.433533+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "Insufficient data provided to analyze the article.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-06T09:42:08.857924+00:00"
+      "tagsGeneratedAt": "2026-08-07T08:16:21.048844+00:00"
     },
     "8afcd008f84be14d26fba280f05e199fd3eae1445bd1bb5856c8b35ebbdfa64b": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/ais-impact-on-labor-and-hiring/",
@@ -2275,7 +2275,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-06T09:42:08.857924+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "Welcome to Street Level, my new series on Liberty Street Economics. As research director, I try to keep track of the wide range of work that the economists at the New York Fed produce. My goal for this series is to periodically offer some thematic discussion of that work, highlighting recent analysis by Research staff and adding my own observations on the issue at hand. In this inaugural post, I’ll focus on perhaps the hottest topic going: How artificial intelligence is changing the labor market and hiring behaviors.",
       "aiSummary": "The analysis explores the intersection of artificial intelligence and workforce dynamics. It specifically examines how AI integration influences hiring patterns and overall labor market structures.",
       "tags": [
@@ -2295,7 +2295,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-06T09:42:08.857924+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "The recent rise in long-term unemployment is largely due to a decline in unemployment outflow rates, especially the rate at which unemployed workers find jobs.",
       "aiSummary": "The paper identifies a decline in unemployment outflow rates as the primary driver for the increase in long-term unemployment. It argues that the difficulty unemployed workers face in securing new roles is central to this trend.",
       "tags": [
@@ -2315,7 +2315,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-06T09:42:08.857924+00:00",
-      "lastChecked": "2026-08-06T09:42:08.857924+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The research examines how differences in worker characteristics affect the efficacy of unemployment insurance. It argues for design adjustments to better accommodate labor market heterogeneity.",
       "tags": [
@@ -2325,6 +2325,27 @@
         "wages"
       ],
       "tagsGeneratedAt": "2026-08-06T09:42:08.857924+00:00"
+    },
+    "c69faf064278c4e5f34e3bd51ebde15c98b902ede0490042b3aeaa624f9a8fd8": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/why-do-fewer-renters-expect-to-move/",
+      "title": "Why Do Fewer Renters Expect to Move?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-08-06",
+      "authors": [],
+      "firstSeen": "2026-08-07T08:16:21.048844+00:00",
+      "lastChecked": "2026-08-07T08:16:21.048844+00:00",
+      "scrapedSnippet": "Americans are moving less than they used to. Moving rates have declined steadily for decades, falling from close to 20 percent annually in the mid-1980s to below 10 percent by 2019. This decline has persisted through business cycles and has been evident across all regions, and has affected a broad range of demographic groups. Falling mobility matters because moving helps households access job opportunities, adjust to changing circumstances, and improve their housing situations. In this post, we show that the decline in mobility also holds for renters, with growing challenges to owning a home b",
+      "aiSummary": "The paper analyzes a long-term decline in residential mobility rates among Americans since the 1980s. It argues that reduced moving rates hinder households' ability to access employment opportunities and optimize labor market matching.",
+      "tags": [
+        "housing",
+        "real estate",
+        "labor markets",
+        "employment",
+        "regional economy"
+      ],
+      "tagsGeneratedAt": "2026-08-07T08:16:21.048844+00:00"
     }
   }
 }
