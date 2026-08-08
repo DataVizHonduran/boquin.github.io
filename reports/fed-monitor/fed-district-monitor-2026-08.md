@@ -6,25 +6,26 @@
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Economist**
-**Date: August 7, 2026**
-**Subject: Federal Reserve District Research Briefing**
+**MEMORANDUM**
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While some publications are introductory, several provide critical signals regarding labor market frictions and the neutral rate of interest.
+**TO:** Investment Committee
+**FROM:** Senior Economist
+**DATE:** August 8, 2026
+**RE:** Federal Reserve District Research Briefing
 
-1. **[NY] A Window into Bond Investors’ Uncertainty About R-Star:** This research analyzes the term structure of sovereign yields to gauge market uncertainty regarding the long-run neutral real interest rate ($r^*$). For our portfolio, this is critical as it suggests that current volatility in long-end yields may be driven by a fundamental disagreement on the "terminal" neutral rate rather than short-term inflation noise.
+I have reviewed the latest research outputs from the regional banks. While some entries are introductory, several provide critical signals regarding labor market frictions and the neutral rate. Here are the most analytically significant findings:
 
-2. **[RIC] The Ins and Outs of Long-Term Unemployment:** The findings indicate that the rise in long-term unemployment is driven by a decline in "outflow rates"—meaning workers are staying unemployed longer rather than more people entering the pool. This suggests a structural mismatch or a "scarring" effect in the labor market that could dampen potential GDP growth even if headline unemployment remains low.
+1. **[NY] A Window into Bond Investors’ Uncertainty About R-Star:** This paper analyzes how the term structure of sovereign yields reflects market uncertainty regarding the long-run neutral real interest rate ($r^*$). Understanding whether the market perceives a structural shift in $r^*$ is vital for pricing long-duration assets and anticipating the Fed's terminal rate.
 
-3. **[NY] Why Do Fewer Renters Expect to Move?:** The data shows a multi-decade decline in residential mobility, with moving rates dropping from 20% in the 80s to below 10%. This trend implies a significant reduction in labor mobility, which may hinder the economy's ability to reallocate human capital to high-growth regions, potentially acting as a drag on long-term productivity.
+2. **[RIC] The Ins and Outs of Long-Term Unemployment:** The research highlights that the rise in long-term unemployment is driven by a decline in "outflow rates"—meaning the unemployed are staying unemployed longer. This suggests a deepening of structural mismatch or hiring hesitation, which could constrain potential GDP growth even if headline unemployment remains low.
 
-4. **[NY] AI’s Impact on Labor and Hiring:** While part of an ongoing series, the focus on "Street Level" hiring trends indicates the Fed is closely monitoring how AI is altering the composition of job openings. We should watch this closely to determine if AI is creating a "jobless productivity" cycle or simply shifting the skill-set requirements for the workforce.
+3. **[NY] Why Do Fewer Renters Expect to Move?:** This study documents a multi-decade decline in residential mobility, with moving rates dropping from 20% in the 80s to under 10% recently. Reduced mobility impairs labor market flexibility and slows the reallocation of workers to high-productivity regions, potentially acting as a drag on long-term productivity growth.
 
-5. **[STL] The Implications of Labor Market Heterogeneity for UI Design:** This paper argues that one-size-fits-all unemployment insurance (UI) may be inefficient given the diverse nature of the modern workforce. From a policy perspective, any shift toward "heterogeneous" UI design could alter consumer spending floors during downturns, changing our risk models for retail and discretionary sectors.
+4. **[NY] AI’s Impact on Labor and Hiring:** While part of a broader series, this work focuses on the real-time integration of AI into hiring processes and labor demand. For our team, this is the primary lens for evaluating "productivity paradox" risks and identifying which sectors will see the fastest margin expansion via labor cost reduction.
 
-**Synthesis:**
-The collective research points toward deepening structural frictions in the U.S. economy, specifically regarding labor immobility and a slowing re-employment rate for the long-term unemployed. Combined with market uncertainty over $r^*$, these factors suggest a more fragile growth trajectory that may be less responsive to traditional monetary easing.
+5. **[STL] Implications of Labor Market Heterogeneity for UI Design:** This analysis argues that "one-size-fits-all" unemployment insurance fails to account for diverse worker profiles. From a policy perspective, a shift toward heterogeneous UI design could alter consumer spending floors during downturns, changing the efficacy of automatic stabilizers.
+
+**Synthesis:** The collective research points toward growing structural rigidities in the U.S. economy, specifically through declining geographic mobility and stagnating unemployment outflow rates. These frictions, coupled with uncertainty around $r^*$, suggest that the Fed may face a more complex "last mile" in stabilizing the economy than traditional models predict.
 
 ---
 
