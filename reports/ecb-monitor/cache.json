@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-08-07T08:47:57.565832+00:00",
-    "totalItems": 276
+    "lastRun": "2026-08-08T08:30:45.499889+00:00",
+    "totalItems": 277
   },
   "items": {
     "86758f605d84adbb1de0edc4fb4478ba21f64ee06ee528204179ad34784436a9": {
@@ -3067,7 +3067,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The document details the privacy policy regarding the collection and processing of personal data. It ensures compliance with data protection regulations for financial services users.",
       "tags": [
@@ -3088,7 +3088,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This text explains the use of cookies for website functionality and user tracking. It focuses on transparency and consent in the digital interaction layer of financial portals.",
       "tags": [
@@ -3109,7 +3109,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The legal notice defines the terms of use and liability limitations for the platform. It establishes the legal framework for accessing institutional financial information.",
       "tags": [
@@ -3130,7 +3130,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This document outlines the accessibility standards implemented to ensure inclusive access to information. It focuses on removing barriers for users interacting with financial regulatory content.",
       "tags": [
@@ -3151,7 +3151,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is a contact email address for a national central bank and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -3172,7 +3172,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to press office personnel and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -3193,7 +3193,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-16T09:18:24.208646+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to institutional events and exhibitions and contains no analytical content. No economic arguments or findings are present.",
       "tags": [
@@ -5588,7 +5588,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-05T10:27:12.365491+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "We design an econometric framework to simulate multiple adverse macro-financial scenarios that can be used in top-down stress tests. First, we create a financial stress index informed by shocks generated via a non-parametric copula estimated on a large dataset of daily financial indicators. Second, we simulate the joint dynamics of macroeconomic indicators conditional on the copula-based financial shocks in a large multi-country Bayesian VAR model. This framework,which we refer to as the Multiple macro-financial stress scenario Simulation Engine, MuSE, allows us to replicate thousands of macro",
       "aiSummary": "The paper proposes a new econometric framework, MuSE, to simulate adverse macro-financial scenarios for top-down stress testing. It utilizes a non-parametric copula and a financial stress index to model the joint dynamics of macroeconomic indicators.",
       "tags": [
@@ -5609,7 +5609,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-05T10:27:12.365491+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "We analyse whether textual information extracted from firms’ earnings calls can improve forecasts of the euro area job vacancy rate. Using transcripts from euro area headquartered firms, we construct a monthly indicator of labour demand based on keywords related to labour market pressures and include it into a mixed frequency Bayesian VAR alongside standard hard and soft indicators. A pseudo–real-time evaluation shows that earnings calls provide timely and valuable signals for tracking vacancy dynamics. Among soft indicators, factors limiting production deliver the largest forecasting gains, w",
       "aiSummary": "This study evaluates the use of textual data from corporate earnings calls to enhance forecasts of the euro area job vacancy rate. The authors employ a mixed frequency Bayesian VAR to integrate a new labor demand indicator with traditional macroeconomic data.",
       "tags": [
@@ -5629,7 +5629,7 @@
       "publicationDate": "2026-08-05",
       "authors": [],
       "firstSeen": "2026-08-05T10:27:12.365491+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The research examines the relationship between rising energy costs and investments in residential energy efficiency. It argues that higher energy prices act as a catalyst for homeowners to improve home efficiency to build long-term resilience.",
       "tags": [
@@ -5650,7 +5650,7 @@
       "publicationDate": "2026-08-06",
       "authors": [],
       "firstSeen": "2026-08-06T10:31:44.514287+00:00",
-      "lastChecked": "2026-08-07T08:47:57.565832+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
       "scrapedSnippet": "We show that monetary policy transmission is shaped not only by a sector’s own financial frictions but also by those prevailing in the broader production network. The latter, indirect frictions amplify the output and price effects of monetary policy and empirically dominate the direct ones. The amplification results from a downstream demand channel, as customers respond to tighter policy by purchasing fewer inputs. This is partly offset by an upstream cost channel, reflecting that suppliers raise prices to protect margins when financing costs rise. We inspect the mechanism in a multi-sector ge",
       "aiSummary": "The paper argues that monetary policy transmission is significantly amplified by financial frictions within the broader production network rather than just individual sector frictions. It identifies a downstream demand channel where indirect frictions dominate the direct effects on output and prices.",
       "tags": [
@@ -5662,6 +5662,27 @@
         "supply chains"
       ],
       "tagsGeneratedAt": "2026-08-06T10:31:44.514287+00:00"
+    },
+    "be8a809626d5d35681d5ef07661fadcacd7f2355d429eb74294760797e0fa4ec": {
+      "url": "https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260807~b7ab24866e.en.html",
+      "title": "From oil to electrons: lessons from the 1970s energy crises",
+      "institution": "European Central Bank",
+      "institutionCode": "ECB",
+      "contentType": "Working Papers, Research Bulletin & Blog",
+      "publicationDate": "2026-08-07",
+      "authors": [],
+      "firstSeen": "2026-08-08T08:30:45.499889+00:00",
+      "lastChecked": "2026-08-08T08:30:45.499889+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper analyzes the structural shifts caused by the 1970s energy shocks to draw parallels with the current transition toward electrification. It examines how supply-side energy disruptions impact inflation dynamics and long-term productivity growth.",
+      "tags": [
+        "inflation",
+        "productivity",
+        "climate & transition",
+        "geopolitics",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-08-08T08:30:45.499889+00:00"
     }
   }
 }

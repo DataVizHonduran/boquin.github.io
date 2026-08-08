@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — August 2026 (Month to Date)
 
-**Coverage Period:** Month to date: August 2026 (8 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: August 2026 (9 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,27 +8,35 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: August 7, 2026**
-**Subject: Briefing on Recent Central Bank Research**
+**Date: August 8, 2026**
+**Subject: Strategic Briefing: Recent ECB/NCB Research Trends**
 
-I have reviewed the latest research cycle from the ECB and national central banks. While some papers are purely methodological, several provide critical insights into the plumbing of the Eurozone economy and the evolving transmission of monetary policy.
+I have reviewed the latest research cycle from the Eurosystem. While several papers focus on historical analogies and data methodology, the following selections provide the most critical insights for our current positioning on monetary transmission, banking stability, and labor market dynamics.
 
-1. **Financial frictions across the production network (ECB):** This research highlights that monetary policy doesn't just hit a sector based on its own balance sheet, but via "indirect frictions" from its suppliers and customers. For us, this means that tightening in a systemic "hub" sector (e.g., chemicals or energy) can freeze credit across the entire production chain, amplifying the recessionary impact beyond the initial shock.
+1. **Financial frictions across the production network and the transmission of monetary policy [ECB]:** This research highlights that monetary policy doesn't just hit sectors directly; it ripples through the supply chain. If a key upstream supplier faces high financial frictions, the "indirect" transmission can amplify the contractionary effect on downstream firms, suggesting that policy lags may be more volatile and sector-dependent than standard models assume.
 
-2. **MuSE: Multiple macro-financial scenario simulation engine (ECB):** The ECB is refining its ability to run top-down stress tests using a new econometric framework for adverse scenarios. This suggests the supervisory arm is preparing for more complex, non-linear systemic shocks, which may lead to higher capital requirements for banks if these simulations reveal hidden vulnerabilities.
+2. **Severity over quantity: Drivers of supervisory capital add-ons [ECB]:** The focus here is on the ECB’s willingness to impose capital add-ons when internal bank models understate risk. For our banking coverage, this signals a shift toward "severity" of risk over mere "quantity" of assets, implying that banks with aggressive internal risk-weighting may face unexpected capital hikes from the SSM.
 
-3. **Forecasting job vacancy rates with earnings calls data (ECB):** The ECB is successfully integrating alternative, high-frequency textual data from corporate earnings calls to predict labor market tightness. This indicates a shift toward "nowcasting" labor dynamics, potentially allowing the Governing Council to react more preemptively to wage-push inflation before official statistics are released.
+3. **Long-term implications of a digital euro on liquidity and funding costs [DBB]:** The Bundesbank warns that a digital euro could trigger a shift in deposits from commercial banks to the central bank. This potential "disintermediation" would likely increase wholesale funding costs for German banks, potentially squeezing net interest margins (NIM) in a way that offsets the benefits of higher policy rates.
 
-4. **Severity over quantity: Supervisory capital add-ons (ECB):** This paper examines the drivers of capital add-ons in internal ratings-based models, focusing on the "severity" of model flaws. This is a signal to our banking analysts that the ECB is tightening its scrutiny of internal risk models, which could lead to unexpected capital buffers and reduced dividend payouts for major Eurozone lenders.
+4. **Forecasting the euro area job vacancy rate with earnings calls data [ECB]:** By integrating textual analysis from corporate earnings calls, the ECB is enhancing its "nowcasting" of labor market tightness. For us, this means the ECB is becoming more agile in detecting shifts in labor demand *before* official statistics are released, likely shortening the reaction time for future rate adjustments.
 
-5. **Long-term implications of a digital euro on liquidity (DBB):** The Deutsche Bundesbank is analyzing how a CBDC could shift deposits away from commercial banks, potentially raising funding costs. This is a critical long-term structural risk; if the digital euro triggers a systemic shift in liquidity, we expect a permanent increase in the cost of credit for the real economy.
+5. **On-the-job search in Europe and the U.S.: precautionary vs. job ladder motives [ECB]:** This study distinguishes between workers moving for better opportunities (ladder) versus those moving out of fear of job loss (precautionary). Understanding this distinction is vital for predicting wage-push inflation; "ladder" mobility suggests a healthy, productive economy, whereas "precautionary" mobility signals underlying fragility despite low headline unemployment.
 
-**Synthesis:** The ECB is increasingly focusing on "network effects"—both in how financial stress propagates through production chains and how alternative data informs policy. Simultaneously, there is a clear trend toward more aggressive supervisory oversight of bank capital and a cautious evaluation of the Digital Euro's impact on banking liquidity.
+**Synthesis:**
+The Eurosystem is shifting toward a "granular" view of the economy, focusing on network-based transmission and real-time textual data to refine policy timing. Simultaneously, there is a clear regulatory trend toward tightening bank capital oversight and preparing for the structural liquidity shocks associated with the digital euro.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 7
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 8
+
+### (cached) [From oil to electrons: lessons from the 1970s energy crises](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260807~b7ab24866e.en.html)
+**Published:** 2026-08-07 | **Authors:** 
+
+The paper analyzes the structural shifts caused by the 1970s energy shocks to draw parallels with the current transition toward electrification. It examines how supply-side energy disruptions impact inflation dynamics and long-term productivity growth.
+
+**Tags:** inflation · productivity · climate & transition · geopolitics · GDP growth
 
 ### (cached) [Financial frictions across the production network and the transmission of monetary policy](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3271~99b37f6d9a.en.pdf)
 **Published:** 2026-08-06 | **Authors:** 
@@ -93,5 +101,5 @@ The research evaluates the potential long-term impact of a digital euro on the G
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 8
-- Total cache size: 8 items
+- Already cached: 9
+- Total cache size: 9 items
