@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOJ Watcher — 2026-08-09</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #bf0000; border-bottom: 3px solid #bf0000; padding-bottom: 10px; }
+h2 { color: #bf0000; border-bottom: 2px solid #fce4e4; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+h4 { color: #555; margin-top: 20px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #bf0000; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #bf0000; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+pre code { background: none; padding: 0; }
+blockquote {
+    border-left: 4px solid #bf0000; margin: 16px 0; padding: 8px 16px;
+    background: #fce4e4; border-radius: 0 4px 4px 0; color: #333;
+}
+strong { color: #111; }
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #bf0000; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">&#8592; BOJ Watcher Archive</a>
+    <h1>&#127471;&#127477; BOJ Watcher &#8212; 2026-08-09</h1>
+    <p class="meta">
+        Generated: 2026-08-09 09:42 UTC &nbsp;|&nbsp;
+        Coverage: last 30 days &nbsp;|&nbsp;
+        Sources: boj.or.jp &middot; Google News RSS &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it
+    </p>
+    <hr>
+    <h1>BOJ Watcher Report</h1>
+<p><strong>Date:</strong> 2026-08-09<br />
+<strong>Coverage Period:</strong> 2026-07-10 to 2026-08-09</p>
+<h3>Executive Summary</h3>
+<p>The Bank of Japan maintained the policy rate at 1% during the July 31 MPM. While the decision was a "hold," the accompanying communications were notably hawkish. Governor Ueda signaled that the BOJ remains open to faster rate hikes if economic and price projections are met, specifically citing the risks posed by a weakening yen. The yen has neared 40-year lows, creating a "monetary conundrum" where currency-driven inflation risks are clashing with the need for financial stability. Market sentiment is shifting toward a September hike, supported by reports that the BOJ is open to accelerating the normalization pace to counter FX-induced inflation.</p>
+<h3>Policy Board Member Pronouncements</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Official</th>
+<th>Role</th>
+<th>Venue/Context</th>
+<th>Key Statement</th>
+<th>Policy Signal</th>
+<th>Evolution vs Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-07-31</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Post-MPM Press Conf</td>
+<td>Discussed policy outlook; signaled openness to further tightening if inflation holds above target.</td>
+<td>Hawkish</td>
+<td>Shift from Neutral $\rightarrow$ Hawkish</td>
+</tr>
+<tr>
+<td>2026-08-07</td>
+<td>Kazuyuki Masu</td>
+<td>External Member</td>
+<td>Scheduled Speaking Event</td>
+<td>(Scheduled to speak ahead of Sept meeting)</td>
+<td>Neutral</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Shinichi Uchida</td>
+<td>Deputy Gov</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Ryozo Himino</td>
+<td>Deputy Gov</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Hajime Takata</td>
+<td>External Member</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Naoki Tamura</td>
+<td>External Member</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Toichiro Asada</td>
+<td>External Member</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Ayano Sato</td>
+<td>External Member</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>New Member</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Junko Koeda</td>
+<td>External Member</td>
+<td>No public comments found</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Consistent with baseline</td>
+</tr>
+</tbody>
+</table>
+<h3>MPM Official Communications</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Document Type</th>
+<th>Title</th>
+<th>Key Takeaways</th>
+<th>Policy Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-07-31</td>
+<td>Policy Statement</td>
+<td>Statement on Monetary Policy</td>
+<td>Rates held at 1%; GDP forecasts upgraded; acknowledged yen weakness risks.</td>
+<td>Hawkish hold; sets stage for Sept hike.</td>
+</tr>
+<tr>
+<td>2026-07-31</td>
+<td>Press Conference</td>
+<td>Governor Ueda's Remarks</td>
+<td>Inflation expected to hold above target; further tightening signaled.</td>
+<td>Increased probability of near-term hike.</td>
+</tr>
+</tbody>
+</table>
+<h3>Thematic Analysis</h3>
+<p><strong>1. Inflation Assessment (CPI, Core, Wages)</strong><br />
+June core inflation accelerated but remained below the BOJ's formal target. However, the BOJ now signals that inflation is likely to hold above target, suggesting a shift in the internal assessment of price persistence.</p>
+<p><strong>2. Growth Outlook</strong><br />
+The BOJ upgraded its GDP forecasts during the July 31 meeting, indicating stronger-than-expected underlying economic resilience despite global headwinds.</p>
+<p><strong>3. Yen / FX Considerations</strong><br />
+The dominant theme of the last 30 days. The yen's slide toward 40-year lows is viewed as a primary risk to the inflation outlook. Reports indicate the BOJ is "open to a faster rate hike pace" specifically to mitigate these FX risks.</p>
+<p><strong>4. Financial Conditions &amp; JGB Market</strong><br />
+The BOJ is balancing the need for normalization with market stability. While rates were held in July, the "hawkish signal" delivered suggests the BOJ believes the JGB market can absorb further increases.</p>
+<p><strong>5. Balance Sheet (JGB purchase taper)</strong><br />
+No specific updates on the quantitative tapering schedule were provided in the gathered data for this period; however, the focus has shifted toward the policy rate.</p>
+<p><strong>6. Forward Guidance Evolution</strong><br />
+Guidance has evolved from "cautionary" to "conditionally hawkish." The BOJ is now explicitly linking the pace of future hikes to the behavior of the yen and the persistence of inflation above target.</p>
+<h3>Hawk-Dove Spectrum Analysis</h3>
+<pre><code>HAWKISH (favor faster normalization / rate hikes)
+├─ Hajime Takata (Consistent hawk; prior dissents for 1%)
+├─ Naoki Tamura (Consistent hawk)
+└─ Kazuo Ueda (Recently shifted toward hawkish signaling due to Yen/Inflation)
+
+NEUTRAL/DATA-DEPENDENT
+├─ Kazuyuki Masu (Neutral/Hawkish baseline)
+├─ Ryozo Himino (Focus on stability)
+└─ Junko Koeda (Consensus-follower)
+
+DOVISH (favor maintaining accommodation / slower hikes)
+├─ Shinichi Uchida (Pragmatic/Accommodative)
+└─ Toichiro Asada (Reflationist baseline)
+</code></pre>
+<p><strong>Key Shifts Identified:</strong><br />
+Governor Ueda has moved from a "Neutral/Cautionary" stance to a more "Hawkish" posture, signaling that the BOJ may accelerate the pace of hikes to combat currency-driven inflation.</p>
+<h3>All 9 Voting Members Focus</h3>
+<table>
+<thead>
+<tr>
+<th>Official</th>
+<th>Role</th>
+<th>Current Stance</th>
+<th>Key Quote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Hawkish</td>
+<td>"Signals further tightening" (via 08-04 report)</td>
+</tr>
+<tr>
+<td>Shinichi Uchida</td>
+<td>Deputy Gov</td>
+<td>Dovish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Ryozo Himino</td>
+<td>Deputy Gov</td>
+<td>Neutral</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Hajime Takata</td>
+<td>External</td>
+<td>Hawkish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Naoki Tamura</td>
+<td>External</td>
+<td>Hawkish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Kazuyuki Masu</td>
+<td>External</td>
+<td>Neutral/Hawk</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Toichiro Asada</td>
+<td>External</td>
+<td>Dovish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Ayano Sato</td>
+<td>External</td>
+<td>Neutral</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Junko Koeda</td>
+<td>External</td>
+<td>Neutral</td>
+<td>No public comments found</td>
+</tr>
+</tbody>
+</table>
+<h3>Dissent Watch</h3>
+<p>No dissents were recorded for the July 31 meeting (rates held at 1%). However, the market is watching for a potential dissent from Hajime Takata in September if the Board chooses to hold again, given his history of pushing for faster normalization (e.g., his 1% proposal in early 2026).</p>
+</div>
+</body>
+</html>
