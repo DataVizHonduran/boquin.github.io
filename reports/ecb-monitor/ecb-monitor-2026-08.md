@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — August 2026 (Month to Date)
 
-**Coverage Period:** Month to date: August 2026 (10 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: August 2026 (11 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,20 +8,22 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: August 10, 2026**
-**Subject: Analysis of Recent ECB/NCB Research Cycle**
+**Date: August 11, 2026**
+**Subject: Strategic Briefing: Recent ECB/NCB Research Analysis**
 
-I have reviewed the latest research output from the Eurosystem. While several papers focus on technical supervisory tools, four publications stand out as critical for our macro-forecasting and policy-rate expectations.
+I have filtered the recent output from the Eurosystem. While several papers focus on technical supervisory calibrations, the following selections provide critical insights into the transmission mechanisms of monetary policy and the structural evolution of the Eurozone economy.
 
-1. **Financial frictions across the production network and the transmission of monetary policy [ECB]:** This research demonstrates that monetary policy impacts are amplified through "indirect frictions" across supply chains, meaning a shock to one sector can paralyze others regardless of their own balance sheet health. For our models, this suggests that the "lag" in policy transmission is non-linear and highly dependent on the current fragility of key industrial hubs.
+1. **Monetary policy and the rigidity of firm employment expectations [ECB]:** This research highlights a potential "blind spot" in policy transmission, suggesting that firms' employment intentions are more rigid than previously assumed. If firms do not adjust hiring expectations quickly in response to rate changes, the ECB may face a lagged or dampened impact on the labor market, complicating the "neutral rate" calibration.
 
-2. **Monetary policy and the rigidity of firm employment expectations [ECB]:** By linking high-frequency policy surprises to German survey data, the ECB finds that firm employment expectations are more rigid than previously assumed. This implies that the labor market may be less responsive to rate hikes than standard models suggest, potentially keeping wage-push inflation stickier for longer.
+2. **Financial frictions across the production network and the transmission of monetary policy [ECB]:** The key insight is that monetary policy doesn't just hit a sector directly; it ripples through the supply chain via "indirect frictions." This implies that a credit crunch in a small but systemic upstream sector can amplify the contractionary effect of rate hikes across the entire economy, increasing the risk of non-linear downturns.
 
-3. **From oil to electrons: lessons from the 1970s energy crises [ECB]:** This comparative analysis evaluates the structural shift from fossil fuels to electrification and the associated inflationary risks. It is vital for our long-term outlook as it suggests that the "green transition" may introduce supply-side volatility reminiscent of the 70s, requiring a different policy reaction function than traditional demand-side shocks.
+3. **Forecasting the euro area job vacancy rate with earnings calls data [ECB]:** By integrating textual analysis from earnings calls, the ECB is enhancing its "nowcasting" capabilities for labor market tightness. For us, this suggests the ECB will be more agile in reacting to labor market cooling *before* official lagging indicators are released, potentially shortening the window for our tactical positioning.
 
-4. **Long-term implications of a digital euro on liquidity and funding costs [DBB]:** The Bundesbank highlights how a digital euro could shift retail deposits away from commercial banks, potentially increasing funding costs for the German banking system. This introduces a systemic risk to bank margins and could force a tightening of credit conditions independent of the ECB’s official policy rate.
+4. **Long-term implications of a digital euro on liquidity and funding costs [DBB]:** This paper addresses the systemic risk of "deposit flight" from commercial banks to a central bank digital currency (CBDC). If a digital euro increases funding costs for commercial banks, it could tighten credit conditions independently of the ECB’s policy rate, creating a structural headwind for bank margins and corporate lending.
 
-**Synthesis:** The current research indicates that monetary policy transmission is becoming increasingly complex, hampered by structural rigidities in labor markets and hidden vulnerabilities in production networks. We should anticipate a "stickier" inflation environment and potential banking sector volatility as the digital euro transition begins to impact liquidity.
+5. **From oil to electrons: lessons from the 1970s energy crises [ECB]:** This analysis draws parallels between historical oil shocks and the current energy transition, focusing on how supply-side shocks embed into long-term inflation. It suggests that the transition to "electrons" may create persistent price volatility, meaning the ECB may have to tolerate higher inflation volatility than the 2% target implies.
+
+**Synthesis:** The research indicates a shift toward understanding "networked" risks—whether through production chains or digital liquidity—suggesting that policy transmission is more complex and fragile than traditional models assume. We should expect the ECB to rely more on high-frequency alternative data to manage a labor market that is structurally more rigid and sensitive to supply-side shocks.
 
 ---
 
@@ -92,7 +94,14 @@ Using a BVAR model and Input-Output matrices, the paper examines how shocks tran
 **Tags:** inflation · supply chains · productivity · GDP growth
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 1
+**Content Type:** Discussion Papers | **New:** 0 of 2
+
+### (cached) [Quantification of margin of conservatism category C: Correlations and quantification levels | Jan Henrik Wosnitza](https://www.bundesbank.de/en/publications/research/discussion-papers/quantification-of-margin-of-conservatism-category-c-correlations-and-quantification-levels-959830)
+**Published:** 2026-08-11 | **Authors:** 
+
+The paper examines the quantification of conservatism margins within risk assessment frameworks, focusing on the impact of correlations on category C levels. It provides a methodology for refining risk buffers to ensure financial stability and prudent capital allocation.
+
+**Tags:** financial stability · banking · credit · eurozone
 
 ### (cached) [Long-term implications of a digital euro on liquidity and funding costs in the German banking system | Ulrich Krüger, Lui-Hsian Wong](https://www.bundesbank.de/en/publications/research/discussion-papers/long-term-implications-of-a-digital-euro-on-liquidity-and-funding-costs-in-the-german-banking-system-992082)
 **Published:** 2026-08-03 | **Authors:** 
@@ -105,5 +114,5 @@ The research evaluates the potential long-term impact of a digital euro on the G
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 10
-- Total cache size: 10 items
+- Already cached: 11
+- Total cache size: 11 items
