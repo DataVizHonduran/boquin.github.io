@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-08-10T08:29:11.359028+00:00",
-    "totalItems": 117
+    "lastRun": "2026-08-11T08:11:36.727141+00:00",
+    "totalItems": 120
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -1975,11 +1975,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-08T09:27:48.732728+00:00",
-      "lastChecked": "2026-08-10T08:29:11.359028+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-10T08:29:11.359028+00:00"
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
     },
     "741b1c72c5e59e66026bb6d856f6d6f021e043815d44bd7dbcc4863d2f0a6470": {
       "url": "https://www.fedinprint.org/item/fedlwp/97969/103490",
@@ -2070,11 +2070,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-15T09:11:32.886541+00:00",
-      "lastChecked": "2026-08-10T08:29:11.359028+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-10T08:29:11.359028+00:00"
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
     },
     "705b92d154df5686a5c5cbca26d95404c00481218c2a5715ff5ca112afff9b35": {
       "url": "https://www.fedinprint.org/item/fedlwp/103525/original",
@@ -2260,11 +2260,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-08-05T09:38:56.433533+00:00",
-      "lastChecked": "2026-08-10T08:29:11.359028+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-10T08:29:11.359028+00:00"
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
     },
     "8afcd008f84be14d26fba280f05e199fd3eae1445bd1bb5856c8b35ebbdfa64b": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/ais-impact-on-labor-and-hiring/",
@@ -2346,6 +2346,69 @@
         "regional economy"
       ],
       "tagsGeneratedAt": "2026-08-07T08:16:21.048844+00:00"
+    },
+    "943944174ec759a3604c04ebc07ef3f998be2a99043426392da9eb8095484b4a": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/stripping-strips-trading-activity/",
+      "title": "Stripping STRIPs Trading Activity",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-08-10",
+      "authors": [],
+      "firstSeen": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "scrapedSnippet": "In March 2020, the Financial Industry Regulatory Authority (FINRA) began reporting aggregate trading volume for securities issued by the U.S. Treasury Department. The public data do not, however, include information about the trading activity of Separate Trading of Registered Interest and Principal of Securities (STRIPS). STRIPS are created from existing Treasury securities and offer risk [&#8230;]",
+      "aiSummary": "The paper examines the reporting gaps in FINRA's aggregate trading volume for U.S. Treasury securities, specifically focusing on the exclusion of STRIPS. It analyzes how this lack of transparency affects the understanding of Treasury market liquidity.",
+      "tags": [
+        "interest rates",
+        "financial stability",
+        "banking",
+        "credit",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
+    },
+    "782b9575d9e0052ce96c8c37feffd34583441f35ca3b75b6e353f627a6c7175b": {
+      "url": "https://www.fedinprint.org/item/fedlwp/103629/original",
+      "title": "The Erosion of Public Capital in Portugal",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-08-10",
+      "authors": [],
+      "firstSeen": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The research analyzes the decline of public infrastructure and capital investment in Portugal. It explores the long-term implications of this erosion on national productivity and economic growth.",
+      "tags": [
+        "GDP growth",
+        "fiscal policy",
+        "international",
+        "emerging markets",
+        "regional economy"
+      ],
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
+    },
+    "d851fe7dca0b0b89c5a0263b55f350fcd0e9bd1e89b8bc6f811c66c374dd91fc": {
+      "url": "https://www.fedinprint.org/item/fedlwp/98881/103614",
+      "title": "Selective College Access and Intergenerational Mobility",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-08-09",
+      "authors": [],
+      "firstSeen": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This study investigates the relationship between selective higher education admissions and the rate of intergenerational economic mobility. It argues that college access patterns significantly influence long-term income distribution and employment outcomes.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "GDP growth",
+        "consumer spending"
+      ],
+      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
     }
   }
 }
