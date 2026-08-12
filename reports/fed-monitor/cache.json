@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-08-11T08:11:36.727141+00:00",
-    "totalItems": 120
+    "lastRun": "2026-08-12T08:20:02.069104+00:00",
+    "totalItems": 122
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -2070,11 +2070,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-07-15T09:11:32.886541+00:00",
-      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
+      "tagsGeneratedAt": "2026-08-12T08:20:02.069104+00:00"
     },
     "705b92d154df5686a5c5cbca26d95404c00481218c2a5715ff5ca112afff9b35": {
       "url": "https://www.fedinprint.org/item/fedlwp/103525/original",
@@ -2260,11 +2260,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-08-05T09:38:56.433533+00:00",
-      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
       "scrapedSnippet": "",
       "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
+      "tagsGeneratedAt": "2026-08-12T08:20:02.069104+00:00"
     },
     "8afcd008f84be14d26fba280f05e199fd3eae1445bd1bb5856c8b35ebbdfa64b": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/ais-impact-on-labor-and-hiring/",
@@ -2356,7 +2356,7 @@
       "publicationDate": "2026-08-10",
       "authors": [],
       "firstSeen": "2026-08-11T08:11:36.727141+00:00",
-      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
       "scrapedSnippet": "In March 2020, the Financial Industry Regulatory Authority (FINRA) began reporting aggregate trading volume for securities issued by the U.S. Treasury Department. The public data do not, however, include information about the trading activity of Separate Trading of Registered Interest and Principal of Securities (STRIPS). STRIPS are created from existing Treasury securities and offer risk [&#8230;]",
       "aiSummary": "The paper examines the reporting gaps in FINRA's aggregate trading volume for U.S. Treasury securities, specifically focusing on the exclusion of STRIPS. It analyzes how this lack of transparency affects the understanding of Treasury market liquidity.",
       "tags": [
@@ -2377,7 +2377,7 @@
       "publicationDate": "2026-08-10",
       "authors": [],
       "firstSeen": "2026-08-11T08:11:36.727141+00:00",
-      "lastChecked": "2026-08-11T08:11:36.727141+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The research analyzes the decline of public infrastructure and capital investment in Portugal. It explores the long-term implications of this erosion on national productivity and economic growth.",
       "tags": [
@@ -2409,6 +2409,42 @@
         "consumer spending"
       ],
       "tagsGeneratedAt": "2026-08-11T08:11:36.727141+00:00"
+    },
+    "e8c6cb2960f44df165501f2cd3e8a3585f35f562166cce27f92e4f7960a7426d": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/08/how-distressed-are-consumers-reconciling-diverging-credit-card-delinquency-measures/",
+      "title": "How Distressed Are Consumers? Reconciling Diverging Credit Card Delinquency Measures",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-08-11",
+      "authors": [],
+      "firstSeen": "2026-08-12T08:20:02.069104+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
+      "scrapedSnippet": "Total debt balances declined slightly by $13 billion in the second quarter of 2026, according to the latest Quarterly Report on Household Debt and Credit from the New York Fed’s Center for Microeconomic Data. Mortgage and student loan balances saw a small decline, while there were increases across other debt products. Delinquency rates across most products remained fairly stable. Still, between 2022:Q3 and 2026:Q1, the percentage of credit card balances 90+ days delinquent rose from 7.6 percent to 12.8 percent, prompting concerns that Americans are falling behind on their debt payments at rate",
+      "aiSummary": "The analysis examines household debt trends, noting a slight decline in total balances alongside stable delinquency rates across most products. It specifically seeks to reconcile diverging measures of credit card distress to assess overall consumer financial health.",
+      "tags": [
+        "credit",
+        "consumer spending",
+        "financial stability",
+        "banking",
+        "housing"
+      ],
+      "tagsGeneratedAt": "2026-08-12T08:20:02.069104+00:00"
+    },
+    "261090683f64ab14299a84fbab29b041192b399172e1a1b120982551e0ff223d": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0811",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-08-12T08:20:02.069104+00:00",
+      "lastChecked": "2026-08-12T08:20:02.069104+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-08-12T08:20:02.069104+00:00"
     }
   }
 }

@@ -1,40 +1,48 @@
 # 🏛️ Federal Reserve District Monitor — August 2026 (Month to Date)
 
-**Coverage Period:** Month to date: August 2026 (8 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: August 2026 (9 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
-**From: Senior Economist**
-**Date: August 11, 2026**
-**Subject: Analysis of Recent Federal Reserve District Research**
+**MEMORANDUM**
+**TO:** Investment Committee
+**FROM:** Senior Economist
+**DATE:** August 12, 2026
+**SUBJECT:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest research outputs from the Federal Reserve districts. While some papers focus on structural sociology or international capital, the following selections provide the most immediate utility for our macro positioning and policy forecasting.
+I have reviewed the latest publications from the Fed districts. While several papers focus on structural sociology or international capital, the following selections provide the most immediate signal for our macro positioning and policy forecasting.
 
-1. **[NY] A Window into Bond Investors’ Uncertainty About R-Star**
-This research analyzes the term structure of sovereign yields to gauge market consensus on the neutral rate of interest. Understanding the "uncertainty gap" regarding r-star is critical for our duration positioning, as it indicates how much room the Fed has to pivot before hitting the restrictive ceiling.
+1. **[NY] How Distressed Are Consumers?**
+The slight decline in total household debt balances ($13B in Q2 2026) suggests a cooling of consumer credit expansion. This is a critical signal for our consumption models, indicating that households may be deleveraging or facing tighter credit constraints, which could dampen GDP growth in the coming quarters.
 
-2. **[NY] AI’s Impact on Labor and Hiring**
-This series examines the real-time displacement and augmentation effects of AI on hiring patterns. For our equity analysts, this is a primary lead indicator for productivity gains and potential margin expansion across the S&P 500, as well as a signal for structural shifts in labor demand.
+2. **[RIC] The Ins and Outs of Long-Term Unemployment**
+The finding that rising long-term unemployment is driven by a decline in "outflow rates" (the speed of re-employment) suggests a growing structural mismatch in the labor market. This implies that the "natural rate" of unemployment may be drifting higher, potentially limiting the Fed's ability to tighten without triggering a sharper-than-expected spike in joblessness.
 
-3. **[RIC] The Ins and Outs of Long-Term Unemployment**
-The Richmond Fed highlights a concerning decline in "outflow rates," meaning the long-term unemployed are struggling more than usual to re-enter the workforce. This suggests a potential "scarring" effect in the labor market that could dampen potential GDP growth and complicate the Fed's dual mandate.
+3. **[NY] A Window into Bond Investors’ Uncertainty About R-Star**
+This research analyzes how the term structure of sovereign yields reflects market uncertainty regarding the neutral real interest rate ($r^*$). For our fixed-income desk, this highlights that current volatility is likely a "discovery phase" for the long-term equilibrium rate, suggesting that duration bets should remain cautious until $r^*$ stabilizes.
 
-4. **[NY] Why Do Fewer Renters Expect to Move?**
-The steady decline in residential mobility rates has profound implications for the housing market and regional economic dynamism. Lower mobility suggests a "lock-in" effect that may sustain elevated rents and constrain labor flexibility, contributing to persistent service-sector inflation.
+4. **[NY] AI’s Impact on Labor and Hiring**
+The New York Fed is actively tracking the displacement and creation effects of AI on hiring patterns. As this transitions from theoretical to empirical data, it will be the primary driver of productivity assumptions in our long-term equity valuations and inflation forecasts.
 
-5. **[STL] The Implications of Labor Market Heterogeneity for Unemployment Insurance Design**
-This paper argues that "one-size-fits-all" unemployment insurance fails to account for diverse worker profiles. From a policy perspective, a shift toward heterogeneous UI design could alter consumer spending floors during downturns, changing the efficacy of automatic stabilizers.
+5. **[NY] Why Do Fewer Renters Expect to Move?**
+The long-term decline in residential mobility rates suggests a "lock-in" effect that reduces labor market fluidity and suppresses housing turnover. This structural rigidity can create localized inflationary pressures in housing costs even as broader economic activity slows.
 
 **Synthesis:**
-The current research suggests a labor market facing structural frictions—specifically AI-driven disruption and declining mobility—that may keep inflation stickier than historical norms. Simultaneously, the focus on r-star uncertainty indicates that the market is still struggling to price the long-term terminal rate, suggesting continued volatility in the long end of the curve.
+The collective data points toward a fragile consumer transition characterized by deleveraging and a labor market struggling with structural frictions and AI-driven disruption. We should anticipate a policy environment where the Fed is increasingly concerned with labor market "scarring" and the uncertainty of the neutral rate.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 5
+
+### (cached) [How Distressed Are Consumers? Reconciling Diverging Credit Card Delinquency Measures](https://libertystreeteconomics.newyorkfed.org/2026/08/how-distressed-are-consumers-reconciling-diverging-credit-card-delinquency-measures/)
+**Published:** 2026-08-11 | **Authors:** 
+
+The analysis examines household debt trends, noting a slight decline in total balances alongside stable delinquency rates across most products. It specifically seeks to reconcile diverging measures of credit card distress to assess overall consumer financial health.
+
+**Tags:** credit · consumer spending · financial stability · banking · housing
 
 ### (cached) [Stripping STRIPs Trading Activity](https://libertystreeteconomics.newyorkfed.org/2026/08/stripping-strips-trading-activity/)
 **Published:** 2026-08-10 | **Authors:** 
@@ -102,5 +110,5 @@ The research examines how differences in worker characteristics affect the effic
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 8
-- Total cache size: 8 items
+- Already cached: 9
+- Total cache size: 9 items
