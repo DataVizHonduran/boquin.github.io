@@ -8,17 +8,43 @@
   body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
   h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
   .meta { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th { background: #f5f5f5; text-align: left; padding: 0.6rem 0.75rem; border-bottom: 2px solid #ddd; white-space: nowrap; }
+  td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+  .group-badge { display: inline-block; background: #e8f0fe; color: #1a0dab; border-radius: 4px; padding: 0.15rem 0.45rem; font-size: 0.78rem; white-space: nowrap; }
+  .ranks { color: #888; font-size: 0.82rem; white-space: nowrap; }
+  .matchup { font-weight: 600; }
   a { color: #1a0dab; }
   .back { font-size: 0.85rem; margin-bottom: 1rem; display: block; }
-  .notice { margin-top: 2rem; padding: 1.25rem 1.5rem; background: #f5f5f5; border-radius: 6px; color: #444; font-size: 0.95rem; }
+  .notice { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.9rem; }
+  .notice strong { display: block; margin-bottom: 0.4rem; font-size: 1rem; }
+  .notice code { background: #f5f5f5; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.85rem; }
+  @media (max-width: 600px) {
+    body { margin: 1rem auto; padding: 0 0.5rem; }
+    table { font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.5rem; }
+  }
 </style>
 </head>
 <body>
 <a class="back" href="index.html">&larr; FIFA WC 2026 Stats</a>
 <h1>Most Interesting Upcoming Matchups</h1>
-<p class="meta">Generated 2026-08-17 (ESPN API blocked by egress policy — no live data fetched)</p>
+<p class="meta">Top fixtures where both teams are highly ranked AND group stakes are live &middot; Scored by FIFA ranking (weaker side weighted 2&times;) + points-gap stakes &middot; Generated August 18, 2026 at 06:15 UTC</p>
+
 <div class="notice">
-  No upcoming group-stage fixtures in the next 9 days. The group stage concluded on July 2, 2026 &mdash; the 2026 FIFA World Cup is over (final played August 2, 2026).
+  <strong>&#9888; Data unavailable — ESPN API blocked by network policy</strong>
+  Fixture data could not be fetched on this run. The outbound connection to
+  <code>site.api.espn.com</code> was rejected by the session's egress proxy
+  (403 connect_rejected — policy denial). This is a network environment issue,
+  not an ESPN outage. The scheduled task will retry on the next run;
+  no data has changed since the last successful update.
+</div>
+
+<p style="color:#888;font-size:0.9rem;">No upcoming group-stage fixtures could be loaded. Check back after the network policy is updated to allow <code>site.api.espn.com</code>.</p>
+
+<div style="font-family:system-ui,sans-serif;font-size:0.8rem;color:#555;max-width:1100px;margin:1.5rem auto 2rem;padding:0.75rem 1rem;border-top:1px solid #e5e5e5;">
+  <strong>Methodology:</strong> Interest score = ranking score (max 0, 100&minus;weakerRank &times; 2 + 100&minus;strongerRank) + stakes score (max 60 for level-on-points, decreasing as point gap widens). Fixtures where either side is already eliminated receive zero stakes score. FIFA rankings as of June 2026.
 </div>
 </body>
 </html>
