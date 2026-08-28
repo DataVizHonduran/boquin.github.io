@@ -1,0 +1,202 @@
+{
+  "date": "2026-08-28",
+  "holdings_as_of": "2026-08-28",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.22,
+      "shares": 6329
+    },
+    {
+      "rank": 2,
+      "ticker": "DASH",
+      "name": "DoorDash, Inc.",
+      "weight": 2.2,
+      "shares": 53795
+    },
+    {
+      "rank": 3,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.19,
+      "shares": 19845
+    },
+    {
+      "rank": 4,
+      "ticker": "UBER",
+      "name": "Uber Technologies, Inc.",
+      "weight": 2.17,
+      "shares": 153716
+    },
+    {
+      "rank": 5,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.16,
+      "shares": 32060
+    },
+    {
+      "rank": 6,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.16,
+      "shares": 20507
+    },
+    {
+      "rank": 7,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.15,
+      "shares": 34911
+    },
+    {
+      "rank": 8,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.14,
+      "shares": 9892
+    },
+    {
+      "rank": 9,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.13,
+      "shares": 57310
+    },
+    {
+      "rank": 10,
+      "ticker": "CPNG",
+      "name": "Coupang, Inc.",
+      "weight": 2.12,
+      "shares": 724237
+    },
+    {
+      "rank": 11,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.12,
+      "shares": 27877
+    },
+    {
+      "rank": 12,
+      "ticker": "WBD",
+      "name": "Warner Bros. Discovery, Inc.",
+      "weight": 2.11,
+      "shares": 417102
+    },
+    {
+      "rank": 13,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.07,
+      "shares": 38161
+    },
+    {
+      "rank": 14,
+      "ticker": "SE",
+      "name": "Sea Limited",
+      "weight": 2.07,
+      "shares": 95741
+    },
+    {
+      "rank": 15,
+      "ticker": "FWONK",
+      "name": "Formula One Group",
+      "weight": 2.06,
+      "shares": 112365
+    },
+    {
+      "rank": 16,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.05,
+      "shares": 33751
+    },
+    {
+      "rank": 17,
+      "ticker": "CVNA",
+      "name": "Carvana Co.",
+      "weight": 2.05,
+      "shares": 154447
+    },
+    {
+      "rank": 18,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.05,
+      "shares": 23163
+    },
+    {
+      "rank": 19,
+      "ticker": "NU",
+      "name": "Nu Holdings Ltd.",
+      "weight": 2.04,
+      "shares": 766560
+    },
+    {
+      "rank": 20,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.04,
+      "shares": 44450
+    },
+    {
+      "rank": 21,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.03,
+      "shares": 23566
+    },
+    {
+      "rank": 22,
+      "ticker": "ABVX",
+      "name": "ABIVAX Soci\u00c3\u00a9t\u00c3\u00a9 Anonyme",
+      "weight": 2.03,
+      "shares": 98139
+    },
+    {
+      "rank": 23,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.02,
+      "shares": 83391
+    },
+    {
+      "rank": 24,
+      "ticker": "APP",
+      "name": "AppLovin Corporation",
+      "weight": 2.02,
+      "shares": 37011
+    },
+    {
+      "rank": 25,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.01,
+      "shares": 32176
+    }
+  ],
+  "performance": {
+    "price": 171.49,
+    "aum": 552125504,
+    "ret_1m": 1.43,
+    "ret_3m": -4.78,
+    "ret_ytd": 9.78,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 11715,
+    "as_of": "2026-08-28"
+  },
+  "sectors": {
+    "consumer_cyclical": 10.46,
+    "technology": 33.61,
+    "communication_services": 12.31,
+    "financial_services": 18.08,
+    "utilities": 6.0,
+    "industrials": 10.21,
+    "healthcare": 9.33
+  }
+}
