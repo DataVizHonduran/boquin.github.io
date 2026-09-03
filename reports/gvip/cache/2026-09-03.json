@@ -1,0 +1,202 @@
+{
+  "date": "2026-09-03",
+  "holdings_as_of": "2026-09-03",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "DASH",
+      "name": "DoorDash, Inc.",
+      "weight": 2.24,
+      "shares": 54617
+    },
+    {
+      "rank": 2,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.2,
+      "shares": 6425
+    },
+    {
+      "rank": 3,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.2,
+      "shares": 20147
+    },
+    {
+      "rank": 4,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.18,
+      "shares": 32550
+    },
+    {
+      "rank": 5,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.18,
+      "shares": 28303
+    },
+    {
+      "rank": 6,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.17,
+      "shares": 38743
+    },
+    {
+      "rank": 7,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.17,
+      "shares": 20821
+    },
+    {
+      "rank": 8,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.15,
+      "shares": 84665
+    },
+    {
+      "rank": 9,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.15,
+      "shares": 35443
+    },
+    {
+      "rank": 10,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.14,
+      "shares": 23926
+    },
+    {
+      "rank": 11,
+      "ticker": "WBD",
+      "name": "Warner Bros. Discovery, Inc.",
+      "weight": 2.13,
+      "shares": 423470
+    },
+    {
+      "rank": 12,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.11,
+      "shares": 58184
+    },
+    {
+      "rank": 13,
+      "ticker": "SNOW",
+      "name": "Snowflake Inc.",
+      "weight": 2.11,
+      "shares": 36036
+    },
+    {
+      "rank": 14,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.09,
+      "shares": 23517
+    },
+    {
+      "rank": 15,
+      "ticker": "CPNG",
+      "name": "Coupang, Inc.",
+      "weight": 2.09,
+      "shares": 735295
+    },
+    {
+      "rank": 16,
+      "ticker": "UBER",
+      "name": "Uber Technologies, Inc.",
+      "weight": 2.09,
+      "shares": 156062
+    },
+    {
+      "rank": 17,
+      "ticker": "APP",
+      "name": "AppLovin Corporation",
+      "weight": 2.07,
+      "shares": 37577
+    },
+    {
+      "rank": 18,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.07,
+      "shares": 45128
+    },
+    {
+      "rank": 19,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 2.07,
+      "shares": 12199
+    },
+    {
+      "rank": 20,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.05,
+      "shares": 32668
+    },
+    {
+      "rank": 21,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.05,
+      "shares": 34267
+    },
+    {
+      "rank": 22,
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "weight": 2.05,
+      "shares": 52643
+    },
+    {
+      "rank": 23,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.05,
+      "shares": 10044
+    },
+    {
+      "rank": 24,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.04,
+      "shares": 27801
+    },
+    {
+      "rank": 25,
+      "ticker": "CVNA",
+      "name": "Carvana Co.",
+      "weight": 2.04,
+      "shares": 156805
+    }
+  ],
+  "performance": {
+    "price": 172.61,
+    "aum": 552125504,
+    "ret_1m": -1.24,
+    "ret_3m": -0.19,
+    "ret_ytd": 10.5,
+    "ret_1y": 19.35,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 10677,
+    "as_of": "2026-09-03"
+  },
+  "sectors": {
+    "consumer_cyclical": 10.46,
+    "technology": 33.61,
+    "communication_services": 12.31,
+    "financial_services": 18.08,
+    "utilities": 6.0,
+    "industrials": 10.21,
+    "healthcare": 9.33
+  }
+}
