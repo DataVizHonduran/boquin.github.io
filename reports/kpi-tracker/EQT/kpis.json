@@ -1,0 +1,23 @@
+{
+  "ticker": "EQT",
+  "company": "EQT Corp",
+  "kpis": [
+    {"key": "sales_volume", "label": "Total Sales Volume", "unit": "Bcfe"},
+    {"key": "realized_price", "label": "Average Realized Price", "unit": "$/Mcfe"},
+    {"key": "adj_ebitda_attrib", "label": "Adjusted EBITDA (Attrib. to EQT)", "unit": "$M"},
+    {"key": "fcf_attrib", "label": "Free Cash Flow (Attrib. to EQT)", "unit": "$M"},
+    {"key": "opex_per_unit", "label": "Total Operating Costs/Unit", "unit": "$/Mcfe"},
+    {"key": "capex", "label": "Capital Expenditures", "unit": "$M"}
+  ],
+  "kpi_rationale": "EQT's earnings releases headline total sales volume, capital expenditures, realized pricing and per-unit operating costs as top bullets every quarter, while the financial performance table centers on Adjusted EBITDA and Free Cash Flow attributable to EQT as its core non-GAAP profitability/cash measures. The attributable-to-EQT breakout for EBITDA/FCF began appearing once EQT's midstream JV noncontrolling interest structure was established (not yet disclosed as of Q3 2024, partially in Q4 2024).",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-10-29", "values": {"sales_volume": 581, "realized_price": 2.38, "adj_ebitda_attrib": null, "fcf_attrib": null, "opex_per_unit": 1.14, "capex": 558}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321324000042/ex9919302024earningsrelease.htm (attributable-to-EQT EBITDA/FCF not yet disclosed)"},
+    {"period": "Q4 2024", "report_date": "2025-02-18", "values": {"sales_volume": 605, "realized_price": 3.01, "adj_ebitda_attrib": null, "fcf_attrib": 580, "opex_per_unit": 1.07, "capex": 583}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321325000008/ex99112312024earningsrelea.htm (attributable-to-EQT Adjusted EBITDA not disclosed this release)"},
+    {"period": "Q1 2025", "report_date": "2025-04-22", "values": {"sales_volume": 571, "realized_price": 3.77, "adj_ebitda_attrib": 1644, "fcf_attrib": 1036, "opex_per_unit": 1.05, "capex": 497}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321325000021/ex9913312025earningsrelease.htm"},
+    {"period": "Q2 2025", "report_date": "2025-07-22", "values": {"sales_volume": 568, "realized_price": 2.81, "adj_ebitda_attrib": 1033, "fcf_attrib": 240, "opex_per_unit": 1.08, "capex": 554}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321325000030/ex9916302025earningsrelease.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-21", "values": {"sales_volume": 634, "realized_price": 2.76, "adj_ebitda_attrib": 1200, "fcf_attrib": 484, "opex_per_unit": 1.00, "capex": 618}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321325000047/ex9919302025earningsrelease.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-17", "values": {"sales_volume": 609, "realized_price": 3.44, "adj_ebitda_attrib": 1509, "fcf_attrib": 744, "opex_per_unit": 1.10, "capex": 655}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321326000012/ex99112312025earningsrelea.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-21", "values": {"sales_volume": 618, "realized_price": 5.08, "adj_ebitda_attrib": 2547, "fcf_attrib": 1832, "opex_per_unit": 1.09, "capex": 608}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321326000028/ex9913312026earningsrelease.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-21", "values": {"sales_volume": 634, "realized_price": 2.65, "adj_ebitda_attrib": 1067, "fcf_attrib": 330, "opex_per_unit": 1.03, "capex": 666}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/33213/000003321326000041/ex9916302026earningsrelease.htm"}
+  ]
+}
