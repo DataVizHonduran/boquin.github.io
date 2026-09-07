@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAL KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 UAL KPI Tracker</h1>
+  <div class="sub">United Airlines Holdings, Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-07-15)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Operating Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$17,672.0M</div>
+      <div class="kpi-change">+21.0% QoQ · +16.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted Pre-Tax Margin</div>
+      <div class="kpi-value" style="color:#eb6834">4.8%</div>
+      <div class="kpi-change">+41.2% QoQ · -56.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">TRASM</div>
+      <div class="kpi-value" style="color:#1baf7a">20.2cents</div>
+      <div class="kpi-change">+7.7% QoQ · +12.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Passenger Load Factor</div>
+      <div class="kpi-value" style="color:#eda100">83.4%</div>
+      <div class="kpi-change">+2.2% QoQ · +0.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CASM-ex</div>
+      <div class="kpi-value" style="color:#e87ba4">13.1cents</div>
+      <div class="kpi-change">-5.9% QoQ · +6.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Fuel Price/Gallon</div>
+      <div class="kpi-value" style="color:#4a3aa7">4.2$</div>
+      <div class="kpi-change">+50.7% QoQ · +79.1% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Operating Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_operating_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_operating_revenue", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [14695, 13213, 15236, 15225, 15397, 14608, 17672],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$14,695.0M", "$13,213.0M", "$15,236.0M", "$15,225.0M", "$15,397.0M", "$14,608.0M", "$17,672.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted Pre-Tax Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-adj_pretax_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adj_pretax_margin", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [9.7, 3.0, 11.0, 8.0, 8.5, 3.4, 4.8],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["9.7%", "3.0%", "11.0%", "8.0%", "8.5%", "3.4%", "4.8%"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">TRASM <span class="chart-unit">(cents)</span></div>
+      <div id="chart-trasm" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-trasm", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [18.77, 17.58, 18.06, 17.42, 18.47, 18.8, 20.25],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["18.8cents", "17.6cents", "18.1cents", "17.4cents", "18.5cents", "18.8cents", "20.2cents"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Passenger Load Factor <span class="chart-unit">(%)</span></div>
+      <div id="chart-load_factor" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-load_factor", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [82.3, 79.2, 83.1, 84.4, 81.9, 81.6, 83.4],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["82.3%", "79.2%", "83.1%", "84.4%", "81.9%", "81.6%", "83.4%"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">CASM-ex <span class="chart-unit">(cents)</span></div>
+      <div id="chart-casm_ex" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-casm_ex", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [12.89, 13.17, 12.36, 12.15, 12.94, 13.95, 13.12],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["12.9cents", "13.2cents", "12.4cents", "12.2cents", "12.9cents", "13.9cents", "13.1cents"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Avg Fuel Price/Gallon <span class="chart-unit">($)</span></div>
+      <div id="chart-avg_fuel_price" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-avg_fuel_price", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [2.4, 2.53, 2.34, 2.43, 2.49, 2.78, 4.19],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["2.4$", "2.5$", "2.3$", "2.4$", "2.5$", "2.8$", "4.2$"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every UAL earnings release headlines total operating revenue, TRASM growth and adjusted pre-tax margin in its top-line bullets, while consolidated passenger load factor and CASM-ex are standard 'Select operating statistics' disclosures repeated each quarter. Average fuel price per gallon is included given how heavily management has emphasized fuel volatility's swing effect on 2026 guidance.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Operating Revenue</th><th>Adjusted Pre-Tax Margin</th><th>TRASM</th><th>Passenger Load Factor</th><th>CASM-ex</th><th>Avg Fuel Price/Gallon</th></tr>
+    <tr><td>Q4 2024</td><td>$14,695.0M</td><td>9.7%</td><td>18.8cents</td><td>82.3%</td><td>12.9cents</td><td>2.4$</td></tr><tr><td>Q1 2025</td><td>$13,213.0M</td><td>3.0%</td><td>17.6cents</td><td>79.2%</td><td>13.2cents</td><td>2.5$</td></tr><tr><td>Q2 2025</td><td>$15,236.0M</td><td>11.0%</td><td>18.1cents</td><td>83.1%</td><td>12.4cents</td><td>2.3$</td></tr><tr><td>Q3 2025</td><td>$15,225.0M</td><td>8.0%</td><td>17.4cents</td><td>84.4%</td><td>12.2cents</td><td>2.4$</td></tr><tr><td>Q4 2025</td><td>$15,397.0M</td><td>8.5%</td><td>18.5cents</td><td>81.9%</td><td>12.9cents</td><td>2.5$</td></tr><tr><td>Q1 2026</td><td>$14,608.0M</td><td>3.4%</td><td>18.8cents</td><td>81.6%</td><td>13.9cents</td><td>2.8$</td></tr><tr><td>Q2 2026</td><td>$17,672.0M</td><td>4.8%</td><td>20.2cents</td><td>83.4%</td><td>13.1cents</td><td>4.2$</td></tr>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "ticker": "UAL",
+  "company": "United Airlines Holdings, Inc.",
+  "kpis": [
+    {"key": "total_operating_revenue", "label": "Total Operating Revenue", "unit": "$M"},
+    {"key": "adj_pretax_margin", "label": "Adjusted Pre-Tax Margin", "unit": "%"},
+    {"key": "trasm", "label": "TRASM", "unit": "cents"},
+    {"key": "load_factor", "label": "Passenger Load Factor", "unit": "%"},
+    {"key": "casm_ex", "label": "CASM-ex", "unit": "cents"},
+    {"key": "avg_fuel_price", "label": "Avg Fuel Price/Gallon", "unit": "$"}
+  ],
+  "kpi_rationale": "Every UAL earnings release headlines total operating revenue, TRASM growth and adjusted pre-tax margin in its top-line bullets, while consolidated passenger load factor and CASM-ex are standard 'Select operating statistics' disclosures repeated each quarter. Average fuel price per gallon is included given how heavily management has emphasized fuel volatility's swing effect on 2026 guidance.",
+  "history": [
+    {"period": "Q4 2024", "report_date": "2025-01-21", "values": {"total_operating_revenue": 14695, "adj_pretax_margin": 9.7, "trasm": 18.77, "load_factor": 82.3, "casm_ex": 12.89, "avg_fuel_price": 2.40}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051725000013/ual_12312024erex991.htm"},
+    {"period": "Q1 2025", "report_date": "2025-04-15", "values": {"total_operating_revenue": 13213, "adj_pretax_margin": 3.0, "trasm": 17.58, "load_factor": 79.2, "casm_ex": 13.17, "avg_fuel_price": 2.53}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051725000087/ual_03312025erex991.htm"},
+    {"period": "Q2 2025", "report_date": "2025-07-16", "values": {"total_operating_revenue": 15236, "adj_pretax_margin": 11.0, "trasm": 18.06, "load_factor": 83.1, "casm_ex": 12.36, "avg_fuel_price": 2.34}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051725000143/ual_06302025erex991.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-15", "values": {"total_operating_revenue": 15225, "adj_pretax_margin": 8.0, "trasm": 17.42, "load_factor": 84.4, "casm_ex": 12.15, "avg_fuel_price": 2.43}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051725000190/ual_09302025erex991.htm"},
+    {"period": "Q4 2025", "report_date": "2026-01-20", "values": {"total_operating_revenue": 15397, "adj_pretax_margin": 8.5, "trasm": 18.47, "load_factor": 81.9, "casm_ex": 12.94, "avg_fuel_price": 2.49}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051726000014/ual_12312025erex991.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-21", "values": {"total_operating_revenue": 14608, "adj_pretax_margin": 3.4, "trasm": 18.80, "load_factor": 81.6, "casm_ex": 13.95, "avg_fuel_price": 2.78}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051726000089/ual_erx03312026xex991.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-15", "values": {"total_operating_revenue": 17672, "adj_pretax_margin": 4.8, "trasm": 20.25, "load_factor": 83.4, "casm_ex": 13.12, "avg_fuel_price": 4.19}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/100517/000010051726000135/ual_erx06302026xex991.htm"}
+  ]
+}
