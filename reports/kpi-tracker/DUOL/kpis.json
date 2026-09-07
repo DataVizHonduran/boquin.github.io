@@ -1,0 +1,39 @@
+{
+  "ticker": "DUOL",
+  "company": "Duolingo, Inc.",
+  "kpis": [
+    {"key": "dau", "label": "Daily Active Users", "unit": "M"},
+    {"key": "mau", "label": "Monthly Active Users", "unit": "M"},
+    {"key": "paid_subs", "label": "Paid Subscribers", "unit": "M"},
+    {"key": "total_bookings", "label": "Total Bookings", "unit": "$M"},
+    {"key": "revenue", "label": "Revenue", "unit": "$M"},
+    {"key": "adj_ebitda_margin", "label": "Adjusted EBITDA Margin", "unit": "%"}
+  ],
+  "kpi_rationale": "Locked from Q2 2026 shareholder letter's own 'Summary of Financial and Key Operating Metrics' table plus the DAU emphasis in mgmt commentary ('single most important KPI' per Apr-2026 preview). DAU/MAU = user growth engine management is explicitly prioritizing over near-term monetization. Paid Subscribers = conversion of that growth into payers. Total Bookings = forward-looking cash economics (leads revenue due to ratable recognition). Revenue = GAAP top line. Adj. EBITDA Margin = whether user-growth investment is compressing profitability as guided.",
+  "history": [
+    {
+      "period": "Q3 2025",
+      "report_date": "2025-11-05",
+      "values": {"dau": 50.5, "mau": null, "paid_subs": 11.5, "total_bookings": 282.0, "revenue": 271.7, "adj_ebitda_margin": 29.5},
+      "source": "boquin earnings tearsheet reports/earnings/DUOL-2025-12-14.md (MAU not disclosed that quarter's release)"
+    },
+    {
+      "period": "Q4 2025",
+      "report_date": "2026-02-26",
+      "values": {"dau": 52.7, "mau": 133.1, "paid_subs": 12.2, "total_bookings": 336.8, "revenue": 282.9, "adj_ebitda_margin": 29.8},
+      "source": "SEC EDGAR 8-K (acc 0001628280-26-012246) EX-99.2 shareholder letter"
+    },
+    {
+      "period": "Q1 2026",
+      "report_date": "2026-05-04",
+      "values": {"dau": 56.5, "mau": 137.8, "paid_subs": 12.5, "total_bookings": 308.5, "revenue": 292.0, "adj_ebitda_margin": 28.6},
+      "source": "SEC EDGAR 8-K (acc 0001628280-26-029790) EX-99.2 shareholder letter"
+    },
+    {
+      "period": "Q2 2026",
+      "report_date": "2026-08-05",
+      "values": {"dau": 58.7, "mau": 140.6, "paid_subs": 12.7, "total_bookings": 289.1, "revenue": 298.5, "adj_ebitda_margin": 25.9},
+      "source": "SEC EDGAR 8-K (acc 0001628280-26-053299) EX-99.2 shareholder letter"
+    }
+  ]
+}
