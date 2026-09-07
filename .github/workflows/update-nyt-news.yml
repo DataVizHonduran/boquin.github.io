@@ -2,7 +2,7 @@ name: NYT News Feed
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # every 6 hours
+    - cron: '0 6 * * *'   # daily at 06:00 UTC
   workflow_dispatch:
 
 concurrency:

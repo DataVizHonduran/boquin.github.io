@@ -2,7 +2,7 @@ name: Daily CTA Commentary
 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 7am UTC daily — runs 5h after CTA signals update (2am)
+    - cron: '0 7 * * 1'   # 7am UTC Monday (weekly) — runs after CTA signals update
   workflow_dispatch:
 
 concurrency:
