@@ -2,7 +2,7 @@ name: Update FOMC Analyzer
 
 on:
   schedule:
-    - cron: '0 8 * * *'   # Daily 08:00 UTC — 10 pairs/day, backfill completes ~22 days
+    - cron: '0 8 * * 4'   # Weekly, Thursday 08:00 UTC — backfill complete, just checks for new FOMC statements (statements drop Wed)
   workflow_dispatch:
     inputs:
       force:
