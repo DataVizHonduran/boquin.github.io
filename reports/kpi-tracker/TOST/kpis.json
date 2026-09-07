@@ -1,0 +1,23 @@
+{
+  "ticker": "TOST",
+  "company": "Toast, Inc.",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "arr", "label": "Annualized Recurring Run-Rate (ARR)", "unit": "$B"},
+    {"key": "total_locations", "label": "Total Locations", "unit": "count"},
+    {"key": "gpv", "label": "Gross Payment Volume (GPV)", "unit": "$B"},
+    {"key": "non_gaap_recurring_gross_profit", "label": "Non-GAAP Subscription + FinTech Gross Profit", "unit": "$M"},
+    {"key": "adj_ebitda", "label": "Adjusted EBITDA", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every Toast earnings release headlines ARR, Total Locations, GPV, and Adjusted EBITDA as its standard 'Financial Highlights' bullets, and calls out Non-GAAP subscription services + financial technology solutions gross profit as its 'recurring gross profit streams' metric -- the operating metrics Toast repeats verbatim every quarter alongside Total Revenue.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-11-07", "values": {"total_revenue": 1305, "arr": 1.6, "total_locations": 127000, "gpv": 41.7, "non_gaap_recurring_gross_profit": 378, "adj_ebitda": 113}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016424000381/tost-20240930xexhibit991.htm"},
+    {"period": "Q4 2024", "report_date": "2025-02-19", "values": {"total_revenue": 1338, "arr": 1.6, "total_locations": 134000, "gpv": 42.2, "non_gaap_recurring_gross_profit": 392, "adj_ebitda": 111}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016425000066/tost-20241231xexhibit991.htm"},
+    {"period": "Q1 2025", "report_date": "2025-05-08", "values": {"total_revenue": 1337, "arr": 1.7, "total_locations": 140000, "gpv": 42.2, "non_gaap_recurring_gross_profit": 415, "adj_ebitda": 133}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016425000175/tost-20250331xexhibit991.htm"},
+    {"period": "Q2 2025", "report_date": "2025-08-05", "values": {"total_revenue": 1550, "arr": 1.9, "total_locations": 148000, "gpv": 49.9, "non_gaap_recurring_gross_profit": 464, "adj_ebitda": 161}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016425000288/tost-20250630xexhibit991.htm"},
+    {"period": "Q3 2025", "report_date": "2025-11-04", "values": {"total_revenue": 1633, "arr": 2.0, "total_locations": 156000, "gpv": 51.5, "non_gaap_recurring_gross_profit": 506, "adj_ebitda": 176}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016425000334/tost-20250930xexhibit991.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-12", "values": {"total_revenue": 1633, "arr": 2.0, "total_locations": 164000, "gpv": 51.4, "non_gaap_recurring_gross_profit": 502, "adj_ebitda": 163}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016426000050/tost-20251231xexhibit991.htm"},
+    {"period": "Q1 2026", "report_date": "2026-05-07", "values": {"total_revenue": 1630, "arr": 2.2, "total_locations": 171000, "gpv": 51.3, "non_gaap_recurring_gross_profit": 529, "adj_ebitda": 179}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016426000113/tost-20260331xexhibit991.htm"},
+    {"period": "Q2 2026", "report_date": "2026-08-04", "values": {"total_revenue": 1908, "arr": 2.4, "total_locations": 180000, "gpv": 60.7, "non_gaap_recurring_gross_profit": 595, "adj_ebitda": 221}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1650164/000165016426000162/tost-20260630xexhibit991.htm"}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "ticker": "ISRG",
+  "company": "Intuitive Surgical Inc",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$B"},
+    {"key": "instruments_accessories_revenue", "label": "Instruments & Accessories Revenue", "unit": "$B"},
+    {"key": "davinci_systems_placed", "label": "da Vinci Systems Placed", "unit": "count"},
+    {"key": "davinci_installed_base", "label": "da Vinci Installed Base", "unit": "count"},
+    {"key": "non_gaap_op_income", "label": "Non-GAAP Income from Operations", "unit": "$M"},
+    {"key": "non_gaap_eps", "label": "Non-GAAP Diluted EPS", "unit": "$"}
+  ],
+  "kpi_rationale": "Every Intuitive earnings release headlines total revenue, instruments & accessories revenue (the recurring, procedure-driven revenue stream), da Vinci systems placed in the quarter, and the cumulative da Vinci installed base as its standard operating metrics, alongside non-GAAP income from operations and non-GAAP diluted EPS in its GAAP/non-GAAP reconciliation -- these are the metrics management uses every quarter to frame procedure-volume-driven growth.",
+  "history": [
+    {"period": "Q4 2024", "report_date": "2025-01-23", "values": {"total_revenue": 2.41, "instruments_accessories_revenue": 1.41, "davinci_systems_placed": 493, "davinci_installed_base": 9902, "non_gaap_op_income": 928, "non_gaap_eps": 2.21}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526725000008/q424ex-991earningsrelease.htm"},
+    {"period": "Q1 2025", "report_date": "2025-04-22", "values": {"total_revenue": 2.25, "instruments_accessories_revenue": 1.37, "davinci_systems_placed": 367, "davinci_installed_base": 10189, "non_gaap_op_income": 768, "non_gaap_eps": 1.81}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526725000106/q125ex-991earningsrelease.htm"},
+    {"period": "Q2 2025", "report_date": "2025-07-22", "values": {"total_revenue": 2.44, "instruments_accessories_revenue": 1.47, "davinci_systems_placed": 395, "davinci_installed_base": 10488, "non_gaap_op_income": 947, "non_gaap_eps": 2.19}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526725000183/q225ex-991earningsrelease.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-21", "values": {"total_revenue": 2.51, "instruments_accessories_revenue": 1.52, "davinci_systems_placed": 427, "davinci_installed_base": 10763, "non_gaap_op_income": 976, "non_gaap_eps": 2.40}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526725000206/q325ex-991earningsrelease.htm"},
+    {"period": "Q4 2025", "report_date": "2026-01-22", "values": {"total_revenue": 2.87, "instruments_accessories_revenue": 1.66, "davinci_systems_placed": 532, "davinci_installed_base": 11106, "non_gaap_op_income": 1070, "non_gaap_eps": 2.53}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526726000006/q425ex-991earningsrelease.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-21", "values": {"total_revenue": 2.77, "instruments_accessories_revenue": 1.69, "davinci_systems_placed": 431, "davinci_installed_base": 11395, "non_gaap_op_income": 1080, "non_gaap_eps": 2.50}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526726000029/q126ex-991earningsrelease.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-16", "values": {"total_revenue": 2.89, "instruments_accessories_revenue": 1.73, "davinci_systems_placed": 468, "davinci_installed_base": 11710, "non_gaap_op_income": 1220, "non_gaap_eps": 2.80}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1035267/000103526726000047/q226ex-991earningsrelease.htm"}
+  ]
+}

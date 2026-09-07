@@ -1,0 +1,23 @@
+{
+  "ticker": "SPHR",
+  "company": "Sphere Entertainment Co.",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "sphere_revenue", "label": "Sphere Segment Revenue", "unit": "$M"},
+    {"key": "msgn_revenue", "label": "MSG Networks Segment Revenue", "unit": "$M"},
+    {"key": "total_adj_op_income", "label": "Total Adjusted Operating Income", "unit": "$M"},
+    {"key": "sphere_adj_op_income", "label": "Sphere Adjusted Operating Income", "unit": "$M"},
+    {"key": "msgn_adj_op_income", "label": "MSG Networks Adjusted Operating Income", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every Sphere Entertainment earnings release breaks revenue and adjusted operating income into its two reportable segments -- Sphere and MSG Networks -- in the same 'Segment Results' table each quarter, alongside consolidated Total Revenue and Total Adjusted Operating Income. Note: the company changed its fiscal year end from June 30 to December 31 effective December 31, 2024; periods below are labeled by the calendar quarter each release covers.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-11-12", "values": {"total_revenue": 227.9, "sphere_revenue": 127.1, "msgn_revenue": 100.8, "total_adj_op_income": -10.2, "sphere_adj_op_income": -26.3, "msgn_adj_op_income": 16.1}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000179525024000040/exhibit991sphereentertainm.htm"},
+    {"period": "Q4 2024", "report_date": "2025-03-03", "values": {"total_revenue": 308.3, "sphere_revenue": 169.0, "msgn_revenue": 139.3, "total_adj_op_income": 32.9, "sphere_adj_op_income": -0.8, "msgn_adj_op_income": 33.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000179525025000009/exhibit991sphereentertainm.htm"},
+    {"period": "Q1 2025", "report_date": "2025-05-08", "values": {"total_revenue": 280.6, "sphere_revenue": 157.5, "msgn_revenue": 123.0, "total_adj_op_income": 36.0, "sphere_adj_op_income": 13.1, "msgn_adj_op_income": 22.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000179525025000027/exhibit991sphereentertainm.htm"},
+    {"period": "Q2 2025", "report_date": "2025-08-11", "values": {"total_revenue": 282.7, "sphere_revenue": 175.6, "msgn_revenue": 107.1, "total_adj_op_income": 61.4, "sphere_adj_op_income": 24.9, "msgn_adj_op_income": 36.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000179525025000033/sphrex991-earningsrelease6.htm"},
+    {"period": "Q3 2025", "report_date": "2025-11-04", "values": {"total_revenue": 262.5, "sphere_revenue": 174.1, "msgn_revenue": 88.4, "total_adj_op_income": 36.4, "sphere_adj_op_income": 17.1, "msgn_adj_op_income": 19.3}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000162828025048533/sphrex991-earningsrelease9.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-12", "values": {"total_revenue": 394.3, "sphere_revenue": 274.2, "msgn_revenue": 120.1, "total_adj_op_income": 128.0, "sphere_adj_op_income": 89.4, "msgn_adj_op_income": 38.6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000162828026007482/exhibit991sphereentertainm.htm"},
+    {"period": "Q1 2026", "report_date": "2026-05-05", "values": {"total_revenue": 386.4, "sphere_revenue": 266.0, "msgn_revenue": 120.4, "total_adj_op_income": 110.0, "sphere_adj_op_income": 74.3, "msgn_adj_op_income": 35.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000162828026030130/exhibit991sphereentertainm.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-30", "values": {"total_revenue": 313.6, "sphere_revenue": 226.4, "msgn_revenue": 87.3, "total_adj_op_income": 50.9, "sphere_adj_op_income": 39.9, "msgn_adj_op_income": 11.0}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1795250/000162828026050809/exhibit991sphereentertainm.htm"}
+  ]
+}

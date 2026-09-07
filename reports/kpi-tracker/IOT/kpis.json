@@ -1,0 +1,23 @@
+{
+  "ticker": "IOT",
+  "company": "Samsara Inc.",
+  "kpis": [
+    {"key": "arr", "label": "Annual Recurring Revenue (ARR)", "unit": "$M"},
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "non_gaap_gross_margin", "label": "Non-GAAP Gross Margin", "unit": "%"},
+    {"key": "non_gaap_op_margin", "label": "Non-GAAP Operating Margin", "unit": "%"},
+    {"key": "non_gaap_eps", "label": "Non-GAAP Diluted EPS", "unit": "$"},
+    {"key": "free_cash_flow", "label": "Free Cash Flow", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every Samsara earnings release presents the same 'Financial Highlights' table -- ARR, Total Revenue, Non-GAAP gross margin, Non-GAAP operating margin, Non-GAAP EPS, and (in a standard reconciliation) Free Cash Flow -- as its standard quarterly disclosure, the metrics management itself uses to frame durable, efficient growth.",
+  "history": [
+    {"period": "FQ3 FY2025", "report_date": "2024-12-05", "values": {"arr": 1348.9, "total_revenue": 322.0, "non_gaap_gross_margin": 78, "non_gaap_op_margin": 11, "non_gaap_eps": 0.07, "free_cash_flow": 31.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000164289624000073/samsaraepr-q32025.htm"},
+    {"period": "FQ4 FY2025", "report_date": "2025-03-06", "values": {"arr": 1457.9, "total_revenue": 346.3, "non_gaap_gross_margin": 78, "non_gaap_op_margin": 16, "non_gaap_eps": 0.11, "free_cash_flow": 48.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000164289625000007/samsaraepr-q42025.htm"},
+    {"period": "FQ1 FY2026", "report_date": "2025-06-05", "values": {"arr": 1535.4, "total_revenue": 366.9, "non_gaap_gross_margin": 79, "non_gaap_op_margin": 14, "non_gaap_eps": 0.11, "free_cash_flow": 45.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000164289625000053/samsaraepr-q12026.htm"},
+    {"period": "FQ2 FY2026", "report_date": "2025-09-04", "values": {"arr": 1640.1, "total_revenue": 391.5, "non_gaap_gross_margin": 78, "non_gaap_op_margin": 15, "non_gaap_eps": 0.12, "free_cash_flow": 44.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000164289625000070/samsaraepr-q22026.htm"},
+    {"period": "FQ3 FY2026", "report_date": "2025-12-04", "values": {"arr": 1745.1, "total_revenue": 416.0, "non_gaap_gross_margin": 78, "non_gaap_op_margin": 19, "non_gaap_eps": 0.15, "free_cash_flow": 55.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000162828025055355/samsaraepr-q32026.htm"},
+    {"period": "FQ4 FY2026", "report_date": "2026-03-05", "values": {"arr": 1889.9, "total_revenue": 444.3, "non_gaap_gross_margin": 77, "non_gaap_op_margin": 21, "non_gaap_eps": 0.18, "free_cash_flow": 61.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000162828026015170/samsaraepr-q42026.htm"},
+    {"period": "FQ1 FY2027", "report_date": "2026-06-04", "values": {"arr": 1990.6, "total_revenue": 478.8, "non_gaap_gross_margin": 76, "non_gaap_op_margin": 19, "non_gaap_eps": 0.17, "free_cash_flow": 73.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000162828026040788/samsaraepr-q12027.htm"},
+    {"period": "FQ2 FY2027", "report_date": "2026-09-03", "values": {"arr": 2124.7, "total_revenue": 508.4, "non_gaap_gross_margin": 78, "non_gaap_op_margin": 21, "non_gaap_eps": 0.20, "free_cash_flow": 64.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1642896/000162828026060438/samsaraepr-q22027.htm"}
+  ]
+}

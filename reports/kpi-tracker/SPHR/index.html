@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPHR KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 SPHR KPI Tracker</h1>
+  <div class="sub">Sphere Entertainment Co. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-07-30)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$313.6M</div>
+      <div class="kpi-change">-18.8% QoQ · +10.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Sphere Segment Revenue</div>
+      <div class="kpi-value" style="color:#eb6834">$226.4M</div>
+      <div class="kpi-change">-14.9% QoQ · +28.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">MSG Networks Segment Revenue</div>
+      <div class="kpi-value" style="color:#1baf7a">$87.3M</div>
+      <div class="kpi-change">-27.5% QoQ · -18.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Adjusted Operating Income</div>
+      <div class="kpi-value" style="color:#eda100">$50.9M</div>
+      <div class="kpi-change">-53.7% QoQ · -17.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Sphere Adjusted Operating Income</div>
+      <div class="kpi-value" style="color:#e87ba4">$39.9M</div>
+      <div class="kpi-change">-46.3% QoQ · +60.2% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">MSG Networks Adjusted Operating Income</div>
+      <div class="kpi-value" style="color:#4a3aa7">$11.0M</div>
+      <div class="kpi-change">-69.2% QoQ · -69.9% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [227.9, 308.3, 280.6, 282.7, 262.5, 394.3, 386.4, 313.6],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$227.9M", "$308.3M", "$280.6M", "$282.7M", "$262.5M", "$394.3M", "$386.4M", "$313.6M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Sphere Segment Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-sphere_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-sphere_revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [127.1, 169.0, 157.5, 175.6, 174.1, 274.2, 266.0, 226.4],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["$127.1M", "$169.0M", "$157.5M", "$175.6M", "$174.1M", "$274.2M", "$266.0M", "$226.4M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">MSG Networks Segment Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-msgn_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-msgn_revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [100.8, 139.3, 123.0, 107.1, 88.4, 120.1, 120.4, 87.3],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["$100.8M", "$139.3M", "$123.0M", "$107.1M", "$88.4M", "$120.1M", "$120.4M", "$87.3M"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Total Adjusted Operating Income <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_adj_op_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_adj_op_income", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [-10.2, 32.9, 36.0, 61.4, 36.4, 128.0, 110.0, 50.9],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["$-10.2M", "$32.9M", "$36.0M", "$61.4M", "$36.4M", "$128.0M", "$110.0M", "$50.9M"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Sphere Adjusted Operating Income <span class="chart-unit">($M)</span></div>
+      <div id="chart-sphere_adj_op_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-sphere_adj_op_income", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [-26.3, -0.8, 13.1, 24.9, 17.1, 89.4, 74.3, 39.9],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["$-26.3M", "$-0.8M", "$13.1M", "$24.9M", "$17.1M", "$89.4M", "$74.3M", "$39.9M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">MSG Networks Adjusted Operating Income <span class="chart-unit">($M)</span></div>
+      <div id="chart-msgn_adj_op_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-msgn_adj_op_income", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [16.1, 33.7, 22.8, 36.5, 19.3, 38.6, 35.7, 11.0],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["$16.1M", "$33.7M", "$22.8M", "$36.5M", "$19.3M", "$38.6M", "$35.7M", "$11.0M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every Sphere Entertainment earnings release breaks revenue and adjusted operating income into its two reportable segments -- Sphere and MSG Networks -- in the same 'Segment Results' table each quarter, alongside consolidated Total Revenue and Total Adjusted Operating Income. Note: the company changed its fiscal year end from June 30 to December 31 effective December 31, 2024; periods below are labeled by the calendar quarter each release covers.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Sphere Segment Revenue</th><th>MSG Networks Segment Revenue</th><th>Total Adjusted Operating Income</th><th>Sphere Adjusted Operating Income</th><th>MSG Networks Adjusted Operating Income</th></tr>
+    <tr><td>Q3 2024</td><td>$227.9M</td><td>$127.1M</td><td>$100.8M</td><td>$-10.2M</td><td>$-26.3M</td><td>$16.1M</td></tr><tr><td>Q4 2024</td><td>$308.3M</td><td>$169.0M</td><td>$139.3M</td><td>$32.9M</td><td>$-0.8M</td><td>$33.7M</td></tr><tr><td>Q1 2025</td><td>$280.6M</td><td>$157.5M</td><td>$123.0M</td><td>$36.0M</td><td>$13.1M</td><td>$22.8M</td></tr><tr><td>Q2 2025</td><td>$282.7M</td><td>$175.6M</td><td>$107.1M</td><td>$61.4M</td><td>$24.9M</td><td>$36.5M</td></tr><tr><td>Q3 2025</td><td>$262.5M</td><td>$174.1M</td><td>$88.4M</td><td>$36.4M</td><td>$17.1M</td><td>$19.3M</td></tr><tr><td>Q4 2025</td><td>$394.3M</td><td>$274.2M</td><td>$120.1M</td><td>$128.0M</td><td>$89.4M</td><td>$38.6M</td></tr><tr><td>Q1 2026</td><td>$386.4M</td><td>$266.0M</td><td>$120.4M</td><td>$110.0M</td><td>$74.3M</td><td>$35.7M</td></tr><tr><td>Q2 2026</td><td>$313.6M</td><td>$226.4M</td><td>$87.3M</td><td>$50.9M</td><td>$39.9M</td><td>$11.0M</td></tr>
+  </table>
+</div>
+</body>
+</html>

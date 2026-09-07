@@ -1,0 +1,23 @@
+{
+  "ticker": "SFIX",
+  "company": "Stitch Fix, Inc.",
+  "kpis": [
+    {"key": "net_revenue", "label": "Net Revenue", "unit": "$M"},
+    {"key": "active_clients", "label": "Active Clients", "unit": "M"},
+    {"key": "rpac", "label": "Net Revenue per Active Client (RPAC)", "unit": "$"},
+    {"key": "gross_margin", "label": "Gross Margin", "unit": "%"},
+    {"key": "adjusted_ebitda", "label": "Adjusted EBITDA", "unit": "$M"},
+    {"key": "free_cash_flow", "label": "Free Cash Flow", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every Stitch Fix earnings release presents the same 'Key Metrics and Financial Highlights' bullets -- Net Revenue, Active Clients, Net Revenue per Active Client (RPAC), Gross Margin, Adjusted EBITDA, and Free Cash Flow -- as its standard quarterly disclosure, the metrics management uses to track its transformation strategy and path to profitable growth.",
+  "history": [
+    {"period": "FQ4 FY2024", "report_date": "2024-09-24", "values": {"net_revenue": 319.6, "active_clients": 2.508, "rpac": 533, "gross_margin": 44.6, "adjusted_ebitda": 9.5, "free_cash_flow": 4.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000157694224000087/exhibit991-q424.htm"},
+    {"period": "FQ1 FY2025", "report_date": "2024-12-10", "values": {"net_revenue": 318.8, "active_clients": 2.434, "rpac": 531, "gross_margin": 45.4, "adjusted_ebitda": 13.5, "free_cash_flow": 9.9}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000157694224000130/exhibit991-q125.htm"},
+    {"period": "FQ2 FY2025", "report_date": "2025-03-11", "values": {"net_revenue": 312.1, "active_clients": 2.371, "rpac": 537, "gross_margin": 44.5, "adjusted_ebitda": 15.9, "free_cash_flow": -19.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000157694225000006/exhibit991-q225.htm"},
+    {"period": "FQ3 FY2025", "report_date": "2025-06-10", "values": {"net_revenue": 325.0, "active_clients": 2.353, "rpac": 542, "gross_margin": 44.2, "adjusted_ebitda": 11.0, "free_cash_flow": 16.0}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000157694225000026/exhibit991-q325.htm"},
+    {"period": "FQ4 FY2025", "report_date": "2025-09-24", "values": {"net_revenue": 311.2, "active_clients": 2.309, "rpac": 549, "gross_margin": 43.6, "adjusted_ebitda": 8.7, "free_cash_flow": 2.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000162828025042587/exhibit991-q425.htm"},
+    {"period": "FQ1 FY2026", "report_date": "2025-12-04", "values": {"net_revenue": 342.1, "active_clients": 2.307, "rpac": 559, "gross_margin": 43.6, "adjusted_ebitda": 13.4, "free_cash_flow": 5.6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000162828025055353/exhibit991-q126.htm"},
+    {"period": "FQ2 FY2026", "report_date": "2026-03-11", "values": {"net_revenue": 341.3, "active_clients": 2.288, "rpac": 577, "gross_margin": 43.6, "adjusted_ebitda": 15.9, "free_cash_flow": 3.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000162828026016819/exhibit991-q226.htm"},
+    {"period": "FQ3 FY2026", "report_date": "2026-06-10", "values": {"net_revenue": 340.3, "active_clients": 2.309, "rpac": 578, "gross_margin": 43.7, "adjusted_ebitda": 13.2, "free_cash_flow": 6.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1576942/000162828026042186/exhibit991-q326.htm"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "ticker": "MU",
+  "company": "Micron Technology Inc",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "non_gaap_gross_margin", "label": "Non-GAAP Gross Margin", "unit": "%"},
+    {"key": "non_gaap_op_margin", "label": "Non-GAAP Operating Margin", "unit": "%"},
+    {"key": "non_gaap_eps", "label": "Non-GAAP Diluted EPS", "unit": "$"},
+    {"key": "cloud_memory_bu_revenue", "label": "Cloud Memory Business Unit Revenue", "unit": "$M"},
+    {"key": "core_data_center_bu_revenue", "label": "Core Data Center Business Unit Revenue", "unit": "$M"}
+  ],
+  "kpi_rationale": "Micron's earnings release reports Total Revenue with non-GAAP gross margin, operating margin and diluted EPS every quarter in its GAAP/non-GAAP results table. Starting with the fiscal Q4 2025 release, Micron began disclosing a 'Quarterly Business Unit Financial Results' breakout (Cloud Memory, Core Data Center, Mobile and Client, Automotive and Embedded); Cloud Memory and Core Data Center are tracked here as the AI/HBM-driven growth segments management now emphasizes, null for the four quarters before that breakout began.",
+  "history": [
+    {"period": "FQ4 2024", "report_date": "2024-09-25", "values": {"total_revenue": 7750, "non_gaap_gross_margin": 36.5, "non_gaap_op_margin": 22.5, "non_gaap_eps": 1.18, "cloud_memory_bu_revenue": null, "core_data_center_bu_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312524000023/a2024q4ex991-pressrelease.htm (business unit revenue breakout not yet disclosed)"},
+    {"period": "FQ1 2025", "report_date": "2024-12-18", "values": {"total_revenue": 8709, "non_gaap_gross_margin": 39.5, "non_gaap_op_margin": 27.5, "non_gaap_eps": 1.79, "cloud_memory_bu_revenue": null, "core_data_center_bu_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312524000046/a2025q1ex991-pressrelease.htm (business unit revenue breakout not yet disclosed)"},
+    {"period": "FQ2 2025", "report_date": "2025-03-20", "values": {"total_revenue": 8053, "non_gaap_gross_margin": 37.9, "non_gaap_op_margin": 24.9, "non_gaap_eps": 1.56, "cloud_memory_bu_revenue": null, "core_data_center_bu_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312525000006/a2025q2ex991-pressrelease.htm (business unit revenue breakout not yet disclosed)"},
+    {"period": "FQ3 2025", "report_date": "2025-06-25", "values": {"total_revenue": 9301, "non_gaap_gross_margin": 39.0, "non_gaap_op_margin": 26.8, "non_gaap_eps": 1.91, "cloud_memory_bu_revenue": null, "core_data_center_bu_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312525000019/a2025q3ex991-pressrelease.htm (business unit revenue breakout not yet disclosed)"},
+    {"period": "FQ4 2025", "report_date": "2025-09-23", "values": {"total_revenue": 11315, "non_gaap_gross_margin": 45.7, "non_gaap_op_margin": 35.0, "non_gaap_eps": 3.03, "cloud_memory_bu_revenue": 4543, "core_data_center_bu_revenue": 1577}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312525000024/a2025q4ex991-pressrelease.htm"},
+    {"period": "FQ1 2026", "report_date": "2025-12-17", "values": {"total_revenue": 13643, "non_gaap_gross_margin": 56.8, "non_gaap_op_margin": 47.0, "non_gaap_eps": 4.78, "cloud_memory_bu_revenue": 5284, "core_data_center_bu_revenue": 2379}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312525000044/a2026q1ex991-pressrelease.htm"},
+    {"period": "FQ2 2026", "report_date": "2026-03-18", "values": {"total_revenue": 23860, "non_gaap_gross_margin": 74.9, "non_gaap_op_margin": 69.0, "non_gaap_eps": 12.20, "cloud_memory_bu_revenue": 7749, "core_data_center_bu_revenue": 5687}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312526000004/a2026q2ex991-pressrelease.htm"},
+    {"period": "FQ3 2026", "report_date": "2026-06-24", "values": {"total_revenue": 41456, "non_gaap_gross_margin": 84.9, "non_gaap_op_margin": 81.2, "non_gaap_eps": 25.11, "cloud_memory_bu_revenue": 13769, "core_data_center_bu_revenue": 11524}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/723125/000072312526000013/a2026q3ex991-pressrelease.htm"}
+  ]
+}

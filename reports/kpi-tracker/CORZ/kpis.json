@@ -1,0 +1,23 @@
+{
+  "ticker": "CORZ",
+  "company": "Core Scientific, Inc.",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "colocation_revenue", "label": "Colocation/HDC Revenue", "unit": "$M"},
+    {"key": "gross_profit", "label": "Gross Profit", "unit": "$M"},
+    {"key": "adjusted_ebitda", "label": "Adjusted EBITDA", "unit": "$M"},
+    {"key": "capex", "label": "Capital Expenditures", "unit": "$M"},
+    {"key": "liquidity", "label": "Liquidity", "unit": "$M"}
+  ],
+  "kpi_rationale": "Core Scientific reports Total Revenue, Gross Profit and Adjusted EBITDA every quarter, and has consistently broken out its data-center-services revenue line item (labeled 'HPC hosting revenue' through 2024, renamed 'Colocation revenue' in 2025, now 'HDC revenue') as the company pivoted from bitcoin mining to AI high-density colocation. Capital Expenditures and Liquidity became standard bullets starting Q1 2025 (Liquidity) and Q2 2025 (CapEx) as the company began quantifying its colocation buildout; null for the two quarters before each was first disclosed.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-11-06", "values": {"total_revenue": 95.4, "colocation_revenue": 10.3, "gross_profit": -0.2, "adjusted_ebitda": 10.1, "capex": null, "liquidity": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828024045714/q32024corescientificinc-ea.htm (CapEx and Liquidity not yet disclosed as standalone metrics; revenue line then called 'HPC hosting revenue')"},
+    {"period": "Q4 2024", "report_date": "2025-02-26", "values": {"total_revenue": 94.9, "colocation_revenue": 8.5, "gross_profit": 4.8, "adjusted_ebitda": 13.3, "capex": null, "liquidity": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828025008130/q42024corescientificinc-ea.htm (CapEx and Liquidity not yet disclosed as standalone metrics; revenue line then called 'HPC hosting revenue')"},
+    {"period": "Q1 2025", "report_date": "2025-05-07", "values": {"total_revenue": 79.5, "colocation_revenue": 8.6, "gross_profit": 8.2, "adjusted_ebitda": -6.1, "capex": null, "liquidity": 778.6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828025023161/q12025corescientificinc-ea.htm (CapEx not yet disclosed as a standalone bullet)"},
+    {"period": "Q2 2025", "report_date": "2025-08-08", "values": {"total_revenue": 78.6, "colocation_revenue": 10.6, "gross_profit": 5.0, "adjusted_ebitda": 21.5, "capex": 121.3, "liquidity": 754.1}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828025039283/q22025corescientificinc-ea.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-24", "values": {"total_revenue": 81.1, "colocation_revenue": 15.0, "gross_profit": 3.9, "adjusted_ebitda": -2.4, "capex": 244.5, "liquidity": 694.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828025046263/q32025corescientificinc-ea.htm"},
+    {"period": "Q4 2025", "report_date": "2026-03-02", "values": {"total_revenue": 79.8, "colocation_revenue": 31.3, "gross_profit": 20.8, "adjusted_ebitda": -42.7, "capex": 279.2, "liquidity": 533.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828026013214/q42025corescientificinc-ea.htm"},
+    {"period": "Q1 2026", "report_date": "2026-05-06", "values": {"total_revenue": 115.2, "colocation_revenue": 77.5, "gross_profit": 30.1, "adjusted_ebitda": 8.9, "capex": 389.2, "liquidity": 1042.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000162828026031246/q12026corescientificinc-ea.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-28", "values": {"total_revenue": 164.2, "colocation_revenue": 136.7, "gross_profit": 70.0, "adjusted_ebitda": 41.1, "capex": 797.5, "liquidity": 1819.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1839341/000183934126000013/q22026corescientificinc-ea.htm"}
+  ]
+}

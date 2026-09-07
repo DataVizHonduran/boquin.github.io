@@ -1,0 +1,23 @@
+{
+  "ticker": "CNDT",
+  "company": "Conduent Inc",
+  "kpis": [
+    {"key": "revenue", "label": "Revenue", "unit": "$M"},
+    {"key": "adjusted_ebitda", "label": "Adjusted EBITDA", "unit": "$M"},
+    {"key": "adjusted_ebitda_margin", "label": "Adjusted EBITDA Margin", "unit": "%"},
+    {"key": "adjusted_diluted_eps", "label": "Adjusted Diluted EPS", "unit": "$"},
+    {"key": "adjusted_free_cash_flow", "label": "Adjusted Free Cash Flow", "unit": "$M"},
+    {"key": "new_business_acv", "label": "New Business Signings ACV", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every Conduent earnings release presents the identical 'Key Financial Results' table -- Revenue, Adjusted EBITDA, Adjusted EBITDA Margin, Adjusted Diluted EPS and Adjusted Free Cash Flow -- plus a 'New Business Signings ACV' headline bullet every quarter, the metrics management uses to track its ongoing transformation and portfolio-rationalization strategy. Note: starting Q2 2026, Conduent's announced divestitures of its Transit and Tolling businesses moved those segments to discontinued operations, so Q2 2026 Revenue (and related metrics) is reported on a narrower continuing-operations basis than prior quarters, which mechanically explains the sequential revenue decline.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-11-06", "values": {"revenue": 807, "adjusted_ebitda": 32, "adjusted_ebitda_margin": 4.1, "adjusted_diluted_eps": -0.14, "adjusted_free_cash_flow": -6, "new_business_acv": 111}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770324000134/cndtq32024ex991-pressrelea.htm"},
+    {"period": "Q4 2024", "report_date": "2025-02-12", "values": {"revenue": 800, "adjusted_ebitda": 32, "adjusted_ebitda_margin": 4.0, "adjusted_diluted_eps": -0.15, "adjusted_free_cash_flow": 62, "new_business_acv": 137}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770325000025/cndtq42024ex991-pressrelea.htm"},
+    {"period": "Q1 2025", "report_date": "2025-05-07", "values": {"revenue": 751, "adjusted_ebitda": 37, "adjusted_ebitda_margin": 4.9, "adjusted_diluted_eps": -0.13, "adjusted_free_cash_flow": -74, "new_business_acv": 109}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770325000075/cndtq12025ex991-pressrelea.htm"},
+    {"period": "Q2 2025", "report_date": "2025-08-06", "values": {"revenue": 754, "adjusted_ebitda": 37, "adjusted_ebitda_margin": 4.9, "adjusted_diluted_eps": -0.13, "adjusted_free_cash_flow": -30, "new_business_acv": 150}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770325000125/cndtq22025ex991-pressrelea.htm"},
+    {"period": "Q3 2025", "report_date": "2025-11-07", "values": {"revenue": 767, "adjusted_ebitda": 40, "adjusted_ebitda_margin": 5.2, "adjusted_diluted_eps": -0.09, "adjusted_free_cash_flow": -54, "new_business_acv": 111}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770325000151/cndtq32025ex991-pressrelea.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-12", "values": {"revenue": 770, "adjusted_ebitda": 50, "adjusted_ebitda_margin": 6.5, "adjusted_diluted_eps": -0.09, "adjusted_free_cash_flow": 28, "new_business_acv": 152}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770326000018/cndtq42025ex991-pressrelea.htm"},
+    {"period": "Q1 2026", "report_date": "2026-05-11", "values": {"revenue": 723, "adjusted_ebitda": 49, "adjusted_ebitda_margin": 6.8, "adjusted_diluted_eps": -0.07, "adjusted_free_cash_flow": -15, "new_business_acv": 114}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770326000061/cndtq12026ex991-pressrelea.htm"},
+    {"period": "Q2 2026", "report_date": "2026-08-10", "values": {"revenue": 531, "adjusted_ebitda": 16, "adjusted_ebitda_margin": 3.0, "adjusted_diluted_eps": -0.18, "adjusted_free_cash_flow": -8, "new_business_acv": 99}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1677703/000167770326000091/cndtq22026ex991-pressrelea.htm (revenue basis narrowed to continuing operations after Transit/Tolling divestitures announced)"}
+  ]
+}

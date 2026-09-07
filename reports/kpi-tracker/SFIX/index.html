@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SFIX KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 SFIX KPI Tracker</h1>
+  <div class="sub">Stitch Fix, Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: FQ3 FY2026 (2026-06-10)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Net Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$340.3M</div>
+      <div class="kpi-change">-0.3% QoQ · +4.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Clients</div>
+      <div class="kpi-value" style="color:#eb6834">2.3M</div>
+      <div class="kpi-change">+0.9% QoQ · -1.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Net Revenue per Active Client (RPAC)</div>
+      <div class="kpi-value" style="color:#1baf7a">578.0$</div>
+      <div class="kpi-change">+0.2% QoQ · +6.6% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Gross Margin</div>
+      <div class="kpi-value" style="color:#eda100">43.7%</div>
+      <div class="kpi-change">+0.2% QoQ · -1.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA</div>
+      <div class="kpi-value" style="color:#e87ba4">$13.2M</div>
+      <div class="kpi-change">-17.0% QoQ · +20.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Free Cash Flow</div>
+      <div class="kpi-value" style="color:#4a3aa7">$6.5M</div>
+      <div class="kpi-change">+91.2% QoQ · -59.4% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Net Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-net_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-net_revenue", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [319.6, 318.8, 312.1, 325.0, 311.2, 342.1, 341.3, 340.3],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$319.6M", "$318.8M", "$312.1M", "$325.0M", "$311.2M", "$342.1M", "$341.3M", "$340.3M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Active Clients <span class="chart-unit">(M)</span></div>
+      <div id="chart-active_clients" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-active_clients", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [2.508, 2.434, 2.371, 2.353, 2.309, 2.307, 2.288, 2.309],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["2.5M", "2.4M", "2.4M", "2.4M", "2.3M", "2.3M", "2.3M", "2.3M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Net Revenue per Active Client (RPAC) <span class="chart-unit">($)</span></div>
+      <div id="chart-rpac" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-rpac", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [533, 531, 537, 542, 549, 559, 577, 578],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["533.0$", "531.0$", "537.0$", "542.0$", "549.0$", "559.0$", "577.0$", "578.0$"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Gross Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-gross_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-gross_margin", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [44.6, 45.4, 44.5, 44.2, 43.6, 43.6, 43.6, 43.7],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["44.6%", "45.4%", "44.5%", "44.2%", "43.6%", "43.6%", "43.6%", "43.7%"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA <span class="chart-unit">($M)</span></div>
+      <div id="chart-adjusted_ebitda" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_ebitda", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [9.5, 13.5, 15.9, 11.0, 8.7, 13.4, 15.9, 13.2],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["$9.5M", "$13.5M", "$15.9M", "$11.0M", "$8.7M", "$13.4M", "$15.9M", "$13.2M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Free Cash Flow <span class="chart-unit">($M)</span></div>
+      <div id="chart-free_cash_flow" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-free_cash_flow", [{
+        x: ["FQ4 FY2024", "FQ1 FY2025", "FQ2 FY2025", "FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026"],
+        y: [4.5, 9.9, -19.4, 16.0, 2.8, 5.6, 3.4, 6.5],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["$4.5M", "$9.9M", "$-19.4M", "$16.0M", "$2.8M", "$5.6M", "$3.4M", "$6.5M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every Stitch Fix earnings release presents the same 'Key Metrics and Financial Highlights' bullets -- Net Revenue, Active Clients, Net Revenue per Active Client (RPAC), Gross Margin, Adjusted EBITDA, and Free Cash Flow -- as its standard quarterly disclosure, the metrics management uses to track its transformation strategy and path to profitable growth.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Net Revenue</th><th>Active Clients</th><th>Net Revenue per Active Client (RPAC)</th><th>Gross Margin</th><th>Adjusted EBITDA</th><th>Free Cash Flow</th></tr>
+    <tr><td>FQ4 FY2024</td><td>$319.6M</td><td>2.5M</td><td>533.0$</td><td>44.6%</td><td>$9.5M</td><td>$4.5M</td></tr><tr><td>FQ1 FY2025</td><td>$318.8M</td><td>2.4M</td><td>531.0$</td><td>45.4%</td><td>$13.5M</td><td>$9.9M</td></tr><tr><td>FQ2 FY2025</td><td>$312.1M</td><td>2.4M</td><td>537.0$</td><td>44.5%</td><td>$15.9M</td><td>$-19.4M</td></tr><tr><td>FQ3 FY2025</td><td>$325.0M</td><td>2.4M</td><td>542.0$</td><td>44.2%</td><td>$11.0M</td><td>$16.0M</td></tr><tr><td>FQ4 FY2025</td><td>$311.2M</td><td>2.3M</td><td>549.0$</td><td>43.6%</td><td>$8.7M</td><td>$2.8M</td></tr><tr><td>FQ1 FY2026</td><td>$342.1M</td><td>2.3M</td><td>559.0$</td><td>43.6%</td><td>$13.4M</td><td>$5.6M</td></tr><tr><td>FQ2 FY2026</td><td>$341.3M</td><td>2.3M</td><td>577.0$</td><td>43.6%</td><td>$15.9M</td><td>$3.4M</td></tr><tr><td>FQ3 FY2026</td><td>$340.3M</td><td>2.3M</td><td>578.0$</td><td>43.7%</td><td>$13.2M</td><td>$6.5M</td></tr>
+  </table>
+</div>
+</body>
+</html>

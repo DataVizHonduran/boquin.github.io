@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSFT KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 MSFT KPI Tracker</h1>
+  <div class="sub">Microsoft Corp — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q4 FY2026 (2026-07-29)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">90.0$B</div>
+      <div class="kpi-change">+8.6% QoQ · +17.8% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Operating Income</div>
+      <div class="kpi-value" style="color:#eb6834">40.6$B</div>
+      <div class="kpi-change">+5.7% QoQ · +18.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Microsoft Cloud Revenue</div>
+      <div class="kpi-value" style="color:#1baf7a">59.3$B</div>
+      <div class="kpi-change">+8.8% QoQ · +27.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Productivity & Business Processes Revenue</div>
+      <div class="kpi-value" style="color:#eda100">37.8$B</div>
+      <div class="kpi-change">+8.0% QoQ · +14.2% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Intelligent Cloud Revenue</div>
+      <div class="kpi-value" style="color:#e87ba4">39.3$B</div>
+      <div class="kpi-change">+13.3% QoQ · +31.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">More Personal Computing Revenue</div>
+      <div class="kpi-value" style="color:#4a3aa7">12.9$B</div>
+      <div class="kpi-change">-2.3% QoQ · -4.4% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [65.6, 69.6, 70.1, 76.4, 77.7, 81.3, 82.9, 90.0],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["65.6$B", "69.6$B", "70.1$B", "76.4$B", "77.7$B", "81.3$B", "82.9$B", "90.0$B"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Operating Income <span class="chart-unit">($B)</span></div>
+      <div id="chart-operating_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-operating_income", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [30.6, 31.7, 32.0, 34.3, 38.0, 38.3, 38.4, 40.6],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["30.6$B", "31.7$B", "32.0$B", "34.3$B", "38.0$B", "38.3$B", "38.4$B", "40.6$B"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Microsoft Cloud Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-microsoft_cloud_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-microsoft_cloud_revenue", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [38.9, 40.9, 42.4, 46.7, 49.1, 51.5, 54.5, 59.3],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["38.9$B", "40.9$B", "42.4$B", "46.7$B", "49.1$B", "51.5$B", "54.5$B", "59.3$B"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Productivity & Business Processes Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-productivity_business_processes" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-productivity_business_processes", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [28.3, 29.4, 29.9, 33.1, 33.0, 34.1, 35.0, 37.8],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["28.3$B", "29.4$B", "29.9$B", "33.1$B", "33.0$B", "34.1$B", "35.0$B", "37.8$B"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Intelligent Cloud Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-intelligent_cloud" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-intelligent_cloud", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [24.1, 25.5, 26.8, 29.9, 30.9, 32.9, 34.7, 39.3],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["24.1$B", "25.5$B", "26.8$B", "29.9$B", "30.9$B", "32.9$B", "34.7$B", "39.3$B"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">More Personal Computing Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-more_personal_computing" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-more_personal_computing", [{
+        x: ["Q1 FY2025", "Q2 FY2025", "Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026"],
+        y: [13.2, 14.7, 13.4, 13.5, 13.8, 14.3, 13.2, 12.9],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["13.2$B", "14.7$B", "13.4$B", "13.5$B", "13.8$B", "14.3$B", "13.2$B", "12.9$B"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Microsoft's earnings release headlines Total Revenue, Operating Income and Microsoft Cloud revenue every quarter, and reports its three official operating segments -- Productivity and Business Processes, Intelligent Cloud, and More Personal Computing -- as the standard breakdown investors track (Azure is disclosed only as a growth rate, not a standalone dollar figure, so Intelligent Cloud segment revenue is the comparable dollar KPI for the AI/cloud infrastructure business).
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Operating Income</th><th>Microsoft Cloud Revenue</th><th>Productivity & Business Processes Revenue</th><th>Intelligent Cloud Revenue</th><th>More Personal Computing Revenue</th></tr>
+    <tr><td>Q1 FY2025</td><td>65.6$B</td><td>30.6$B</td><td>38.9$B</td><td>28.3$B</td><td>24.1$B</td><td>13.2$B</td></tr><tr><td>Q2 FY2025</td><td>69.6$B</td><td>31.7$B</td><td>40.9$B</td><td>29.4$B</td><td>25.5$B</td><td>14.7$B</td></tr><tr><td>Q3 FY2025</td><td>70.1$B</td><td>32.0$B</td><td>42.4$B</td><td>29.9$B</td><td>26.8$B</td><td>13.4$B</td></tr><tr><td>Q4 FY2025</td><td>76.4$B</td><td>34.3$B</td><td>46.7$B</td><td>33.1$B</td><td>29.9$B</td><td>13.5$B</td></tr><tr><td>Q1 FY2026</td><td>77.7$B</td><td>38.0$B</td><td>49.1$B</td><td>33.0$B</td><td>30.9$B</td><td>13.8$B</td></tr><tr><td>Q2 FY2026</td><td>81.3$B</td><td>38.3$B</td><td>51.5$B</td><td>34.1$B</td><td>32.9$B</td><td>14.3$B</td></tr><tr><td>Q3 FY2026</td><td>82.9$B</td><td>38.4$B</td><td>54.5$B</td><td>35.0$B</td><td>34.7$B</td><td>13.2$B</td></tr><tr><td>Q4 FY2026</td><td>90.0$B</td><td>40.6$B</td><td>59.3$B</td><td>37.8$B</td><td>39.3$B</td><td>12.9$B</td></tr>
+  </table>
+</div>
+</body>
+</html>

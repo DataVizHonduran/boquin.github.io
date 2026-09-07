@@ -1,0 +1,23 @@
+{
+  "ticker": "MSFT",
+  "company": "Microsoft Corp",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$B"},
+    {"key": "operating_income", "label": "Operating Income", "unit": "$B"},
+    {"key": "microsoft_cloud_revenue", "label": "Microsoft Cloud Revenue", "unit": "$B"},
+    {"key": "productivity_business_processes", "label": "Productivity & Business Processes Revenue", "unit": "$B"},
+    {"key": "intelligent_cloud", "label": "Intelligent Cloud Revenue", "unit": "$B"},
+    {"key": "more_personal_computing", "label": "More Personal Computing Revenue", "unit": "$B"}
+  ],
+  "kpi_rationale": "Microsoft's earnings release headlines Total Revenue, Operating Income and Microsoft Cloud revenue every quarter, and reports its three official operating segments -- Productivity and Business Processes, Intelligent Cloud, and More Personal Computing -- as the standard breakdown investors track (Azure is disclosed only as a growth rate, not a standalone dollar figure, so Intelligent Cloud segment revenue is the comparable dollar KPI for the AI/cloud infrastructure business).",
+  "history": [
+    {"period": "Q1 FY2025", "report_date": "2024-10-30", "values": {"total_revenue": 65.6, "operating_income": 30.6, "microsoft_cloud_revenue": 38.9, "productivity_business_processes": 28.3, "intelligent_cloud": 24.1, "more_personal_computing": 13.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000095017024118955/msft-ex99_1.htm"},
+    {"period": "Q2 FY2025", "report_date": "2025-01-29", "values": {"total_revenue": 69.6, "operating_income": 31.7, "microsoft_cloud_revenue": 40.9, "productivity_business_processes": 29.4, "intelligent_cloud": 25.5, "more_personal_computing": 14.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000095017025010484/msft-ex99_1.htm"},
+    {"period": "Q3 FY2025", "report_date": "2025-04-30", "values": {"total_revenue": 70.1, "operating_income": 32.0, "microsoft_cloud_revenue": 42.4, "productivity_business_processes": 29.9, "intelligent_cloud": 26.8, "more_personal_computing": 13.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000095017025061032/msft-ex99_1.htm"},
+    {"period": "Q4 FY2025", "report_date": "2025-07-30", "values": {"total_revenue": 76.4, "operating_income": 34.3, "microsoft_cloud_revenue": 46.7, "productivity_business_processes": 33.1, "intelligent_cloud": 29.9, "more_personal_computing": 13.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000095017025100226/msft-ex99_1.htm"},
+    {"period": "Q1 FY2026", "report_date": "2025-10-29", "values": {"total_revenue": 77.7, "operating_income": 38.0, "microsoft_cloud_revenue": 49.1, "productivity_business_processes": 33.0, "intelligent_cloud": 30.9, "more_personal_computing": 13.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000119312525256310/msft-ex99_1.htm"},
+    {"period": "Q2 FY2026", "report_date": "2026-01-28", "values": {"total_revenue": 81.3, "operating_income": 38.3, "microsoft_cloud_revenue": 51.5, "productivity_business_processes": 34.1, "intelligent_cloud": 32.9, "more_personal_computing": 14.3}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-ex99_1.htm"},
+    {"period": "Q3 FY2026", "report_date": "2026-04-29", "values": {"total_revenue": 82.9, "operating_income": 38.4, "microsoft_cloud_revenue": 54.5, "productivity_business_processes": 35.0, "intelligent_cloud": 34.7, "more_personal_computing": 13.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000119312526191457/msft-ex99_1.htm"},
+    {"period": "Q4 FY2026", "report_date": "2026-07-29", "values": {"total_revenue": 90.0, "operating_income": 40.6, "microsoft_cloud_revenue": 59.3, "productivity_business_processes": 37.8, "intelligent_cloud": 39.3, "more_personal_computing": 12.9}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm"}
+  ]
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISRG KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 ISRG KPI Tracker</h1>
+  <div class="sub">Intuitive Surgical Inc — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-07-16)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">2.9$B</div>
+      <div class="kpi-change">+4.3% QoQ · +18.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Instruments & Accessories Revenue</div>
+      <div class="kpi-value" style="color:#eb6834">1.7$B</div>
+      <div class="kpi-change">+2.4% QoQ · +17.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">da Vinci Systems Placed</div>
+      <div class="kpi-value" style="color:#1baf7a">468.0count</div>
+      <div class="kpi-change">+8.6% QoQ · +18.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">da Vinci Installed Base</div>
+      <div class="kpi-value" style="color:#eda100">11,710.0count</div>
+      <div class="kpi-change">+2.8% QoQ · +11.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Income from Operations</div>
+      <div class="kpi-value" style="color:#e87ba4">$1,220.0M</div>
+      <div class="kpi-change">+13.0% QoQ · +28.8% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Diluted EPS</div>
+      <div class="kpi-value" style="color:#4a3aa7">2.8$</div>
+      <div class="kpi-change">+12.0% QoQ · +27.9% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [2.41, 2.25, 2.44, 2.51, 2.87, 2.77, 2.89],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["2.4$B", "2.2$B", "2.4$B", "2.5$B", "2.9$B", "2.8$B", "2.9$B"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Instruments & Accessories Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-instruments_accessories_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-instruments_accessories_revenue", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [1.41, 1.37, 1.47, 1.52, 1.66, 1.69, 1.73],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["1.4$B", "1.4$B", "1.5$B", "1.5$B", "1.7$B", "1.7$B", "1.7$B"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">da Vinci Systems Placed <span class="chart-unit">(count)</span></div>
+      <div id="chart-davinci_systems_placed" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-davinci_systems_placed", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [493, 367, 395, 427, 532, 431, 468],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["493.0count", "367.0count", "395.0count", "427.0count", "532.0count", "431.0count", "468.0count"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">da Vinci Installed Base <span class="chart-unit">(count)</span></div>
+      <div id="chart-davinci_installed_base" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-davinci_installed_base", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [9902, 10189, 10488, 10763, 11106, 11395, 11710],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["9,902.0count", "10,189.0count", "10,488.0count", "10,763.0count", "11,106.0count", "11,395.0count", "11,710.0count"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Income from Operations <span class="chart-unit">($M)</span></div>
+      <div id="chart-non_gaap_op_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_op_income", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [928, 768, 947, 976, 1070, 1080, 1220],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["$928.0M", "$768.0M", "$947.0M", "$976.0M", "$1,070.0M", "$1,080.0M", "$1,220.0M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Diluted EPS <span class="chart-unit">($)</span></div>
+      <div id="chart-non_gaap_eps" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_eps", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [2.21, 1.81, 2.19, 2.4, 2.53, 2.5, 2.8],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["2.2$", "1.8$", "2.2$", "2.4$", "2.5$", "2.5$", "2.8$"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every Intuitive earnings release headlines total revenue, instruments & accessories revenue (the recurring, procedure-driven revenue stream), da Vinci systems placed in the quarter, and the cumulative da Vinci installed base as its standard operating metrics, alongside non-GAAP income from operations and non-GAAP diluted EPS in its GAAP/non-GAAP reconciliation -- these are the metrics management uses every quarter to frame procedure-volume-driven growth.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Instruments & Accessories Revenue</th><th>da Vinci Systems Placed</th><th>da Vinci Installed Base</th><th>Non-GAAP Income from Operations</th><th>Non-GAAP Diluted EPS</th></tr>
+    <tr><td>Q4 2024</td><td>2.4$B</td><td>1.4$B</td><td>493.0count</td><td>9,902.0count</td><td>$928.0M</td><td>2.2$</td></tr><tr><td>Q1 2025</td><td>2.2$B</td><td>1.4$B</td><td>367.0count</td><td>10,189.0count</td><td>$768.0M</td><td>1.8$</td></tr><tr><td>Q2 2025</td><td>2.4$B</td><td>1.5$B</td><td>395.0count</td><td>10,488.0count</td><td>$947.0M</td><td>2.2$</td></tr><tr><td>Q3 2025</td><td>2.5$B</td><td>1.5$B</td><td>427.0count</td><td>10,763.0count</td><td>$976.0M</td><td>2.4$</td></tr><tr><td>Q4 2025</td><td>2.9$B</td><td>1.7$B</td><td>532.0count</td><td>11,106.0count</td><td>$1,070.0M</td><td>2.5$</td></tr><tr><td>Q1 2026</td><td>2.8$B</td><td>1.7$B</td><td>431.0count</td><td>11,395.0count</td><td>$1,080.0M</td><td>2.5$</td></tr><tr><td>Q2 2026</td><td>2.9$B</td><td>1.7$B</td><td>468.0count</td><td>11,710.0count</td><td>$1,220.0M</td><td>2.8$</td></tr>
+  </table>
+</div>
+</body>
+</html>

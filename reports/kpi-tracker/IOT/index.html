@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IOT KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 IOT KPI Tracker</h1>
+  <div class="sub">Samsara Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: FQ2 FY2027 (2026-09-03)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Annual Recurring Revenue (ARR)</div>
+      <div class="kpi-value" style="color:#2a78d6">$2,124.7M</div>
+      <div class="kpi-change">+6.7% QoQ · +29.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#eb6834">$508.4M</div>
+      <div class="kpi-change">+6.2% QoQ · +29.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Gross Margin</div>
+      <div class="kpi-value" style="color:#1baf7a">78.0%</div>
+      <div class="kpi-change">+2.6% QoQ · +0.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Operating Margin</div>
+      <div class="kpi-value" style="color:#eda100">21.0%</div>
+      <div class="kpi-change">+10.5% QoQ · +40.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Diluted EPS</div>
+      <div class="kpi-value" style="color:#e87ba4">0.2$</div>
+      <div class="kpi-change">+17.6% QoQ · +66.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Free Cash Flow</div>
+      <div class="kpi-value" style="color:#4a3aa7">$64.7M</div>
+      <div class="kpi-change">-11.6% QoQ · +46.4% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Annual Recurring Revenue (ARR) <span class="chart-unit">($M)</span></div>
+      <div id="chart-arr" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-arr", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [1348.9, 1457.9, 1535.4, 1640.1, 1745.1, 1889.9, 1990.6, 2124.7],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$1,348.9M", "$1,457.9M", "$1,535.4M", "$1,640.1M", "$1,745.1M", "$1,889.9M", "$1,990.6M", "$2,124.7M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [322.0, 346.3, 366.9, 391.5, 416.0, 444.3, 478.8, 508.4],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["$322.0M", "$346.3M", "$366.9M", "$391.5M", "$416.0M", "$444.3M", "$478.8M", "$508.4M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Gross Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_gross_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_gross_margin", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [78, 78, 79, 78, 78, 77, 76, 78],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["78.0%", "78.0%", "79.0%", "78.0%", "78.0%", "77.0%", "76.0%", "78.0%"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Operating Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_op_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_op_margin", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [11, 16, 14, 15, 19, 21, 19, 21],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["11.0%", "16.0%", "14.0%", "15.0%", "19.0%", "21.0%", "19.0%", "21.0%"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Diluted EPS <span class="chart-unit">($)</span></div>
+      <div id="chart-non_gaap_eps" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_eps", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [0.07, 0.11, 0.11, 0.12, 0.15, 0.18, 0.17, 0.2],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["0.1$", "0.1$", "0.1$", "0.1$", "0.1$", "0.2$", "0.2$", "0.2$"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Free Cash Flow <span class="chart-unit">($M)</span></div>
+      <div id="chart-free_cash_flow" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-free_cash_flow", [{
+        x: ["FQ3 FY2025", "FQ4 FY2025", "FQ1 FY2026", "FQ2 FY2026", "FQ3 FY2026", "FQ4 FY2026", "FQ1 FY2027", "FQ2 FY2027"],
+        y: [31.2, 48.5, 45.7, 44.2, 55.8, 61.7, 73.2, 64.7],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["$31.2M", "$48.5M", "$45.7M", "$44.2M", "$55.8M", "$61.7M", "$73.2M", "$64.7M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every Samsara earnings release presents the same 'Financial Highlights' table -- ARR, Total Revenue, Non-GAAP gross margin, Non-GAAP operating margin, Non-GAAP EPS, and (in a standard reconciliation) Free Cash Flow -- as its standard quarterly disclosure, the metrics management itself uses to frame durable, efficient growth.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Annual Recurring Revenue (ARR)</th><th>Total Revenue</th><th>Non-GAAP Gross Margin</th><th>Non-GAAP Operating Margin</th><th>Non-GAAP Diluted EPS</th><th>Free Cash Flow</th></tr>
+    <tr><td>FQ3 FY2025</td><td>$1,348.9M</td><td>$322.0M</td><td>78.0%</td><td>11.0%</td><td>0.1$</td><td>$31.2M</td></tr><tr><td>FQ4 FY2025</td><td>$1,457.9M</td><td>$346.3M</td><td>78.0%</td><td>16.0%</td><td>0.1$</td><td>$48.5M</td></tr><tr><td>FQ1 FY2026</td><td>$1,535.4M</td><td>$366.9M</td><td>79.0%</td><td>14.0%</td><td>0.1$</td><td>$45.7M</td></tr><tr><td>FQ2 FY2026</td><td>$1,640.1M</td><td>$391.5M</td><td>78.0%</td><td>15.0%</td><td>0.1$</td><td>$44.2M</td></tr><tr><td>FQ3 FY2026</td><td>$1,745.1M</td><td>$416.0M</td><td>78.0%</td><td>19.0%</td><td>0.1$</td><td>$55.8M</td></tr><tr><td>FQ4 FY2026</td><td>$1,889.9M</td><td>$444.3M</td><td>77.0%</td><td>21.0%</td><td>0.2$</td><td>$61.7M</td></tr><tr><td>FQ1 FY2027</td><td>$1,990.6M</td><td>$478.8M</td><td>76.0%</td><td>19.0%</td><td>0.2$</td><td>$73.2M</td></tr><tr><td>FQ2 FY2027</td><td>$2,124.7M</td><td>$508.4M</td><td>78.0%</td><td>21.0%</td><td>0.2$</td><td>$64.7M</td></tr>
+  </table>
+</div>
+</body>
+</html>

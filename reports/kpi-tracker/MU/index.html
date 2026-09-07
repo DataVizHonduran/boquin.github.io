@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MU KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 MU KPI Tracker</h1>
+  <div class="sub">Micron Technology Inc — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: FQ3 2026 (2026-06-24)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$41,456.0M</div>
+      <div class="kpi-change">+73.7% QoQ · +345.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Gross Margin</div>
+      <div class="kpi-value" style="color:#eb6834">84.9%</div>
+      <div class="kpi-change">+13.4% QoQ · +117.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Operating Margin</div>
+      <div class="kpi-value" style="color:#1baf7a">81.2%</div>
+      <div class="kpi-change">+17.7% QoQ · +203.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Diluted EPS</div>
+      <div class="kpi-value" style="color:#eda100">25.1$</div>
+      <div class="kpi-change">+105.8% QoQ · +1214.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cloud Memory Business Unit Revenue</div>
+      <div class="kpi-value" style="color:#e87ba4">$13,769.0M</div>
+      <div class="kpi-change">+77.7% QoQ</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Core Data Center Business Unit Revenue</div>
+      <div class="kpi-value" style="color:#4a3aa7">$11,524.0M</div>
+      <div class="kpi-change">+102.6% QoQ</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [7750, 8709, 8053, 9301, 11315, 13643, 23860, 41456],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$7,750.0M", "$8,709.0M", "$8,053.0M", "$9,301.0M", "$11,315.0M", "$13,643.0M", "$23,860.0M", "$41,456.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Gross Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_gross_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_gross_margin", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [36.5, 39.5, 37.9, 39.0, 45.7, 56.8, 74.9, 84.9],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["36.5%", "39.5%", "37.9%", "39.0%", "45.7%", "56.8%", "74.9%", "84.9%"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Operating Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_op_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_op_margin", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [22.5, 27.5, 24.9, 26.8, 35.0, 47.0, 69.0, 81.2],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["22.5%", "27.5%", "24.9%", "26.8%", "35.0%", "47.0%", "69.0%", "81.2%"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Diluted EPS <span class="chart-unit">($)</span></div>
+      <div id="chart-non_gaap_eps" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_eps", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [1.18, 1.79, 1.56, 1.91, 3.03, 4.78, 12.2, 25.11],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["1.2$", "1.8$", "1.6$", "1.9$", "3.0$", "4.8$", "12.2$", "25.1$"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Cloud Memory Business Unit Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-cloud_memory_bu_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-cloud_memory_bu_revenue", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [null, null, null, null, 4543, 5284, 7749, 13769],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["\u2014", "\u2014", "\u2014", "\u2014", "$4,543.0M", "$5,284.0M", "$7,749.0M", "$13,769.0M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Core Data Center Business Unit Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-core_data_center_bu_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-core_data_center_bu_revenue", [{
+        x: ["FQ4 2024", "FQ1 2025", "FQ2 2025", "FQ3 2025", "FQ4 2025", "FQ1 2026", "FQ2 2026", "FQ3 2026"],
+        y: [null, null, null, null, 1577, 2379, 5687, 11524],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["\u2014", "\u2014", "\u2014", "\u2014", "$1,577.0M", "$2,379.0M", "$5,687.0M", "$11,524.0M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Micron's earnings release reports Total Revenue with non-GAAP gross margin, operating margin and diluted EPS every quarter in its GAAP/non-GAAP results table. Starting with the fiscal Q4 2025 release, Micron began disclosing a 'Quarterly Business Unit Financial Results' breakout (Cloud Memory, Core Data Center, Mobile and Client, Automotive and Embedded); Cloud Memory and Core Data Center are tracked here as the AI/HBM-driven growth segments management now emphasizes, null for the four quarters before that breakout began.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Non-GAAP Gross Margin</th><th>Non-GAAP Operating Margin</th><th>Non-GAAP Diluted EPS</th><th>Cloud Memory Business Unit Revenue</th><th>Core Data Center Business Unit Revenue</th></tr>
+    <tr><td>FQ4 2024</td><td>$7,750.0M</td><td>36.5%</td><td>22.5%</td><td>1.2$</td><td>—</td><td>—</td></tr><tr><td>FQ1 2025</td><td>$8,709.0M</td><td>39.5%</td><td>27.5%</td><td>1.8$</td><td>—</td><td>—</td></tr><tr><td>FQ2 2025</td><td>$8,053.0M</td><td>37.9%</td><td>24.9%</td><td>1.6$</td><td>—</td><td>—</td></tr><tr><td>FQ3 2025</td><td>$9,301.0M</td><td>39.0%</td><td>26.8%</td><td>1.9$</td><td>—</td><td>—</td></tr><tr><td>FQ4 2025</td><td>$11,315.0M</td><td>45.7%</td><td>35.0%</td><td>3.0$</td><td>$4,543.0M</td><td>$1,577.0M</td></tr><tr><td>FQ1 2026</td><td>$13,643.0M</td><td>56.8%</td><td>47.0%</td><td>4.8$</td><td>$5,284.0M</td><td>$2,379.0M</td></tr><tr><td>FQ2 2026</td><td>$23,860.0M</td><td>74.9%</td><td>69.0%</td><td>12.2$</td><td>$7,749.0M</td><td>$5,687.0M</td></tr><tr><td>FQ3 2026</td><td>$41,456.0M</td><td>84.9%</td><td>81.2%</td><td>25.1$</td><td>$13,769.0M</td><td>$11,524.0M</td></tr>
+  </table>
+</div>
+</body>
+</html>

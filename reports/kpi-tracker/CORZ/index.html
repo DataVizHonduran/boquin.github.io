@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORZ KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 CORZ KPI Tracker</h1>
+  <div class="sub">Core Scientific, Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-07-28)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$164.2M</div>
+      <div class="kpi-change">+42.5% QoQ · +108.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Colocation/HDC Revenue</div>
+      <div class="kpi-value" style="color:#eb6834">$136.7M</div>
+      <div class="kpi-change">+76.4% QoQ · +1189.6% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Gross Profit</div>
+      <div class="kpi-value" style="color:#1baf7a">$70.0M</div>
+      <div class="kpi-change">+132.6% QoQ · +1300.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA</div>
+      <div class="kpi-value" style="color:#eda100">$41.1M</div>
+      <div class="kpi-change">+361.8% QoQ · +91.2% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Capital Expenditures</div>
+      <div class="kpi-value" style="color:#e87ba4">$797.5M</div>
+      <div class="kpi-change">+104.9% QoQ · +557.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Liquidity</div>
+      <div class="kpi-value" style="color:#4a3aa7">$1,819.4M</div>
+      <div class="kpi-change">+74.5% QoQ · +141.3% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [95.4, 94.9, 79.5, 78.6, 81.1, 79.8, 115.2, 164.2],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$95.4M", "$94.9M", "$79.5M", "$78.6M", "$81.1M", "$79.8M", "$115.2M", "$164.2M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Colocation/HDC Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-colocation_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-colocation_revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [10.3, 8.5, 8.6, 10.6, 15.0, 31.3, 77.5, 136.7],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["$10.3M", "$8.5M", "$8.6M", "$10.6M", "$15.0M", "$31.3M", "$77.5M", "$136.7M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Gross Profit <span class="chart-unit">($M)</span></div>
+      <div id="chart-gross_profit" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-gross_profit", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [-0.2, 4.8, 8.2, 5.0, 3.9, 20.8, 30.1, 70.0],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["$-0.2M", "$4.8M", "$8.2M", "$5.0M", "$3.9M", "$20.8M", "$30.1M", "$70.0M"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA <span class="chart-unit">($M)</span></div>
+      <div id="chart-adjusted_ebitda" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_ebitda", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [10.1, 13.3, -6.1, 21.5, -2.4, -42.7, 8.9, 41.1],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["$10.1M", "$13.3M", "$-6.1M", "$21.5M", "$-2.4M", "$-42.7M", "$8.9M", "$41.1M"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Capital Expenditures <span class="chart-unit">($M)</span></div>
+      <div id="chart-capex" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-capex", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [null, null, null, 121.3, 244.5, 279.2, 389.2, 797.5],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["\u2014", "\u2014", "\u2014", "$121.3M", "$244.5M", "$279.2M", "$389.2M", "$797.5M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Liquidity <span class="chart-unit">($M)</span></div>
+      <div id="chart-liquidity" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-liquidity", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [null, null, 778.6, 754.1, 694.8, 533.4, 1042.5, 1819.4],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["\u2014", "\u2014", "$778.6M", "$754.1M", "$694.8M", "$533.4M", "$1,042.5M", "$1,819.4M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Core Scientific reports Total Revenue, Gross Profit and Adjusted EBITDA every quarter, and has consistently broken out its data-center-services revenue line item (labeled 'HPC hosting revenue' through 2024, renamed 'Colocation revenue' in 2025, now 'HDC revenue') as the company pivoted from bitcoin mining to AI high-density colocation. Capital Expenditures and Liquidity became standard bullets starting Q1 2025 (Liquidity) and Q2 2025 (CapEx) as the company began quantifying its colocation buildout; null for the two quarters before each was first disclosed.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Colocation/HDC Revenue</th><th>Gross Profit</th><th>Adjusted EBITDA</th><th>Capital Expenditures</th><th>Liquidity</th></tr>
+    <tr><td>Q3 2024</td><td>$95.4M</td><td>$10.3M</td><td>$-0.2M</td><td>$10.1M</td><td>—</td><td>—</td></tr><tr><td>Q4 2024</td><td>$94.9M</td><td>$8.5M</td><td>$4.8M</td><td>$13.3M</td><td>—</td><td>—</td></tr><tr><td>Q1 2025</td><td>$79.5M</td><td>$8.6M</td><td>$8.2M</td><td>$-6.1M</td><td>—</td><td>$778.6M</td></tr><tr><td>Q2 2025</td><td>$78.6M</td><td>$10.6M</td><td>$5.0M</td><td>$21.5M</td><td>$121.3M</td><td>$754.1M</td></tr><tr><td>Q3 2025</td><td>$81.1M</td><td>$15.0M</td><td>$3.9M</td><td>$-2.4M</td><td>$244.5M</td><td>$694.8M</td></tr><tr><td>Q4 2025</td><td>$79.8M</td><td>$31.3M</td><td>$20.8M</td><td>$-42.7M</td><td>$279.2M</td><td>$533.4M</td></tr><tr><td>Q1 2026</td><td>$115.2M</td><td>$77.5M</td><td>$30.1M</td><td>$8.9M</td><td>$389.2M</td><td>$1,042.5M</td></tr><tr><td>Q2 2026</td><td>$164.2M</td><td>$136.7M</td><td>$70.0M</td><td>$41.1M</td><td>$797.5M</td><td>$1,819.4M</td></tr>
+  </table>
+</div>
+</body>
+</html>

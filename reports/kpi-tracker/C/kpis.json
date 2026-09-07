@@ -1,0 +1,21 @@
+{
+  "ticker": "C",
+  "company": "Citigroup Inc",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenues, Net of Interest Expense", "unit": "$M"},
+    {"key": "net_income", "label": "Citigroup's Net Income", "unit": "$M"},
+    {"key": "diluted_eps", "label": "Diluted EPS", "unit": "$"},
+    {"key": "rotce", "label": "Return on Avg Tangible Common Equity (RoTCE)", "unit": "%"},
+    {"key": "efficiency_ratio", "label": "Efficiency Ratio", "unit": "%"},
+    {"key": "cet1_ratio", "label": "CET1 Capital Ratio", "unit": "%"}
+  ],
+  "kpi_rationale": "Every Citigroup earnings release presents the identical 'Financial Results' summary table -- Total Revenues, Net Income, Diluted EPS, RoTCE, Efficiency Ratio and CET1 Capital Ratio -- as its standard quarterly disclosure, the metrics management and bank analysts use every quarter to track profitability, cost discipline and capital adequacy. Only 6 quarters of history are available: Citigroup files thousands of routine 8-Ks per year for structured note offerings, so EDGAR's 'recent filings' window for this issuer only reaches back to September 2025; two additional quarters (Q1-Q2 2025) were recovered from an older EDGAR submissions page, but Efficiency Ratio was not included in the summary table of those two releases.",
+  "history": [
+    {"period": "Q1 2025", "report_date": "2025-04-15", "values": {"total_revenue": 21596, "net_income": 4064, "diluted_eps": 1.96, "rotce": 9.1, "efficiency_ratio": null, "cet1_ratio": 13.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000110465925034974/c-20240712xex99d1.htm (Efficiency Ratio not included in this release's summary table)"},
+    {"period": "Q2 2025", "report_date": "2025-07-15", "values": {"total_revenue": 21668, "net_income": 4019, "diluted_eps": 1.96, "rotce": 8.7, "efficiency_ratio": null, "cet1_ratio": 13.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000141057825001455/c-20250715xex99d1.htm (Efficiency Ratio not included in this release's summary table)"},
+    {"period": "Q3 2025", "report_date": "2025-10-14", "values": {"total_revenue": 22090, "net_income": 3752, "diluted_eps": 1.86, "rotce": 8.0, "efficiency_ratio": 64.7, "cet1_ratio": 13.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000110465925099097/c-20251014xex99d1.htm"},
+    {"period": "Q4 2025", "report_date": "2026-01-14", "values": {"total_revenue": 19871, "net_income": 2471, "diluted_eps": 1.19, "rotce": 5.1, "efficiency_ratio": 69.6, "cet1_ratio": 13.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000110465926003604/c-20260114xex99d1.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-14", "values": {"total_revenue": 24633, "net_income": 5785, "diluted_eps": 3.06, "rotce": 13.1, "efficiency_ratio": 58.1, "cet1_ratio": 12.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000110465926042942/c-20260414xex99d1.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-14", "values": {"total_revenue": 24766, "net_income": 5831, "diluted_eps": 3.15, "rotce": 13.0, "efficiency_ratio": 57.4, "cet1_ratio": 12.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm"}
+  ]
+}

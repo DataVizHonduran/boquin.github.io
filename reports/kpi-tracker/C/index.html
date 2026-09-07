@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 C KPI Tracker</h1>
+  <div class="sub">Citigroup Inc — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-07-14)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenues, Net of Interest Expense</div>
+      <div class="kpi-value" style="color:#2a78d6">$24,766.0M</div>
+      <div class="kpi-change">+0.5% QoQ · +14.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Citigroup's Net Income</div>
+      <div class="kpi-value" style="color:#eb6834">$5,831.0M</div>
+      <div class="kpi-change">+0.8% QoQ · +45.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Diluted EPS</div>
+      <div class="kpi-value" style="color:#1baf7a">3.1$</div>
+      <div class="kpi-change">+2.9% QoQ · +60.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Return on Avg Tangible Common Equity (RoTCE)</div>
+      <div class="kpi-value" style="color:#eda100">13.0%</div>
+      <div class="kpi-change">-0.8% QoQ · +49.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Efficiency Ratio</div>
+      <div class="kpi-value" style="color:#e87ba4">57.4%</div>
+      <div class="kpi-change">-1.2% QoQ</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CET1 Capital Ratio</div>
+      <div class="kpi-value" style="color:#4a3aa7">12.8%</div>
+      <div class="kpi-change">+0.8% QoQ · -5.2% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenues, Net of Interest Expense <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [21596, 21668, 22090, 19871, 24633, 24766],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$21,596.0M", "$21,668.0M", "$22,090.0M", "$19,871.0M", "$24,633.0M", "$24,766.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Citigroup's Net Income <span class="chart-unit">($M)</span></div>
+      <div id="chart-net_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-net_income", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [4064, 4019, 3752, 2471, 5785, 5831],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["$4,064.0M", "$4,019.0M", "$3,752.0M", "$2,471.0M", "$5,785.0M", "$5,831.0M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Diluted EPS <span class="chart-unit">($)</span></div>
+      <div id="chart-diluted_eps" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-diluted_eps", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [1.96, 1.96, 1.86, 1.19, 3.06, 3.15],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["2.0$", "2.0$", "1.9$", "1.2$", "3.1$", "3.1$"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Return on Avg Tangible Common Equity (RoTCE) <span class="chart-unit">(%)</span></div>
+      <div id="chart-rotce" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-rotce", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [9.1, 8.7, 8.0, 5.1, 13.1, 13.0],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["9.1%", "8.7%", "8.0%", "5.1%", "13.1%", "13.0%"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Efficiency Ratio <span class="chart-unit">(%)</span></div>
+      <div id="chart-efficiency_ratio" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-efficiency_ratio", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [null, null, 64.7, 69.6, 58.1, 57.4],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["\u2014", "\u2014", "64.7%", "69.6%", "58.1%", "57.4%"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">CET1 Capital Ratio <span class="chart-unit">(%)</span></div>
+      <div id="chart-cet1_ratio" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-cet1_ratio", [{
+        x: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [13.4, 13.5, 13.2, 13.2, 12.7, 12.8],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["13.4%", "13.5%", "13.2%", "13.2%", "12.7%", "12.8%"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every Citigroup earnings release presents the identical 'Financial Results' summary table -- Total Revenues, Net Income, Diluted EPS, RoTCE, Efficiency Ratio and CET1 Capital Ratio -- as its standard quarterly disclosure, the metrics management and bank analysts use every quarter to track profitability, cost discipline and capital adequacy. Only 6 quarters of history are available: Citigroup files thousands of routine 8-Ks per year for structured note offerings, so EDGAR's 'recent filings' window for this issuer only reaches back to September 2025; two additional quarters (Q1-Q2 2025) were recovered from an older EDGAR submissions page, but Efficiency Ratio was not included in the summary table of those two releases.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenues, Net of Interest Expense</th><th>Citigroup's Net Income</th><th>Diluted EPS</th><th>Return on Avg Tangible Common Equity (RoTCE)</th><th>Efficiency Ratio</th><th>CET1 Capital Ratio</th></tr>
+    <tr><td>Q1 2025</td><td>$21,596.0M</td><td>$4,064.0M</td><td>2.0$</td><td>9.1%</td><td>—</td><td>13.4%</td></tr><tr><td>Q2 2025</td><td>$21,668.0M</td><td>$4,019.0M</td><td>2.0$</td><td>8.7%</td><td>—</td><td>13.5%</td></tr><tr><td>Q3 2025</td><td>$22,090.0M</td><td>$3,752.0M</td><td>1.9$</td><td>8.0%</td><td>64.7%</td><td>13.2%</td></tr><tr><td>Q4 2025</td><td>$19,871.0M</td><td>$2,471.0M</td><td>1.2$</td><td>5.1%</td><td>69.6%</td><td>13.2%</td></tr><tr><td>Q1 2026</td><td>$24,633.0M</td><td>$5,785.0M</td><td>3.1$</td><td>13.1%</td><td>58.1%</td><td>12.7%</td></tr><tr><td>Q2 2026</td><td>$24,766.0M</td><td>$5,831.0M</td><td>3.1$</td><td>13.0%</td><td>57.4%</td><td>12.8%</td></tr>
+  </table>
+</div>
+</body>
+</html>
