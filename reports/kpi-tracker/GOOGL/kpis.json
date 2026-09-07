@@ -1,0 +1,23 @@
+{
+  "ticker": "GOOGL",
+  "company": "Alphabet Inc.",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "google_cloud_revenue", "label": "Google Cloud Revenue", "unit": "$M"},
+    {"key": "google_search_revenue", "label": "Google Search & Other Revenue", "unit": "$M"},
+    {"key": "youtube_ads_revenue", "label": "YouTube Ads Revenue", "unit": "$M"},
+    {"key": "operating_margin", "label": "Consolidated Operating Margin", "unit": "%"},
+    {"key": "google_cloud_op_income", "label": "Google Cloud Operating Income", "unit": "$M"}
+  ],
+  "kpi_rationale": "Alphabet's supplemental financial tables break out Google Search & other, YouTube ads and Google Cloud revenue every quarter alongside consolidated operating margin, and its segment table reports Google Cloud's operating income every quarter -- the metrics management and analysts use to track the AI/Cloud growth story against the core Search/YouTube advertising businesses.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-10-29", "values": {"total_revenue": 88268, "google_cloud_revenue": 11353, "google_search_revenue": 49385, "youtube_ads_revenue": 8921, "operating_margin": 32, "google_cloud_op_income": 1947}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204424000115/googexhibit991q32024.htm"},
+    {"period": "Q4 2024", "report_date": "2025-02-04", "values": {"total_revenue": 96469, "google_cloud_revenue": 11955, "google_search_revenue": 54034, "youtube_ads_revenue": 10473, "operating_margin": 32, "google_cloud_op_income": 2093}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204425000010/googexhibit991q42024.htm"},
+    {"period": "Q1 2025", "report_date": "2025-04-24", "values": {"total_revenue": 90234, "google_cloud_revenue": 12260, "google_search_revenue": 50702, "youtube_ads_revenue": 8927, "operating_margin": 34, "google_cloud_op_income": 2177}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204425000040/googexhibit991q12025.htm"},
+    {"period": "Q2 2025", "report_date": "2025-07-23", "values": {"total_revenue": 96428, "google_cloud_revenue": 13624, "google_search_revenue": 54190, "youtube_ads_revenue": 9796, "operating_margin": 32, "google_cloud_op_income": 2826}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204425000056/googexhibit991q22025.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-29", "values": {"total_revenue": 102346, "google_cloud_revenue": 15157, "google_search_revenue": 56567, "youtube_ads_revenue": 10261, "operating_margin": 31, "google_cloud_op_income": 3594}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204425000087/googexhibit991q32025.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-04", "values": {"total_revenue": 113828, "google_cloud_revenue": 17664, "google_search_revenue": 63073, "youtube_ads_revenue": 11383, "operating_margin": 32, "google_cloud_op_income": 5313}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204426000012/googexhibit991q42025.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-29", "values": {"total_revenue": 109896, "google_cloud_revenue": 20028, "google_search_revenue": 60399, "youtube_ads_revenue": 9883, "operating_margin": 36, "google_cloud_op_income": 6598}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-22", "values": {"total_revenue": 119796, "google_cloud_revenue": 24768, "google_search_revenue": 63271, "youtube_ads_revenue": 11055, "operating_margin": 34, "google_cloud_op_income": 8814}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm"}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "ticker": "GTLB",
+  "company": "Gitlab Inc.",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$M"},
+    {"key": "non_gaap_op_margin", "label": "Non-GAAP Operating Margin", "unit": "%"},
+    {"key": "dbnrr", "label": "Dollar-Based Net Retention Rate", "unit": "%"},
+    {"key": "customers_100k_arr", "label": "Customers with >$100K ARR", "unit": "count"},
+    {"key": "total_rpo", "label": "Total RPO", "unit": "$M"},
+    {"key": "non_gaap_fcf", "label": "Non-GAAP Adjusted Free Cash Flow", "unit": "$M"}
+  ],
+  "kpi_rationale": "Every GitLab earnings release headlines Total Revenue, non-GAAP operating margin, Dollar-Based Net Retention Rate, Customers with >$100,000 ARR, Total RPO and non-GAAP adjusted free cash flow as its standard 'Financial Highlights' bullets -- the standard SaaS growth/efficiency/retention metrics GitLab repeats verbatim every quarter.",
+  "history": [
+    {"period": "Q4 FY2025", "report_date": "2025-03-03", "values": {"total_revenue": 211.4, "non_gaap_op_margin": 18, "dbnrr": 123, "customers_100k_arr": 1229, "total_rpo": 945.0, "non_gaap_fcf": 62.1}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828025009422/gitlab-ex99120250131fy25.htm"},
+    {"period": "Q1 FY2026", "report_date": "2025-06-10", "values": {"total_revenue": 214.5, "non_gaap_op_margin": 12, "dbnrr": 122, "customers_100k_arr": 1288, "total_rpo": 955.1, "non_gaap_fcf": 104.1}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828025030455/gitlab-ex99120250430fy26.htm"},
+    {"period": "Q2 FY2026", "report_date": "2025-09-03", "values": {"total_revenue": 236.0, "non_gaap_op_margin": 17, "dbnrr": 121, "customers_100k_arr": 1344, "total_rpo": 988.2, "non_gaap_fcf": 46.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000165348225000008/gitlab-ex99120250731fy26.htm"},
+    {"period": "Q3 FY2026", "report_date": "2025-12-02", "values": {"total_revenue": 244.4, "non_gaap_op_margin": 18, "dbnrr": 119, "customers_100k_arr": 1405, "total_rpo": 1000, "non_gaap_fcf": 27.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828025054758/gitlab-ex99120251031fy26.htm"},
+    {"period": "Q4 FY2026", "report_date": "2026-03-03", "values": {"total_revenue": 260.4, "non_gaap_op_margin": 21, "dbnrr": 118, "customers_100k_arr": 1456, "total_rpo": 1100, "non_gaap_fcf": 41.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828026013795/gitlab-ex99120260131fy26.htm"},
+    {"period": "Q1 FY2027", "report_date": "2026-06-02", "values": {"total_revenue": 264.2, "non_gaap_op_margin": 14, "dbnrr": 117, "customers_100k_arr": 1519, "total_rpo": 1100, "non_gaap_fcf": 146.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828026039805/gitlab-ex99120260430fy27.htm"},
+    {"period": "Q2 FY2027", "report_date": "2026-09-01", "values": {"total_revenue": 286.3, "non_gaap_op_margin": 15, "dbnrr": 117, "customers_100k_arr": 1571, "total_rpo": 1200, "non_gaap_fcf": 9.8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1653482/000162828026059820/gitlab-ex99120260731fy27.htm"}
+  ]
+}

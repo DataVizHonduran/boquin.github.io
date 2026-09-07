@@ -1,0 +1,23 @@
+{
+  "ticker": "NVDA",
+  "company": "NVIDIA Corp",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$B"},
+    {"key": "data_center_revenue", "label": "Data Center Revenue", "unit": "$B"},
+    {"key": "non_gaap_gross_margin", "label": "Non-GAAP Gross Margin", "unit": "%"},
+    {"key": "non_gaap_eps", "label": "Non-GAAP Diluted EPS", "unit": "$"},
+    {"key": "gaming_revenue", "label": "Gaming Revenue", "unit": "$B"},
+    {"key": "edge_computing_revenue", "label": "Edge Computing Revenue", "unit": "$B"}
+  ],
+  "kpi_rationale": "Every NVIDIA release headlines Total Revenue and Data Center Revenue in its opening bullets, with GAAP-to-non-GAAP gross margin and EPS reconciliation tables every quarter. NVIDIA retired its Gaming/Professional Visualization/Automotive segment breakout starting Q1 FY2027, replacing it with a consolidated 'Edge Computing' segment -- both are tracked here (mutually exclusive by period, null before/after the switch) since each was the disclosed non-datacenter metric of its era. Note: beginning Q1 FY2027 NVIDIA's non-GAAP figures no longer exclude stock-based compensation, so non-GAAP EPS/margin before vs. after Q1 FY2027 aren't computed on an identical basis.",
+  "history": [
+    {"period": "Q3 FY2025", "report_date": "2024-11-20", "values": {"total_revenue": 35.1, "data_center_revenue": 30.8, "non_gaap_gross_margin": 75.0, "non_gaap_eps": 0.81, "gaming_revenue": 3.3, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581024000315/q3fy25pr.htm (Edge Computing segment not yet reported)"},
+    {"period": "Q4 FY2025", "report_date": "2025-02-26", "values": {"total_revenue": 39.3, "data_center_revenue": 35.6, "non_gaap_gross_margin": 73.5, "non_gaap_eps": 0.89, "gaming_revenue": 2.5, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581025000021/q4fy25pr.htm (Edge Computing segment not yet reported)"},
+    {"period": "Q1 FY2026", "report_date": "2025-05-28", "values": {"total_revenue": 44.1, "data_center_revenue": 39.1, "non_gaap_gross_margin": 61.0, "non_gaap_eps": 0.81, "gaming_revenue": 3.8, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581025000115/q1fy26pr.htm (gross margin depressed by $4.5B H20 export-license charge; Edge Computing segment not yet reported)"},
+    {"period": "Q2 FY2026", "report_date": "2025-08-27", "values": {"total_revenue": 46.7, "data_center_revenue": 41.1, "non_gaap_gross_margin": 72.7, "non_gaap_eps": 1.05, "gaming_revenue": 4.3, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581025000207/q2fy26pr.htm (Edge Computing segment not yet reported)"},
+    {"period": "Q3 FY2026", "report_date": "2025-11-19", "values": {"total_revenue": 57.0, "data_center_revenue": 51.2, "non_gaap_gross_margin": 73.6, "non_gaap_eps": 1.30, "gaming_revenue": 4.3, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581025000228/q3fy26pr.htm (Edge Computing segment not yet reported)"},
+    {"period": "Q4 FY2026", "report_date": "2026-02-25", "values": {"total_revenue": 68.1, "data_center_revenue": 62.3, "non_gaap_gross_margin": 75.2, "non_gaap_eps": 1.62, "gaming_revenue": 3.7, "edge_computing_revenue": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26pr.htm (Edge Computing segment not yet reported)"},
+    {"period": "Q1 FY2027", "report_date": "2026-05-20", "values": {"total_revenue": 81.6, "data_center_revenue": 75.2, "non_gaap_gross_margin": 75.0, "non_gaap_eps": 1.87, "gaming_revenue": null, "edge_computing_revenue": 6.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27pr.htm (Gaming segment retired; superseded by Edge Computing; non-GAAP now includes stock-based comp)"},
+    {"period": "Q2 FY2027", "report_date": "2026-08-26", "values": {"total_revenue": 96.2, "data_center_revenue": 89.0, "non_gaap_gross_margin": 75.0, "non_gaap_eps": 2.22, "gaming_revenue": null, "edge_computing_revenue": 7.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm (Gaming segment retired; superseded by Edge Computing)"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "ticker": "ORCL",
+  "company": "Oracle Corp",
+  "kpis": [
+    {"key": "total_revenue", "label": "Total Revenue", "unit": "$B"},
+    {"key": "rpo", "label": "Remaining Performance Obligations", "unit": "$B"},
+    {"key": "cloud_revenue", "label": "Total Cloud Revenue (IaaS+SaaS)", "unit": "$B"},
+    {"key": "iaas_revenue", "label": "Cloud Infrastructure (IaaS) Revenue", "unit": "$B"},
+    {"key": "saas_revenue", "label": "Cloud Applications (SaaS) Revenue", "unit": "$B"},
+    {"key": "non_gaap_op_margin", "label": "Non-GAAP Operating Margin", "unit": "%"}
+  ],
+  "kpi_rationale": "Every Oracle earnings release headlines Total Revenue, RPO, Total Cloud Revenue and the IaaS/SaaS split as its top bullets, and reports non-GAAP operating margin in its GAAP-to-non-GAAP reconciliation table each quarter -- these are the metrics management itself uses to frame the AI/cloud infrastructure buildout story.",
+  "history": [
+    {"period": "Q1 FY2025", "report_date": "2024-09-09", "values": {"total_revenue": 13.3, "rpo": 99, "cloud_revenue": 5.6, "iaas_revenue": 2.2, "saas_revenue": 3.5, "non_gaap_op_margin": 43}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000095017024104753/orcl-ex99_1.htm"},
+    {"period": "Q2 FY2025", "report_date": "2024-12-09", "values": {"total_revenue": 14.1, "rpo": 97, "cloud_revenue": 5.9, "iaas_revenue": 2.4, "saas_revenue": 3.5, "non_gaap_op_margin": 43}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000095017024134537/orcl-ex99_1.htm"},
+    {"period": "Q3 FY2025", "report_date": "2025-03-10", "values": {"total_revenue": 14.1, "rpo": 130, "cloud_revenue": 6.2, "iaas_revenue": 2.7, "saas_revenue": 3.6, "non_gaap_op_margin": 44}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000095017025036295/orcl-ex99_1.htm"},
+    {"period": "Q4 FY2025", "report_date": "2025-06-11", "values": {"total_revenue": 15.9, "rpo": 138, "cloud_revenue": 6.7, "iaas_revenue": 3.0, "saas_revenue": 3.7, "non_gaap_op_margin": 44}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000095017025084831/orcl-ex99_1.htm"},
+    {"period": "Q1 FY2026", "report_date": "2025-09-09", "values": {"total_revenue": 14.9, "rpo": 455, "cloud_revenue": 7.2, "iaas_revenue": 3.3, "saas_revenue": 3.8, "non_gaap_op_margin": 42}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000119312525199175/orcl-ex99_1.htm"},
+    {"period": "Q2 FY2026", "report_date": "2025-12-10", "values": {"total_revenue": 16.1, "rpo": 523, "cloud_revenue": 8.0, "iaas_revenue": 4.1, "saas_revenue": 3.9, "non_gaap_op_margin": 42}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000119312525314207/orcl-ex99_1.htm"},
+    {"period": "Q3 FY2026", "report_date": "2026-03-10", "values": {"total_revenue": 17.2, "rpo": 553, "cloud_revenue": 8.9, "iaas_revenue": 4.9, "saas_revenue": 4.0, "non_gaap_op_margin": 43}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000119312526100148/orcl-ex99_1.htm"},
+    {"period": "Q4 FY2026", "report_date": "2026-06-10", "values": {"total_revenue": 19.2, "rpo": 638, "cloud_revenue": 9.9, "iaas_revenue": 5.8, "saas_revenue": 4.1, "non_gaap_op_margin": 45}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm"}
+  ]
+}

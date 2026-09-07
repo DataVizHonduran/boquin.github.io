@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTLB KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 GTLB KPI Tracker</h1>
+  <div class="sub">Gitlab Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 FY2027 (2026-09-01)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$286.3M</div>
+      <div class="kpi-change">+8.4% QoQ · +21.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Operating Margin</div>
+      <div class="kpi-value" style="color:#eb6834">15.0%</div>
+      <div class="kpi-change">+7.1% QoQ · -11.8% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Dollar-Based Net Retention Rate</div>
+      <div class="kpi-value" style="color:#1baf7a">117.0%</div>
+      <div class="kpi-change">+0.0% QoQ · -3.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Customers with >$100K ARR</div>
+      <div class="kpi-value" style="color:#eda100">1,571.0count</div>
+      <div class="kpi-change">+3.4% QoQ · +16.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total RPO</div>
+      <div class="kpi-value" style="color:#e87ba4">$1,200.0M</div>
+      <div class="kpi-change">+9.1% QoQ · +21.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Adjusted Free Cash Flow</div>
+      <div class="kpi-value" style="color:#4a3aa7">$9.8M</div>
+      <div class="kpi-change">-93.3% QoQ · -78.9% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [211.4, 214.5, 236.0, 244.4, 260.4, 264.2, 286.3],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$211.4M", "$214.5M", "$236.0M", "$244.4M", "$260.4M", "$264.2M", "$286.3M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Operating Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_op_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_op_margin", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [18, 12, 17, 18, 21, 14, 15],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["18.0%", "12.0%", "17.0%", "18.0%", "21.0%", "14.0%", "15.0%"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Dollar-Based Net Retention Rate <span class="chart-unit">(%)</span></div>
+      <div id="chart-dbnrr" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-dbnrr", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [123, 122, 121, 119, 118, 117, 117],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["123.0%", "122.0%", "121.0%", "119.0%", "118.0%", "117.0%", "117.0%"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Customers with >$100K ARR <span class="chart-unit">(count)</span></div>
+      <div id="chart-customers_100k_arr" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-customers_100k_arr", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [1229, 1288, 1344, 1405, 1456, 1519, 1571],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["1,229.0count", "1,288.0count", "1,344.0count", "1,405.0count", "1,456.0count", "1,519.0count", "1,571.0count"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Total RPO <span class="chart-unit">($M)</span></div>
+      <div id="chart-total_rpo" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_rpo", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [945.0, 955.1, 988.2, 1000, 1100, 1100, 1200],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["$945.0M", "$955.1M", "$988.2M", "$1,000.0M", "$1,100.0M", "$1,100.0M", "$1,200.0M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Adjusted Free Cash Flow <span class="chart-unit">($M)</span></div>
+      <div id="chart-non_gaap_fcf" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_fcf", [{
+        x: ["Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [62.1, 104.1, 46.5, 27.2, 41.8, 146.7, 9.8],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["$62.1M", "$104.1M", "$46.5M", "$27.2M", "$41.8M", "$146.7M", "$9.8M"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every GitLab earnings release headlines Total Revenue, non-GAAP operating margin, Dollar-Based Net Retention Rate, Customers with >$100,000 ARR, Total RPO and non-GAAP adjusted free cash flow as its standard 'Financial Highlights' bullets -- the standard SaaS growth/efficiency/retention metrics GitLab repeats verbatim every quarter.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Non-GAAP Operating Margin</th><th>Dollar-Based Net Retention Rate</th><th>Customers with >$100K ARR</th><th>Total RPO</th><th>Non-GAAP Adjusted Free Cash Flow</th></tr>
+    <tr><td>Q4 FY2025</td><td>$211.4M</td><td>18.0%</td><td>123.0%</td><td>1,229.0count</td><td>$945.0M</td><td>$62.1M</td></tr><tr><td>Q1 FY2026</td><td>$214.5M</td><td>12.0%</td><td>122.0%</td><td>1,288.0count</td><td>$955.1M</td><td>$104.1M</td></tr><tr><td>Q2 FY2026</td><td>$236.0M</td><td>17.0%</td><td>121.0%</td><td>1,344.0count</td><td>$988.2M</td><td>$46.5M</td></tr><tr><td>Q3 FY2026</td><td>$244.4M</td><td>18.0%</td><td>119.0%</td><td>1,405.0count</td><td>$1,000.0M</td><td>$27.2M</td></tr><tr><td>Q4 FY2026</td><td>$260.4M</td><td>21.0%</td><td>118.0%</td><td>1,456.0count</td><td>$1,100.0M</td><td>$41.8M</td></tr><tr><td>Q1 FY2027</td><td>$264.2M</td><td>14.0%</td><td>117.0%</td><td>1,519.0count</td><td>$1,100.0M</td><td>$146.7M</td></tr><tr><td>Q2 FY2027</td><td>$286.3M</td><td>15.0%</td><td>117.0%</td><td>1,571.0count</td><td>$1,200.0M</td><td>$9.8M</td></tr>
+  </table>
+</div>
+</body>
+</html>

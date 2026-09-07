@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 NVDA KPI Tracker</h1>
+  <div class="sub">NVIDIA Corp — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 FY2027 (2026-08-26)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">96.2$B</div>
+      <div class="kpi-change">+17.9% QoQ · +106.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Data Center Revenue</div>
+      <div class="kpi-value" style="color:#eb6834">89.0$B</div>
+      <div class="kpi-change">+18.4% QoQ · +116.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Gross Margin</div>
+      <div class="kpi-value" style="color:#1baf7a">75.0%</div>
+      <div class="kpi-change">+0.0% QoQ · +3.2% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Non-GAAP Diluted EPS</div>
+      <div class="kpi-value" style="color:#eda100">2.2$</div>
+      <div class="kpi-change">+18.7% QoQ · +111.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Gaming Revenue</div>
+      <div class="kpi-value" style="color:#e87ba4">—</div>
+      <div class="kpi-change">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Edge Computing Revenue</div>
+      <div class="kpi-value" style="color:#4a3aa7">7.2$B</div>
+      <div class="kpi-change">+12.5% QoQ</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Total Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-total_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_revenue", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [35.1, 39.3, 44.1, 46.7, 57.0, 68.1, 81.6, 96.2],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["35.1$B", "39.3$B", "44.1$B", "46.7$B", "57.0$B", "68.1$B", "81.6$B", "96.2$B"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Data Center Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-data_center_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-data_center_revenue", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [30.8, 35.6, 39.1, 41.1, 51.2, 62.3, 75.2, 89.0],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["30.8$B", "35.6$B", "39.1$B", "41.1$B", "51.2$B", "62.3$B", "75.2$B", "89.0$B"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Gross Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-non_gaap_gross_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_gross_margin", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [75.0, 73.5, 61.0, 72.7, 73.6, 75.2, 75.0, 75.0],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["75.0%", "73.5%", "61.0%", "72.7%", "73.6%", "75.2%", "75.0%", "75.0%"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Non-GAAP Diluted EPS <span class="chart-unit">($)</span></div>
+      <div id="chart-non_gaap_eps" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-non_gaap_eps", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [0.81, 0.89, 0.81, 1.05, 1.3, 1.62, 1.87, 2.22],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["0.8$", "0.9$", "0.8$", "1.1$", "1.3$", "1.6$", "1.9$", "2.2$"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Gaming Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-gaming_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-gaming_revenue", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [3.3, 2.5, 3.8, 4.3, 4.3, 3.7, null, null],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["3.3$B", "2.5$B", "3.8$B", "4.3$B", "4.3$B", "3.7$B", "\u2014", "\u2014"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Edge Computing Revenue <span class="chart-unit">($B)</span></div>
+      <div id="chart-edge_computing_revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-edge_computing_revenue", [{
+        x: ["Q3 FY2025", "Q4 FY2025", "Q1 FY2026", "Q2 FY2026", "Q3 FY2026", "Q4 FY2026", "Q1 FY2027", "Q2 FY2027"],
+        y: [null, null, null, null, null, null, 6.4, 7.2],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "6.4$B", "7.2$B"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Every NVIDIA release headlines Total Revenue and Data Center Revenue in its opening bullets, with GAAP-to-non-GAAP gross margin and EPS reconciliation tables every quarter. NVIDIA retired its Gaming/Professional Visualization/Automotive segment breakout starting Q1 FY2027, replacing it with a consolidated 'Edge Computing' segment -- both are tracked here (mutually exclusive by period, null before/after the switch) since each was the disclosed non-datacenter metric of its era. Note: beginning Q1 FY2027 NVIDIA's non-GAAP figures no longer exclude stock-based compensation, so non-GAAP EPS/margin before vs. after Q1 FY2027 aren't computed on an identical basis.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Total Revenue</th><th>Data Center Revenue</th><th>Non-GAAP Gross Margin</th><th>Non-GAAP Diluted EPS</th><th>Gaming Revenue</th><th>Edge Computing Revenue</th></tr>
+    <tr><td>Q3 FY2025</td><td>35.1$B</td><td>30.8$B</td><td>75.0%</td><td>0.8$</td><td>3.3$B</td><td>—</td></tr><tr><td>Q4 FY2025</td><td>39.3$B</td><td>35.6$B</td><td>73.5%</td><td>0.9$</td><td>2.5$B</td><td>—</td></tr><tr><td>Q1 FY2026</td><td>44.1$B</td><td>39.1$B</td><td>61.0%</td><td>0.8$</td><td>3.8$B</td><td>—</td></tr><tr><td>Q2 FY2026</td><td>46.7$B</td><td>41.1$B</td><td>72.7%</td><td>1.1$</td><td>4.3$B</td><td>—</td></tr><tr><td>Q3 FY2026</td><td>57.0$B</td><td>51.2$B</td><td>73.6%</td><td>1.3$</td><td>4.3$B</td><td>—</td></tr><tr><td>Q4 FY2026</td><td>68.1$B</td><td>62.3$B</td><td>75.2%</td><td>1.6$</td><td>3.7$B</td><td>—</td></tr><tr><td>Q1 FY2027</td><td>81.6$B</td><td>75.2$B</td><td>75.0%</td><td>1.9$</td><td>—</td><td>6.4$B</td></tr><tr><td>Q2 FY2027</td><td>96.2$B</td><td>89.0$B</td><td>75.0%</td><td>2.2$</td><td>—</td><td>7.2$B</td></tr>
+  </table>
+</div>
+</body>
+</html>
