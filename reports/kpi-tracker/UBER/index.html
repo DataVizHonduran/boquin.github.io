@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UBER KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 UBER KPI Tracker</h1>
+  <div class="sub">Uber Technologies, Inc — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-08-05)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Gross Bookings</div>
+      <div class="kpi-value" style="color:#2a78d6">$58,022.0M</div>
+      <div class="kpi-change">+8.0% QoQ · +24.1% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Trips</div>
+      <div class="kpi-value" style="color:#eb6834">3,867.0M</div>
+      <div class="kpi-change">+6.1% QoQ · +18.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Monthly Active Platform Consumers</div>
+      <div class="kpi-value" style="color:#1baf7a">208.0M</div>
+      <div class="kpi-change">+4.5% QoQ · +15.6% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value" style="color:#eda100">$14,191.0M</div>
+      <div class="kpi-change">+7.5% QoQ · +12.2% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA</div>
+      <div class="kpi-value" style="color:#e87ba4">$2,819.0M</div>
+      <div class="kpi-change">+13.6% QoQ · +33.0% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA Margin (% of Gross Bookings)</div>
+      <div class="kpi-value" style="color:#4a3aa7">4.9%</div>
+      <div class="kpi-change">+6.5% QoQ · +8.9% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Gross Bookings <span class="chart-unit">($M)</span></div>
+      <div id="chart-gross_bookings" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-gross_bookings", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [40973, 44197, 42818, 46756, 49740, 54140, 53720, 58022],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$40,973.0M", "$44,197.0M", "$42,818.0M", "$46,756.0M", "$49,740.0M", "$54,140.0M", "$53,720.0M", "$58,022.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Trips <span class="chart-unit">(M)</span></div>
+      <div id="chart-trips" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-trips", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [2868, 3068, 3036, 3268, 3512, 3751, 3643, 3867],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["2,868.0M", "3,068.0M", "3,036.0M", "3,268.0M", "3,512.0M", "3,751.0M", "3,643.0M", "3,867.0M"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Monthly Active Platform Consumers <span class="chart-unit">(M)</span></div>
+      <div id="chart-mapc" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-mapc", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [161, 171, 170, 180, 189, 202, 199, 208],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["161.0M", "171.0M", "170.0M", "180.0M", "189.0M", "202.0M", "199.0M", "208.0M"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [11188, 11959, 11533, 12651, 13467, 14366, 13203, 14191],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["$11,188.0M", "$11,959.0M", "$11,533.0M", "$12,651.0M", "$13,467.0M", "$14,366.0M", "$13,203.0M", "$14,191.0M"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA <span class="chart-unit">($M)</span></div>
+      <div id="chart-adjusted_ebitda" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_ebitda", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [1690, 1842, 1868, 2119, 2256, 2487, 2481, 2819],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["$1,690.0M", "$1,842.0M", "$1,868.0M", "$2,119.0M", "$2,256.0M", "$2,487.0M", "$2,481.0M", "$2,819.0M"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA Margin (% of Gross Bookings) <span class="chart-unit">(%)</span></div>
+      <div id="chart-adjusted_ebitda_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_ebitda_margin", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [4.1, 4.2, 4.4, 4.5, 4.5, 4.6, 4.6, 4.9],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["4.1%", "4.2%", "4.4%", "4.5%", "4.5%", "4.6%", "4.6%", "4.9%"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Uber's press release leads every quarter with a 'Financial and Operational Highlights' table reporting exactly Gross Bookings, Trips, MAPCs, Revenue, and Adjusted EBITDA; Adjusted EBITDA margin as a % of Gross Bookings is management's headline profitability callout in the same release.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Gross Bookings</th><th>Trips</th><th>Monthly Active Platform Consumers</th><th>Revenue</th><th>Adjusted EBITDA</th><th>Adjusted EBITDA Margin (% of Gross Bookings)</th></tr>
+    <tr><td>Q3 2024</td><td>$40,973.0M</td><td>2,868.0M</td><td>161.0M</td><td>$11,188.0M</td><td>$1,690.0M</td><td>4.1%</td></tr><tr><td>Q4 2024</td><td>$44,197.0M</td><td>3,068.0M</td><td>171.0M</td><td>$11,959.0M</td><td>$1,842.0M</td><td>4.2%</td></tr><tr><td>Q1 2025</td><td>$42,818.0M</td><td>3,036.0M</td><td>170.0M</td><td>$11,533.0M</td><td>$1,868.0M</td><td>4.4%</td></tr><tr><td>Q2 2025</td><td>$46,756.0M</td><td>3,268.0M</td><td>180.0M</td><td>$12,651.0M</td><td>$2,119.0M</td><td>4.5%</td></tr><tr><td>Q3 2025</td><td>$49,740.0M</td><td>3,512.0M</td><td>189.0M</td><td>$13,467.0M</td><td>$2,256.0M</td><td>4.5%</td></tr><tr><td>Q4 2025</td><td>$54,140.0M</td><td>3,751.0M</td><td>202.0M</td><td>$14,366.0M</td><td>$2,487.0M</td><td>4.6%</td></tr><tr><td>Q1 2026</td><td>$53,720.0M</td><td>3,643.0M</td><td>199.0M</td><td>$13,203.0M</td><td>$2,481.0M</td><td>4.6%</td></tr><tr><td>Q2 2026</td><td>$58,022.0M</td><td>3,867.0M</td><td>208.0M</td><td>$14,191.0M</td><td>$2,819.0M</td><td>4.9%</td></tr>
+  </table>
+</div>
+</body>
+</html>

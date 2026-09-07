@@ -1,0 +1,23 @@
+{
+  "ticker": "UBER",
+  "company": "Uber Technologies, Inc",
+  "kpis": [
+    {"key": "gross_bookings", "label": "Gross Bookings", "unit": "$M"},
+    {"key": "trips", "label": "Trips", "unit": "M"},
+    {"key": "mapc", "label": "Monthly Active Platform Consumers", "unit": "M"},
+    {"key": "revenue", "label": "Revenue", "unit": "$M"},
+    {"key": "adjusted_ebitda", "label": "Adjusted EBITDA", "unit": "$M"},
+    {"key": "adjusted_ebitda_margin", "label": "Adjusted EBITDA Margin (% of Gross Bookings)", "unit": "%"}
+  ],
+  "kpi_rationale": "Uber's press release leads every quarter with a 'Financial and Operational Highlights' table reporting exactly Gross Bookings, Trips, MAPCs, Revenue, and Adjusted EBITDA; Adjusted EBITDA margin as a % of Gross Bookings is management's headline profitability callout in the same release.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-10-31", "values": {"gross_bookings": 40973, "trips": 2868, "mapc": 161, "revenue": 11188, "adjusted_ebitda": 1690, "adjusted_ebitda_margin": 4.1}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315124000033/uberq324earningspressrelea.htm"},
+    {"period": "Q4 2024", "report_date": "2025-02-05", "values": {"gross_bookings": 44197, "trips": 3068, "mapc": 171, "revenue": 11959, "adjusted_ebitda": 1842, "adjusted_ebitda_margin": 4.2}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315125000004/uberq424earningspressrelea.htm"},
+    {"period": "Q1 2025", "report_date": "2025-05-07", "values": {"gross_bookings": 42818, "trips": 3036, "mapc": 170, "revenue": 11533, "adjusted_ebitda": 1868, "adjusted_ebitda_margin": 4.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315125000012/uberq125earningspressrelea.htm"},
+    {"period": "Q2 2025", "report_date": "2025-08-06", "values": {"gross_bookings": 46756, "trips": 3268, "mapc": 180, "revenue": 12651, "adjusted_ebitda": 2119, "adjusted_ebitda_margin": 4.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315125000020/uberq225earningspressrelea.htm"},
+    {"period": "Q3 2025", "report_date": "2025-11-04", "values": {"gross_bookings": 49740, "trips": 3512, "mapc": 189, "revenue": 13467, "adjusted_ebitda": 2256, "adjusted_ebitda_margin": 4.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315125000030/uberq325earningspressrelea.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-04", "values": {"gross_bookings": 54140, "trips": 3751, "mapc": 202, "revenue": 14366, "adjusted_ebitda": 2487, "adjusted_ebitda_margin": 4.6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315126000011/uberq425earningspressrelea.htm"},
+    {"period": "Q1 2026", "report_date": "2026-05-06", "values": {"gross_bookings": 53720, "trips": 3643, "mapc": 199, "revenue": 13203, "adjusted_ebitda": 2481, "adjusted_ebitda_margin": 4.6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315126000019/uberq126earningspressrelea.htm"},
+    {"period": "Q2 2026", "report_date": "2026-08-05", "values": {"gross_bookings": 58022, "trips": 3867, "mapc": 208, "revenue": 14191, "adjusted_ebitda": 2819, "adjusted_ebitda_margin": 4.9}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1543151/000154315126000027/uberq226earningspressrelea.htm"}
+  ]
+}
