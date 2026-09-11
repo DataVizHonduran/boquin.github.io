@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOJ Watcher — 2026-09-11</title>
+    <style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1000px; margin: 0 auto; padding: 20px;
+    line-height: 1.6; background: #f5f5f5; color: #333;
+}
+.container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+h1 { color: #bf0000; border-bottom: 3px solid #bf0000; padding-bottom: 10px; }
+h2 { color: #bf0000; border-bottom: 2px solid #fce4e4; padding-bottom: 6px; margin-top: 36px; }
+h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+h4 { color: #555; margin-top: 20px; }
+.meta { color: #777; font-size: 0.85em; margin: 6px 0 20px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #bf0000; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.9em; }
+th { background: #bf0000; color: white; padding: 10px 12px; text-align: left; }
+td { border: 1px solid #ddd; padding: 8px 12px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8f9fa; }
+pre {
+    background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px;
+    padding: 16px; overflow-x: auto; font-size: 0.88em; white-space: pre-wrap;
+}
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+pre code { background: none; padding: 0; }
+blockquote {
+    border-left: 4px solid #bf0000; margin: 16px 0; padding: 8px 16px;
+    background: #fce4e4; border-radius: 0 4px 4px 0; color: #333;
+}
+strong { color: #111; }
+ul, ol { padding-left: 1.5em; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 2px solid #eee; margin: 32px 0; }
+a { color: #bf0000; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">&#8592; BOJ Watcher Archive</a>
+    <h1>&#127471;&#127477; BOJ Watcher &#8212; 2026-09-11</h1>
+    <p class="meta">
+        Generated: 2026-09-11 13:23 UTC &nbsp;|&nbsp;
+        Coverage: last 30 days &nbsp;|&nbsp;
+        Sources: boj.or.jp &middot; Google News RSS &nbsp;|&nbsp;
+        Model: google/gemma-4-31B-it
+    </p>
+    <hr>
+    <h3>Executive Summary</h3>
+<p>The past 30 days have seen a marked shift toward a more aggressive normalization bias within the Bank of Japan (BOJ). Governor Ueda and Deputy Governor Uchida have both signaled that a September rate hike remains on the table, supported by July core inflation accelerating to 2.0% and elevated August wholesale prices. The hawkish wing, led by Hajime Takata and now explicitly joined by Kazuyuki Masu, is pushing for "nimble" and potentially "rapid" rate hikes to cap inflation at 2% and address yen volatility. Market expectations have shifted toward a September hike to 1.25%, with the Yen reacting positively, hitting a one-month high of 155 per dollar. The consensus is moving from "cautionary" to "proactive" as the Board weighs price risks against financial stability.</p>
+<h3>Policy Board Member Pronouncements</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Official</th>
+<th>Role</th>
+<th>Venue/Context</th>
+<th>Key Statement</th>
+<th>Policy Signal</th>
+<th>Evolution vs Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09-10</td>
+<td>Kazuyuki Masu</td>
+<td>External Member</td>
+<td>Public Remarks</td>
+<td>BOJ will keep raising rates to cap price trend at 2%; rapid hikes may be needed if inflation accelerates.</td>
+<td>Hawkish</td>
+<td>Shifted from Neutral/Hawkish $\rightarrow$ Hawkish</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Speech (Fukui)</td>
+<td>[Referenced in news as signaling chance of Sept hike and debating price risks]</td>
+<td>Mixed/Hawkish</td>
+<td>Shifted from Neutral $\rightarrow$ Hawkish lean</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Speech (Sapporo)</td>
+<td>[Referenced in news as signaling chance of Sept hike]</td>
+<td>Mixed/Hawkish</td>
+<td>Consistent with recent lean</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>Hajime Takata</td>
+<td>External Member</td>
+<td>Public Remarks</td>
+<td>Urged "nimble" and "aggressive" rate hikes; 2026 is a turning point.</td>
+<td>Hawkish</td>
+<td>Consistent with Hawkish baseline</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Speech (Saitama)</td>
+<td>[Referenced in news as signaling chance of Sept hike]</td>
+<td>Mixed/Hawkish</td>
+<td>Consistent with recent lean</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>Shinichi Uchida</td>
+<td>Deputy Governor</td>
+<td>Public Remarks</td>
+<td>Kept door open to September rate increase.</td>
+<td>Hawkish</td>
+<td>Shifted from Dovish/Pragmatic $\rightarrow$ Hawkish</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>Shinichi Uchida</td>
+<td>Deputy Governor</td>
+<td>Public Remarks</td>
+<td>Called for timely rate hike; focus on inflation risk.</td>
+<td>Hawkish</td>
+<td>Shifted from Dovish/Pragmatic $\rightarrow$ Hawkish</td>
+</tr>
+</tbody>
+</table>
+<h3>MPM Official Communications</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Document Type</th>
+<th>Title</th>
+<th>Key Takeaways</th>
+<th>Policy Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>No new official documents released</td>
+<td>No minutes or outlook reports provided in current data set.</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3>Thematic Analysis</h3>
+<p><strong>1. Inflation Assessment (CPI, Core, Wages)</strong><br />
+Inflationary pressure is intensifying. Core inflation accelerated to 2.0% in July, and wholesale inflation remained elevated through August. This data is providing the necessary empirical cover for the BOJ to accelerate its hiking cycle.</p>
+<p><strong>2. Growth Outlook</strong><br />
+Not explicitly detailed in recent statements, though the focus has shifted entirely toward managing the "price trend" rather than stimulating growth.</p>
+<p><strong>3. Yen / FX Considerations</strong><br />
+The Yen is a primary driver of the current hawkish tilt. The currency hit a one-month high of 155 to the dollar in early September as markets priced in a higher probability of a rate hike. Member Masu specifically highlighted the "weak yen" as a risk factor necessitating rate increases.</p>
+<p><strong>4. Financial Conditions &amp; JGB Market</strong><br />
+External views (MOL Chairman) suggest that current low interest rates relative to inflation provide the BOJ ample room to hike without destabilizing the economy.</p>
+<p><strong>5. Balance Sheet (JGB purchase taper)</strong><br />
+No new specific updates on the JGB purchase taper were provided in the coverage period.</p>
+<p><strong>6. Forward Guidance Evolution</strong><br />
+Guidance is evolving from "data-dependent caution" to "nimble normalization." The introduction of terms like "rapid rate hikes" (Masu) and "aggressive" (Takata) suggests the BOJ is preparing the market for a faster pace of tightening than previously signaled.</p>
+<h3>Hawk-Dove Spectrum Analysis</h3>
+<pre><code>HAWKISH (favor faster normalization / rate hikes)
+├─ Hajime Takata (Urging aggressive/nimble hikes)
+├─ Kazuyuki Masu (Warns of rapid hikes to cap inflation)
+└─ Naoki Tamura (Consistent with hawkish baseline)
+
+NEUTRAL/DATA-DEPENDENT
+├─ Kazuo Ueda (Signaling Sept hike; managing price risks)
+├─ Ryozo Himino (Consistent with neutral baseline)
+└─ Junko Koeda (Consistent with neutral baseline)
+
+DOVISH (favor maintaining accommodation / slower hikes)
+├─ Shinichi Uchida (Now signaling &quot;timely&quot; hikes, but historically pragmatic)
+└─ Toichiro Asada (Consistent with dovish/reflationist baseline)
+</code></pre>
+<p><strong>Key Shifts Identified:</strong><br />
+- <strong>Kazuyuki Masu:</strong> Moved from a "Neutral/Hawkish" baseline to a clear "Hawkish" stance, explicitly mentioning the possibility of "rapid" hikes.<br />
+- <strong>Shinichi Uchida:</strong> Shifted from a "Dovish/Pragmatic" architect of accommodation to signaling a "timely" September hike.<br />
+- <strong>Kazuo Ueda:</strong> Moving from "Neutral/Cautionary" to actively signaling a September hike.</p>
+<h3>All 9 Voting Members Focus</h3>
+<table>
+<thead>
+<tr>
+<th>Official</th>
+<th>Role</th>
+<th>Current Stance</th>
+<th>Key Quote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kazuo Ueda</td>
+<td>Governor</td>
+<td>Mixed/Hawkish</td>
+<td>[Signaled chance of September rate hike]</td>
+</tr>
+<tr>
+<td>Shinichi Uchida</td>
+<td>Deputy Governor</td>
+<td>Hawkish</td>
+<td>"Keeps door open to September rate increase"</td>
+</tr>
+<tr>
+<td>Ryozo Himino</td>
+<td>Deputy Governor</td>
+<td>Neutral</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Hajime Takata</td>
+<td>External Member</td>
+<td>Hawkish</td>
+<td>"Urges nimble approach to rate hikes"</td>
+</tr>
+<tr>
+<td>Naoki Tamura</td>
+<td>External Member</td>
+<td>Hawkish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Kazuyuki Masu</td>
+<td>External Member</td>
+<td>Hawkish</td>
+<td>"BOJ may be forced to hike rates rapidly if inflation accelerates"</td>
+</tr>
+<tr>
+<td>Toichiro Asada</td>
+<td>External Member</td>
+<td>Dovish</td>
+<td>No public comments found</td>
+</tr>
+<tr>
+<td>Ayano Sato</td>
+<td>External Member</td>
+<td>Neutral</td>
+<td>No public comments found (Incoming)</td>
+</tr>
+<tr>
+<td>Junko Koeda</td>
+<td>External Member</td>
+<td>Neutral</td>
+<td>No public comments found</td>
+</tr>
+</tbody>
+</table>
+<h3>Dissent Watch</h3>
+<p>Hajime Takata remains the primary source of dissent. While the March 2026 hold was 8-1 (Takata dissenting for 1%), his recent calls for "aggressive" and "outsized" hikes suggest he may continue to dissent if the September move is perceived as too small (e.g., if the BOJ hikes to 1.0% while he favors 1.25% or higher).</p>
+</div>
+</body>
+</html>
