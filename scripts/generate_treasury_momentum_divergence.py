@@ -379,9 +379,17 @@ def _auto_yaxis_script(div_id: str) -> str:
   function attach() {{
     var gd = document.getElementById('{div_id}');
     if (!gd || !gd.data || !gd.data.length) {{ setTimeout(attach, 60); return; }}
+    // Pandas serializes timestamps with nanosecond precision
+    // ("...T00:00:00.000000000"); JS Date only understands up to
+    // milliseconds and silently returns Invalid Date on the rest,
+    // so trim any fractional-seconds digits past the first 3.
+    function parseDate(v) {{
+      if (typeof v === 'number') return v;
+      return new Date(String(v).replace(/(\\.\\d{{3}})\\d+/, '$1')).getTime();
+    }}
     var traces = gd.data.filter(function(t) {{ return t.x && t.y; }})
                          .map(function(t) {{
-                           return {{x: t.x.map(function(v) {{ return new Date(v).getTime(); }}), y: t.y}};
+                           return {{x: t.x.map(parseDate), y: t.y}};
                          }});
     function rescale(x0, x1) {{
       var ymin = Infinity, ymax = -Infinity;
@@ -404,11 +412,11 @@ def _auto_yaxis_script(div_id: str) -> str:
       }}
       var x0, x1;
       if (ev['xaxis.range[0]'] !== undefined && ev['xaxis.range[1]'] !== undefined) {{
-        x0 = new Date(ev['xaxis.range[0]']).getTime();
-        x1 = new Date(ev['xaxis.range[1]']).getTime();
+        x0 = parseDate(ev['xaxis.range[0]']);
+        x1 = parseDate(ev['xaxis.range[1]']);
       }} else if (ev['xaxis.range']) {{
-        x0 = new Date(ev['xaxis.range'][0]).getTime();
-        x1 = new Date(ev['xaxis.range'][1]).getTime();
+        x0 = parseDate(ev['xaxis.range'][0]);
+        x1 = parseDate(ev['xaxis.range'][1]);
       }} else {{
         return;
       }}
