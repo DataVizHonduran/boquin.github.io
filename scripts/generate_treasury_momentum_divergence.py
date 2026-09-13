@@ -179,6 +179,22 @@ def random_baseline_stats(vol_adj_fwd: pd.Series, exclude_dates: list, n_signals
 # Charts
 # ---------------------------------------------------------------------------
 
+def _range_selector() -> dict:
+    """1y/2y/3y/5y/10y/20y/All zoom buttons + a scrub slider, for time-series charts."""
+    return dict(
+        buttons=[
+            dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(count=2, label="2y", step="year", stepmode="backward"),
+            dict(count=3, label="3y", step="year", stepmode="backward"),
+            dict(count=5, label="5y", step="year", stepmode="backward"),
+            dict(count=10, label="10y", step="year", stepmode="backward"),
+            dict(count=20, label="20y", step="year", stepmode="backward"),
+            dict(step="all", label="All"),
+        ],
+        bgcolor="#f0f0f0", activecolor="#c8d8ea", font=dict(size=11),
+    )
+
+
 def build_fig2(yield_s: pd.Series, signals: list, osc_name: str) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Scatter(
@@ -201,11 +217,12 @@ def build_fig2(yield_s: pd.Series, signals: list, osc_name: str) -> go.Figure:
             text=f"30Y Treasury Yield — Weekly Bearish {osc_name} Divergence (Bond Buy) Signals",
             x=0.5, xanchor="center", font=dict(size=18, color="#1a1a2e"),
         ),
-        xaxis=dict(title="Date", showgrid=True, gridcolor="lightgrey", tickformat="%Y", dtick="M24"),
+        xaxis=dict(title="Date", showgrid=True, gridcolor="lightgrey",
+                    rangeselector=_range_selector(), rangeslider=dict(visible=True, thickness=0.06)),
         yaxis=dict(title="Yield (%)", ticksuffix="%", showgrid=True, zeroline=False),
         legend=dict(x=0.01, y=0.99, bgcolor="rgba(255,255,255,0.85)",
                     bordercolor="black", borderwidth=1),
-        hovermode="x unified", plot_bgcolor="white", width=1100, height=620,
+        hovermode="x unified", plot_bgcolor="white", width=1100, height=680,
         annotations=[dict(
             text=(f"Source: FRED {SERIES_ID}, weekly ({RESAMPLE_RULE}) resample. Signal = weekly yield "
                   f"higher high with {osc_name} lower high (bearish divergence)."),
@@ -250,11 +267,12 @@ def build_fig_osc(yield_s: pd.Series, osc_s: pd.Series, signals: list, osc_name:
             text=f"{osc_name} — Divergence Windows Shaded",
             x=0.5, xanchor="center", font=dict(size=18, color="#1a1a2e"),
         ),
-        xaxis=dict(title="Date", showgrid=True, gridcolor="lightgrey", tickformat="%Y", dtick="M24"),
+        xaxis=dict(title="Date", showgrid=True, gridcolor="lightgrey",
+                    rangeselector=_range_selector(), rangeslider=dict(visible=True, thickness=0.08)),
         yaxis=dict(title=osc_name, showgrid=True, zeroline=False),
         legend=dict(x=0.01, y=0.99, bgcolor="rgba(255,255,255,0.85)",
                     bordercolor="black", borderwidth=1),
-        plot_bgcolor="white", width=1100, height=420, hovermode="x unified",
+        plot_bgcolor="white", width=1100, height=480, hovermode="x unified",
         annotations=[dict(
             text=("Shaded red spans mark each divergence window: yield made a higher high while "
                   f"{osc_name} made a lower high (red dashed line connects the two pivot points)."),
