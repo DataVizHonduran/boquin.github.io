@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-09-13T08:52:25.519154",
+  "series": "DGS30",
+  "method": "RSI-14",
+  "data_range": [
+    "1977-02-18",
+    "2026-09-11"
+  ],
+  "signal_count": 16,
+  "signals": [
+    {
+      "date": "1978-07-14",
+      "yield_at_signal": 8.69,
+      "osc_at_signal": 85.71,
+      "prior_high_date": "1978-02-17"
+    },
+    {
+      "date": "1979-02-23",
+      "yield_at_signal": 9.1,
+      "osc_at_signal": 73.56,
+      "prior_high_date": "1978-07-14"
+    },
+    {
+      "date": "1980-02-22",
+      "yield_at_signal": 12.59,
+      "osc_at_signal": 87.07,
+      "prior_high_date": "1979-11-02"
+    },
+    {
+      "date": "1980-12-12",
+      "yield_at_signal": 12.82,
+      "osc_at_signal": 75.88,
+      "prior_high_date": "1980-02-22"
+    },
+    {
+      "date": "1981-02-13",
+      "yield_at_signal": 13.2,
+      "osc_at_signal": 59.21,
+      "prior_high_date": "1980-12-12"
+    },
+    {
+      "date": "1988-08-26",
+      "yield_at_signal": 9.43,
+      "osc_at_signal": 52.74,
+      "prior_high_date": "1988-05-20"
+    },
+    {
+      "date": "1990-08-24",
+      "yield_at_signal": 9.17,
+      "osc_at_signal": 66.67,
+      "prior_high_date": "1990-04-27"
+    },
+    {
+      "date": "1994-07-08",
+      "yield_at_signal": 7.7,
+      "osc_at_signal": 69.8,
+      "prior_high_date": "1994-05-06"
+    },
+    {
+      "date": "1996-07-05",
+      "yield_at_signal": 7.19,
+      "osc_at_signal": 66.46,
+      "prior_high_date": "1996-05-03"
+    },
+    {
+      "date": "1999-08-06",
+      "yield_at_signal": 6.16,
+      "osc_at_signal": 65.0,
+      "prior_high_date": "1999-03-26"
+    },
+    {
+      "date": "2000-01-21",
+      "yield_at_signal": 6.71,
+      "osc_at_signal": 67.18,
+      "prior_high_date": "1999-10-22"
+    },
+    {
+      "date": "2013-09-06",
+      "yield_at_signal": 3.87,
+      "osc_at_signal": 69.93,
+      "prior_high_date": "2013-03-08"
+    },
+    {
+      "date": "2013-12-27",
+      "yield_at_signal": 3.94,
+      "osc_at_signal": 59.34,
+      "prior_high_date": "2013-09-06"
+    },
+    {
+      "date": "2018-05-18",
+      "yield_at_signal": 3.2,
+      "osc_at_signal": 55.17,
+      "prior_high_date": "2018-03-09"
+    },
+    {
+      "date": "2025-05-23",
+      "yield_at_signal": 5.04,
+      "osc_at_signal": 62.07,
+      "prior_high_date": "2025-01-10"
+    },
+    {
+      "date": "2026-05-15",
+      "yield_at_signal": 5.12,
+      "osc_at_signal": 63.64,
+      "prior_high_date": "2026-01-30"
+    }
+  ],
+  "signal_stats": {
+    "n": 16,
+    "mean": -2.659553049442315,
+    "std": 4.390390890247686
+  },
+  "random_baseline": {
+    "draws": 1000,
+    "mean": -0.10419617428445453,
+    "std": 1.0531888542553838
+  }
+}
