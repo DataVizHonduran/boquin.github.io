@@ -1,0 +1,23 @@
+{
+  "ticker": "SYM",
+  "company": "Symbotic Inc.",
+  "kpis": [
+    {"key": "revenue", "label": "Revenue", "unit": "$M"},
+    {"key": "adjusted_gross_margin", "label": "Adjusted Gross Margin", "unit": "%"},
+    {"key": "adjusted_ebitda", "label": "Adjusted EBITDA", "unit": "$M"},
+    {"key": "net_income", "label": "Net Income (Loss)", "unit": "$M"},
+    {"key": "systems_in_deployment", "label": "Systems in Deployment", "unit": "#"},
+    {"key": "total_backlog", "label": "Total Backlog", "unit": "$B"}
+  ],
+  "kpi_rationale": "Symbotic's own investor deck carries a 'Key Financial Metrics / Key Operating Metrics' slide every quarter headlined by revenue growth, gross margin, and Total Backlog, plus Systems in Deployment as the primary operating cadence metric. Adjusted EBITDA and net income are the two profitability lines management calls out in every earnings press release headline.",
+  "history": [
+    {"period": "Q4 2024", "report_date": "2024-11-18", "values": {"revenue": 577, "adjusted_gross_margin": 19.6, "adjusted_ebitda": 54.6, "net_income": 28, "systems_in_deployment": null, "total_backlog": null}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724024000213/q4248-k_ex9911.htm (no investor deck filed this release; Systems in Deployment/Backlog not disclosed)"},
+    {"period": "Q1 2025", "report_date": "2025-02-05", "values": {"revenue": 487, "adjusted_gross_margin": 17.7, "adjusted_ebitda": 17.9, "net_income": -19, "systems_in_deployment": 44, "total_backlog": 22.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724025000043/q1258-k_ex991.htm"},
+    {"period": "Q2 2025", "report_date": "2025-05-07", "values": {"revenue": 550, "adjusted_gross_margin": 22.2, "adjusted_ebitda": 34.7, "net_income": -21.4, "systems_in_deployment": 46, "total_backlog": 22.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724025000149/q2258-k_ex991.htm"},
+    {"period": "Q3 2025", "report_date": "2025-08-06", "values": {"revenue": 592, "adjusted_gross_margin": 21.5, "adjusted_ebitda": 45.4, "net_income": -32, "systems_in_deployment": 46, "total_backlog": 22.4}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724025000261/q3258-k_ex991.htm"},
+    {"period": "Q4 2025", "report_date": "2025-11-24", "values": {"revenue": 618, "adjusted_gross_margin": 22.1, "adjusted_ebitda": 49.4, "net_income": -19, "systems_in_deployment": 50, "total_backlog": 22.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724025000277/q4258-k_ex991.htm"},
+    {"period": "Q1 2026", "report_date": "2026-02-04", "values": {"revenue": 630, "adjusted_gross_margin": 23.4, "adjusted_ebitda": 66.9, "net_income": 13, "systems_in_deployment": 57, "total_backlog": 22.3}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724026000008/q1268-k_ex991.htm"},
+    {"period": "Q2 2026", "report_date": "2026-05-06", "values": {"revenue": 676, "adjusted_gross_margin": 24.5, "adjusted_ebitda": 77.8, "net_income": 9.4, "systems_in_deployment": 70, "total_backlog": 22.7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724026000023/q2268-k_ex991.htm"},
+    {"period": "Q3 2026", "report_date": "2026-08-05", "values": {"revenue": 721, "adjusted_gross_margin": 25.0, "adjusted_ebitda": 95.2, "net_income": 55, "systems_in_deployment": 77, "total_backlog": 22.5}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1837240/000183724026000042/q3268-k_ex991.htm"}
+  ]
+}

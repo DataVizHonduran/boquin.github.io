@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 SYM KPI Tracker</h1>
+  <div class="sub">Symbotic Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q3 2026 (2026-08-05)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$721.0M</div>
+      <div class="kpi-change">+6.7% QoQ · +21.8% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted Gross Margin</div>
+      <div class="kpi-value" style="color:#eb6834">25.0%</div>
+      <div class="kpi-change">+2.0% QoQ · +16.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA</div>
+      <div class="kpi-value" style="color:#1baf7a">$95.2M</div>
+      <div class="kpi-change">+22.4% QoQ · +109.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Net Income (Loss)</div>
+      <div class="kpi-value" style="color:#eda100">$55.0M</div>
+      <div class="kpi-change">+485.1% QoQ · -271.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Systems in Deployment</div>
+      <div class="kpi-value" style="color:#e87ba4">77.0#</div>
+      <div class="kpi-change">+10.0% QoQ · +67.4% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Backlog</div>
+      <div class="kpi-value" style="color:#4a3aa7">22.5$B</div>
+      <div class="kpi-change">-0.9% QoQ · +0.4% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-revenue", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [577, 487, 550, 592, 618, 630, 676, 721],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$577.0M", "$487.0M", "$550.0M", "$592.0M", "$618.0M", "$630.0M", "$676.0M", "$721.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted Gross Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-adjusted_gross_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_gross_margin", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [19.6, 17.7, 22.2, 21.5, 22.1, 23.4, 24.5, 25.0],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["19.6%", "17.7%", "22.2%", "21.5%", "22.1%", "23.4%", "24.5%", "25.0%"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA <span class="chart-unit">($M)</span></div>
+      <div id="chart-adjusted_ebitda" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adjusted_ebitda", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [54.6, 17.9, 34.7, 45.4, 49.4, 66.9, 77.8, 95.2],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["$54.6M", "$17.9M", "$34.7M", "$45.4M", "$49.4M", "$66.9M", "$77.8M", "$95.2M"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Net Income (Loss) <span class="chart-unit">($M)</span></div>
+      <div id="chart-net_income" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-net_income", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [28, -19, -21.4, -32, -19, 13, 9.4, 55],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["$28.0M", "$-19.0M", "$-21.4M", "$-32.0M", "$-19.0M", "$13.0M", "$9.4M", "$55.0M"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Systems in Deployment <span class="chart-unit">(#)</span></div>
+      <div id="chart-systems_in_deployment" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-systems_in_deployment", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [null, 44, 46, 46, 50, 57, 70, 77],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["\u2014", "44.0#", "46.0#", "46.0#", "50.0#", "57.0#", "70.0#", "77.0#"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Total Backlog <span class="chart-unit">($B)</span></div>
+      <div id="chart-total_backlog" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-total_backlog", [{
+        x: ["Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026"],
+        y: [null, 22.4, 22.7, 22.4, 22.5, 22.3, 22.7, 22.5],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["\u2014", "22.4$B", "22.7$B", "22.4$B", "22.5$B", "22.3$B", "22.7$B", "22.5$B"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Symbotic's own investor deck carries a 'Key Financial Metrics / Key Operating Metrics' slide every quarter headlined by revenue growth, gross margin, and Total Backlog, plus Systems in Deployment as the primary operating cadence metric. Adjusted EBITDA and net income are the two profitability lines management calls out in every earnings press release headline.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Revenue</th><th>Adjusted Gross Margin</th><th>Adjusted EBITDA</th><th>Net Income (Loss)</th><th>Systems in Deployment</th><th>Total Backlog</th></tr>
+    <tr><td>Q4 2024</td><td>$577.0M</td><td>19.6%</td><td>$54.6M</td><td>$28.0M</td><td>—</td><td>—</td></tr><tr><td>Q1 2025</td><td>$487.0M</td><td>17.7%</td><td>$17.9M</td><td>$-19.0M</td><td>44.0#</td><td>22.4$B</td></tr><tr><td>Q2 2025</td><td>$550.0M</td><td>22.2%</td><td>$34.7M</td><td>$-21.4M</td><td>46.0#</td><td>22.7$B</td></tr><tr><td>Q3 2025</td><td>$592.0M</td><td>21.5%</td><td>$45.4M</td><td>$-32.0M</td><td>46.0#</td><td>22.4$B</td></tr><tr><td>Q4 2025</td><td>$618.0M</td><td>22.1%</td><td>$49.4M</td><td>$-19.0M</td><td>50.0#</td><td>22.5$B</td></tr><tr><td>Q1 2026</td><td>$630.0M</td><td>23.4%</td><td>$66.9M</td><td>$13.0M</td><td>57.0#</td><td>22.3$B</td></tr><tr><td>Q2 2026</td><td>$676.0M</td><td>24.5%</td><td>$77.8M</td><td>$9.4M</td><td>70.0#</td><td>22.7$B</td></tr><tr><td>Q3 2026</td><td>$721.0M</td><td>25.0%</td><td>$95.2M</td><td>$55.0M</td><td>77.0#</td><td>22.5$B</td></tr>
+  </table>
+</div>
+</body>
+</html>

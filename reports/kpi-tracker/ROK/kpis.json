@@ -1,0 +1,22 @@
+{
+  "ticker": "ROK",
+  "company": "ROCKWELL AUTOMATION, INC",
+  "kpis": [
+    {"key": "sales", "label": "Sales", "unit": "$M"},
+    {"key": "operating_margin", "label": "Operating Margin", "unit": "%"},
+    {"key": "organic_sales_growth", "label": "Organic Sales Growth YoY", "unit": "%"},
+    {"key": "adjusted_eps", "label": "Adjusted EPS", "unit": "$"},
+    {"key": "arr_growth_yoy", "label": "ARR Growth YoY", "unit": "%"}
+  ],
+  "kpi_rationale": "Every Rockwell release headlines reported/organic sales growth, Adjusted EPS, and ARR growth in its opening bullets, with segment operating margin (renamed 'Enterprise operating margin' starting Q2 FY26 after the Sensia JV dissolution) as the recurring profitability metric. Adjusted EBITDA was excluded despite being called out since Q1 FY26 because it isn't disclosed for the earlier quarters in this history.",
+  "history": [
+    {"period": "Q4 2024", "report_date": "2024-11-07", "values": {"sales": 2036, "operating_margin": 20.1, "organic_sales_growth": -21, "adjusted_eps": 2.47, "arr_growth_yoy": 16}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447824000105/fy2024ex99.htm"},
+    {"period": "Q1 2025", "report_date": "2025-02-10", "values": {"sales": 1881, "operating_margin": 17.1, "organic_sales_growth": -7.6, "adjusted_eps": 1.83, "arr_growth_yoy": 11}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447825000008/q1fy25ex99.htm"},
+    {"period": "Q2 2025", "report_date": "2025-05-07", "values": {"sales": 2001, "operating_margin": 20.4, "organic_sales_growth": -4, "adjusted_eps": 2.45, "arr_growth_yoy": 8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447825000033/q2fy25ex99.htm"},
+    {"period": "Q3 2025", "report_date": "2025-08-06", "values": {"sales": 2144, "operating_margin": 21.2, "organic_sales_growth": 4, "adjusted_eps": 2.82, "arr_growth_yoy": 7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447825000081/q3fy25ex99.htm"},
+    {"period": "Q4 2025", "report_date": "2025-11-06", "values": {"sales": 2316, "operating_margin": 22.5, "organic_sales_growth": 13, "adjusted_eps": 3.34, "arr_growth_yoy": 8}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447825000112/fy2025ex99.htm"},
+    {"period": "Q1 2026", "report_date": "2026-02-05", "values": {"sales": 2105, "operating_margin": 20.7, "organic_sales_growth": 10, "adjusted_eps": 2.75, "arr_growth_yoy": 7}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447826000003/q1fy26ex99.htm"},
+    {"period": "Q2 2026", "report_date": "2026-05-05", "values": {"sales": 2239, "operating_margin": 22.5, "organic_sales_growth": 9, "adjusted_eps": 3.30, "arr_growth_yoy": 6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447826000020/q2fy26ex99.htm (operating margin redefined as 'Enterprise operating margin')"},
+    {"period": "Q3 2026", "report_date": "2026-08-04", "values": {"sales": 2313, "operating_margin": 22.3, "organic_sales_growth": 10, "adjusted_eps": 3.49, "arr_growth_yoy": 6}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1024478/000102447826000028/q3fy26ex99.htm (ARR growth reported as 'Organic ARR' post-Sensia dissolution)"}
+  ]
+}

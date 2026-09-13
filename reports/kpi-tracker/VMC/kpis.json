@@ -1,0 +1,23 @@
+{
+  "ticker": "VMC",
+  "company": "Vulcan Materials CO",
+  "kpis": [
+    {"key": "revenue", "label": "Total Revenues", "unit": "$M"},
+    {"key": "adjusted_ebitda_margin", "label": "Adjusted EBITDA Margin", "unit": "%"},
+    {"key": "aggregates_shipments", "label": "Aggregates Shipments", "unit": "M tons"},
+    {"key": "freight_adjusted_price_per_ton", "label": "Freight-Adjusted Sales Price", "unit": "$/ton"},
+    {"key": "gross_profit_per_ton", "label": "Aggregates Gross Profit", "unit": "$/ton"},
+    {"key": "cash_gross_profit_per_ton", "label": "Aggregates Cash Gross Profit", "unit": "$/ton"}
+  ],
+  "kpi_rationale": "Vulcan's earnings release leads every quarter with a 'Financial Highlights' table pairing consolidated revenue and Adjusted EBITDA margin against its own Aggregates segment metrics — shipment tons, freight-adjusted price per ton, and gross/cash gross profit per ton — which management repeats verbatim quarter to quarter as the core measures of its pure-play aggregates strategy.",
+  "history": [
+    {"period": "Q3 2024", "report_date": "2024-10-30", "values": {"revenue": 2004, "adjusted_ebitda_margin": 29.0, "aggregates_shipments": 57.7, "freight_adjusted_price_per_ton": 21.27, "gross_profit_per_ton": 8.63, "cash_gross_profit_per_ton": 10.89}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036124044579/ef20037837_ex99-1.htm"},
+    {"period": "Q4 2024", "report_date": "2025-02-18", "values": {"revenue": 1854, "adjusted_ebitda_margin": 29.7, "aggregates_shipments": 53.9, "freight_adjusted_price_per_ton": 21.41, "gross_profit_per_ton": 9.02, "cash_gross_profit_per_ton": 11.50}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036125004970/ef20043777_ex99-1.htm"},
+    {"period": "Q1 2025", "report_date": "2025-04-30", "values": {"revenue": 1635, "adjusted_ebitda_margin": 25.1, "aggregates_shipments": 47.8, "freight_adjusted_price_per_ton": 22.03, "gross_profit_per_ton": 7.48, "cash_gross_profit_per_ton": 10.63}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036125016513/ef20048175_ex99-1.htm"},
+    {"period": "Q2 2025", "report_date": "2025-07-31", "values": {"revenue": 2102, "adjusted_ebitda_margin": 31.4, "aggregates_shipments": 59.3, "freight_adjusted_price_per_ton": 22.11, "gross_profit_per_ton": 9.44, "cash_gross_profit_per_ton": 11.88}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036125028104/ef20052989_ex99-1.htm"},
+    {"period": "Q3 2025", "report_date": "2025-10-30", "values": {"revenue": 2292, "adjusted_ebitda_margin": 32.1, "aggregates_shipments": 64.7, "freight_adjusted_price_per_ton": 22.01, "gross_profit_per_ton": 9.46, "cash_gross_profit_per_ton": 11.84}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036125039792/ef20057945_ex99-1.htm"},
+    {"period": "Q4 2025", "report_date": "2026-02-17", "values": {"revenue": 1913, "adjusted_ebitda_margin": 27.1, "aggregates_shipments": 55.1, "freight_adjusted_price_per_ton": 21.78, "gross_profit_per_ton": 7.91, "cash_gross_profit_per_ton": 10.73}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036126005605/ef20065685_ex99-1.htm"},
+    {"period": "Q1 2026", "report_date": "2026-04-29", "values": {"revenue": 1756, "adjusted_ebitda_margin": 25.5, "aggregates_shipments": 50.0, "freight_adjusted_price_per_ton": 22.80, "gross_profit_per_ton": 8.01, "cash_gross_profit_per_ton": 10.93}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036126017638/ef20071724_ex99-1.htm"},
+    {"period": "Q2 2026", "report_date": "2026-07-29", "values": {"revenue": 2156, "adjusted_ebitda_margin": 30.3, "aggregates_shipments": 59.9, "freight_adjusted_price_per_ton": 22.97, "gross_profit_per_ton": 9.47, "cash_gross_profit_per_ton": 12.02}, "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1396009/000114036126029958/ef20078928_ex99-1.htm"}
+  ]
+}
