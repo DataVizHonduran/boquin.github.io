@@ -369,6 +369,58 @@ def methodology_html(osc_name: str, signals: list, signal_stats: dict, random_st
 """
 
 
+def _auto_yaxis_script(div_id: str) -> str:
+    """Rescale the y-axis to the data visible in the x-range after any zoom
+    (rangeslider drag, rangeselector button, or box-zoom) — Plotly does not
+    do this on its own; it only ever auto-fits the y-axis to the full series."""
+    return f"""
+<script>
+(function() {{
+  function attach() {{
+    var gd = document.getElementById('{div_id}');
+    if (!gd || !gd.data || !gd.data.length) {{ setTimeout(attach, 60); return; }}
+    var traces = gd.data.filter(function(t) {{ return t.x && t.y; }})
+                         .map(function(t) {{
+                           return {{x: t.x.map(function(v) {{ return new Date(v).getTime(); }}), y: t.y}};
+                         }});
+    function rescale(x0, x1) {{
+      var ymin = Infinity, ymax = -Infinity;
+      traces.forEach(function(tr) {{
+        for (var i = 0; i < tr.x.length; i++) {{
+          if (tr.x[i] >= x0 && tr.x[i] <= x1) {{
+            if (tr.y[i] < ymin) ymin = tr.y[i];
+            if (tr.y[i] > ymax) ymax = tr.y[i];
+          }}
+        }}
+      }});
+      if (ymin === Infinity) return;
+      var pad = (ymax - ymin) * 0.08 || Math.abs(ymax) * 0.08 || 1;
+      Plotly.relayout(gd, {{'yaxis.range': [ymin - pad, ymax + pad], 'yaxis.autorange': false}});
+    }}
+    gd.on('plotly_relayout', function(ev) {{
+      if (ev['xaxis.autorange']) {{
+        Plotly.relayout(gd, {{'yaxis.autorange': true}});
+        return;
+      }}
+      var x0, x1;
+      if (ev['xaxis.range[0]'] !== undefined && ev['xaxis.range[1]'] !== undefined) {{
+        x0 = new Date(ev['xaxis.range[0]']).getTime();
+        x1 = new Date(ev['xaxis.range[1]']).getTime();
+      }} else if (ev['xaxis.range']) {{
+        x0 = new Date(ev['xaxis.range'][0]).getTime();
+        x1 = new Date(ev['xaxis.range'][1]).getTime();
+      }} else {{
+        return;
+      }}
+      rescale(x0, x1);
+    }});
+  }}
+  attach();
+}})();
+</script>
+"""
+
+
 def build_html(fig2: go.Figure, fig_osc: go.Figure, fig3: go.Figure, osc_name: str, signals: list,
                 signal_stats: dict, random_stats: dict, yield_s: pd.Series) -> str:
     from datetime import date
@@ -376,10 +428,12 @@ def build_html(fig2: go.Figure, fig_osc: go.Figure, fig3: go.Figure, osc_name: s
     latest = yield_s.index[-1].strftime("%B %d, %Y")
     latest_yield = yield_s.iloc[-1]
 
-    chart2_div = fig2.to_html(full_html=False, include_plotlyjs="cdn",
+    chart2_div = fig2.to_html(full_html=False, include_plotlyjs="cdn", div_id="yield-chart",
                                config={"displayModeBar": True, "displaylogo": False})
-    chart_osc_div = fig_osc.to_html(full_html=False, include_plotlyjs=False,
+    chart2_div += _auto_yaxis_script("yield-chart")
+    chart_osc_div = fig_osc.to_html(full_html=False, include_plotlyjs=False, div_id="rsi-chart",
                                      config={"displayModeBar": True, "displaylogo": False})
+    chart_osc_div += _auto_yaxis_script("rsi-chart")
     chart3_div = fig3.to_html(full_html=False, include_plotlyjs=False,
                                config={"displayModeBar": True, "displaylogo": False})
 
