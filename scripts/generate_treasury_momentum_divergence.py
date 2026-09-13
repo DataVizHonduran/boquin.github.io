@@ -216,6 +216,55 @@ def build_fig2(yield_s: pd.Series, signals: list, osc_name: str) -> go.Figure:
     return fig
 
 
+def build_fig_osc(yield_s: pd.Series, osc_s: pd.Series, signals: list, osc_name: str) -> go.Figure:
+    """Oscillator panel with each divergence window shaded and the two pivot
+    points connected by a dashed line, so the 'lower high' is visible."""
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=osc_s.index, y=osc_s.values, mode="lines",
+        name=osc_name, line=dict(color="#7b52ab", width=1.6),
+        hovertemplate="%{x|%b %Y}<br>%{y:.2f}<extra></extra>",
+    ))
+    if osc_name == "RSI-14":
+        fig.add_hline(y=70, line_dash="dot", line_color="grey", opacity=0.5)
+        fig.add_hline(y=30, line_dash="dot", line_color="grey", opacity=0.5)
+    else:
+        fig.add_hline(y=0, line_dash="dot", line_color="grey", opacity=0.5)
+
+    for i, s in enumerate(signals):
+        fig.add_vrect(x0=s["prior_high_date"], x1=s["date"],
+                      fillcolor="rgba(220,53,69,0.12)", line_width=0, layer="below")
+        osc_at_prior = float(osc_s.loc[s["prior_high_date"]])
+        fig.add_trace(go.Scatter(
+            x=[s["prior_high_date"], s["date"]],
+            y=[osc_at_prior, s["osc_at_signal"]],
+            mode="lines+markers",
+            line=dict(color="red", width=1.5, dash="dash"),
+            marker=dict(size=6, color="red"),
+            showlegend=(i == 0), name="Divergence pivots",
+            hoverinfo="skip",
+        ))
+
+    fig.update_layout(
+        title=dict(
+            text=f"{osc_name} — Divergence Windows Shaded",
+            x=0.5, xanchor="center", font=dict(size=18, color="#1a1a2e"),
+        ),
+        xaxis=dict(title="Date", showgrid=True, gridcolor="lightgrey", tickformat="%Y", dtick="M24"),
+        yaxis=dict(title=osc_name, showgrid=True, zeroline=False),
+        legend=dict(x=0.01, y=0.99, bgcolor="rgba(255,255,255,0.85)",
+                    bordercolor="black", borderwidth=1),
+        plot_bgcolor="white", width=1100, height=420, hovermode="x unified",
+        annotations=[dict(
+            text=("Shaded red spans mark each divergence window: yield made a higher high while "
+                  f"{osc_name} made a lower high (red dashed line connects the two pivot points)."),
+            xref="paper", yref="paper", x=0.5, y=-0.16, showarrow=False,
+            font=dict(size=11, color="grey"), align="center",
+        )],
+    )
+    return fig
+
+
 def build_fig3(signal_stats: dict, random_stats: dict) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Histogram(
@@ -302,7 +351,7 @@ def methodology_html(osc_name: str, signals: list, signal_stats: dict, random_st
 """
 
 
-def build_html(fig2: go.Figure, fig3: go.Figure, osc_name: str, signals: list,
+def build_html(fig2: go.Figure, fig_osc: go.Figure, fig3: go.Figure, osc_name: str, signals: list,
                 signal_stats: dict, random_stats: dict, yield_s: pd.Series) -> str:
     from datetime import date
     today = date.today().strftime("%B %d, %Y")
@@ -311,6 +360,8 @@ def build_html(fig2: go.Figure, fig3: go.Figure, osc_name: str, signals: list,
 
     chart2_div = fig2.to_html(full_html=False, include_plotlyjs="cdn",
                                config={"displayModeBar": True, "displaylogo": False})
+    chart_osc_div = fig_osc.to_html(full_html=False, include_plotlyjs=False,
+                                     config={"displayModeBar": True, "displaylogo": False})
     chart3_div = fig3.to_html(full_html=False, include_plotlyjs=False,
                                config={"displayModeBar": True, "displaylogo": False})
 
@@ -344,6 +395,7 @@ def build_html(fig2: go.Figure, fig3: go.Figure, osc_name: str, signals: list,
     Updated {today}
   </p>
   <div class="chart-wrap">{chart2_div}</div>
+  <div class="chart-wrap">{chart_osc_div}</div>
   <div class="chart-wrap">{chart3_div}</div>
   {methodology_html(osc_name, signals, signal_stats, random_stats)}
 </body>
@@ -367,6 +419,7 @@ def main():
     macd_s = calculate_macd_hist(yield_s)
     highs = find_local_highs(yield_s)
     osc_name, signals = select_method(yield_s, rsi_s, macd_s, highs)
+    osc_s = rsi_s if osc_name == "RSI-14" else macd_s
     for s in signals:
         print(f"      {s['date'].date()}  yield={s['yield_at_signal']:.2f}%  "
               f"prior high={s['prior_high_date'].date()}")
@@ -382,8 +435,9 @@ def main():
 
     print("[5/5] Building charts and writing report...")
     fig2 = build_fig2(yield_s, signals, osc_name)
+    fig_osc = build_fig_osc(yield_s, osc_s, signals, osc_name)
     fig3 = build_fig3(signal_stats, random_stats)
-    html = build_html(fig2, fig3, osc_name, signals, signal_stats, random_stats, yield_s)
+    html = build_html(fig2, fig_osc, fig3, osc_name, signals, signal_stats, random_stats, yield_s)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
