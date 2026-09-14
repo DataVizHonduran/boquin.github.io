@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABNB KPI Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+         background:#f5f7fa; margin:0; padding:0; color:#333; }
+  .header { background:#1a1a2e; color:white; padding:28px 32px; }
+  .header h1 { margin:0; font-size:1.8em; }
+  .header .sub { color:#aaa; font-size:.9em; margin-top:6px; }
+  .container { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  .back { display:inline-block; margin-bottom:20px; color:#007bff;
+          text-decoration:none; font-size:.9em; }
+  .back:hover { text-decoration:underline; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:28px; }
+  .kpi-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .kpi-label { font-size:.78em; color:#666; margin-bottom:6px; }
+  .kpi-value { font-size:1.5em; font-weight:700; }
+  .kpi-change { font-size:.8em; color:#888; margin-top:4px; }
+  .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px; }
+  .chart-box { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:16px; }
+  .chart-title { font-size:.9em; font-weight:600; color:#333; margin-bottom:4px; }
+  .chart-unit { font-weight:400; color:#888; }
+  .rationale { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+               padding:20px 24px; margin-top:28px; font-size:.88em; color:#555; line-height:1.5; }
+  .rationale h3 { margin-top:0; font-size:1em; color:#1a1a2e; }
+  table { width:100%; border-collapse:collapse; margin-top:28px; font-size:.85em; background:white;
+          border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  th, td { text-align:right; padding:10px 14px; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:#1a1a2e; color:white; font-weight:600; }
+  tr:nth-child(even) { background:#fafafa; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 ABNB KPI Tracker</h1>
+  <div class="sub">Airbnb, Inc. — key operating metrics tracked over time, locked from mgmt-disclosed KPIs · latest: Q2 2026 (2026-08-06)</div>
+</div>
+<div class="container">
+  <a class="back" href="../../index.html">← All Dashboards</a>
+  <a class="back" href="../index.html" style="margin-left:16px;">← All Tracked Tickers</a>
+
+  <div class="kpi-grid">
+    
+    <div class="kpi-card">
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value" style="color:#2a78d6">$3,608.0M</div>
+      <div class="kpi-change">+34.7% QoQ · +16.5% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Adjusted EBITDA Margin</div>
+      <div class="kpi-value" style="color:#eb6834">35.0%</div>
+      <div class="kpi-change">+84.2% QoQ · +2.9% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Gross Booking Value</div>
+      <div class="kpi-value" style="color:#1baf7a">27.2$B</div>
+      <div class="kpi-change">-6.8% QoQ · +15.7% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Nights and Seats Booked</div>
+      <div class="kpi-value" style="color:#eda100">148.3M</div>
+      <div class="kpi-change">-5.1% QoQ · +10.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Daily Rate (GBV per Night/Seat)</div>
+      <div class="kpi-value" style="color:#e87ba4">183.7$</div>
+      <div class="kpi-change">-1.7% QoQ · +5.3% YoY</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Implied Take Rate</div>
+      <div class="kpi-value" style="color:#4a3aa7">13.2%</div>
+      <div class="kpi-change">+43.5% QoQ · +0.0% YoY</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    
+    <div class="chart-box">
+      <div class="chart-title">Revenue <span class="chart-unit">($M)</span></div>
+      <div id="chart-revenue" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-revenue", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [3732, 2480, 2272, 3096, 4095, 2778, 2678, 3608],
+        mode: "lines+markers+text",
+        line: {color: "#2a78d6", width: 2, shape: "spline"},
+        marker: {color: "#2a78d6", size: 8},
+        text: ["$3,732.0M", "$2,480.0M", "$2,272.0M", "$3,096.0M", "$4,095.0M", "$2,778.0M", "$2,678.0M", "$3,608.0M"],
+        textposition: "top center",
+        textfont: {color: "#2a78d6", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Adjusted EBITDA Margin <span class="chart-unit">(%)</span></div>
+      <div id="chart-adj_ebitda_margin" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adj_ebitda_margin", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [52, 31, 18, 34, 50, 28, 19, 35],
+        mode: "lines+markers+text",
+        line: {color: "#eb6834", width: 2, shape: "spline"},
+        marker: {color: "#eb6834", size: 8},
+        text: ["52.0%", "31.0%", "18.0%", "34.0%", "50.0%", "28.0%", "19.0%", "35.0%"],
+        textposition: "top center",
+        textfont: {color: "#eb6834", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Gross Booking Value <span class="chart-unit">($B)</span></div>
+      <div id="chart-gbv" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-gbv", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [20.1, 17.6, 24.5, 23.5, 22.9, 20.4, 29.2, 27.2],
+        mode: "lines+markers+text",
+        line: {color: "#1baf7a", width: 2, shape: "spline"},
+        marker: {color: "#1baf7a", size: 8},
+        text: ["20.1$B", "17.6$B", "24.5$B", "23.5$B", "22.9$B", "20.4$B", "29.2$B", "27.2$B"],
+        textposition: "top center",
+        textfont: {color: "#1baf7a", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Nights and Seats Booked <span class="chart-unit">(M)</span></div>
+      <div id="chart-nights_seats_booked" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-nights_seats_booked", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [122.8, 111.0, 143.1, 134.4, 133.6, 121.9, 156.2, 148.3],
+        mode: "lines+markers+text",
+        line: {color: "#eda100", width: 2, shape: "spline"},
+        marker: {color: "#eda100", size: 8},
+        text: ["122.8M", "111.0M", "143.1M", "134.4M", "133.6M", "121.9M", "156.2M", "148.3M"],
+        textposition: "top center",
+        textfont: {color: "#eda100", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Avg Daily Rate (GBV per Night/Seat) <span class="chart-unit">($)</span></div>
+      <div id="chart-adr" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-adr", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [163.64, 158.13, 171.34, 174.48, 171.29, 167.51, 186.82, 183.73],
+        mode: "lines+markers+text",
+        line: {color: "#e87ba4", width: 2, shape: "spline"},
+        marker: {color: "#e87ba4", size: 8},
+        text: ["163.6$", "158.1$", "171.3$", "174.5$", "171.3$", "167.5$", "186.8$", "183.7$"],
+        textposition: "top center",
+        textfont: {color: "#e87ba4", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+    <div class="chart-box">
+      <div class="chart-title">Implied Take Rate <span class="chart-unit">(%)</span></div>
+      <div id="chart-take_rate" class="plot"></div>
+    </div>
+    <script>
+      Plotly.newPlot("chart-take_rate", [{
+        x: ["Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026"],
+        y: [18.6, 14.1, 9.3, 13.2, 17.9, 13.6, 9.2, 13.2],
+        mode: "lines+markers+text",
+        line: {color: "#4a3aa7", width: 2, shape: "spline"},
+        marker: {color: "#4a3aa7", size: 8},
+        text: ["18.6%", "14.1%", "9.3%", "13.2%", "17.9%", "13.6%", "9.2%", "13.2%"],
+        textposition: "top center",
+        textfont: {color: "#4a3aa7", size: 11},
+        hovertemplate: "%{x}<br>%{y}<extra></extra>",
+        connectgaps: true
+      }], {
+        margin: {l: 44, r: 16, t: 8, b: 32},
+        height: 220,
+        xaxis: {showgrid: false, tickfont: {size: 11, color: "#666"}},
+        yaxis: {showgrid: true, gridcolor: "#eee", zeroline: false, tickfont: {size: 11, color: "#666"}},
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        showlegend: false
+      }, {displayModeBar: false, responsive: true});
+    </script>
+  </div>
+
+  <div class="rationale">
+    <h3>Why these KPIs</h3>
+    Airbnb's shareholder letter names GBV and Nights and Seats Booked as its official 'Key Business Metrics,' and every letter carries a dedicated 'Monetization and Take Rate' section (revenue/GBV) plus Revenue, Adjusted EBITDA Margin, and ADR (GBV per Night/Seat) — the recurring set management uses for its own QoQ/YoY narrative.
+  </div>
+
+  <table>
+    <tr><th>Period</th><th>Revenue</th><th>Adjusted EBITDA Margin</th><th>Gross Booking Value</th><th>Nights and Seats Booked</th><th>Avg Daily Rate (GBV per Night/Seat)</th><th>Implied Take Rate</th></tr>
+    <tr><td>Q3 2024</td><td>$3,732.0M</td><td>52.0%</td><td>20.1$B</td><td>122.8M</td><td>163.6$</td><td>18.6%</td></tr><tr><td>Q4 2024</td><td>$2,480.0M</td><td>31.0%</td><td>17.6$B</td><td>111.0M</td><td>158.1$</td><td>14.1%</td></tr><tr><td>Q1 2025</td><td>$2,272.0M</td><td>18.0%</td><td>24.5$B</td><td>143.1M</td><td>171.3$</td><td>9.3%</td></tr><tr><td>Q2 2025</td><td>$3,096.0M</td><td>34.0%</td><td>23.5$B</td><td>134.4M</td><td>174.5$</td><td>13.2%</td></tr><tr><td>Q3 2025</td><td>$4,095.0M</td><td>50.0%</td><td>22.9$B</td><td>133.6M</td><td>171.3$</td><td>17.9%</td></tr><tr><td>Q4 2025</td><td>$2,778.0M</td><td>28.0%</td><td>20.4$B</td><td>121.9M</td><td>167.5$</td><td>13.6%</td></tr><tr><td>Q1 2026</td><td>$2,678.0M</td><td>19.0%</td><td>29.2$B</td><td>156.2M</td><td>186.8$</td><td>9.2%</td></tr><tr><td>Q2 2026</td><td>$3,608.0M</td><td>35.0%</td><td>27.2$B</td><td>148.3M</td><td>183.7$</td><td>13.2%</td></tr>
+  </table>
+</div>
+</body>
+</html>

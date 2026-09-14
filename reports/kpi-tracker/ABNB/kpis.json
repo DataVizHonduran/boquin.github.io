@@ -1,0 +1,63 @@
+{
+  "ticker": "ABNB",
+  "company": "Airbnb, Inc.",
+  "kpis": [
+    {"key": "revenue", "label": "Revenue", "unit": "$M"},
+    {"key": "adj_ebitda_margin", "label": "Adjusted EBITDA Margin", "unit": "%"},
+    {"key": "gbv", "label": "Gross Booking Value", "unit": "$B"},
+    {"key": "nights_seats_booked", "label": "Nights and Seats Booked", "unit": "M"},
+    {"key": "adr", "label": "Avg Daily Rate (GBV per Night/Seat)", "unit": "$"},
+    {"key": "take_rate", "label": "Implied Take Rate", "unit": "%"}
+  ],
+  "kpi_rationale": "Airbnb's shareholder letter names GBV and Nights and Seats Booked as its official 'Key Business Metrics,' and every letter carries a dedicated 'Monetization and Take Rate' section (revenue/GBV) plus Revenue, Adjusted EBITDA Margin, and ADR (GBV per Night/Seat) — the recurring set management uses for its own QoQ/YoY narrative.",
+  "history": [
+    {
+      "period": "Q3 2024",
+      "report_date": "2024-11-07",
+      "values": {"revenue": 3732, "adj_ebitda_margin": 52, "gbv": 20.1, "nights_seats_booked": 122.8, "adr": 163.64, "take_rate": 18.6},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312524253103/d886752dex991.htm"
+    },
+    {
+      "period": "Q4 2024",
+      "report_date": "2025-02-13",
+      "values": {"revenue": 2480, "adj_ebitda_margin": 31, "gbv": 17.6, "nights_seats_booked": 111.0, "adr": 158.13, "take_rate": 14.1},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312525026054/d915198dex991.htm"
+    },
+    {
+      "period": "Q1 2025",
+      "report_date": "2025-05-01",
+      "values": {"revenue": 2272, "adj_ebitda_margin": 18, "gbv": 24.5, "nights_seats_booked": 143.1, "adr": 171.34, "take_rate": 9.3},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312525109934/d40594dex991.htm"
+    },
+    {
+      "period": "Q2 2025",
+      "report_date": "2025-08-06",
+      "values": {"revenue": 3096, "adj_ebitda_margin": 34, "gbv": 23.5, "nights_seats_booked": 134.4, "adr": 174.48, "take_rate": 13.2},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312525174438/d17531dex991.htm"
+    },
+    {
+      "period": "Q3 2025",
+      "report_date": "2025-11-06",
+      "values": {"revenue": 4095, "adj_ebitda_margin": 50, "gbv": 22.9, "nights_seats_booked": 133.6, "adr": 171.29, "take_rate": 17.9},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312525269432/d40503dex991.htm"
+    },
+    {
+      "period": "Q4 2025",
+      "report_date": "2026-02-12",
+      "values": {"revenue": 2778, "adj_ebitda_margin": 28, "gbv": 20.4, "nights_seats_booked": 121.9, "adr": 167.51, "take_rate": 13.6},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312526048670/d58192dex991.htm"
+    },
+    {
+      "period": "Q1 2026",
+      "report_date": "2026-05-07",
+      "values": {"revenue": 2678, "adj_ebitda_margin": 19, "gbv": 29.2, "nights_seats_booked": 156.2, "adr": 186.82, "take_rate": 9.2},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312526211816/d23351dex991.htm"
+    },
+    {
+      "period": "Q2 2026",
+      "report_date": "2026-08-06",
+      "values": {"revenue": 3608, "adj_ebitda_margin": 35, "gbv": 27.2, "nights_seats_booked": 148.3, "adr": 183.73, "take_rate": 13.2},
+      "source": "SEC EDGAR 8-K https://www.sec.gov/Archives/edgar/data/1559720/000119312526337928/d70413dex991.htm"
+    }
+  ]
+}
