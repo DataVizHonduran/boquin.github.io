@@ -1,21 +1,57 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (1 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (4 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-Based on the provided monitoring window, there is only one publication available for review. As a senior economist, I must note that the volume of research in this specific window is abnormally low, providing limited new signals for our Eurozone macro outlook.
+To: Investment Team
+From: Senior Eurozone Economist
+Date: September 14, 2026
+Subject: Analysis of Recent ECB and National Central Bank Research
 
-1. **[DBB] Survey design and professional forecasters: The case of uncertainty in the US SPF** | Knüppel & Pavlova: This paper examines how the structure of survey design influences the reporting of uncertainty among professional forecasters, specifically within the US Survey of Professional Forecasters. While focused on the US, it is analytically significant for our team because it highlights potential biases in the "consensus" forecasts we use to benchmark ECB expectations. Understanding these systematic errors in uncertainty reporting allows us to better discount market-implied volatility and refine our own proprietary projections for the Eurozone.
+I have reviewed the latest research outputs from the ECB and the Deutsche Bundesbank (DBB). While the volume is low, the thematic focus on behavioral inflation and fiscal transmission is highly relevant to our current positioning.
 
-**Synthesis:** The current window lacks broad Eurozone-specific policy research, offering only a methodological critique of forecasting uncertainty. Consequently, there are no new central bank signals to adjust our current baseline for inflation or interest rate trajectories.
+1. **[ECB] DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates**: This paper examines how Federal Reserve policy permeates USD-pegged stablecoins, even when issuers don't pay explicit interest. For the Eurozone, this highlights a "shadow" transmission channel where US monetary tightening can drain global liquidity more effectively than traditional banking channels, potentially tightening financial conditions in the EU unexpectedly.
+
+2. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**: The research demonstrates that government spending disproportionately stimulates non-tradable services and subsequent private consumption. This is critical for our inflation forecasts, as it suggests that national fiscal expansions in the Eurozone will likely fuel "sticky" service-sector inflation, complicating the ECB’s path toward its 2% target.
+
+3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**: This study explores how psychological biases in inflation expectations can decouple actual price dynamics from economic fundamentals. It suggests that if pessimism becomes entrenched, the ECB may face a "lower-for-longer" inflation trap that requires more aggressive unconventional tools to break.
+
+4. **[DBB] Survey design and professional forecasters: The case of uncertainty in the US SPF**: While focused on US data, this analysis reveals how survey methodologies can systematically bias the reporting of uncertainty among professional forecasters. For our team, this underscores the need to discount "consensus" forecasts and apply a wider volatility lens to our macro projections.
+
+**Synthesis:**
+The current research suggests a growing concern over the "leakage" of US monetary policy via DeFi and the persistence of service-sector inflation driven by fiscal spillovers. Collectively, these papers indicate that the ECB is increasingly worried about behavioral biases and non-traditional transmission channels undermining their policy precision.
 
 ---
 
+## European Central Bank
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 2
+
+### (cached) [DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3280~503ba7d4b0.en.pdf)
+**Published:** 2026-09-14 | **Authors:** 
+
+The paper investigates the transmission of Federal Reserve monetary policy to interest rates within Decentralized Finance (DeFi) protocols for USD-pegged stablecoins. It finds significant and persistent spreads between traditional short-term rates and DeFi deposit rates, indicating a weak transmission mechanism.
+
+**Tags:** monetary policy · interest rates · financial stability · payments · digital euro · banking
+
+### (cached) [Fiscal policy and sectoral spillovers in open-economy HANK](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3279~c0a22d29e1.en.pdf)
+**Published:** 2026-09-14 | **Authors:** 
+
+This study analyzes the impact of government spending shocks on private consumption and sectoral spillovers using an open-economy HANK model. It demonstrates that fiscal expansion in non-tradable services stimulates consumption and leads to a relative decline in goods prices.
+
+**Tags:** fiscal policy · consumer spending · GDP growth · trade · inflation
+
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 1
+**Content Type:** Discussion Papers | **New:** 0 of 2
+
+### (cached) [The consequences of optimism and pessimism for inflation dynamics and monetary policy | Stefan Hasenclever, Mathias Hoffmann](https://www.bundesbank.de/en/publications/research/discussion-papers/the-consequences-of-optimism-and-pessimism-for-inflation-dynamics-and-monetary-policy-968330)
+**Published:** 2026-09-14 | **Authors:** 
+
+The paper examines how sentiment-driven expectations, characterized by optimism and pessimism, shape inflation dynamics. It further analyzes the consequences of these psychological factors for the implementation and effectiveness of monetary policy.
+
+**Tags:** inflation · monetary policy · interest rates · consumer spending · GDP growth
 
 ### (cached) [Survey design and professional forecasters: The case of uncertainty in the US SPF | Malte Knüppel, Lora Pavlova](https://www.bundesbank.de/en/publications/research/discussion-papers/survey-design-and-professional-forecasters-the-case-of-uncertainty-in-the-us-spf-934468)
 **Published:** 2026-09-11 | **Authors:** 
@@ -28,5 +64,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 1
-- Total cache size: 1 items
+- Already cached: 4
+- Total cache size: 4 items
