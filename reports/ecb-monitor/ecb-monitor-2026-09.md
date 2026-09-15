@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (4 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (6 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,26 +8,40 @@
 
 To: Investment Team
 From: Senior Eurozone Economist
-Date: September 14, 2026
+Date: September 15, 2026
 Subject: Analysis of Recent ECB and National Central Bank Research
 
-I have reviewed the latest research outputs from the ECB and the Deutsche Bundesbank (DBB). While the volume is low, the thematic focus on behavioral inflation and fiscal transmission is highly relevant to our current positioning.
+I have reviewed the latest research from the ECB and the Bundesbank. While some papers are methodological, several provide critical insights into the "last mile" of inflation targeting and the structural constraints on Eurozone growth.
 
-1. **[ECB] DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates**: This paper examines how Federal Reserve policy permeates USD-pegged stablecoins, even when issuers don't pay explicit interest. For the Eurozone, this highlights a "shadow" transmission channel where US monetary tightening can drain global liquidity more effectively than traditional banking channels, potentially tightening financial conditions in the EU unexpectedly.
+1. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations**
+This paper examines the conditions under which the ECB can ignore temporary sectoral price shocks without risking a broader inflationary spiral. It suggests that the ability to "look through" these shocks depends entirely on the strength of inflation anchoring, providing a framework for the Governing Council to justify holding rates steady despite volatile headline data.
 
-2. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**: The research demonstrates that government spending disproportionately stimulates non-tradable services and subsequent private consumption. This is critical for our inflation forecasts, as it suggests that national fiscal expansions in the Eurozone will likely fuel "sticky" service-sector inflation, complicating the ECB’s path toward its 2% target.
+2. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**
+The research demonstrates that government spending disproportionately stimulates non-tradable services, which then spills over into the goods sector. For our models, this implies that fiscal expansion in the Eurozone is more inflationary than previously thought, particularly in the services sector, potentially forcing a more restrictive monetary stance.
 
-3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**: This study explores how psychological biases in inflation expectations can decouple actual price dynamics from economic fundamentals. It suggests that if pessimism becomes entrenched, the ECB may face a "lower-for-longer" inflation trap that requires more aggressive unconventional tools to break.
+3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**
+This study highlights how behavioral biases—specifically optimism and pessimism—can distort inflation trajectories and the perceived effectiveness of policy. It suggests that standard linear models may understate the persistence of inflation if behavioral inertia takes hold, meaning the ECB may need to over-tighten to achieve a nominal anchor.
 
-4. **[DBB] Survey design and professional forecasters: The case of uncertainty in the US SPF**: While focused on US data, this analysis reveals how survey methodologies can systematically bias the reporting of uncertainty among professional forecasters. For our team, this underscores the need to discount "consensus" forecasts and apply a wider volatility lens to our macro projections.
+4. **[ECB] Why Europeans save differently — and how to put those savings to work**
+The ECB analyzes the structural heterogeneity of savings across the bloc and the mechanisms required to mobilize this capital. This is analytically significant for our long-term growth forecasts, as the transition from passive saving to productive investment is essential for the Eurozone's productivity recovery and "Strategic Autonomy" goals.
+
+5. **[ECB] DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates**
+This paper explores how Federal Reserve policy transmits to USD-pegged stablecoins, even when issuers do not pay explicit interest. It alerts us to a "shadow" transmission channel where US monetary policy can influence global liquidity and Eurozone financial stability through digital asset rails, bypassing traditional banking intermediaries.
 
 **Synthesis:**
-The current research suggests a growing concern over the "leakage" of US monetary policy via DeFi and the persistence of service-sector inflation driven by fiscal spillovers. Collectively, these papers indicate that the ECB is increasingly worried about behavioral biases and non-traditional transmission channels undermining their policy precision.
+The current research suggests a growing concern that behavioral biases and sectoral fiscal spillovers are making inflation more persistent and harder to target. Simultaneously, the ECB is pivoting toward the structural challenge of mobilizing stagnant household savings to fund the region's necessary industrial transition.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 2
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 3
+
+### (cached) [Why Europeans save differently — and how to put those savings to work](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260915~dacebb4a6f.en.html)
+**Published:** 2026-09-15 | **Authors:** 
+
+The paper analyzes the divergent saving patterns across European households and the underlying socioeconomic drivers of these behaviors. It proposes strategies to mobilize these idle savings to foster investment and long-term economic growth.
+
+**Tags:** consumer spending · eurozone · banking · financial stability · GDP growth · credit
 
 ### (cached) [DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3280~503ba7d4b0.en.pdf)
 **Published:** 2026-09-14 | **Authors:** 
@@ -44,7 +58,14 @@ This study analyzes the impact of government spending shocks on private consumpt
 **Tags:** fiscal policy · consumer spending · GDP growth · trade · inflation
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 2
+**Content Type:** Discussion Papers | **New:** 0 of 3
+
+### (cached) [On looking through sectoral shocks: The role of (de-)anchored inflation expectations | Rafael Gerke, Joost Röttger](https://www.bundesbank.de/en/publications/research/discussion-papers/on-looking-through-sectoral-shocks-the-role-of-de-anchored-inflation-expectations-973908)
+**Published:** 2026-09-15 | **Authors:** 
+
+This research examines the trade-off between ignoring transitory sectoral shocks and preventing the de-anchoring of inflation expectations. It argues that the ability to 'look through' such shocks depends heavily on the strength of the central bank's credibility.
+
+**Tags:** monetary policy · inflation · interest rates · eurozone · GDP growth · productivity
 
 ### (cached) [The consequences of optimism and pessimism for inflation dynamics and monetary policy | Stefan Hasenclever, Mathias Hoffmann](https://www.bundesbank.de/en/publications/research/discussion-papers/the-consequences-of-optimism-and-pessimism-for-inflation-dynamics-and-monetary-policy-968330)
 **Published:** 2026-09-14 | **Authors:** 
@@ -64,5 +85,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 4
-- Total cache size: 4 items
+- Already cached: 6
+- Total cache size: 6 items
