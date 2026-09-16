@@ -1,0 +1,203 @@
+{
+  "date": "2026-09-16",
+  "holdings_as_of": "2026-09-16",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "weight": 2.39,
+      "shares": 20246
+    },
+    {
+      "rank": 2,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.31,
+      "shares": 39034
+    },
+    {
+      "rank": 3,
+      "ticker": "APP",
+      "name": "AppLovin Corporation",
+      "weight": 2.25,
+      "shares": 37860
+    },
+    {
+      "rank": 4,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.24,
+      "shares": 85302
+    },
+    {
+      "rank": 5,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.21,
+      "shares": 20298
+    },
+    {
+      "rank": 6,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.18,
+      "shares": 32795
+    },
+    {
+      "rank": 7,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.18,
+      "shares": 6473
+    },
+    {
+      "rank": 8,
+      "ticker": "ECHO",
+      "name": "EchoStar Corporation",
+      "weight": 2.17,
+      "shares": 129961
+    },
+    {
+      "rank": 9,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.17,
+      "shares": 23694
+    },
+    {
+      "rank": 10,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.16,
+      "shares": 24106
+    },
+    {
+      "rank": 11,
+      "ticker": "SNOW",
+      "name": "Snowflake Inc.",
+      "weight": 2.14,
+      "shares": 36307
+    },
+    {
+      "rank": 12,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.14,
+      "shares": 34525
+    },
+    {
+      "rank": 13,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.14,
+      "shares": 20978
+    },
+    {
+      "rank": 14,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.13,
+      "shares": 58621
+    },
+    {
+      "rank": 15,
+      "ticker": "WBD",
+      "name": "Warner Bros. Discovery, Inc.",
+      "weight": 2.13,
+      "shares": 426654
+    },
+    {
+      "rank": 16,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.12,
+      "shares": 28516
+    },
+    {
+      "rank": 17,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.08,
+      "shares": 28010
+    },
+    {
+      "rank": 18,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.05,
+      "shares": 45467
+    },
+    {
+      "rank": 19,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.05,
+      "shares": 32914
+    },
+    {
+      "rank": 20,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.04,
+      "shares": 10120
+    },
+    {
+      "rank": 21,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 2.03,
+      "shares": 23215
+    },
+    {
+      "rank": 22,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.03,
+      "shares": 35709
+    },
+    {
+      "rank": 23,
+      "ticker": "UBER",
+      "name": "Uber Technologies, Inc.",
+      "weight": 2.03,
+      "shares": 157235
+    },
+    {
+      "rank": 24,
+      "ticker": "ABVX",
+      "name": "ABIVAX Soci\u00c3\u00a9t\u00c3\u00a9 Anonyme",
+      "weight": 2.02,
+      "shares": 100386
+    },
+    {
+      "rank": 25,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 2.02,
+      "shares": 12291
+    }
+  ],
+  "performance": {
+    "price": 168.08,
+    "aum": 566907328,
+    "ret_1m": -5.85,
+    "ret_3m": -6.77,
+    "ret_ytd": 7.6,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 10772,
+    "as_of": "2026-09-16"
+  },
+  "sectors": {
+    "realestate": 1.7,
+    "consumer_cyclical": 12.59,
+    "technology": 31.61,
+    "communication_services": 13.85,
+    "financial_services": 14.67,
+    "utilities": 3.65,
+    "industrials": 13.59,
+    "healthcare": 8.34
+  }
+}
