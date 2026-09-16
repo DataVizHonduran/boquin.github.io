@@ -1,40 +1,47 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (6 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (8 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
-From: Senior Eurozone Economist
-Date: September 15, 2026
-Subject: Analysis of Recent ECB and National Central Bank Research
+**To: Investment Committee**
+**From: Senior Economist (Eurozone)**
+**Date: September 16, 2026**
+**Subject: Analysis of Recent ECB/NCB Research Publications**
 
-I have reviewed the latest research from the ECB and the Bundesbank. While some papers are methodological, several provide critical insights into the "last mile" of inflation targeting and the structural constraints on Eurozone growth.
+I have screened the latest research from the ECB and national central banks. While some papers focus on technical survey design or US-specific stablecoin dynamics, the following five publications provide critical insights into the current Eurozone macroeconomic regime and the transmission of monetary policy.
 
-1. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations**
-This paper examines the conditions under which the ECB can ignore temporary sectoral price shocks without risking a broader inflationary spiral. It suggests that the ability to "look through" these shocks depends entirely on the strength of inflation anchoring, providing a framework for the Governing Council to justify holding rates steady despite volatile headline data.
+1. **[ECB] Endogenous monetary policy effectiveness**
+This research examines the asymmetry between policy tightening and loosening across the cycle. For our outlook, this suggests that the "impact" of rate cuts may not mirror the speed or magnitude of the previous hiking cycle, requiring us to adjust our models for non-linear transmission.
 
-2. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**
-The research demonstrates that government spending disproportionately stimulates non-tradable services, which then spills over into the goods sector. For our models, this implies that fiscal expansion in the Eurozone is more inflationary than previously thought, particularly in the services sector, potentially forcing a more restrictive monetary stance.
+2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations**
+The authors analyze when central banks should ignore temporary sectoral price spikes versus when they must act. This is vital for our inflation forecasting, as it highlights that the ECB’s tolerance for "noisy" sectoral data depends entirely on the stability of long-term inflation anchors.
 
 3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**
-This study highlights how behavioral biases—specifically optimism and pessimism—can distort inflation trajectories and the perceived effectiveness of policy. It suggests that standard linear models may understate the persistence of inflation if behavioral inertia takes hold, meaning the ECB may need to over-tighten to achieve a nominal anchor.
+This paper explores how behavioral sentiment drives inflation expectations and subsequent policy responses. It suggests that "sentiment-driven" inflation can create a feedback loop that forces the ECB into a more hawkish stance than fundamental data alone would dictate.
 
-4. **[ECB] Why Europeans save differently — and how to put those savings to work**
-The ECB analyzes the structural heterogeneity of savings across the bloc and the mechanisms required to mobilize this capital. This is analytically significant for our long-term growth forecasts, as the transition from passive saving to productive investment is essential for the Eurozone's productivity recovery and "Strategic Autonomy" goals.
+4. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**
+Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows how government spending in non-tradable services spills over into the broader goods sector. This is a key warning for our fiscal analysis: targeted government spending may be more inflationary across the whole economy than previously assumed.
 
-5. **[ECB] DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates**
-This paper explores how Federal Reserve policy transmits to USD-pegged stablecoins, even when issuers do not pay explicit interest. It alerts us to a "shadow" transmission channel where US monetary policy can influence global liquidity and Eurozone financial stability through digital asset rails, bypassing traditional banking intermediaries.
+5. **[ECB] Why Europeans save differently — and how to put those savings to work**
+This analysis addresses the structural divergence in saving behaviors across the Eurozone. Understanding these disparities is essential for predicting the "marginal propensity to consume" as rates fall, which will determine the strength of the domestic recovery.
 
 **Synthesis:**
-The current research suggests a growing concern that behavioral biases and sectoral fiscal spillovers are making inflation more persistent and harder to target. Simultaneously, the ECB is pivoting toward the structural challenge of mobilizing stagnant household savings to fund the region's necessary industrial transition.
+The current research suggests a shift toward analyzing non-linearities, where policy effectiveness and inflation dynamics are heavily influenced by behavioral sentiment and sectoral spillovers. For our portfolio, this means moving away from symmetric "rate-cut" assumptions and closely monitoring the interplay between fiscal spending and anchored expectations.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 3
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 5
+
+### (cached) [When firms do not take the money and run: evidence from corporate loan moratoria](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3282~b3fc21f7c5.en.pdf)
+**Published:** 2026-09-16 | **Authors:** 
+
+The paper evaluates the impact of corporate loan moratoria in Austria during the 2020 crisis, focusing on liquidity provision. It finds a moderate take-up rate of 44% among eligible firms, suggesting that such policy tools may not be fully utilized by the target population.
+
+**Tags:** banking · credit · financial stability · fiscal policy · eurozone
 
 ### (cached) [Why Europeans save differently — and how to put those savings to work](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260915~dacebb4a6f.en.html)
 **Published:** 2026-09-15 | **Authors:** 
@@ -42,6 +49,13 @@ The current research suggests a growing concern that behavioral biases and secto
 The paper analyzes the divergent saving patterns across European households and the underlying socioeconomic drivers of these behaviors. It proposes strategies to mobilize these idle savings to foster investment and long-term economic growth.
 
 **Tags:** consumer spending · eurozone · banking · financial stability · GDP growth · credit
+
+### (cached) [Endogenous monetary policy effectiveness](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3281~01820b53fd.en.pdf)
+**Published:** 2026-09-15 | **Authors:** 
+
+This study examines the asymmetric effectiveness of monetary policy tightenings versus loosenings across the policy cycle. It utilizes a nonlinear framework to demonstrate how endogenous financial exposure influences the macroeconomy's response to policy shifts.
+
+**Tags:** monetary policy · interest rates · inflation · GDP growth · financial stability
 
 ### (cached) [DeFi-ying the Fed? Monetary policy transmission to stablecoin deposit rates](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3280~503ba7d4b0.en.pdf)
 **Published:** 2026-09-14 | **Authors:** 
@@ -85,5 +99,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 6
-- Total cache size: 6 items
+- Already cached: 8
+- Total cache size: 8 items
