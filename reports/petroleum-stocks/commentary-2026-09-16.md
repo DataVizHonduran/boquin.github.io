@@ -1,35 +1,35 @@
-# EIA Weekly Petroleum Analysis: Week Ending 2026-09-04
+# EIA Weekly Petroleum Analysis: Week Ending 2026-09-11
 
 ## Executive Summary
-The latest EIA data reveals a market characterized by critically low crude reserves and significant seasonal deficits in refined products, despite modest weekly builds in the product slate.
+The latest EIA data reveals a market characterized by critically low crude inventories and significant seasonal deficits in refined products, despite modest weekly builds in the product space.
 
 | Product | MMBbl | WoW | Seasonal % | Signal |
 | :--- | :--- | :--- | :--- | :--- |
-| **Crude (NUS)** | 424.1 | -0.4 | 8.9% | 🐂 Bullish |
-| **Gasoline** | 206.9 | +1.3 | -32.3% | 🐂 Bullish |
-| **Distillates** | 106.3 | +2.1 | -8.6% | 🐂 Bullish |
+| **Crude Oil** | 423.4 | -0.6 | 11.5% | Bullish |
+| **Gasoline** | 207.7 | +0.8 | -28.7% | Bullish |
+| **Distillates** | 107.9 | +1.6 | -12.9% | Bullish |
 
 ---
 
 ## 1. Crude Oil Positioning
-*   **NUS Total:** Crude stocks are sitting at the bottom of the 5-year seasonal range (8.9%), indicating a lean inventory environment heading into Q4.
-*   **WoW Movement:** A marginal draw of 0.4 MMBbl suggests a balance between production and refinery throughput.
-*   **PADD 3 Highlight:** The Gulf Coast remains the primary anchor at 51.6% of its seasonal range. While the national average is low, PADD 3 provides a necessary buffer for export flexibility and refinery feedstock.
+*   **NUS Total:** A modest draw of 0.6 MMBbl keeps total stocks at 423.4 MMBbl. Positioning is extremely lean, sitting at only **11.5% of the 5-year seasonal range**.
+*   **PADD 3 (Gulf Coast):** Stocks are at 246.2 MMBbl (52.1% of range). While the Gulf Coast remains the primary buffer, the extreme tightness in PADD 2 (0.5%) and PADD 5 (1.6%) suggests severe regional imbalances.
 
 ## 2. Gasoline Positioning
-*   **Seasonal Tightness:** Gasoline is severely undersupplied, sitting 32.3% below the 5-year seasonal norm.
-*   **Demand Signal:** Despite a 1.3 MMBbl weekly build, the massive seasonal deficit suggests that the "end of summer" demand wind-down is not offsetting the structural shortage.
+*   **Seasonal Status:** Despite a WoW build of 0.8 MMBbl, gasoline remains in a deep seasonal deficit (**-28.7% of 5yr range**).
+*   **Demand Signal:** The build is likely a result of refinery transitions or lower late-summer demand, but the overall deficit suggests a tight market heading into the autumn transition.
 
 ## 3. Distillate Positioning
-*   **Seasonal Tightness:** Distillates are also below norm (-8.6%), though less extreme than gasoline.
-*   **Demand Signal:** A 2.1 MMBbl build indicates a slight easing of immediate diesel pressure, but the deficit in PADD 1 (-17.4%) suggests regional tightness on the East Coast as heating oil prep begins.
+*   **Seasonal Status:** Stocks rose by 1.6 MMBbl to 107.9 MMBbl, yet remain **12.9% below the 5-year seasonal norm**.
+*   **Demand Signal:** The build is a positive sign for heating oil readiness, but the overall deficit indicates that diesel demand remains robust or refinery yields are lagging.
 
 ## 4. Cross-Product Divergences
-*   **Crude vs. Products:** We see a divergence where crude is "critically low" (8.9% of range) while refined products are seeing weekly builds. This suggests refineries are processing crude efficiently to replenish product stocks, which will likely keep crude inventories suppressed.
+*   **Crude vs. Products:** We see a "tight-across-the-board" scenario. Unlike typical cycles where crude is loose while products are tight (or vice versa), all three categories are currently positioned well below their historical seasonal averages.
+*   **Regional Divergence:** PADD 3 is relatively balanced, while the coasts (PADD 1, 5) and the Midwest (PADD 2) are facing acute shortages.
 
 ## 5. Price Implications
-*   **WTI:** **Bullish.** Extremely low seasonal crude stocks provide a strong floor for prices.
-*   **Refined Products:** **Bullish.** The deep seasonal deficits in gasoline and distillates suggest that any unexpected demand spike or refinery outage will trigger sharp price volatility.
+*   **WTI:** **Net Bullish.** Extremely low total crude stocks (11.5% of range) provide a strong floor for prices.
+*   **Refined Products:** **Bullish.** Both gasoline and distillates are in seasonal deficits. Any unexpected demand spike or refinery outage will lead to rapid price volatility.
 
 ## 6. Watchlist for Next Wednesday
-**PADD 2 Crude Stocks:** Currently at -4.1% of the seasonal range. If the Midwest continues to draw down, we may see increased internal crude movements from PADD 3 to PADD 2, impacting regional differentials.
+**PADD 2 & 5 Crude Levels:** With these regions sitting at <2% of their seasonal range, any further draws will likely trigger regional price premiums and increased import urgency.
