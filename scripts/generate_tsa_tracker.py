@@ -200,6 +200,77 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
+    """60-day trailing moving average of daily travelers, YoY % change (2026 vs 2025)."""
+    yr2025 = (
+        df[df["year"] == 2025].sort_values("day_of_year")
+        .set_index("day_of_year")["travelers"]
+    )
+    curr = (
+        df[df["year"] == CURR_YEAR].sort_values("day_of_year")
+        .set_index("day_of_year")["travelers"]
+    )
+    ma2025 = yr2025.rolling(60, min_periods=1).mean()
+    ma2026 = curr.rolling(60, min_periods=1).mean()
+
+    days = sorted(set(ma2026.index) & set(ma2025.index))
+    days = [d for d in days if d >= 60]  # drop partial-window warmup
+    yoy = pd.Series(
+        {d: (ma2026[d] / ma2025[d] - 1) * 100 for d in days}
+    ).sort_index()
+
+    last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    fig = go.Figure()
+    fig.add_hline(y=0, line=dict(color="rgba(0,0,0,0.3)", width=1))
+    fig.add_trace(go.Scatter(
+        x=yoy.index,
+        y=yoy.values,
+        mode="lines",
+        line=dict(color="#DC2626", width=2.5),
+        name="60d MA YoY %",
+        hovertemplate="Day %{x}<br>%{y:+.2f}%<extra></extra>",
+    ))
+
+    fig.update_layout(
+        title=dict(
+            text="TSA Throughput — 60-Day Moving Average, YoY % Change",
+            font=dict(size=22, color="#111"),
+            x=0.5,
+        ),
+        annotations=[dict(
+            text=f"2026 vs. 2025, 60-day trailing average | Updated: {last_updated}",
+            xref="paper", yref="paper",
+            x=0.5, y=1.06,
+            showarrow=False,
+            font=dict(size=12, color="#555"),
+            xanchor="center",
+        )],
+        xaxis=dict(
+            title="",
+            tickvals=list(MONTH_TICKS.keys()),
+            ticktext=list(MONTH_TICKS.values()),
+            range=[1, 366],
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.4)",
+            tickfont=dict(size=11),
+        ),
+        yaxis=dict(
+            title="YoY % Change",
+            ticksuffix="%",
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.4)",
+        ),
+        hovermode="x unified",
+        showlegend=False,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        margin=dict(t=100, b=50, l=90, r=20),
+        height=420,
+    )
+    return fig
+
+
 def scrape_fr24() -> pd.DataFrame:
     print("Fetching FlightRadar24 statistics...")
     html = requests.get(
@@ -300,6 +371,7 @@ def main():
 
     print("Building TSA chart...")
     fig_tsa = build_chart(df)
+    fig_yoy = build_yoy_chart(df)
 
     fr24_df = scrape_fr24()
     print("Building FR24 charts...")
@@ -308,6 +380,7 @@ def main():
 
     cfg = {"displayModeBar": True, "responsive": True}
     div_tsa = fig_tsa.to_html(include_plotlyjs=False, full_html=False, config=cfg)
+    div_yoy = fig_yoy.to_html(include_plotlyjs=False, full_html=False, config=cfg)
     div_general = fig_general.to_html(include_plotlyjs=False, full_html=False, config=cfg)
     div_commercial = fig_commercial.to_html(include_plotlyjs=False, full_html=False, config=cfg)
 
@@ -338,7 +411,7 @@ def main():
     <button class="tab-btn active" onclick="showTab('tsa', this)">TSA Throughput</button>
     <button class="tab-btn" onclick="showTab('fr24', this)">FlightRadar24</button>
   </div>
-  <div id="tsa" class="tab-panel active">{div_tsa}</div>
+  <div id="tsa" class="tab-panel active">{div_tsa}{div_yoy}</div>
   <div id="fr24" class="tab-panel">
     {div_general}
     <p class="fr24-footnote"><strong>Total flights:</strong> Commercial flights above + rest of business jet flights + private flights + gliders + most helicopter flights + most ambulance flights + government flights + some military flights + drones</p>
