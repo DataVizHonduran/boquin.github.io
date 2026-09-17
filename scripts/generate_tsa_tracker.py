@@ -201,45 +201,68 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
 
 
 def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
-    """60-day trailing moving average of daily travelers, YoY % change (2026 vs 2025)."""
-    yr2025 = (
-        df[df["year"] == 2025].sort_values("day_of_year")
-        .set_index("day_of_year")["travelers"]
-    )
-    curr = (
-        df[df["year"] == CURR_YEAR].sort_values("day_of_year")
-        .set_index("day_of_year")["travelers"]
-    )
-    ma2025 = yr2025.rolling(60, min_periods=1).mean()
-    ma2026 = curr.rolling(60, min_periods=1).mean()
+    """60-day trailing MA of daily travelers, YoY % change — 5yr lookback (2022-2026 vs prior yr)."""
+    ma_by_year = {}
+    for y in HIST_YEARS + [CURR_YEAR]:
+        s = (
+            df[df["year"] == y].sort_values("day_of_year")
+            .set_index("day_of_year")["travelers"]
+        )
+        ma_by_year[y] = s.rolling(60, min_periods=1).mean()
 
-    days = sorted(set(ma2026.index) & set(ma2025.index))
-    days = [d for d in days if d >= 60]  # drop partial-window warmup
-    yoy = pd.Series(
-        {d: (ma2026[d] / ma2025[d] - 1) * 100 for d in days}
-    ).sort_index()
+    yoy_by_year = {}  # year Y -> Series of (MA_Y / MA_{Y-1} - 1) * 100
+    for y in HIST_YEARS[1:] + [CURR_YEAR]:  # 2022..2026, five YoY series
+        prev = ma_by_year[y - 1]
+        cur = ma_by_year[y]
+        days = sorted(set(cur.index) & set(prev.index))
+        days = [d for d in days if d >= 60]  # drop partial-window warmup
+        yoy_by_year[y] = pd.Series(
+            {d: (cur[d] / prev[d] - 1) * 100 for d in days}
+        ).sort_index()
+
+    band_years = HIST_YEARS[1:]  # 2022-2025
+    band = pd.DataFrame({y: yoy_by_year[y] for y in band_years})
+    band_low = band.min(axis=1).dropna()
+    band_high = band.max(axis=1).dropna()
+    yoy2025 = yoy_by_year[2025]
+    yoy2026 = yoy_by_year[CURR_YEAR]
 
     last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     fig = go.Figure()
     fig.add_hline(y=0, line=dict(color="rgba(0,0,0,0.3)", width=1))
+
     fig.add_trace(go.Scatter(
-        x=yoy.index,
-        y=yoy.values,
-        mode="lines",
-        line=dict(color="#DC2626", width=2.5),
-        name="60d MA YoY %",
-        hovertemplate="Day %{x}<br>%{y:+.2f}%<extra></extra>",
+        x=band_high.index, y=band_high.values,
+        mode="lines", line=dict(width=0), showlegend=False, hoverinfo="skip",
+    ))
+    fig.add_trace(go.Scatter(
+        x=band_low.index, y=band_low.values,
+        mode="lines", line=dict(width=0), fill="tonexty",
+        fillcolor="rgba(160,160,160,0.25)", name="2022–2025 Range",
+        hovertemplate="Day %{x}<br>%{y:+.2f}%<extra>2022–2025 Range</extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=yoy2025.index, y=yoy2025.values,
+        mode="lines", line=dict(color="rgba(110,110,110,0.55)", width=1.2, dash="dot"),
+        name="2025 YoY",
+        hovertemplate="Day %{x}<br>%{y:+.2f}%<extra>2025</extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=yoy2026.index, y=yoy2026.values,
+        mode="lines", line=dict(color="#DC2626", width=2.5),
+        name="2026 YoY",
+        hovertemplate="Day %{x}<br>%{y:+.2f}%<extra>2026</extra>",
     ))
 
     fig.update_layout(
         title=dict(
-            text="TSA Throughput — 60-Day Moving Average, YoY % Change",
+            text="TSA Throughput — 60-Day MA, YoY % Change (5yr Lookback)",
             font=dict(size=22, color="#111"),
             x=0.5,
         ),
         annotations=[dict(
-            text=f"2026 vs. 2025, 60-day trailing average | Updated: {last_updated}",
+            text=f"2026 YoY (red) vs. 2022–2025 YoY min/max range (grey) | Updated: {last_updated}",
             xref="paper", yref="paper",
             x=0.5, y=1.06,
             showarrow=False,
@@ -262,11 +285,18 @@ def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
             gridcolor="rgba(200,200,200,0.4)",
         ),
         hovermode="x unified",
-        showlegend=False,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.06,
+            xanchor="right",
+            x=1,
+            font=dict(size=12),
+        ),
         plot_bgcolor="white",
         paper_bgcolor="white",
-        margin=dict(t=100, b=50, l=90, r=20),
-        height=420,
+        margin=dict(t=110, b=50, l=90, r=20),
+        height=460,
     )
     return fig
 
