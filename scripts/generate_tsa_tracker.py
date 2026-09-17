@@ -201,9 +201,9 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
 
 
 def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
-    """60-day trailing MA of daily travelers, YoY % change — single continuous line, full history."""
+    """30-day trailing MA of daily travelers, YoY % change — single continuous line, full history."""
     full = df.sort_values("date").drop_duplicates("date").set_index("date")["travelers"]
-    ma60 = full.rolling("60D", min_periods=1).mean()
+    ma60 = full.rolling("30D", min_periods=1).mean()
 
     ma60_prev = ma60.copy()
     ma60_prev.index = ma60_prev.index + pd.DateOffset(years=1)
@@ -220,13 +220,13 @@ def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_trace(go.Scatter(
         x=yoy.index, y=yoy.values,
         mode="lines", line=dict(color="#DC2626", width=2),
-        name="60d MA YoY %",
+        name="30d MA YoY %",
         hovertemplate="%{x|%b %d, %Y}<br>%{y:+.2f}%<extra></extra>",
     ))
 
     fig.update_layout(
         title=dict(
-            text="TSA Throughput — 60-Day MA, YoY % Change",
+            text="TSA Throughput — 30-Day MA, YoY % Change",
             font=dict(size=22, color="#111"),
             x=0.5,
         ),
