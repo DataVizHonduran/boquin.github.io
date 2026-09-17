@@ -1,40 +1,54 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (8 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (10 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
 **To: Investment Committee**
-**From: Senior Economist (Eurozone)**
-**Date: September 16, 2026**
-**Subject: Analysis of Recent ECB/NCB Research Publications**
+**From: Senior Eurozone Economist**
+**Date: September 17, 2026**
+**Subject: Analysis of Recent Central Bank Research**
 
-I have screened the latest research from the ECB and national central banks. While some papers focus on technical survey design or US-specific stablecoin dynamics, the following five publications provide critical insights into the current Eurozone macroeconomic regime and the transmission of monetary policy.
+I have reviewed the latest output from the ECB and national central banks. While several papers focus on methodology, a few provide critical insights into the current transmission mechanism and the evolving nature of inflation expectations. Here are the most analytically significant publications for our current positioning:
 
 1. **[ECB] Endogenous monetary policy effectiveness**
-This research examines the asymmetry between policy tightening and loosening across the cycle. For our outlook, this suggests that the "impact" of rate cuts may not mirror the speed or magnitude of the previous hiking cycle, requiring us to adjust our models for non-linear transmission.
+This research examines whether policy tightenings and loosenings have symmetric effects on the macroeconomy. For our outlook, this suggests that the "lag" and intensity of rate cuts may not mirror the impact of the previous hiking cycle, requiring us to adjust our growth forecasts based on where we are in the policy cycle.
 
 2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations**
-The authors analyze when central banks should ignore temporary sectoral price spikes versus when they must act. This is vital for our inflation forecasting, as it highlights that the ECB’s tolerance for "noisy" sectoral data depends entirely on the stability of long-term inflation anchors.
+The authors analyze how central banks distinguish between temporary sectoral price shocks and systemic inflation. This is critical for our inflation forecasting, as it indicates whether the ECB will remain "patient" during energy or food spikes or if they perceive a dangerous shift in long-term inflation anchoring.
 
 3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**
-This paper explores how behavioral sentiment drives inflation expectations and subsequent policy responses. It suggests that "sentiment-driven" inflation can create a feedback loop that forces the ECB into a more hawkish stance than fundamental data alone would dictate.
+This paper explores how behavioral biases among agents influence the actual trajectory of inflation. It suggests that "sentiment" is not just a lagging indicator but a driver of price-setting behavior, meaning we should overweight sentiment surveys in our near-term CPI models.
 
 4. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**
-Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows how government spending in non-tradable services spills over into the broader goods sector. This is a key warning for our fiscal analysis: targeted government spending may be more inflationary across the whole economy than previously assumed.
+Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows that government spending disproportionately boosts non-tradable services and spills over into the goods sector. This is vital for our sectoral equity allocations, as it highlights how fiscal stimulus in the Eurozone may drive service-sector inflation more aggressively than overall GDP growth.
 
 5. **[ECB] Why Europeans save differently — and how to put those savings to work**
-This analysis addresses the structural divergence in saving behaviors across the Eurozone. Understanding these disparities is essential for predicting the "marginal propensity to consume" as rates fall, which will determine the strength of the domestic recovery.
+This analysis addresses the structural differences in household saving behaviors across the bloc. Understanding these patterns is key to predicting the "marginal propensity to consume" as rates fall, which will determine the speed of the Eurozone's domestic demand recovery.
 
 **Synthesis:**
-The current research suggests a shift toward analyzing non-linearities, where policy effectiveness and inflation dynamics are heavily influenced by behavioral sentiment and sectoral spillovers. For our portfolio, this means moving away from symmetric "rate-cut" assumptions and closely monitoring the interplay between fiscal spending and anchored expectations.
+The current research indicates a shift toward understanding the non-linearities of monetary transmission and the psychological drivers of inflation. For our strategy, this means moving beyond simple linear models to incorporate behavioral sentiment and sectoral fiscal spillovers into our Eurozone growth and rate projections.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 5
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 7
+
+### (cached) [Entropic tilting of forecasts to SPF histograms: analytics & applications](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3284~c350fd075f.en.pdf)
+**Published:** 2026-09-17 | **Authors:** 
+
+The paper proposes a method to integrate nonparametric survey density forecasts from the SPF into model-based predictive distributions using entropic tilting. This approach aims to preserve rich distributional information that is typically lost in moment-based approximations.
+
+**Tags:** inflation · GDP growth · monetary policy · productivity · eurozone
+
+### (cached) [Measuring sentiment news with transformer-based language models](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3283~df0633dfd3.en.pdf)
+**Published:** 2026-09-17 | **Authors:** 
+
+The authors develop a framework for creating daily financial news sentiment indices using transformer-based language models to improve upon dictionary-based methods. The study evaluates the ability of these models to capture semantic structure and context for economic forecasting.
+
+**Tags:** financial stability · banking · monetary policy · inflation · GDP growth
 
 ### (cached) [When firms do not take the money and run: evidence from corporate loan moratoria](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3282~b3fc21f7c5.en.pdf)
 **Published:** 2026-09-16 | **Authors:** 
@@ -99,5 +113,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 8
-- Total cache size: 8 items
+- Already cached: 10
+- Total cache size: 10 items
