@@ -1,40 +1,50 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (10 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (13 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee**
+**To: Investment Team**
 **From: Senior Eurozone Economist**
-**Date: September 17, 2026**
-**Subject: Analysis of Recent Central Bank Research**
+**Date: September 18, 2026**
+**Subject: Analysis of Recent ECB and NCB Research Publications**
 
-I have reviewed the latest output from the ECB and national central banks. While several papers focus on methodology, a few provide critical insights into the current transmission mechanism and the evolving nature of inflation expectations. Here are the most analytically significant publications for our current positioning:
+I have reviewed the latest research cycle from the ECB and national central banks. While much of the output is methodological, several papers provide critical insights into the transmission mechanisms of monetary policy and the structural risks facing the bloc.
 
-1. **[ECB] Endogenous monetary policy effectiveness**
-This research examines whether policy tightenings and loosenings have symmetric effects on the macroeconomy. For our outlook, this suggests that the "lag" and intensity of rate cuts may not mirror the impact of the previous hiking cycle, requiring us to adjust our growth forecasts based on where we are in the policy cycle.
+Here are the most analytically significant publications for our current positioning:
 
-2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations**
-The authors analyze how central banks distinguish between temporary sectoral price shocks and systemic inflation. This is critical for our inflation forecasting, as it indicates whether the ECB will remain "patient" during energy or food spikes or if they perceive a dangerous shift in long-term inflation anchoring.
+1. **[ECB] Endogenous monetary policy effectiveness:** This paper investigates whether policy tightenings and loosenings have symmetric effects on the macroeconomy. For us, this is critical for timing our pivots; if the "braking" effect of rate hikes is more potent than the "accelerator" effect of cuts, the ECB may be more prone to over-tightening than under-stimulating.
 
-3. **[DBB] The consequences of optimism and pessimism for inflation dynamics and monetary policy**
-This paper explores how behavioral biases among agents influence the actual trajectory of inflation. It suggests that "sentiment" is not just a lagging indicator but a driver of price-setting behavior, meaning we should overweight sentiment surveys in our near-term CPI models.
+2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** The authors analyze how the central bank can ignore temporary sectoral shocks without losing control of inflation. This is a key read for our inflation forecasting, as it suggests that the ECB’s ability to "look through" energy or supply shocks depends entirely on the stability of long-term inflation expectations.
 
-4. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK**
-Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows that government spending disproportionately boosts non-tradable services and spills over into the goods sector. This is vital for our sectoral equity allocations, as it highlights how fiscal stimulus in the Eurozone may drive service-sector inflation more aggressively than overall GDP growth.
+3. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK:** Using a Heterogeneous Agent New Keynesian (HANK) model, this research shows that government spending disproportionately boosts non-tradable services and spills over into the goods sector. This implies that fiscal expansion in the Eurozone may be more inflationary than previously thought by driving demand into supply-constrained service sectors.
 
-5. **[ECB] Why Europeans save differently — and how to put those savings to work**
-This analysis addresses the structural differences in household saving behaviors across the bloc. Understanding these patterns is key to predicting the "marginal propensity to consume" as rates fall, which will determine the speed of the Eurozone's domestic demand recovery.
+4. **[ECB] Bank competition and credit risk: the conditioning role of capital:** This study examines how capital levels modulate the relationship between competition and lending risk. As we monitor the health of mid-tier Eurozone banks, this highlights that highly competitive lending environments only remain stable if capital buffers are sufficiently high, otherwise, competition drives a race to the bottom in credit quality.
 
-**Synthesis:**
-The current research indicates a shift toward understanding the non-linearities of monetary transmission and the psychological drivers of inflation. For our strategy, this means moving beyond simple linear models to incorporate behavioral sentiment and sectoral fiscal spillovers into our Eurozone growth and rate projections.
+5. **[DBB] Macroeconomic effects of carbon-intensive energy price changes:** This model comparison assesses how shifts in carbon-heavy energy costs ripple through the economy. Given the ongoing green transition and volatile energy markets, this provides a framework for quantifying the "greenflation" risk and the resulting drag on industrial output.
+
+**Synthesis:** The current research trend suggests a shift toward understanding the non-linearities of policy transmission and the sectoral frictions of the green transition. For our portfolio, this underscores a need to account for asymmetric policy impacts and the heightened sensitivity of inflation to fiscal spillovers in the services sector.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 7
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 9
+
+### (cached) [Out with the new, in with the old? Supranational bank supervision and the composition of firm investment](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3286~f4202ab618.en.pdf)
+**Published:** 2026-09-18 | **Authors:** 
+
+The paper analyzes the impact of the Single Supervisory Mechanism on firm investment patterns. It finds that supranational supervision leads to a reduction in the share of intangible assets among borrowing firms compared to those under national supervision.
+
+**Tags:** banking · banking union · eurozone · credit · productivity
+
+### (cached) [Bank competition and credit risk: the conditioning role of capital](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3285~6f253764af.en.pdf)
+**Published:** 2026-09-18 | **Authors:** 
+
+This study investigates the interaction between bank competition and credit risk, specifically how regulatory capital levels moderate this relationship. It utilizes ECB supervisory data to assess the implications for risk-based supervision and deregulation.
+
+**Tags:** banking · financial stability · credit · eurozone · interest rates
 
 ### (cached) [Entropic tilting of forecasts to SPF histograms: analytics & applications](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3284~c350fd075f.en.pdf)
 **Published:** 2026-09-17 | **Authors:** 
@@ -86,7 +96,14 @@ This study analyzes the impact of government spending shocks on private consumpt
 **Tags:** fiscal policy · consumer spending · GDP growth · trade · inflation
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 3
+**Content Type:** Discussion Papers | **New:** 0 of 4
+
+### (cached) [Macroeconomic effects of carbon-intensive energy price changes: A model comparison | Matthias Burgert, Matthieu Darracq Pariès, Luigi Durand, Mario González, Romanos Priftis, Oke Röhe, Matthias Rottner, Edgar Silgado-Gómez, Nikolai Stähler, Janos Varga](https://www.bundesbank.de/en/publications/research/discussion-papers/macroeconomic-effects-of-carbon-intensive-energy-price-changes-a-model-comparison-933124)
+**Published:** 2026-09-18 | **Authors:** 
+
+The authors compare macroeconomic models to evaluate the impact of price fluctuations in carbon-intensive energy. The research focuses on the resulting effects on inflation and overall economic output during the energy transition.
+
+**Tags:** inflation · climate & transition · green finance · GDP growth · supply chains
 
 ### (cached) [On looking through sectoral shocks: The role of (de-)anchored inflation expectations | Rafael Gerke, Joost Röttger](https://www.bundesbank.de/en/publications/research/discussion-papers/on-looking-through-sectoral-shocks-the-role-of-de-anchored-inflation-expectations-973908)
 **Published:** 2026-09-15 | **Authors:** 
@@ -113,5 +130,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 10
-- Total cache size: 10 items
+- Already cached: 13
+- Total cache size: 13 items
