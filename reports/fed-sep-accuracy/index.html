@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grading the Dots — Fed SEP Forecast Accuracy, 2015–2026</title>
+<style>
+  :root{
+    --paper:#f5f6f4;
+    --ink:#191d24;
+    --ink-soft:#454b58;
+    --ink-mute:#7a8092;
+    --line:#d8dbd6;
+    --panel:#ffffff;
+    --seq-0:#cfe0f0;   /* oldest vintage */
+    --seq-1:#5c8ec4;
+    --seq-2:#123a63;   /* newest vintage */
+    --actual:#b13a46;
+    --actual-soft:#b13a46;
+    --pos:#c17d1f;     /* actual > forecast (underestimated) */
+    --neg:#2b7a72;     /* actual < forecast (overestimated) */
+    --mae:#8891a0;
+    --focus:#123a63;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#12151b;
+      --ink:#e9ebf1;
+      --ink-soft:#b7bccb;
+      --ink-mute:#7c8296;
+      --line:#2b303c;
+      --panel:#181c24;
+      --seq-0:#2c3f57;
+      --seq-1:#5c8ec4;
+      --seq-2:#a9cdf2;
+      --actual:#e2717c;
+      --actual-soft:#e2717c;
+      --pos:#e0a83f;
+      --neg:#4fada2;
+      --mae:#7c8296;
+      --focus:#a9cdf2;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12151b; --ink:#e9ebf1; --ink-soft:#b7bccb; --ink-mute:#7c8296; --line:#2b303c;
+    --panel:#181c24; --seq-0:#2c3f57; --seq-1:#5c8ec4; --seq-2:#a9cdf2; --actual:#e2717c;
+    --actual-soft:#e2717c; --pos:#e0a83f; --neg:#4fada2; --mae:#7c8296; --focus:#a9cdf2;
+  }
+  :root[data-theme="light"]{
+    --paper:#f5f6f4; --ink:#191d24; --ink-soft:#454b58; --ink-mute:#7a8092; --line:#d8dbd6;
+    --panel:#ffffff; --seq-0:#cfe0f0; --seq-1:#5c8ec4; --seq-2:#123a63; --actual:#b13a46;
+    --actual-soft:#b13a46; --pos:#c17d1f; --neg:#2b7a72; --mae:#8891a0; --focus:#123a63;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:56px 28px 80px;}
+
+  h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:400;margin:0;text-wrap:balance;}
+  h1{font-size:2.15rem;letter-spacing:-0.01em;color:var(--ink);}
+  h2{font-size:1.4rem;color:var(--ink);margin-bottom:4px;}
+  .kicker{
+    text-transform:uppercase;letter-spacing:0.11em;font-size:0.72rem;font-weight:600;
+    color:var(--ink-mute);margin-bottom:10px;
+  }
+  .dek{font-size:1.02rem;color:var(--ink-soft);max-width:640px;margin-top:14px;}
+  header{border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:44px;}
+
+  section{margin-bottom:56px;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:18px;}
+  .section-note{font-size:0.86rem;color:var(--ink-mute);max-width:420px;}
+
+  .panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:22px 22px 16px;
+  }
+  .chart-scroll{overflow-x:auto;}
+  svg{display:block;font-family:inherit;}
+  .axis-label{fill:var(--ink-mute);font-size:11px;}
+  .axis-line{stroke:var(--line);stroke-width:1;}
+  .gridline{stroke:var(--line);stroke-width:1;}
+  .vline{fill:none;stroke-linejoin:round;stroke-linecap:round;transition:opacity .12s, stroke-width .12s;}
+  .vdot{transition:opacity .12s;}
+  .actual-line{fill:none;stroke:var(--actual);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;}
+  .actual-dot{fill:var(--actual);}
+  .actual-dot-pending{fill:var(--panel);stroke:var(--actual);stroke-width:2;stroke-dasharray:2 2;}
+  .crosshair{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:3 3;pointer-events:none;}
+  .hover-cap{fill:var(--ink);font-size:11.5px;font-weight:600;}
+
+  .legend{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-top:14px;font-size:0.78rem;color:var(--ink-soft);}
+  .legend-item{display:flex;align-items:center;gap:8px;}
+  .swatch-grad{width:56px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--seq-0),var(--seq-1) 50%,var(--seq-2));}
+  .swatch-line{width:22px;height:0;border-top:2.5px solid var(--actual);}
+
+  .tooltip{
+    position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);
+    font-size:0.76rem;line-height:1.45;border-radius:7px;padding:9px 11px;
+    box-shadow:0 6px 18px rgba(0,0,0,.22);opacity:0;transition:opacity .1s;
+    max-width:230px;z-index:5;font-variant-numeric:tabular-nums;
+  }
+  @media (prefers-color-scheme:dark){ .tooltip{background:#e9ebf1;color:#12151b;} }
+  :root[data-theme="dark"] .tooltip{background:#e9ebf1;color:#12151b;}
+  :root[data-theme="light"] .tooltip{background:#191d24;color:#f5f6f4;}
+  .tt-row{display:flex;justify-content:space-between;gap:14px;}
+  .tt-row + .tt-row{margin-top:2px;}
+  .tt-title{font-weight:700;margin-bottom:5px;}
+
+  .chart-wrap{position:relative;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:10px;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+  .stat-card h3{font-size:0.95rem;color:var(--ink);margin-bottom:12px;font-family:inherit;font-weight:600;}
+  .bar-row{display:grid;grid-template-columns:70px 1fr 46px;align-items:center;gap:10px;font-size:0.78rem;color:var(--ink-soft);margin:7px 0;}
+  .bar-track{height:8px;background:var(--line);border-radius:4px;position:relative;overflow:visible;}
+  .bar-track.diverging::before{content:'';position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink-mute);}
+  .bar-fill{position:absolute;top:0;bottom:0;border-radius:4px;}
+  .bar-val{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);}
+  .stat-legend{display:flex;gap:16px;font-size:0.72rem;color:var(--ink-mute);margin-top:12px;padding-top:10px;border-top:1px solid var(--line);}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;}
+
+  footer{border-top:1px solid var(--line);padding-top:24px;margin-top:16px;font-size:0.78rem;color:var(--ink-mute);}
+  footer p{max-width:760px;margin:0 0 10px;}
+  code{font-size:0.85em;background:var(--line);padding:1px 5px;border-radius:4px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Federal Reserve · Summary of Economic Projections</div>
+    <h1>Grading the dots</h1>
+    <p class="dek">Every quarter since 2015, FOMC participants have published a median forecast for where unemployment and core inflation will land — one, two, three years out. Here's how those forecasts stacked up against what actually happened, vintage by vintage.</p>
+  </header>
+
+  <section id="sec-ue">
+    <div class="section-head">
+      <div>
+        <h2>Unemployment rate</h2>
+        <div class="section-note">Each line is one SEP's median projection path, made at a single meeting. The red line is what actually happened (Q4 average, UNRATE).</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="chart-scroll"><div id="chart-ue" class="chart-wrap"></div></div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch-grad"></span> SEP vintage, Sep 2015 → Sep 2026 (older → newer)</div>
+        <div class="legend-item"><span class="swatch-line"></span> Actual (realized)</div>
+        <div class="legend-item">Hover a line to trace one vintage · hover the chart to compare all forecasts for a year</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-pce">
+    <div class="section-head">
+      <div>
+        <h2>Core PCE inflation</h2>
+        <div class="section-note">Same read, for core PCE (Q4/Q4 % change, PCEPILFE) — the Fed's preferred inflation gauge.</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="chart-scroll"><div id="chart-pce" class="chart-wrap"></div></div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch-grad"></span> SEP vintage, Sep 2015 → Sep 2026 (older → newer)</div>
+        <div class="legend-item"><span class="swatch-line"></span> Actual (realized)</div>
+        <div class="legend-item">Hover a line to trace one vintage · hover the chart to compare all forecasts for a year</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-accuracy">
+    <div class="section-head">
+      <div>
+        <h2>Accuracy by forecast horizon</h2>
+        <div class="section-note">Bias = actual − median forecast, averaged across all vintages at that horizon. Positive means the Fed underestimated; negative means it overestimated. MAE is the average size of the miss, regardless of direction.</div>
+      </div>
+    </div>
+    <div class="stat-grid" id="stat-grid"></div>
+  </section>
+
+  <footer>
+    <p><strong>Method.</strong> SEP medians are scraped from the Fed's own "accessible version" projection tables (federalreserve.gov/monetarypolicy/fomcprojtabl*.htm). The FOMC did not publish a formal median for unemployment/inflation until the September 2015 SEP — earlier vintages (back to 2007) gave only a central-tendency range, so this history starts there rather than in 2007. Actual unemployment = Q4 average of UNRATE; actual core PCE = Q4-over-Q4 % change in PCEPILFE, matching the Fed's own convention. Both series from FRED.</p>
+    <p><strong>Gaps.</strong> The March 2022 SEP's accessible-table page is missing from the Fed's site (404) and is excluded. October 2025 unemployment uses a 2-of-3-month Q4 average due to a BLS reporting gap that month. 2026 and later target years are still projections — no actual yet.</p>
+  </footer>
+
+</div>
+
+<script>
+const DATA = {"meta": {"generated": "2026-09-17", "note": "FOMC Summary of Economic Projections (SEP) median forecasts vs. realized outcomes. Official medians for GDP/unemployment/PCE inflation began Sept 2015 (2012-mid2015 SEPs published central tendency & range only, no median). UE = Q4 average of UNRATE. Core PCE = Q4/Q4 pct chg of PCEPILFE index (Fed convention). March 2022 vintage page unavailable on federalreserve.gov. Oct 2025 UE uses 2-of-3 Q4 months due to BLS data gap (govt shutdown)."}, "vintages": [{"vintage": "20150917", "ue": {"2015": 5.0, "2016": 4.8, "2017": 4.8, "2018": 4.8, "Longer run": 4.9}, "core_pce": {"2015": 1.4, "2016": 1.7, "2017": 1.9, "2018": 2.0, "Longer run": NaN}}, {"vintage": "20151216", "ue": {"2015": 5.0, "2016": 4.7, "2017": 4.7, "2018": 4.7, "Longer run": 4.9}, "core_pce": {"2015": 1.3, "2016": 1.6, "2017": 1.9, "2018": 2.0, "Longer run": NaN}}, {"vintage": "20160316", "ue": {"2016": 4.7, "2017": 4.6, "2018": 4.5, "Longer run": 4.8}, "core_pce": {"2016": 1.6, "2017": 1.8, "2018": 2.0, "Longer run": NaN}}, {"vintage": "20160615", "ue": {"2016": 4.7, "2017": 4.6, "2018": 4.6, "Longer run": 4.8}, "core_pce": {"2016": 1.7, "2017": 1.9, "2018": 2.0, "Longer run": NaN}}, {"vintage": "20160921", "ue": {"2016": 4.8, "2017": 4.6, "2018": 4.5, "2019": 4.6, "Longer run": 4.8}, "core_pce": {"2016": 1.7, "2017": 1.8, "2018": 2.0, "2019": 2.0, "Longer run": NaN}}, {"vintage": "20161214", "ue": {"2016": 4.7, "2017": 4.5, "2018": 4.5, "2019": 4.5, "Longer run": 4.8}, "core_pce": {"2016": 1.7, "2017": 1.8, "2018": 2.0, "2019": 2.0, "Longer run": NaN}}, {"vintage": "20170315", "ue": {"2017": 4.5, "2018": 4.5, "2019": 4.5, "Longer run": 4.7}, "core_pce": {"2017": 1.9, "2018": 2.0, "2019": 2.0, "Longer run": NaN}}, {"vintage": "20170614", "ue": {"2017": 4.3, "2018": 4.2, "2019": 4.2, "Longer run": 4.6}, "core_pce": {"2017": 1.7, "2018": 2.0, "2019": 2.0, "Longer run": NaN}}, {"vintage": "20170920", "ue": {"2017": 4.3, "2018": 4.1, "2019": 4.1, "2020": 4.2, "Longer run": 4.6}, "core_pce": {"2017": 1.5, "2018": 1.9, "2019": 2.0, "2020": 2.0, "Longer run": NaN}}, {"vintage": "20171213", "ue": {"2017": 4.1, "2018": 3.9, "2019": 3.9, "2020": 4.0, "Longer run": 4.6}, "core_pce": {"2017": 1.5, "2018": 1.9, "2019": 2.0, "2020": 2.0, "Longer run": NaN}}, {"vintage": "20180321", "ue": {"2018": 3.8, "2019": 3.6, "2020": 3.6, "Longer run": 4.5}, "core_pce": {"2018": 1.9, "2019": 2.1, "2020": 2.1, "Longer run": NaN}}, {"vintage": "20180613", "ue": {"2018": 3.6, "2019": 3.5, "2020": 3.5, "Longer run": 4.5}, "core_pce": {"2018": 2.0, "2019": 2.1, "2020": 2.1, "Longer run": NaN}}, {"vintage": "20180926", "ue": {"2018": 3.7, "2019": 3.5, "2020": 3.5, "2021": 3.7, "Longer run": 4.5}, "core_pce": {"2018": 2.0, "2019": 2.1, "2020": 2.1, "2021": 2.1, "Longer run": NaN}}, {"vintage": "20181219", "ue": {"2018": 3.7, "2019": 3.5, "2020": 3.6, "2021": 3.8, "Longer run": 4.4}, "core_pce": {"2018": 1.9, "2019": 2.0, "2020": 2.0, "2021": 2.0, "Longer run": NaN}}, {"vintage": "20190320", "ue": {"2019": 3.7, "2020": 3.8, "2021": 3.9, "Longer run": 4.3}, "core_pce": {"2019": 2.0, "2020": 2.0, "2021": 2.0, "Longer run": NaN}}, {"vintage": "20190619", "ue": {"2019": 3.6, "2020": 3.7, "2021": 3.8, "Longer run": 4.2}, "core_pce": {"2019": 1.8, "2020": 1.9, "2021": 2.0, "Longer run": NaN}}, {"vintage": "20190918", "ue": {"2019": 3.7, "2020": 3.7, "2021": 3.8, "2022": 3.9, "Longer run": 4.2}, "core_pce": {"2019": 1.8, "2020": 1.9, "2021": 2.0, "2022": 2.0, "Longer run": NaN}}, {"vintage": "20191211", "ue": {"2019": 3.6, "2020": 3.5, "2021": 3.6, "2022": 3.7, "Longer run": 4.1}, "core_pce": {"2019": 1.6, "2020": 1.9, "2021": 2.0, "2022": 2.0, "Longer run": NaN}}, {"vintage": "20200610", "ue": {"2020": 9.3, "2021": 6.5, "2022": 5.5, "Longer run": 4.1}, "core_pce": {"2020": 1.0, "2021": 1.5, "2022": 1.7, "Longer run": NaN}}, {"vintage": "20200916", "ue": {"2020": 7.6, "2021": 5.5, "2022": 4.6, "2023": 4.0, "Longer run": 4.1}, "core_pce": {"2020": 1.5, "2021": 1.7, "2022": 1.8, "2023": 2.0, "Longer run": NaN}}, {"vintage": "20201216", "ue": {"2020": 6.7, "2021": 5.0, "2022": 4.2, "2023": 3.7, "Longer run": 4.1}, "core_pce": {"2020": 1.4, "2021": 1.8, "2022": 1.9, "2023": 2.0, "Longer run": NaN}}, {"vintage": "20210317", "ue": {"2021": 4.5, "2022": 3.9, "2023": 3.5, "Longer run": 4.0}, "core_pce": {"2021": 2.2, "2022": 2.0, "2023": 2.1, "Longer run": NaN}}, {"vintage": "20210616", "ue": {"2021": 4.5, "2022": 3.8, "2023": 3.5, "Longer run": 4.0}, "core_pce": {"2021": 3.0, "2022": 2.1, "2023": 2.1, "Longer run": NaN}}, {"vintage": "20210922", "ue": {"2021": 4.8, "2022": 3.8, "2023": 3.5, "2024": 3.5, "Longer run": 4.0}, "core_pce": {"2021": 3.7, "2022": 2.3, "2023": 2.2, "2024": 2.1, "Longer run": NaN}}, {"vintage": "20211215", "ue": {"2021": 4.3, "2022": 3.5, "2023": 3.5, "2024": 3.5, "Longer run": 4.0}, "core_pce": {"2021": 4.4, "2022": 2.7, "2023": 2.3, "2024": 2.1, "Longer run": NaN}}, {"vintage": "20220615", "ue": {"2022": 3.7, "2023": 3.9, "2024": 4.1, "Longer run": 4.0}, "core_pce": {"2022": 4.3, "2023": 2.7, "2024": 2.3, "Longer run": NaN}}, {"vintage": "20220921", "ue": {"2022": 3.8, "2023": 4.4, "2024": 4.4, "2025": 4.3, "Longer run": 4.0}, "core_pce": {"2022": 4.5, "2023": 3.1, "2024": 2.3, "2025": 2.1, "Longer run": NaN}}, {"vintage": "20221214", "ue": {"2022": 3.7, "2023": 4.6, "2024": 4.6, "2025": 4.5, "Longer run": 4.0}, "core_pce": {"2022": 4.8, "2023": 3.5, "2024": 2.5, "2025": 2.1, "Longer run": NaN}}, {"vintage": "20230322", "ue": {"2023": 4.5, "2024": 4.6, "2025": 4.6, "Longer run": 4.0}, "core_pce": {"2023": 3.6, "2024": 2.6, "2025": 2.1, "Longer run": NaN}}, {"vintage": "20230614", "ue": {"2023": 4.1, "2024": 4.5, "2025": 4.5, "Longer run": 4.0}, "core_pce": {"2023": 3.9, "2024": 2.6, "2025": 2.2, "Longer run": NaN}}, {"vintage": "20230920", "ue": {"2023": 3.8, "2024": 4.1, "2025": 4.1, "2026": 4.0, "Longer run": 4.0}, "core_pce": {"2023": 3.7, "2024": 2.6, "2025": 2.3, "2026": 2.0, "Longer run": NaN}}, {"vintage": "20231213", "ue": {"2023": 3.8, "2024": 4.1, "2025": 4.1, "2026": 4.1, "Longer run": 4.1}, "core_pce": {"2023": 3.2, "2024": 2.4, "2025": 2.2, "2026": 2.0, "Longer run": NaN}}, {"vintage": "20240320", "ue": {"2024": 4.0, "2025": 4.1, "2026": 4.0, "Longer run": 4.1}, "core_pce": {"2024": 2.6, "2025": 2.2, "2026": 2.0, "Longer run": NaN}}, {"vintage": "20240612", "ue": {"2024": 4.0, "2025": 4.2, "2026": 4.1, "Longer run": 4.2}, "core_pce": {"2024": 2.8, "2025": 2.3, "2026": 2.0, "Longer run": NaN}}, {"vintage": "20240918", "ue": {"2024": 4.4, "2025": 4.4, "2026": 4.3, "2027": 4.2, "Longer run": 4.2}, "core_pce": {"2024": 2.6, "2025": 2.2, "2026": 2.0, "2027": 2.0, "Longer run": NaN}}, {"vintage": "20241218", "ue": {"2024": 4.2, "2025": 4.3, "2026": 4.3, "2027": 4.3, "Longer run": 4.2}, "core_pce": {"2024": 2.8, "2025": 2.5, "2026": 2.2, "2027": 2.0, "Longer run": NaN}}, {"vintage": "20250319", "ue": {"2025": 4.4, "2026": 4.3, "2027": 4.3, "Longer run": 4.2}, "core_pce": {"2025": 2.8, "2026": 2.2, "2027": 2.0, "Longer run": NaN}}, {"vintage": "20250618", "ue": {"2025": 4.5, "2026": 4.5, "2027": 4.4, "Longer run": 4.2}, "core_pce": {"2025": 3.1, "2026": 2.4, "2027": 2.1, "Longer run": NaN}}, {"vintage": "20250917", "ue": {"2025": 4.5, "2026": 4.4, "2027": 4.3, "2028": 4.2, "Longer run": 4.2}, "core_pce": {"2025": 3.1, "2026": 2.6, "2027": 2.1, "2028": 2.0, "Longer run": NaN}}, {"vintage": "20260318", "ue": {"2026": 4.4, "2027": 4.3, "2028": 4.2, "Longer run": 4.2}, "core_pce": {"2026": 2.7, "2027": 2.2, "2028": 2.0, "Longer run": NaN}}, {"vintage": "20260617", "ue": {"2026": 4.3, "2027": 4.3, "2028": 4.2, "Longer run": 4.2}, "core_pce": {"2026": 3.3, "2027": 2.5, "2028": 2.1, "Longer run": NaN}}, {"vintage": "20260916", "ue": {"2026": 4.1, "2027": 4.1, "2028": 4.1, "2029": 4.1, "Longer run": 4.2}, "core_pce": {"2026": 3.4, "2027": 2.5, "2028": 2.2, "2029": 2.0, "Longer run": NaN}}], "actuals": {"ue": {"2013": 6.93, "2014": 5.7, "2015": 5.03, "2016": 4.77, "2017": 4.17, "2018": 3.83, "2019": 3.6, "2020": 6.77, "2021": 4.17, "2022": 3.57, "2023": 3.8, "2024": 4.13, "2025": 4.45}, "core_pce": {"2014": 1.41, "2015": 1.19, "2016": 1.76, "2017": 1.55, "2018": 1.97, "2019": 1.56, "2020": 1.46, "2021": 4.85, "2022": 5.21, "2023": 3.29, "2024": 2.99, "2025": 2.85}, "ue_partial": {"2025": "2/3 months (BLS Oct-2025 data gap)"}}, "summary": {"core_pce": {"0": {"n": 39, "bias": 0.175, "mae": 0.365, "rmse": 0.628}, "1": {"n": 36, "bias": 0.586, "mae": 0.88, "rmse": 1.394}, "2": {"n": 32, "bias": 0.797, "mae": 1.113, "rmse": 1.56}, "3": {"n": 16, "bias": 0.991, "mae": 1.244, "rmse": 1.645}}, "ue": {"0": {"n": 39, "bias": -0.161, "mae": 0.225, "rmse": 0.475}, "1": {"n": 36, "bias": 0.084, "mae": 0.676, "rmse": 1.172}, "2": {"n": 32, "bias": 0.176, "mae": 0.849, "rmse": 1.28}, "3": {"n": 16, "bias": 0.202, "mae": 0.759, "rmse": 1.094}}}};
+
+function iso(v){ return v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); }
+function vLabel(v){
+  const m = {'01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May','06':'Jun','07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'};
+  return m[v.slice(4,6)] + ' ' + v.slice(0,4);
+}
+function lerpColor(a,b,t){
+  const pa=hex2rgb(a), pb=hex2rgb(b);
+  const r=Math.round(pa[0]+(pb[0]-pa[0])*t);
+  const g=Math.round(pa[1]+(pb[1]-pa[1])*t);
+  const bl=Math.round(pa[2]+(pb[2]-pa[2])*t);
+  return `rgb(${r},${g},${bl})`;
+}
+function hex2rgb(h){
+  h=h.replace('#','');
+  return [parseInt(h.substring(0,2),16),parseInt(h.substring(2,4),16),parseInt(h.substring(4,6),16)];
+}
+function seqColor(t){
+  const cs = getComputedStyle(document.documentElement);
+  const c0 = cs.getPropertyValue('--seq-0').trim();
+  const c1 = cs.getPropertyValue('--seq-1').trim();
+  const c2 = cs.getPropertyValue('--seq-2').trim();
+  if(t<0.5) return lerpColor(c0,c1,t/0.5);
+  return lerpColor(c1,c2,(t-0.5)/0.5);
+}
+
+function buildChart(containerId, variable, opts){
+  const container = document.getElementById(containerId);
+  const width = 1000, height = 340;
+  const margin = {top:16,right:20,bottom:30,left:44};
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const vintages = DATA.vintages;
+  const actuals = DATA.actuals[variable];
+
+  // collect all years present
+  let years = new Set();
+  vintages.forEach(v => Object.keys(v[variable]).forEach(k => { if(k!=='Longer run') years.add(+k); }));
+  Object.keys(actuals).forEach(k => years.add(+k));
+  years = Array.from(years).sort((a,b)=>a-b);
+  const yMin = years[0], yMax = years[years.length-1];
+
+  // y domain
+  let vals = [];
+  vintages.forEach(v => Object.entries(v[variable]).forEach(([k,val]) => { if(k!=='Longer run' && val==val) vals.push(val); }));
+  Object.values(actuals).forEach(v => { if(typeof v === 'number') vals.push(v); });
+  const yLo = Math.floor(Math.min(...vals)*2)/2 - 0.25;
+  const yHi = Math.ceil(Math.max(...vals)*2)/2 + 0.25;
+
+  const x = yr => margin.left + (yr - yMin) / (yMax - yMin) * innerW;
+  const y = v => margin.top + innerH - (v - yLo) / (yHi - yLo) * innerH;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  svg.setAttribute('width','100%');
+  svg.setAttribute('height', height);
+  svg.style.minWidth = '640px';
+
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs){
+    const e = document.createElementNS(NS, tag);
+    for(const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // gridlines + y axis ticks
+  const yTicks = [];
+  for(let t = Math.ceil(yLo); t <= yHi; t++) yTicks.push(t);
+  yTicks.forEach(t => {
+    svg.appendChild(el('line', {class:'gridline', x1:margin.left, x2:width-margin.right, y1:y(t), y2:y(t)}));
+    const lbl = el('text', {class:'axis-label', x:margin.left-8, y:y(t)+3, 'text-anchor':'end'});
+    lbl.textContent = opts.pct ? t+'%' : t;
+    svg.appendChild(lbl);
+  });
+  // x axis ticks (every year)
+  years.forEach(yr => {
+    const lbl = el('text', {class:'axis-label', x:x(yr), y:height-margin.bottom+18, 'text-anchor':'middle'});
+    lbl.textContent = yr;
+    svg.appendChild(lbl);
+  });
+  svg.appendChild(el('line', {class:'axis-line', x1:margin.left, x2:width-margin.right, y1:margin.top+innerH, y2:margin.top+innerH}));
+
+  // vintage lines
+  const lineGroup = el('g', {});
+  svg.appendChild(lineGroup);
+  const n = vintages.length;
+  vintages.forEach((v, i) => {
+    const pts = Object.entries(v[variable])
+      .filter(([k,val]) => k !== 'Longer run' && val === val)
+      .map(([k,val]) => [+k, val])
+      .sort((a,b)=>a[0]-b[0]);
+    if(pts.length < 1) return;
+    const t = n>1 ? i/(n-1) : 1;
+    const color = seqColor(t);
+    const d = pts.map((p,idx) => (idx===0?'M':'L') + x(p[0]).toFixed(2) + ' ' + y(p[1]).toFixed(2)).join(' ');
+    const path = el('path', {class:'vline', d, stroke:color, 'stroke-width':1.6, opacity:0.75, 'data-vintage':v.vintage});
+    lineGroup.appendChild(path);
+    pts.forEach(p => {
+      lineGroup.appendChild(el('circle', {class:'vdot', cx:x(p[0]), cy:y(p[1]), r:2.2, fill:color, opacity:0.75, 'data-vintage':v.vintage}));
+    });
+    path.addEventListener('mouseenter', () => highlightVintage(lineGroup, v.vintage));
+    path.addEventListener('mouseleave', () => resetHighlight(lineGroup));
+  });
+
+  function highlightVintage(group, vint){
+    group.querySelectorAll('[data-vintage]').forEach(node => {
+      if(node.getAttribute('data-vintage') === vint){
+        node.setAttribute('opacity', 1);
+        if(node.tagName === 'path') node.setAttribute('stroke-width', 3);
+      } else {
+        node.setAttribute('opacity', 0.08);
+      }
+    });
+  }
+  function resetHighlight(group){
+    group.querySelectorAll('[data-vintage]').forEach(node => {
+      node.setAttribute('opacity', 0.75);
+      if(node.tagName === 'path') node.setAttribute('stroke-width', 1.6);
+    });
+  }
+
+  // actual line
+  const actualPts = years.filter(yr => typeof actuals[yr] === 'number').map(yr => [yr, actuals[yr]]);
+  if(actualPts.length > 1){
+    const d = actualPts.map((p,idx) => (idx===0?'M':'L') + x(p[0]).toFixed(2) + ' ' + y(p[1]).toFixed(2)).join(' ');
+    svg.appendChild(el('path', {class:'actual-line', d}));
+  }
+  actualPts.forEach(p => {
+    svg.appendChild(el('circle', {class:'actual-dot', cx:x(p[0]), cy:y(p[1]), r:3.4}));
+  });
+
+  container.appendChild(svg);
+
+  // hover interaction: crosshair + tooltip aggregating all vintages for nearest year
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip';
+  container.appendChild(tooltip);
+
+  const overlay = el('rect', {x:margin.left, y:margin.top, width:innerW, height:innerH, fill:'transparent'});
+  svg.appendChild(overlay);
+  const crosshair = el('line', {class:'crosshair', y1:margin.top, y2:margin.top+innerH, x1:0, x2:0, style:'display:none'});
+  svg.appendChild(crosshair);
+
+  overlay.addEventListener('mousemove', (ev) => {
+    const rect = svg.getBoundingClientRect();
+    const scale = width / rect.width;
+    const mx = (ev.clientX - rect.left) * scale;
+    let nearestYear = years.reduce((a,b) => Math.abs(x(b)-mx) < Math.abs(x(a)-mx) ? b : a);
+    crosshair.setAttribute('x1', x(nearestYear));
+    crosshair.setAttribute('x2', x(nearestYear));
+    crosshair.style.display = 'block';
+
+    const rows = [];
+    vintages.forEach(v => {
+      const val = v[variable][String(nearestYear)];
+      if(val === undefined || val !== val) return;
+      const vy = +v.vintage.slice(0,4);
+      const horizon = nearestYear - vy;
+      rows.push({label: vLabel(v.vintage) + ' (' + (horizon===0?'nowcast':'+'+horizon+'y') + ')', val});
+    });
+    rows.sort((a,b)=> a.val - b.val);
+
+    let html = `<div class="tt-title">${nearestYear}</div>`;
+    const av = actuals[nearestYear];
+    html += `<div class="tt-row"><span>Actual</span><span>${typeof av === 'number' ? (opts.pct? av.toFixed(1)+'%': av.toFixed(1)) : '—'}</span></div>`;
+    if(rows.length){
+      html += `<div style="margin-top:5px;opacity:0.75">SEP forecasts:</div>`;
+      rows.forEach(r => {
+        html += `<div class="tt-row"><span>${r.label}</span><span>${opts.pct? r.val.toFixed(1)+'%' : r.val.toFixed(1)}</span></div>`;
+      });
+    }
+    tooltip.innerHTML = html;
+    tooltip.style.opacity = 1;
+    const cw = container.getBoundingClientRect().width;
+    const relX = (mx / width) * cw;
+    tooltip.style.left = Math.min(relX + 14, cw - 220) + 'px';
+    tooltip.style.top = '8px';
+  });
+  overlay.addEventListener('mouseleave', () => {
+    tooltip.style.opacity = 0;
+    crosshair.style.display = 'none';
+  });
+}
+
+buildChart('chart-ue', 'ue', {pct:true});
+buildChart('chart-pce', 'core_pce', {pct:true});
+
+// --- accuracy summary bars ---
+function buildStats(){
+  const grid = document.getElementById('stat-grid');
+  const horizonLabel = {0:'Nowcast', 1:'+1 year', 2:'+2 years', 3:'+3 years'};
+  const cfg = [
+    {key:'ue', title:'Unemployment rate', pct:true},
+    {key:'core_pce', title:'Core PCE inflation', pct:true},
+  ];
+  cfg.forEach(c => {
+    const s = DATA.summary[c.key];
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    let html = `<h3>${c.title}</h3>`;
+    const maxAbs = Math.max(...Object.values(s).flatMap(h => [Math.abs(h.bias), h.mae]));
+    [0,1,2,3].forEach(h => {
+      if(!s[h]) return;
+      const bias = s[h].bias, mae = s[h].mae;
+      const biasColor = bias >= 0 ? 'var(--pos)' : 'var(--neg)';
+      const biasPct = Math.min(Math.abs(bias)/maxAbs*100, 100);
+      const maePct = Math.min(mae/maxAbs*100, 100);
+      html += `
+        <div class="bar-row">
+          <span>${horizonLabel[h]}</span>
+          <div class="bar-track diverging"><div class="bar-fill" style="left:${bias>=0?50:50-biasPct/2}%;width:${biasPct/2}%;background:${biasColor}"></div></div>
+          <span class="bar-val">${bias>=0?'+':''}${bias.toFixed(2)}</span>
+        </div>
+        <div class="bar-row">
+          <span></span>
+          <div class="bar-track"><div class="bar-fill" style="left:0;width:${maePct}%;background:var(--mae)"></div></div>
+          <span class="bar-val">${mae.toFixed(2)}</span>
+        </div>`;
+    });
+    html += `<div class="stat-legend">
+      <span><span class="dot" style="background:var(--pos)"></span>Bias, underestimated</span>
+      <span><span class="dot" style="background:var(--neg)"></span>Bias, overestimated</span>
+      <span><span class="dot" style="background:var(--mae)"></span>MAE</span>
+    </div>`;
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+}
+buildStats();
+</script>
+</body>
+</html>
