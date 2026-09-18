@@ -1,341 +1,5 @@
 [
   {
-    "ts": 1787239512,
-    "counts": {
-      "Brazil": 172,
-      "Mexico": 1062,
-      "South Korea": 12,
-      "China": 370,
-      "UAE": 59,
-      "Qatar": 8,
-      "Saudi Arabia": 1,
-      "Turkey": 59,
-      "Kuwait / Bahrain": 20
-    }
-  },
-  {
-    "ts": 1787243017,
-    "counts": {
-      "Brazil": 163,
-      "Mexico": 1009,
-      "South Korea": 14,
-      "China": 337,
-      "UAE": 69,
-      "Qatar": 12,
-      "Saudi Arabia": 0,
-      "Turkey": 60,
-      "Kuwait / Bahrain": 29
-    }
-  },
-  {
-    "ts": 1787246441,
-    "counts": {
-      "Brazil": 178,
-      "Mexico": 1017,
-      "South Korea": 12,
-      "China": 279,
-      "UAE": 65,
-      "Qatar": 11,
-      "Saudi Arabia": 0,
-      "Turkey": 50,
-      "Kuwait / Bahrain": 25
-    }
-  },
-  {
-    "ts": 1787250285,
-    "counts": {
-      "Brazil": 200,
-      "Mexico": 1045,
-      "South Korea": 19,
-      "China": 256,
-      "UAE": 73,
-      "Qatar": 13,
-      "Saudi Arabia": 0,
-      "Turkey": 47,
-      "Kuwait / Bahrain": 24
-    }
-  },
-  {
-    "ts": 1787257123,
-    "counts": {
-      "Brazil": 179,
-      "Mexico": 904,
-      "South Korea": 20,
-      "China": 296,
-      "UAE": 91,
-      "Qatar": 27,
-      "Saudi Arabia": 0,
-      "Turkey": 49,
-      "Kuwait / Bahrain": 21
-    }
-  },
-  {
-    "ts": 1787260774,
-    "counts": {
-      "Brazil": 188,
-      "Mexico": 863,
-      "South Korea": 56,
-      "China": 276,
-      "UAE": 62,
-      "Qatar": 16,
-      "Saudi Arabia": 0,
-      "Turkey": 33,
-      "Kuwait / Bahrain": 11
-    }
-  },
-  {
-    "ts": 1787264247,
-    "counts": {
-      "Brazil": 166,
-      "Mexico": 883,
-      "South Korea": 73,
-      "China": 265,
-      "UAE": 32,
-      "Qatar": 6,
-      "Saudi Arabia": 0,
-      "Turkey": 27,
-      "Kuwait / Bahrain": 10
-    }
-  },
-  {
-    "ts": 1787267861,
-    "counts": {
-      "Brazil": 133,
-      "Mexico": 788,
-      "South Korea": 87,
-      "China": 382,
-      "UAE": 63,
-      "Qatar": 19,
-      "Saudi Arabia": 1,
-      "Turkey": 22,
-      "Kuwait / Bahrain": 28
-    }
-  },
-  {
-    "ts": 1787273071,
-    "counts": {
-      "Brazil": 150,
-      "Mexico": 715,
-      "South Korea": 79,
-      "China": 541,
-      "UAE": 69,
-      "Qatar": 8,
-      "Saudi Arabia": 0,
-      "Turkey": 21,
-      "Kuwait / Bahrain": 16
-    }
-  },
-  {
-    "ts": 1787278723,
-    "counts": {
-      "Brazil": 104,
-      "Mexico": 616,
-      "South Korea": 116,
-      "China": 662,
-      "UAE": 68,
-      "Qatar": 13,
-      "Saudi Arabia": 0,
-      "Turkey": 27,
-      "Kuwait / Bahrain": 16
-    }
-  },
-  {
-    "ts": 1787283771,
-    "counts": {
-      "Brazil": 76,
-      "Mexico": 463,
-      "South Korea": 89,
-      "China": 652,
-      "UAE": 60,
-      "Qatar": 13,
-      "Saudi Arabia": 0,
-      "Turkey": 34,
-      "Kuwait / Bahrain": 14
-    }
-  },
-  {
-    "ts": 1787286561,
-    "counts": {
-      "Brazil": 62,
-      "Mexico": 345,
-      "South Korea": 101,
-      "China": 655,
-      "UAE": 60,
-      "Qatar": 3,
-      "Saudi Arabia": 0,
-      "Turkey": 29,
-      "Kuwait / Bahrain": 10
-    }
-  },
-  {
-    "ts": 1787289858,
-    "counts": {
-      "Brazil": 51,
-      "Mexico": 203,
-      "South Korea": 94,
-      "China": 617,
-      "UAE": 75,
-      "Qatar": 14,
-      "Saudi Arabia": 0,
-      "Turkey": 37,
-      "Kuwait / Bahrain": 21
-    }
-  },
-  {
-    "ts": 1787293811,
-    "counts": {
-      "Brazil": 52,
-      "Mexico": 124,
-      "South Korea": 110,
-      "China": 657,
-      "UAE": 75,
-      "Qatar": 17,
-      "Saudi Arabia": 0,
-      "Turkey": 39,
-      "Kuwait / Bahrain": 31
-    }
-  },
-  {
-    "ts": 1787297722,
-    "counts": {
-      "Brazil": 67,
-      "Mexico": 91,
-      "South Korea": 98,
-      "China": 626,
-      "UAE": 62,
-      "Qatar": 15,
-      "Saudi Arabia": 0,
-      "Turkey": 42,
-      "Kuwait / Bahrain": 22
-    }
-  },
-  {
-    "ts": 1787301031,
-    "counts": {
-      "Brazil": 89,
-      "Mexico": 130,
-      "South Korea": 81,
-      "China": 602,
-      "UAE": 59,
-      "Qatar": 8,
-      "Saudi Arabia": 0,
-      "Turkey": 57,
-      "Kuwait / Bahrain": 14
-    }
-  },
-  {
-    "ts": 1787304442,
-    "counts": {
-      "Brazil": 128,
-      "Mexico": 108,
-      "South Korea": 87,
-      "China": 603,
-      "UAE": 60,
-      "Qatar": 8,
-      "Saudi Arabia": 1,
-      "Turkey": 55,
-      "Kuwait / Bahrain": 16
-    }
-  },
-  {
-    "ts": 1787307650,
-    "counts": {
-      "Brazil": 150,
-      "Mexico": 135,
-      "South Korea": 105,
-      "China": 602,
-      "UAE": 48,
-      "Qatar": 7,
-      "Saudi Arabia": 0,
-      "Turkey": 67,
-      "Kuwait / Bahrain": 20
-    }
-  },
-  {
-    "ts": 1787311079,
-    "counts": {
-      "Brazil": 146,
-      "Mexico": 228,
-      "South Korea": 87,
-      "China": 608,
-      "UAE": 63,
-      "Qatar": 6,
-      "Saudi Arabia": 0,
-      "Turkey": 68,
-      "Kuwait / Bahrain": 13
-    }
-  },
-  {
-    "ts": 1787315275,
-    "counts": {
-      "Brazil": 193,
-      "Mexico": 528,
-      "South Korea": 80,
-      "China": 586,
-      "UAE": 55,
-      "Qatar": 11,
-      "Saudi Arabia": 0,
-      "Turkey": 47,
-      "Kuwait / Bahrain": 25
-    }
-  },
-  {
-    "ts": 1787319503,
-    "counts": {
-      "Brazil": 186,
-      "Mexico": 849,
-      "South Korea": 57,
-      "China": 506,
-      "UAE": 67,
-      "Qatar": 19,
-      "Saudi Arabia": 0,
-      "Turkey": 64,
-      "Kuwait / Bahrain": 23
-    }
-  },
-  {
-    "ts": 1787322359,
-    "counts": {
-      "Brazil": 195,
-      "Mexico": 997,
-      "South Korea": 32,
-      "China": 510,
-      "UAE": 66,
-      "Qatar": 22,
-      "Saudi Arabia": 0,
-      "Turkey": 60,
-      "Kuwait / Bahrain": 23
-    }
-  },
-  {
-    "ts": 1787325874,
-    "counts": {
-      "Brazil": 164,
-      "Mexico": 1078,
-      "South Korea": 26,
-      "China": 401,
-      "UAE": 72,
-      "Qatar": 15,
-      "Saudi Arabia": 0,
-      "Turkey": 63,
-      "Kuwait / Bahrain": 25
-    }
-  },
-  {
-    "ts": 1787329304,
-    "counts": {
-      "Brazil": 185,
-      "Mexico": 1005,
-      "South Korea": 12,
-      "China": 316,
-      "UAE": 56,
-      "Qatar": 12,
-      "Saudi Arabia": 0,
-      "Turkey": 40,
-      "Kuwait / Bahrain": 32
-    }
-  },
-  {
     "ts": 1787332841,
     "counts": {
       "Brazil": 187,
@@ -3357,6 +3021,342 @@
       "Saudi Arabia": 0,
       "Turkey": 25,
       "Kuwait / Bahrain": 29
+    }
+  },
+  {
+    "ts": 1789352944,
+    "counts": {
+      "Brazil": 101,
+      "Mexico": 499,
+      "South Korea": 115,
+      "China": 734,
+      "UAE": 90,
+      "Qatar": 19,
+      "Saudi Arabia": 0,
+      "Turkey": 50,
+      "Kuwait / Bahrain": 17
+    }
+  },
+  {
+    "ts": 1789373991,
+    "counts": {
+      "Brazil": 103,
+      "Mexico": 84,
+      "South Korea": 97,
+      "China": 658,
+      "UAE": 82,
+      "Qatar": 16,
+      "Saudi Arabia": 0,
+      "Turkey": 113,
+      "Kuwait / Bahrain": 13
+    }
+  },
+  {
+    "ts": 1789399682,
+    "counts": {
+      "Brazil": 147,
+      "Mexico": 1080,
+      "South Korea": 18,
+      "China": 428,
+      "UAE": 85,
+      "Qatar": 7,
+      "Saudi Arabia": 0,
+      "Turkey": 80,
+      "Kuwait / Bahrain": 18
+    }
+  },
+  {
+    "ts": 1789416240,
+    "counts": {
+      "Brazil": 170,
+      "Mexico": 941,
+      "South Korea": 25,
+      "China": 366,
+      "UAE": 91,
+      "Qatar": 15,
+      "Saudi Arabia": 0,
+      "Turkey": 85,
+      "Kuwait / Bahrain": 18
+    }
+  },
+  {
+    "ts": 1789429054,
+    "counts": {
+      "Brazil": 142,
+      "Mexico": 717,
+      "South Korea": 83,
+      "China": 459,
+      "UAE": 77,
+      "Qatar": 22,
+      "Saudi Arabia": 0,
+      "Turkey": 36,
+      "Kuwait / Bahrain": 32
+    }
+  },
+  {
+    "ts": 1789439600,
+    "counts": {
+      "Brazil": 110,
+      "Mexico": 521,
+      "South Korea": 108,
+      "China": 685,
+      "UAE": 90,
+      "Qatar": 16,
+      "Saudi Arabia": 0,
+      "Turkey": 53,
+      "Kuwait / Bahrain": 19
+    }
+  },
+  {
+    "ts": 1789459938,
+    "counts": {
+      "Brazil": 100,
+      "Mexico": 83,
+      "South Korea": 96,
+      "China": 663,
+      "UAE": 68,
+      "Qatar": 16,
+      "Saudi Arabia": 0,
+      "Turkey": 88,
+      "Kuwait / Bahrain": 13
+    }
+  },
+  {
+    "ts": 1789480825,
+    "counts": {
+      "Brazil": 191,
+      "Mexico": 1002,
+      "South Korea": 33,
+      "China": 527,
+      "UAE": 75,
+      "Qatar": 28,
+      "Saudi Arabia": 0,
+      "Turkey": 92,
+      "Kuwait / Bahrain": 29
+    }
+  },
+  {
+    "ts": 1789495312,
+    "counts": {
+      "Brazil": 213,
+      "Mexico": 1062,
+      "South Korea": 13,
+      "China": 288,
+      "UAE": 78,
+      "Qatar": 7,
+      "Saudi Arabia": 0,
+      "Turkey": 70,
+      "Kuwait / Bahrain": 18
+    }
+  },
+  {
+    "ts": 1789516247,
+    "counts": {
+      "Brazil": 157,
+      "Mexico": 862,
+      "South Korea": 87,
+      "China": 471,
+      "UAE": 94,
+      "Qatar": 21,
+      "Saudi Arabia": 0,
+      "Turkey": 29,
+      "Kuwait / Bahrain": 32
+    }
+  },
+  {
+    "ts": 1789525665,
+    "counts": {
+      "Brazil": 116,
+      "Mexico": 547,
+      "South Korea": 101,
+      "China": 713,
+      "UAE": 92,
+      "Qatar": 15,
+      "Saudi Arabia": 0,
+      "Turkey": 56,
+      "Kuwait / Bahrain": 22
+    }
+  },
+  {
+    "ts": 1789545946,
+    "counts": {
+      "Brazil": 113,
+      "Mexico": 68,
+      "South Korea": 104,
+      "China": 682,
+      "UAE": 81,
+      "Qatar": 16,
+      "Saudi Arabia": 0,
+      "Turkey": 82,
+      "Kuwait / Bahrain": 21
+    }
+  },
+  {
+    "ts": 1789566862,
+    "counts": {
+      "Brazil": 213,
+      "Mexico": 898,
+      "South Korea": 48,
+      "China": 554,
+      "UAE": 62,
+      "Qatar": 21,
+      "Saudi Arabia": 0,
+      "Turkey": 106,
+      "Kuwait / Bahrain": 20
+    }
+  },
+  {
+    "ts": 1789581160,
+    "counts": {
+      "Brazil": 202,
+      "Mexico": 1004,
+      "South Korea": 15,
+      "China": 275,
+      "UAE": 80,
+      "Qatar": 13,
+      "Saudi Arabia": 1,
+      "Turkey": 71,
+      "Kuwait / Bahrain": 18
+    }
+  },
+  {
+    "ts": 1789591200,
+    "counts": {
+      "Brazil": 179,
+      "Mexico": 948,
+      "South Korea": 46,
+      "China": 361,
+      "UAE": 89,
+      "Qatar": 29,
+      "Saudi Arabia": 0,
+      "Turkey": 70,
+      "Kuwait / Bahrain": 27
+    }
+  },
+  {
+    "ts": 1789601134,
+    "counts": {
+      "Brazil": 176,
+      "Mexico": 773,
+      "South Korea": 105,
+      "China": 457,
+      "UAE": 76,
+      "Qatar": 22,
+      "Saudi Arabia": 0,
+      "Turkey": 33,
+      "Kuwait / Bahrain": 26
+    }
+  },
+  {
+    "ts": 1789612296,
+    "counts": {
+      "Brazil": 113,
+      "Mexico": 506,
+      "South Korea": 111,
+      "China": 654,
+      "UAE": 91,
+      "Qatar": 14,
+      "Saudi Arabia": 0,
+      "Turkey": 60,
+      "Kuwait / Bahrain": 18
+    }
+  },
+  {
+    "ts": 1789632705,
+    "counts": {
+      "Brazil": 112,
+      "Mexico": 74,
+      "South Korea": 99,
+      "China": 711,
+      "UAE": 86,
+      "Qatar": 14,
+      "Saudi Arabia": 0,
+      "Turkey": 77,
+      "Kuwait / Bahrain": 14
+    }
+  },
+  {
+    "ts": 1789653485,
+    "counts": {
+      "Brazil": 225,
+      "Mexico": 913,
+      "South Korea": 49,
+      "China": 551,
+      "UAE": 70,
+      "Qatar": 21,
+      "Saudi Arabia": 0,
+      "Turkey": 124,
+      "Kuwait / Bahrain": 22
+    }
+  },
+  {
+    "ts": 1789667711,
+    "counts": {
+      "Brazil": 207,
+      "Mexico": 1095,
+      "South Korea": 20,
+      "China": 303,
+      "UAE": 83,
+      "Qatar": 14,
+      "Saudi Arabia": 0,
+      "Turkey": 86,
+      "Kuwait / Bahrain": 19
+    }
+  },
+  {
+    "ts": 1789678003,
+    "counts": {
+      "Brazil": 205,
+      "Mexico": 1020,
+      "South Korea": 50,
+      "China": 375,
+      "UAE": 74,
+      "Qatar": 30,
+      "Saudi Arabia": 0,
+      "Turkey": 57,
+      "Kuwait / Bahrain": 16
+    }
+  },
+  {
+    "ts": 1789687026,
+    "counts": {
+      "Brazil": 173,
+      "Mexico": 805,
+      "South Korea": 93,
+      "China": 439,
+      "UAE": 69,
+      "Qatar": 20,
+      "Saudi Arabia": 0,
+      "Turkey": 33,
+      "Kuwait / Bahrain": 36
+    }
+  },
+  {
+    "ts": 1789697844,
+    "counts": {
+      "Brazil": 100,
+      "Mexico": 622,
+      "South Korea": 126,
+      "China": 750,
+      "UAE": 86,
+      "Qatar": 17,
+      "Saudi Arabia": 0,
+      "Turkey": 59,
+      "Kuwait / Bahrain": 13
+    }
+  },
+  {
+    "ts": 1789717630,
+    "counts": {
+      "Brazil": 85,
+      "Mexico": 98,
+      "South Korea": 108,
+      "China": 728,
+      "UAE": 66,
+      "Qatar": 11,
+      "Saudi Arabia": 0,
+      "Turkey": 90,
+      "Kuwait / Bahrain": 18
     }
   }
 ]

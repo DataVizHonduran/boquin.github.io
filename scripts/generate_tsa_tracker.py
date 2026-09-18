@@ -200,6 +200,68 @@ def build_chart(df: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def build_yoy_chart(df: pd.DataFrame) -> go.Figure:
+    """30-day trailing MA of daily travelers, YoY % change — single continuous line, full history."""
+    full = df.sort_values("date").drop_duplicates("date").set_index("date")["travelers"]
+    ma60 = full.rolling("30D", min_periods=1).mean()
+
+    ma60_prev = ma60.copy()
+    ma60_prev.index = ma60_prev.index + pd.DateOffset(years=1)
+    ma60_prev = ma60_prev[~ma60_prev.index.duplicated(keep="first")]  # Feb 29 -> Feb 28 collision
+    ma60_prev = ma60_prev.reindex(ma60.index)
+
+    yoy = (ma60 / ma60_prev - 1) * 100
+    yoy = yoy.dropna()
+
+    last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    fig = go.Figure()
+    fig.add_hline(y=0, line=dict(color="rgba(0,0,0,0.3)", width=1))
+    fig.add_trace(go.Scatter(
+        x=yoy.index, y=yoy.values,
+        mode="lines", line=dict(color="#DC2626", width=2),
+        name="30d MA YoY %",
+        hovertemplate="%{x|%b %d, %Y}<br>%{y:+.2f}%<extra></extra>",
+    ))
+
+    fig.update_layout(
+        title=dict(
+            text="TSA Throughput — 30-Day MA, YoY % Change",
+            font=dict(size=22, color="#111"),
+            x=0.5,
+        ),
+        annotations=[dict(
+            text=f"Full history | Updated: {last_updated}",
+            xref="paper", yref="paper",
+            x=0.5, y=1.06,
+            showarrow=False,
+            font=dict(size=12, color="#555"),
+            xanchor="center",
+        )],
+        xaxis=dict(
+            title="",
+            type="date",
+            tickformat="%b %Y",
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.4)",
+            tickfont=dict(size=11),
+        ),
+        yaxis=dict(
+            title="YoY % Change",
+            ticksuffix="%",
+            showgrid=True,
+            gridcolor="rgba(200,200,200,0.4)",
+        ),
+        hovermode="x unified",
+        showlegend=False,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        margin=dict(t=100, b=50, l=90, r=20),
+        height=420,
+    )
+    return fig
+
+
 def scrape_fr24() -> pd.DataFrame:
     print("Fetching FlightRadar24 statistics...")
     html = requests.get(
@@ -300,6 +362,7 @@ def main():
 
     print("Building TSA chart...")
     fig_tsa = build_chart(df)
+    fig_yoy = build_yoy_chart(df)
 
     fr24_df = scrape_fr24()
     print("Building FR24 charts...")
@@ -308,6 +371,7 @@ def main():
 
     cfg = {"displayModeBar": True, "responsive": True}
     div_tsa = fig_tsa.to_html(include_plotlyjs=False, full_html=False, config=cfg)
+    div_yoy = fig_yoy.to_html(include_plotlyjs=False, full_html=False, config=cfg)
     div_general = fig_general.to_html(include_plotlyjs=False, full_html=False, config=cfg)
     div_commercial = fig_commercial.to_html(include_plotlyjs=False, full_html=False, config=cfg)
 
@@ -338,7 +402,7 @@ def main():
     <button class="tab-btn active" onclick="showTab('tsa', this)">TSA Throughput</button>
     <button class="tab-btn" onclick="showTab('fr24', this)">FlightRadar24</button>
   </div>
-  <div id="tsa" class="tab-panel active">{div_tsa}</div>
+  <div id="tsa" class="tab-panel active">{div_tsa}{div_yoy}</div>
   <div id="fr24" class="tab-panel">
     {div_general}
     <p class="fr24-footnote"><strong>Total flights:</strong> Commercial flights above + rest of business jet flights + private flights + gliders + most helicopter flights + most ambulance flights + government flights + some military flights + drones</p>
