@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (13 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (16 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,30 +8,37 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: September 20, 2026**
-**Subject: Analysis of Recent ECB and NCB Research**
+**Date: September 21, 2026**
+**Subject: Critical Analysis of Recent ECB/NCB Research**
 
-I have reviewed the latest research cycle from the Eurosystem. While several papers focus on econometric methodology, the following selections provide critical insights into the transmission mechanisms and structural risks currently facing the Eurozone.
+After reviewing the latest research cycle from the ECB and National Central Banks (notably the Deutsche Bundesbank), I have isolated the following publications as the most analytically significant for our current positioning.
 
-1. **Endogenous monetary policy effectiveness (ECB):** This research examines the asymmetry between policy tightening and loosening across the cycle. For our positioning, this suggests that the "lag" in monetary policy is not constant, meaning the ECB's current restrictive stance may have a different velocity of impact than previous easing cycles.
+1. **[ECB] Endogenous monetary policy effectiveness:** This research questions the symmetry of policy transmission, suggesting that the impact of rate hikes versus cuts varies across the policy cycle. For our models, this means we cannot assume a linear response to ECB pivots; the "exit" from restrictive territory may not mirror the "entry" in terms of GDP and inflation impact.
+2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This paper examines the conditions under which the ECB can ignore volatile sectoral price shocks without risking a broader inflation spiral. It is critical for our inflation forecasting, as it suggests that the "anchoring" of expectations is the primary determinant of whether the ECB will react aggressively to energy or food spikes.
+3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** By introducing a novel index for capital buffer fragmentation, the ECB acknowledges that regulatory divergence still creates uneven credit conditions across the bloc. This implies that "Eurozone" corporate credit trends are misleading, and we must maintain a granular, country-by-country approach to credit risk.
+4. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK:** Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows that government spending in non-tradables creates significant spillovers into the goods sector and private consumption. This suggests that national fiscal expansions in the periphery could be more inflationary and stimulative than previously estimated in aggregate models.
+5. **[DBB] Carbon pricing, trade and the natural rate:** This research links the green transition and carbon pricing directly to the $r^*$ (natural rate of interest). If carbon pricing structurally alters the neutral rate, the ECB’s long-term terminal rate may be higher than pre-transition estimates, fundamentally altering our long-duration bond valuations.
 
-2. **Macroeconomic effects of carbon-intensive energy price changes (DBB):** By comparing models on energy price shocks, this paper highlights the specific volatility risks associated with the green transition. It is essential for our sector allocations, as it quantifies how carbon-intensive shocks propagate differently through the economy than general energy spikes.
-
-3. **On looking through sectoral shocks: The role of (de-)anchored inflation expectations (DBB):** This paper analyzes when the ECB can ignore temporary sectoral price spikes versus when they threaten to unanchor inflation expectations. This is a key signal for our inflation forecasting; if expectations are anchored, we can remain less concerned about transient supply-side shocks.
-
-4. **Fiscal policy and sectoral spillovers in open-economy HANK (ECB):** Using a Heterogeneous Agent New Keynesian (HANK) model, this study shows that government spending disproportionately boosts non-tradable services and spills over into the goods sector. This implies that national fiscal expansions in the Eurozone may create localized inflationary pressures in services that the ECB must then counter with aggregate rate hikes.
-
-5. **Bank competition and credit risk: the conditioning role of capital (ECB):** This study explores how capital levels dictate whether bank competition leads to better rates or riskier lending. As we monitor the Eurozone banking sector, this suggests that well-capitalized banks can compete aggressively without compromising credit quality, whereas under-capitalized banks may be engaging in "risky" competition.
-
-6. **Why Europeans save differently — and how to put those savings to work (ECB):** This research addresses the structural divergence in saving behaviors across member states. Understanding these disparities is critical for predicting the effectiveness of interest rate changes on aggregate consumption across the periphery versus the core.
-
-**Synthesis:**
-The current research emphasizes a shift toward understanding "non-linearities"—specifically how monetary policy effectiveness varies by cycle and how fiscal spillovers create sectoral imbalances. For our strategy, this means moving away from aggregate Eurozone assumptions and focusing on the divergent impacts of policy on services versus goods and core versus periphery.
+**Synthesis:** The research indicates a shift toward acknowledging non-linearities in monetary transmission and the structural impact of the green transition on the neutral rate. Simultaneously, the focus on "fragmentation" and "sectoral spillovers" warns us that divergence between member states remains a primary risk to a unified Eurozone recovery.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 9
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 11
+
+### (cached) [Inflation narratives and risk premia](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3288~e05b586456.en.pdf)
+**Published:** 2026-09-21 | **Authors:** 
+
+The paper examines how inflation risk premia fluctuate based on whether market participants perceive supply or demand shocks as the primary drivers of price changes. It utilizes a causality extraction method on Financial Times news to quantify these narratives within the Eurozone.
+
+**Tags:** inflation · monetary policy · eurozone · interest rates · exchange rates
+
+### (cached) [The impact of macroprudential policy fragmentation on corporate lending – evidence from a novel indicator](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3287~f3a9c1695b.en.pdf)
+**Published:** 2026-09-21 | **Authors:** 
+
+The authors develop a new bank-level index to measure the fragmentation of capital buffer requirements across the euro area. The study analyzes how this regulatory inconsistency impacts corporate lending behavior and overall financial stability.
+
+**Tags:** banking · credit · financial stability · banking union · eurozone
 
 ### (cached) [Out with the new, in with the old? Supranational bank supervision and the composition of firm investment](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3286~f4202ab618.en.pdf)
 **Published:** 2026-09-18 | **Authors:** 
@@ -97,7 +104,14 @@ This study analyzes the impact of government spending shocks on private consumpt
 **Tags:** fiscal policy · consumer spending · GDP growth · trade · inflation
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 4
+**Content Type:** Discussion Papers | **New:** 0 of 5
+
+### (cached) [Carbon pricing, trade and the natural rate | Anne Ernst, Natascha Hinterlang, Nikolai Stähler](https://www.bundesbank.de/en/publications/research/discussion-papers/carbon-pricing-trade-and-the-natural-rate-933132)
+**Published:** 2026-09-21 | **Authors:** 
+
+This research analyzes the interaction between carbon pricing mechanisms, international trade dynamics, and the equilibrium natural rate of interest. It explores how the transition to a low-carbon economy influences long-term macroeconomic stability.
+
+**Tags:** climate & transition · green finance · trade · interest rates · GDP growth · monetary policy
 
 ### (cached) [Macroeconomic effects of carbon-intensive energy price changes: A model comparison | Matthias Burgert, Matthieu Darracq Pariès, Luigi Durand, Mario González, Romanos Priftis, Oke Röhe, Matthias Rottner, Edgar Silgado-Gómez, Nikolai Stähler, Janos Varga](https://www.bundesbank.de/en/publications/research/discussion-papers/macroeconomic-effects-of-carbon-intensive-energy-price-changes-a-model-comparison-933124)
 **Published:** 2026-09-18 | **Authors:** 
@@ -131,5 +145,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 13
-- Total cache size: 13 items
+- Already cached: 16
+- Total cache size: 16 items
