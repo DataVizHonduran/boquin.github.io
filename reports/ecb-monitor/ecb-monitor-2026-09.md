@@ -1,37 +1,53 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (16 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (18 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee / Trading Desk**
+**To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: September 22, 2026**
-**Subject: Analysis of Recent ECB/NCB Research Publications**
+**Date: September 23, 2026**
+**Subject: Analysis of Recent ECB/NCB Research Cycle**
 
-I have reviewed the latest research cycle from the ECB and National Central Banks. While several papers focus on technical methodology, the following selections provide critical insights into the current transmission mechanisms of monetary policy and the structural risks facing the Eurozone.
+I have reviewed the latest research output from the ECB and national central banks. While much of the output is technical/methodological, several papers provide critical insights into the current structural headwinds facing the Eurozone.
 
-1. **Endogenous monetary policy effectiveness (ECB):** This research questions the symmetry of policy impacts, suggesting that tightenings and loosenings may not have identical effects on the macroeconomy. For us, this implies that the "neutral rate" is a moving target and that the economy may be more sensitive to the current restrictive stance than previous easing cycles suggested.
+**Key Analytical Takeaways:**
 
-2. **Inflation narratives and risk premia (ECB):** The paper establishes that inflation risk premia shift based on whether markets perceive shocks as supply-driven or demand-driven. This is vital for our bond pricing models, as it suggests that the term premium will remain volatile as long as the market is undecided on the nature of the current inflation regime.
+1. **[ECB] Endogenous monetary policy effectiveness:** This research questions the symmetry of policy transmission, suggesting that the impact of rate hikes versus cuts varies across the policy cycle. For us, this implies that the "last mile" of inflation fighting may require more aggressive moves than the initial phase, as the economy's sensitivity to tightening evolves.
 
-3. **The impact of macroprudential policy fragmentation on corporate lending (ECB):** By quantifying the fragmentation of capital buffer frameworks, the ECB highlights how divergent national regulations create an uneven playing field for corporate credit. This suggests that credit conditions may tighten unevenly across the bloc, potentially creating "pockets" of financial stress despite a unified ECB policy rate.
+2. **[DBB] Carbon pricing, trade and the natural rate:** This paper examines how the transition to a green economy alters the $r^*$ (natural rate of interest). As carbon pricing shifts investment patterns and trade flows, the long-term equilibrium rate may shift, fundamentally changing the "neutral" destination for the ECB’s policy rate.
 
-4. **On looking through sectoral shocks: The role of (de-)anchored inflation expectations (DBB):** This study examines the conditions under which the ECB can safely ignore temporary sectoral price spikes without risking a broader inflation spiral. It underscores the fragility of inflation anchoring, suggesting that the "look-through" approach is only viable if core expectations remain rigidly fixed.
+3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** The authors introduce a novel index showing that divergent capital buffer requirements across member states are creating "fragmentation" in credit access. This suggests that even with a single monetary policy, corporate borrowing costs will remain unevenly distributed across the bloc, hindering synchronized recovery.
 
-5. **Fiscal policy and sectoral spillovers in open-economy HANK (ECB):** The research demonstrates that government spending disproportionately boosts non-tradable services, which then spills over into the goods sector. This implies that national fiscal expansions in the Eurozone may be more inflationary than previously modeled, potentially forcing the ECB to maintain higher rates for longer to offset fiscal slippage.
+4. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This study analyzes when the ECB can safely ignore temporary sectoral price spikes versus when they risk becoming embedded. It highlights that the "look-through" approach is only viable if inflation expectations remain firmly anchored, raising the stakes for current communication strategies.
 
-6. **Carbon pricing, trade and the natural rate (DBB):** This analysis links the green transition and carbon pricing directly to the $r^*$ (natural rate of interest). As the Eurozone accelerates its decarbonization, the resulting shifts in investment and productivity could fundamentally alter the long-term equilibrium rate, impacting our long-duration asset valuations.
+5. **[ECB] Out with the new, in with the old? Supranational bank supervision and the composition of firm investment:** This evidence suggests that the Single Supervisory Mechanism (SSM) has shifted the types of firms receiving bank credit, potentially favoring safer, "older" investment profiles over riskier, innovative ones. This indicates a structural drag on Eurozone productivity growth driven by the risk-aversion of supervised banks.
+
+6. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK:** Using a heterogeneous-agent model, this paper shows that government spending disproportionately boosts non-tradable services, creating complex spillovers to the goods sector. This is critical for our forecasts, as it suggests fiscal expansion in the Eurozone may be more inflationary (via services) than previously modeled.
 
 **Synthesis:**
-The collective research indicates a growing concern over "fragmentation"—not just in sovereign spreads, but in macroprudential policy and the asymmetric transmission of rate changes. Furthermore, the integration of carbon pricing and fiscal spillovers into macro models suggests that the path to price stability is becoming increasingly complex and structurally dependent on non-monetary factors.
+The research indicates a growing concern over "fragmentation"—not just in sovereign spreads, but in macroprudential lending and the structural productivity of the corporate sector. Simultaneously, the ECB is grappling with a shifting natural rate ($r^*$) and asymmetric policy transmission, suggesting that the path to a "neutral" rate will be more volatile and less linear than market pricing currently assumes.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 11
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 13
+
+### (cached) [Monetary policy transmission by securitising banks](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3289~670b45de09.en.pdf)
+**Published:** 2026-09-22 | **Authors:** 
+
+The paper examines how securitisation influences the transmission of monetary policy through the banking sector in the euro area. It finds that banks utilizing securitisation exhibit a stronger adjustment in credit supply following monetary policy shocks due to expanded lending capacity.
+
+**Tags:** monetary policy · banking · credit · eurozone · financial stability
+
+### (cached) [Artificial intelligence and financial markets](https://www.ecb.europa.eu//pub/pdf/scpdps/ecb.dp32~90bd9a7638.en.pdf)
+**Published:** 2026-09-22 | **Authors:** 
+
+This research analyzes the impact of artificial intelligence on financial intermediation and information production within securities markets. It explores how algorithmic advances shift decision-making processes and alter labor demand for financial professionals.
+
+**Tags:** financial stability · banking · labor markets · employment · productivity
 
 ### (cached) [Inflation narratives and risk premia](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3288~e05b586456.en.pdf)
 **Published:** 2026-09-21 | **Authors:** 
@@ -152,5 +168,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 16
-- Total cache size: 16 items
+- Already cached: 18
+- Total cache size: 18 items
