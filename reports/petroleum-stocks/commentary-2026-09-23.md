@@ -1,33 +1,34 @@
-## EIA Weekly Petroleum Analysis: Sept 23, 2026
+# EIA Weekly Petroleum Analysis: Week Ending 2026-09-18
 
-### Executive Summary
+## Executive Summary
+The latest EIA snapshot reveals a stark divergence between crude oil accumulation and refined product depletion. While crude inventories are building, gasoline and distillates are trading significantly below their five-year seasonal norms, suggesting strong end-of-quarter demand or refinery constraints.
+
 | Product | MMBbl | WoW | Seasonal % | Signal |
 | :--- | :--- | :--- | :--- | :--- |
-| **Crude Oil** | 423.4 | -0.6 | 11.5% | Bullish |
-| **Gasoline** | 207.7 | +0.8 | -28.7% | Bullish |
-| **Distillates**| 107.9 | +1.6 | -12.9% | Neutral/Bullish |
+| **Crude Oil** | 426.4 | +3.0 | 16.4% | Bearish |
+| **Gasoline** | 206.0 | -1.7 | -40.1% | Bullish |
+| **Distillates** | 107.4 | -0.4 | -11.2% | Bullish |
 
 ---
 
-### 1. Crude Oil Positioning
-*   **NUS Total:** Stocks remain critically low, sitting at only 11.5% of the 5-year seasonal range. The 0.6 MMBbl draw indicates a tight physical market.
-*   **PADD 3 Highlight:** The Gulf Coast remains the primary buffer at 52.1% of its range. While PADD 3 is stable, the extreme depletion in PADD 2 (0.5%) and PADD 5 (1.6%) suggests severe regional imbalances and a reliance on coastal imports.
+## 1. Crude Oil Positioning
+*   **NUS Total:** A WoW build of 3.0 MMBbl pushes total stocks to 426.4 MMBbl. While the build is modest, the overall position remains lean at 16.4% of the 5-year range.
+*   **PADD 3 Highlight:** The Gulf Coast remains the primary anchor at 244.1 MMBbl (49.1% of range). This neutral positioning suggests that while the US is not in a critical crude shortage, there is no massive surplus to cap price spikes.
 
-### 2. Gasoline Positioning
-*   **Seasonal Tightness:** Despite a modest WoW build of 0.8 MMBbl, total stocks are nearly 29% below the 5-year average.
-*   **Demand Signal:** The significant deficit in PADD 1 and PADD 3 suggests that the transition out of the summer driving season is seeing higher-than-expected consumption or refinery maintenance constraints.
+## 2. Gasoline Positioning
+*   **Seasonal Tightness:** Gasoline is severely undersupplied, sitting at -40.1% of its 5-year seasonal range.
+*   **Demand Signal:** The 1.7 MMBbl WoW draw, coupled with extreme deficits in PADD 1 (-47.3%) and PADD 3 (-58.8%), indicates a strong demand signal or a failure in refinery throughput to meet late-season requirements.
 
-### 3. Distillate Positioning
-*   **Seasonal Tightness:** Stocks are 12.9% below seasonal norms. The 1.6 MMBbl build is a minor offset to a broader deficit.
-*   **Demand Signal:** PADD 1 and PADD 4 are showing notable tightness. As we approach the heating season, the current deficit provides a strong floor for diesel and heating oil prices.
+## 3. Distillate Positioning
+*   **Seasonal Tightness:** Distillates are moderately tight at -11.2% of the 5-year range.
+*   **Demand Signal:** A slight WoW draw of 0.4 MMBbl. The West Coast (PADD 5) is particularly lean (-57.9%), suggesting localized diesel tightness as the market prepares for the heating oil transition.
 
-### 4. Cross-Product Divergences
-*   **Crude vs. Products:** We see a "tight-across-the-board" scenario. Unlike typical cycles where crude builds while products draw (or vice versa), all three categories are currently trading well below their 5-year seasonal averages.
-*   **Regional Divergence:** PADD 3 (Gulf Coast) is the only region showing relative comfort in crude, while the coasts (PADD 1 & 5) are struggling with product availability.
+## 4. Cross-Product Divergences
+*   **Crude vs. Products:** We are seeing a "bottleneck" pattern. Crude is building (+3.0 MMBbl) while both refined products are drawing. This suggests that the current inventory build is not due to a lack of demand, but likely due to refinery maintenance or operational outages preventing crude from being converted into products.
 
-### 5. Price Implications
-*   **WTI:** **Bullish.** Low total NUS stocks and extreme depletion in the Midwest/West Coast support upward price pressure.
-*   **Refined Products:** **Bullish.** Gasoline's deep seasonal deficit (-28.7%) and Distillates' deficit (-12.9%) suggest strong support for crack spreads.
+## 5. Price Implications
+*   **WTI:** **Neutral/Bearish.** The WoW build provides a headwind, though the low overall seasonal percentile (16.4%) prevents a full bearish collapse.
+*   **Refined Products:** **Strongly Bullish.** The massive seasonal deficit in gasoline and the lean distillate profile should support higher crack spreads and firm RBOB/ULSD pricing.
 
-### 6. Watchlist for Next Wednesday
-*   **PADD 2 Crude Levels:** With the Midwest at a precarious 0.5% of its seasonal range, any further draw here could trigger localized price spikes and increased import urgency.
+## 6. Watchlist for Next Wednesday
+**Refinery Utilization Rates:** Given the crude build vs. product draw, I will be monitoring the "Refinery Utilization" and "Net Input" data to confirm if unplanned outages are driving the current product tightness.
