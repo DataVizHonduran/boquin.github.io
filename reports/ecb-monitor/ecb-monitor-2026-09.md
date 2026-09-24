@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (18 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (20 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,32 +8,41 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: September 23, 2026**
-**Subject: Analysis of Recent ECB/NCB Research Cycle**
+**Date: September 24, 2026**
+**Subject: Analysis of Recent ECB/NCB Research Publications**
 
-I have reviewed the latest research output from the ECB and national central banks. While much of the output is technical/methodological, several papers provide critical insights into the current structural headwinds facing the Eurozone.
+I have reviewed the latest research cycle from the ECB and national central banks. While much of the output is focused on methodology and fintech, several papers provide critical insights into the current transmission mechanism and the evolving risks to the Eurozone's structural outlook.
 
-**Key Analytical Takeaways:**
+The following publications are the most analytically significant for our positioning:
 
-1. **[ECB] Endogenous monetary policy effectiveness:** This research questions the symmetry of policy transmission, suggesting that the impact of rate hikes versus cuts varies across the policy cycle. For us, this implies that the "last mile" of inflation fighting may require more aggressive moves than the initial phase, as the economy's sensitivity to tightening evolves.
-
-2. **[DBB] Carbon pricing, trade and the natural rate:** This paper examines how the transition to a green economy alters the $r^*$ (natural rate of interest). As carbon pricing shifts investment patterns and trade flows, the long-term equilibrium rate may shift, fundamentally changing the "neutral" destination for the ECB’s policy rate.
-
-3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** The authors introduce a novel index showing that divergent capital buffer requirements across member states are creating "fragmentation" in credit access. This suggests that even with a single monetary policy, corporate borrowing costs will remain unevenly distributed across the bloc, hindering synchronized recovery.
-
-4. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This study analyzes when the ECB can safely ignore temporary sectoral price spikes versus when they risk becoming embedded. It highlights that the "look-through" approach is only viable if inflation expectations remain firmly anchored, raising the stakes for current communication strategies.
-
-5. **[ECB] Out with the new, in with the old? Supranational bank supervision and the composition of firm investment:** This evidence suggests that the Single Supervisory Mechanism (SSM) has shifted the types of firms receiving bank credit, potentially favoring safer, "older" investment profiles over riskier, innovative ones. This indicates a structural drag on Eurozone productivity growth driven by the risk-aversion of supervised banks.
-
-6. **[ECB] Fiscal policy and sectoral spillovers in open-economy HANK:** Using a heterogeneous-agent model, this paper shows that government spending disproportionately boosts non-tradable services, creating complex spillovers to the goods sector. This is critical for our forecasts, as it suggests fiscal expansion in the Eurozone may be more inflationary (via services) than previously modeled.
+1. **[ECB] Endogenous monetary policy effectiveness:** This research investigates whether policy tightenings and loosenings have symmetric effects on the macroeconomy. For our models, this suggests that the "impact" of a rate cut may not be a mirror image of a rate hike, potentially complicating the timing of our pivot calls.
+2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This paper examines the conditions under which the ECB can ignore temporary sectoral price spikes without risking a broader inflation spiral. It is critical for determining whether the Governing Council will remain "hawkish" in the face of specific energy or service shocks.
+3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** By introducing a novel index for capital buffer fragmentation, the ECB acknowledges that national-level regulations are creating uneven credit conditions across the bloc. This implies that corporate credit availability will remain divergent between the Core and Periphery, regardless of the headline policy rate.
+4. **[DBB] Carbon pricing, trade and the natural rate:** This study explores how the transition to a green economy alters the $r^*$ (natural rate of interest). If carbon pricing structurally raises the natural rate, the "neutral" rate may be higher than previously estimated, limiting the room for aggressive monetary easing in the long term.
+5. **[ECB] Monetary policy transmission by securitising banks:** This paper reveals that banks active in securitization adjust their lending behavior differently in response to policy shifts. This adds a layer of complexity to our bank-sector analysis, as the "pass-through" of ECB rates to the real economy varies by bank business model.
+6. **[ECB] Inflation narratives and risk premia:** By linking supply/demand narratives to risk premia, the ECB is refining how it interprets market signals. This suggests the ECB is becoming more sensitive to "narrative-driven" volatility, which could lead to more frequent (and potentially volatile) forward guidance adjustments.
 
 **Synthesis:**
-The research indicates a growing concern over "fragmentation"—not just in sovereign spreads, but in macroprudential lending and the structural productivity of the corporate sector. Simultaneously, the ECB is grappling with a shifting natural rate ($r^*$) and asymmetric policy transmission, suggesting that the path to a "neutral" rate will be more volatile and less linear than market pricing currently assumes.
+The research indicates a growing ECB concern regarding the "fragmentation" of policy transmission, both through macroprudential divergence and varying bank business models. Furthermore, the integration of carbon pricing into the natural rate analysis suggests a structural shift in the long-term neutral rate, potentially capping the extent of future monetary easing.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 13
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 15
+
+### (cached) [Connecting payment systems, linking economies](https://www.ecb.europa.eu//press/research-publications/resbull/2026/html/ecb.rb260924~8b74a93aa7.en.html)
+**Published:** 2026-09-24 | **Authors:** 
+
+The paper examines the integration of domestic fast payment systems to reduce costs and delays in cross-border transactions. It evaluates the impact of these interlinkages on economic efficiency in alignment with G20 objectives.
+
+**Tags:** payments · eurozone · trade · digital euro · productivity
+
+### (cached) [How policymakers’ speeches and interviews move markets](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20260924~3240af33dc.en.html)
+**Published:** 2026-09-24 | **Authors:** 
+
+This research analyzes the transmission mechanism of central bank communication to financial markets. It assesses how qualitative guidance via speeches and interviews influences market expectations and asset pricing.
+
+**Tags:** monetary policy · interest rates · inflation · financial stability · eurozone
 
 ### (cached) [Monetary policy transmission by securitising banks](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3289~670b45de09.en.pdf)
 **Published:** 2026-09-22 | **Authors:** 
@@ -168,5 +177,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 18
-- Total cache size: 18 items
+- Already cached: 20
+- Total cache size: 20 items
