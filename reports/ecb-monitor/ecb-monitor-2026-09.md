@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (20 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (21 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,27 +8,39 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: September 24, 2026**
+**Date: September 25, 2026**
 **Subject: Analysis of Recent ECB/NCB Research Publications**
 
-I have reviewed the latest research cycle from the ECB and national central banks. While much of the output is focused on methodology and fintech, several papers provide critical insights into the current transmission mechanism and the evolving risks to the Eurozone's structural outlook.
+I have reviewed the latest research cycle from the ECB and national central banks. While there is a heavy focus on technical forecasting and AI, several papers provide critical insights into the current transmission mechanism and the structural risks facing the Eurozone.
 
-The following publications are the most analytically significant for our positioning:
+The following publications are the most analytically significant for our current positioning:
 
-1. **[ECB] Endogenous monetary policy effectiveness:** This research investigates whether policy tightenings and loosenings have symmetric effects on the macroeconomy. For our models, this suggests that the "impact" of a rate cut may not be a mirror image of a rate hike, potentially complicating the timing of our pivot calls.
-2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This paper examines the conditions under which the ECB can ignore temporary sectoral price spikes without risking a broader inflation spiral. It is critical for determining whether the Governing Council will remain "hawkish" in the face of specific energy or service shocks.
-3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** By introducing a novel index for capital buffer fragmentation, the ECB acknowledges that national-level regulations are creating uneven credit conditions across the bloc. This implies that corporate credit availability will remain divergent between the Core and Periphery, regardless of the headline policy rate.
-4. **[DBB] Carbon pricing, trade and the natural rate:** This study explores how the transition to a green economy alters the $r^*$ (natural rate of interest). If carbon pricing structurally raises the natural rate, the "neutral" rate may be higher than previously estimated, limiting the room for aggressive monetary easing in the long term.
-5. **[ECB] Monetary policy transmission by securitising banks:** This paper reveals that banks active in securitization adjust their lending behavior differently in response to policy shifts. This adds a layer of complexity to our bank-sector analysis, as the "pass-through" of ECB rates to the real economy varies by bank business model.
-6. **[ECB] Inflation narratives and risk premia:** By linking supply/demand narratives to risk premia, the ECB is refining how it interprets market signals. This suggests the ECB is becoming more sensitive to "narrative-driven" volatility, which could lead to more frequent (and potentially volatile) forward guidance adjustments.
+1. **Monetary policy transmission by securitising banks [ECB]:** This research indicates that banks active in securitization adjust their lending rates differently than traditional lenders. This suggests that the "pass-through" of ECB rate changes is not uniform across the banking sector, potentially creating pockets of credit resilience or vulnerability depending on a bank's balance sheet structure.
+
+2. **The impact of macroprudential policy fragmentation on corporate lending [ECB]:** The authors introduce a novel index showing that divergent capital buffer requirements across member states are creating fragmented lending conditions. For us, this means corporate credit availability is becoming increasingly decoupled from the aggregate ECB stance and more dependent on national-level regulatory friction.
+
+3. **Endogenous monetary policy effectiveness [ECB]:** This paper explores the asymmetry between policy tightening and loosening, questioning whether the macroeconomy responds identically to rate hikes versus cuts. This is critical for our terminal rate projections, as it suggests the "impact" of the current cycle may not be a mirror image of previous easing cycles.
+
+4. **Carbon pricing, trade and the natural rate [DBB]:** This study links the green transition directly to the $r^*$ (natural rate of interest). If carbon pricing and the shift away from carbon-intensive energy structurally alter productivity and investment, the long-term neutral rate may be higher than previously modeled, limiting the room for future monetary easing.
+
+5. **Inflation narratives and risk premia [ECB]:** By measuring whether markets perceive inflation as supply-driven or demand-driven, the ECB is refining how it views inflation risk premia. This suggests the Governing Council is becoming more sensitive to "narrative" shifts, which will likely increase volatility in market pricing following ECB communications.
+
+6. **Fiscal policy and sectoral spillovers in open-economy HANK [ECB]:** This research highlights how government spending disproportionately boosts non-tradable services, creating spillovers into the broader goods sector. This implies that national fiscal expansions in the Eurozone may be more inflationary for the services sector than previously estimated, complicating the "last mile" of inflation convergence.
 
 **Synthesis:**
-The research indicates a growing ECB concern regarding the "fragmentation" of policy transmission, both through macroprudential divergence and varying bank business models. Furthermore, the integration of carbon pricing into the natural rate analysis suggests a structural shift in the long-term neutral rate, potentially capping the extent of future monetary easing.
+The research indicates a growing concern over "fragmentation"—not just in sovereign spreads, but in macroprudential policy and bank transmission channels. Furthermore, the integration of carbon-pricing dynamics into the natural rate suggests a structural upward shift in the long-term interest rate environment.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 15
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 16
+
+### (cached) [Multivariate uncertainty and distributional transmission](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3290~30ee904f1e.en.pdf)
+**Published:** 2026-09-25 | **Authors:** 
+
+The paper proposes a framework for computing impulse responses for scenario probabilities and predictive distributions of macroeconomic outcomes. It utilizes a regime-dependent mixture VAR with endogenous state probabilities to move beyond point forecasts toward risk-based assessments.
+
+**Tags:** monetary policy · GDP growth · inflation · recession · financial stability
 
 ### (cached) [Connecting payment systems, linking economies](https://www.ecb.europa.eu//press/research-publications/resbull/2026/html/ecb.rb260924~8b74a93aa7.en.html)
 **Published:** 2026-09-24 | **Authors:** 
@@ -177,5 +189,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 20
-- Total cache size: 20 items
+- Already cached: 21
+- Total cache size: 21 items
