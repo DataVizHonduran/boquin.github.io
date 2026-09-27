@@ -273,8 +273,8 @@
       <div class="scenario-card">
         <span class="scenario-tag tag-a">Scenario A</span>
         <h3>No Hike Needed</h3>
-        <p>Insurance-cut cycle plays out as intended. Fed keeps easing toward neutral, no reversal required.</p>
-        <div class="scenario-rate">3.00% <span>terminal rate</span></div>
+        <p>Fed holds at the current 3.75&ndash;4.00% target range from here. No further tightening required.</p>
+        <div class="scenario-rate">4.00% <span>terminal rate</span></div>
       </div>
       <div class="scenario-card">
         <span class="scenario-tag tag-b">Scenario B</span>
@@ -379,8 +379,8 @@
   </section>
 
   <footer>
-    Terminal-rate anchors are fixed assumptions: A = 3.00%, B = 4.50%, C = 5.625% (midpoint of 150&ndash;175bp
-    of hiking). Implied rate for a given (A,B,C) mix = 3.00&middot;A + 4.50&middot;B + 5.625&middot;C. Market rate
+    Terminal-rate anchors are fixed assumptions: A = 4.00% (hold at current 3.75&ndash;4.00% target range), B = 4.50%,
+    C = 5.625% (midpoint of 150&ndash;175bp of hiking). Implied rate for a given (A,B,C) mix = 4.00&middot;A + 4.50&middot;B + 5.625&middot;C. Market rate
     = 100 &minus; SFRZ7 price. Diff = implied &minus; market, in basis points. This is a static probability-weighted
     read, not a forward path &mdash; it does not account for convexity, carry, or the Z7/Z8 term slope.
   </footer>
@@ -389,7 +389,7 @@
 
 <script>
 (function () {
-  var RATE = { A: 3.00, B: 4.50, C: 5.625 };
+  var RATE = { A: 4.00, B: 4.50, C: 5.625 };
   var STEPS = [0,10,20,30,40,50,60,70,80,90,100];
   var selectedA = null;
 
