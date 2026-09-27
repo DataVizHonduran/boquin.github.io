@@ -183,6 +183,46 @@
 
   footer { margin-top: 8px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.6; max-width: 74ch; }
 
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .tab-btn {
+    font-family: inherit; font-size: 14px; font-weight: 600; color: var(--ink-soft);
+    background: none; border: none; padding: 10px 4px; margin-bottom: -1px; cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .tab-btn + .tab-btn { margin-left: 14px; }
+  .tab-btn[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:focus-visible { outline: 2px solid var(--market); outline-offset: 2px; }
+  .tab-panel[hidden] { display: none; }
+
+  /* Fair value calculator */
+  .fv-panel { display: flex; gap: 20px; flex-wrap: wrap; align-items: stretch; }
+  .fv-inputs {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 22px; box-shadow: var(--shadow); min-width: 240px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .fv-inputs .input-group input { width: 90px; }
+  .fv-resid { font-size: 13px; color: var(--ink-soft); }
+  .fv-resid strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .fv-error { font-size: 12.5px; color: var(--hawk-3); font-weight: 600; }
+  .fv-results {
+    flex: 1; min-width: 280px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;
+  }
+  .fv-stat .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
+    color: var(--ink-faint); margin-bottom: 6px;
+  }
+  .fv-stat .value {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-size: 24px; font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .fv-stat .value.dove { color: var(--dove-3); }
+  .fv-stat .value.hawk { color: var(--hawk-3); }
+  .fv-stat .sub { font-size: 12px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; }
+
   @media (max-width: 760px) {
     .scenarios { grid-template-columns: 1fr; }
     .readout { margin-left: 0; }
@@ -236,35 +276,63 @@
     </div>
   </section>
 
-  <section>
-    <h2>P(B) &times; P(C) &mdash; A implied</h2>
-    <p class="section-note">Rows are probability of Scenario B, columns probability of Scenario C. Scenario A takes
-      whatever probability is left over (100 &minus; B &minus; C). Blank cells are infeasible (B+C&gt;100%).</p>
-    <div class="grid-wrap">
-      <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
-      <div id="grid-bc"></div>
-      <div class="legend">
-        <span>Dovish</span>
-        <span class="legend-bar"></span>
-        <span>Hawkish</span>
-        <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+  <div class="tabs" role="tablist" aria-label="View">
+    <button class="tab-btn" role="tab" id="tab-btn-grids" aria-selected="true" aria-controls="tab-grids">Scenario Grids</button>
+    <button class="tab-btn" role="tab" id="tab-btn-fv" aria-selected="false" aria-controls="tab-fv">Fair Value Calculator</button>
+  </div>
+
+  <section id="tab-grids" role="tabpanel" aria-labelledby="tab-btn-grids" class="tab-panel">
+    <div style="margin-bottom: 44px;">
+      <h2>P(B) &times; P(C) &mdash; A implied</h2>
+      <p class="section-note">Rows are probability of Scenario B, columns probability of Scenario C. Scenario A takes
+        whatever probability is left over (100 &minus; B &minus; C). Blank cells are infeasible (B+C&gt;100%).</p>
+      <div class="grid-wrap">
+        <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
+        <div id="grid-bc"></div>
+        <div class="legend">
+          <span>Dovish</span>
+          <span class="legend-bar"></span>
+          <span>Hawkish</span>
+          <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>P(A) &times; P(B) &mdash; C implied</h2>
+      <p class="section-note">Rows are probability of Scenario A, columns probability of Scenario B. Scenario C takes
+        the remainder (100 &minus; A &minus; B).</p>
+      <div class="grid-wrap">
+        <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
+        <div id="grid-ab"></div>
+        <div class="legend">
+          <span>Dovish</span>
+          <span class="legend-bar"></span>
+          <span>Hawkish</span>
+          <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>P(A) &times; P(B) &mdash; C implied</h2>
-    <p class="section-note">Rows are probability of Scenario A, columns probability of Scenario B. Scenario C takes
-      the remainder (100 &minus; A &minus; B).</p>
-    <div class="grid-wrap">
-      <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
-      <div id="grid-ab"></div>
-      <div class="legend">
-        <span>Dovish</span>
-        <span class="legend-bar"></span>
-        <span>Hawkish</span>
-        <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+  <section id="tab-fv" role="tabpanel" aria-labelledby="tab-btn-fv" class="tab-panel" hidden>
+    <h2>Fair Value from B/C Probabilities</h2>
+    <p class="section-note">Set P(B) and P(C) directly &mdash; P(A) is whatever's left over. Computes the implied
+      Z7 rate and fair value price, and how far that sits from the SFRZ7 price entered above.</p>
+    <div class="fv-panel">
+      <div class="fv-inputs">
+        <div class="input-group">
+          <label for="fv-b">P(B) %</label>
+          <input type="number" id="fv-b" value="70" min="0" max="100" step="1">
+        </div>
+        <div class="input-group">
+          <label for="fv-c">P(C) %</label>
+          <input type="number" id="fv-c" value="30" min="0" max="100" step="1">
+        </div>
+        <div class="fv-resid" id="fv-resid">P(A) (residual): <strong>0%</strong></div>
+        <div class="fv-error" id="fv-error" hidden>B + C exceeds 100% &mdash; reduce one input.</div>
       </div>
+      <div class="fv-results" id="fv-results"></div>
     </div>
   </section>
 
@@ -357,6 +425,48 @@
     container.innerHTML = html;
   }
 
+  function renderFairValue(price) {
+    var bInput = document.getElementById('fv-b');
+    var cInput = document.getElementById('fv-c');
+    var b = parseFloat(bInput.value); if (isNaN(b)) b = 0;
+    var c = parseFloat(cInput.value); if (isNaN(c)) c = 0;
+    b = Math.max(0, Math.min(100, b));
+    c = Math.max(0, Math.min(100, c));
+    var a = 100 - b - c;
+
+    var errorEl = document.getElementById('fv-error');
+    var residEl = document.getElementById('fv-resid');
+    var resultsEl = document.getElementById('fv-results');
+
+    if (a < 0) {
+      errorEl.hidden = false;
+      residEl.innerHTML = 'P(A) (residual): <strong>&mdash;</strong>';
+      resultsEl.innerHTML = '';
+      return;
+    }
+    errorEl.hidden = true;
+    residEl.innerHTML = 'P(A) (residual): <strong>' + a.toFixed(0) + '%</strong>';
+
+    var rateBp = impliedRateBp(a, b, c);
+    var ratePct = rateBp / 100;
+    var fvPrice = 100 - ratePct;
+    var mktBp = marketRateBp(price);
+    var diffBp = rateBp - mktBp;
+    var diffPrice = -diffBp / 100;
+    var dirClass = diffPrice >= 0 ? 'dove' : 'hawk';
+    var dirWord = diffPrice >= 0 ? 'richer than' : 'cheaper than';
+
+    resultsEl.innerHTML =
+      '<div class="fv-stat"><div class="label">Implied Rate</div><div class="value">' +
+        ratePct.toFixed(3) + '%</div></div>' +
+      '<div class="fv-stat"><div class="label">Fair Value SFRZ7</div><div class="value">' +
+        fvPrice.toFixed(3) + '</div></div>' +
+      '<div class="fv-stat"><div class="label">Vs. Entered SFRZ7 (' + price.toFixed(2) + ')</div>' +
+        '<div class="value ' + dirClass + '">' + (diffPrice >= 0 ? '+' : '') + diffPrice.toFixed(3) + ' pts</div>' +
+        '<div class="sub">' + (diffBp >= 0 ? '+' : '') + Math.round(diffBp) + 'bp on yield &mdash; fair value is ' +
+        dirWord + ' the entered print</div></div>';
+  }
+
   function render() {
     var priceInput = document.getElementById('z7-input');
     var price = parseFloat(priceInput.value);
@@ -368,12 +478,25 @@
 
     buildGrid('grid-bc', 'P(B)', 'P(C)', function (b, c) { return 100 - b - c; }, price);
     buildGrid('grid-ab', 'P(A)', 'P(B)', function (a, b) { return 100 - a - b; }, price);
+    renderFairValue(price);
+  }
+
+  function switchTab(which) {
+    var showGrids = which === 'grids';
+    document.getElementById('tab-btn-grids').setAttribute('aria-selected', showGrids ? 'true' : 'false');
+    document.getElementById('tab-btn-fv').setAttribute('aria-selected', showGrids ? 'false' : 'true');
+    document.getElementById('tab-grids').hidden = !showGrids;
+    document.getElementById('tab-fv').hidden = showGrids;
   }
 
   document.getElementById('recalc-btn').addEventListener('click', render);
   document.getElementById('z7-input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') render();
   });
+  document.getElementById('fv-b').addEventListener('input', render);
+  document.getElementById('fv-c').addEventListener('input', render);
+  document.getElementById('tab-btn-grids').addEventListener('click', function () { switchTab('grids'); });
+  document.getElementById('tab-btn-fv').addEventListener('click', function () { switchTab('fv'); });
 
   render();
 })();
