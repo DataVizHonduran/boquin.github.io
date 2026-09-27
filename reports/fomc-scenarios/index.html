@@ -198,6 +198,15 @@
   .resid-btn:focus-visible { outline: 2px solid var(--market); outline-offset: 2px; }
   table.matrix td.cell.a-highlight { outline: 3px solid var(--ink); outline-offset: -3px; position: relative; z-index: 2; }
 
+  table.ladder { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; width: 100%; }
+  table.ladder th, table.ladder td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--line); }
+  table.ladder th { color: var(--ink-soft); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+  table.ladder th:first-child, table.ladder td:first-child { text-align: left; }
+  table.ladder td.split { color: var(--ink-faint); font-weight: 400; font-size: 11.5px; }
+  table.ladder td.hawk { color: var(--hawk-3); font-weight: 600; }
+  table.ladder td.dove { color: var(--dove-3); font-weight: 600; }
+  table.ladder tr.pivot { background: var(--market-bg); }
+
   footer { margin-top: 8px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.6; max-width: 74ch; }
 
   /* Tabs */
@@ -296,6 +305,7 @@
   <div class="tabs" role="tablist" aria-label="View">
     <button class="tab-btn" role="tab" id="tab-btn-grids" aria-selected="true" aria-controls="tab-grids">Scenario Grids</button>
     <button class="tab-btn" role="tab" id="tab-btn-fv" aria-selected="false" aria-controls="tab-fv">Fair Value Calculator</button>
+    <button class="tab-btn" role="tab" id="tab-btn-ladder" aria-selected="false" aria-controls="tab-ladder">FV Ladder</button>
   </div>
 
   <section id="tab-grids" role="tabpanel" aria-labelledby="tab-btn-grids" class="tab-panel">
@@ -356,6 +366,15 @@
         <div class="fv-error" id="fv-error" hidden>B + C exceeded 100% &mdash; P(C) capped so A stays &ge; 0.</div>
       </div>
       <div class="fv-results" id="fv-results"></div>
+    </div>
+  </section>
+
+  <section id="tab-ladder" role="tabpanel" aria-labelledby="tab-btn-ladder" class="tab-panel" hidden>
+    <h2>FV Ladder &mdash; P(A) fixed, averaged over P(B)/P(C)</h2>
+    <p class="section-note">For each P(A) level, averages the implied rate across every feasible P(B)/P(C) split
+      (B+C = 100&minus;A), then shows the most hawkish and most dovish split within that row.</p>
+    <div class="grid-wrap">
+      <div id="ladder-table"></div>
     </div>
   </section>
 
@@ -482,6 +501,43 @@
     });
   }
 
+  function buildLadder(price) {
+    var mkt = marketRateBp(price);
+    var container = document.getElementById('ladder-table');
+    var html = '<table class="ladder"><thead><tr>' +
+      '<th>P(A)</th><th>Avg Rate</th><th>Avg FV Price</th><th>Avg Diff</th>' +
+      '<th>Most Hawkish</th><th>Most Dovish</th>' +
+      '</tr></thead><tbody>';
+
+    STEPS.forEach(function (a) {
+      var rows = [];
+      for (var b = 0; b <= 100 - a; b += 10) {
+        var c = 100 - a - b;
+        var diff = impliedRateBp(a, b, c) - mkt;
+        rows.push({ b: b, c: c, diff: diff });
+      }
+      var avgDiff = rows.reduce(function (sum, r) { return sum + r.diff; }, 0) / rows.length;
+      var avgFv = 100 - (mkt + avgDiff) / 100;
+      var maxRow = rows.reduce(function (m, r) { return r.diff > m.diff ? r : m; });
+      var minRow = rows.reduce(function (m, r) { return r.diff < m.diff ? r : m; });
+      var isPivot = Math.abs(avgDiff) <= 5;
+
+      html += '<tr' + (isPivot ? ' class="pivot"' : '') + '>' +
+        '<td>' + a + '</td>' +
+        '<td>' + ((mkt + avgDiff) / 100).toFixed(3) + '%</td>' +
+        '<td>' + avgFv.toFixed(3) + '</td>' +
+        '<td>' + (avgDiff >= 0 ? '+' : '') + avgDiff.toFixed(1) + 'bp</td>' +
+        '<td class="hawk">' + (maxRow.diff >= 0 ? '+' : '') + Math.round(maxRow.diff) +
+          'bp <span class="split">(B' + maxRow.b + '/C' + maxRow.c + ')</span></td>' +
+        '<td class="dove">' + (minRow.diff >= 0 ? '+' : '') + Math.round(minRow.diff) +
+          'bp <span class="split">(B' + minRow.b + '/C' + minRow.c + ')</span></td>' +
+        '</tr>';
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
+
   function renderFairValue(price) {
     var bInput = document.getElementById('fv-b');
     var cInput = document.getElementById('fv-c');
@@ -538,14 +594,15 @@
     buildGrid('grid-ab', 'P(A)', 'P(B)', function (a, b) { return 100 - a - b; }, price);
     applyResidHighlight();
     renderFairValue(price);
+    buildLadder(price);
   }
 
   function switchTab(which) {
-    var showGrids = which === 'grids';
-    document.getElementById('tab-btn-grids').setAttribute('aria-selected', showGrids ? 'true' : 'false');
-    document.getElementById('tab-btn-fv').setAttribute('aria-selected', showGrids ? 'false' : 'true');
-    document.getElementById('tab-grids').hidden = !showGrids;
-    document.getElementById('tab-fv').hidden = showGrids;
+    ['grids', 'fv', 'ladder'].forEach(function (name) {
+      var selected = name === which;
+      document.getElementById('tab-btn-' + name).setAttribute('aria-selected', selected ? 'true' : 'false');
+      document.getElementById('tab-' + name).hidden = !selected;
+    });
   }
 
   document.getElementById('recalc-btn').addEventListener('click', render);
@@ -556,6 +613,7 @@
   document.getElementById('fv-c').addEventListener('input', render);
   document.getElementById('tab-btn-grids').addEventListener('click', function () { switchTab('grids'); });
   document.getElementById('tab-btn-fv').addEventListener('click', function () { switchTab('fv'); });
+  document.getElementById('tab-btn-ladder').addEventListener('click', function () { switchTab('ladder'); });
 
   buildResidBar();
   render();
