@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fed Path Scenarios: SFRZ7 Pricing Grid</title>
+<style>
+  :root {
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --ink: #17212E;
+    --ink-soft: #5B6675;
+    --ink-faint: #8B94A3;
+    --line: #DADFE6;
+    --accent: #1E4E79;
+    --accent-soft: #E3ECF3;
+    --market: #C99A2E;
+    --market-bg: #FBF3DF;
+    --dove-3: #0B5E8C;
+    --dove-2: #4F8FB4;
+    --dove-1: #A9C8DC;
+    --neutral: #EEF0F3;
+    --hawk-1: #E3B48A;
+    --hawk-2: #C97B44;
+    --hawk-3: #B0501F;
+    --shadow: 0 1px 2px rgba(23,33,46,0.06), 0 8px 24px rgba(23,33,46,0.05);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F151D;
+    --surface: #171F29;
+    --ink: #E8EBEF;
+    --ink-soft: #9AA5B3;
+    --ink-faint: #6C7683;
+    --line: #2A3441;
+    --accent: #7FB1DD;
+    --accent-soft: #1D2E3D;
+    --market: #E8C468;
+    --market-bg: #2E2712;
+    --dove-3: #3E8FC0;
+    --dove-2: #2F6D96;
+    --dove-1: #24455C;
+    --neutral: #232C37;
+    --hawk-1: #6B4426;
+    --hawk-2: #8F5A2D;
+    --hawk-3: #C0763C;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F151D;
+      --surface: #171F29;
+      --ink: #E8EBEF;
+      --ink-soft: #9AA5B3;
+      --ink-faint: #6C7683;
+      --line: #2A3441;
+      --accent: #7FB1DD;
+      --accent-soft: #1D2E3D;
+      --market: #E8C468;
+      --market-bg: #2E2712;
+      --dove-3: #3E8FC0;
+      --dove-2: #2F6D96;
+      --dove-1: #24455C;
+      --neutral: #232C37;
+      --hawk-1: #6B4426;
+      --hawk-2: #8F5A2D;
+      --hawk-3: #C0763C;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 20px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .page { max-width: 1080px; margin: 0 auto; }
+
+  header { margin-bottom: 32px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 8px;
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-size: 32px; font-weight: 600; line-height: 1.2; margin: 0 0 8px;
+    color: var(--ink); text-wrap: balance;
+  }
+  .subtitle { font-size: 15px; color: var(--ink-soft); margin: 0; max-width: 68ch; line-height: 1.55; }
+
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-size: 20px; font-weight: 600; margin: 0 0 4px; color: var(--ink);
+  }
+  .section-note { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 18px; line-height: 1.55; max-width: 70ch; }
+
+  section { margin-bottom: 44px; }
+
+  /* Scenario cards */
+  .scenarios {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .scenario-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .scenario-tag {
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700;
+    display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;
+  }
+  .tag-a { color: var(--dove-3); background: var(--dove-1); }
+  .tag-b { color: var(--ink); background: var(--neutral); }
+  .tag-c { color: var(--hawk-3); background: var(--hawk-1); }
+  .scenario-card h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-size: 17px; margin: 0 0 8px; color: var(--ink);
+  }
+  .scenario-card p { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0 0 10px; }
+  .scenario-rate {
+    font-variant-numeric: tabular-nums; font-size: 13px; color: var(--ink);
+    border-top: 1px solid var(--line); padding-top: 10px; font-weight: 600;
+  }
+  .scenario-rate span { color: var(--ink-faint); font-weight: 400; }
+
+  /* Input panel */
+  .input-panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 22px; box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .input-group { display: flex; align-items: baseline; gap: 10px; }
+  .input-group label {
+    font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap;
+  }
+  .input-group input {
+    font-variant-numeric: tabular-nums;
+    width: 110px; font-size: 16px; padding: 7px 10px; border-radius: 6px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+    font-family: inherit;
+  }
+  .input-group input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .btn {
+    font-size: 13.5px; font-weight: 600; color: #fff; background: var(--accent);
+    border: none; border-radius: 6px; padding: 9px 16px; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:focus-visible { outline: 2px solid var(--market); outline-offset: 2px; }
+  .readout {
+    font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums;
+    margin-left: auto;
+  }
+  .readout strong { color: var(--ink); }
+
+  /* Grids */
+  .grid-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px 22px 16px; box-shadow: var(--shadow); }
+  table.matrix { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  table.matrix caption { caption-side: top; text-align: left; }
+  table.matrix th, table.matrix td {
+    padding: 7px 10px; text-align: center; min-width: 54px; border: 1px solid var(--line);
+  }
+  table.matrix th { background: var(--bg); color: var(--ink-soft); font-weight: 600; font-size: 11.5px; }
+  table.matrix th.corner { background: var(--surface); border: none; }
+  table.matrix td.infeasible { background: var(--bg); color: var(--ink-faint); }
+  table.matrix td.cell { color: var(--ink); font-weight: 500; cursor: default; }
+  table.matrix td.cell.market {
+    box-shadow: inset 0 0 0 2px var(--market);
+    background: var(--market-bg) !important;
+    font-weight: 700;
+  }
+  .axis-label {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--ink-soft); margin-bottom: 10px;
+  }
+  .legend { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 11.5px; color: var(--ink-soft); }
+  .legend-bar { height: 10px; width: 220px; border-radius: 5px;
+    background: linear-gradient(to right, var(--dove-3), var(--dove-1), var(--neutral), var(--hawk-1), var(--hawk-3));
+    border: 1px solid var(--line); }
+  .legend-marker { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; box-shadow: inset 0 0 0 2px var(--market); background: var(--market-bg); }
+
+  footer { margin-top: 8px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.6; max-width: 74ch; }
+
+  @media (max-width: 760px) {
+    .scenarios { grid-template-columns: 1fr; }
+    .readout { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Central Banks &middot; Rates</p>
+    <h1>Fed Path Scenarios: SFRZ7 Pricing Grid</h1>
+    <p class="subtitle">
+      Three world-states for the Fed funds path, priced against SOFR futures Z7 (Dec-2027) and
+      backed out as a probability mix. Enter the live SFRZ7 print below to re-run both grids
+      against current market pricing.
+    </p>
+  </header>
+
+  <section>
+    <div class="scenarios">
+      <div class="scenario-card">
+        <span class="scenario-tag tag-a">Scenario A</span>
+        <h3>No Hike Needed</h3>
+        <p>Insurance-cut cycle plays out as intended. Fed keeps easing toward neutral, no reversal required.</p>
+        <div class="scenario-rate">3.00% <span>terminal rate</span></div>
+      </div>
+      <div class="scenario-card">
+        <span class="scenario-tag tag-b">Scenario B</span>
+        <h3>Unwind the Insurance Cuts</h3>
+        <p>Inflation firms up enough that the Fed claws back 50&ndash;75bp of recent precautionary easing.</p>
+        <div class="scenario-rate">4.50% <span>terminal rate</span></div>
+      </div>
+      <div class="scenario-card">
+        <span class="scenario-tag tag-c">Scenario C</span>
+        <h3>Real Hiking Cycle</h3>
+        <p>Inflation re-accelerates or credibility breaks. Fed forced into 150bp+ of genuine tightening.</p>
+        <div class="scenario-rate">5.5&ndash;5.6% <span>terminal rate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="input-panel">
+      <div class="input-group">
+        <label for="z7-input">SFRZ7 price</label>
+        <input type="number" id="z7-input" value="95.18" step="0.01" min="90" max="100">
+      </div>
+      <button class="btn" id="recalc-btn">Recalculate</button>
+      <span class="readout" id="readout"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>P(B) &times; P(C) &mdash; A implied</h2>
+    <p class="section-note">Rows are probability of Scenario B, columns probability of Scenario C. Scenario A takes
+      whatever probability is left over (100 &minus; B &minus; C). Blank cells are infeasible (B+C&gt;100%).</p>
+    <div class="grid-wrap">
+      <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
+      <div id="grid-bc"></div>
+      <div class="legend">
+        <span>Dovish</span>
+        <span class="legend-bar"></span>
+        <span>Hawkish</span>
+        <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>P(A) &times; P(B) &mdash; C implied</h2>
+    <p class="section-note">Rows are probability of Scenario A, columns probability of Scenario B. Scenario C takes
+      the remainder (100 &minus; A &minus; B).</p>
+    <div class="grid-wrap">
+      <div class="axis-label">Yield diff vs. SFRZ7 (bp) &mdash; positive = more hawkish than priced</div>
+      <div id="grid-ab"></div>
+      <div class="legend">
+        <span>Dovish</span>
+        <span class="legend-bar"></span>
+        <span>Hawkish</span>
+        <span class="legend-marker"><span class="legend-swatch"></span> market-consistent (&plusmn;5bp)</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Terminal-rate anchors are fixed assumptions: A = 3.00%, B = 4.50%, C = 5.625% (midpoint of 150&ndash;175bp
+    of hiking). Implied rate for a given (A,B,C) mix = 3.00&middot;A + 4.50&middot;B + 5.625&middot;C. Market rate
+    = 100 &minus; SFRZ7 price. Diff = implied &minus; market, in basis points. This is a static probability-weighted
+    read, not a forward path &mdash; it does not account for convexity, carry, or the Z7/Z8 term slope.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var RATE = { A: 3.00, B: 4.50, C: 5.625 };
+  var STEPS = [0,10,20,30,40,50,60,70,80,90,100];
+
+  function impliedRateBp(a, b, c) {
+    return RATE.A * a + RATE.B * b + RATE.C * c; // a,b,c are 0-100, formula scales to bp directly since RATE is in %
+  }
+
+  function marketRateBp(price) {
+    return (100 - price) * 100;
+  }
+
+  function colorFor(diffBp, maxAbs) {
+    // diverging scale across [-maxAbs, +maxAbs]
+    var t = Math.max(-1, Math.min(1, diffBp / maxAbs));
+    var stops = t < 0
+      ? [ [-1, 'var(--dove-3)'], [-0.5, 'var(--dove-2)'], [0, 'var(--dove-1)'] ]
+      : [ [0, 'var(--hawk-1)'], [0.5, 'var(--hawk-2)'], [1, 'var(--hawk-3)'] ];
+    // simple nearest-stop pick for a clean, readable banding rather than continuous gradient
+    if (Math.abs(diffBp) <= 5) return 'var(--neutral)';
+    if (diffBp < 0) {
+      if (t < -0.66) return 'var(--dove-3)';
+      if (t < -0.33) return 'var(--dove-2)';
+      return 'var(--dove-1)';
+    } else {
+      if (t > 0.66) return 'var(--hawk-3)';
+      if (t > 0.33) return 'var(--hawk-2)';
+      return 'var(--hawk-1)';
+    }
+  }
+
+  function buildGrid(containerId, rowLabel, colLabel, computeThird, price) {
+    var mkt = marketRateBp(price);
+    var container = document.getElementById(containerId);
+
+    // first pass: compute diffs + max magnitude for color scaling
+    var cells = [];
+    var maxAbs = 1;
+    STEPS.forEach(function (row) {
+      STEPS.forEach(function (col) {
+        var third = computeThird(row, col);
+        if (third < 0) return;
+        var a, b, c;
+        if (containerId === 'grid-bc') { b = row; c = col; a = third; }
+        else { a = row; b = col; c = third; }
+        var diff = impliedRateBp(a, b, c) - mkt;
+        maxAbs = Math.max(maxAbs, Math.abs(diff));
+        cells.push({ row: row, col: col, diff: diff });
+      });
+    });
+
+    var lookup = {};
+    cells.forEach(function (cell) { lookup[cell.row + '_' + cell.col] = cell.diff; });
+
+    var html = '<table class="matrix"><thead><tr><th class="corner">' + rowLabel + ' \\ ' + colLabel + '</th>';
+    STEPS.forEach(function (col) { html += '<th>' + col + '</th>'; });
+    html += '</tr></thead><tbody>';
+
+    STEPS.forEach(function (row) {
+      html += '<tr><th>' + row + '</th>';
+      STEPS.forEach(function (col) {
+        var key = row + '_' + col;
+        if (!(key in lookup)) {
+          html += '<td class="infeasible">&mdash;</td>';
+        } else {
+          var diff = lookup[key];
+          var isMarket = Math.abs(diff) <= 5;
+          var bg = colorFor(diff, maxAbs);
+          var sign = diff > 0 ? '+' : '';
+          html += '<td class="cell' + (isMarket ? ' market' : '') + '" style="background:' + bg + '">' +
+                  sign + Math.round(diff) + '</td>';
+        }
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
+
+  function render() {
+    var priceInput = document.getElementById('z7-input');
+    var price = parseFloat(priceInput.value);
+    if (isNaN(price) || price <= 0) { price = 95.18; priceInput.value = price; }
+
+    var mktRateBp = marketRateBp(price);
+    document.getElementById('readout').innerHTML =
+      'Implied market rate: <strong>' + (mktRateBp / 100).toFixed(3) + '%</strong>';
+
+    buildGrid('grid-bc', 'P(B)', 'P(C)', function (b, c) { return 100 - b - c; }, price);
+    buildGrid('grid-ab', 'P(A)', 'P(B)', function (a, b) { return 100 - a - b; }, price);
+  }
+
+  document.getElementById('recalc-btn').addEventListener('click', render);
+  document.getElementById('z7-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
