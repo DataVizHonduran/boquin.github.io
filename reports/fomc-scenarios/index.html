@@ -205,7 +205,7 @@
   .fv-inputs .input-group input { width: 90px; }
   .fv-resid { font-size: 13px; color: var(--ink-soft); }
   .fv-resid strong { color: var(--ink); font-variant-numeric: tabular-nums; }
-  .fv-error { font-size: 12.5px; color: var(--hawk-3); font-weight: 600; }
+  .fv-error { font-size: 12.5px; color: var(--market); font-weight: 600; }
   .fv-results {
     flex: 1; min-width: 280px; background: var(--surface); border: 1px solid var(--line);
     border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow);
@@ -330,7 +330,7 @@
           <input type="number" id="fv-c" value="30" min="0" max="100" step="1">
         </div>
         <div class="fv-resid" id="fv-resid">P(A) (residual): <strong>0%</strong></div>
-        <div class="fv-error" id="fv-error" hidden>B + C exceeds 100% &mdash; reduce one input.</div>
+        <div class="fv-error" id="fv-error" hidden>B + C exceeded 100% &mdash; P(C) capped so A stays &ge; 0.</div>
       </div>
       <div class="fv-results" id="fv-results"></div>
     </div>
@@ -431,20 +431,22 @@
     var b = parseFloat(bInput.value); if (isNaN(b)) b = 0;
     var c = parseFloat(cInput.value); if (isNaN(c)) c = 0;
     b = Math.max(0, Math.min(100, b));
-    c = Math.max(0, Math.min(100, c));
-    var a = 100 - b - c;
 
     var errorEl = document.getElementById('fv-error');
     var residEl = document.getElementById('fv-resid');
     var resultsEl = document.getElementById('fv-results');
 
-    if (a < 0) {
+    var cCap = 100 - b;
+    if (c > cCap) {
+      c = cCap;
+      cInput.value = c;
       errorEl.hidden = false;
-      residEl.innerHTML = 'P(A) (residual): <strong>&mdash;</strong>';
-      resultsEl.innerHTML = '';
-      return;
+    } else {
+      errorEl.hidden = true;
     }
-    errorEl.hidden = true;
+    c = Math.max(0, c);
+    var a = 100 - b - c;
+
     residEl.innerHTML = 'P(A) (residual): <strong>' + a.toFixed(0) + '%</strong>';
 
     var rateBp = impliedRateBp(a, b, c);
