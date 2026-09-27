@@ -457,10 +457,9 @@
     var dirWord = diffBp >= 0 ? 'more hawkish than' : 'more dovish than';
 
     resultsEl.innerHTML =
-      '<div class="fv-stat"><div class="label">Implied Rate</div><div class="value">' +
-        ratePct.toFixed(3) + '%</div></div>' +
-      '<div class="fv-stat"><div class="label">Fair Value SFRZ7</div><div class="value">' +
-        fvPrice.toFixed(3) + '</div></div>' +
+      '<div class="fv-stat"><div class="label">Fair Value (Yield)</div><div class="value">' +
+        ratePct.toFixed(3) + '%</div>' +
+        '<div class="sub">price equiv. ' + fvPrice.toFixed(3) + '</div></div>' +
       '<div class="fv-stat"><div class="label">Vs. Entered SFRZ7 (' + price.toFixed(2) + ')</div>' +
         '<div class="value ' + dirClass + '">' + (diffBp >= 0 ? '+' : '') + Math.round(diffBp) + 'bp</div>' +
         '<div class="sub">' + (diffPrice >= 0 ? '+' : '') + diffPrice.toFixed(3) + ' pts on price &mdash; this mix is ' +
