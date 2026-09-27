@@ -123,6 +123,14 @@
     border-top: 1px solid var(--line); padding-top: 10px; font-weight: 600;
   }
   .scenario-rate span { color: var(--ink-faint); font-weight: 400; }
+  .scenario-toggle {
+    margin-top: 10px; font-family: inherit; font-size: 11.5px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent);
+    border-radius: 5px; padding: 5px 10px; cursor: pointer; width: 100%;
+  }
+  .scenario-toggle:hover { filter: brightness(0.97); }
+  .scenario-toggle[aria-pressed="true"] { background: var(--hawk-3); color: #fff; border-color: var(--hawk-3); }
+  .scenario-toggle:focus-visible { outline: 2px solid var(--market); outline-offset: 2px; }
 
   /* Input panel */
   .input-panel {
@@ -286,7 +294,8 @@
         <span class="scenario-tag tag-c">Scenario C</span>
         <h3>Real Hiking Cycle</h3>
         <p>Inflation re-accelerates or credibility breaks. Fed forced into 150bp+ of genuine tightening.</p>
-        <div class="scenario-rate">5.5&ndash;5.6% <span>terminal rate</span></div>
+        <div class="scenario-rate" id="scenario-c-rate">5.5&ndash;5.6% <span>terminal rate</span></div>
+        <button class="scenario-toggle" id="toggle-c-btn" type="button" aria-pressed="false">Stress to 6.00%</button>
       </div>
     </div>
   </section>
@@ -380,7 +389,8 @@
 
   <footer>
     Terminal-rate anchors are fixed assumptions: A = 4.00% (hold at current 3.75&ndash;4.00% target range), B = 4.50%,
-    C = 5.625% (midpoint of 150&ndash;175bp of hiking). Implied rate for a given (A,B,C) mix = 4.00&middot;A + 4.50&middot;B + 5.625&middot;C. Market rate
+    C = <span id="footer-c-rate">5.625% (midpoint of 150&ndash;175bp of hiking)</span>. Implied rate for a given (A,B,C) mix
+    = 4.00&middot;A + 4.50&middot;B + <span id="footer-c-coef">5.625</span>&middot;C. Market rate
     = 100 &minus; SFRZ7 price. Diff = implied &minus; market, in basis points. This is a static probability-weighted
     read, not a forward path &mdash; it does not account for convexity, carry, or the Z7/Z8 term slope.
   </footer>
@@ -390,6 +400,8 @@
 <script>
 (function () {
   var RATE = { A: 4.00, B: 4.50, C: 5.625 };
+  var RATE_C_DEFAULT = 5.625;
+  var RATE_C_STRESS = 6.00;
   var STEPS = [0,10,20,30,40,50,60,70,80,90,100];
   var selectedA = null;
 
@@ -597,6 +609,24 @@
     buildLadder(price);
   }
 
+  function toggleStressC() {
+    var stressed = RATE.C !== RATE_C_DEFAULT;
+    RATE.C = stressed ? RATE_C_DEFAULT : RATE_C_STRESS;
+    var nowStressed = !stressed;
+
+    var btn = document.getElementById('toggle-c-btn');
+    btn.setAttribute('aria-pressed', nowStressed ? 'true' : 'false');
+    btn.textContent = nowStressed ? 'Reset to 5.5–5.6%' : 'Stress to 6.00%';
+
+    document.getElementById('scenario-c-rate').innerHTML =
+      (nowStressed ? '6.00%' : '5.5&ndash;5.6%') + ' <span>terminal rate</span>';
+    document.getElementById('footer-c-rate').textContent =
+      nowStressed ? '6.000% (stressed)' : '5.625% (midpoint of 150–175bp of hiking)';
+    document.getElementById('footer-c-coef').textContent = RATE.C.toFixed(3);
+
+    render();
+  }
+
   function switchTab(which) {
     ['grids', 'fv', 'ladder'].forEach(function (name) {
       var selected = name === which;
@@ -614,6 +644,7 @@
   document.getElementById('tab-btn-grids').addEventListener('click', function () { switchTab('grids'); });
   document.getElementById('tab-btn-fv').addEventListener('click', function () { switchTab('fv'); });
   document.getElementById('tab-btn-ladder').addEventListener('click', function () { switchTab('ladder'); });
+  document.getElementById('toggle-c-btn').addEventListener('click', toggleStressC);
 
   buildResidBar();
   render();
