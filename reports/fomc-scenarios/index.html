@@ -453,8 +453,8 @@
     var mktBp = marketRateBp(price);
     var diffBp = rateBp - mktBp;
     var diffPrice = -diffBp / 100;
-    var dirClass = diffPrice >= 0 ? 'dove' : 'hawk';
-    var dirWord = diffPrice >= 0 ? 'richer than' : 'cheaper than';
+    var dirClass = diffBp >= 0 ? 'hawk' : 'dove';
+    var dirWord = diffBp >= 0 ? 'more hawkish than' : 'more dovish than';
 
     resultsEl.innerHTML =
       '<div class="fv-stat"><div class="label">Implied Rate</div><div class="value">' +
@@ -462,8 +462,8 @@
       '<div class="fv-stat"><div class="label">Fair Value SFRZ7</div><div class="value">' +
         fvPrice.toFixed(3) + '</div></div>' +
       '<div class="fv-stat"><div class="label">Vs. Entered SFRZ7 (' + price.toFixed(2) + ')</div>' +
-        '<div class="value ' + dirClass + '">' + (diffPrice >= 0 ? '+' : '') + diffPrice.toFixed(3) + ' pts</div>' +
-        '<div class="sub">' + (diffBp >= 0 ? '+' : '') + Math.round(diffBp) + 'bp on yield &mdash; fair value is ' +
+        '<div class="value ' + dirClass + '">' + (diffBp >= 0 ? '+' : '') + Math.round(diffBp) + 'bp</div>' +
+        '<div class="sub">' + (diffPrice >= 0 ? '+' : '') + diffPrice.toFixed(3) + ' pts on price &mdash; this mix is ' +
         dirWord + ' the entered print</div></div>';
   }
 
