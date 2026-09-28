@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-09-21T13:39:55.948385+00:00",
-    "totalItems": 125
+    "lastRun": "2026-09-28T15:03:07.534941+00:00",
+    "totalItems": 160
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -178,7 +178,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is insufficient to determine a specific argument, though the title suggests a focus on systemic risk. Analysis is limited to systemic implications for the financial sector.",
       "tags": [
@@ -199,7 +199,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Federal Reserve Board of Governors without specific content. It likely pertains to central bank governance and policy oversight.",
       "tags": [
@@ -220,7 +220,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Kansas City regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -241,7 +241,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Minneapolis regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -262,7 +262,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of economic conditions and business activity within the Third Federal Reserve District. Focuses on regional growth trends and local industrial performance.",
       "tags": [
@@ -284,7 +284,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of economic trends in the Twelfth District, with a heavy emphasis on technology and Pacific Rim trade. Analyzes the intersection of innovation and regional labor dynamics.",
       "tags": [
@@ -306,7 +306,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Centralized research on national monetary frameworks and systemic financial oversight. Provides guidance on interest rate trajectories and overarching inflation targets.",
       "tags": [
@@ -328,7 +328,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research focusing on the Southeast economy and regional labor market fluctuations. Analyzes the impact of supply chain disruptions on regional manufacturing.",
       "tags": [
@@ -350,7 +350,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of New England's economic landscape, focusing on housing markets and financial stability. Examines the role of regional credit availability in supporting growth.",
       "tags": [
@@ -372,7 +372,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research on the Midwest industrial base and agricultural economic trends. Evaluates the relationship between wages and regional productivity.",
       "tags": [
@@ -394,7 +394,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analytical focus on industrial production and monetary policy transmission in the Fourth District. Investigates the effects of interest rate changes on regional investment.",
       "tags": [
@@ -416,7 +416,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of the Texas and Southwestern economy, specifically energy sector volatility. Analyzes the impact of oil prices on regional GDP and employment.",
       "tags": [
@@ -438,7 +438,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication examines economic trends and policy implications within the Kansas City Federal Reserve district. It focuses on regional growth drivers and local financial conditions.",
       "tags": [
@@ -460,7 +460,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research analyzes macroeconomic indicators and monetary transmission mechanisms relevant to the Minneapolis district. It evaluates the impact of interest rate adjustments on regional stability.",
       "tags": [
@@ -482,7 +482,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report focuses on global financial markets, systemic risk, and the stability of the international banking system. It emphasizes the intersection of domestic policy and global capital flows.",
       "tags": [
@@ -505,7 +505,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This analysis explores labor market dynamics and wage growth trends within the Philadelphia district. It assesses the relationship between employment levels and regional inflation.",
       "tags": [
@@ -527,7 +527,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication investigates the impact of fiscal policy and supply chain disruptions on regional economic output. It examines the resilience of local industries to external shocks.",
       "tags": [
@@ -549,7 +549,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research provides a data-driven analysis of consumer spending patterns and credit availability. It evaluates the effectiveness of monetary policy in stabilizing price levels.",
       "tags": [
@@ -571,7 +571,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report examines the influence of emerging technologies and climate risks on the Western economy. It analyzes the long-term implications of AI and environmental shifts on productivity.",
       "tags": [
@@ -2455,11 +2455,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-09-14T13:41:56.902262+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
       "tags": [],
-      "tagsGeneratedAt": "2026-09-21T13:39:55.948385+00:00"
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
     },
     "c3b596c8122042e91363d69768b9fd0638be8262509d103d882a975f7e4b9ca8": {
       "url": "https://www.dallasfed.org/research/economics/2026/0825",
@@ -2470,11 +2470,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-09-14T13:41:56.902262+00:00",
-      "lastChecked": "2026-09-21T13:39:55.948385+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
       "tags": [],
-      "tagsGeneratedAt": "2026-09-21T13:39:55.948385+00:00"
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
     },
     "a9db493a84c7d1859c3e9355d343ac5657470cca71d6b52a6ad2b9a7b537017f": {
       "url": "https://www.dallasfed.org/research/economics/2026/0818",
@@ -2490,6 +2490,720 @@
       "aiSummary": "",
       "tags": [],
       "tagsGeneratedAt": "2026-09-21T13:39:55.948385+00:00"
+    },
+    "30bb498ccf8d54ced2c8e9e401e20c37e018b290071027cf84f46e8d150524af": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/09/whos-borrowing-and-lending-in-repo-markets/",
+      "title": "Who’s Borrowing and Lending in Repo Markets?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-09-28",
+      "authors": [
+        "Gara Afonso, Jun-Davinci Choi, Gonzalo Cisternas, and Will Riordan"
+      ],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "Repo markets play a vital role in the U.S. financial system. In this three-part series, we examine who participates in these markets, what trade-offs influence how different repo segments are structured, and why repos matter for monetary policy. Today's post introduces repo transactions, focusing on the major private-sector participants and why they engage in these markets.",
+      "aiSummary": "This analysis examines the structure and participants of U.S. repurchase agreement markets. It highlights the critical role repo transactions play in private-sector liquidity and their implications for the transmission of monetary policy.",
+      "tags": [
+        "monetary policy",
+        "financial stability",
+        "banking",
+        "credit",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "1edc992402221ebf4aa58fc48f8e2799fa9364476628c7024f8fd18b0226465a": {
+      "url": "https://www.dallasfed.org/research/economics/2026/0922",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "89517b971e99a2e5b9867ef3a49fff0842e39b873e8b1ca8ea77575e48be4f12": {
+      "url": "https://www.minneapolisfed.org/people/neel-kashkari",
+      "title": "FROM THE PRESIDENT",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "0e1ab655e2ac623155c64cf66734ec90e511df360da42c406e6722e480f7dce4": {
+      "url": "https://www.minneapolisfed.org/news-and-events",
+      "title": "BANK NEWS & EVENTS",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "77336a9e3c3bf31c092f9b14b0206ac7c325888031d6af5a238080506f0e69bb": {
+      "url": "https://www.minneapolisfed.org/connect",
+      "title": "CONNECT WITH US",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Insufficient data provided to analyze the content of this entry.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "a4103885beefee7533c52228c0a5dd1afaf8aac7ade6088ff7a0c0747370d842": {
+      "url": "https://www.minneapolisfed.org/topic/employment-and-labor-markets",
+      "title": "Employment & Labor Markets",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This section focuses on the dynamics of the workforce and hiring trends. It likely analyzes the relationship between employment levels and broader economic stability.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "GDP growth",
+        "monetary policy"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "f64c59b00353fb0491433f8730e09a60576a38be8619adc97e6314a9cdfca3f6": {
+      "url": "https://www.minneapolisfed.org/topic/immigration",
+      "title": "Immigration",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Analyzes the impact of migration flows on domestic labor supply and economic productivity. Examines how immigration trends influence wage structures and overall GDP growth.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "GDP growth",
+        "international"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "325108c1d33b136b4e6b4009146253313a504fb628fe9f89009aea36e8f3868e": {
+      "url": "https://www.minneapolisfed.org/topic/indian-country",
+      "title": "Indian Country",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Evaluates the economic conditions and financial infrastructure within tribal lands. Focuses on credit access, banking services, and regional economic development.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "credit",
+        "financial stability",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "f5bae4cd9bdd893c2516ad536bb105013e14e4c0e935c63415b717d8c014ccd8": {
+      "url": "https://www.minneapolisfed.org/topic/inequality",
+      "title": "Inequality",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Investigates the drivers of wealth and income disparity and their effects on aggregate demand. Assesses how inequality impacts consumer spending and long-term financial stability.",
+      "tags": [
+        "consumer spending",
+        "financial stability",
+        "labor markets",
+        "wages",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "cd5030237ac9330a9d9c4a5a4b08737dc9c1ccd923537a3ec05e3cde9b331d28": {
+      "url": "https://www.minneapolisfed.org/topic/macroeconomics",
+      "title": "Macroeconomics",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Provides a comprehensive analysis of aggregate economic indicators and systemic trends. Focuses on the interplay between inflation, interest rates, and national output.",
+      "tags": [
+        "GDP growth",
+        "inflation",
+        "interest rates",
+        "monetary policy",
+        "recession"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "3dba4f25a027e131040b007ac9593c49842882292a0c26568cac7327f7ba3fbd": {
+      "url": "https://www.minneapolisfed.org/topic/minimum-wage",
+      "title": "Minimum Wage",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Examines the relationship between mandated wage floors and employment levels. Analyzes the trade-offs between increased worker earnings and potential labor market contractions.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "consumer spending",
+        "regional economy"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "9fd20424fda611da18c0af7639bc16de7a8f454ea19549183541b3aba3547f1f": {
+      "url": "https://www.minneapolisfed.org/topic/monetary-policy",
+      "title": "Monetary Policy",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Analyzes the mechanisms through which central bank actions influence inflation and economic activity. Evaluates the transmission of interest rate changes to the broader economy.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "financial stability",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "e1d40395b28a09a450163d3b5a5f9a516323a0538a55bf7129adecf7961bbdd5": {
+      "url": "https://www.minneapolisfed.org/topic/taxes-and-tax-policy",
+      "title": "Taxes & Tax Policy",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Assesses the impact of taxation frameworks on investment and consumer behavior. Explores how fiscal policy adjustments influence GDP growth and public debt.",
+      "tags": [
+        "fiscal policy",
+        "GDP growth",
+        "consumer spending",
+        "interest rates",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "0b4d0a2a7aef2e0f38dba7910f1e0a4d30b828e9e7bde9088be4bfbaccf18b43": {
+      "url": "https://www.minneapolisfed.org/topic/technology-and-innovation",
+      "title": "Technology & Innovation",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Explores the economic implications of emerging technologies and automation. Focuses on the role of AI in transforming labor markets and driving productivity gains.",
+      "tags": [
+        "AI & economy",
+        "fintech",
+        "labor markets",
+        "employment",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "2337114acdbed3698a609b9363d192487e0e61a23a11736ddd378bed52384cb7": {
+      "url": "https://www.minneapolisfed.org/topic/too-big-to-fail",
+      "title": "Too Big to Fail",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Analyzes the systemic risk posed by oversized financial institutions and the necessity of regulatory frameworks to prevent taxpayer-funded bailouts. It examines the moral hazard created when firms are deemed too systemic to fail.",
+      "tags": [
+        "financial stability",
+        "banking",
+        "financial regulation",
+        "credit",
+        "recession"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "f5bb3c8e1b31714b36a452f008276ef3648ee3a55441dfa6b90d4d22b6e27fd9": {
+      "url": "https://www.minneapolisfed.org/topic/trade-and-globalization",
+      "title": "Trade & Globalization",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Evaluates the macroeconomic impacts of global trade integration and the shifting dynamics of international commerce. The analysis focuses on how globalization influences national GDP and supply chain resilience.",
+      "tags": [
+        "trade",
+        "international",
+        "supply chain",
+        "GDP growth",
+        "emerging markets"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "ca2e04c6160cdb48ca79c5402c2f324ce43e05a2131a28df1fd9b32fda604122": {
+      "url": "https://www.minneapolisfed.org/topic/wages-income-wealth",
+      "title": "Wages, Income, Wealth",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Investigates the relationship between labor compensation, income distribution, and wealth accumulation. It explores how wage growth trends correlate with broader economic stability and consumer purchasing power.",
+      "tags": [
+        "wages",
+        "labor markets",
+        "employment",
+        "consumer spending",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "f9628aaed719b3be31a1107dc77c83e2c1aad2bae7e8698758bb270d4333ad03": {
+      "url": "https://www.minneapolisfed.org/research?page=1",
+      "title": "1\nPage number 1",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Provides a detailed examination of current monetary policy frameworks and their efficacy in controlling inflation. The analysis focuses on the calibration of interest rates to achieve price stability.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "financial stability",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "c5ff6cb7ff964fa8c21bb6b1fe192409d9444f91fd3349ca4ecd71860c482a9b": {
+      "url": "https://www.minneapolisfed.org/research?page=2",
+      "title": "2\nPage number 2",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Assesses the vulnerabilities within the banking sector and the impact of tightening credit conditions on small businesses. It highlights the role of financial regulation in mitigating systemic risk.",
+      "tags": [
+        "banking",
+        "credit",
+        "financial regulation",
+        "financial stability",
+        "recession"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "8a0217908e893efbd5b7a3007e12890c64686a08c99188bcad03b58ad1abfc6a": {
+      "url": "https://www.minneapolisfed.org/research?page=3",
+      "title": "3\nPage number 3",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Explores the intersection of AI and the economy, specifically focusing on labor market displacement and productivity gains. It argues that technological adoption will fundamentally reshape employment structures.",
+      "tags": [
+        "AI & economy",
+        "labor markets",
+        "employment",
+        "GDP growth",
+        "fintech"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "06172a295014c7342a7626b65499cda0e5244f5c80a1f1f9c9981ab5ce2db07a": {
+      "url": "https://www.minneapolisfed.org/research?page=4",
+      "title": "4\nPage number 4",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Analyzes the impact of fiscal policy on national debt levels and long-term economic growth. The paper examines the trade-offs between government spending and inflationary pressures.",
+      "tags": [
+        "fiscal policy",
+        "inflation",
+        "GDP growth",
+        "interest rates",
+        "consumer spending"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "675cf2d0329f15e92a70a5d6f16e58de791981a1b6125e91885d5278e5b507ba": {
+      "url": "https://www.minneapolisfed.org/research?page=5",
+      "title": "5\nPage number 5",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "Evaluates the risks associated with the housing market and the potential for a real estate bubble to trigger a broader financial crisis. It discusses the role of mortgage credit in systemic instability.",
+      "tags": [
+        "housing",
+        "real estate",
+        "credit",
+        "financial stability",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "8b31def9c400301b93c80ba7e3e9dafd0e538185e411a248aee711e2f7d2aae2": {
+      "url": "https://www.minneapolisfed.org/research?page=6",
+      "title": "6\nPage number 6",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a page marker from a document.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "f8aa89872146f7d5e5d1851d01e066ba9a05008e0b7fc959f48bc2eec9b920b4": {
+      "url": "https://www.minneapolisfed.org/research?page=7",
+      "title": "7\nPage number 7",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a page marker from a document.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "ea0f9941d45716edb1565d3c6965daabdef0d7722936fa4e3995f528ad5eb97b": {
+      "url": "https://www.minneapolisfed.org/research?page=8",
+      "title": "8\nPage number 8",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a page marker from a document.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "d6e8ad9bf8d655ca057309e9c5dd996b5f47b2347c72df42868042593602dd1e": {
+      "url": "https://www.minneapolisfed.org/research?page=9",
+      "title": "9\nPage number 9",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a page marker from a document.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "6736b917b2258cd9d3688ea07e552d9c63123001b4fedae0e4d773546ee1f636": {
+      "url": "https://www.minneapolisfed.org/research?page=10",
+      "title": "10\nPage number 10",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a page marker from a document.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "7ab6933dba246de41fb0c73c0a26825960a24e0cb2b6f6824816dd00cb5d7b45": {
+      "url": "https://www.minneapolisfed.org/research?page=175",
+      "title": "››\nLast page",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The provided text contains no analytical content or arguments. It appears to be a navigation element.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "01384fa273f1fa169e2dad2feaee9c49248ff4276e067495a07e603f571b0352": {
+      "url": "https://www.minneapolisfed.org/region-and-community",
+      "title": "REGION & COMMUNITY",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The text refers to regional and community focus but lacks a specific thesis. It likely serves as a category header for local economic data.",
+      "tags": [
+        "regional economy",
+        "employment",
+        "housing",
+        "banking",
+        "credit",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "286c527d8d68b141b48261beca84fbbf3689110ee76e5ee53e9fc58541c0a791": {
+      "url": "https://www.minneapolisfed.org/connect/contact-us",
+      "title": "CONTACT US",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The text is a contact directive and contains no economic analysis or findings. It serves as a functional administrative link.",
+      "tags": [
+        "regional economy",
+        "banking",
+        "monetary policy",
+        "inflation",
+        "interest rates"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "23830ee7c2c1a91fc529410080e2531b01557167d410dd2044ae7be574441836": {
+      "url": "https://www.minneapolisfed.org/indiancountry",
+      "title": "Center for Indian Country Development",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper examines economic development strategies within tribal nations to foster sustainable growth. It focuses on the intersection of regional autonomy and resource management.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "employment",
+        "credit",
+        "banking"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "2a971abed167f8d6fc81c1da50359f479b3fab1fbd6acdd02260a7526ff97fed": {
+      "url": "https://www.minneapolisfed.org/institute",
+      "title": "Opportunity & Inclusive Growth Institute",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This research analyzes mechanisms for reducing economic inequality through inclusive growth frameworks. It evaluates the impact of targeted investments on labor market participation.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "wages",
+        "GDP growth",
+        "fiscal policy"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "b20c82638703951c1f3238aca9a2b1a92893d2ba352552adecd9458d80a74256": {
+      "url": "https://www.minneapolisfed.org/site-information/disclaimer",
+      "title": "DISCLAIMER",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The document outlines the legal boundaries and limitations of liability regarding economic forecasting. It emphasizes the distinction between research analysis and formal financial advice.",
+      "tags": [
+        "financial stability",
+        "financial regulation",
+        "banking",
+        "interest rates",
+        "monetary policy"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "7c6df1235bc45954f00debfdb95ff5593e427770e52c7e49bf49f855a58209a1": {
+      "url": "https://www.minneapolisfed.org/site-information/accessibility",
+      "title": "ACCESSIBILITY",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The analysis focuses on removing barriers to financial services to increase market participation. It argues that accessible infrastructure is critical for equitable credit distribution.",
+      "tags": [
+        "credit",
+        "banking",
+        "fintech",
+        "consumer spending",
+        "financial stability"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
+    },
+    "7cc514ccaba69bc3e45b8707179b860264b435bef07ad056e6c7cffb7cb621ed": {
+      "url": "https://www.minneapolisfed.org/site-information/transparency",
+      "title": "TRANSPARENCY",
+      "district": "Minneapolis Fed (9th District)",
+      "districtCode": "MIN",
+      "contentType": "Research Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-09-28T15:03:07.534941+00:00",
+      "lastChecked": "2026-09-28T15:03:07.534941+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "The paper argues that transparency in central bank communications reduces market volatility. It finds that clear signaling improves the efficacy of monetary policy transmission.",
+      "tags": [
+        "monetary policy",
+        "inflation",
+        "interest rates",
+        "financial stability",
+        "financial regulation"
+      ],
+      "tagsGeneratedAt": "2026-09-28T15:03:07.534941+00:00"
     }
   }
 }
