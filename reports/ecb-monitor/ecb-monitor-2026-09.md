@@ -1,31 +1,34 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — September 2026 (Month to Date)
 
-**Coverage Period:** Month to date: September 2026 (22 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: September 2026 (23 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
 **To: Investment Team**
-**From: Senior Eurozone Economist**
-**Date: September 29, 2026**
-**Subject: Critical Analysis of Recent ECB/NCB Research**
+**From: Senior Economist (Eurozone)**
+**Date: September 30, 2026**
+**Subject: Analysis of Recent ECB and NCB Research Publications**
 
-I have filtered the recent output from the ECB and National Central Banks. While there is significant noise regarding AI and payment systems, the following publications provide the most critical analytical levers for our current macro and policy positioning.
+I have reviewed the latest research cycle from the ECB and national central banks. While there is a heavy emphasis on technical forecasting and AI, several papers provide critical insights into the structural transmission of monetary policy and the evolving risk landscape of the Eurozone.
 
-1. **[ECB] Endogenous monetary policy effectiveness:** This research questions the symmetry of policy transmission, suggesting that the impact of rate hikes versus cuts varies across the policy cycle. For us, this implies that the "normalization" phase may not unwind the economy as predictably as the tightening phase constrained it, necessitating a more nuanced approach to our growth forecasts.
+The following publications are the most analytically significant for our current positioning:
 
-2. **[DBB] On looking through sectoral shocks: The role of (de-)anchored inflation expectations:** This paper analyzes when the ECB can ignore temporary sectoral price spikes versus when they risk triggering a broader inflation spiral. This is vital for our inflation targeting models, as it helps us predict whether the Governing Council will "look through" current energy or service volatility or pivot to a more hawkish stance.
+1. **[ECB] Monetary policy transmission by securitising banks (Paper 6):** This research demonstrates that banks active in securitization adjust their lending behavior differently in response to policy shifts compared to traditional hold-to-maturity banks. For us, this means the "pass-through" of ECB rate changes is not uniform across the banking sector, potentially creating pockets of credit resilience or vulnerability depending on a bank's balance sheet structure.
 
-3. **[ECB] The impact of macroprudential policy fragmentation on corporate lending:** By introducing a novel index for capital buffer fragmentation, the ECB acknowledges that national-level regulatory differences still distort credit flow. This suggests that "Eurozone-wide" monetary policy is still hitting a fragmented banking wall, which may lead to divergent credit conditions between the Core and Periphery.
+2. **[ECB] The impact of macroprudential policy fragmentation on corporate lending (Paper 9):** The authors introduce a novel index showing that divergent capital buffer requirements across member states are creating "fragmentation" in corporate lending. This suggests that the "Single Market" for credit is still a myth; credit availability for firms is being driven more by national regulatory idiosyncrasies than by aggregate Eurozone monetary policy.
 
-4. **[ECB] Monetary policy transmission by securitising banks:** The finding that banks active in securitization adjust their lending behavior differently in response to policy changes is a key nuance for our credit outlook. It suggests that the transmission of ECB rates to the real economy is filtered through the balance sheet structure of the banks, potentially cushioning the blow for certain corporate sectors.
+3. **[DBB] Carbon pricing, trade and the natural rate (Paper 10):** This paper explores how the transition to a green economy and carbon pricing affects the $r^*$ (natural rate of interest). If carbon pricing structurally alters investment patterns and productivity, the ECB may be forced to calibrate its long-term neutral rate higher or lower than historical averages, fundamentally changing our terminal rate projections.
 
-5. **[DBB] Carbon pricing, trade and the natural rate:** This research links the green transition directly to the $r^*$ (natural rate of interest). If carbon pricing structurally alters the neutral rate, the ECB’s "long-run" target for interest rates may be shifting, which has profound implications for our long-end bond pricing and equity valuation models.
+4. **[ECB] Endogenous monetary policy effectiveness (Paper 19):** The study finds that the impact of policy tightenings and loosenings is asymmetric and varies across the policy cycle. This is a critical warning for our models: the "multiplier" of an ECB rate hike in a restrictive environment may be significantly different from a cut in an accommodative one, suggesting we should avoid linear projections for policy impact.
 
-6. **[ECB] Inflation narratives and risk premia:** By using narratives to measure whether supply or demand shocks are perceived to dominate, the ECB is refining how it views inflation risk premia. This indicates a shift toward "narrative-driven" policy, meaning we must monitor ECB communication more closely for specific keywords regarding "supply" vs "demand" to anticipate policy pivots.
+5. **[ECB] Inflation narratives and risk premia (Paper 8):** By analyzing whether markets perceive inflation as supply-driven or demand-driven, this paper links "narratives" to actual risk premia in bond yields. This implies that the *source* of inflation (e.g., energy shocks vs. wage growth) matters as much as the *level* of inflation for pricing the long end of the sovereign curve.
 
-**Synthesis:** The research indicates a shift toward "non-linear" thinking, where the ECB is increasingly concerned with the asymmetry of policy transmission and the structural impact of the green transition on the neutral rate. We should move away from simple point-forecast models and incorporate more risk-weighted scenarios that account for regulatory fragmentation and narrative-driven policy shifts.
+6. **[ECB] Out with the new, in with the old? Supranational bank supervision and the composition of firm investment (Paper 11):** This examines how the Single Supervisory Mechanism (SSM) has shifted the types of firms receiving credit. It suggests that centralized supervision may be inadvertently favoring established firms over innovative ones, which could act as a drag on Eurozone productivity growth in the medium term.
+
+**Synthesis:**
+The research indicates that the "transmission mechanism" is increasingly fragmented, both by bank business models and national macroprudential rules, making a "one-size-fits-all" policy impact unlikely. Furthermore, the integration of carbon pricing and asymmetric policy effectiveness suggests that the ECB's path to a neutral rate will be more volatile and structurally complex than previously modeled.
 
 ---
 
@@ -145,7 +148,14 @@ This study analyzes the impact of government spending shocks on private consumpt
 **Tags:** fiscal policy · consumer spending · GDP growth · trade · inflation
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 6
+**Content Type:** Discussion Papers | **New:** 0 of 7
+
+### (cached) [The macroeconomics of stablecoins | Boris Hofmann, Matthias Kaldorf, Matthias Rottner](https://www.bundesbank.de/en/publications/research/discussion-papers/the-macroeconomics-of-stablecoins-1008308)
+**Published:** 2026-09-30 | **Authors:** 
+
+The paper analyzes the macroeconomic implications of stablecoins, focusing on their potential impact on monetary sovereignty and the transmission of monetary policy. It examines how these digital assets could influence the demand for central bank money and the stability of the financial system.
+
+**Tags:** monetary policy · financial stability · payments · digital euro · banking
 
 ### (cached) [Safe haven status and international shock transmission | Stefan Hasenclever, Benedikt Kolb](https://www.bundesbank.de/en/publications/research/discussion-papers/safe-haven-status-and-international-shock-transmission-933862)
 **Published:** 2026-09-29 | **Authors:** 
@@ -193,5 +203,5 @@ The paper examines how the design and methodology of the Survey of Professional 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 22
-- Total cache size: 22 items
+- Already cached: 23
+- Total cache size: 23 items
