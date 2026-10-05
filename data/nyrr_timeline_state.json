@@ -1,7 +1,7 @@
 {
-  "hash": "cdddeed6abcd527f6512c614fb962e036084d9676b40a790f49909b0403c0f2a",
-  "content": "Race Registration Launch Timeline\nJanuary-March 2027 Races\nPlease note: All information is subject to change.\nJanuary-March 2027 races will open for registration at 12:00 p.m. ET on the following dates:\nWednesday, October 14: Advance registration for adult races opens to all members. Registration to youth races opens to the public.\nFriday, October 16: General registration opens to the public for adult races.\nPlease note: 9+1 program credit at eligible races is available only to registered 2027 9+1 Passholders.\nJanuary- March 2027 Adult Races\nPlease note: All information is subject to change.\nEVENT\nEVENT DATE\nNYRR Joe Kleinerman 10K\nJanuary 9, 2027\nNYRR Fred Lebow Half\nJanuary 24, 2027\nNYRR Manhattan 10K\nJanuary 31, 2027\nNYRR Gridiron 4M Presented by The FLAG Art Foundation\nFebruary 7, 2027\nNYRR BK 5K\nFebruary 20, 2027\nNYRR Al Gordon 5K\nFebruary 27, 2027\nNYRR Washington Heights Salsa, Blues, and Shamrocks 5K\nMarch 7, 2027\nJanuary- March 2027 Youth Events\nPlease note: All information is subject to change.\nEVENT\nEVENT DATE\nRising NYRR at the NYRR Washington Heights Salsa, Blues, and Shamrocks 5K - Stages 1, 2, and 3\nMarch 7, 2027\nTimes Square Kids Run at the United Airlines NYC Half – Stages 1, 2, and 3\nMarch 21, 2027\nFAQs\nLearn more about how to register for multiple races, update payment method, and more.\nRead Our FAQs",
-  "last_changed": "2026-10-02T16:26:28.017448+00:00",
+  "hash": "852afdaf7f55e215180f822fd86302884bf7f0e4f956997a7c212af29af04bb7",
+  "content": "Race Registration Launch Timeline\nJanuary-March 2027 Races\nPlease note: All information is subject to change.\nJanuary-March 2027 races will open for registration at 12:00 p.m. ET on the following dates:\nWednesday, October 14: Advance registration for adult races opens to all members. Registration to youth races opens to the public.\nFriday, October 16: General registration opens to the public for adult races.\nPlease note: 9+1 program credit at eligible races is available only to registered 2027 9+1 Passholders.\nJanuary- March 2027 Adult Races\nPlease note: All information is subject to change.\nEVENT\nEVENT DATE\nNYRR Joe Kleinerman 10K\nJanuary 9, 2027\nNYRR Fred Lebow Half\nJanuary 24, 2027\nNYRR Manhattan 10K*\nJanuary 31, 2027\nNYRR Gridiron 4M Presented by The FLAG Art Foundation\nFebruary 7, 2027\nNYRR BK 5K\nFebruary 20, 2027\nNYRR Al Gordon 5K\nFebruary 27, 2027\nNYRR Washington Heights Salsa, Blues, and Shamrocks 5K\nMarch 7, 2027\n*If you received a deferral from the 2025 NYRR Manhattan 10K, you will be able to claim your guaranteed entry on October 14, 2026 at 12:00 p.m. ET and have until October 21, 2026 at 11:59 p.m. ET.\nJanuary- March 2027 Youth Events\nPlease note: All information is subject to change.\nEVENT\nEVENT DATE\nRising NYRR at the NYRR Washington Heights Salsa, Blues, and Shamrocks 5K - Stages 1, 2, and 3\nMarch 7, 2027\nTimes Square Kids Run at the United Airlines NYC Half – Stages 1, 2, and 3\nMarch 21, 2027\nFAQs\nLearn more about how to register for multiple races, update payment method, and more.\nRead Our FAQs",
+  "last_changed": "2026-10-05T19:39:19.752764+00:00",
   "changelog": [
     {
       "date": "2026-05-19",
@@ -62,6 +62,11 @@
       "date": "2026-10-02",
       "summary": "Timeline page updated",
       "diff": "Added:\n  + Please note: 9+1 program credit at eligible races is available only to registered 2027 9+1 Passholders.\n\nRemoved:\n  - Please note: 9+1 credit only applies to 9+1 Passholders. 9+1 program credit at eligible races is available only to registered 2027 9+1 Passholders.\n"
+    },
+    {
+      "date": "2026-10-05",
+      "summary": "Timeline page updated",
+      "diff": "Added:\n  + NYRR Manhattan 10K*\n\n  + *If you received a deferral from the 2025 NYRR Manhattan 10K, you will be able to claim your guaranteed entry on October 14, 2026 at 12:00 p.m. ET and have until October 21, 2026 at 11:59 p.m. ET.\n\nRemoved:\n  - NYRR Manhattan 10K\n"
     }
   ]
 }
