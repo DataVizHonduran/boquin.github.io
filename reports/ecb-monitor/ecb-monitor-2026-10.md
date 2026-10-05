@@ -1,32 +1,54 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — October 2026 (Month to Date)
 
-**Coverage Period:** Month to date: October 2026 (4 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: October 2026 (6 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-To: Investment Team
-From: Senior Eurozone Economist
-Date: October 4, 2026
-Subject: Analysis of Recent Central Bank Research
+**To: Investment Team**
+**From: Senior Eurozone Economist**
+**Date: October 5, 2026**
+**Subject: Analysis of Recent ECB/NCB Research Publications**
 
-Below are the most analytically significant findings from the recent ECB and national central bank publication cycle.
+I have reviewed the latest research output from the Eurosystem. While some papers are purely methodological, several provide critical insights into the ECB’s evolving toolkit for managing inflation and assessing the real economy. Here are the most analytically significant publications:
 
-1. **[ECB] How firms plan to finance AI investment (SAFE):** This research provides empirical evidence on the funding mechanisms for AI adoption, highlighting whether firms are relying on internal cash flows or external debt. Understanding this is critical for our credit outlook, as a shift toward external financing would increase corporate sensitivity to the ECB's terminal rate.
+1. **Understanding inflation: insights from the term structure of inflation risks [ECB]**
+This paper evaluates the predictive power of zero-coupon inflation caps to gauge market-implied inflation expectations. For our team, this is vital as it suggests the ECB is looking beyond point-estimate forecasts toward the *distribution* of risks, which will likely dictate the aggressiveness of their terminal rate path.
 
-2. **[ECB] Monetary policy surprises with imperfect information:** The paper argues that high-frequency market moves following central bank announcements often reflect "information shocks" (new data) rather than "policy shocks" (unexpected intent). This suggests we should be cautious in using high-frequency data to gauge the ECB's actual policy pivot, as market volatility may simply be a reaction to the ECB's superior data visibility.
+2. **Monetary policy surprises with imperfect information [ECB]**
+The research argues that high-frequency market reactions to central bank announcements often reflect "information shocks" (the bank revealing new data) rather than "policy shocks" (a change in stance). This warns us against over-interpreting immediate market volatility following ECB meetings, as the move may be a reaction to the ECB's private data rather than a shift in the policy trajectory.
 
-3. **[ECB] Forecasting wages with local linear forests (LLF):** By applying LLF to French wage data and outperforming traditional ridge regressions, the ECB is signaling a move toward more sophisticated, non-linear ML models for inflation forecasting. This suggests the ECB may be becoming more precise in identifying "wage-price spiral" risks, potentially making them more proactive in their restrictive stance if LLF models signal a wage breakout.
+3. **How firms plan to finance AI investment—evidence from the SAFE [ECB]**
+Utilizing the Survey on the Access to Finance of Enterprises (SAFE), this study identifies the funding mechanisms firms are employing for the AI transition. This is a key lead indicator for credit demand; if AI investment is shifting from internal funds to external debt, we should expect a floor under loan demand despite restrictive rates.
 
-4. **[DBB] Modified X-11 seasonal adjustments for complex seasonality:** While technical, this Deutsche Bundesbank research aims to reduce noise in time series data with irregular seasonal patterns. For our team, this means official German macro indicators may soon be subject to revised adjustments, which could alter the perceived trend of the Eurozone's largest economy in the short term.
+4. **Forecasting wages with local linear forests [ECB]**
+By applying machine learning (LLF) to French wage data, the ECB is improving its ability to predict nominal wage growth, which remains the "last mile" of the inflation fight. More accurate wage forecasting reduces the risk of a policy overshoot, potentially allowing for a more dovish pivot if the model shows wage pressures peaking earlier than traditional models suggest.
 
-**Synthesis:** The ECB is increasingly leveraging machine learning and refined data filtering to manage the "last mile" of inflation and AI-driven productivity shifts. Simultaneously, they are cautioning that market reactions to policy announcements are often misread, suggesting a potential disconnect between market expectations and actual policy intent.
+5. **ECB monetary policy transmission to unilaterally euroised economies [ECB]**
+This examines how policy spillovers affect non-EU economies like Montenegro and Kosovo. While geographically peripheral, this research is analytically significant for understanding the "euro-shadow" and how the currency's external stability is impacted by the ECB's balance sheet adjustments.
+
+**Synthesis:**
+The ECB is increasingly integrating machine learning and market-implied risk distributions to refine its forecasting of wages and inflation. Simultaneously, they are cautioning against a naive reading of market surprises, suggesting a more nuanced, data-dependent communication strategy moving forward.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 3
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 5
+
+### (cached) [Understanding inflation: insights from the term structure of inflation risks](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3294~343f6d6c31.en.pdf)
+**Published:** 2026-10-05 | **Authors:** 
+
+The paper develops a non-parametric methodology using inflation caps and floors to estimate risk-neutral densities across various horizons. It analyzes the term structure of inflation risks to better understand the dynamics of price stability.
+
+**Tags:** inflation · monetary policy · eurozone
+
+### (cached) [ECB monetary policy transmission to unilaterally euroised economies](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3293~a7c6243bcc.en.pdf)
+**Published:** 2026-10-05 | **Authors:** 
+
+This study utilizes a structural VAR model to analyze how ECB monetary policy shocks spill over into unilaterally euroised economies like Montenegro and Kosovo. It finds that such policies significantly impact output and inflation, though the transmission is characterized by a delayed response.
+
+**Tags:** monetary policy · inflation · GDP growth · eurozone · exchange rates
 
 ### (cached) [How firms plan to finance AI investment- evidence from the SAFE](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20261002~7e82912ad5.en.html)
 **Published:** 2026-10-02 | **Authors:** 
@@ -63,5 +85,5 @@ The author discusses methodological refinements to the X-11 seasonal adjustment 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 4
-- Total cache size: 4 items
+- Already cached: 6
+- Total cache size: 6 items
