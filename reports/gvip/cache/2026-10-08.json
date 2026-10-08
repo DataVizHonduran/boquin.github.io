@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-08",
+  "holdings_as_of": "2026-10-08",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 2.58,
+      "shares": 23784
+    },
+    {
+      "rank": 2,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "weight": 2.56,
+      "shares": 20741
+    },
+    {
+      "rank": 3,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.51,
+      "shares": 87388
+    },
+    {
+      "rank": 4,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.31,
+      "shares": 28696
+    },
+    {
+      "rank": 5,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.28,
+      "shares": 20796
+    },
+    {
+      "rank": 6,
+      "ticker": "INTC",
+      "name": "Intel Corporation",
+      "weight": 2.24,
+      "shares": 119359
+    },
+    {
+      "rank": 7,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.23,
+      "shares": 39990
+    },
+    {
+      "rank": 8,
+      "ticker": "ECHO",
+      "name": "EchoStar Corporation",
+      "weight": 2.23,
+      "shares": 133140
+    },
+    {
+      "rank": 9,
+      "ticker": "VST",
+      "name": "Vistra Corp.",
+      "weight": 2.22,
+      "shares": 82591
+    },
+    {
+      "rank": 10,
+      "ticker": "WBD",
+      "name": "Warner Bros. Discovery, Inc.",
+      "weight": 2.21,
+      "shares": 426654
+    },
+    {
+      "rank": 11,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 2.2,
+      "shares": 12591
+    },
+    {
+      "rank": 12,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.18,
+      "shares": 24696
+    },
+    {
+      "rank": 13,
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "weight": 2.17,
+      "shares": 54336
+    },
+    {
+      "rank": 14,
+      "ticker": "AMAT",
+      "name": "Applied Materials, Inc.",
+      "weight": 2.14,
+      "shares": 24122
+    },
+    {
+      "rank": 15,
+      "ticker": "TLN",
+      "name": "Talen Energy Corporation",
+      "weight": 2.1,
+      "shares": 33727
+    },
+    {
+      "rank": 16,
+      "ticker": "NU",
+      "name": "Nu Holdings Ltd.",
+      "weight": 2.1,
+      "shares": 803301
+    },
+    {
+      "rank": 17,
+      "ticker": "SNOW",
+      "name": "Snowflake Inc.",
+      "weight": 2.09,
+      "shares": 37195
+    },
+    {
+      "rank": 18,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.08,
+      "shares": 33597
+    },
+    {
+      "rank": 19,
+      "ticker": "SNDK",
+      "name": "Sandisk Corporation",
+      "weight": 2.07,
+      "shares": 7455
+    },
+    {
+      "rank": 20,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.06,
+      "shares": 6633
+    },
+    {
+      "rank": 21,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.06,
+      "shares": 35370
+    },
+    {
+      "rank": 22,
+      "ticker": "LRCX",
+      "name": "Lam Research Corporation",
+      "weight": 2.05,
+      "shares": 36810
+    },
+    {
+      "rank": 23,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.05,
+      "shares": 24273
+    },
+    {
+      "rank": 24,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.03,
+      "shares": 21490
+    },
+    {
+      "rank": 25,
+      "ticker": "ASML",
+      "name": "ASML Holding N.V.",
+      "weight": 2.03,
+      "shares": 6635
+    }
+  ],
+  "performance": {
+    "price": 171.06,
+    "aum": 569020992,
+    "ret_1m": -0.84,
+    "ret_3m": -3.5,
+    "ret_ytd": 9.51,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 10165,
+    "as_of": "2026-10-08"
+  },
+  "sectors": {
+    "realestate": 1.44,
+    "consumer_cyclical": 10.98,
+    "technology": 34.24,
+    "communication_services": 14.65,
+    "financial_services": 13.63,
+    "utilities": 3.78,
+    "industrials": 12.94,
+    "healthcare": 8.35
+  }
+}
