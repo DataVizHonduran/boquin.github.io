@@ -25,20 +25,27 @@ jobs:
       - name: Generate chart
         run: |
           mkdir -p reports/chess-club
-          python scripts/chess_club_stats.py \
-            --school PS11 --x ck_rating --y uscf_rating \
+          # PS11's page may be password-gated upstream (ICN has been locking
+          # school pages down) — don't hard-fail the whole Action on that,
+          # just skip the update and leave the last good chart in place.
+          if python scripts/chess_club_stats.py \
+            --school PS11 --slug ps11chessclubandteamstats --x ck_rating --y uscf_rating \
             --min-x 900 --z-thresh 1.5 \
-            --out reports/chess-club/fragment.html
-          {
-            echo '<!DOCTYPE html>'
-            echo '<html lang="en"><head><meta charset="UTF-8">'
-            echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-            echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>♟️</text></svg>">'
-            echo '</head><body style="margin:0;background:#fcfcfb;">'
-            cat reports/chess-club/fragment.html
-            echo '</body></html>'
-          } > reports/chess-club/index.html
-          rm reports/chess-club/fragment.html
+            --out reports/chess-club/fragment.html; then
+            {
+              echo '<!DOCTYPE html>'
+              echo '<html lang="en"><head><meta charset="UTF-8">'
+              echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+              echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>♟️</text></svg>">'
+              echo '</head><body style="margin:0;background:#fcfcfb;">'
+              cat reports/chess-club/fragment.html
+              echo '</body></html>'
+            } > reports/chess-club/index.html
+            rm reports/chess-club/fragment.html
+          else
+            echo "::warning::PS11 data fetch failed (likely password-gated upstream) — leaving existing chart in place."
+            rm -f reports/chess-club/fragment.html
+          fi
 
       - name: Commit and push
         run: |

@@ -2,16 +2,23 @@
 Impact Coaching Network chess-club roster stats: fetch, regression, scatter chart.
 
 Data source: each school's public stats page (impactcoachingnetwork.org/<slug>)
-embeds an iframe pointing at
-    https://icnadmin2.com/icnroster/ck_data_<SCHOOL>.html
-which is a bare HTML table, no API/auth needed. This module fetches that table,
-parses it, fits a linear regression between any two numeric columns with
-single-pass outlier trimming, and renders a self-contained interactive
-scatter+regression-band HTML chart (dataviz-skill styled, light/dark aware).
+embeds an iframe pointing at a bare HTML table at icnadmin2.com. As of ~Oct
+2026 that URL is NOT a predictable `ck_data_<SCHOOL>.html` anymore — it's
+`ck_data_<SCHOOL>_<random-token>.html`, a different opaque token per school,
+so the data URL must be resolved by fetching the school's public page and
+reading the iframe `src` fresh each run (see resolve_data_url). Some school
+pages are also now Squarespace password-protected (HTTP 401, title "...
+Secure") — that's a real access restriction, not fetchable without the
+password.
+
+This module fetches that table, parses it, fits a linear regression between
+any two numeric columns with single-pass outlier trimming, and renders a
+self-contained interactive scatter+regression-band HTML chart (dataviz-skill
+styled, light/dark aware).
 
 CLI:
-    python3 chess_club_stats.py --school PS11 --x ck_rating --y uscf_rating \
-        --min-x 900 --z-thresh 1.5 --out /tmp/chart.html
+    python3 chess_club_stats.py --slug ps11chessclubandteamstats --school PS11 \
+        --x ck_rating --y uscf_rating --min-x 900 --z-thresh 1.5 --out /tmp/chart.html
 
 Columns available (order matches the source table):
     name, grade, ck_rating, puzzles_correct, puzzles_attempted, plw,
@@ -27,7 +34,34 @@ import math
 import re
 import urllib.request
 
-DATA_URL_TMPL = "https://icnadmin2.com/icnroster/ck_data_{school}.html"
+PAGE_URL_TMPL = "https://impactcoachingnetwork.org/{slug}"
+
+
+class PasswordProtectedError(Exception):
+    """Raised when a school's public stats page is Squarespace password-gated."""
+
+
+def resolve_data_url(slug: str) -> str:
+    """Fetch the school's public page and pull the live (tokenized) data URL
+    out of its iframe src. Raises PasswordProtectedError if the page itself
+    is gated (HTTP 401 / Squarespace "Secure" page)."""
+    url = PAGE_URL_TMPL.format(slug=slug)
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        if e.code == 401:
+            raise PasswordProtectedError(
+                f"{url} is password-protected (HTTP 401) — can't fetch without the password."
+            ) from e
+        raise
+    if "Impact Coaching Network &mdash; Secure" in html or "Impact Coaching Network — Secure" in html:
+        raise PasswordProtectedError(f"{url} is password-protected (Squarespace gate).")
+    m = re.search(r'<iframe[^>]*src\s*=\s*["\']([^"\']*ck_data_[^"\']*)["\']', html)
+    if not m:
+        raise RuntimeError(f"No ck_data iframe found on {url} — page layout may have changed.")
+    return m.group(1)
 
 COLUMNS = [
     "name", "grade", "ck_rating", "puzzles_correct", "puzzles_attempted",
@@ -78,9 +112,8 @@ LABELS = {
 }
 
 
-def fetch_html(school: str) -> str:
-    url = DATA_URL_TMPL.format(school=school.upper())
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+def fetch_html(data_url: str) -> str:
+    req = urllib.request.Request(data_url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=20) as resp:
         return resp.read().decode("utf-8", errors="replace")
 
@@ -363,7 +396,12 @@ def render_html(clean, outliers, band, xkey, ykey, *, title, subtitle, meta,
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--school", required=True, help="School code, e.g. PS11 (matches ck_data_<SCHOOL>.html)")
+    ap.add_argument("--school", required=True, help="School code, e.g. PS11 (used for title/labels)")
+    ap.add_argument("--slug", default=None,
+                     help="impactcoachingnetwork.org/<slug> for this school — used to resolve the "
+                          "live (tokenized) data URL. Required unless --data-url is given directly.")
+    ap.add_argument("--data-url", default=None,
+                     help="Skip slug resolution and fetch this icnadmin2.com data URL directly.")
     ap.add_argument("--x", default="ck_rating", choices=sorted(NUMERIC_COLUMNS))
     ap.add_argument("--y", default="uscf_rating", choices=sorted(NUMERIC_COLUMNS))
     ap.add_argument("--min-x", type=float, default=None, help="Drop rows with x below this value")
@@ -372,7 +410,17 @@ def main():
     ap.add_argument("--out", required=True, help="Output HTML path")
     args = ap.parse_args()
 
-    html = fetch_html(args.school)
+    if args.data_url:
+        data_url = args.data_url
+    elif args.slug:
+        try:
+            data_url = resolve_data_url(args.slug)
+        except PasswordProtectedError as e:
+            raise SystemExit(f"error: {e}")
+    else:
+        raise SystemExit("error: provide --slug (preferred) or --data-url")
+
+    html = fetch_html(data_url)
     roster = parse_roster(html)
     pts = [p for p in roster if p.get(args.x) is not None and p.get(args.y) is not None]
     # a rating of 0 in this feed means "not on file", not a real value
