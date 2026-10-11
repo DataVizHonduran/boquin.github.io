@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Sovereign Credit Note</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 20px 20px 60px;
+        background: #f5f5f5;
+        color: #222;
+    }
+    .back-link {
+        display: inline-block;
+        margin-bottom: 16px;
+        color: #1a5276;
+        text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    #content {
+        background: white;
+        padding: 32px 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        line-height: 1.65;
+        font-size: 16px;
+    }
+
+    #content h1 {
+        font-size: 1.5em;
+        color: #333;
+        border-bottom: 3px solid #1a5276;
+        padding-bottom: 12px;
+        margin-top: 0;
+    }
+    #content h2 {
+        color: #1a5276;
+        font-size: 1.2em;
+        border-top: 1px solid #e0e0e0;
+        padding-top: 24px;
+        margin-top: 32px;
+    }
+    #content h2:first-of-type { border-top: none; padding-top: 0; margin-top: 24px; }
+    #content h3 {
+        color: #1a5276;
+        font-size: 1.05em;
+    }
+    #content p { margin: 14px 0; }
+    #content a { color: #1a5276; word-break: break-word; }
+    #content strong { color: #111; }
+
+    #content blockquote {
+        margin: 20px 0;
+        padding: 14px 20px;
+        background: #eaf0fb;
+        border-left: 4px solid #1a5276;
+        border-radius: 4px;
+        font-size: 1.05em;
+    }
+    #content blockquote p { margin: 0; }
+
+    /* table wrapper lets wide tables scroll instead of breaking the page */
+    .table-wrap {
+        overflow-x: auto;
+        margin: 20px 0;
+    }
+    #content table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.88em;
+    }
+    #content th, #content td {
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+    #content th {
+        background: #eaf0fb;
+        color: #1a5276;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    #content tr:nth-child(even) td { background: #fafbfd; }
+
+    #content hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 32px 0 20px;
+    }
+    #content ul, #content ol { margin: 14px 0; padding-left: 28px; }
+    #content li { margin: 6px 0; }
+
+    /* footer source list uses <em> lines from the markdown; shrink and mute it */
+    #content h1 ~ hr ~ p em {
+        color: #666;
+        font-size: 0.85em;
+        display: block;
+        line-height: 1.5;
+    }
+
+    .state-msg { color: #666; font-style: italic; padding: 20px 0; }
+</style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Sovereign Archive</a>
+    <div id="content"><p class="state-msg">Loading report...</p></div>
+
+    <script>
+        function wrapTables(html) {
+            return html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
+        }
+
+        async function loadReport() {
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get('file');
+            const contentDiv = document.getElementById('content');
+
+            if (!file) {
+                contentDiv.innerHTML = '<p class="state-msg">No report specified.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error('fetch failed: ' + response.status);
+                const md = await response.text();
+
+                const titleMatch = md.match(/^#\s+(.+)$/m);
+                if (titleMatch) document.getElementById('page-title').textContent = titleMatch[1];
+
+                contentDiv.innerHTML = wrapTables(marked.parse(md));
+            } catch (error) {
+                contentDiv.innerHTML = '<p class="state-msg">Error loading report. Please try again later.</p>';
+                console.error('Error loading report:', error);
+            }
+        }
+
+        loadReport();
+    </script>
+</body>
+</html>
