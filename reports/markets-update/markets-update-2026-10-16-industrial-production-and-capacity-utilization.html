@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-09">
+    <meta name="release-date" content="2026-10-16">
+    <title>Industrial Production and Capacity Utilization — 2026-10-16</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Industrial Production and Capacity Utilization</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-10-16 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>101.668</h3>
+            <p>CONTEXT: 10Y REGIME: 95.8th Percentile | Z-Score: +1.26σ | 10Y Range:</p>
+            <p class="card-period">2025-09</p>
+        </div>
+        <div class="card">
+            <h3>76.046</h3>
+            <p>CONTEXT: 10Y REGIME: 51.7th Percentile | Z-Score: +0.09σ | 10Y Range:</p>
+            <p class="card-period">2025-09</p>
+        </div>
+        <div class="card">
+            <h3>98.047</h3>
+            <p>CONTEXT: 10Y REGIME: 76.7th Percentile | Z-Score: +0.52σ | 10Y Range:</p>
+            <p class="card-period">2025-09</p>
+        </div>
+        <div class="card">
+            <h3>107.194</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +3.43σ | 10Y Range:</p>
+            <p class="card-period">2025-09</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Industrial Production Index
+                <span class="mu-chart-latest">103.951</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"],
+                        datasets: [{
+                            data: [99.4695, 99.2925, 100.3273, 100.0647, 101.0993, 101.0404, 101.1279, 100.9655, 101.4785, 101.894, 101.6247, 101.668, 101.2195, 101.0344, 101.4941, 101.0388, 101.9053, 101.7336, 102.5768, 102.7232, 102.961, 103.2006, 103.2664, 103.9506],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Capacity Utilization, Total
+                <span class="mu-chart-latest">76.85</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"],
+                        datasets: [{
+                            data: [75.3852, 75.1681, 75.8651, 75.5781, 76.2685, 76.1318, 76.1048, 75.8894, 76.181, 76.3997, 76.1055, 76.0461, 75.6194, 75.3901, 75.6422, 75.242, 75.8142, 75.6178, 76.1792, 76.2225, 76.3321, 76.4409, 76.4184, 76.8504],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Global Economics Strategy Team</strong></p>
+<p><strong>Date: October 2026</strong></p>
+<p><strong>Subject: Industrial Production Analysis – Utilities-Driven Expansion</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest industrial production (IP) data reveals a robust expansionary trend, with the headline index reaching the 95.8th percentile of its 10-year range. While manufacturing shows a steady, moderate recovery, the primary driver of current growth is a parabolic surge in utilities production, which has reached a decade-high peak.</p>
+
+<p>The overall tone is one of resilience, though the divergence between manufacturing and utilities suggests that the "industrial" recovery is uneven. From a policy perspective, the lack of significant capacity constraints (TCU remains near the median) suggests that this growth is not yet fueling systemic inflationary pressures, providing the Fed with some breathing room despite the high headline IP levels.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Headline Strength:</strong> The Industrial Production Index rose to 103.951 in September 2026, representing a +0.66% MoM increase and a sustained climb from the 101.034 trough seen in November 2025.</li>
+<li>  <strong>Utilities Outlier:</strong> Utilities production is in a state of extreme expansion, printing at 117.451—the absolute 100th percentile of the 10-year range—driven by a significant jump from August (113.266).</li>
+<li>  <strong>Manufacturing Recovery:</strong> Manufacturing production (IPMAN) has recovered from a low of 96.986 (Dec '25) to 99.436, a steady climb that indicates a return to growth, though it remains well below its historical ceiling of 102.04.</li>
+<li>  <strong>Underutilized Capacity:</strong> Despite the high IP index, Total Capacity Utilization (TCU) sits at 76.85%, which is nearly the 10-year median (51.7th percentile), suggesting significant slack remains in the industrial base.</li>
+<li>  <strong>Momentum Shift:</strong> The data shows a clear acceleration phase starting in April 2026, with consecutive monthly gains in the headline index through September.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> Industrial growth is currently aggressive but skewed. The headline index's Z-score of +1.26$\sigma$ indicates strong above-trend growth. However, the growth is heavily concentrated in the utilities sector rather than a broad-based industrial renaissance.</p>
+
+<p><strong>(ii) Labor Market:</strong> While direct employment data is not provided, the steady rise in Manufacturing Production (up ~2.5% since Dec '25) and the surge in Utilities suggest tightening labor demand within these specific industrial verticals to support increased output.</p>
+
+<p><strong>(iii) Inflation:</strong> The capacity utilization data (Z-score +0.09$\sigma$) is the key inflation signal here. Because TCU is not overheating (remaining far below the 79.93% ceiling), the current increase in production is unlikely to trigger supply-side "bottleneck" inflation.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>The current regime is classified as a <strong>mid-cycle expansion</strong>. </p>
+
+<p>While the headline IP index is at the 95.8th percentile, the critical "overheating" metric—Capacity Utilization—is almost exactly at its 10-year average (51.7th percentile). A "late-cycle" designation would require TCU to be pushing toward the 80% mark. The extreme Z-score in Utilities (+3.43$\sigma$) is a significant regime-defining event, suggesting a structural shift in energy demand or infrastructure utilization rather than a cyclical peak of the broader economy.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Next Move: Hold / Neutral</strong></p>
+
+<p>The balance of risks currently favors a "wait-and-see" approach. The Fed is faced with strong production growth (bullish for GDP) but no evidence of capacity constraints (neutral for inflation). Given that TCU is only +0.09$\sigma$ from the mean, there is no immediate pressure to hike rates to cool the industrial sector. Conversely, the strong momentum in IP and Manufacturing suggests the economy is not sliding toward a recession, removing the urgency for aggressive cuts. We expect the Fed to maintain current rates in the next meeting, monitoring whether the utilities surge translates into broader inflationary pressure.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- INDUSTRIAL PRODUCTION AND CAPACITY UTILIZATION: CYCLE-AWARE SUMMARY ---
+
+SERIES: Industrial Production Index (index, SA) [INDPRO]
+CONTEXT: 10Y REGIME: 95.8th Percentile | Z-Score: +1.26σ | 10Y Range: [84.56, 104.10]
+DATA:
+  2025-09       101.668
+  2025-10       101.219
+  2025-11       101.034
+  2025-12       101.494
+  2026-01       101.039
+  2026-02       101.905
+  2026-03       101.734
+  2026-04       102.577
+  2026-05       102.723
+  2026-06       102.961
+  2026-07       103.201
+  2026-08       103.266
+  2026-09       103.951
+----------------------------------------
+SERIES: Capacity Utilization, Total (%, SA) [TCU]
+CONTEXT: 10Y REGIME: 51.7th Percentile | Z-Score: +0.09σ | 10Y Range: [64.08, 79.93]
+DATA:
+  2025-09        76.046
+  2025-10        75.619
+  2025-11        75.390
+  2025-12        75.642
+  2026-01        75.242
+  2026-02        75.814
+  2026-03        75.618
+  2026-04        76.179
+  2026-05        76.222
+  2026-06        76.332
+  2026-07        76.441
+  2026-08        76.418
+  2026-09        76.850
+----------------------------------------
+SERIES: Manufacturing Production (index, SA) [IPMAN]
+CONTEXT: 10Y REGIME: 76.7th Percentile | Z-Score: +0.52σ | 10Y Range: [79.86, 102.04]
+DATA:
+  2025-09        98.047
+  2025-10        97.213
+  2025-11        97.130
+  2025-12        96.986
+  2026-01        97.079
+  2026-02        97.733
+  2026-03        98.092
+  2026-04        98.838
+  2026-05        98.983
+  2026-06        99.270
+  2026-07        99.431
+  2026-08        99.178
+  2026-09        99.436
+----------------------------------------
+SERIES: Utilities Production (index, SA) [IPG2211S]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +3.43σ | 10Y Range: [94.03, 117.45]
+DATA:
+  2025-09       107.194
+  2025-10       109.794
+  2025-11       108.295
+  2025-12       113.464
+  2026-01       110.573
+  2026-02       111.145
+  2026-03       109.880
+  2026-04       111.156
+  2026-05       109.655
+  2026-06       110.113
+  2026-07       111.353
+  2026-08       113.266
+  2026-09       117.451
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>
