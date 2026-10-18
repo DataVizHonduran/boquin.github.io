@@ -31,7 +31,7 @@ a.pair-link:hover{text-decoration:underline}
 <div class="hdr">
   <h1>🧮 G10 Classic PPP Fair Value</h1>
   <div class="sub">Relative purchasing-power-parity model for EUR/USD + 8 other G10 pairs, back to 1990. PPP-implied rate is calibrated so mean misalignment = 0 over the full sample (beta fixed at 1); an unrestricted OLS fit and an AR(1) half-life of mean reversion are reported alongside. EUR, GBP, JPY, AUD, NZD, and CAD also have an <strong>Adjusted PPP</strong> variant (annual, OLS-fit relative PPP + terms of trade + productivity/Balassa-Samuelson) — toggle it on via the legend on each pair's chart.</div>
-  <div class="meta">Sources: FRED spot FX, OECD live CPI (Eurostat HICP for the euro area), US CPI (CPIAUCSL), IMF trade unit values (ToT), World Bank GDP-per-worker (productivity) · Updated 2026-10-05</div>
+  <div class="meta">Sources: FRED spot FX, OECD live CPI (Eurostat HICP for the euro area), US CPI (CPIAUCSL), IMF trade unit values (ToT), World Bank GDP-per-worker (productivity) · Updated 2026-10-18</div>
 </div>
 
 <div class="content">
@@ -61,6 +61,31 @@ a.pair-link:hover{text-decoration:underline}
       <a href="nzd.html">NZD/USD</a>
       <a href="sek.html">USD/SEK</a>
       <a href="nok.html">USD/NOK</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">JPY Crosses — Current Misalignment vs. PPP</div>
+    <table>
+      <thead><tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th><th class="num">Adj. Misalignment</th></tr></thead>
+      <tbody>
+        <tr><td><a class="pair-link" href="chfjpy.html">CHFJPY</a></td><td class="num">195.6519</td><td class="num">103.5649</td><td class="num misalign">+88.9%</td><td class="num">n/a*</td><td class="num">—</td></tr><tr><td><a class="pair-link" href="audjpy.html">AUDJPY</a></td><td class="num">110.0296</td><td class="num">58.5139</td><td class="num misalign">+88.0%</td><td class="num">41 qtr</td><td class="num">+29.5% (2025)</td></tr><tr><td><a class="pair-link" href="gbpjpy.html">GBPJPY</a></td><td class="num">215.1908</td><td class="num">123.3863</td><td class="num misalign">+74.4%</td><td class="num">361 mo</td><td class="num">+28.8% (2025)</td></tr><tr><td><a class="pair-link" href="nzdjpy.html">NZDJPY</a></td><td class="num">90.3150</td><td class="num">51.9139</td><td class="num misalign">+74.0%</td><td class="num">38 qtr</td><td class="num">+13.1% (2025)</td></tr><tr><td><a class="pair-link" href="eurjpy.html">EURJPY</a></td><td class="num">182.5765</td><td class="num">105.8218</td><td class="num misalign">+72.5%</td><td class="num">5138 mo</td><td class="num">+22.7% (2025)</td></tr><tr><td><a class="pair-link" href="cadjpy.html">CADJPY</a></td><td class="num">114.2624</td><td class="num">69.2853</td><td class="num misalign">+64.9%</td><td class="num">292 mo</td><td class="num">+17.6% (2025)</td></tr><tr><td><a class="pair-link" href="sekjpy.html">SEKJPY</a></td><td class="num">16.7768</td><td class="num">11.7930</td><td class="num misalign">+42.3%</td><td class="num">50 mo</td><td class="num">—</td></tr><tr><td><a class="pair-link" href="nokjpy.html">NOKJPY</a></td><td class="num">15.4266</td><td class="num">11.3638</td><td class="num misalign">+35.8%</td><td class="num">57 mo</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+    <div class="note">Derived algebraically from each leg's USD-based PPP model above (no separate data fetch) — misalignment nets out the shared USD numeraire, so e.g. EURJPY misalignment = EUR misalignment − JPY misalignment. Negative = foreign currency cheap vs. JPY relative to PPP.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Launch JPY Cross Chart</div>
+    <div class="grid">
+      <a href="eurjpy.html">EURJPY</a>
+      <a href="gbpjpy.html">GBPJPY</a>
+      <a href="chfjpy.html">CHFJPY</a>
+      <a href="cadjpy.html">CADJPY</a>
+      <a href="audjpy.html">AUDJPY</a>
+      <a href="nzdjpy.html">NZDJPY</a>
+      <a href="sekjpy.html">SEKJPY</a>
+      <a href="nokjpy.html">NOKJPY</a>
     </div>
   </div>
 

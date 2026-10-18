@@ -257,6 +257,17 @@ def fetch_raw_data(pair: str) -> pd.DataFrame:
     return fetch_eur() if pair == "EUR" else fetch_generic(pair)
 
 
+def ar1_half_life(m: pd.Series) -> tuple[float, float]:
+    """AR(1) coefficient + implied half-life (in series periods) of a misalignment series."""
+    m_lag = m.shift(1)
+    valid = m_lag.notna()
+    X_ar = np.column_stack([np.ones(int(valid.sum())), m_lag[valid].to_numpy()])
+    y_ar = m[valid].to_numpy()
+    (ar_const, rho), *_ = np.linalg.lstsq(X_ar, y_ar, rcond=None)
+    half_life = np.log(0.5) / np.log(rho) if 0 < rho < 1 else np.nan
+    return rho, half_life
+
+
 def compute_model(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
     out["ln_FX"] = np.log(out["FX"])
@@ -272,13 +283,7 @@ def compute_model(df: pd.DataFrame) -> pd.DataFrame:
     y = out["ln_FX"].to_numpy()
     (ols_alpha, ols_beta), *_ = np.linalg.lstsq(X, y, rcond=None)
 
-    m = out["Misalignment"]
-    m_lag = m.shift(1)
-    valid = m_lag.notna()
-    X_ar = np.column_stack([np.ones(int(valid.sum())), m_lag[valid].to_numpy()])
-    y_ar = m[valid].to_numpy()
-    (ar_const, rho), *_ = np.linalg.lstsq(X_ar, y_ar, rcond=None)
-    half_life = np.log(0.5) / np.log(rho) if 0 < rho < 1 else np.nan
+    rho, half_life = ar1_half_life(out["Misalignment"])
 
     out.attrs.update(alpha=alpha, ols_alpha=ols_alpha, ols_beta=ols_beta, ar1_rho=rho, half_life_periods=half_life)
     return out
@@ -321,11 +326,11 @@ def compute_adjusted_model(raw: pd.DataFrame, area: str) -> pd.DataFrame | None:
     return df
 
 
-def plot_ppp(res: pd.DataFrame, pair: str, adjusted: pd.DataFrame | None = None) -> go.Figure:
+def plot_ppp(res: pd.DataFrame, label: str, axis_title: str, adjusted: pd.DataFrame | None = None) -> go.Figure:
+    """res/adjusted must already carry display-convention FX/FX_PPP/FX_ADJ (caller applies to_market_convention)."""
     pct_dev = res["Pct_Misalignment"]
-    label = market_label(pair)
-    disp_fx = to_market_convention(res["FX"], pair)
-    disp_fx_ppp = to_market_convention(res["FX_PPP"], pair)
+    disp_fx = res["FX"]
+    disp_fx_ppp = res["FX_PPP"]
 
     fig = make_subplots(
         rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1,
@@ -348,7 +353,7 @@ def plot_ppp(res: pd.DataFrame, pair: str, adjusted: pd.DataFrame | None = None)
                               line=dict(color="#F5A623", width=2, dash="dash")), row=1, col=1)
 
     if adjusted is not None:
-        disp_fx_adj = to_market_convention(adjusted["FX_ADJ"], pair)
+        disp_fx_adj = adjusted["FX_ADJ"]
         fig.add_trace(go.Scatter(
             x=adjusted.index, y=disp_fx_adj, name=f"{label} (Adjusted PPP: ToT + productivity)",
             mode="lines+markers", line=dict(color="#7B2CBF", width=2, dash="dot"),
@@ -369,7 +374,6 @@ def plot_ppp(res: pd.DataFrame, pair: str, adjusted: pd.DataFrame | None = None)
     horizon_buttons.append(dict(step="all", label="All"))
     fig.update_xaxes(rangeselector=dict(buttons=horizon_buttons, bgcolor="#f0f0f0"), row=1, col=1)
 
-    axis_title = f"{pair} per USD" if pair in USD_BASE_PAIRS else f"USD per {pair}"
     fig.update_yaxes(title_text=axis_title, gridcolor="#e5e5e5", row=1, col=1)
     fig.update_yaxes(title_text="Per cent", gridcolor="#e5e5e5", row=2, col=1)
     fig.update_xaxes(gridcolor="#e5e5e5")
@@ -381,7 +385,7 @@ def plot_ppp(res: pd.DataFrame, pair: str, adjusted: pd.DataFrame | None = None)
     return fig
 
 
-def run(pair: str) -> dict:
+def run(pair: str, cache: dict) -> dict:
     print(f"Fetching {pair}...")
     raw = fetch_raw_data(pair)
     res = compute_model(raw)
@@ -406,7 +410,18 @@ def run(pair: str) -> dict:
             print(f"  Adjusted PPP ({adj_year}): beta_ToT={adjusted.attrs['beta_tot']:.2f}, "
                   f"beta_Prod={adjusted.attrs['beta_prod']:.2f}, misalignment={adj_misalignment:+.1f}%")
 
-    fig = plot_ppp(res, pair, adjusted)
+    cache[pair] = dict(res=res, adjusted=adjusted)
+
+    disp = res.copy()
+    disp["FX"] = to_market_convention(res["FX"], pair)
+    disp["FX_PPP"] = to_market_convention(res["FX_PPP"], pair)
+    disp_adj = None
+    if adjusted is not None:
+        disp_adj = adjusted.copy()
+        disp_adj["FX_ADJ"] = to_market_convention(adjusted["FX_ADJ"], pair)
+
+    axis_title = f"{pair} per USD" if pair in USD_BASE_PAIRS else f"USD per {pair}"
+    fig = plot_ppp(disp, label, axis_title, disp_adj)
     slug = pair.lower()
     fig.write_html(os.path.join(OUTPUT_DIR, f"{slug}.html"))
     print(f"  {label}: {current_fx:.4f} vs PPP {current_ppp:.4f} ({misalignment:+.1f}%)")
@@ -419,22 +434,79 @@ def run(pair: str) -> dict:
     )
 
 
-def build_index_html(rows: list[dict]) -> str:
-    rows_sorted = sorted(rows, key=lambda r: r["misalignment"], reverse=True)
+def run_cross(foreign: str, cache: dict) -> dict:
+    """JPY cross (e.g. EURJPY), derived algebraically from two already-fit USD-leg PPP
+    models — no new data fetch. Internal FX/FX_PPP on both legs are USD-per-foreign-unit,
+    so dividing foreign-leg by JPY-leg gives JPY-per-foreign directly (market convention
+    for every JPY cross); differencing the two Misalignment logs cancels the shared USD
+    numeraire exactly, since both legs' CPI model is relative to the same US_CPI series.
+    """
+    label = f"{foreign}JPY"
+    res_f, res_j = cache[foreign]["res"], cache["JPY"]["res"]
 
-    table_rows = []
+    m = pd.concat({
+        "fx_f": res_f["FX"], "fx_fppp": res_f["FX_PPP"], "m_f": res_f["Misalignment"],
+        "fx_j": res_j["FX"], "fx_jppp": res_j["FX_PPP"], "m_j": res_j["Misalignment"],
+    }, axis=1).dropna()
+    m["FX"] = m["fx_f"] / m["fx_j"]
+    m["FX_PPP"] = m["fx_fppp"] / m["fx_jppp"]
+    m["Misalignment"] = m["m_f"] - m["m_j"]
+    m["Pct_Misalignment"] = (np.exp(m["Misalignment"]) - 1) * 100
+    _, half_life = ar1_half_life(m["Misalignment"])
+
+    adjusted = adj_misalignment = adj_year = None
+    adj_f, adj_j = cache[foreign].get("adjusted"), cache["JPY"].get("adjusted")
+    if adj_f is not None and adj_j is not None:
+        a = pd.concat({
+            "fxadj_f": adj_f["FX_ADJ"], "fxadj_j": adj_j["FX_ADJ"],
+            "pf": adj_f["Pct_Misalignment_ADJ"], "pj": adj_j["Pct_Misalignment_ADJ"],
+        }, axis=1).dropna()
+        a["FX_ADJ"] = a["fxadj_f"] / a["fxadj_j"]
+        a["Pct_Misalignment_ADJ"] = (np.exp(np.log1p(a["pf"] / 100) - np.log1p(a["pj"] / 100)) - 1) * 100
+        adjusted = a
+        adj_misalignment = adjusted["Pct_Misalignment_ADJ"].iloc[-1]
+        adj_year = adjusted.index[-1].year
+
+    fig = plot_ppp(m, label, f"JPY per {foreign}", adjusted)
+    slug = label.lower()
+    fig.write_html(os.path.join(OUTPUT_DIR, f"{slug}.html"))
+    current_fx, current_ppp = m["FX"].iloc[-1], m["FX_PPP"].iloc[-1]
+    misalignment = m["Pct_Misalignment"].iloc[-1]
+    print(f"  {label}: {current_fx:.4f} vs PPP {current_ppp:.4f} ({misalignment:+.1f}%)")
+
+    return dict(
+        pair=label, slug=slug, label=label, current_fx=current_fx, current_ppp=current_ppp,
+        misalignment=misalignment, half_life=half_life,
+        half_life_unit="qtr" if foreign in ("AUD", "NZD") else "mo",
+        adj_misalignment=adj_misalignment, adj_year=adj_year,
+    )
+
+
+def _misalignment_table_rows(rows: list[dict]) -> str:
+    rows_sorted = sorted(rows, key=lambda r: r["misalignment"], reverse=True)
+    out = []
     for r in rows_sorted:
         hl = f"{r['half_life']:.0f} {r['half_life_unit']}" if pd.notna(r["half_life"]) else "n/a*"
         adj_cell = f'{r["adj_misalignment"]:+.1f}% ({r["adj_year"]})' if r.get("adj_misalignment") is not None else "—"
-        table_rows.append(
+        out.append(
             f'<tr><td><a class="pair-link" href="{r["slug"]}.html">{r["label"]}</a></td>'
             f'<td class="num">{r["current_fx"]:.4f}</td><td class="num">{r["current_ppp"]:.4f}</td>'
             f'<td class="num misalign">{r["misalignment"]:+.1f}%</td><td class="num">{hl}</td>'
             f'<td class="num">{adj_cell}</td></tr>'
         )
+    return "".join(out)
 
-    grid_links = "\n      ".join(f'<a href="{r["slug"]}.html">{r["label"]}</a>' for r in rows)
-    has_no_half_life = any(pd.isna(r["half_life"]) for r in rows)
+
+def _pair_grid(rows: list[dict]) -> str:
+    return "\n      ".join(f'<a href="{r["slug"]}.html">{r["label"]}</a>' for r in rows)
+
+
+def build_index_html(rows: list[dict], cross_rows: list[dict]) -> str:
+    table_rows = _misalignment_table_rows(rows)
+    grid_links = _pair_grid(rows)
+    cross_table_rows = _misalignment_table_rows(cross_rows)
+    cross_grid_links = _pair_grid(cross_rows)
+    has_no_half_life = any(pd.isna(r["half_life"]) for r in rows + cross_rows)
     footnote = (
         "<br>*One or more pairs show an AR(1) coefficient on misalignment ≥1 over the full sample "
         "(no finite half-life) — the most pronounced PPP breakdowns in G10." if has_no_half_life else ""
@@ -498,15 +570,35 @@ a.pair-link:hover{{text-decoration:underline}}
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-title">JPY Crosses — Current Misalignment vs. PPP</div>
+    <table>
+      <thead><tr><th>Pair</th><th class="num">Current Rate</th><th class="num">PPP-Implied</th><th class="num">Misalignment</th><th class="num">Half-Life</th><th class="num">Adj. Misalignment</th></tr></thead>
+      <tbody>
+        {cross_table_rows}
+      </tbody>
+    </table>
+    <div class="note">Derived algebraically from each leg's USD-based PPP model above (no separate data fetch) — misalignment nets out the shared USD numeraire, so e.g. EURJPY misalignment = EUR misalignment − JPY misalignment. Negative = foreign currency cheap vs. JPY relative to PPP.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Launch JPY Cross Chart</div>
+    <div class="grid">
+      {cross_grid_links}
+    </div>
+  </div>
+
 </div>
 </body>
 </html>"""
 
 
 if __name__ == "__main__":
-    results = [run(p) for p in ALL_PAIRS]
+    cache: dict = {}
+    results = [run(p, cache) for p in ALL_PAIRS]
+    cross_results = [run_cross(p, cache) for p in ALL_PAIRS if p != "JPY"]
 
-    html = build_index_html(results)
+    html = build_index_html(results, cross_results)
     out_path = os.path.join(OUTPUT_DIR, "index.html")
     with open(out_path, "w") as f:
         f.write(html)
