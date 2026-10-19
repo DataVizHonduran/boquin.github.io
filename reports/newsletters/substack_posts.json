@@ -1,263 +1,33 @@
 {
-  "junkbondinvestor.substack.com": [
-    {
-      "title": "Capital Southwest Corp ($CSWC): Does a Premium Stock Make a Better Bond?",
-      "url": "https://www.junkbondinvestor.com/p/capital-southwest-corp-cswc-does",
-      "date": "2026-10-08",
-      "description": "Most BDCs trade below book. CSWC trades at 1.4x NAV and just issued new 2031 notes. I look at both sides of the capital structure."
-    },
-    {
-      "title": "Credit Weekly: A Record Book, a Smaller Bid",
-      "url": "https://www.junkbondinvestor.com/p/credit-weekly-a-record-book-a-smaller",
-      "date": "2026-10-05",
-      "description": "The largest dollar junk deal on record priced tight, then traded down several points. The issuer kept the savings and the buyers took the loss."
-    },
-    {
-      "title": "Cable One ($CABO): The Making of a Distressed Credit",
-      "url": "https://www.junkbondinvestor.com/p/cable-one-cabo-the-making-of-a-distressed",
-      "date": "2026-10-02",
-      "description": "A shrinking cable business, a $480mm put and financing talks that include &#8220;certain&#8221; lenders. Walking through the business, the docs, and who gets left behind."
-    },
-    {
-      "title": "Credit Weekly: Rates Did Most of the Damage",
-      "url": "https://www.junkbondinvestor.com/p/credit-weekly-rates-did-most-of-the",
-      "date": "2026-09-27",
-      "description": "High yield is down 1.84% in September, and spreads were the smaller part of it"
-    },
-    {
-      "title": "Keel Infrastructure ($KEEL): What Are the Converts Worth Without a Lease?",
-      "url": "https://www.junkbondinvestor.com/p/keel-infrastructure-keel-what-are",
-      "date": "2026-09-24",
-      "description": "A closer look at KEEL&#8217;s beaten-down converts, the odds of a Panther Creek lease, and what bondholders own if it never comes."
-    }
-  ],
-  "www.semianalysis.com": [
-    {
-      "title": "xAI\u2019s Colossus 2 \u2013 First Gigawatt Datacenter In The World, Unique RL Methodology, Capital Raise",
-      "url": "https://semianalysis.com/2025/09/16/xais-colossus-2-first-gigawatt-datacenter/",
-      "date": "2025-09-16",
-      "description": "Much has been written about xAI\u2019s Colossus 1. The Memphis build belongs in the history books: the largest AI training cluster, erected from scratch in 122 days. With roughly 200,000 H100/H200s and ~30"
-    },
-    {
-      "title": "Another Giant Leap: The Rubin CPX Specialized Accelerator & Rack",
-      "url": "https://semianalysis.com/2025/09/10/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack/",
-      "date": "2025-09-10",
-      "description": "Nvidia announced the Rubin CPX, a solution that is specifically designed to be optimized for the prefill phase, with the single-die Rubin CPX heavily emphasizing compute FLOPS over memory bandwidth. T"
-    },
-    {
-      "title": "Huawei Ascend Production Ramp: Die Banks, TSMC Continued Production, HBM is The Bottleneck",
-      "url": "https://semianalysis.com/2025/09/08/huawei-ascend-production-ramp/",
-      "date": "2025-09-08",
-      "description": "Compute is the lifeblood of AI. He who controls the spice controls the universe the compute will control the production of tokens and reap the benefits of AI. Without compute you do not have a seat at"
-    },
-    {
-      "title": "Amazon\u2019s AI Resurgence: AWS & Anthropic\u2019s Multi-Gigawatt Trainium Expansion",
-      "url": "https://semianalysis.com/2025/09/03/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion/",
-      "date": "2025-09-03",
-      "description": "Two-and-a-half years ago, we flagged a looming \u201ccloud crisis\u201d at AWS. Today, the evidence has mounted. AWS is the crown jewel of the Amazon empire, generating ~60% of group profits, and dominating the"
-    },
-    {
-      "title": "H100 vs GB200 NVL72 Training Benchmarks \u2013 Power, TCO, and Reliability Analysis, Software Improvement Over Time",
-      "url": "https://semianalysis.com/2025/08/20/h100-vs-gb200-nvl72-training-benchmarks/",
-      "date": "2025-08-20",
-      "description": "Frontier model training has pushed GPUs and AI systems to their absolute limits, making cost, efficiency, power, performance per TCO, and reliability central to the discussion on effective training. T"
-    }
-  ],
-  "epbresearch.substack.com": [
-    {
-      "title": "Why the 10-Year Yield Rose After a \"Weak\" Jobs Report",
-      "url": "https://blog.epbresearch.com/p/why-the-10-year-yield-rose-after",
-      "date": "2026-10-04",
-      "description": "The headline was soft, but construction and manufacturing payrolls reached a new high."
-    },
-    {
-      "title": "The Economy Can\u2019t Sustain Positive Real Interest Rates Like It Used To",
-      "url": "https://blog.epbresearch.com/p/the-economy-cant-sustain-positive",
-      "date": "2026-09-14",
-      "description": "Today&#8217;s real Fed funds rate is around +1.2%. The question is not whether that is high historically, but whether today&#8217;s debt-heavy economy can sustain it."
-    },
-    {
-      "title": "Housing Has Been Weak for Years. Why Hasn\u2019t It Caused a Recession?",
-      "url": "https://blog.epbresearch.com/p/housing-has-been-weak-for-years-why",
-      "date": "2026-09-09",
-      "description": "Housing has weakened for years without producing a recession. Strength elsewhere in Cyclical GDP and a large homebuilder profit-margin cushion help explain why."
-    },
-    {
-      "title": "Corporate Profits Doubled. Why Didn\u2019t Household Income Fall?",
-      "url": "https://blog.epbresearch.com/p/corporate-profits-doubled-why-didnt",
-      "date": "2026-09-02",
-      "description": "Corporate profits more than doubled as a share of GDP while household income held up. The national accounts show why old profit-margin averages can be misleading."
-    },
-    {
-      "title": "Prometheus: In Conversation With Eric Basmajian",
-      "url": "https://blog.epbresearch.com/p/prometheus-in-conversation-with-eric",
-      "date": "2026-08-31",
-      "description": "A conversation on the business cycle, inflation, recession risk, and asset markets"
-    }
-  ],
+  "junkbondinvestor.substack.com": [],
+  "www.semianalysis.com": [],
+  "epbresearch.substack.com": [],
   "thechangeconstant.substack.com": [],
   "hfiresearch.substack.com": [],
-  "www.notboring.co": [
-    {
-      "title": "Weekly Dose of Optimism #214",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-214",
-      "date": "2026-10-09",
-      "description": "Nobel, Matter Compiler, Anduril Shipyard, Mouth Cancer Patch, Biohub Virtual Cell + Extra Doses"
-    },
-    {
-      "title": "Weekly Dose of Optimism #213",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-213",
-      "date": "2026-10-02",
-      "description": "Starship Orbital, America.gov, Matic Master Plan, Freckle, Heart Age + Extra Doses"
-    },
-    {
-      "title": "Airbound: As We May Move",
-      "url": "https://www.notboring.co/p/airbound-as-we-may-move",
-      "date": "2026-09-28",
-      "description": "A Deep Dive on Airbound and Humanity&#8217;s Flying Future"
-    },
-    {
-      "title": "Weekly Dose of Optimism #212",
-      "url": "https://www.notboring.co/p/weekly-dose-of-optimism-212",
-      "date": "2026-09-25",
-      "description": "Vironexis, Solcoa, Terraform, Joby, Meta VR Glasses + Extra Doses"
-    },
-    {
-      "title": "Would We Send Our Kids to HAA?",
-      "url": "https://www.notboring.co/p/haa",
-      "date": "2026-09-23",
-      "description": "The Future of Education: Whatever They Wish"
-    }
-  ],
-  "macrocreditthinking.substack.com": [
-    {
-      "title": "Down the LLM rabbit hole",
-      "url": "https://macrocreditthinking.substack.com/p/down-the-llm-rabbit-hole",
-      "date": "2025-11-09",
-      "description": "The race to build makes sense if LLMs can be scaled with more GPUs, but there is good reason to believe the current generation cannot."
-    },
-    {
-      "title": "Fed QT: Explaining the inexplicable",
-      "url": "https://macrocreditthinking.substack.com/p/fed-qt-explaining-the-inexplicable",
-      "date": "2025-11-02",
-      "description": "The Fed has ended QT as short-term interest rates move higher, but breathless media commentary exposes a continued lack of understanding of how money works."
-    },
-    {
-      "title": "CS AT1s: Fool me once, shame on you",
-      "url": "https://macrocreditthinking.substack.com/p/cs-at1s-fool-me-once-shame-on-you",
-      "date": "2025-10-26",
-      "description": "Credit Suisse's failure was a classic bank run, not a capital hole. FINMA likely acted too soon in writing down the AT1s - and recent court rulings open the door to CHF16bn of bonds being reinstated."
-    },
-    {
-      "title": "Gold gone wild",
-      "url": "https://macrocreditthinking.substack.com/p/gold-gone-wild",
-      "date": "2025-10-19",
-      "description": "The break-out in gold is starting to look long-in-the-tooth, unless you expect a post Bretton Woods devaluation of fiat currencies."
-    },
-    {
-      "title": "Bank credit: a one-way bet",
-      "url": "https://macrocreditthinking.substack.com/p/bank-credit-a-one-way-bet",
-      "date": "2025-10-12",
-      "description": "Banks can trade through non-financials in a continued rally, but it's less clear what would happen in a widening"
-    }
-  ],
-  "macromostly.substack.com": [
-    {
-      "title": "High Frequency Labor Market Indicators (10/08)",
-      "url": "https://macromostly.substack.com/p/high-frequency-labor-market-indicators-ada",
-      "date": "2026-10-08",
-      "description": "The Labor Market Is Still Improving as of Early Fall"
-    },
-    {
-      "title": "BLS Jobs Report Recap (September)",
-      "url": "https://macromostly.substack.com/p/bls-jobs-report-recap-september-ade",
-      "date": "2026-10-03",
-      "description": "A disappointing, soft report"
-    },
-    {
-      "title": "Jobs Day with Guy and Keds",
-      "url": "https://macromostly.substack.com/p/jobs-day-with-guy-and-keds",
-      "date": "2026-10-02",
-      "description": "A recording from Guy Berger and Kathryn Anne Edwards's live video"
-    },
-    {
-      "title": "High Frequency Labor Market Indicators (10/01)",
-      "url": "https://macromostly.substack.com/p/high-frequency-labor-market-indicators-4dc",
-      "date": "2026-10-01",
-      "description": "September was the best labor market month since May"
-    },
-    {
-      "title": "BLS Jobs Report Preview (September)",
-      "url": "https://macromostly.substack.com/p/bls-jobs-report-preview-september-e3e",
-      "date": "2026-09-30",
-      "description": "The Labor Market Awakens from Its Summer Nap, and Feels Refreshed"
-    }
-  ],
-  "rupakghose.substack.com": [
-    {
-      "title": "Arini in the headlines",
-      "url": "https://rupakghose.substack.com/p/arini-in-the-headlines",
-      "date": "2026-10-09",
-      "description": "Credit manager&#8217;s returns come under the radar"
-    },
-    {
-      "title": "Prediction markets",
-      "url": "https://rupakghose.substack.com/p/prediction-markets",
-      "date": "2026-10-08",
-      "description": "Susquehanna (SIG) and the PTFs"
-    },
-    {
-      "title": "Not Your Father\u2019s Man Group",
-      "url": "https://rupakghose.substack.com/p/not-your-fathers-man-group",
-      "date": "2026-09-30",
-      "description": "Stop calling it the largest listed hedge fund in the world"
-    },
-    {
-      "title": "SMAs, Millennium and an interconnected industry",
-      "url": "https://rupakghose.substack.com/p/smas-millennium-and-an-interconnected",
-      "date": "2026-09-27",
-      "description": "Millennium raises more money and Jain goes into external allocations"
-    },
-    {
-      "title": "Taula: Choppy waters for fixed income hedge funds",
-      "url": "https://rupakghose.substack.com/p/taula-choppy-waters-for-fixed-income",
-      "date": "2026-09-20",
-      "description": "Weak investment returns, fund raising and that huge Millennium allocation"
-    }
-  ],
-  "www.newcomer.co": [
-    {
-      "title": "Competing ARR Estimates & Fuzzy Valuation Math in the Spotlight as Markets Get Edgy",
-      "url": "https://www.newcomer.co/p/competing-arr-estimates-and-fuzzy",
-      "date": "2026-10-09",
-      "description": "Plus, Western startups aim to challenge China on open source & Google&#8217;s AI flunks in the classroom"
-    },
-    {
-      "title": "After Missing AI\u2019s Early Days, Lightspeed Remade Itself. Now It\u2019s Poised to Score with Anthropic.",
-      "url": "https://www.newcomer.co/p/after-missing-ais-early-days-lightspeed",
-      "date": "2026-10-08",
-      "description": "A pivotal April 2023 meeting set the firm on an ambitious new course that includes PE-style roll-ups."
-    },
-    {
-      "title": "9 Videos from Machine Earning: Town\u2019s Jean-Denis Greze, Lead Bank\u2019s Jackie Reses, Chime\u2019s Ryan King & More",
-      "url": "https://www.newcomer.co/p/9-videos-from-machine-earning-towns",
-      "date": "2026-10-06",
-      "description": "See the most compelling conversations from Newcomer&#8217;s Machine Earning AI Summit"
-    },
-    {
-      "title": "Anthropic's IPO Can't Wait Forever",
-      "url": "https://www.newcomer.co/p/anthropics-ipo-cant-wait-forever",
-      "date": "2026-10-02",
-      "description": "Plus, Vinod Khosla fires off at Factory founder that Khosla Ventures backed"
-    },
-    {
-      "title": "Igor Babuschkin + Founders of Legora, Factory, Fireworks AI, Etched & Crosby Join the Cerebral Valley AI Summit as Speakers",
-      "url": "https://www.newcomer.co/p/igor-babuschkin-founders-of-legora",
-      "date": "2026-10-01",
-      "description": "New speakers will join the CEOs of Anthropic, Databricks & Palo Alto Networks"
-    }
-  ],
+  "www.notboring.co": [],
+  "macrocreditthinking.substack.com": [],
+  "macromostly.substack.com": [],
+  "rupakghose.substack.com": [],
+  "www.newcomer.co": [],
   "globalmacromethod.substack.com": [
+    {
+      "title": "Internal Memo: Bringing The Macro & The Portfolio Together",
+      "url": "https://www.globalmacromethod.net/p/internal-memo-bringing-the-macro",
+      "date": "2026-10-19",
+      "description": "I&#8217;m going to start mapping the GMM portfolio a little differently."
+    },
+    {
+      "title": "Weekly Recap: The Week That Was and The Week That Is",
+      "url": "https://www.globalmacromethod.net/p/weekly-recap-the-week-that-was-and",
+      "date": "2026-10-18",
+      "description": "A bond rally with a different message"
+    },
+    {
+      "title": "Macro Report: The Problem Didn\u2019t Go Away",
+      "url": "https://www.globalmacromethod.net/p/macro-report-the-problem-didnt-go",
+      "date": "2026-10-15",
+      "description": "Understanding the recent mega moves in rates, particularly in the US"
+    },
     {
       "title": "Macro Report: Duration, Duration, Duration!",
       "url": "https://www.globalmacromethod.net/p/macro-report-duration-duration-duration",
@@ -269,27 +39,15 @@
       "url": "https://www.globalmacromethod.net/p/macro-report-the-boom-is-real-so",
       "date": "2026-10-09",
       "description": "Stuff im currently thinking about and what to keep in mind for the next while&#8230;"
-    },
-    {
-      "title": "We Got the Rally. Now Comes the Interesting Bit.",
-      "url": "https://www.globalmacromethod.net/p/we-got-the-rally-now-comes-the-interesting",
-      "date": "2026-10-06",
-      "description": "We got long US equities last week while the bond market was doing its best to make that feel uncomfortable."
-    },
-    {
-      "title": "The Week That Was and The Week That Is: A Pause Is Not The Same As A Peak",
-      "url": "https://www.globalmacromethod.net/p/the-week-that-was-and-the-week-that-e45",
-      "date": "2026-10-04",
-      "description": "4 October 2026 | Reviewing 28 September&#8211;2 October and looking ahead to 5&#8211;9 October"
-    },
-    {
-      "title": "The Market Doesn\u2019t Need a Rescue",
-      "url": "https://www.globalmacromethod.net/p/the-market-doesnt-need-a-rescue",
-      "date": "2026-09-30",
-      "description": "The opportunity is in earnings surviving the rates shock, not in pretending that shock doesn&#8217;t matter."
     }
   ],
   "thematicmarkets.substack.com": [
+    {
+      "title": "What would Jackson do?",
+      "url": "https://thematicmarkets.substack.com/p/what-would-jackson-do",
+      "date": "2026-10-13",
+      "description": "Populism, monetary policy and the competition for capital"
+    },
     {
       "title": "Episode 024: Crisis in Europe",
       "url": "https://thematicmarkets.substack.com/p/episode-024-crisis-in-europe",
@@ -313,15 +71,15 @@
       "url": "https://thematicmarkets.substack.com/p/observations-marking-to-market",
       "date": "2026-09-08",
       "description": "Both Trump and Warsh have surprised me and the clock is ticking (for everyone)"
-    },
-    {
-      "title": "Warsh cycle, Part II",
-      "url": "https://thematicmarkets.substack.com/p/warsh-cycle-part-ii",
-      "date": "2026-07-27",
-      "description": "Mapping the contours of Chairman Warsh&#8217;s velvet revolution"
     }
   ],
   "thesundaydrive.substack.com": [
+    {
+      "title": "The Sunday Drive - 10/18/2026 Edition [#237]",
+      "url": "https://www.mikeallison.com/p/the-sunday-drive-10182026-edition",
+      "date": "2026-10-18",
+      "description": "Musings and Meanderings of a Financial Provocateur"
+    },
     {
       "title": "The Sunday Drive - 10/11/2026 Edition [#236]",
       "url": "https://www.mikeallison.com/p/the-sunday-drive-10112026-edition",
@@ -345,16 +103,16 @@
       "url": "https://www.mikeallison.com/p/the-sunday-drive-09202026-edition",
       "date": "2026-09-20",
       "description": "Musings and Meanderings of a Financial Provocateur"
-    },
-    {
-      "title": "The Sunday Drive - 09/13/2026 Edition [#232]",
-      "url": "https://www.mikeallison.com/p/the-sunday-drive-09132026-edition",
-      "date": "2026-09-13",
-      "description": "Musings and Meanderings of a Financial Provocateur"
     }
   ],
   "www.doomberg.com": [],
   "technically.substack.com": [
+    {
+      "title": "What does LangChain do?",
+      "url": "https://read.technically.dev/p/what-does-langchain-do",
+      "date": "2026-10-13",
+      "description": "What started as a humble LLM framework has become an everything store for agents."
+    },
     {
       "title": "The Vibe Coder\u2019s Guide to Cloud + Scaling",
       "url": "https://read.technically.dev/p/cloud-scaling-for-vibe-coders",
@@ -378,15 +136,21 @@
       "url": "https://read.technically.dev/p/whats-google-doing-with-ai",
       "date": "2026-09-15",
       "description": "Inside Google&#8217;s full-stack cloud bet, and how it differs from Microsoft and AWS."
-    },
-    {
-      "title": "Software Eng for Vibe Coders: Auth + Security",
-      "url": "https://read.technically.dev/p/security-for-vibe-coders",
-      "date": "2026-09-08",
-      "description": "How to make sure anyone on the internet can't just delete your app's data, and other security considerations."
     }
   ],
   "openinsights.substack.com": [
+    {
+      "title": "Our Q3 2026 Update: Our Companies (OXY, RIG, VAL)",
+      "url": "https://www.openinsightscap.com/p/our-q3-2026-update-our-companies",
+      "date": "2026-10-19",
+      "description": "October 18, 2026"
+    },
+    {
+      "title": "Our Q3 2026 Letter and Look Ahead",
+      "url": "https://www.openinsightscap.com/p/our-q3-2026-letter-and-look-ahead",
+      "date": "2026-10-19",
+      "description": "October 18, 2026"
+    },
     {
       "title": "Oil Market: When All You Can Say is Wow.",
       "url": "https://www.openinsightscap.com/p/oil-market-when-all-you-can-say-is",
@@ -404,50 +168,38 @@
       "url": "https://www.openinsightscap.com/p/oil-when-the-invisible-becomes-visible",
       "date": "2026-09-12",
       "description": "September 12, 2026"
-    },
-    {
-      "title": "As the Summer Fades, Energy Begins to Heat-Up",
-      "url": "https://www.openinsightscap.com/p/as-the-summer-fades-energy-begins",
-      "date": "2026-09-11",
-      "description": "September 4, 2026"
-    },
-    {
-      "title": "ServiceNow: When SAAS Meets AI = Opportunities",
-      "url": "https://www.openinsightscap.com/p/servicenow-when-saas-meets-ai-opportunities",
-      "date": "2026-08-28",
-      "description": "August 28, 2026"
     }
   ],
   "www.chinatalk.media": [
     {
-      "title": "10 Takeaways from Q3",
-      "url": "https://www.chinatalk.media/p/10-takeaways-from-q3",
-      "date": "2026-10-11",
-      "description": "AI, China, defense, national security, supply chains, the Protestant roots of Kim Il-sung&#8217;s Messiah complex, the lethality of hydrofluoric acid, and horseback archery in Kyrgyzstan."
+      "title": "Drone Dominance",
+      "url": "https://www.chinatalk.media/p/drone-dominance",
+      "date": "2026-10-19",
+      "description": "the Pentagon&#8217;s $1bn drone contest"
     },
     {
-      "title": "Kevin Roose on the AGI Believers: Oppenheimer with Equity",
-      "url": "https://www.chinatalk.media/p/the-agi-chronicles",
-      "date": "2026-10-09",
-      "description": "this one was so fun"
+      "title": "The Case for DUV Controls",
+      "url": "https://www.chinatalk.media/p/saif-khan-the-case-for-duv-controls",
+      "date": "2026-10-17",
+      "description": "with Saif Khan!"
     },
     {
-      "title": "The Spice Trader vs. the Tariffs",
-      "url": "https://www.chinatalk.media/p/the-spice-trader-vs-the-tariffs",
-      "date": "2026-10-08",
-      "description": "a section 301 update from the litigant"
+      "title": "Why a Chinese AI Lab\u2019s Product Lead Thinks AGI is \u201cInevitable\u201d",
+      "url": "https://www.chinatalk.media/p/why-a-chinese-ai-labs-product-lead",
+      "date": "2026-10-16",
+      "description": "and nobody knows what it&#8217;ll look like"
     },
     {
-      "title": "China, the FCC, and the Logic of Transceivers",
-      "url": "https://www.chinatalk.media/p/china-the-fcc-and-the-logic-of-transceivers",
-      "date": "2026-10-07",
-      "description": "The dependencies that a potential rule on optical transceivers misses"
+      "title": "\u201cI Will Complain to the EU!\u201d",
+      "url": "https://www.chinatalk.media/p/workers-of-the-world-email-volkswagen",
+      "date": "2026-10-14",
+      "description": "How 107 laid-off Chinese graduates turned BMW, VW, and Mercedes into leverage"
     },
     {
-      "title": "Data is the Hard Part",
-      "url": "https://www.chinatalk.media/p/data-is-the-hard-part",
-      "date": "2026-10-06",
-      "description": "Bharat Patel is currently Accenture&#8217;s AI and data lead for its defense portfolio, a former enlisted Navy sailor, and a veteran of the Army acquisition world, with experience at MITRE and across"
+      "title": "WarTalk: AutoWarCom and Project Meridian",
+      "url": "https://www.chinatalk.media/p/wartalk-autowarcom-and-project-meridian",
+      "date": "2026-10-13",
+      "description": "+ Newt returns!"
     }
   ],
   "capitalmischief.substack.com": [],
@@ -485,37 +237,43 @@
   ],
   "robinjbrooks.substack.com": [
     {
-      "title": "Will Gold Boom Again Like in 2025?",
-      "url": "https://robinjbrooks.substack.com/p/will-gold-boom-again-like-in-2025-dd2",
-      "date": "2026-10-11",
+      "title": "Why France is Systemic",
+      "url": "https://robinjbrooks.substack.com/p/why-france-is-systemic",
+      "date": "2026-10-19",
+      "description": "There&#8217;s a widespread view that France is too small to matter, but that&#8217;s wrong"
+    },
+    {
+      "title": "The Dark Side of China\u2019s Export Boom",
+      "url": "https://robinjbrooks.substack.com/p/the-dark-side-of-chinas-export-boom",
+      "date": "2026-10-19",
+      "description": "China&#8217;s direct exports to Russia are surging, as are its transshipments via Central Asia"
+    },
+    {
+      "title": "The New Era of Chinese Mercantilism",
+      "url": "https://robinjbrooks.substack.com/p/the-new-era-of-chinese-mercantilism",
+      "date": "2026-10-18",
       "description": "A recording from Robin J Brooks's live video"
     },
     {
-      "title": "Will Gold Boom Again Like in 2025?",
-      "url": "https://robinjbrooks.substack.com/p/will-gold-boom-again-like-in-2025",
-      "date": "2026-10-11",
-      "description": "It was Fed easing that powered last year&#8217;s rise in gold - the Fed isn&#8217;t quite there yet"
+      "title": "Financial Stability Risk as AI Debt Sinks",
+      "url": "https://robinjbrooks.substack.com/p/financial-stability-risk-as-ai-debt",
+      "date": "2026-10-18",
+      "description": "Financial stress is rising, but we&#8217;re still at moderate levels compared to earlier in 2026"
     },
     {
-      "title": "Are Japanese investors dumping French bonds?",
-      "url": "https://robinjbrooks.substack.com/p/are-japanese-investors-dumping-french",
-      "date": "2026-10-10",
+      "title": "How big is the AI fear factor in markets?",
+      "url": "https://robinjbrooks.substack.com/p/how-big-is-the-ai-fear-factor-in",
+      "date": "2026-10-17",
       "description": "A recording from Robin J Brooks's live video"
-    },
-    {
-      "title": "Who\u2019s Selling French Debt?",
-      "url": "https://robinjbrooks.substack.com/p/whos-selling-french-debt",
-      "date": "2026-10-10",
-      "description": "The blame for rising French yields lies with France, not some Japanese investor"
-    },
-    {
-      "title": "How the Russian Plague Could Spread",
-      "url": "https://robinjbrooks.substack.com/p/how-the-russian-plague-could-spread",
-      "date": "2026-10-09",
-      "description": "If the plague gets out of Russia, it&#8217;s most likely to do that via Turkey or Thailand"
     }
   ],
   "www.parentdata.org": [
+    {
+      "title": "The Latest: What happens if you\u2019re pregnant on Ozempic?",
+      "url": "https://parentdata.org/grown-ups/latest/",
+      "date": "2026-10-18",
+      "description": "Plus the latest on egg freezing\nContinue reading on ParentData"
+    },
     {
       "title": "Actually, You\u2019re Fine: A Compassionate, Practical Guide to Maximizing Your Child\u2019s Potential in the Age of Anxiety",
       "url": "https://parentdata.org/kids/maximizing-child-potential-anxiety/",
@@ -539,15 +297,27 @@
       "url": "https://parentdata.org/uncategorized/dinner-planned-5-minutes-to-less-mental-load/",
       "date": "2026-07-28",
       "description": "Subscribe to ParentData You\u2019ve used all of your free article views. Subscribe today to get: Unlimited access to articles on ParentData Personalized newsletters delivered to your inbox Invitations to"
-    },
-    {
-      "title": "Everyone Is Talking About Male Testosterone",
-      "url": "https://parentdata.org/grown-ups/male-testosterone-decline-data/",
-      "date": "2026-07-26",
-      "description": "What the data says about testosterone levels and supplementation\nContinue reading on ParentData"
     }
   ],
   "debtserious.substack.com": [
+    {
+      "title": "Podcast | Episode #9: Trends in Private Credit Legal Docs | Jennifer Daly, Chair of Private Credit & Special Situations at Paul Hastings",
+      "url": "https://debtserious.substack.com/p/podcast-episode-9-trends-in-private",
+      "date": "2026-10-19",
+      "description": "Loose vs. Tight Docs | LME Clauses | Loan Restructuring"
+    },
+    {
+      "title": "WEEKENDER | 17 October 2026",
+      "url": "https://debtserious.substack.com/p/weekender-17-october-2026",
+      "date": "2026-10-17",
+      "description": "News | Transactions | Rates | Chart of the Week"
+    },
+    {
+      "title": "Round #64: Primer: The Notorious ARR Loans",
+      "url": "https://debtserious.substack.com/p/round-64-primer-the-notorious-arr",
+      "date": "2026-10-15",
+      "description": "A Deep Dive into SaaS Companies and the Structuring of ARR Loans"
+    },
     {
       "title": "WEEKENDER | 10 October 2026",
       "url": "https://debtserious.substack.com/p/weekender-10-october-2026",
@@ -559,27 +329,21 @@
       "url": "https://debtserious.substack.com/p/im-dead-serious-about-debt-serious",
       "date": "2026-10-09",
       "description": "So, I&#8217;m Doubling Down on Content and Hiding It Behind a Paywall"
-    },
-    {
-      "title": "DILIGENCE CALL #1: State of the Debt Market",
-      "url": "https://debtserious.substack.com/p/diligence-call-1-state-of-the-debt",
-      "date": "2026-10-09",
-      "description": "Stefan Shaffer, Founder & Managing Director, SPP Capital"
-    },
-    {
-      "title": "Round #63: Daily NAV + Restructuring",
-      "url": "https://debtserious.substack.com/p/round-63-daily-nav-restructuring",
-      "date": "2026-10-06",
-      "description": "Consumer Sentiment; SEC and Apollo on NAV; Getting Ready to Restructure; Secondaries & Credit Cycle; Inside Subprime Auto ABS; JPMorgan on Credit; Notable Deals; Bulletin Board."
-    },
-    {
-      "title": "WEEKENDER | 3 October 2026",
-      "url": "https://debtserious.substack.com/p/weekender-3-october-2026",
-      "date": "2026-10-03",
-      "description": "News | Transactions | Rates | Chart(s) of the Week"
     }
   ],
   "cartadocondado.substack.com": [
+    {
+      "title": "Qual \u00e9 a sua amostra?",
+      "url": "https://cartadocondado.substack.com/p/qual-e-a-sua-amostra",
+      "date": "2026-10-18",
+      "description": "Aquele per&#237;odo tranquilo que ocorre de 4 em 4 anos&#8230;"
+    },
+    {
+      "title": "Se algo n\u00e3o pode continuar para sempre, vai parar - Condado View",
+      "url": "https://cartadocondado.substack.com/p/se-algo-nao-pode-continuar-para-sempre",
+      "date": "2026-10-17",
+      "description": "Em agosto, a gente falou aqui da receita da CoreWeave, empresa que aluga capacidade de computa&#231;&#227;o para treinar IA."
+    },
     {
       "title": "Como surgiram os Estados Unidos?",
       "url": "https://cartadocondado.substack.com/p/como-surgiram-os-estados-unidos",
@@ -597,18 +361,6 @@
       "url": "https://cartadocondado.substack.com/p/olavao",
       "date": "2026-09-27",
       "description": "(Re)descobrindo um dos arquitetos do mercado financeiro brasileiro"
-    },
-    {
-      "title": "A economia depois do trabalho - Edi\u00e7\u00e3o Especial do Condado AI View",
-      "url": "https://cartadocondado.substack.com/p/a-economia-depois-do-trabalho-edicao",
-      "date": "2026-09-25",
-      "description": "Londres, 23 de julho."
-    },
-    {
-      "title": "A vida do Faria Limer virou um terminal da Bloomberg",
-      "url": "https://cartadocondado.substack.com/p/a-vida-do-faria-limer-virou-um-terminal",
-      "date": "2026-09-20",
-      "description": "Metrificaram a vida, tem gr&#225;fico pra tudo"
     }
   ],
   "thecentralbankswatcher.substack.com": [],
@@ -646,6 +398,12 @@
   ],
   "yetanothervalueblog.substack.com": [
     {
+      "title": "October 2026 Random Ramblings",
+      "url": "https://www.yetanothervalueblog.com/p/october-2026-random-ramblings",
+      "date": "2026-10-14",
+      "description": "YAVP #428"
+    },
+    {
       "title": "Consumer agents: an ethics race, a prisoner\u2019s dilemma, and the obvious OTA short",
       "url": "https://www.yetanothervalueblog.com/p/consumer-agents-an-ethics-race-a",
       "date": "2026-10-09",
@@ -668,12 +426,6 @@
       "url": "https://www.yetanothervalueblog.com/p/dark-arts-or-infinite-reload-ttds",
       "date": "2026-09-29",
       "description": "It would be totally fair to accuse me of being &#8220;corporate governance&#8221; pilled, as most of the investments I&#8217;ve made so far this year have had some type of &#8220;dark arts&#8221; styl"
-    },
-    {
-      "title": "Before you fade Muse, use it for 72 hours",
-      "url": "https://www.yetanothervalueblog.com/p/before-you-fade-muse-use-it-for-72",
-      "date": "2026-09-28",
-      "description": "Here&#8217;s how (and why) I&#8217;d recommend investors experiment with consumer agents like Muse"
     }
   ],
   "www.weightythoughts.com": [
@@ -743,6 +495,18 @@
   "quantseeker.substack.com": [
     {
       "title": "Weekly Research Recap",
+      "url": "https://www.quantseeker.com/p/weekly-research-recap-02f",
+      "date": "2026-10-13",
+      "description": "Latest research on investing and trading"
+    },
+    {
+      "title": "Do Stocks Rally Into Midterm Elections? A Century of Evidence",
+      "url": "https://www.quantseeker.com/p/do-stocks-rally-into-midterm-elections",
+      "date": "2026-10-13",
+      "description": "Midterm years have gained 5% around Election Day since 1926, versus 1.4% in other years. How is 2026 tracking?"
+    },
+    {
+      "title": "Weekly Research Recap",
       "url": "https://www.quantseeker.com/p/weekly-research-recap-3e6",
       "date": "2026-10-07",
       "description": "Latest research on investing and trading"
@@ -758,21 +522,21 @@
       "url": "https://www.quantseeker.com/p/weekly-research-recap-08e",
       "date": "2026-09-29",
       "description": "Latest research on investing and trading"
-    },
-    {
-      "title": "Timing Short Volatility with VIX Curve Momentum",
-      "url": "https://www.quantseeker.com/p/timing-short-volatility-with-vix",
-      "date": "2026-09-23",
-      "description": "Testing whether changes in the VIX term structure contain information beyond its level"
-    },
-    {
-      "title": "Weekly Research Recap",
-      "url": "https://www.quantseeker.com/p/weekly-research-recap-e0b",
-      "date": "2026-09-22",
-      "description": "Latest research on investing and trading"
     }
   ],
   "reboundcapital.substack.com": [
+    {
+      "title": "Taking advantage of the semis pullback",
+      "url": "https://reboundcapital.substack.com/p/taking-advantage-of-the-semis-pullback",
+      "date": "2026-10-16",
+      "description": "Taking advantage of the semis pullback"
+    },
+    {
+      "title": "Deep Dive: Applied Materials ($AMAT)",
+      "url": "https://reboundcapital.substack.com/p/deep-dive-applied-materials-amat",
+      "date": "2026-10-14",
+      "description": "Is it a potential buy?"
+    },
     {
       "title": "Notes on 5.3% US 10 Year Yields",
       "url": "https://reboundcapital.substack.com/p/notes-on-53-us-10-year-yields",
@@ -790,21 +554,15 @@
       "url": "https://reboundcapital.substack.com/p/deep-dive-intuit-intu",
       "date": "2026-10-06",
       "description": "Will AI file your taxes?"
-    },
-    {
-      "title": "October 2026 Portfolio Update",
-      "url": "https://reboundcapital.substack.com/p/october-2026-portfolio-update",
-      "date": "2026-10-02",
-      "description": "Updating the intrinsic value and DCF models for all our holdings"
-    },
-    {
-      "title": "Hindsight Capital",
-      "url": "https://reboundcapital.substack.com/p/hindsight-capital",
-      "date": "2026-09-27",
-      "description": "Would you have invested in beaten down companies?"
     }
   ],
   "stevesaretsky.substack.com": [
+    {
+      "title": "COPE Harder",
+      "url": "https://stevesaretsky.substack.com/p/cope-harder",
+      "date": "2026-10-19",
+      "description": "Vancouver's new mayor likely to be swayed by far-left COPE council which aims to ramp up tenant compensation, social housing, and Real Estate taxes."
+    },
     {
       "title": "Build BC Strong",
       "url": "https://stevesaretsky.substack.com/p/build-bc-strong",
@@ -828,12 +586,6 @@
       "url": "https://stevesaretsky.substack.com/p/floating-rates",
       "date": "2026-09-14",
       "description": "Happy Monday Morning!"
-    },
-    {
-      "title": "The Cost of Holding an Asset",
-      "url": "https://stevesaretsky.substack.com/p/the-cost-of-holding-an-asset",
-      "date": "2026-08-31",
-      "description": "Since 2020, the cost of taxes, insurance, and upkeep are rising 2-3x faster than the rent you're allowed to collect in BC."
     }
   ],
   "macromusings.substack.com": [
@@ -879,37 +631,55 @@
   ],
   "www.publicnotice.co": [
     {
-      "title": "Trump\u2019s collapse with indy voters, explained by Greg Sargent",
-      "url": "https://www.publicnotice.co/p/greg-sargent-interview-2026-midterms",
-      "date": "2026-10-10",
-      "description": "&#8220;This is the center of the electorate completely turning on Trump.&#8221;"
+      "title": "The weird rise and spectacular fall of Katie Zacharia",
+      "url": "https://www.publicnotice.co/p/katie-zacharia-rise-and-fall",
+      "date": "2026-10-19",
+      "description": "Remember when we were only gonna hire the best people?"
     },
     {
-      "title": "We've reached the livestreamed executions part of Trump 2.0",
-      "url": "https://www.publicnotice.co/p/weve-reached-the-livestreamed-executions",
-      "date": "2026-10-09",
-      "description": "We talk Hegseth&#8217;s barbarity, Trump&#8217;s increasingly sad rallies, and more."
+      "title": "Steve Levitsky on the slide into \u201ccompetitive authoritarianism\u201d",
+      "url": "https://www.publicnotice.co/p/steve-levitsky-interview-competitive-authoritarianism",
+      "date": "2026-10-18",
+      "description": "&#8220;I continue to believe it&#8217;s quite reversible. But I think we crossed that line.&#8221;"
     },
     {
-      "title": "Trump\u2019s meme coin grift hits a new low",
-      "url": "https://www.publicnotice.co/p/trump-meme-coin-dinner",
-      "date": "2026-10-09",
-      "description": "Buyers have lost almost everything. He keeps pumping them anyway."
+      "title": "Who wants to visit an authoritarian America?",
+      "url": "https://www.publicnotice.co/p/trump-us-tourism",
+      "date": "2026-10-17",
+      "description": "Trump take tourism."
     },
     {
-      "title": "Trump faces his worst bankruptcy yet",
-      "url": "https://www.publicnotice.co/p/trump-political-bankruptcy",
-      "date": "2026-10-08",
-      "description": "His political capital is gone and the repo man is on the way."
+      "title": "Dumb and dummymander",
+      "url": "https://www.publicnotice.co/p/dummymander",
+      "date": "2026-10-16",
+      "description": "Turns out redistricting can&#8217;t fix being super unpopular."
     },
     {
-      "title": "Roger Marshall is running an all time terrible campaign",
-      "url": "https://www.publicnotice.co/p/roger-marshall-hamilton",
-      "date": "2026-10-07",
-      "description": "Red state MAGAs aren&#8217;t equipped for real competition and accountability."
+      "title": "Russia, Russia, Russia",
+      "url": "https://www.publicnotice.co/p/russia-russia-russia",
+      "date": "2026-10-15",
+      "description": "Putin&#8217;s diesel ain&#8217;t saving Trump&#8217;s bacon."
     }
   ],
   "lbmacro.substack.com": [
+    {
+      "title": "The Tightening Cycle Has Only Just Begun",
+      "url": "https://lbmacro.substack.com/p/the-tightening-cycle-has-only-just",
+      "date": "2026-10-18",
+      "description": "LB MACRO Weekly 18.10.2026"
+    },
+    {
+      "title": "Tech Under Pressure as Bubble Warnings Return",
+      "url": "https://lbmacro.substack.com/p/tech-under-pressure-as-bubble-warnings",
+      "date": "2026-10-13",
+      "description": "LB MACRO Daily 13.10.2026"
+    },
+    {
+      "title": "Assessing the ECB's TPI: The Bar For Activation is High",
+      "url": "https://lbmacro.substack.com/p/assessing-the-ecbs-tpi-the-bar-for",
+      "date": "2026-10-12",
+      "description": "LB MACRO Weekly 12.10.2026"
+    },
     {
       "title": "In Conversation With Luigi Buttiglione",
       "url": "https://lbmacro.substack.com/p/in-conversation-with-luigi-buttiglione",
@@ -921,24 +691,6 @@
       "url": "https://lbmacro.substack.com/p/a-whiff-of-a-european-sovereign-crisis",
       "date": "2026-10-05",
       "description": "LB MACRO Weekly 05.10.2026"
-    },
-    {
-      "title": "Bond Yields? Higher for Longer",
-      "url": "https://lbmacro.substack.com/p/bond-yields-higher-for-longer",
-      "date": "2026-09-27",
-      "description": "LB MACRO Weekly 27.09.2026"
-    },
-    {
-      "title": "Shock Spreading From Energy, to Inflation, Central Banks, Bonds and, Eventually, Equities",
-      "url": "https://lbmacro.substack.com/p/shock-spreading-from-energy-to-inflation",
-      "date": "2026-09-21",
-      "description": "LB MACRO Weekly 20.09.2026"
-    },
-    {
-      "title": "BoJ Hikes, But With Split Decision",
-      "url": "https://lbmacro.substack.com/p/boj-hikes-but-with-split-decision",
-      "date": "2026-09-18",
-      "description": "LB MACRO Daily 18.09.2026"
     }
   ],
   "quantumnomia.substack.com": [],
@@ -978,6 +730,12 @@
   "helenemeisler.substack.com": [
     {
       "title": "Saturday Chart Fest",
+      "url": "https://helenemeisler.substack.com/p/saturday-chart-fest-fe3",
+      "date": "2026-10-17",
+      "description": "Good Saturday Morning Chart Fans!"
+    },
+    {
+      "title": "Saturday Chart Fest",
       "url": "https://helenemeisler.substack.com/p/saturday-chart-fest-399",
       "date": "2026-10-10",
       "description": "Good Saturday Morning Chart Fans!"
@@ -999,16 +757,22 @@
       "url": "https://helenemeisler.substack.com/p/saturday-chart-fest-4e7",
       "date": "2026-09-19",
       "description": "Good Saturday Morning Chart Fans!"
-    },
-    {
-      "title": "Saturday Chart Fest",
-      "url": "https://helenemeisler.substack.com/p/saturday-chart-fest-f0d",
-      "date": "2026-09-12",
-      "description": "Good Saturday Morning Chart Fans!"
     }
   ],
   "quantenthusiasts.substack.com": [],
   "www.commoditycontext.com": [
+    {
+      "title": "Oil Context Weekly (W42)",
+      "url": "https://www.commoditycontext.com/p/ocw42w26",
+      "date": "2026-10-16",
+      "description": "Brent futures hit $110 for 1st time since May and term structure strengthened amid rumours of damage to Saudi oil infrastructure and fears of escalation in both the US-Iran and Saudi-Houthi conflicts"
+    },
+    {
+      "title": "OPEC+ Data Deck (October 2026)",
+      "url": "https://www.commoditycontext.com/p/opec-data-deck-october-2026",
+      "date": "2026-10-14",
+      "description": "Middle Eastern crude production continued to rise through September as Hormuz flows reached a wartime high, driven by Saudi Arabia&#8217;s return to Gulf loadings and Iraq&#8217;s recovery to near-pre"
+    },
     {
       "title": "Oil Context Weekly (W41)",
       "url": "https://www.commoditycontext.com/p/ocw41w26",
@@ -1026,22 +790,16 @@
       "url": "https://www.commoditycontext.com/p/ocw40w26",
       "date": "2026-10-02",
       "description": "Crude prices pulled back on the recent recovery in Middle Eastern oil flows despite growing fears of an escalation in hostilities, while governments return to energy security interventions once again"
-    },
-    {
-      "title": "Diesel Danger Zone",
-      "url": "https://www.commoditycontext.com/p/diesel-danger-zone",
-      "date": "2026-10-01",
-      "description": "Wars have hobbled many of the world&#8217;s largest diesel exporters, pushing the price of the industrial workhorse fuel into the stratosphere in search of elusive demand destruction as governments sc"
-    },
-    {
-      "title": "Oil Context Weekly (W39)",
-      "url": "https://www.commoditycontext.com/p/ocw39w26",
-      "date": "2026-09-25",
-      "description": "Crude ended roughly flat once again this week despite a more than $10/bbl intraweek range as the barrel ricocheted between diplomatic optimism and mounting concerns regarding prompt barrel scarcity."
     }
   ],
   "energyoutlookadvisors.substack.com": [],
   "chartstorm.substack.com": [
+    {
+      "title": "Weekly S&P500 ChartStorm - 18 October 2026",
+      "url": "https://www.chartstorm.info/p/weekly-s-and-p500-chartstorm-18-october",
+      "date": "2026-10-18",
+      "description": "This week: technical check, small cap correction + next steps, buyback comeback, private equity stocks, tech credit, margin debt, concentration, sentiment/positioning..."
+    },
     {
       "title": "Weekly S&P500 ChartStorm - 11 October 2026",
       "url": "https://www.chartstorm.info/p/weekly-s-and-p500-chartstorm-11-october",
@@ -1065,113 +823,119 @@
       "url": "https://www.chartstorm.info/p/weekly-s-and-p500-chartstorm-20-september",
       "date": "2026-09-20",
       "description": "This week: fund flows, foreign buying, economic confidence, cyclical surge, investor sentiment, margin debt , buyback blackouts, Europe risk hedging..."
-    },
-    {
-      "title": "Weekly S&P500 ChartStorm - 13 September 2026",
-      "url": "https://www.chartstorm.info/p/weekly-s-and-p500-chartstorm-13-september",
-      "date": "2026-09-13",
-      "description": "This week: technical check, breadth signs, warnings, correlations, liquidity, Fed hike risk, growth vs value, semis, and investor asset allocations..."
     }
   ],
   "damnang.substack.com": [],
   "macrocharts.substack.com": [
     {
-      "title": "LOCKED AND LOADED.",
-      "url": "https://www.macrocharts.com/p/locked-and-loaded",
-      "date": "2026-10-11",
-      "description": "One of the best setups of the year. My core scenario may be in motion. Seven Charts for the week ahead, Top signals I&#8217;m watching, my Updated Plan, and much more."
+      "title": "PANIC ACTIVATED.",
+      "url": "https://www.macrocharts.com/p/panic-activated",
+      "date": "2026-10-18",
+      "description": "Must-see charts no one is talking about. Studying the panic and next steps. Big turns underway, one of the best setups of the year, and much more."
     },
     {
-      "title": "Market Update & Signals 10/9/26",
-      "url": "https://www.macrocharts.com/p/market-update-and-signals-10926",
-      "date": "2026-10-09",
-      "description": "A massive asymmetric opportunity. Moving in a clear direction, and with a clear goal in mind. My core scenario may already be in motion."
+      "title": "Market Update & Signals 10/16/26",
+      "url": "https://www.macrocharts.com/p/market-update-and-signals-101626",
+      "date": "2026-10-16",
+      "description": "We don&#8217;t need roads. The impossible just happened. Price action strongly reinforcing my core view. Think BIG ALPHA. Historical studies. Following my plan."
     },
     {
-      "title": "Market Update & Signals 10/8/26",
-      "url": "https://www.macrocharts.com/p/market-update-and-signals-10826",
-      "date": "2026-10-08",
-      "description": "Thinking about important portfolio changes. My strategic allocation plan. Something interesting is changing under the market. What happens when the streak ends"
+      "title": "Market Update & Signals 10/15/26",
+      "url": "https://www.macrocharts.com/p/market-update-and-signals-101526",
+      "date": "2026-10-15",
+      "description": "Survival of the fittest. A CLASSIC news failure. Volatility surging. Crowded positions unwinding. Following my plan."
     },
     {
-      "title": "Market Update & Signals 10/7/26",
-      "url": "https://www.macrocharts.com/p/market-update-and-signals-10726",
-      "date": "2026-10-07",
-      "description": "Momentum is expanding across the board. Strong action across multiple core watchlist groups. New groups are joining the rally. Watching Rates and FX closely."
+      "title": "Market Update & Signals 10/14/26",
+      "url": "https://www.macrocharts.com/p/market-update-and-signals-101426",
+      "date": "2026-10-14",
+      "description": "An asymmetric setup for earnings and upside *alpha*. A legend shares his updated view on stocks (don&#8217;t miss it). New signals have triggered. Awaiting key data."
     },
     {
-      "title": "Market Update & Signals 10/6/26",
-      "url": "https://www.macrocharts.com/p/market-update-and-signals-10626",
-      "date": "2026-10-06",
-      "description": "Following up on historic signals. Markets are in motion with big moves out of the gate. The asymmetry remains extremely compelling. The next big trend may be ready to run."
+      "title": "Market Update & Signals 10/13/26",
+      "url": "https://www.macrocharts.com/p/market-update-and-signals-101326",
+      "date": "2026-10-13",
+      "description": "Memory stocks down sharply. Bonds bid. Moving the portfolio strategically and methodically. Focusing on strength, as a matter of survival."
     }
   ],
   "polimetrics.substack.com": [
+    {
+      "title": "What Prop 419 Would Fund at Every Mesa Public School",
+      "url": "https://polimetrics.substack.com/p/what-prop-419-would-fund-at-every",
+      "date": "2026-10-19",
+      "description": "Mesa Public Schools&#8217; $449 million bond, mapped school by school, with what it would cost on a property tax bill"
+    },
+    {
+      "title": "Prop 419 in Mesa, AZ",
+      "url": "https://polimetrics.substack.com/p/prop-419-in-mesa-az",
+      "date": "2026-10-18",
+      "description": "What Mesa Public Schools' $449 million bond would build at each school, and what it would add to a property tax bill"
+    },
+    {
+      "title": "How Local Governments Spend Their Money",
+      "url": "https://polimetrics.substack.com/p/how-local-governments-spend-their-b92",
+      "date": "2026-10-14",
+      "description": "Where $2.3 trillion goes, from school districts and city water systems to county jails and hospital districts"
+    },
+    {
+      "title": "How Local Governments Spend Their Money",
+      "url": "https://polimetrics.substack.com/p/how-local-governments-spend-their",
+      "date": "2026-10-13",
+      "description": "A walkthrough of where local spending goes, across counties, cities, townships, school districts, and special districts"
+    },
     {
       "title": "How Local Governments Pay for Themselves",
       "url": "https://polimetrics.substack.com/p/how-local-governments-pay-for-themselves-d9f",
       "date": "2026-10-09",
       "description": "A walkthrough of where local revenue comes from, across counties, cities, townships, school districts, and special districts"
-    },
-    {
-      "title": "How Local Governments Pay for Themselves: Property Taxes, Sales Taxes, Fees, and State Aid",
-      "url": "https://polimetrics.substack.com/p/how-local-governments-pay-for-themselves",
-      "date": "2026-10-09",
-      "description": "The US has about 91,000 local governments, from counties and cities to school districts and tiny special districts that handle fire protection, water, libraries, and even cemeteries."
-    },
-    {
-      "title": "How Unemployment Insurance Works: Who Pays, Who Qualifies, and How Benefits Are Funded",
-      "url": "https://polimetrics.substack.com/p/how-unemployment-insurance-works-a8d",
-      "date": "2026-10-06",
-      "description": "Description"
-    },
-    {
-      "title": "How Unemployment Insurance Works: Who Pays, Who Qualifies, and How Benefits Are Funded",
-      "url": "https://polimetrics.substack.com/p/how-unemployment-insurance-works",
-      "date": "2026-10-06",
-      "description": "A walkthrough of the UI system from employer payroll taxes to weekly benefit checks, using Arizona as an example"
-    },
-    {
-      "title": "The Budget Behind the Pentagon's New Office of Religious Affairs",
-      "url": "https://polimetrics.substack.com/p/the-budget-behind-the-pentagons-new-4d8",
-      "date": "2026-10-02",
-      "description": "On September 30, the Secretary of War signed a memo creating an Office of Religious Affairs to oversee religious support for a department of about 2.9 million people."
     }
   ],
   "dualityresearch.substack.com": [
+    {
+      "title": "Upside = Reality \u2212 Expectations",
+      "url": "https://dualityresearch.substack.com/p/upside-reality-expectations",
+      "date": "2026-10-19",
+      "description": "Thoughts on the Market"
+    },
+    {
+      "title": "Week 42",
+      "url": "https://dualityresearch.substack.com/p/week-42-635",
+      "date": "2026-10-17",
+      "description": "SectorSnap"
+    },
+    {
+      "title": "\ud83d\udcb8 CPI \u2013 September",
+      "url": "https://dualityresearch.substack.com/p/cpi-september-978",
+      "date": "2026-10-14",
+      "description": "MacroDrip"
+    },
+    {
+      "title": "All This, and Still at All-Time Highs?",
+      "url": "https://dualityresearch.substack.com/p/all-this-and-still-at-all-time-highs",
+      "date": "2026-10-12",
+      "description": "Thoughts on the Market"
+    },
     {
       "title": "Week 41",
       "url": "https://dualityresearch.substack.com/p/week-41-24f",
       "date": "2026-10-10",
       "description": "SectorSnap"
-    },
-    {
-      "title": "The Warning Sign Everyone Has Backwards",
-      "url": "https://dualityresearch.substack.com/p/the-warning-sign-everyone-has-backwards",
-      "date": "2026-10-05",
-      "description": "Thoughts on the Market"
-    },
-    {
-      "title": "Week 40",
-      "url": "https://dualityresearch.substack.com/p/week-40-1b4",
-      "date": "2026-10-03",
-      "description": "SectorSnap"
-    },
-    {
-      "title": "The Market Is Cracking. But Look Who\u2019s Cracking.",
-      "url": "https://dualityresearch.substack.com/p/the-market-is-cracking-but-look-whos",
-      "date": "2026-09-28",
-      "description": "Thoughts on the Market"
-    },
-    {
-      "title": "Week 39",
-      "url": "https://dualityresearch.substack.com/p/week-39-f45",
-      "date": "2026-09-26",
-      "description": "SectorSnap"
     }
   ],
   "www.capitalwars.com": [],
   "thesignal.substack.com": [
+    {
+      "title": "Meta\u2019s Muse, Google\u2019s Argon, and OpenAI\u2019s Bugged Meeting Room",
+      "url": "https://thesignal.substack.com/p/metas-muse-googles-argon-and-openais",
+      "date": "2026-10-18",
+      "description": "This week in AI: Meta&#8217;s Muse Spark Open becomes the top US open-weight model, Google opens Gemini 4 Argon to developers worldwide, and OpenAI traces a hidden recording device to one of its own e"
+    },
+    {
+      "title": "Mathematicians are protesting AI like it\u2019s 1986",
+      "url": "https://thesignal.substack.com/p/mathematicians-are-protesting-ai",
+      "date": "2026-10-14",
+      "description": "The fear is forty years old, and so is the answer."
+    },
     {
       "title": "Hark the Herald Agent, Claude Gets Its Docs in a Row, and OpenAI\u2019s Sign of the Times",
       "url": "https://thesignal.substack.com/p/hark-the-herald-agent-claude-gets",
@@ -1189,22 +953,22 @@
       "url": "https://thesignal.substack.com/p/google-steals-fire-governments-move",
       "date": "2026-10-04",
       "description": "This week in AI: Google's Gemini 4 Argon outranks every rival, Britain promises a global AI code, and OpenAI's dots take aim at Meta's Muse."
-    },
-    {
-      "title": "Goodbye AI, Hello SI",
-      "url": "https://thesignal.substack.com/p/goodbye-ai-hello-si",
-      "date": "2026-10-02",
-      "description": "A new name for AI, and a clear message about who's in charge of it."
-    },
-    {
-      "title": "OpenAI's Solar System, Claude Talks Sense, and Google's Space Face",
-      "url": "https://thesignal.substack.com/p/openais-solar-system-claude-talks",
-      "date": "2026-09-27",
-      "description": "This week in AI: OpenAI launches cheaper, faster versions of GPT-6, Opus 5.5 rivals Anthropic's top public model, Google sends AI chips into orbit to chase solar power."
     }
   ],
   "asgoghie.substack.com": [],
   "worksinprogress.substack.com": [
+    {
+      "title": "Porcelain",
+      "url": "https://www.worksinprogress.news/p/porcelain",
+      "date": "2026-10-16",
+      "description": "A pricey kitchen stove left Charles C Mann with a question: what on earth is Dekton?"
+    },
+    {
+      "title": "How China became rich",
+      "url": "https://www.worksinprogress.news/p/how-china-became-rich",
+      "date": "2026-10-14",
+      "description": "It&#8217;s secret is its cities, not central planning"
+    },
     {
       "title": "Victorian elites stayed in bed until the afternoon",
       "url": "https://www.worksinprogress.news/p/why-were-victorian-elites-so-effective",
@@ -1222,21 +986,21 @@
       "url": "https://www.worksinprogress.news/p/you-can-just-eradicate-things",
       "date": "2026-10-05",
       "description": "The technology to eradicate mosquito-borne disease already exists. We just have to be brave enough to use it."
-    },
-    {
-      "title": "Why the Bronze Age collapsed",
-      "url": "https://www.worksinprogress.news/p/why-really-caused-the-bronze-age",
-      "date": "2026-09-28",
-      "description": "Historians like to blame drought, famine and invaders. But this can&#8217;t explain why the empires never came back."
-    },
-    {
-      "title": "The 1970s law holding back modern biotechnology",
-      "url": "https://www.worksinprogress.news/p/all-the-microbes-you-cant-have",
-      "date": "2026-09-22",
-      "description": "We&#8217;ve invented microbes that can eat plastic, detect landmines, and extract rare metals. They&#8217;ve been swallowed by a black hole."
     }
   ],
   "demographyunplugged.substack.com": [
+    {
+      "title": "Video | 2026 Midterm Elections: The Final Weeks",
+      "url": "https://www.demographyunplugged.com/p/video-2026-midterm-elections-the",
+      "date": "2026-10-14",
+      "description": "This morning, I filmed a special election webcast with JT Taylor, Hedgeye's veteran Washington Policy Analyst."
+    },
+    {
+      "title": "Marijuana Use Rebounds",
+      "url": "https://www.demographyunplugged.com/p/marijuana-use-rebounds",
+      "date": "2026-10-13",
+      "description": "Marijuana use is rebounding after a brief decline."
+    },
     {
       "title": "Prediction Markets Are Disrupting Sports Betting",
       "url": "https://www.demographyunplugged.com/p/prediction-markets-are-disrupting",
@@ -1254,21 +1018,15 @@
       "url": "https://www.demographyunplugged.com/p/reading-for-fun-is-disappearing",
       "date": "2026-09-29",
       "description": "Older Americans are still the most likely to read for fun."
-    },
-    {
-      "title": "Episode 106: Midterm Odds, US-China Talks, and a Divided UN",
-      "url": "https://www.demographyunplugged.com/p/episode-106-midterm-odds-us-china",
-      "date": "2026-09-25",
-      "description": "This week, we discuss Xi Jinping&#8217;s visit to Washington, Democrats&#8217; improving midterm prospects, rising measles deaths, elections in Russia and Germany, and the latest developments in the I"
-    },
-    {
-      "title": "Corruption Fears Surge",
-      "url": "https://www.demographyunplugged.com/p/corruption-fears-surge",
-      "date": "2026-09-21",
-      "description": "Distrust has become a defining feature of American politics."
     }
   ],
   "bojwatchtower.substack.com": [
+    {
+      "title": "G3 central bank meetings still live",
+      "url": "https://bojwatchtower.substack.com/p/g3-central-bank-meetings-still-live",
+      "date": "2026-10-19",
+      "description": "Message reinforcement, Politics & vigilantes, The dominos"
+    },
     {
       "title": "October\u2019s collective management",
       "url": "https://bojwatchtower.substack.com/p/octobers-collective-management",
@@ -1292,12 +1050,6 @@
       "url": "https://bojwatchtower.substack.com/p/boj-in-september-something-new",
       "date": "2026-09-14",
       "description": "September rate hike, articulating neutral, input from FOMC and Takaichi"
-    },
-    {
-      "title": "BoJ likes the new Fed pursuit of optionality",
-      "url": "https://bojwatchtower.substack.com/p/boj-likes-the-new-fed-pursuit-of",
-      "date": "2026-09-05",
-      "description": "All meetings live, meeting optionality = less speculative risk taking, volatility is market feedback as well, BoJ must internally revise growth higher"
     }
   ],
   "tscs.substack.com": [
@@ -1309,6 +1061,12 @@
     }
   ],
   "michaelwgreen.substack.com": [
+    {
+      "title": "Be My Guest -- The Machine Responds",
+      "url": "https://www.yesigiveafig.com/p/be-my-guest-the-machine-responds",
+      "date": "2026-10-18",
+      "description": "What does AI think about The Quiet Turning Series?"
+    },
     {
       "title": "A Top Tier Update",
       "url": "https://www.yesigiveafig.com/p/a-top-tier-update",
@@ -1332,12 +1090,6 @@
       "url": "https://www.yesigiveafig.com/p/the-market-has-a-rule-of-its-own",
       "date": "2026-09-20",
       "description": "Before the Fed reads the long end as a message, it should identify who is speaking"
-    },
-    {
-      "title": "The Machine Never Releases",
-      "url": "https://www.yesigiveafig.com/p/the-machine-never-releases",
-      "date": "2026-09-13",
-      "description": "What happens when the past can no longer become the past?"
     }
   ],
   "latinamericariskreport.substack.com": []
