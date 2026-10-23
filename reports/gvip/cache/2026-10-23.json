@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-23",
+  "holdings_as_of": "2026-10-23",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "weight": 2.6,
+      "shares": 20896
+    },
+    {
+      "rank": 2,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.6,
+      "shares": 20951
+    },
+    {
+      "rank": 3,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.51,
+      "shares": 88040
+    },
+    {
+      "rank": 4,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.48,
+      "shares": 40288
+    },
+    {
+      "rank": 5,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.47,
+      "shares": 33847
+    },
+    {
+      "rank": 6,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.41,
+      "shares": 21650
+    },
+    {
+      "rank": 7,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.37,
+      "shares": 10444
+    },
+    {
+      "rank": 8,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.37,
+      "shares": 24880
+    },
+    {
+      "rank": 9,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 2.37,
+      "shares": 23961
+    },
+    {
+      "rank": 10,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.36,
+      "shares": 24454
+    },
+    {
+      "rank": 11,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.33,
+      "shares": 29431
+    },
+    {
+      "rank": 12,
+      "ticker": "VST",
+      "name": "Vistra Corp.",
+      "weight": 2.32,
+      "shares": 83207
+    },
+    {
+      "rank": 13,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.23,
+      "shares": 28910
+    },
+    {
+      "rank": 14,
+      "ticker": "ECHO",
+      "name": "EchoStar Corporation",
+      "weight": 2.22,
+      "shares": 134133
+    },
+    {
+      "rank": 15,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.21,
+      "shares": 6682
+    },
+    {
+      "rank": 16,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.2,
+      "shares": 46927
+    },
+    {
+      "rank": 17,
+      "ticker": "TLN",
+      "name": "Talen Energy Corporation",
+      "weight": 2.18,
+      "shares": 33978
+    },
+    {
+      "rank": 18,
+      "ticker": "NU",
+      "name": "Nu Holdings Ltd.",
+      "weight": 2.18,
+      "shares": 809290
+    },
+    {
+      "rank": 19,
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "weight": 2.17,
+      "shares": 54741
+    },
+    {
+      "rank": 20,
+      "ticker": "SNOW",
+      "name": "Snowflake Inc.",
+      "weight": 2.16,
+      "shares": 37472
+    },
+    {
+      "rank": 21,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.16,
+      "shares": 36858
+    },
+    {
+      "rank": 22,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "weight": 2.13,
+      "shares": 35634
+    },
+    {
+      "rank": 23,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.1,
+      "shares": 60505
+    },
+    {
+      "rank": 24,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "weight": 2.07,
+      "shares": 12685
+    },
+    {
+      "rank": 25,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.03,
+      "shares": 33969
+    }
+  ],
+  "performance": {
+    "price": 160.41,
+    "aum": 569020992,
+    "ret_1m": -6.61,
+    "ret_3m": -3.6,
+    "ret_ytd": 2.69,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 9896,
+    "as_of": "2026-10-23"
+  },
+  "sectors": {
+    "realestate": 1.44,
+    "consumer_cyclical": 10.98,
+    "technology": 34.24,
+    "communication_services": 14.65,
+    "financial_services": 13.63,
+    "utilities": 3.78,
+    "industrials": 12.94,
+    "healthcare": 8.35
+  }
+}
