@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-10-26T14:07:56.765213+00:00",
-    "totalItems": 166
+    "lastRun": "2026-11-02T16:53:14.577207+00:00",
+    "totalItems": 170
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -178,7 +178,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text is insufficient to determine a specific argument, though the title suggests a focus on systemic risk. Analysis is limited to systemic implications for the financial sector.",
       "tags": [
@@ -199,7 +199,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Federal Reserve Board of Governors without specific content. It likely pertains to central bank governance and policy oversight.",
       "tags": [
@@ -220,7 +220,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Kansas City regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -241,7 +241,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "The provided text refers to the Minneapolis regional district. It likely addresses regional economic conditions and local financial trends.",
       "tags": [
@@ -262,7 +262,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of economic conditions and business activity within the Third Federal Reserve District. Focuses on regional growth trends and local industrial performance.",
       "tags": [
@@ -284,7 +284,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of economic trends in the Twelfth District, with a heavy emphasis on technology and Pacific Rim trade. Analyzes the intersection of innovation and regional labor dynamics.",
       "tags": [
@@ -306,7 +306,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Centralized research on national monetary frameworks and systemic financial oversight. Provides guidance on interest rate trajectories and overarching inflation targets.",
       "tags": [
@@ -350,7 +350,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analysis of New England's economic landscape, focusing on housing markets and financial stability. Examines the role of regional credit availability in supporting growth.",
       "tags": [
@@ -372,7 +372,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Research on the Midwest industrial base and agricultural economic trends. Evaluates the relationship between wages and regional productivity.",
       "tags": [
@@ -394,7 +394,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Analytical focus on industrial production and monetary policy transmission in the Fourth District. Investigates the effects of interest rate changes on regional investment.",
       "tags": [
@@ -416,7 +416,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "Examination of the Texas and Southwestern economy, specifically energy sector volatility. Analyzes the impact of oil prices on regional GDP and employment.",
       "tags": [
@@ -438,7 +438,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication examines economic trends and policy implications within the Kansas City Federal Reserve district. It focuses on regional growth drivers and local financial conditions.",
       "tags": [
@@ -460,7 +460,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research analyzes macroeconomic indicators and monetary transmission mechanisms relevant to the Minneapolis district. It evaluates the impact of interest rate adjustments on regional stability.",
       "tags": [
@@ -482,7 +482,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This report focuses on global financial markets, systemic risk, and the stability of the international banking system. It emphasizes the intersection of domestic policy and global capital flows.",
       "tags": [
@@ -505,7 +505,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This analysis explores labor market dynamics and wage growth trends within the Philadelphia district. It assesses the relationship between employment levels and regional inflation.",
       "tags": [
@@ -527,7 +527,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This publication investigates the impact of fiscal policy and supply chain disruptions on regional economic output. It examines the resilience of local industries to external shocks.",
       "tags": [
@@ -549,7 +549,7 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-04-11T07:58:31.445105+00:00",
-      "lastChecked": "2026-10-19T14:23:40.530083+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
       "aiSummary": "This research provides a data-driven analysis of consumer spending patterns and credit availability. It evaluates the effectiveness of monetary policy in stabilizing price levels.",
       "tags": [
@@ -3252,11 +3252,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-10-12T16:32:08.551713+00:00",
-      "lastChecked": "2026-10-26T14:07:56.765213+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-10-26T14:07:56.765213+00:00"
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
     },
     "21348f1189c487108d8b67290c21f6a82efa1b4c7270a008fe858248f987b65a": {
       "url": "https://www.dallasfed.org/research/economics/2026/1006",
@@ -3282,11 +3282,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-10-19T14:23:40.530083+00:00",
-      "lastChecked": "2026-10-26T14:07:56.765213+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-10-26T14:07:56.765213+00:00"
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
     },
     "e743bf9b86c33057b003bef1c38e8fed6e6261b4f3e0258acf866497c42316ef": {
       "url": "https://www.dallasfed.org/research/economics/2026/1015",
@@ -3297,11 +3297,83 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-10-19T14:23:40.530083+00:00",
-      "lastChecked": "2026-10-26T14:07:56.765213+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-10-26T14:07:56.765213+00:00"
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
+    },
+    "8aa07c18cd5d75e8231fa5006dce9e33dfb57c24a469daf8e44e69039acd3b3f": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/11/how-do-banking-supervisors-deal-with-failing-banks/",
+      "title": "How Do Banking Supervisors Deal with Failing Banks?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-11-02",
+      "authors": [
+        "Sergio Correia, Stephan Luck, and Emil Verner"
+      ],
+      "firstSeen": "2026-11-02T16:53:14.577207+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
+      "scrapedSnippet": "In this post, we discuss insights from a recent staff report on the role of banking supervision in identifying and disciplining failing banks. We show that bank failures typically result from supervisory closure decisions based on hard information about book equity. Yet hard information is itself partly produced by supervision, as our evidence suggests that supervisors require troubled banks to recognize potential losses. We argue that supervision faces a trade-off: Stricter supervision can reduce the costs of resolving failing banks, but it can also lead to tighter regulatory capital constrai",
+      "aiSummary": "The paper examines the mechanisms banking supervisors use to identify and discipline failing institutions. It argues that supervisory closure decisions are primarily driven by hard information regarding book equity.",
+      "tags": [
+        "banking",
+        "financial stability",
+        "financial regulation",
+        "credit"
+      ],
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
+    },
+    "2765d865cc1607d79e53eadd90bcf31293cd62dd033eab70415c603b4048d860": {
+      "url": "https://www.atlantafed.org/research-and-data/publications/policy-hub-macroblog/2026/11/02/introducing-survey-practitioners-corner",
+      "title": "Introducing Survey Practitioner’s Corner",
+      "district": "Atlanta Fed (6th District)",
+      "districtCode": "ATL",
+      "contentType": "Macroblog",
+      "publicationDate": "2026-11-02",
+      "authors": [],
+      "firstSeen": "2026-11-02T16:53:14.577207+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
+      "scrapedSnippet": "The Atlanta Fed introduces Survey Practitioner's Corner, an ongoing compendium of short articles in which our economics survey team shares experiences and insights on survey-related topics.",
+      "aiSummary": "This piece introduces a new series focused on the methodology and practical application of economic surveys. It aims to share practitioner insights to improve data collection and analysis.",
+      "tags": [
+        "regional economy",
+        "GDP growth",
+        "labor markets",
+        "consumer spending"
+      ],
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
+    },
+    "74d63edfaaf259c7abf72a760c0cf42807f2cca4c094736ae9e1c2bc50574352": {
+      "url": "https://www.atlantafed.org/research-and-data/publications",
+      "title": "Atlanta Publications",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-11-02T16:53:14.577207+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
+    },
+    "25ba29d2b9b64f1b07c217d2a5c5c3d7196a62d4604bae17c2b3e28786985d77": {
+      "url": "https://www.frbsf.org/research-and-insights/publications/",
+      "title": "San Francisco Publications",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-11-02T16:53:14.577207+00:00",
+      "lastChecked": "2026-11-02T16:53:14.577207+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-11-02T16:53:14.577207+00:00"
     }
   }
 }
