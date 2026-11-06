@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-06",
+  "holdings_as_of": "2026-11-06",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.73,
+      "shares": 10444
+    },
+    {
+      "rank": 2,
+      "ticker": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "weight": 2.73,
+      "shares": 20951
+    },
+    {
+      "rank": 3,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.72,
+      "shares": 33847
+    },
+    {
+      "rank": 4,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.68,
+      "shares": 21650
+    },
+    {
+      "rank": 5,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.61,
+      "shares": 29431
+    },
+    {
+      "rank": 6,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.61,
+      "shares": 24454
+    },
+    {
+      "rank": 7,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.6,
+      "shares": 40288
+    },
+    {
+      "rank": 8,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "weight": 2.55,
+      "shares": 24880
+    },
+    {
+      "rank": 9,
+      "ticker": "ECHO",
+      "name": "EchoStar Corporation",
+      "weight": 2.44,
+      "shares": 134133
+    },
+    {
+      "rank": 10,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "weight": 2.43,
+      "shares": 20896
+    },
+    {
+      "rank": 11,
+      "ticker": "CPNG",
+      "name": "Coupang, Inc.",
+      "weight": 2.4,
+      "shares": 764609
+    },
+    {
+      "rank": 12,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.34,
+      "shares": 36858
+    },
+    {
+      "rank": 13,
+      "ticker": "CVNA",
+      "name": "Carvana Co.",
+      "weight": 2.33,
+      "shares": 163058
+    },
+    {
+      "rank": 14,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "weight": 2.3,
+      "shares": 46927
+    },
+    {
+      "rank": 15,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.23,
+      "shares": 60505
+    },
+    {
+      "rank": 16,
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "weight": 2.21,
+      "shares": 88040
+    },
+    {
+      "rank": 17,
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "weight": 2.2,
+      "shares": 33969
+    },
+    {
+      "rank": 18,
+      "ticker": "TDG",
+      "name": "TransDigm Group Incorporated",
+      "weight": 2.2,
+      "shares": 9806
+    },
+    {
+      "rank": 19,
+      "ticker": "FWONK",
+      "name": "Formula One Group",
+      "weight": 2.16,
+      "shares": 118629
+    },
+    {
+      "rank": 20,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "weight": 2.16,
+      "shares": 23961
+    },
+    {
+      "rank": 21,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.14,
+      "shares": 6682
+    },
+    {
+      "rank": 22,
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "weight": 2.11,
+      "shares": 28910
+    },
+    {
+      "rank": 23,
+      "ticker": "UBER",
+      "name": "Uber Technologies, Inc.",
+      "weight": 2.09,
+      "shares": 162284
+    },
+    {
+      "rank": 24,
+      "ticker": "DASH",
+      "name": "DoorDash, Inc.",
+      "weight": 2.08,
+      "shares": 56794
+    },
+    {
+      "rank": 25,
+      "ticker": "COF",
+      "name": "Capital One Financial Corporation",
+      "weight": 2.06,
+      "shares": 54216
+    }
+  ],
+  "performance": {
+    "price": 155.85,
+    "aum": 535788160,
+    "ret_1m": -9.12,
+    "ret_3m": -10.61,
+    "ret_ytd": -0.23,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 9734,
+    "as_of": "2026-11-06"
+  },
+  "sectors": {
+    "realestate": 1.59,
+    "consumer_cyclical": 11.57,
+    "technology": 31.21,
+    "communication_services": 11.69,
+    "financial_services": 16.21,
+    "utilities": 4.33,
+    "industrials": 14.05,
+    "healthcare": 9.34
+  }
+}
