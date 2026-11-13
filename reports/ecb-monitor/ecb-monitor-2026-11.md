@@ -1,6 +1,6 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — November 2026 (Month to Date)
 
-**Coverage Period:** Month to date: November 2026 (17 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: November 2026 (18 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
@@ -8,31 +8,31 @@
 
 **To: Investment Committee**
 **From: Senior Eurozone Economist**
-**Date: November 12, 2026**
-**Subject: Strategic Briefing – Recent Central Bank Research**
+**Date: November 13, 2026**
+**Subject: Strategic Briefing – Recent ECB/NCB Research Cycle**
 
-I have filtered the latest research from the ECB and Deutsche Bundesbank. While there is significant noise regarding retail sentiment and payment systems, the following publications provide the most critical analytical signals for our portfolio positioning and macro outlook.
+I have filtered the recent output from the ECB and National Central Banks. While there is significant noise regarding retail sentiment and payment systems, the following six papers provide the most critical analytical signals for our macro and policy positioning.
 
-1. **Deep-π*: a neural network estimate of trend inflation [ECB]**
-This paper moves beyond the "random walk" approach to trend inflation, using neural networks to identify the specific economic drivers of long-term price trajectories. For us, this is a vital tool for determining whether current inflation prints are transitory noise or a structural shift in the equilibrium rate, directly impacting our long-term rates forecasts.
+1. **[ECB] Deep-π*: a neural network estimate of trend inflation**
+This paper introduces a neural network approach to decouple trend inflation from transitory noise, moving beyond simple random walk models. For us, this is a signal that the ECB is upgrading its toolkit to better identify "structural" inflation, which will likely dictate the terminal rate and the timing of any future easing cycles.
 
-2. **Monetary policy in times of high public debt [ECB]**
-The research examines the "fiscal dominance" risk—specifically how high sovereign debt levels may constrain the ECB's ability to hike rates without triggering solvency crises. This is critical for our sovereign credit analysis, as it highlights the tension between inflation mandates and financial stability in highly indebted member states.
+2. **[ECB] Monetary policy in times of high public debt**
+The research explicitly addresses the "fiscal dominance" risk—whether high debt levels constrain the ECB’s ability to hike rates without triggering sovereign instability. This is essential for our sovereign spreads analysis, as it suggests the ECB is actively modeling the threshold where monetary tightening becomes counterproductive due to fiscal fragility.
 
-3. **The macroeconomic effects of defence spending [ECB]**
-By analyzing the output multipliers of defense spending across the EU, this paper quantifies the "beyond GDP" effects of the current geopolitical re-armament. This provides a framework for assessing whether the surge in defense budgets acts as a sustainable growth driver or a crowding-out mechanism for private investment.
+3. **[DBB] Granular monetary policy surprises**
+The Deutsche Bundesbank is analyzing how policy surprises hit different sectors and firms with varying intensity rather than as a uniform shock. This implies that "blanket" macro assumptions are outdated; we need to refine our credit risk models to account for this granular transmission of rate shocks.
 
-4. **When nonbanks dampen and when they amplify: A yield-curve view [DBB]**
-This study clarifies the role of Non-Bank Financial Intermediaries (NBFIs) in the transmission of monetary policy, specifically how they can either buffer or exacerbate yield curve movements. Understanding this "non-bank lending channel" is essential for timing our duration bets and anticipating volatility in the periphery.
+4. **[ECB] The macroeconomic effects of defence spending**
+By analyzing the multipliers of defense spending across 27 member states, the ECB is quantifying the "security premium" on GDP. As Eurozone budgets pivot toward permanent defense increases, this research helps us determine if this spending is purely inflationary or if it provides a genuine productivity boost to the industrial base.
 
-5. **Anatomy of a safe asset: Bund market structure and reform [DBB]**
-The Bundesbank provides a deep dive into the structural mechanics of the Bund market, the Eurozone's primary benchmark. Any proposed reforms to the "safe asset" architecture could fundamentally alter liquidity premiums and the pricing of the entire European swap curve.
+5. **[DBB] Anatomy of a safe asset: Bund market structure and reform**
+This paper examines the plumbing of the Bund market, focusing on liquidity and structural reforms. Given the volatility in sovereign markets, any shift in the "safe asset" definition or market structure directly impacts our hedging costs and the pricing of the Eurozone's risk-free rate.
 
-6. **Debt maturity and government spending multipliers [ECB]**
-This research demonstrates that the effectiveness of fiscal stimulus is contingent on how it is financed (short-term vs. long-term debt). As Eurozone governments navigate post-crisis debt profiles, this insight helps us predict which national fiscal expansions will actually drive growth versus those that will merely increase debt overhang.
+6. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view**
+The DBB highlights how Non-Bank Financial Intermediaries (NBFIs) can either stabilize or exacerbate yield curve movements depending on the environment. This is a critical warning for our fixed-income desk: the "non-bank lending channel" can create sudden, non-linear volatility in long-end yields that traditional bank-centric models miss.
 
 **Synthesis:**
-The overarching theme is a shift toward "structural complexity," where the ECB is increasingly concerned with how non-bank actors and high sovereign debt levels distort traditional monetary transmission. We must pivot our models to account for these non-linearities, as the relationship between policy rates and real-economy outcomes is becoming less predictable.
+The ECB and DBB are shifting focus toward the "plumbing" of the financial system (NBFIs and Bund structure) and the structural constraints of high public debt. We should expect a more nuanced, data-driven approach to trend inflation that may decouple policy decisions from headline prints.
 
 ---
 
@@ -131,7 +131,14 @@ The research analyzes high-frequency online supermarket data to understand the d
 **Tags:** inflation · consumer spending · productivity
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 4
+**Content Type:** Discussion Papers | **New:** 0 of 5
+
+### (cached) [Taxing capital, rewarding labor? The international and generational dimensions | Matthias Schön, Nikolai Stähler](https://www.bundesbank.de/en/publications/research/discussion-papers/taxing-capital-rewarding-labor-the-international-and-generational-dimensions-1008210)
+**Published:** 2026-11-13 | **Authors:** 
+
+The paper examines the distributional effects of shifting the tax burden from labor to capital to enhance intergenerational equity. It argues that such fiscal reforms could mitigate wealth inequality and support labor market participation across different age cohorts.
+
+**Tags:** fiscal policy · labor markets · wages · demographics · GDP growth
 
 ### (cached) [Granular monetary policy surprises | Falko Fecht, Björn Imbierowicz, Moritz Kellers](https://www.bundesbank.de/en/publications/research/discussion-papers/granular-monetary-policy-surprises-1007830)
 **Published:** 2026-11-11 | **Authors:** 
@@ -165,5 +172,5 @@ This paper investigates the non-bank lending channel and how non-bank financial 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 17
-- Total cache size: 17 items
+- Already cached: 18
+- Total cache size: 18 items
