@@ -24,7 +24,7 @@ START_HIST      = "2016-01-01"   # fetch from here (covers 2017 display)
 BASELINE_START  = "2018-01-01"   # z-score normalization window start
 BASELINE_END    = "2024-12-31"   # z-score normalization window end
 START_DISPLAY   = "2017-01-01"   # earliest selectable date in the UI
-END_DISPLAY     = "2026-04-30"   # latest date shown
+END_DISPLAY     = datetime.now().strftime("%Y-%m-01")  # current month, always up to date
 DEFAULT_START_YEAR = 2025        # default view on page load
 
 OUTPUT_PATH = os.path.join(
