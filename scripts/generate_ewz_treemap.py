@@ -47,6 +47,8 @@ def main():
     df, asof = load_holdings(sys.argv[1] if len(sys.argv) > 1 else None)
     pes = [fetch_pe(s) for s in df["yf"]]
     df["pe"] = [p for p, _ in pes]
+    if df["pe"].isna().mean() > 0.5:
+        sys.exit(f"too many missing P/Es ({df['pe'].isna().sum()}/{len(df)}) — Yahoo blocked? keeping old map")
     df["name"] = df["Name"].str.title()
 
     PE_LO, PE_MID, PE_HI = 4, 10, 25  # log color scale; cheap green ↔ pricey red
