@@ -25,11 +25,13 @@ jobs:
       - name: Generate chart
         run: |
           mkdir -p reports/chess-club
-          # PS11's page may be password-gated upstream (ICN has been locking
-          # school pages down) — don't hard-fail the whole Action on that,
-          # just skip the update and leave the last good chart in place.
-          if python scripts/chess_club_stats.py \
-            --school PS11 --slug ps11chessclubandteamstats --x ck_rating --y uscf_rating \
+          # PS11's ICN page is password-gated; PLW Chess City scrapes it daily
+          # (06:00 UTC, ICN_PASSWORD secret in that repo) and publishes
+          # team_stats.json. On failure, leave the last good chart in place.
+          if curl -sfL https://datavizhonduran.github.io/plw-chess-city/team_stats.json -o /tmp/team_stats.json \
+            && python scripts/team_stats_to_table.py /tmp/team_stats.json /tmp/ps11_table.html \
+            && python scripts/chess_club_stats.py \
+            --school PS11 --data-url file:///tmp/ps11_table.html --x ck_rating --y uscf_rating \
             --min-x 900 --z-thresh 1.5 \
             --out reports/chess-club/fragment.html; then
             {
@@ -43,7 +45,7 @@ jobs:
             } > reports/chess-club/index.html
             rm reports/chess-club/fragment.html
           else
-            echo "::warning::PS11 data fetch failed (likely password-gated upstream) — leaving existing chart in place."
+            echo "::warning::PS11 data fetch failed (PLW team_stats.json unavailable) — leaving existing chart in place."
             rm -f reports/chess-club/fragment.html
           fi
 

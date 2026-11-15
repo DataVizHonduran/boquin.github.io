@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-10">
+    <meta name="release-date" content="2026-11-06">
+    <title>Employment Situation (NFP) — 2026-11-06</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Employment Situation (NFP)</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-11-06 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>158408.000</h3>
+            <p>CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.29σ | 10Y Range:</p>
+            <p class="card-period">2025-10</p>
+        </div>
+        <div class="card">
+            <h3>4.500</h3>
+            <p>CONTEXT: 10Y REGIME: 56.3th Percentile | Z-Score: -0.25σ | 10Y Range:</p>
+            <p class="card-period">2025-11</p>
+        </div>
+        <div class="card">
+            <h3>8.700</h3>
+            <p>CONTEXT: 10Y REGIME: 60.5th Percentile | Z-Score: -0.20σ | 10Y Range:</p>
+            <p class="card-period">2025-11</p>
+        </div>
+        <div class="card">
+            <h3>62.500</h3>
+            <p>CONTEXT: 10Y REGIME: 23.5th Percentile | Z-Score: -0.88σ | 10Y Range:</p>
+            <p class="card-period">2025-11</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Nonfarm Payrolls
+                <span class="mu-chart-latest">159,293</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"],
+                        datasets: [{
+                            data: [158079.0, 158316.0, 158268.0, 158310.0, 158377.0, 158485.0, 158498.0, 158478.0, 158542.0, 158472.0, 158548.0, 158408.0, 158449.0, 158432.0, 158592.0, 158436.0, 158650.0, 158798.0, 158861.0, 158892.0, 158882.0, 159068.0, 159128.0, 159293.0],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Unemployment Rate
+                <span class="mu-chart-latest">4.1</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"],
+                        datasets: [{
+                            data: [4.2, 4.1, 4.0, 4.2, 4.2, 4.2, 4.3, 4.1, 4.3, 4.3, 4.4, 4.5, 4.4, 4.3, 4.4, 4.3, 4.3, 4.3, 4.2, 4.1, 4.1, 4.2, 4.1],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>To: Institutional Clients</strong></p>
+<p><strong>From: Economics Strategy Group</strong></p>
+<p><strong>Date: October 2026</strong></p>
+<p><strong>Subject: Employment Situation — Persistent Tightness and Wage Acceleration</strong></p>
+
+<h3>1. Executive Summary</h3>
+<p>The October employment data reveals a labor market operating at maximum capacity, characterized by record-high payroll levels and accelerating wage growth. Nonfarm Payrolls (NFP) have reached a 10-year peak of 159.29 million, while Average Hourly Earnings have hit a cyclical ceiling. The combination of a 4.1% unemployment rate and a steady climb in private sector hiring suggests that the labor market remains an engine of inflationary pressure rather than a source of cooling.</p>
+
+<p>The policy signal is clear: the "neutral" rate is likely higher than previously estimated, and the resilience of the labor market removes any immediate urgency for the Federal Reserve to pivot toward aggressive easing. The data suggests a market that is not merely stable, but potentially overheating.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Peak Employment Levels:</strong> Total NFP (159.29M) and Private Payrolls (135.96M) have both hit the 100th percentile of their 10-year ranges, indicating a labor market at historical saturation.</li>
+<li>  <strong>Wage-Push Inflation Risk:</strong> Average Hourly Earnings have surged to $38.00/hr (100th percentile, Z-score +1.73$\sigma$), marking a consistent upward trajectory from $36.85 in Oct 2025.</li>
+<li>  <strong>Tightness Despite Participation:</strong> While the Labor Force Participation Rate remains depressed (23.5th percentile, Z-score -0.88$\sigma$), the unemployment rate has trended down to 4.1%, suggesting a severe mismatch or a highly constrained labor supply.</li>
+<li>  <strong>Private Sector Dominance:</strong> Growth is being driven by the private sector, which added 159k jobs in the last month alone (Sept to Oct), while government payrolls remain relatively flat.</li>
+<li>  <strong>Underemployment Stability:</strong> The U-6 rate (7.9%) and long-term unemployment (1.96M) remain well-contained, confirming that the current employment strength is broad-based and not merely a result of short-term temporary hiring.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> Economic activity appears robust and expanding. The consistent month-on-month increase in total payrolls—culminating in a 10-year high—suggests strong aggregate demand and business confidence, particularly within the private sector and manufacturing.</p>
+
+<p><strong>(ii) Labor Market:</strong> The market is characterized by extreme tightness. With the unemployment rate at 4.1% and the Z-score for total payrolls at +1.29$\sigma$, the economy is operating near the Non-Accelerating Inflation Rate of Unemployment (NAIRU), leaving little room for further expansion without triggering significant wage spirals.</p>
+
+<p><strong>(iii) Inflation:</strong> The data points toward persistent cost-push inflation. The Z-score of +1.73$\sigma$ for Average Hourly Earnings is the most critical signal; wages are not just rising, they are reaching historical extremes, which likely translates into higher service-sector prices.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>Based on the 10-year Z-scores and percentiles, the current regime is classified as <strong>Late-Cycle Overheating</strong>. </p>
+
+<p>The convergence of NFP and Average Hourly Earnings at the 100th percentile, paired with a Z-score for wages approaching the +2.0$\sigma$ threshold, indicates a market that has moved beyond a "mid-cycle pause." The extreme percentile rankings for payrolls suggest the economy is pushing against its structural capacity limits.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Forecast: Hold / Hawkish Bias</strong></p>
+
+<p>We expect the Federal Reserve to maintain current rates or consider a modest hike if inflation prints do not cool. The balance of risks has shifted heavily toward inflation over growth. With the labor market at a 10-year peak and wages accelerating, there is no "labor market weakness" to justify a rate cut. We anticipate the Fed will remain on hold for the next two meetings, monitoring whether the $38.00/hr wage ceiling triggers a secondary wave of inflation. Any pivot to easing is now deferred until a clear softening in NFP or a meaningful rise in the unemployment rate is observed.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- EMPLOYMENT SITUATION (NFP): CYCLE-AWARE SUMMARY ---
+
+SERIES: Nonfarm Payrolls (thousands, SA) [PAYEMS]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.29σ | 10Y Range: [130,426.00, 159,293.00]
+DATA:
+  2025-10    158408.000
+  2025-11    158449.000
+  2025-12    158432.000
+  2026-01    158592.000
+  2026-02    158436.000
+  2026-03    158650.000
+  2026-04    158798.000
+  2026-05    158861.000
+  2026-06    158892.000
+  2026-07    158882.000
+  2026-08    159068.000
+  2026-09    159128.000
+  2026-10    159293.000
+----------------------------------------
+SERIES: Unemployment Rate (%, SA) [UNRATE]
+CONTEXT: 10Y REGIME: 56.3th Percentile | Z-Score: -0.25σ | 10Y Range: [3.40, 14.80]
+DATA:
+  2025-11         4.500
+  2025-12         4.400
+  2026-01         4.300
+  2026-02         4.400
+  2026-03         4.300
+  2026-04         4.300
+  2026-05         4.300
+  2026-06         4.200
+  2026-07         4.100
+  2026-08         4.100
+  2026-09         4.200
+  2026-10         4.100
+----------------------------------------
+SERIES: U-6 Underemployment Rate (%, SA) [U6RATE]
+CONTEXT: 10Y REGIME: 60.5th Percentile | Z-Score: -0.20σ | 10Y Range: [6.60, 22.90]
+DATA:
+  2025-11         8.700
+  2025-12         8.400
+  2026-01         8.100
+  2026-02         7.900
+  2026-03         8.000
+  2026-04         8.200
+  2026-05         8.100
+  2026-06         7.900
+  2026-07         7.900
+  2026-08         7.700
+  2026-09         7.600
+  2026-10         7.900
+----------------------------------------
+SERIES: Labor Force Participation Rate (%, SA) [CIVPART]
+CONTEXT: 10Y REGIME: 23.5th Percentile | Z-Score: -0.88σ | 10Y Range: [60.10, 63.30]
+DATA:
+  2025-11        62.500
+  2025-12        62.400
+  2026-01        62.100
+  2026-02        62.000
+  2026-03        61.900
+  2026-04        61.800
+  2026-05        61.800
+  2026-06        61.500
+  2026-07        61.400
+  2026-08        61.600
+  2026-09        61.800
+  2026-10        61.900
+----------------------------------------
+SERIES: Avg Hourly Earnings, Private ($/hr, SA) [CES0500000003]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.73σ | 10Y Range: [25.90, 38.00]
+DATA:
+  2025-10        36.850
+  2025-11        37.000
+  2025-12        37.020
+  2026-01        37.150
+  2026-02        37.270
+  2026-03        37.350
+  2026-04        37.410
+  2026-05        37.490
+  2026-06        37.590
+  2026-07        37.640
+  2026-08        37.760
+  2026-09        37.860
+  2026-10        38.000
+----------------------------------------
+SERIES: Avg Weekly Hours, Private (hrs, SA) [AWHNONAG]
+CONTEXT: 10Y REGIME: 71.7th Percentile | Z-Score: -0.08σ | 10Y Range: [33.50, 34.40]
+DATA:
+  2025-10        33.700
+  2025-11        33.800
+  2025-12        33.700
+  2026-01        33.800
+  2026-02        33.800
+  2026-03        33.800
+  2026-04        33.800
+  2026-05        33.800
+  2026-06        33.800
+  2026-07        33.800
+  2026-08        33.800
+  2026-09        33.900
+  2026-10        33.800
+----------------------------------------
+SERIES: Private Payrolls (thousands, SA) [USPRIV]
+CONTEXT: 10Y REGIME: 100.0th Percentile | Z-Score: +1.28σ | 10Y Range: [108,517.00, 135,961.00]
+DATA:
+  2025-10    135018.000
+  2025-11    135090.000
+  2025-12    135083.000
+  2026-01    135263.000
+  2026-02    135115.000
+  2026-03    135317.000
+  2026-04    135467.000
+  2026-05    135528.000
+  2026-06    135554.000
+  2026-07    135582.000
+  2026-08    135724.000
+  2026-09    135802.000
+  2026-10    135961.000
+----------------------------------------
+SERIES: Government Payrolls (thousands, SA) [USGOVT]
+CONTEXT: 10Y REGIME: 80.8th Percentile | Z-Score: +1.21σ | 10Y Range: [21,393.00, 23,586.00]
+DATA:
+  2025-10     23390.000
+  2025-11     23359.000
+  2025-12     23349.000
+  2026-01     23329.000
+  2026-02     23321.000
+  2026-03     23333.000
+  2026-04     23331.000
+  2026-05     23333.000
+  2026-06     23338.000
+  2026-07     23300.000
+  2026-08     23344.000
+  2026-09     23326.000
+  2026-10     23332.000
+----------------------------------------
+SERIES: Manufacturing Payrolls (thousands, SA) [MANEMP]
+CONTEXT: 10Y REGIME: 55.8th Percentile | Z-Score: +0.33σ | 10Y Range: [11,382.00, 12,903.00]
+DATA:
+  2025-10     12603.000
+  2025-11     12593.000
+  2025-12     12580.000
+  2026-01     12582.000
+  2026-02     12583.000
+  2026-03     12598.000
+  2026-04     12597.000
+  2026-05     12595.000
+  2026-06     12608.000
+  2026-07     12628.000
+  2026-08     12649.000
+  2026-09     12662.000
+  2026-10     12681.000
+----------------------------------------
+SERIES: Long-term Unemployed 27+ weeks (thousands) [UEMP27OV]
+CONTEXT: 10Y REGIME: 85.7th Percentile | Z-Score: +0.33σ | 10Y Range: [910.00, 4,176.00]
+DATA:
+  2025-11      1910.000
+  2025-12      1948.000
+  2026-01      1813.000
+  2026-02      1899.000
+  2026-03      1821.000
+  2026-04      1833.000
+  2026-05      1988.000
+  2026-06      1937.000
+  2026-07      1771.000
+  2026-08      1930.000
+  2026-09      1944.000
+  2026-10      1963.000
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>

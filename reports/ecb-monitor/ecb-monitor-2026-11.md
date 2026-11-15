@@ -1,39 +1,88 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — November 2026 (Month to Date)
 
-**Coverage Period:** Month to date: November 2026 (7 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: November 2026 (18 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**To: Investment Committee / Trading Desk**
+**To: Investment Team**
 **From: Senior Eurozone Economist**
-**Date: November 3, 2026**
-**Subject: Analysis of Recent ECB/NCB Research Publications**
+**Date: November 14, 2026**
+**Subject: Strategic Briefing: Recent ECB/NCB Research Analysis**
 
-I have reviewed the latest research output from the Eurosystem. While some papers are operational or descriptive, several address critical structural vulnerabilities regarding fiscal-monetary interaction and non-bank financial intermediation (NBFI) that will drive our risk pricing for the next 12–18 months.
+I have filtered the recent output from the ECB and the Deutsche Bundesbank (DBB). While much of the research is granular or historical, several papers provide critical signals regarding the current regime of high public debt, the evolution of inflation measurement, and the systemic risks posed by non-bank financial intermediaries (NBFIs).
 
-**Key Analytical Takeaways:**
+Here are the most analytically significant publications for our current positioning:
 
-1. **[ECB] Monetary policy in times of high public debt:** This paper addresses the "fiscal dominance" risk, exploring whether high debt levels constrain the ECB's ability to raise rates without triggering solvency crises. It is critical for our outlook as it suggests a tighter coupling between monetary tightening and the need for coordinated fiscal consolidation to avoid market fragmentation.
+1. **[ECB] Monetary policy in times of high public debt:** This paper addresses the "fiscal dominance" risk, exploring how elevated debt levels may constrain the ECB's ability to raise rates without triggering sovereign instability. It is essential for our sovereign credit spreads analysis, as it highlights the tension between inflation targeting and debt sustainability.
 
-2. **[ECB] Debt maturity and government spending multipliers:** The research indicates that the effectiveness of fiscal stimulus is contingent on the maturity profile of the debt used to finance it. For the Eurozone, this implies that short-term funding spikes could dampen the multiplier effect of national budgets, potentially leading to lower-than-expected GDP growth during fiscal expansions.
+2. **[ECB] Deep-π*: a neural network estimate of trend inflation:** By moving away from latent random walks toward a neural network approach, the ECB is attempting to identify the structural drivers of trend inflation. This suggests a shift in how the Governing Council defines "stability," potentially allowing for more flexible policy responses if trend inflation is found to be more volatile than previously assumed.
 
-3. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view:** The Deutsche Bundesbank highlights how NBFIs can either stabilize or exacerbate volatility depending on the slope of the yield curve. This is a vital signal for our fixed-income desk, as it suggests that non-bank lending channels may amplify shocks during periods of curve inversion or rapid flattening.
+3. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view of the nonbank lending channel:** This research clarifies how NBFIs interact with the yield curve to either stabilize or exacerbate credit shocks. For our fixed-income desk, this provides a framework for predicting liquidity squeezes and volatility spikes in the periphery during tightening cycles.
 
-4. **[ECB] Elastic in cash, inelastic in repo: hedge funds in the treasury and repo markets:** This study underscores the fragility of the link between sovereign bond holdings and repo market liquidity. It warns that hedge fund leverage can create sudden liquidity gaps in sovereign markets, increasing the likelihood of "flash" volatility in BTPs or OATs regardless of fundamental data.
+4. **[ECB] Debt maturity and government spending multipliers:** The finding that the effectiveness of fiscal expansion depends on the maturity of the financing (short-term vs. long-term) is critical. As Eurozone governments refinance legacy debt at higher rates, the "bang for the buck" of fiscal stimulus is likely declining, suggesting a drag on GDP growth.
 
-5. **[ECB] ECB perception of non-banks (ML-based approach):** By quantifying the ECB's own communication regarding NBFIs, this paper reveals a growing institutional preoccupation with systemic risk outside the traditional banking sector. This suggests that the ECB is laying the intellectual groundwork for more intrusive macroprudential oversight or new liquidity facilities targeting non-banks.
+5. **[ECB] The macroeconomic effects of defence spending: what impact beyond GDP?:** With the structural pivot toward increased defense budgets across the EU, this paper evaluates the long-term productivity trade-offs. It matters because it questions whether the current "defense boom" is purely additive to GDP or if it crowds out more productive private investment.
 
-6. **[ECB] Catching the repricing wave: daily online supermarket prices:** This provides a high-frequency window into inflation persistence and the speed of price adjustments. It matters for our inflation forecasts because it suggests that "sticky" inflation may be less a function of contracts and more a function of digital pricing agility, potentially shortening the lag of monetary policy transmission.
+6. **[DBB] Anatomy of a safe asset: Bund market structure and reform:** This analysis of the Bund market's plumbing is vital for understanding the "safe asset" premium. Any proposed reforms to market structure could fundamentally alter the liquidity and pricing of the Eurozone's primary benchmark, impacting all duration bets.
 
 **Synthesis:**
-The overarching theme is a shift in focus from simple inflation targeting toward the complex interplay between sovereign debt sustainability and the volatility of non-bank financial intermediaries. We should expect the ECB to prioritize financial stability and "market functioning" as much as price stability in its upcoming policy communications.
+The central banks are increasingly preoccupied with the "fiscal-monetary nexus," specifically how high sovereign debt and non-bank leverage complicate the transmission of monetary policy. We should expect a policy environment where inflation targets are balanced against systemic financial stability and the structural costs of defense spending.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 6
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 13
+
+### (cached) [The macroeconomic effects of defence spending: what impact beyond GDP?](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3310~6ef5699d9a.en.pdf)
+**Published:** 2026-11-12 | **Authors:** 
+
+The paper analyzes the macroeconomic impact of defense spending across EU member states, focusing on price implications and demand-side channels. It seeks to expand the literature beyond simple output multipliers to understand broader inflationary and growth effects.
+
+**Tags:** inflation · GDP growth · fiscal policy · eurozone · geopolitics
+
+### (cached) [Reading the room: what Reddit tells us about retail investor sentiment](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20261112~a4c8b903d9.en.html)
+**Published:** 2026-11-12 | **Authors:** 
+
+The research investigates retail investor sentiment by analyzing data from Reddit to understand behavioral drivers in financial markets. It aims to quantify how social media discourse correlates with market movements.
+
+**Tags:** financial stability · consumer spending
+
+### (cached) [The real and financial effects of local corporate tax increases: evidence from linked firm–bank data](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3309~4e8af93b3a.en.pdf)
+**Published:** 2026-11-11 | **Authors:** 
+
+Using linked firm-bank data from Portugal, this study examines how local corporate tax increases influence corporate financing and real economic activity. It specifically tracks the interaction between fiscal burdens and bank credit availability.
+
+**Tags:** banking · credit · fiscal policy · GDP growth
+
+### (cached) [How the sovereign debt crisis shaped wealth inequality in the euro area](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20261111~ee77dcd0d0.en.html)
+**Published:** 2026-11-11 | **Authors:** 
+
+This paper explores the long-term impact of the sovereign debt crisis on the distribution of wealth within the euro area. It analyzes how financial instability and fiscal austerity contributed to increased wealth inequality.
+
+**Tags:** sovereign debt · financial stability · eurozone · recession
+
+### (cached) [Unlocking supervisory effectiveness in credit risk: insights from the ECB’s supervisory findings and measures](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3308~a6e82e37aa.en.pdf)
+**Published:** 2026-11-09 | **Authors:** 
+
+The paper evaluates the effectiveness of ECB supervisory measures in managing credit risk using a large-scale dataset of supervisory findings. It utilizes large language models to quantify the impact of supervisory narratives on risk mitigation within the banking sector.
+
+**Tags:** banking · credit · financial stability · banking union · eurozone
+
+### (cached) [Deep-π*: a neural network estimate of trend inflation](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3307~d3d2e0c5e4.en.pdf)
+**Published:** 2026-11-04 | **Authors:** 
+
+The paper introduces Deep-π*, a neural network framework designed to estimate trend inflation by modeling innovations as nonlinear functions of macroeconomic indicators. This approach allows for the attribution of trend movements to specific economic drivers using Shapley values.
+
+**Tags:** inflation · monetary policy · productivity · eurozone
+
+### (cached) [Christine Lagarde: A warning from Europe's hot summer](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20261104~78299c3eaf.en.html)
+**Published:** 2026-11-04 | **Authors:** 
+
+The speech by President Lagarde addresses the macroeconomic implications of extreme weather events and climate-related shocks on the European economy. It emphasizes the risks these factors pose to price stability and long-term growth.
+
+**Tags:** climate & transition · inflation · eurozone · GDP growth · monetary policy
 
 ### (cached) [Debt maturity and government spending multipliers](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3306~028a82bc67.en.pdf)
 **Published:** 2026-11-03 | **Authors:** 
@@ -78,7 +127,35 @@ The research analyzes high-frequency online supermarket data to understand the d
 **Tags:** inflation · consumer spending · productivity
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 1
+**Content Type:** Discussion Papers | **New:** 0 of 5
+
+### (cached) [Taxing capital, rewarding labor? The international and generational dimensions | Matthias Schön, Nikolai Stähler](https://www.bundesbank.de/en/publications/research/discussion-papers/taxing-capital-rewarding-labor-the-international-and-generational-dimensions-1008210)
+**Published:** 2026-11-13 | **Authors:** 
+
+The paper examines the distributional effects of shifting the tax burden from labor to capital to enhance intergenerational equity. It argues that such fiscal reforms could mitigate wealth inequality and support labor market participation across different age cohorts.
+
+**Tags:** fiscal policy · labor markets · wages · demographics · GDP growth
+
+### (cached) [Granular monetary policy surprises | Falko Fecht, Björn Imbierowicz, Moritz Kellers](https://www.bundesbank.de/en/publications/research/discussion-papers/granular-monetary-policy-surprises-1007830)
+**Published:** 2026-11-11 | **Authors:** 
+
+The authors examine the heterogeneous effects of monetary policy surprises at a granular level. The study focuses on how unexpected policy shifts impact different sectors and financial institutions differently.
+
+**Tags:** monetary policy · interest rates · banking · financial stability
+
+### (cached) [Cross-predictability of returns: An equilibrium perspective | Patrick Konermann, Christoph Meinerding](https://www.bundesbank.de/en/publications/research/discussion-papers/cross-predictability-of-returns-an-equilibrium-perspective-992016)
+**Published:** 2026-11-09 | **Authors:** 
+
+The study examines the cross-predictability of asset returns through an equilibrium lens. It analyzes how information from one asset class can forecast returns in another within a broader financial framework.
+
+**Tags:** financial stability · interest rates · exchange rates · banking
+
+### (cached) [Anatomy of a safe asset: Bund market structure and reform | Mark Kerssenfischer, Konrad Lucke, Willy Scherrieble](https://www.bundesbank.de/en/publications/research/discussion-papers/anatomy-of-a-safe-asset-bund-market-structure-and-reform-1007074)
+**Published:** 2026-11-06 | **Authors:** 
+
+The paper analyzes the market structure of German Bunds to evaluate their role as a primary safe asset in the euro area. It examines liquidity dynamics and proposes reforms to enhance the efficiency and stability of the sovereign debt market.
+
+**Tags:** sovereign debt · financial stability · eurozone · interest rates · banking
 
 ### (cached) [When nonbanks dampen and when they amplify: A yield-curve view of the nonbank lending channel | Peter Bednarek, Francesco Febbraro, Steven Ongena, Natalja von Westernhagen](https://www.bundesbank.de/en/publications/research/discussion-papers/when-nonbanks-dampen-and-when-they-amplify-a-yield-curve-view-of-the-nonbank-lending-channel-1007926)
 **Published:** 2026-11-02 | **Authors:** 
@@ -91,5 +168,5 @@ This paper investigates the non-bank lending channel and how non-bank financial 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 7
-- Total cache size: 7 items
+- Already cached: 18
+- Total cache size: 18 items

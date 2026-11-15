@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="reference-month" content="2026-11">
+    <meta name="release-date" content="2026-11-12">
+    <title>Unemployment Insurance Weekly Claims — 2026-11-12</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fed-blue: #003366;
+            --fed-gold: #b8860b;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        header {
+            background: linear-gradient(135deg, var(--fed-blue) 0%, #004080 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .meta { opacity: 0.75; font-size: 0.9rem; margin-top: 6px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--fed-blue);
+        }
+        .card h3 { color: var(--fed-blue); font-size: 1.8rem; margin-bottom: 4px; }
+        .card p { color: #666; font-size: 0.85rem; }
+        .card .card-period { color: #999; font-size: 0.8rem; }
+        .note-body { max-width: 860px; }
+        .note-body h2 {
+            color: var(--fed-blue);
+            border-bottom: 2px solid var(--fed-blue);
+            padding-bottom: 8px;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        .note-body h3 {
+            color: var(--fed-blue);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        .note-body h3.section-heading {
+            background: var(--light-bg);
+            border-left: 4px solid var(--fed-gold);
+            padding: 8px 14px;
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0 12px;
+        }
+        .note-body p { margin-bottom: 12px; color: #444; }
+        .note-body ul { margin: 10px 0 16px 24px; }
+        .note-body li { margin-bottom: 6px; color: #444; }
+        .note-body strong { color: #222; }
+        .data-block {
+            background: #f4f6f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .data-block summary {
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--fed-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer a { color: var(--fed-blue); }
+        .mu-chart-wrap {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px 12px;
+        }
+        .mu-chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--fed-blue);
+            margin-bottom: 10px;
+        }
+        .mu-chart-latest {
+            font-weight: 400;
+            color: #555;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📊 Unemployment Insurance Weekly Claims</h1>
+        <div class="subtitle">Economist Analyst Note</div>
+        <div class="meta">Generated 2026-11-12 · Data: FRED · Model: Gemma 4 31B</div>
+    </header>
+
+    <div class="summary-cards">
+        
+        <div class="card">
+            <h3>207000.000</h3>
+            <p>CONTEXT: 10Y REGIME: 11.7th Percentile | Z-Score: -1.44σ | 10Y Range:</p>
+            <p class="card-period">2026-08</p>
+        </div>
+        <div class="card">
+            <h3>1796000.000</h3>
+            <p>CONTEXT: 10Y REGIME: 1.7th Percentile | Z-Score: -2.35σ | 10Y Range:</p>
+            <p class="card-period">2026-08</p>
+        </div>
+        <div class="card">
+            <h3>204250.000</h3>
+            <p>CONTEXT: 10Y REGIME: 1.7th Percentile | Z-Score: -2.14σ | 10Y Range:</p>
+            <p class="card-period">2026-08</p>
+        </div>
+    </div>
+
+    
+    <div class="mu-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+        
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">Initial Jobless Claims
+                <span class="mu-chart-latest">200,000</span>
+            </div>
+            <canvas id="mu_chart_0" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_0'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2026-05", "2026-06", "2026-06", "2026-06", "2026-06", "2026-07", "2026-07", "2026-07", "2026-07", "2026-08", "2026-08", "2026-08", "2026-08", "2026-08", "2026-09", "2026-09", "2026-09", "2026-09", "2026-10", "2026-10", "2026-10", "2026-10", "2026-10", "2026-11"],
+                        datasets: [{
+                            data: [225000.0, 230000.0, 227000.0, 216000.0, 217000.0, 217000.0, 209000.0, 189000.0, 198000.0, 200000.0, 212000.0, 207000.0, 204000.0, 207000.0, 207000.0, 198000.0, 198000.0, 199000.0, 198000.0, 200000.0, 195000.0, 195000.0, 191000.0, 200000.0],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+        <div class="mu-chart-wrap">
+            <div class="mu-chart-title">4-Week Avg Initial Claims
+                <span class="mu-chart-latest">195,250</span>
+            </div>
+            <canvas id="mu_chart_1" height="120"></canvas>
+            <script>
+            (function(){
+                new Chart(document.getElementById('mu_chart_1'), {
+                    type: 'line',
+                    data: {
+                        labels: ["2026-05", "2026-06", "2026-06", "2026-06", "2026-06", "2026-07", "2026-07", "2026-07", "2026-07", "2026-08", "2026-08", "2026-08", "2026-08", "2026-08", "2026-09", "2026-09", "2026-09", "2026-09", "2026-10", "2026-10", "2026-10", "2026-10", "2026-10", "2026-11"],
+                        datasets: [{
+                            data: [214750.0, 219250.0, 223500.0, 224500.0, 222500.0, 219250.0, 214750.0, 208000.0, 203250.0, 199000.0, 199750.0, 204250.0, 205750.0, 207500.0, 206250.0, 204000.0, 202500.0, 200500.0, 198250.0, 198750.0, 198000.0, 197000.0, 195250.0, 195250.0],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0,51,102,0.07)',
+                            borderWidth: 2,
+                            pointRadius: 2.5,
+                            pointHoverRadius: 5,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(c) {
+                                        return c.parsed.y.toLocaleString(undefined, {maximumFractionDigits: 3});
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 11 },
+                                    callback: function(v) {
+                                        if (Math.abs(v) >= 1000000) return (v/1000000).toFixed(1)+'M';
+                                        if (Math.abs(v) >= 1000)    return (v/1000).toFixed(0)+'K';
+                                        return v.toLocaleString(undefined,{maximumFractionDigits:2});
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            }
+                        }
+                    }
+                });
+            })();
+            </script>
+        </div>
+    </div>
+
+    <div class="note-body">
+        <p><strong>Investment Banking | Macro Strategy Note</strong></p>
+<p><strong>Date:</strong> November 2026</p>
+<p><strong>Subject:</strong> Weekly Unemployment Insurance Claims Analysis</p>
+
+<h3>1. Executive Summary</h3>
+<p>The latest unemployment insurance data reinforces a narrative of extreme labor market tightness, with both initial and continued claims trending toward decade-long lows. The print suggests a labor market that remains remarkably resilient, providing the Federal Reserve with significant headroom to maintain a restrictive stance if inflation remains sticky, or to execute a cautious easing cycle without fear of an imminent employment collapse.</p>
+
+<p>The overall tone is one of stability and strength. The convergence of low initial claims and a significant drop in continued claims indicates not only a lack of layoffs but a high "re-hire" rate, suggesting that the labor market is operating near full capacity.</p>
+
+<h3>2. Five Main Views</h3>
+<ul>
+<li>  <strong>Historic Tightness:</strong> Initial claims remain well below the 10-year median, with the 4-week average sitting at the 1.7th percentile of the historical range.</li>
+<li>  <strong>Accelerating Re-employment:</strong> Continued Claims (CCSA) have dropped to 1.697M, hitting the absolute bottom of the 10-year range (1.695M–1.963M).</li>
+<li>  <strong>Downward Momentum:</strong> The 4-week average of initial claims has declined steadily from 207.5k in August to 195.25k in November, a ~6% reduction in the trend line.</li>
+<li>  <strong>Low Churn Risk:</strong> The stability of initial claims around the 191k–200k mark suggests that corporate downsizing is not currently a systemic risk.</li>
+<li>  <strong>Regime Divergence:</strong> While initial claims are tight (Z-score -1.44σ), the continued claims Z-score (-2.35σ) indicates a statistically significant deviation from the long-term norm, signaling a structural shift in labor hoarding or demand.</li>
+</ul>
+
+<h3>3. Macro Characterization</h3>
+<p><strong>(i) Growth:</strong> The data implies robust underlying economic activity. The absence of a spike in jobless claims suggests that firms are continuing to invest in human capital, which typically correlates with steady GDP growth and resilient consumer spending.</p>
+
+<p><strong>(ii) Labor Market:</strong> The market is in a state of extreme tightness. With continued claims at the 1.7th percentile, the "duration of unemployment" is likely at historic lows. This indicates a high-velocity labor market where displaced workers are absorbed almost immediately by other firms.</p>
+
+<p><strong>(iii) Inflation:</strong> From a macro perspective, this level of tightness is inflationary. Low unemployment and high labor demand put upward pressure on nominal wages, which may complicate the Fed's efforts to bring core inflation back to the 2% target via the demand side.</p>
+
+<h3>4. Cyclical Alignment</h3>
+<p>Based on the provided Z-scores, we are observing a <strong>structural regime shift</strong>. </p>
+
+<p>The Continued Claims Z-score of <strong>-2.35σ</strong> and the 4-Week Average Initial Claims Z-score of <strong>-2.14σ</strong> both exceed the |2.0| threshold for significance. This is not a mere "mid-cycle pause"; rather, it represents a departure from the 10-year historical average. The data suggests a regime of "hyper-tightness" that exceeds typical late-cycle overheating, potentially reflecting post-pandemic structural changes in labor force participation or a permanent shift in employer hiring behavior.</p>
+
+<h3>5. Policy Outlook</h3>
+<p><strong>Next Move: Hold / Hawkish Pause</strong></p>
+<p><strong>Timing: Next FOMC Meeting</strong></p>
+
+<p>The balance of risks is currently skewed toward inflation rather than unemployment. With the labor market operating at the 1.7th percentile of its 10-year range, there is zero evidence of the "labor market cooling" required to justify aggressive rate cuts. We expect the Fed to maintain current rates or signal a "higher for longer" posture. Any pivot toward easing will likely be delayed until we see the 4-week average of initial claims break above the 210k level or a normalization of the CCSA Z-score toward the mean.</p>
+    </div>
+
+    <details class="data-block">
+        <summary>Raw data fed to model</summary>
+--- UNEMPLOYMENT INSURANCE WEEKLY CLAIMS: CYCLE-AWARE SUMMARY ---
+
+SERIES: Initial Jobless Claims (thousands, SA) [ICSA]
+CONTEXT: 10Y REGIME: 11.7th Percentile | Z-Score: -1.44σ | 10Y Range: [189,000.00, 259,000.00]
+DATA:
+  2026-08    207000.000
+  2026-08    204000.000
+  2026-08    207000.000
+  2026-09    207000.000
+  2026-09    198000.000
+  2026-09    198000.000
+  2026-09    199000.000
+  2026-10    198000.000
+  2026-10    200000.000
+  2026-10    195000.000
+  2026-10    195000.000
+  2026-10    191000.000
+  2026-11    200000.000
+----------------------------------------
+SERIES: Continued Claims (thousands, SA) [CCSA]
+CONTEXT: 10Y REGIME: 1.7th Percentile | Z-Score: -2.35σ | 10Y Range: [1,695,000.00, 1,963,000.00]
+DATA:
+  2026-08   1796000.000
+  2026-08   1771000.000
+  2026-08   1775000.000
+  2026-08   1765000.000
+  2026-09   1717000.000
+  2026-09   1712000.000
+  2026-09   1699000.000
+  2026-09   1714000.000
+  2026-10   1703000.000
+  2026-10   1722000.000
+  2026-10   1695000.000
+  2026-10   1717000.000
+  2026-10   1697000.000
+----------------------------------------
+SERIES: 4-Week Avg Initial Claims (thousands, SA) [IC4WSA]
+CONTEXT: 10Y REGIME: 1.7th Percentile | Z-Score: -2.14σ | 10Y Range: [195,250.00, 242,250.00]
+DATA:
+  2026-08    204250.000
+  2026-08    205750.000
+  2026-08    207500.000
+  2026-09    206250.000
+  2026-09    204000.000
+  2026-09    202500.000
+  2026-09    200500.000
+  2026-10    198250.000
+  2026-10    198750.000
+  2026-10    198000.000
+  2026-10    197000.000
+  2026-10    195250.000
+  2026-11    195250.000
+----------------------------------------
+    </details>
+
+    <footer>
+        <p>Data sourced from <a href="https://fred.stlouisfed.org">FRED</a> ·
+        Analysis generated by <a href="https://huggingface.co/google/gemma-4-31B-it">Gemma 4 31B-IT</a> ·
+        <a href="index.html">← All reports</a></p>
+    </footer>
+</body>
+</html>

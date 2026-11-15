@@ -1,0 +1,36 @@
+name: Update EWZ Treemap
+
+on:
+  schedule:
+    - cron: '0 14 * * 6'  # Weekly, Saturday 14:00 UTC (after Friday holdings file)
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas numpy plotly requests yfinance
+
+      - name: Generate treemap
+        run: python scripts/generate_ewz_treemap.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/ewz-treemap/
+          git diff --staged --quiet || (git commit -m "Update EWZ treemap - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)

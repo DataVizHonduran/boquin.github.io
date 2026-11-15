@@ -1,0 +1,1057 @@
+{
+  "date": "2026-11-09",
+  "etfs": {
+    "HFND": [
+      {
+        "StockTicker": "FGXXX",
+        "SecurityName": "First American Government Obligations Fund 12/01/2031",
+        "Shares": 17706649.0,
+        "Price": 100.0,
+        "MarketValue": 17706648.98,
+        "Weightings": 49.63,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "IBYZ6 Index",
+        "SecurityName": "iBoxx iSh $HY Fut Dec26",
+        "Shares": 60.0,
+        "Price": 181.285,
+        "MarketValue": 10877100.0,
+        "Weightings": 30.48,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "MESZ6 Index",
+        "SecurityName": "MSCI EmgMkt       Dec26",
+        "Shares": 70.0,
+        "Price": 1515.7,
+        "MarketValue": 5304950.0,
+        "Weightings": 14.87,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "ESZ6 Index",
+        "SecurityName": "S&P500 EMINI FUT  Dec26",
+        "Shares": 8.0,
+        "Price": 7402.0,
+        "MarketValue": 2960800.0,
+        "Weightings": 8.3,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "Cash&Other",
+        "SecurityName": "Cash & Other",
+        "Shares": 2451700.0,
+        "Price": 1.0,
+        "MarketValue": 2451699.55,
+        "Weightings": 6.87,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "VTV",
+        "SecurityName": "Vanguard Morningstar Value ETF",
+        "Shares": 9789.0,
+        "Price": 223.01,
+        "MarketValue": 2183044.89,
+        "Weightings": 6.12,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "UXX6 Index",
+        "SecurityName": "CBOE VIX FUTURE   Nov26",
+        "Shares": 76.0,
+        "Price": 23.6945,
+        "MarketValue": 1800782.0,
+        "Weightings": 5.05,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "DNZ6 Index",
+        "SecurityName": "BCOM Comdty Ind   Dec26",
+        "Shares": 127.0,
+        "Price": 134.7893,
+        "MarketValue": 1711824.11,
+        "Weightings": 4.8,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "VUG",
+        "SecurityName": "Vanguard Morningstar Growth ETF",
+        "Shares": 19342.0,
+        "Price": 82.17,
+        "MarketValue": 1589332.14,
+        "Weightings": 4.45,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "AGZ",
+        "SecurityName": "iShares Agency Bond ETF",
+        "Shares": 14720.0,
+        "Price": 107.65,
+        "MarketValue": 1584608.0,
+        "Weightings": 4.44,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "MFSZ6 Index",
+        "SecurityName": "MSCI EAFE         Dec26",
+        "Shares": 10.0,
+        "Price": 3057.0,
+        "MarketValue": 1528500.0,
+        "Weightings": 4.28,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "EMHY",
+        "SecurityName": "iShares J.P. Morgan EM High Yield Bond ETF",
+        "Shares": 38771.0,
+        "Price": 38.61,
+        "MarketValue": 1496948.31,
+        "Weightings": 4.2,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "ICVT",
+        "SecurityName": "iShares Convertible Bond ETF",
+        "Shares": 11868.0,
+        "Price": 101.68,
+        "MarketValue": 1206738.24,
+        "Weightings": 3.38,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "VO",
+        "SecurityName": "Vanguard Morningstar Mid-Cap ETF",
+        "Shares": 14771.0,
+        "Price": 79.38,
+        "MarketValue": 1172521.98,
+        "Weightings": 3.29,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLI",
+        "SecurityName": "State Street Industrial Select Sector SPDR ETF",
+        "Shares": 6362.0,
+        "Price": 162.67,
+        "MarketValue": 1034906.54,
+        "Weightings": 2.9,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "VGZ6 Index",
+        "SecurityName": "EURO STOXX 50     Dec26",
+        "Shares": 15.0,
+        "Price": 6176.0,
+        "MarketValue": 1032568.72,
+        "Weightings": 2.89,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "LQD",
+        "SecurityName": "iShares iBoxx USD Investment Grade Corporate Bond ETF",
+        "Shares": 9396.0,
+        "Price": 104.53,
+        "MarketValue": 982163.88,
+        "Weightings": 2.75,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLK",
+        "SecurityName": "State Street Technology Select Sector SPDR ETF",
+        "Shares": 5663.0,
+        "Price": 164.74,
+        "MarketValue": 932922.62,
+        "Weightings": 2.61,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLB",
+        "SecurityName": "State Street Materials Select Sector SPDR ETF",
+        "Shares": 17349.0,
+        "Price": 51.95,
+        "MarketValue": 901280.55,
+        "Weightings": 2.53,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "VFMO",
+        "SecurityName": "Vanguard US Momentum Factor ETF",
+        "Shares": 4315.0,
+        "Price": 203.81,
+        "MarketValue": 879440.15,
+        "Weightings": 2.46,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "NXZ6 Index",
+        "SecurityName": "NIKKEI 225  (CME) Dec26",
+        "Shares": 3.0,
+        "Price": 58265.0,
+        "MarketValue": 873975.0,
+        "Weightings": 2.45,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "ADZ6 Curncy",
+        "SecurityName": "AUDUSD Crncy Fut  Dec26",
+        "Shares": 10.0,
+        "Price": 68.595,
+        "MarketValue": 685950.0,
+        "Weightings": 1.92,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "RTYZ6 Index",
+        "SecurityName": "E-Mini Russ 2000  Dec26",
+        "Shares": 4.0,
+        "Price": 2760.5,
+        "MarketValue": 552100.0,
+        "Weightings": 1.55,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XRT",
+        "SecurityName": "State Street SPDR S&P Retail ETF",
+        "Shares": 6096.0,
+        "Price": 89.5,
+        "MarketValue": 545592.0,
+        "Weightings": 1.53,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "DXZ6 Curncy",
+        "SecurityName": "DOLLAR INDEX      Dec26",
+        "Shares": 3.0,
+        "Price": 102.179,
+        "MarketValue": 306537.0,
+        "Weightings": 0.86,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLF",
+        "SecurityName": "State Street Financial Select Sector SPDR ETF",
+        "Shares": 5157.0,
+        "Price": 57.16,
+        "MarketValue": 294774.12,
+        "Weightings": 0.83,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XBI",
+        "SecurityName": "State Street SPDR S&P Biotech ETF",
+        "Shares": 1421.0,
+        "Price": 152.21,
+        "MarketValue": 216290.41,
+        "Weightings": 0.61,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLE",
+        "SecurityName": "State Street Energy Select Sector SPDR ETF",
+        "Shares": 3279.0,
+        "Price": 61.62,
+        "MarketValue": 202051.98,
+        "Weightings": 0.57,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLY",
+        "SecurityName": "State Street Consumer Discretionary Select Sector SPDR ETF",
+        "Shares": 1149.0,
+        "Price": 117.58,
+        "MarketValue": 135099.42,
+        "Weightings": 0.38,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLU",
+        "SecurityName": "State Street Utilities Select Sector SPDR ETF",
+        "Shares": 2127.0,
+        "Price": 43.13,
+        "MarketValue": 91737.51,
+        "Weightings": 0.26,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "EWY",
+        "SecurityName": "iShares MSCI South Korea ETF",
+        "Shares": 302.0,
+        "Price": 137.01,
+        "MarketValue": 41377.02,
+        "Weightings": 0.12,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XLV",
+        "SecurityName": "State Street Health Care Select Sector SPDR ETF",
+        "Shares": 90.0,
+        "Price": 184.8,
+        "MarketValue": 16632.0,
+        "Weightings": 0.05,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "EWZ",
+        "SecurityName": "iShares MSCI Brazil ETF",
+        "Shares": 481.0,
+        "Price": 31.98,
+        "MarketValue": 15382.38,
+        "Weightings": 0.04,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "BPZ6 Curncy",
+        "SecurityName": "BP CURRENCY FUT   Dec26",
+        "Shares": -2.0,
+        "Price": 133.52,
+        "MarketValue": -166900.0,
+        "Weightings": -0.47,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "TYZ6 Comdty",
+        "SecurityName": "US 10YR NOTE (CBT)Dec26",
+        "Shares": -4.0,
+        "Price": 107.109375,
+        "MarketValue": -428437.5,
+        "Weightings": -1.2,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "SFZ6 Curncy",
+        "SecurityName": "CHF CURRENCY FUT  Dec26",
+        "Shares": -3.0,
+        "Price": 122.38,
+        "MarketValue": -458925.0,
+        "Weightings": -1.29,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "XARZ6 Index",
+        "SecurityName": "Emini S&P ReEstateDec26",
+        "Shares": -10.0,
+        "Price": 216.0,
+        "MarketValue": -540000.0,
+        "Weightings": -1.51,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "JYZ6 Curncy",
+        "SecurityName": "JPN YEN CURR FUT  Dec26",
+        "Shares": -7.0,
+        "Price": 63.27,
+        "MarketValue": -553612.5,
+        "Weightings": -1.55,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "USZ6 Comdty",
+        "SecurityName": "US LONG BOND(CBT) Dec26",
+        "Shares": -10.0,
+        "Price": 108.46875,
+        "MarketValue": -1084687.5,
+        "Weightings": -3.04,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "ECZ6 Curncy",
+        "SecurityName": "EURO FX CURR FUT  Dec26",
+        "Shares": -9.0,
+        "Price": 1.11565,
+        "MarketValue": -1255106.25,
+        "Weightings": -3.52,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "CDZ6 Curncy",
+        "SecurityName": "C$ CURRENCY FUT   Dec26",
+        "Shares": -18.0,
+        "Price": 70.87,
+        "MarketValue": -1275660.0,
+        "Weightings": -3.58,
+        "NetAssets": 35680260.0
+      },
+      {
+        "StockTicker": "FVZ6 Comdty",
+        "SecurityName": "US 5YR NOTE (CBT) Dec26",
+        "Shares": -95.0,
+        "Price": 105.203125,
+        "MarketValue": -9994296.88,
+        "Weightings": -28.01,
+        "NetAssets": 35680260.0
+      }
+    ],
+    "HFGM": [
+      {
+        "StockTicker": "FGXXX",
+        "SecurityName": "First American Government Obligations Fund 12/01/2031",
+        "Shares": 92862283.0,
+        "Price": 100.0,
+        "MarketValue": 92862282.56,
+        "Weightings": 69.02,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "ESZ6 Index",
+        "SecurityName": "S&P500 EMINI FUT  Dec26",
+        "Shares": 204.0,
+        "Price": 7402.0,
+        "MarketValue": 75500400.0,
+        "Weightings": 56.12,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "IBYZ6 Index",
+        "SecurityName": "iBoxx iSh $HY Fut Dec26",
+        "Shares": 415.0,
+        "Price": 181.285,
+        "MarketValue": 75233275.0,
+        "Weightings": 55.92,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "ADZ6 Curncy",
+        "SecurityName": "AUDUSD Crncy Fut  Dec26",
+        "Shares": 724.0,
+        "Price": 68.595,
+        "MarketValue": 49662780.0,
+        "Weightings": 36.91,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "Cash&Other",
+        "SecurityName": "Cash & Other",
+        "Shares": 38700010.0,
+        "Price": 1.0,
+        "MarketValue": 38700010.4,
+        "Weightings": 28.76,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "MESZ6 Index",
+        "SecurityName": "MSCI EmgMkt       Dec26",
+        "Shares": 478.0,
+        "Price": 1515.7,
+        "MarketValue": 36225230.0,
+        "Weightings": 26.92,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "NXZ6 Index",
+        "SecurityName": "NIKKEI 225  (CME) Dec26",
+        "Shares": 103.0,
+        "Price": 58265.0,
+        "MarketValue": 30006475.0,
+        "Weightings": 22.3,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "GCZ6 COMDTY",
+        "SecurityName": "GOLD 100 OZ FUTR  Dec26",
+        "Shares": 54.0,
+        "Price": 4074.9,
+        "MarketValue": 22004460.0,
+        "Weightings": 16.35,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "DXZ6 Curncy",
+        "SecurityName": "DOLLAR INDEX      Dec26",
+        "Shares": 213.0,
+        "Price": 102.179,
+        "MarketValue": 21764127.0,
+        "Weightings": 16.18,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "SBH7 Comdty",
+        "SecurityName": "SUGAR #11 (WORLD) Mar27",
+        "Shares": 866.0,
+        "Price": 18.24,
+        "MarketValue": 17691340.8,
+        "Weightings": 13.15,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "HGZ6 COMDTY",
+        "SecurityName": "COPPER FUTURE     Dec26",
+        "Shares": 111.0,
+        "Price": 623.75,
+        "MarketValue": 17309062.5,
+        "Weightings": 12.86,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "S F7 Comdty",
+        "SecurityName": "SOYBEAN FUTURE    Jan27",
+        "Shares": 277.0,
+        "Price": 1193.75,
+        "MarketValue": 16533437.5,
+        "Weightings": 12.29,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "CLZ6 Comdty",
+        "SecurityName": "WTI CRUDE FUTURE  Dec26",
+        "Shares": 166.0,
+        "Price": 90.83,
+        "MarketValue": 15077780.0,
+        "Weightings": 11.21,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "MFSZ6 Index",
+        "SecurityName": "MSCI EAFE         Dec26",
+        "Shares": 77.0,
+        "Price": 3057.0,
+        "MarketValue": 11769450.0,
+        "Weightings": 8.75,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "UXX6 Index",
+        "SecurityName": "CBOE VIX FUTURE   Nov26",
+        "Shares": 483.0,
+        "Price": 23.6945,
+        "MarketValue": 11444443.5,
+        "Weightings": 8.51,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "RTYZ6 Index",
+        "SecurityName": "E-Mini Russ 2000  Dec26",
+        "Shares": 80.0,
+        "Price": 2760.5,
+        "MarketValue": 11042000.0,
+        "Weightings": 8.21,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "C Z6 Comdty",
+        "SecurityName": "CORN FUTURE       Dec26",
+        "Shares": 389.0,
+        "Price": 441.5,
+        "MarketValue": 8587175.0,
+        "Weightings": 6.38,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "CCZ6 Comdty",
+        "SecurityName": "COCOA FUTURE      Dec26",
+        "Shares": 143.0,
+        "Price": 5155.0,
+        "MarketValue": 7371650.0,
+        "Weightings": 5.48,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "VWOB",
+        "SecurityName": "Vanguard Emerging Markets Government Bond ETF",
+        "Shares": 46724.0,
+        "Price": 63.88,
+        "MarketValue": 2984729.12,
+        "Weightings": 2.22,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "VGZ6 Index",
+        "SecurityName": "EURO STOXX 50     Dec26",
+        "Shares": 40.0,
+        "Price": 6176.0,
+        "MarketValue": 2753516.57,
+        "Weightings": 2.05,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "LAZ26 Comdty",
+        "SecurityName": "LME PRI ALUM FUTR Dec26",
+        "Shares": 27.0,
+        "Price": 3100.76,
+        "MarketValue": 2093013.0,
+        "Weightings": 1.56,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "KCZ6 Comdty",
+        "SecurityName": "COFFEE 'C' FUTURE Dec26",
+        "Shares": 17.0,
+        "Price": 280.0,
+        "MarketValue": 1785000.0,
+        "Weightings": 1.33,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "LNZ6 Comdty",
+        "SecurityName": "LME NICKEL FUTURE Dec26",
+        "Shares": 9.0,
+        "Price": 16249.54,
+        "MarketValue": 877475.16,
+        "Weightings": 0.65,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "HKD",
+        "SecurityName": "HONG KONG DOLLAR",
+        "Shares": -2507.0,
+        "Price": 1.0,
+        "MarketValue": -319.74,
+        "Weightings": 0.0,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "TYZ6 Comdty",
+        "SecurityName": "US 10YR NOTE (CBT)Dec26",
+        "Shares": -13.0,
+        "Price": 107.109375,
+        "MarketValue": -1392421.88,
+        "Weightings": -1.03,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "HIX6 Index",
+        "SecurityName": "HANG SENG IDX FUT Nov26",
+        "Shares": -31.0,
+        "Price": 24499.0,
+        "MarketValue": -4842872.81,
+        "Weightings": -3.6,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "LCZ6 Comdty",
+        "SecurityName": "LIVE CATTLE FUTR  Dec26",
+        "Shares": -90.0,
+        "Price": 214.05,
+        "MarketValue": -7705800.0,
+        "Weightings": -5.73,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "SFZ6 Curncy",
+        "SecurityName": "CHF CURRENCY FUT  Dec26",
+        "Shares": -135.0,
+        "Price": 122.38,
+        "MarketValue": -20651625.0,
+        "Weightings": -15.35,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "JYZ6 Curncy",
+        "SecurityName": "JPN YEN CURR FUT  Dec26",
+        "Shares": -357.0,
+        "Price": 63.27,
+        "MarketValue": -28234237.5,
+        "Weightings": -20.98,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "BPZ6 Curncy",
+        "SecurityName": "BP CURRENCY FUT   Dec26",
+        "Shares": -374.0,
+        "Price": 133.52,
+        "MarketValue": -31210300.0,
+        "Weightings": -23.2,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "FVZ6 Comdty",
+        "SecurityName": "US 5YR NOTE (CBT) Dec26",
+        "Shares": -517.0,
+        "Price": 105.203125,
+        "MarketValue": -54390015.63,
+        "Weightings": -40.43,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "USZ6 Comdty",
+        "SecurityName": "US LONG BOND(CBT) Dec26",
+        "Shares": -611.0,
+        "Price": 108.46875,
+        "MarketValue": -66274406.25,
+        "Weightings": -49.26,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "CDZ6 Curncy",
+        "SecurityName": "C$ CURRENCY FUT   Dec26",
+        "Shares": -1001.0,
+        "Price": 70.87,
+        "MarketValue": -70940870.0,
+        "Weightings": -52.73,
+        "NetAssets": 134545482.0
+      },
+      {
+        "StockTicker": "ECZ6 Curncy",
+        "SecurityName": "EURO FX CURR FUT  Dec26",
+        "Shares": -525.0,
+        "Price": 1.11565,
+        "MarketValue": -73214531.25,
+        "Weightings": -54.42,
+        "NetAssets": 134545482.0
+      }
+    ],
+    "HFMF": [
+      {
+        "StockTicker": "FGXXX",
+        "SecurityName": "First American Government Obligations Fund 12/01/2031",
+        "Shares": 19330478.0,
+        "Price": 100.0,
+        "MarketValue": 19330478.33,
+        "Weightings": 83.19,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "ESZ6 Index",
+        "SecurityName": "S&P500 EMINI FUT  Dec26",
+        "Shares": 25.0,
+        "Price": 7402.0,
+        "MarketValue": 9252500.0,
+        "Weightings": 39.82,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "ADZ6 Curncy",
+        "SecurityName": "AUDUSD Crncy Fut  Dec26",
+        "Shares": 66.0,
+        "Price": 68.595,
+        "MarketValue": 4527270.0,
+        "Weightings": 19.48,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "Cash&Other",
+        "SecurityName": "Cash & Other",
+        "Shares": 3906106.0,
+        "Price": 1.0,
+        "MarketValue": 3906105.91,
+        "Weightings": 16.81,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "SBH7 Comdty",
+        "SecurityName": "SUGAR #11 (WORLD) Mar27",
+        "Shares": 144.0,
+        "Price": 18.24,
+        "MarketValue": 2941747.2,
+        "Weightings": 12.66,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "S F7 Comdty",
+        "SecurityName": "SOYBEAN FUTURE    Jan27",
+        "Shares": 44.0,
+        "Price": 1193.75,
+        "MarketValue": 2626250.0,
+        "Weightings": 11.3,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "HGZ6 COMDTY",
+        "SecurityName": "COPPER FUTURE     Dec26",
+        "Shares": 16.0,
+        "Price": 623.75,
+        "MarketValue": 2495000.0,
+        "Weightings": 10.74,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "CLZ6 Comdty",
+        "SecurityName": "WTI CRUDE FUTURE  Dec26",
+        "Shares": 27.0,
+        "Price": 90.83,
+        "MarketValue": 2452410.0,
+        "Weightings": 10.55,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "C Z6 Comdty",
+        "SecurityName": "CORN FUTURE       Dec26",
+        "Shares": 58.0,
+        "Price": 441.5,
+        "MarketValue": 1280350.0,
+        "Weightings": 5.51,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "UXX6 Index",
+        "SecurityName": "CBOE VIX FUTURE   Nov26",
+        "Shares": 44.0,
+        "Price": 23.6945,
+        "MarketValue": 1042558.0,
+        "Weightings": 4.49,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "CCZ6 Comdty",
+        "SecurityName": "COCOA FUTURE      Dec26",
+        "Shares": 19.0,
+        "Price": 5155.0,
+        "MarketValue": 979450.0,
+        "Weightings": 4.22,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "NXZ6 Index",
+        "SecurityName": "NIKKEI 225  (CME) Dec26",
+        "Shares": 3.0,
+        "Price": 58265.0,
+        "MarketValue": 873975.0,
+        "Weightings": 3.76,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "LCZ6 Comdty",
+        "SecurityName": "LIVE CATTLE FUTR  Dec26",
+        "Shares": -19.0,
+        "Price": 214.05,
+        "MarketValue": -1626780.0,
+        "Weightings": -7.0,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "JYZ6 Curncy",
+        "SecurityName": "JPN YEN CURR FUT  Dec26",
+        "Shares": -54.0,
+        "Price": 63.27,
+        "MarketValue": -4270725.0,
+        "Weightings": -18.38,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "BPZ6 Curncy",
+        "SecurityName": "BP CURRENCY FUT   Dec26",
+        "Shares": -85.0,
+        "Price": 133.52,
+        "MarketValue": -7093250.0,
+        "Weightings": -30.53,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "CDZ6 Curncy",
+        "SecurityName": "C$ CURRENCY FUT   Dec26",
+        "Shares": -131.0,
+        "Price": 70.87,
+        "MarketValue": -9283970.0,
+        "Weightings": -39.96,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "USZ6 Comdty",
+        "SecurityName": "US LONG BOND(CBT) Dec26",
+        "Shares": -99.0,
+        "Price": 108.46875,
+        "MarketValue": -10738406.25,
+        "Weightings": -46.22,
+        "NetAssets": 23235157.0
+      },
+      {
+        "StockTicker": "ECZ6 Curncy",
+        "SecurityName": "EURO FX CURR FUT  Dec26",
+        "Shares": -85.0,
+        "Price": 1.11565,
+        "MarketValue": -11853781.25,
+        "Weightings": -51.02,
+        "NetAssets": 23235157.0
+      }
+    ],
+    "HFEQ": [
+      {
+        "StockTicker": "FGXXX",
+        "SecurityName": "First American Government Obligations Fund 12/01/2031",
+        "Shares": 3845465.0,
+        "Price": 100.0,
+        "MarketValue": 3845465.19,
+        "Weightings": 32.58,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "NQZ6 Index",
+        "SecurityName": "NASDAQ 100 E-MINI Dec26",
+        "Shares": 4.0,
+        "Price": 27085.25,
+        "MarketValue": 2166820.0,
+        "Weightings": 18.36,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "MESZ6 Index",
+        "SecurityName": "MSCI EmgMkt       Dec26",
+        "Shares": 28.0,
+        "Price": 1515.7,
+        "MarketValue": 2121980.0,
+        "Weightings": 17.98,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "VTV",
+        "SecurityName": "Vanguard Morningstar Value ETF",
+        "Shares": 8228.0,
+        "Price": 223.01,
+        "MarketValue": 1834926.28,
+        "Weightings": 15.55,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "MFSZ6 Index",
+        "SecurityName": "MSCI EAFE         Dec26",
+        "Shares": 10.0,
+        "Price": 3057.0,
+        "MarketValue": 1528500.0,
+        "Weightings": 12.95,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "ESZ6 Index",
+        "SecurityName": "S&P500 EMINI FUT  Dec26",
+        "Shares": 4.0,
+        "Price": 7402.0,
+        "MarketValue": 1480400.0,
+        "Weightings": 12.54,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "VO",
+        "SecurityName": "Vanguard Morningstar Mid-Cap ETF",
+        "Shares": 15419.0,
+        "Price": 79.38,
+        "MarketValue": 1223960.22,
+        "Weightings": 10.37,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "Cash&Other",
+        "SecurityName": "Cash & Other",
+        "Shares": 992411.0,
+        "Price": 1.0,
+        "MarketValue": 992410.89,
+        "Weightings": 8.41,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "VFMO",
+        "SecurityName": "Vanguard US Momentum Factor ETF",
+        "Shares": 4793.0,
+        "Price": 203.81,
+        "MarketValue": 976861.33,
+        "Weightings": 8.28,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XLB",
+        "SecurityName": "State Street Materials Select Sector SPDR ETF",
+        "Shares": 16032.0,
+        "Price": 51.95,
+        "MarketValue": 832862.4,
+        "Weightings": 7.06,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "UXX6 Index",
+        "SecurityName": "CBOE VIX FUTURE   Nov26",
+        "Shares": 35.0,
+        "Price": 23.6945,
+        "MarketValue": 829307.5,
+        "Weightings": 7.03,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "VGZ6 Index",
+        "SecurityName": "EURO STOXX 50     Dec26",
+        "Shares": 12.0,
+        "Price": 6176.0,
+        "MarketValue": 826054.97,
+        "Weightings": 7.0,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XRT",
+        "SecurityName": "State Street SPDR S&P Retail ETF",
+        "Shares": 8513.0,
+        "Price": 89.5,
+        "MarketValue": 761913.5,
+        "Weightings": 6.46,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XLI",
+        "SecurityName": "State Street Industrial Select Sector SPDR ETF",
+        "Shares": 4061.0,
+        "Price": 162.67,
+        "MarketValue": 660602.87,
+        "Weightings": 5.6,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "NXZ6 Index",
+        "SecurityName": "NIKKEI 225  (CME) Dec26",
+        "Shares": 2.0,
+        "Price": 58265.0,
+        "MarketValue": 582650.0,
+        "Weightings": 4.94,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "RTYZ6 Index",
+        "SecurityName": "E-Mini Russ 2000  Dec26",
+        "Shares": 4.0,
+        "Price": 2760.5,
+        "MarketValue": 552100.0,
+        "Weightings": 4.68,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "IXAZ6 Index",
+        "SecurityName": "XAF Financial     Dec26",
+        "Shares": 2.0,
+        "Price": 706.68,
+        "MarketValue": 353340.0,
+        "Weightings": 2.99,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XBI",
+        "SecurityName": "State Street SPDR S&P Biotech ETF",
+        "Shares": 1949.0,
+        "Price": 152.21,
+        "MarketValue": 296657.29,
+        "Weightings": 2.51,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XLE",
+        "SecurityName": "State Street Energy Select Sector SPDR ETF",
+        "Shares": 3158.0,
+        "Price": 61.62,
+        "MarketValue": 194595.96,
+        "Weightings": 1.65,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XLY",
+        "SecurityName": "State Street Consumer Discretionary Select Sector SPDR ETF",
+        "Shares": 1048.0,
+        "Price": 117.58,
+        "MarketValue": 123223.84,
+        "Weightings": 1.04,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XLU",
+        "SecurityName": "State Street Utilities Select Sector SPDR ETF",
+        "Shares": 1349.0,
+        "Price": 43.13,
+        "MarketValue": 58182.37,
+        "Weightings": 0.49,
+        "NetAssets": 11801565.0
+      },
+      {
+        "StockTicker": "XARZ6 Index",
+        "SecurityName": "Emini S&P ReEstateDec26",
+        "Shares": -12.0,
+        "Price": 216.0,
+        "MarketValue": -648000.0,
+        "Weightings": -5.49,
+        "NetAssets": 11801565.0
+      }
+    ]
+  }
+}
