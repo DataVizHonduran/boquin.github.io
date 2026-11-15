@@ -2,6 +2,7 @@
 Output: reports/ewz-treemap/index.html
 """
 import io
+import json
 import math
 import sys
 from pathlib import Path
@@ -61,20 +62,23 @@ def main():
             return "losing money"
         return "cheap" if pe < 7 else "fair" if pe < 14 else "pricey"
 
-    ids, labels, parents, values, colors, hover, text = [], [], [], [], [], [], []
-    for sec, g in df.groupby("Sector"):
+    from plotly.colors import qualitative
+    ids, labels, parents, values, colors, hover, text, sec_cols = [], [], [], [], [], [], [], []
+    pal = [c for c in qualitative.Set3 if c != "rgb(217,217,217)"]  # no gray: reads as "no data"
+    for k, (sec, g) in enumerate(df.groupby("Sector")):
+        sc = pal[k % len(pal)]
         w = g["Weight (%)"].sum()
         wpe = g[g["pe"].fillna(-1) > 0]
         # sector P/E = weight-weighted harmonic mean (how index P/E is computed)
         spe = wpe["Weight (%)"].sum() / (wpe["Weight (%)"] / wpe["pe"]).sum() if len(wpe) else None
-        ids.append(sec); labels.append(sec); parents.append(""); values.append(w)
+        ids.append(sec); labels.append(sec); parents.append(""); values.append(w); sec_cols.append(sc)
         colors.append(cval(spe)); text.append(f"P/E {spe:.1f}" if spe else "")
         hover.append(f"<b>{sec}</b><br>{w:.1f}% of fund<br>Sector P/E: {spe:.1f}" if spe else f"<b>{sec}</b><br>{w:.1f}% of fund")
         for _, r in g.iterrows():
             pe = r["pe"]
             pe_s = "n/a" if pe is None or pd.isna(pe) else ("negative" if pe <= 0 else f"{pe:.1f}")
             ids.append(f"{sec}/{r['Ticker']}"); labels.append(r["Ticker"]); parents.append(sec)
-            values.append(r["Weight (%)"]); colors.append(cval(pe))
+            values.append(r["Weight (%)"]); colors.append(cval(pe)); sec_cols.append(sc)
             text.append(f"{r['name']}<br>P/E {pe_s}")
             hover.append(f"<b>{r['name']}</b> ({r['Ticker']})<br>{r['Weight (%)']:.2f}% of fund<br>"
                          f"P/E: {pe_s} — {tag(pe)}")
@@ -91,9 +95,10 @@ def main():
         from plotly.colors import sample_colorscale
         return sample_colorscale(scale, [t])[0]
 
+    pe_cols = [to_rgb(c) for c in colors]
     fig = go.Figure(go.Treemap(
         ids=ids, labels=labels, parents=parents, values=values, branchvalues="total",
-        marker=dict(colors=[to_rgb(c) for c in colors], line=dict(width=1.5, color="#ffffff")),
+        marker=dict(colors=pe_cols, line=dict(width=1.5, color="#ffffff")),
         text=text, texttemplate="<b>%{label}</b><br>%{text}", hovertext=hover,
         hovertemplate="%{hovertext}<extra></extra>", pathbar=dict(visible=True),
         textfont=dict(color="#111"), tiling=dict(pad=3),
@@ -110,7 +115,7 @@ def main():
                       paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
 
     n_missing = df["pe"].isna().sum()
-    chart = fig.to_html(full_html=False, include_plotlyjs="cdn", config={"displaylogo": False, "responsive": True})
+    chart = fig.to_html(full_html=False, include_plotlyjs="cdn", div_id="tm", config={"displaylogo": False, "responsive": True})
     html = f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,19 +132,35 @@ def main():
  .how b {{ white-space:nowrap; }}
  .foot {{ color:var(--muted); font-size:.85rem; margin-top:10px; }}
  a {{ color:inherit; }}
+ .toggle {{ display:inline-flex; border:1px solid var(--muted); border-radius:8px; overflow:hidden; margin-bottom:10px; }}
+ .toggle button {{ border:0; background:transparent; color:var(--fg); padding:6px 14px; font:inherit; cursor:pointer; }}
+ .toggle button.on {{ background:var(--fg); color:var(--bg); }}
 </style></head><body><div class="wrap">
 <h1>🇧🇷 Brazil Stock Map</h1>
 <p class="sub">Every company inside the EWZ fund (iShares MSCI Brazil) · holdings as of {asof}</p>
 <div class="how">
  <b>📦 Box size</b> = how much of the fund that company is (bigger box = more money invested).<br>
  <b>🗂️ Groups</b> = the type of business (banks, oil, mining, electricity…). Click a group to zoom in; click the top bar to zoom back out.<br>
- <b>🎨 Color</b> = <b>price-to-earnings (P/E)</b>: how many dollars you pay for each $1 the company is expected to earn over the next year.
+ <span id="how-pe"><b>🎨 Color</b> = <b>price-to-earnings (P/E)</b>: how many dollars you pay for each $1 the company is expected to earn over the next year.
  <span style="color:#1a9850;font-weight:600">Green = cheap</span> (low P/E),
  <span style="color:#d73027;font-weight:600">red = pricey</span> (high P/E),
  <span style="color:{GRAY};font-weight:600">gray = losing money or no data</span>.
- A P/E of 5 means if profits stayed the same, the company would "earn back" its price in 5 years.
+ A P/E of 5 means if profits stayed the same, the company would "earn back" its price in 5 years.</span>
+ <span id="how-sec" style="display:none"><b>🎨 Color</b> = sector — every company in the same type of business shares a color.</span>
 </div>
+<div class="toggle"><button id="b-pe" class="on" onclick="setMode('pe')">🎨 Color by P/E</button><button id="b-sec" onclick="setMode('sec')">🗂️ Color by sector</button></div>
 {chart}
+<script>
+const COLS = {{pe: {json.dumps(pe_cols)}, sec: {json.dumps(sec_cols)}}};
+function setMode(m) {{
+  Plotly.restyle('tm', {{'marker.colors': [COLS[m]]}}, [0]);
+  Plotly.restyle('tm', {{visible: m === 'pe'}}, [1]);
+  document.getElementById('how-pe').style.display = m === 'pe' ? '' : 'none';
+  document.getElementById('how-sec').style.display = m === 'sec' ? '' : 'none';
+  document.getElementById('b-pe').classList.toggle('on', m === 'pe');
+  document.getElementById('b-sec').classList.toggle('on', m === 'sec');
+}}
+</script>
 <p class="foot">Source: iShares holdings file; P/E = forward (next-12-month analyst estimates) from Yahoo Finance ({n_missing} with no data). Sector P/E is weight-averaged the way index P/Es are. Not investment advice — just for learning. <a href="../../index.html">← boquin.xyz</a></p>
 </div></body></html>"""
     OUT.parent.mkdir(parents=True, exist_ok=True)
