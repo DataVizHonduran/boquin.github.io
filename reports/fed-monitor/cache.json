@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastRun": "2026-11-09T17:13:32.051377+00:00",
-    "totalItems": 171
+    "lastRun": "2026-11-16T16:47:37.736829+00:00",
+    "totalItems": 174
   },
   "items": {
     "a394d042b25d8fb4dc985c6ccb9785fc0e491aab30e2d66d09ee55d6eb536759": {
@@ -3282,11 +3282,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-10-19T14:23:40.530083+00:00",
-      "lastChecked": "2026-11-09T17:13:32.051377+00:00",
+      "lastChecked": "2026-11-16T16:47:37.736829+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "Insufficient data provided to analyze the content of the article.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-11-09T17:13:32.051377+00:00"
+      "tagsGeneratedAt": "2026-11-16T16:47:37.736829+00:00"
     },
     "e743bf9b86c33057b003bef1c38e8fed6e6261b4f3e0258acf866497c42316ef": {
       "url": "https://www.dallasfed.org/research/economics/2026/1015",
@@ -3297,11 +3297,11 @@
       "publicationDate": "",
       "authors": [],
       "firstSeen": "2026-10-19T14:23:40.530083+00:00",
-      "lastChecked": "2026-11-09T17:13:32.051377+00:00",
+      "lastChecked": "2026-11-16T16:47:37.736829+00:00",
       "scrapedSnippet": "",
-      "aiSummary": "Insufficient data provided to analyze the content of the article.",
+      "aiSummary": "No content provided for analysis.",
       "tags": [],
-      "tagsGeneratedAt": "2026-11-09T17:13:32.051377+00:00"
+      "tagsGeneratedAt": "2026-11-16T16:47:37.736829+00:00"
     },
     "8aa07c18cd5d75e8231fa5006dce9e33dfb57c24a469daf8e44e69039acd3b3f": {
       "url": "https://libertystreeteconomics.newyorkfed.org/2026/11/how-do-banking-supervisors-deal-with-failing-banks/",
@@ -3395,6 +3395,60 @@
         "recession"
       ],
       "tagsGeneratedAt": "2026-11-09T17:13:32.051377+00:00"
+    },
+    "04687d7ab438a60ea9efd01b073f3fcd9bcefecacabf7049ab28fa954340b941": {
+      "url": "https://libertystreeteconomics.newyorkfed.org/2026/11/can-workers-predict-job-finding-and-job-loss/",
+      "title": "Can Workers Predict Job Finding and Job Loss?",
+      "district": "New York Fed (2nd District)",
+      "districtCode": "NY",
+      "contentType": "Liberty Street Economics Blog",
+      "publicationDate": "2026-11-16",
+      "authors": [],
+      "firstSeen": "2026-11-16T16:47:37.736829+00:00",
+      "lastChecked": "2026-11-16T16:47:37.736829+00:00",
+      "scrapedSnippet": "Workers’ perceptions of the labor market may differ from aggregate labor market statistics. Individuals might be overly optimistic about their chance of finding a job, or too pessimistic about the odds of losing their current position. In this post, we compare subjective beliefs of future job-finding and job-loss from the New York Fed’s Survey of Consumer Expectations (SCE) with their realized counterparts in the Current Population Survey (CPS). We then investigate how closely aggregate perceptions of job-finding and job-loss prospects align with realized rates.",
+      "aiSummary": "This research examines the divergence between individual workers' subjective beliefs regarding job security and actual labor market outcomes. It utilizes Survey of Consumer Expectations data to analyze whether workers accurately predict job-finding and job-loss probabilities.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "consumer spending",
+        "regional economy"
+      ],
+      "tagsGeneratedAt": "2026-11-16T16:47:37.736829+00:00"
+    },
+    "2b9bbd464ebb73be66109a8eaaab12f828e38b86810c888d0912cd01344e842b": {
+      "url": "https://www.dallasfed.org/research/economics/2026/1110",
+      "title": "",
+      "district": "Dallas Fed (11th District)",
+      "districtCode": "DAL",
+      "contentType": "Economics Publications",
+      "publicationDate": "",
+      "authors": [],
+      "firstSeen": "2026-11-16T16:47:37.736829+00:00",
+      "lastChecked": "2026-11-16T16:47:37.736829+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "No content provided for analysis.",
+      "tags": [],
+      "tagsGeneratedAt": "2026-11-16T16:47:37.736829+00:00"
+    },
+    "fee80fc58788bbc5960c93b1d8120eb539a5d22a545f8029e2b5bfbaa81a45dd": {
+      "url": "https://www.fedinprint.org/item/fedlwp/104072/original",
+      "title": "Risky College Admissions and the (Mis)Allocation of Talent",
+      "district": "St. Louis Fed (8th District)",
+      "districtCode": "STL",
+      "contentType": "Working Papers",
+      "publicationDate": "2026-11-16",
+      "authors": [],
+      "firstSeen": "2026-11-16T16:47:37.736829+00:00",
+      "lastChecked": "2026-11-16T16:47:37.736829+00:00",
+      "scrapedSnippet": "",
+      "aiSummary": "This paper explores how the uncertainty and risk associated with college admissions processes impact the distribution of human capital. It argues that these mechanisms may lead to a misallocation of talent within the economy.",
+      "tags": [
+        "labor markets",
+        "employment",
+        "GDP growth"
+      ],
+      "tagsGeneratedAt": "2026-11-16T16:47:37.736829+00:00"
     }
   }
 }
