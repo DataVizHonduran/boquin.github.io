@@ -1,30 +1,34 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — November 2026 (Month to Date)
 
-**Coverage Period:** Month to date: November 2026 (20 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: November 2026 (21 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**MEMORANDUM**
-**TO:** Investment Committee / Trading Desk
-**FROM:** Senior Eurozone Economist
-**DATE:** November 17, 2026
-**SUBJECT:** Strategic Briefing: Recent ECB and National Central Bank Research
+**MEMO: Eurozone Research Briefing**
+**To:** Investment Team
+**From:** Senior Economist
+**Date:** November 18, 2026
 
-After reviewing the latest research cycle from the ECB and Deutsche Bundesbank (DBB), I have isolated the following publications as the most critical for our current macro and policy positioning.
+I have reviewed the latest research cycle from the ECB and national central banks (notably the Deutsche Bundesbank). While much of the output is technical, several papers provide critical signals regarding the transmission of monetary policy and the structural risks facing the Eurozone.
 
-1. **[ECB] Monetary policy in times of high public debt**: This paper analyzes the "fiscal dominance" risk, exploring how high sovereign debt levels may constrain a central bank's ability to fight inflation without triggering fiscal instability. For us, this suggests a narrower "policy corridor" for the ECB, where aggressive tightening could inadvertently trigger sovereign spreads, potentially forcing a premature pivot.
+**Key Analytical Takeaways:**
 
-2. **[ECB] Deep-π*: a neural network estimate of trend inflation**: By using neural networks to identify the drivers of trend inflation rather than treating it as a random walk, the ECB is refining its "neutral" inflation target. This indicates a shift toward more data-driven, non-linear forecasting, which may lead to more abrupt changes in policy guidance as the "trend" is redefined in real-time.
+1. **[ECB] Monetary policy in times of high public debt:** This paper addresses the "fiscal dominance" risk, exploring how high sovereign debt levels may constrain the ECB's ability to fight inflation without triggering debt instability. For us, this suggests a narrower "policy corridor" for rates, where the ECB must balance price stability against the risk of sovereign spreads widening.
 
-3. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view of the nonbank lending channel**: This research highlights how Non-Bank Financial Intermediaries (NBFIs) can either stabilize or exacerbate yield curve volatility depending on their funding structures. Given the systemic importance of NBFIs in the Eurozone, this suggests that liquidity shocks in the shadow banking sector could lead to violent, non-linear moves in sovereign yields.
+2. **[ECB] Deep-π*: a neural network estimate of trend inflation:** By moving beyond random-walk models to a neural network approach, the ECB is attempting to identify the specific economic drivers of trend inflation. This indicates a shift toward more sophisticated, data-driven forecasting that may lead to more aggressive or precise pivots in policy as they better isolate "sticky" inflation from transitory shocks.
 
-4. **[ECB] Monetary policy, segmented capital markets and innovation**: The authors identify a mechanism where contractionary policy disproportionately hits innovation in markets with imperfect integration. This implies that higher-for-longer rates may cause a permanent "scarring" effect on European competitiveness and productivity, as capital-constrained firms scale back R&D.
+3. **[ECB] Monetary policy, segmented capital markets and innovation:** The research identifies a mechanism where contractionary policy disproportionately hurts innovation in segmented markets. This is a warning sign for Eurozone competitiveness; prolonged high rates may not just cool the economy but permanently degrade the region's long-term growth potential by stifling R&D.
 
-5. **[DBB] Tariffs, cohort redistribution, and the world real interest rate**: This paper examines the macroeconomic fallout of trade barriers and their impact on global real rates. With geopolitical tensions rising, this suggests that a return to protectionism would not only be inflationary but could structurally shift the equilibrium real rate higher, complicating the ECB's long-term terminal rate assumptions.
+4. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view:** This analysis of the non-bank lending channel highlights how NBFIs can either stabilize or exacerbate market volatility depending on the yield curve's shape. As we navigate the current rate environment, this suggests that liquidity risks in the shadow banking sector could trigger sudden, non-linear shocks to credit availability.
 
-**Synthesis:** The overarching theme is a transition from "standard" monetary transmission to a regime defined by structural fragility, where high public debt and non-bank volatility limit the ECB's operational flexibility. We should expect policy decisions to be increasingly influenced by financial stability risks and "trend" inflation shifts rather than simple headline CPI targets.
+5. **[ECB] The macroeconomic effects of defence spending:** By analyzing the impact beyond GDP, the ECB is quantifying the "crowding out" effect of the current geopolitical shift. This matters because a pivot toward defense spending may be less efficient for long-term productivity than civilian investment, potentially altering the neutral rate ($r^*$) and fiscal multipliers.
+
+6. **[DBB] Tariffs, cohort redistribution, and the world real interest rate:** This paper links trade protectionism to global real interest rates and generational wealth shifts. In an era of rising tariffs, this suggests that trade wars will not only impact trade volumes but will exert upward pressure on global real yields, complicating the ECB's easing cycle.
+
+**Synthesis:**
+The collective research signals a transition from "crisis management" to "structural navigation," focusing on the frictions created by high public debt, non-bank fragility, and the productivity costs of defense and trade shifts. We should expect the ECB to be increasingly concerned with the "long-term scarring" of high rates on innovation and the precarious balance between inflation control and sovereign solvency.
 
 ---
 
@@ -130,7 +134,14 @@ The research analyzes high-frequency online supermarket data to understand the d
 **Tags:** inflation · consumer spending · productivity
 
 ## Deutsche Bundesbank
-**Content Type:** Discussion Papers | **New:** 0 of 6
+**Content Type:** Discussion Papers | **New:** 0 of 7
+
+### (cached) [Beyond local deposit markets: Social spillovers in deposit pricing | Sofia Anyfantaki, Panagiotis Avramidis, Natalya Martynova](https://www.bundesbank.de/en/publications/research/discussion-papers/beyond-local-deposit-markets-social-spillovers-in-deposit-pricing-1016068)
+**Published:** 2026-11-18 | **Authors:** 
+
+The paper analyzes how deposit pricing is influenced by social spillovers and competition beyond local markets. It examines the transmission of interest rate changes to depositors and the role of banking competition in deposit rate setting.
+
+**Tags:** banking · interest rates · monetary policy · credit · eurozone
 
 ### (cached) [Tariffs, cohort redistribution, and the world real interest rate | Anne Ernst, Matthias Schön, Nikolai Stähler](https://www.bundesbank.de/en/publications/research/discussion-papers/tariffs-cohort-redistribution-and-the-world-real-interest-rate-1007836)
 **Published:** 2026-11-17 | **Authors:** 
@@ -178,5 +189,5 @@ This paper investigates the non-bank lending channel and how non-bank financial 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 20
-- Total cache size: 20 items
+- Already cached: 21
+- Total cache size: 21 items
