@@ -167,6 +167,7 @@ function simulate(rafRating, seed){
       a.score+=sa;b.score+=1-sa;
     }
   }
+  if(rounds.length<ROUNDS)return simulate(rafRating,seed+1); // rare: Rafael got the bye; use the next tournament
   const rank=FIELD.filter(r=>r>rafRating).length+1;
   return{rounds,rank,score:raf.score};
 }
@@ -328,7 +329,7 @@ function updateText(cur,p){
 }
 
 function run(){sim=simulate(+slider.value,seed);rOut.textContent=slider.value;rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey=''}
-function frame(ts){if(!playing)return;const dt=Math.min(.05,(ts-last)/1000);last=ts;t+=dt;
+function frame(ts){if(!playing)return;const dt=Math.max(0,Math.min(.05,(ts-last)/1000));last=ts;t+=dt;
   if(t>=END){t=END;playing=false;setPlay()}draw();if(playing)requestAnimationFrame(frame)}
 function setPlay(){playBtn.textContent=playing?'❚❚ Pause':(t>=END?'▶ Watch the tournament':'▶ Keep going')}
 function start(){if(t>=END)t=0;playing=true;setPlay();last=performance.now();requestAnimationFrame(frame)}
