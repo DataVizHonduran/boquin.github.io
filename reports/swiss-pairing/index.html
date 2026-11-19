@@ -57,7 +57,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 .score{display:grid;grid-template-columns:repeat(7,1fr) auto;gap:6px;align-items:stretch}
 .cell{border-radius:12px;background:var(--bg);text-align:center;padding:6px 2px;font-weight:800;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .cell b{display:block;font-family:var(--display);font-size:16px;font-weight:600}
-.cell.win{background:var(--win);color:#fff}.cell.loss{background:var(--loss);color:#fff}
+.cell.win{background:var(--win);color:#fff}.cell.draw{background:var(--gold);color:#18213d}.cell.loss{background:var(--loss);color:#fff}
 .total{padding:6px 12px;border-radius:12px;background:var(--blue);color:#fff;text-align:center;font-weight:800;font-size:13px;min-width:74px}
 .total b{display:block;font-family:var(--display);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 @media (max-width:480px){.score{grid-template-columns:repeat(7,1fr)}.total{grid-column:1/-1}.cell{font-size:11px}}
@@ -83,6 +83,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
     <span><i class="dot" style="background:var(--red-soft)"></i>Kids with the same points as Rafael</span>
     <span><i class="dot" style="background:var(--fg)"></i>Filled = won</span>
     <span><i class="dot" style="border:3px solid var(--fg)"></i>Empty = lost</span>
+    <span><i class="dot" style="border:3px solid var(--fg);background:linear-gradient(90deg,var(--fg) 50%,transparent 50%)"></i>Half = draw</span>
   </div>
 
   <div class="panel">
@@ -107,16 +108,16 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 
   <section class="how" aria-label="How Swiss pairing works">
     <div class="step"><div class="n">1</div><div><h3>Everyone plays 7 games</h3><p>Lose a game and you still play the next round. Nobody goes home early.</p></div></div>
-    <div class="step"><div class="n">2</div><div><h3>A win is 1 point</h3><p>After each round, every kid adds up their points.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>A win is 1 point</h3><p>A draw is ½ point for each kid. After each round, every kid adds up their points.</p></div></div>
     <div class="step"><div class="n">3</div><div><h3>Same points play each other</h3><p>Kids who keep losing meet kids who keep losing. Kids who keep winning meet each other. Soon everyone plays someone at their level.</p></div></div>
   </section>
 
-  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Real games can also be draws (half a point); we left those out to keep it simple. Move the slider to try a different starting rating.</p>
+  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws happen too: about 1 game in 10 between kids with the same rating, and fewer when the ratings are far apart. Move the slider to try a different starting rating.</p>
 </div>
 
 <script>
 /* ---------- simulation ---------- */
-const ROUNDS = 7;
+const ROUNDS = 7, DRAW = 0.10; // peak draw chance, for equal ratings
 function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function invNorm(p){ // Acklam approximation
   const a=[-39.69683028665376,220.9460984245205,-275.9285104469687,138.357751867269,-30.66479806614716,2.506628277459239],
@@ -155,11 +156,12 @@ function simulate(rafRating, seed){
     if(carry.length)carry[0].score++; // odd field: lowest player gets a 1-point bye
     for(const[a,b]of pairs){
       a.opps.add(b.id);b.opps.add(a.id);
-      const pa=1/(1+Math.pow(10,(b.r-a.r)/400)),aWins=rnd()<pa;
-      if(a.raf||b.raf){const o=a.raf?b:a;const rw=a.raf?aWins:!aWins;
-        rounds.push({opp:o.name,oppR:o.r,oppScore:o.score,rafScore:raf.score,win:rw,
+      const ea=1/(1+Math.pow(10,(b.r-a.r)/400)),pd=DRAW*Math.exp(-Math.pow((a.r-b.r)/300,2)),u=rnd();
+      const sa=u<ea-pd/2?1:u<ea+pd/2?.5:0;
+      if(a.raf||b.raf){const o=a.raf?b:a;const rp=a.raf?sa:1-sa;
+        rounds.push({opp:o.name,oppR:o.r,oppScore:o.score,rafScore:raf.score,win:rp===1,draw:rp===.5,pts:rp,
           same:rafGroup.filter(p=>!p.raf).map(p=>p.r)});}
-      (aWins?a:b).score++;
+      a.score+=sa;b.score+=1-sa;
     }
   }
   const rank=FIELD.filter(r=>r>rafRating).length+1;
@@ -175,7 +177,7 @@ const slider=document.getElementById('rating'),rOut=document.getElementById('rat
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const D=3.6, END=ROUNDS*D, RES=0.72;
 const YMIN=0, YMAX=2000;
-let seed=2207, sim, t=END, playing=false, last=0, lastKey='';
+let seed=264, sim, t=END, playing=false, last=0, lastKey='';
 
 function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function size(){const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
@@ -244,30 +246,30 @@ function draw(){
         ctx.fillText((d>0?'+':'')+d,x+8,(oy+ry)/2)}}
     // red ball
     const big=i===cur&&cur<ROUNDS, rr=big?rB:rS;
-    ctx.globalAlpha=dp;ball(x,yy+bump*dir,rr,C.red,!(lp>=RES&&r.win));ctx.globalAlpha=1;
+    ctx.globalAlpha=dp;ball(x,yy+bump*dir,rr,C.red,lp<RES?true:r.draw?'half':!r.win);ctx.globalAlpha=1;
     if(!narrow||big){ctx.font=`700 ${big?14:12}px ${body}`;ctx.fillStyle=C.fg;ctx.textAlign='left';ctx.textBaseline='middle';
       const lx=x+rr+5;ctx.globalAlpha=dp*(big?1:.75);ctx.fillText(`${r.opp} ${r.oppR}`,Math.min(lx,W-R-70),yy+bump*dir);ctx.globalAlpha=1}
     // result badge
     if(lp>=RES){
       const pop=reduce?1:back(clamp((lp-RES)/.12));
       ctx.save();ctx.translate(x,T-22);ctx.scale(pop,pop);
-      if(r.win){star(0,0,narrow?9:12,C.gold);ctx.fillStyle=C.win}else{ctx.fillStyle=C.loss}
+      if(r.win){star(0,0,narrow?9:12,C.gold);ctx.fillStyle=C.win}else{ctx.fillStyle=r.draw?C.gold:C.loss}
       ctx.font=`700 ${narrow?11:13}px ${disp}`;ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(r.win?'WIN':'loss',0,r.win?(narrow?16:19):0);ctx.restore();
+      ctx.fillText(r.win?'WIN':r.draw?'draw':'loss',0,r.win?(narrow?16:19):0);ctx.restore();
       if(r.win&&i<cur){ctx.strokeStyle=C.gold;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,ry,rS+4,0,7);ctx.stroke()}
     }
     // Rafael's past dot
-    if(i<cur){ball(x,ry,rS,C.blue,r.win)}
+    if(i<cur){ball(x,ry,rS,C.blue,r.draw?'half':r.win)}
     else if(cur<ROUNDS){ // live blue ball
       const from=i===0?L:X(i-1),m=reduce?1:ease(clamp(lp/.18));
       const bx=from+(x-from)*m;
       // drawn after loop
-      liveBlue={x:bx,y:ry-bump*dir,win:r.win&&lp>=RES,lost:!r.win&&lp>=RES};
+      liveBlue={x:bx,y:ry-bump*dir,win:r.win&&lp>=RES,lost:!r.win&&lp>=RES,draw:r.draw&&lp>=RES};
     }
   }
   if(cur<ROUNDS){
     if(p<.3){const from=cur===0?L:X(cur-1),m=reduce?1:ease(clamp(p/.18));liveBlue={x:from+(X(cur)-from)*m,y:ry,win:false,lost:false}}
-    const b=liveBlue;ball(b.x,b.y,rB,C.blue,!b.lost);
+    const b=liveBlue;ball(b.x,b.y,rB,C.blue,b.draw?'half':!b.lost);
     if(b.win){ctx.strokeStyle=C.gold;ctx.lineWidth=3;ctx.beginPath();ctx.arc(b.x,b.y,rB+5,0,7);ctx.stroke()}
     labelRaf(b.x,b.y,rB);
   }else{labelRaf(X(ROUNDS-1),ry,rS)}
@@ -275,7 +277,9 @@ function draw(){
   function labelRaf(x,y,r){ctx.font=`700 ${narrow?13:15}px ${disp}`;ctx.fillStyle=C.blue;ctx.textAlign='right';ctx.textBaseline='middle';
     const tx=x-r-6;if(tx>L+60)ctx.fillText('Rafael',tx,y+(narrow?0:0)-(r+10));else{ctx.textAlign='left';ctx.fillText('Rafael',x-r,y-r-12)}}
   function ball(x,y,r,col,filled){ctx.beginPath();ctx.arc(x,y,r,0,7);
-    if(filled){ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.surface;ctx.lineWidth=2;ctx.stroke()}
+    if(filled==='half'){ctx.fillStyle=C.surface;ctx.fill();ctx.save();ctx.beginPath();ctx.arc(x,y,r,Math.PI/2,Math.PI*1.5);ctx.closePath();ctx.fillStyle=col;ctx.fill();ctx.restore();
+      ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,r-1.5,0,7);ctx.stroke()}
+    else if(filled){ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.surface;ctx.lineWidth=2;ctx.stroke()}
     else{ctx.fillStyle=C.surface;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,r-1.5,0,7);ctx.stroke()}}
   function star(cx,cy,r,col){ctx.fillStyle=col;ctx.beginPath();for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rad=k%2?r*.45:r;ctx.lineTo(cx+Math.cos(a)*rad,cy+Math.sin(a)*rad)}ctx.closePath();ctx.fill()}
 
@@ -290,9 +294,10 @@ function describe(d){
   if(d>=-250)return'not as strong as Rafael';
   return'much newer at chess than Rafael';
 }
-const pts=n=>n===1?'1 point':`${n} points`;
+const half=n=>(Math.floor(n)||(n%1?'':'0'))+(n%1?'½':'');
+const pts=n=>n===1||n===.5?`${half(n)} point`:`${half(n)} points`;
 function updateText(cur,p){
-  const res=cur<ROUNDS&&p>=RES, key=`${cur}-${res}-${sim.rounds.map(r=>+r.win).join('')}-${slider.value}`;
+  const res=cur<ROUNDS&&p>=RES, key=`${cur}-${res}-${sim.rounds.map(r=>r.pts).join('')}-${slider.value}`;
   if(key===lastKey)return;lastKey=key;
   const rs=sim.rounds,rafR=+slider.value;
   let html;
@@ -307,16 +312,16 @@ function updateText(cur,p){
     const r=rs[cur],d=r.oppR-rafR;
     const intro=cur===0?`<strong>Round 1.</strong> Everyone has 0 points. Kids in the bottom half by rating play kids in the top half. Rafael plays <strong class="r">${r.opp}</strong>, who is ${describe(d)}.`
       :`<strong>Round ${cur+1}.</strong> Rafael has ${pts(r.rafScore)}. He plays <strong class="r">${r.opp}</strong>, who ${r.oppScore===r.rafScore?`also has ${pts(r.oppScore)}`:`has ${pts(r.oppScore)}, the closest match left`}. ${r.opp} is ${describe(d)}.`;
-    html=res?(r.win?`<strong class="w">Rafael wins!</strong> That's +1 point. `:`${r.opp} wins this one. That's okay. `)+
-      (cur<ROUNDS-1?`Next round he'll play a kid with ${pts(r.rafScore+(r.win?1:0))} too.`:'Last game done!')
+    html=res?(r.win?`<strong class="w">Rafael wins!</strong> That's +1 point. `:r.draw?`<strong>It's a draw!</strong> Each kid gets ½ point. `:`${r.opp} wins this one. That's okay. `)+
+      (cur<ROUNDS-1?`Next round he'll play a kid with ${pts(r.rafScore+r.pts)} too.`:'Last game done!')
       :intro;
   }
   cap.innerHTML=html;
   // scoreboard
   let total=0,cells='';
-  for(let i=0;i<ROUNDS;i++){const shown=i<cur||(i===cur&&res);const w=rs[i].win;if(shown&&w)total++;
-    cells+=`<div class="cell ${shown?(w?'win':'loss'):''}">R${i+1}<b>${shown?(w?'Win':'Loss'):'·'}</b></div>`}
-  scoreEl.innerHTML=cells+`<div class="total">Points<b>${total}</b></div>`;
+  for(let i=0;i<ROUNDS;i++){const shown=i<cur||(i===cur&&res);const w=rs[i].win,dr=rs[i].draw;if(shown)total+=rs[i].pts;
+    cells+=`<div class="cell ${shown?(w?'win':dr?'draw':'loss'):''}">R${i+1}<b>${shown?(w?'Win':dr?'Draw':'Loss'):'·'}</b></div>`}
+  scoreEl.innerHTML=cells+`<div class="total">Points<b>${half(total)}</b></div>`;
 }
 
 function run(){sim=simulate(+slider.value,seed);rOut.textContent=slider.value;rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey=''}
