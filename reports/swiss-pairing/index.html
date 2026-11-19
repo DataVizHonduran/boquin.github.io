@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Rafael's Swiss Tournament</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: one centered column — big friendly headline, the round-by-round chart as the hero, story caption, controls, then a 3-step "how it works" strip. */
+:root{
+  --bg:#f4f7fd; --surface:#ffffff; --fg:#18213d; --muted:#5a6584; --grid:#dfe5f1;
+  --blue:#2c6be6; --blue-soft:rgba(44,107,230,.11); --red:#e2483d; --red-soft:rgba(226,72,61,.28);
+  --gold:#e9a512; --win:#17945a; --loss:#8a93ad;
+  --display:"Fredoka","Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10162a; --surface:#182039; --fg:#e9edf8; --muted:#9ba6c4; --grid:#2a3352;
+  --blue:#6097ff; --blue-soft:rgba(96,151,255,.14); --red:#ff6b5f; --red-soft:rgba(255,107,95,.32);
+  --gold:#ffc642; --win:#41d08a; --loss:#7d88a8; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#10162a; --surface:#182039; --fg:#e9edf8; --muted:#9ba6c4; --grid:#2a3352;
+  --blue:#6097ff; --blue-soft:rgba(96,151,255,.14); --red:#ff6b5f; --red-soft:rgba(255,107,95,.32);
+  --gold:#ffc642; --win:#41d08a; --loss:#7d88a8; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding-block:28px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-weight:800;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5.4vw,48px);line-height:1.08;margin:4px 0 8px;text-wrap:balance}
+h1 .b{color:var(--blue)} h1 .r{color:var(--red)}
+.lede{margin:0;max-width:62ch;font-size:19px;color:var(--fg)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-weight:700;font-size:15px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block}
+.panel{background:var(--surface);border-radius:20px;padding:14px 14px 10px;box-shadow:0 1px 0 var(--grid),0 10px 30px -18px rgba(20,30,70,.35)}
+canvas{display:block;width:100%;height:440px}
+@media (max-width:560px){canvas{height:380px}}
+.caption{min-height:4.2em;font-family:var(--display);font-weight:500;font-size:clamp(19px,2.6vw,24px);line-height:1.3;text-wrap:pretty;margin:0;padding:4px 6px}
+.caption strong{font-weight:700}
+.caption .b{color:var(--blue)} .caption .r{color:var(--red)} .caption .w{color:var(--win)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button{font-family:var(--display);font-weight:600;font-size:17px;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;background:var(--grid);color:var(--fg)}
+button.primary{background:var(--blue);color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.slider{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-left:auto;font-weight:700}
+.slider input{width:180px;accent-color:var(--blue)}
+.slider output{font-variant-numeric:tabular-nums;color:var(--blue);font-family:var(--display);font-size:20px}
+.slider small{color:var(--muted);font-weight:600;font-size:14px;width:100%;text-align:right}
+@media (max-width:640px){.slider{margin-left:0}.slider small{text-align:left}}
+.score{display:grid;grid-template-columns:repeat(7,1fr) auto;gap:6px;align-items:stretch}
+.cell{border-radius:12px;background:var(--bg);text-align:center;padding:6px 2px;font-weight:800;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cell b{display:block;font-family:var(--display);font-size:16px;font-weight:600}
+.cell.win{background:var(--win);color:#fff}.cell.loss{background:var(--loss);color:#fff}
+.total{padding:6px 12px;border-radius:12px;background:var(--blue);color:#fff;text-align:center;font-weight:800;font-size:13px;min-width:74px}
+.total b{display:block;font-family:var(--display);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.score{grid-template-columns:repeat(7,1fr)}.total{grid-column:1/-1}.cell{font-size:11px}}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:720px){.how{grid-template-columns:1fr}}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step .n{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-family:var(--display);font-weight:700;font-size:20px;display:grid;place-items:center}
+.step h3{font-family:var(--display);font-weight:600;font-size:19px;margin:2px 0 2px}
+.step p{margin:0;color:var(--muted);font-size:16px}
+.note{font-size:14px;color:var(--muted);max-width:75ch;margin:0}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">National K-12 Grade Championships · Orlando · Dec 11–13 · 2nd Grade section</div>
+    <h1>Lose a few, then the <span class="b">wins</span> come</h1>
+    <p class="lede">In a Swiss tournament nobody gets knocked out. Every round, you play a kid who has the <strong>same number of points</strong> as you. So the games keep getting closer to just right.</p>
+  </header>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="dot" style="background:var(--blue)"></i>Rafael</span>
+    <span><i class="dot" style="background:var(--red)"></i>Rafael's opponent</span>
+    <span><i class="dot" style="background:var(--red-soft)"></i>Kids with the same points as Rafael</span>
+    <span><i class="dot" style="background:var(--fg)"></i>Filled = won</span>
+    <span><i class="dot" style="border:3px solid var(--fg)"></i>Empty = lost</span>
+  </div>
+
+  <div class="panel">
+    <canvas id="c" role="img" aria-label="Chart of Rafael's seven rounds. Higher means a stronger player."></canvas>
+  </div>
+
+  <p class="caption" id="cap" aria-live="polite"></p>
+
+  <div class="score" id="score"></div>
+
+  <div class="controls">
+    <button class="primary" id="play">▶ Watch the tournament</button>
+    <button id="step">Next round</button>
+    <button id="luck">New tournament</button>
+    <span id="tno" style="font-weight:700;color:var(--muted)">Tournament #1</span>
+    <label class="slider" for="rating">Rafael's rating
+      <input type="range" id="rating" min="100" max="1900" step="1" value="581">
+      <output id="ratingOut">581</output>
+      <small id="rankOut"></small>
+    </label>
+  </div>
+
+  <section class="how" aria-label="How Swiss pairing works">
+    <div class="step"><div class="n">1</div><div><h3>Everyone plays 7 games</h3><p>Lose a game and you still play the next round. Nobody goes home early.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>A win is 1 point</h3><p>After each round, every kid adds up their points.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>Same points play each other</h3><p>Kids who keep losing meet kids who keep losing. Kids who keep winning meet each other. Soon everyone plays someone at their level.</p></div></div>
+  </section>
+
+  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Real games can also be draws (half a point); we left those out to keep it simple. Move the slider to try a different starting rating.</p>
+</div>
+
+<script>
+/* ---------- simulation ---------- */
+const ROUNDS = 7;
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function invNorm(p){ // Acklam approximation
+  const a=[-39.69683028665376,220.9460984245205,-275.9285104469687,138.357751867269,-30.66479806614716,2.506628277459239],
+        b=[-54.47609879822406,161.5858368580409,-155.6989798598866,66.80131188771972,-13.28068155288572],
+        c=[-0.007784894002430293,-0.3223964580411365,-2.400758277161838,-2.549732539343734,4.374664141464968,2.938163982698783],
+        d=[0.007784695709041462,0.3224671290700398,2.445134137142996,3.754408661907416];
+  const pl=0.02425; let q,r;
+  if(p<pl){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)}
+  if(p>1-pl){q=Math.sqrt(-2*Math.log(1-p));return-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)}
+  q=p-.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+const NAMES=["Maya","Leo","Ava","Noah","Zoe","Eli","Mia","Owen","Lily","Sam","Nora","Jack","Ivy","Max","Ella","Ben","Ruby","Luca","Aria","Finn","Sofia","Theo","Chloe","Ezra","Lucy","Kai","Hazel","Jude","Stella","Omar","Isla","Ryan","Grace","Milo","Leah","Dev","Clara","Asher","Nina","Ravi","June","Caleb","Rosa","Ian","Wren","Liam","Elsa","Gabe","Iris","Hugo","Tess","Arlo","Mila","Diego","Ana","Felix","Jade","Ollie","Priya","Nico","Vera","Cole","Lena","Amir","Skye","Reid","Faye","Jonah","Kira","Paul","Gia","Abe","Lola","Seth","Mae","Raj","Elle","Tom","Bea"];
+const FIELD=[1861,1794,1686,1658,1653,1621,1617,1599,1547,1507,1480,1459,1456,1444,1415,1412,1408,1399,1389,1385,1372,1372,1367,1326,1325,1324,1315,1311,1297,1294,1284,1259,1246,1232,1229,1227,1225,1225,1220,1215,1214,1213,1213,1211,1211,1210,1205,1202,1199,1198,1196,1194,1193,1191,1181,1150,1143,1137,1132,1128,1122,1092,1089,1071,1044,1033,1023,1009,1006,1002,1001,998,996,991,979,976,972,955,951,946,939,933,926,922,910,907,904,903,894,888,886,878,873,868,864,852,849,837,835,831,829,821,817,815,815,811,810,804,792,788,786,784,779,776,772,766,761,759,759,757,756,755,754,748,748,746,743,735,724,722,712,711,693,686,684,684,678,673,670,666,665,663,660,652,649,644,635,633,629,626,609,607,606,602,600,595,587,583,580,575,564,562,558,554,553,552,552,545,526,522,519,512,512,512,480,477,474,472,470,465,456,452,447,414,400,400,400,400,400,400,400,400,400,400,400,400,400,400,394,368,362,344,337,336,324,297,294,278,274,274,271,239,208,202,194,181,176,173,165,159,137,115,114,114]; // 2nd Grade section entry list, kingregistration.com, Nov 19 2026 (Unrated → 400)
+const N=FIELD.length+1;
+
+function simulate(rafRating, seed){
+  const rnd=mulberry(seed);
+  const P=FIELD.map((r,i)=>({id:i,name:NAMES[i%NAMES.length],r,score:0,opps:new Set(),raf:false}));
+  const raf={id:99,name:"Rafael",r:rafRating,score:0,opps:new Set(),raf:true}; P.push(raf);
+  const rounds=[];
+  for(let rd=0;rd<ROUNDS;rd++){
+    const sorted=[...P].sort((a,b)=>b.score-a.score||b.r-a.r);
+    const groups=[];for(const p of sorted){const g=groups[groups.length-1];if(g&&g.s===p.score)g.list.push(p);else groups.push({s:p.score,list:[p]})}
+    let carry=[];const pairs=[];let rafGroup=null;
+    for(const g of groups){
+      const list=carry.concat(g.list);carry=[];
+      if(list.length%2){let k=list.length-1;if(list[k].raf)k--;carry=list.splice(k,1)}
+      if(list.includes(raf))rafGroup=list;
+      const h=list.length/2,top=list.slice(0,h),bot=list.slice(h),used=new Set();
+      for(const t of top){
+        let pick=bot.find(b=>!used.has(b)&&!t.opps.has(b.id))||bot.find(b=>!used.has(b));
+        used.add(pick);pairs.push([t,pick]);
+      }
+    }
+    if(carry.length)carry[0].score++; // odd field: lowest player gets a 1-point bye
+    for(const[a,b]of pairs){
+      a.opps.add(b.id);b.opps.add(a.id);
+      const pa=1/(1+Math.pow(10,(b.r-a.r)/400)),aWins=rnd()<pa;
+      if(a.raf||b.raf){const o=a.raf?b:a;const rw=a.raf?aWins:!aWins;
+        rounds.push({opp:o.name,oppR:o.r,oppScore:o.score,rafScore:raf.score,win:rw,
+          same:rafGroup.filter(p=>!p.raf).map(p=>p.r)});}
+      (aWins?a:b).score++;
+    }
+  }
+  const rank=FIELD.filter(r=>r>rafRating).length+1;
+  return{rounds,rank,score:raf.score};
+}
+</script>
+<script>
+/* ---------- drawing ---------- */
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const cap=document.getElementById('cap'),scoreEl=document.getElementById('score');
+const playBtn=document.getElementById('play'),stepBtn=document.getElementById('step'),luckBtn=document.getElementById('luck');
+const slider=document.getElementById('rating'),rOut=document.getElementById('ratingOut'),rankOut=document.getElementById('rankOut');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const D=3.6, END=ROUNDS*D, RES=0.72;
+const YMIN=0, YMAX=2000;
+let seed=2224, sim, t=END, playing=false, last=0, lastKey='';
+
+function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function size(){const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+const ease=x=>1-Math.pow(1-x,3);
+const back=x=>{const c=1.5;x-=1;return 1+(c+1)*x*x*x+c*x*x};
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+
+function draw(){
+  const W=cv.clientWidth,H=cv.clientHeight,narrow=W<520;
+  const L=narrow?44:62,R=narrow?10:20,T=46,B=38;
+  const C={fg:tok('--fg'),muted:tok('--muted'),grid:tok('--grid'),blue:tok('--blue'),bsoft:tok('--blue-soft'),red:tok('--red'),rsoft:tok('--red-soft'),gold:tok('--gold'),win:tok('--win'),loss:tok('--loss'),surface:tok('--surface')};
+  const disp=tok('--display'),body=tok('--body');
+  const X=i=>L+(i+.5)*(W-L-R)/ROUNDS, Y=v=>T+(YMAX-v)/(YMAX-YMIN)*(H-T-B);
+  ctx.clearRect(0,0,W,H);
+  const rafR=+slider.value, ry=Y(rafR);
+
+  // zones
+  ctx.fillStyle=C.bsoft;ctx.fillRect(L,Y(rafR+100),W-L-R,Y(rafR-100)-Y(rafR+100));
+  ctx.font=`700 ${narrow?11:13}px ${body}`;ctx.fillStyle=C.muted;ctx.textAlign='left';ctx.textBaseline='middle';
+  // grid + y labels
+  ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.textAlign='right';
+  for(let v=200;v<=1800;v+=200){const y=Y(v);ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(W-R,y);ctx.stroke();ctx.fillText(v,L-8,y)}
+  ctx.save();ctx.translate(12,T+(H-T-B)/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font=`700 ${narrow?11:13}px ${body}`;
+  ctx.fillText(narrow?'Rating ↑ stronger':'Chess rating  (higher = stronger) ↑',0,0);ctx.restore();
+  // x labels
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font=`700 ${narrow?12:14}px ${body}`;
+  for(let i=0;i<ROUNDS;i++){ctx.fillStyle=C.muted;ctx.fillText(narrow?`R${i+1}`:`Round ${i+1}`,X(i),H-12)}
+  // zone words
+  ctx.textAlign='left';ctx.font=`600 ${narrow?12:14}px ${disp}`;
+  ctx.fillStyle=C.blue;ctx.fillText('just right',L+6,Y(rafR+100)-6>T+10?Y(rafR+100)-6:Y(rafR-100)+16);
+  ctx.fillStyle=C.muted;
+  if(Y(rafR+100)-T>60)ctx.fillText('harder ↑',L+6,T+14);
+  if(H-B-Y(rafR-100)>40)ctx.fillText('easier ↓',L+6,H-B-8);
+  // Rafael line
+  ctx.setLineDash([6,6]);ctx.strokeStyle=C.blue;ctx.globalAlpha=.55;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(L,ry);ctx.lineTo(W-R,ry);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+
+  const cur=Math.min(Math.floor(t/D),ROUNDS);let p=cur>=ROUNDS?1:(t-cur*D)/D;
+  if(reduce&&cur<ROUNDS)p=p<RES?.6:1;
+  const rs=sim.rounds;
+
+  // red path through finished opponents
+  const done=[];for(let i=0;i<ROUNDS;i++){if(i<cur||(i===cur&&p>=.5))done.push(i)}
+  if(done.length>1){ctx.strokeStyle=C.red;ctx.globalAlpha=.35;ctx.lineWidth=2.5;ctx.beginPath();
+    done.forEach((i,k)=>{const x=X(i),y=Y(rs[i].oppR);k?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.globalAlpha=1}
+
+  const rB=narrow?10:14, rS=narrow?8:11;
+  for(let i=0;i<ROUNDS;i++){
+    if(i>cur)break;
+    const r=rs[i],x=X(i),oy=Y(r.oppR),lp=i<cur?1:p;
+    // same-score crowd
+    if(i===cur&&lp>.08&&lp<.9){
+      const a=clamp((lp-.08)/.12)*clamp((.9-lp)/.12);
+      ctx.fillStyle=C.rsoft;ctx.globalAlpha=a;
+      r.same.forEach((v,k)=>{const jx=((k*37)%11-5)*(narrow?2:3);ctx.beginPath();ctx.arc(x+jx,Y(v),narrow?3.5:4.5,0,7);ctx.fill()});
+      ctx.globalAlpha=1;
+    }
+    if(lp<.3)continue;
+    const dp=ease(clamp((lp-.3)/.2)),yy=reduce?oy:(T-20)+(oy-(T-20))*back(clamp((lp-.3)/.2));
+    let bump=0;if(lp>.55&&lp<.72)bump=Math.sin((lp-.55)/.17*Math.PI)*Math.min(14,Math.abs(oy-ry)/2-rB);
+    const dir=oy<ry?1:-1;
+    // gap line
+    if(lp>=.5&&Math.abs(oy-ry)>2*rS){ctx.strokeStyle=C.red;ctx.globalAlpha=i===cur||cur>=ROUNDS?.6:.25;ctx.setLineDash([3,4]);ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(x,oy);ctx.lineTo(x,ry);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+      if(i===cur&&cur<ROUNDS&&Math.abs(oy-ry)>40){const d=r.oppR-rafR;ctx.font=`700 13px ${body}`;ctx.fillStyle=C.red;ctx.textAlign='left';ctx.textBaseline='middle';
+        ctx.fillText((d>0?'+':'')+d,x+8,(oy+ry)/2)}}
+    // red ball
+    const big=i===cur&&cur<ROUNDS, rr=big?rB:rS;
+    ctx.globalAlpha=dp;ball(x,yy+bump*dir,rr,C.red,!(lp>=RES&&r.win));ctx.globalAlpha=1;
+    if(!narrow||big){ctx.font=`700 ${big?14:12}px ${body}`;ctx.fillStyle=C.fg;ctx.textAlign='left';ctx.textBaseline='middle';
+      const lx=x+rr+5;ctx.globalAlpha=dp*(big?1:.75);ctx.fillText(`${r.opp} ${r.oppR}`,Math.min(lx,W-R-70),yy+bump*dir);ctx.globalAlpha=1}
+    // result badge
+    if(lp>=RES){
+      const pop=reduce?1:back(clamp((lp-RES)/.12));
+      ctx.save();ctx.translate(x,T-22);ctx.scale(pop,pop);
+      if(r.win){star(0,0,narrow?9:12,C.gold);ctx.fillStyle=C.win}else{ctx.fillStyle=C.loss}
+      ctx.font=`700 ${narrow?11:13}px ${disp}`;ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(r.win?'WIN':'loss',0,r.win?(narrow?16:19):0);ctx.restore();
+      if(r.win&&i<cur){ctx.strokeStyle=C.gold;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,ry,rS+4,0,7);ctx.stroke()}
+    }
+    // Rafael's past dot
+    if(i<cur){ball(x,ry,rS,C.blue,r.win)}
+    else if(cur<ROUNDS){ // live blue ball
+      const from=i===0?L:X(i-1),m=reduce?1:ease(clamp(lp/.18));
+      const bx=from+(x-from)*m;
+      // drawn after loop
+      liveBlue={x:bx,y:ry-bump*dir,win:r.win&&lp>=RES,lost:!r.win&&lp>=RES};
+    }
+  }
+  if(cur<ROUNDS){
+    if(p<.3){const from=cur===0?L:X(cur-1),m=reduce?1:ease(clamp(p/.18));liveBlue={x:from+(X(cur)-from)*m,y:ry,win:false,lost:false}}
+    const b=liveBlue;ball(b.x,b.y,rB,C.blue,!b.lost);
+    if(b.win){ctx.strokeStyle=C.gold;ctx.lineWidth=3;ctx.beginPath();ctx.arc(b.x,b.y,rB+5,0,7);ctx.stroke()}
+    labelRaf(b.x,b.y,rB);
+  }else{labelRaf(X(ROUNDS-1),ry,rS)}
+
+  function labelRaf(x,y,r){ctx.font=`700 ${narrow?13:15}px ${disp}`;ctx.fillStyle=C.blue;ctx.textAlign='right';ctx.textBaseline='middle';
+    const tx=x-r-6;if(tx>L+60)ctx.fillText('Rafael',tx,y+(narrow?0:0)-(r+10));else{ctx.textAlign='left';ctx.fillText('Rafael',x-r,y-r-12)}}
+  function ball(x,y,r,col,filled){ctx.beginPath();ctx.arc(x,y,r,0,7);
+    if(filled){ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.surface;ctx.lineWidth=2;ctx.stroke()}
+    else{ctx.fillStyle=C.surface;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,r-1.5,0,7);ctx.stroke()}}
+  function star(cx,cy,r,col){ctx.fillStyle=col;ctx.beginPath();for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rad=k%2?r*.45:r;ctx.lineTo(cx+Math.cos(a)*rad,cy+Math.sin(a)*rad)}ctx.closePath();ctx.fill()}
+
+  updateText(cur,p);
+}
+let liveBlue={x:0,y:0,win:false};
+
+function describe(d){
+  if(d>250)return'a lot stronger than Rafael';
+  if(d>100)return'stronger than Rafael';
+  if(d>=-100)return'about as strong as Rafael';
+  if(d>=-250)return'not as strong as Rafael';
+  return'much newer at chess than Rafael';
+}
+const pts=n=>n===1?'1 point':`${n} points`;
+function updateText(cur,p){
+  const res=cur<ROUNDS&&p>=RES, key=`${cur}-${res}-${sim.rounds.map(r=>+r.win).join('')}-${slider.value}`;
+  if(key===lastKey)return;lastKey=key;
+  const rs=sim.rounds,rafR=+slider.value;
+  let html;
+  if(cur>=ROUNDS){
+    const s=sim.score,lateWins=rs.slice(3).filter(r=>r.win).length;
+    const g1=Math.abs(rs[0].oppR-rafR),g7=Math.abs(rs[6].oppR-rafR);
+    html=`Rafael finished with <strong class="b">${pts(s)}</strong> out of 7`+
+      (lateWins&&!rs[0].win?`, and won ${lateWins} of his last 4 games. `:'. ')+
+      (g7<g1?`His first opponent was ${g1} rating points away from him. His last one was only ${g7} away. `:'')+
+      `Swiss pairing keeps matching kids with the same points, so he ends up playing kids near his level.`;
+  }else{
+    const r=rs[cur],d=r.oppR-rafR;
+    const intro=cur===0?`<strong>Round 1.</strong> Everyone has 0 points, so kids are lined up by rating. That's why Round 1 is the same every time. Rafael plays <strong class="r">${r.opp}</strong>, who is ${describe(d)}.`
+      :`<strong>Round ${cur+1}.</strong> Rafael has ${pts(r.rafScore)}. He plays <strong class="r">${r.opp}</strong>, who ${r.oppScore===r.rafScore?`also has ${pts(r.oppScore)}`:`has ${pts(r.oppScore)}, the closest match left`}. ${r.opp} is ${describe(d)}.`;
+    html=res?(r.win?`<strong class="w">Rafael wins!</strong> That's +1 point. `:`${r.opp} wins this one. That's okay. `)+
+      (cur<ROUNDS-1?`Next round he'll play a kid with ${pts(r.rafScore+(r.win?1:0))} too.`:'Last game done!')
+      :intro;
+  }
+  cap.innerHTML=html;
+  // scoreboard
+  let total=0,cells='';
+  for(let i=0;i<ROUNDS;i++){const shown=i<cur||(i===cur&&res);const w=rs[i].win;if(shown&&w)total++;
+    cells+=`<div class="cell ${shown?(w?'win':'loss'):''}">R${i+1}<b>${shown?(w?'Win':'Loss'):'·'}</b></div>`}
+  scoreEl.innerHTML=cells+`<div class="total">Points<b>${total}</b></div>`;
+}
+
+function run(){sim=simulate(+slider.value,seed);rOut.textContent=slider.value;rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey=''}
+function frame(ts){if(!playing)return;const dt=Math.min(.05,(ts-last)/1000);last=ts;t+=dt;
+  if(t>=END){t=END;playing=false;setPlay()}draw();if(playing)requestAnimationFrame(frame)}
+function setPlay(){playBtn.textContent=playing?'❚❚ Pause':(t>=END?'▶ Watch the tournament':'▶ Keep going')}
+function start(){if(t>=END)t=0;playing=true;setPlay();last=performance.now();requestAnimationFrame(frame)}
+playBtn.onclick=()=>{if(playing){playing=false;setPlay()}else start()};
+stepBtn.onclick=()=>{playing=false;if(t>=END)t=0;const cur=Math.floor(t/D),p=(t-cur*D)/D;
+  t=p<RES?cur*D+RES*D+.2:Math.min(END,(cur+1)*D+RES*D+.2);if(t>=(ROUNDS-1)*D+RES*D+.2&&cur>=ROUNDS-1)t=END;setPlay();draw()};
+let tCount=1;luckBtn.onclick=()=>{seed=(Math.random()*1e9)|0;run();t=0;document.getElementById('tno').textContent=`Tournament #${++tCount}`;start()};
+slider.oninput=()=>{playing=false;run();t=END;setPlay();draw()};
+addEventListener('resize',()=>{size();draw()});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+size();run();draw();
+document.fonts&&document.fonts.ready.then(draw);
+</script>
+
+</body>
+</html>
