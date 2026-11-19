@@ -146,6 +146,7 @@ function simulate(rafRating, seed){
       if(list.length%2){let k=list.length-1;if(list[k].raf)k--;carry=list.splice(k,1)}
       if(list.includes(raf))rafGroup=list;
       const h=list.length/2,top=list.slice(0,h),bot=list.slice(h),used=new Set();
+      if(rd===0)for(let k=top.length-1;k>0;k--){const j=Math.floor(rnd()*(k+1));[top[k],top[j]]=[top[j],top[k]]} // Round 1: random kid from the top half
       for(const t of top){
         let pick=bot.find(b=>!used.has(b)&&!t.opps.has(b.id))||bot.find(b=>!used.has(b));
         used.add(pick);pairs.push([t,pick]);
@@ -174,7 +175,7 @@ const slider=document.getElementById('rating'),rOut=document.getElementById('rat
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const D=3.6, END=ROUNDS*D, RES=0.72;
 const YMIN=0, YMAX=2000;
-let seed=2224, sim, t=END, playing=false, last=0, lastKey='';
+let seed=2207, sim, t=END, playing=false, last=0, lastKey='';
 
 function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function size(){const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
@@ -304,7 +305,7 @@ function updateText(cur,p){
       `Swiss pairing keeps matching kids with the same points, so he ends up playing kids near his level.`;
   }else{
     const r=rs[cur],d=r.oppR-rafR;
-    const intro=cur===0?`<strong>Round 1.</strong> Everyone has 0 points, so kids are lined up by rating. That's why Round 1 is the same every time. Rafael plays <strong class="r">${r.opp}</strong>, who is ${describe(d)}.`
+    const intro=cur===0?`<strong>Round 1.</strong> Everyone has 0 points. Kids in the bottom half by rating play kids in the top half. Rafael plays <strong class="r">${r.opp}</strong>, who is ${describe(d)}.`
       :`<strong>Round ${cur+1}.</strong> Rafael has ${pts(r.rafScore)}. He plays <strong class="r">${r.opp}</strong>, who ${r.oppScore===r.rafScore?`also has ${pts(r.oppScore)}`:`has ${pts(r.oppScore)}, the closest match left`}. ${r.opp} is ${describe(d)}.`;
     html=res?(r.win?`<strong class="w">Rafael wins!</strong> That's +1 point. `:`${r.opp} wins this one. That's okay. `)+
       (cur<ROUNDS-1?`Next round he'll play a kid with ${pts(r.rafScore+(r.win?1:0))} too.`:'Last game done!')
