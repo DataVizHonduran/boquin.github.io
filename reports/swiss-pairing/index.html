@@ -41,7 +41,7 @@ h1 .b{color:var(--blue)} h1 .r{color:var(--red)}
 .dot{width:16px;height:16px;border-radius:50%;display:inline-block}
 .panel{background:var(--surface);border-radius:20px;padding:14px 14px 10px;box-shadow:0 1px 0 var(--grid),0 10px 30px -18px rgba(20,30,70,.35)}
 canvas{display:block;width:100%;height:440px}
-@media (max-width:560px){canvas{height:380px}}
+@media (max-width:560px){canvas{height:340px}#h{height:260px}}
 .caption{min-height:4.2em;font-family:var(--display);font-weight:500;font-size:clamp(19px,2.6vw,24px);line-height:1.3;text-wrap:pretty;margin:0;padding:4px 6px}
 .caption strong{font-weight:700}
 .caption .b{color:var(--blue)} .caption .r{color:var(--red)} .caption .w{color:var(--win)}
@@ -49,7 +49,21 @@ canvas{display:block;width:100%;height:440px}
 .controls{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:0}
 .tno{font-weight:700;color:var(--muted);text-align:center;font-size:14px;margin-top:-4px}
 button.luck{background:var(--red);color:#fff;font-size:19px;padding:14px 16px}
-@media (max-width:760px){.stage{grid-template-columns:1fr}.controls{flex-direction:row;flex-wrap:wrap;align-items:center}.tno{margin-top:0}}
+.btns,.settings{display:flex;flex-direction:column;gap:10px}
+@media (max-width:760px){
+  .wrap{gap:16px;padding-block:20px 40px}
+  .stage,.controls{display:contents}
+  .wrap>header{order:0}.chart-panel{order:1}.btns{order:2}.caption{order:3}.score{order:4}.legend{order:5}.settings{order:6}.hist-panel{order:7}.how{order:8}.note{order:9}
+  .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .btns .luck,.btns .tno{grid-column:1/-1}.btns .tno{margin-top:-2px}
+  .btns button{font-size:16px;padding:12px 10px}.btns button.luck{font-size:19px;padding:14px}
+  .settings{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--surface);border-radius:16px;padding:14px}
+  .settings label[for=pname]{grid-column:1/-1;order:-1}
+  .settings .rating-box{margin-top:0}.settings .rating-box input,.settings .rating-box select{max-width:none}
+  .legend{font-size:13px;gap:6px 14px}.legend .dot{width:13px;height:13px}
+  .panel{padding:8px 6px 6px;border-radius:16px}
+  .lede{font-size:17px}
+}
 button{font-family:var(--display);font-weight:600;font-size:17px;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;background:var(--grid);color:var(--fg)}
 button.primary{background:var(--blue);color:#fff}
 button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
@@ -69,7 +83,7 @@ em.pn,.legend em{font-style:normal}
 .cell.win{background:var(--win);color:#fff}.cell.draw{background:var(--gold);color:#18213d}.cell.loss{background:var(--loss);color:#fff}
 .total{padding:6px 12px;border-radius:12px;background:var(--blue);color:#fff;text-align:center;font-weight:800;font-size:13px;min-width:74px}
 .total b{display:block;font-family:var(--display);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
-@media (max-width:480px){.score{grid-template-columns:repeat(7,1fr)}.total{grid-column:1/-1}.cell{font-size:11px}}
+@media (max-width:480px){.score{grid-template-columns:repeat(7,1fr) 50px;gap:4px}.total{min-width:0;padding:6px 2px;font-size:11px}.cell{font-size:11px;padding:6px 0}.cell b{font-size:13px}}
 .how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 @media (max-width:720px){.how{grid-template-columns:1fr}}
 .step{display:flex;gap:12px;align-items:flex-start}
@@ -97,10 +111,13 @@ em.pn,.legend em{font-style:normal}
 
   <div class="stage">
     <div class="controls">
+      <div class="btns">
       <button class="luck" id="luck">🎲 New tournament</button>
       <span id="tno" class="tno">Tournament #1</span>
       <button class="primary" id="play">▶ Watch the tournament</button>
       <button id="step">Next round</button>
+      </div>
+      <div class="settings">
       <label class="rating-box" for="grade">Grade section
         <select id="grade"><option>Kindergarten</option><option>1st Grade</option><option selected>2nd Grade</option><option>3rd Grade</option><option>4th Grade</option><option>5th Grade</option><option>6th Grade</option><option>7th Grade</option><option>8th Grade</option><option>9th Grade</option><option>10th Grade</option><option>11th Grade</option><option>12th Grade</option></select>
       </label>
@@ -111,8 +128,9 @@ em.pn,.legend em{font-style:normal}
         <input type="number" id="rating" min="100" max="3000" step="1" value="710" inputmode="numeric">
         <small id="rankOut"></small>
       </label>
+      </div>
     </div>
-    <div class="panel">
+    <div class="panel chart-panel">
     <canvas id="c" role="img" aria-label="Chart of Rafael's seven rounds. Higher means a stronger player."></canvas>
     </div>
   </div>
@@ -121,7 +139,7 @@ em.pn,.legend em{font-style:normal}
 
   <div class="score" id="score"></div>
 
-  <div class="panel">
+  <div class="panel hist-panel">
     <div class="hist-head"><h2>2,000 pretend tournaments</h2><p id="histNote">Running…</p></div>
     <canvas id="h" role="img" aria-label="Bar chart: how many of 2,000 simulated tournaments ended with each point total for Rafael."></canvas>
   </div>
@@ -219,7 +237,7 @@ const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 
 function draw(){
   const W=cv.clientWidth,H=cv.clientHeight,narrow=W<520;
-  const L=narrow?44:62,R=narrow?10:20,T=46,B=38;
+  const L=narrow?38:62,R=narrow?8:20,T=46,B=38;
   const C={fg:tok('--fg'),muted:tok('--muted'),grid:tok('--grid'),blue:tok('--blue'),bsoft:tok('--blue-soft'),red:tok('--red'),rsoft:tok('--red-soft'),gold:tok('--gold'),win:tok('--win'),loss:tok('--loss'),surface:tok('--surface')};
   const disp=tok('--display'),body=tok('--body');
   const X=i=>L+(i+.5)*(W-L-R)/ROUNDS, Y=v=>T+(YMAX-v)/(YMAX-YMIN)*(H-T-B);
@@ -232,8 +250,8 @@ function draw(){
   // grid + y labels
   ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.textAlign='right';
   for(let v=200;v<YMAX;v+=200){const y=Y(v);ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(W-R,y);ctx.stroke();ctx.fillText(v,L-8,y)}
-  ctx.save();ctx.translate(12,T+(H-T-B)/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font=`700 ${narrow?11:13}px ${body}`;
-  ctx.fillText(narrow?'Rating ↑ stronger':'Chess rating  (higher = stronger) ↑',0,0);ctx.restore();
+  if(!narrow){ctx.save();ctx.translate(12,T+(H-T-B)/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font=`700 ${narrow?11:13}px ${body}`;
+  ctx.fillText('Chess rating  (higher = stronger) ↑',0,0);ctx.restore()}
   // x labels
   ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font=`700 ${narrow?12:14}px ${body}`;
   for(let i=0;i<ROUNDS;i++){ctx.fillStyle=C.muted;ctx.fillText(narrow?`R${i+1}`:`Round ${i+1}`,X(i),H-12)}
@@ -391,7 +409,7 @@ function drawHist(){
     if(n&&(!narrow||k%2===0||n>max*.05)){hx.fillStyle=fg;hx.font=`700 ${narrow?10:12}px ${body}`;hx.fillText(n,x+w/2,y-5)}
     if(k%2===0||!narrow){hx.fillStyle=muted;hx.font=`700 ${narrow?11:13}px ${body}`;hx.fillText(half(k/2),x+w/2,H-B+18)}});
   hx.fillStyle=muted;hx.font=`700 ${narrow?11:13}px ${body}`;hx.textAlign='center';hx.fillText(`${NAME}'s points at the end (out of 7)`,L+(W-L-R)/2,H-6);
-  hx.save();hx.translate(12,T+(H-T-B)/2);hx.rotate(-Math.PI/2);hx.fillText('Tournaments',0,0);hx.restore();
+  if(!narrow){hx.save();hx.translate(12,T+(H-T-B)/2);hx.rotate(-Math.PI/2);hx.fillText('Tournaments',0,0);hx.restore()}
 }
 function frame(ts){if(!playing)return;const dt=Math.max(0,Math.min(.05,(ts-last)/1000));last=ts;t+=dt;
   if(t>=END){t=END;playing=false;setPlay()}draw();if(playing)requestAnimationFrame(frame)}
