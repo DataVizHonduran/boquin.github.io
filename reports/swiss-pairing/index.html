@@ -155,42 +155,47 @@ const SECTIONS={"Kindergarten":[1133,924,907,794,763,745,740,716,687,653,645,637
 let SEC='2nd Grade',FIELD=SECTIONS[SEC],N=FIELD.length+1,NAME='Rafael';
 const esc=x=>x.replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 
-function simulate(rafRating, seed, depth=0){
-  const rnd=mulberry(seed);
-  const P=FIELD.map((r,i)=>({id:i,name:NAMES[i%NAMES.length],r,score:0,opps:new Set(),raf:false}));
-  const raf={id:99,name:"Rafael",r:rafRating,score:0,opps:new Set(),raf:true}; P.push(raf);
-  const rounds=[];
+function simulate(rafRating, seed, depth=0, lite=false){
+  const rnd=mulberry(seed),n=FIELD.length,P=new Array(n+1);
+  for(let i=0;i<n;i++){const r=FIELD[i];P[i]={id:i,r,q:Math.pow(10,r/400),score:0,opps:[],raf:false,used:-1}}
+  const raf={id:n,r:rafRating,q:Math.pow(10,rafRating/400),score:0,opps:[],raf:true,used:-1};P[n]=raf;
+  const rounds=[];let rafGames=0,stamp=0;
+  const cmp=(a,b)=>b.score-a.score||b.r-a.r;
   for(let rd=0;rd<ROUNDS;rd++){
-    const sorted=[...P].sort((a,b)=>b.score-a.score||b.r-a.r);
-    const groups=[];for(const p of sorted){const g=groups[groups.length-1];if(g&&g.s===p.score)g.list.push(p);else groups.push({s:p.score,list:[p]})}
-    let carry=[];const pairs=[];let rafGroup=null;
-    for(const g of groups){
-      const list=carry.concat(g.list);carry=[];
+    const sorted=P.slice().sort(cmp);
+    let carry=[],rafGroup=null;const pairs=[];
+    for(let gi=0;gi<sorted.length;){
+      const s0=sorted[gi].score,list=carry;carry=[];
+      while(gi<sorted.length&&sorted[gi].score===s0)list.push(sorted[gi++]);
       if(list.length%2){let k=list.length-1;if(list[k].raf)k--;carry=list.splice(k,1)}
-      if(list.includes(raf))rafGroup=list;
-      const h=list.length/2,top=list.slice(0,h),bot=list.slice(h),used=new Set();
-      if(rd===0)for(let k=top.length-1;k>0;k--){const j=Math.floor(rnd()*(k+1));[top[k],top[j]]=[top[j],top[k]]} // Round 1: random kid from the top half
+      if(!lite&&list.includes(raf))rafGroup=list;
+      const h=list.length/2,top=list.slice(0,h),bot=list.slice(h);stamp++;
+      if(rd===0)for(let k=top.length-1;k>0;k--){const j=Math.floor(rnd()*(k+1));const x=top[k];top[k]=top[j];top[j]=x} // Round 1: random kid from the top half
       for(const t of top){
-        let pick=bot.find(b=>!used.has(b)&&!t.opps.has(b.id))||bot.find(b=>!used.has(b));
-        used.add(pick);pairs.push([t,pick]);
+        let pick=null,first=null;
+        for(const b of bot){if(b.used===stamp)continue;if(!first)first=b;if(!t.opps.includes(b.id)){pick=b;break}}
+        pick=pick||first;pick.used=stamp;pairs.push(t,pick);
       }
     }
     if(carry.length)carry[0].score++; // odd field: lowest player gets a 1-point bye
-    for(const[a,b]of pairs){
-      a.opps.add(b.id);b.opps.add(a.id);
+    for(let k=0;k<pairs.length;k+=2){
+      const a=pairs[k],b=pairs[k+1];
+      a.opps.push(b.id);b.opps.push(a.id);
       // Davidson model on Elo strengths: draws likelier when ratings are close and when both kids are stronger
-      const qa=Math.pow(10,a.r/400),qb=Math.pow(10,b.r/400),avg=(a.r+b.r)/2;
+      const qa=a.q,qb=b.q,avg=(a.r+b.r)/2;
       const d0=Math.min(.15,Math.max(.03,.03+.12*(avg-400)/1400)),nu=2*d0/(1-d0),tot=qa+qb+nu*Math.sqrt(qa*qb);
       const pw=qa/tot,pd=nu*Math.sqrt(qa*qb)/tot,u=rnd();
       const sa=u<pw?1:u<pw+pd?.5:0;
-      if(a.raf||b.raf){const o=a.raf?b:a;const rp=a.raf?sa:1-sa;
-        rounds.push({opp:o.name,oppR:o.r,oppScore:o.score,rafScore:raf.score,win:rp===1,draw:rp===.5,pts:rp,
-          same:rafGroup.filter(p=>!p.raf).map(p=>p.r)});}
+      if(a.raf||b.raf){rafGames++;
+        if(!lite){const o=a.raf?b:a;const rp=a.raf?sa:1-sa;
+          rounds.push({opp:NAMES[o.id%NAMES.length],oppR:o.r,oppScore:o.score,rafScore:raf.score,win:rp===1,draw:rp===.5,pts:rp,
+            same:rafGroup.filter(p=>!p.raf).map(p=>p.r)});}}
       a.score+=sa;b.score+=1-sa;
     }
   }
-  if(rounds.length<ROUNDS&&depth<50)return simulate(rafRating,seed+1,depth+1); // rare: Rafael got the bye; use the next tournament
-  const rank=FIELD.filter(r=>r>rafRating).length+1;
+  if(rafGames<ROUNDS&&depth<50)return simulate(rafRating,seed+1,depth+1,lite); // rare: Rafael got the bye; use the next tournament
+  if(lite)return raf.score;
+  let rank=1;for(const r of FIELD)if(r>rafRating)rank++;
   return{rounds,rank,score:raf.score};
 }
 </script>
@@ -353,10 +358,23 @@ function updateText(cur,p){
 
 function run(){sim=simulate(RR,seed);rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey='';drawHist()}
 const hc=document.getElementById('h'),hx=hc.getContext('2d'),histNote=document.getElementById('histNote');
-function runHist(){histNote.textContent='Running 2,000 tournaments…';hist=null;drawHist();
-  setTimeout(()=>{const c=Array(15).fill(0);for(let i=1;i<=2000;i++)c[Math.round(simulate(RR,i).score*2)]++;hist=c;
-    const mode=c.indexOf(Math.max(...c)),avg=c.reduce((a,n,k)=>a+n*k/2,0)/2000;
-    histNote.textContent=`Most often: ${pts(mode/2)} (${c[mode].toLocaleString()} times) · Average: ${avg.toFixed(1)} points`;drawHist()},30)}
+const HIST_N=2000;let histJob=0,worker=null;
+try{const src=`const ROUNDS=${ROUNDS};const NAMES=[];let FIELD=[],N=0;${mulberry.toString()}\n${simulate.toString()}
+onmessage=e=>{const{id,field,rr}=e.data;FIELD=field;N=field.length+1;const c=new Array(15).fill(0);
+for(let i=1;i<=${HIST_N};i++)c[Math.round(simulate(rr,i,0,true)*2)]++;postMessage({id,c})}`;
+  worker=new Worker(URL.createObjectURL(new Blob([src],{type:'text/javascript'})));
+  worker.onmessage=e=>{if(e.data.id===histJob)histDone(e.data.c)};
+  worker.onerror=()=>{worker=null;runHist()};
+}catch(e){worker=null}
+function histDone(c){hist=c;const mode=c.indexOf(Math.max(...c)),avg=c.reduce((a,n,k)=>a+n*k/2,0)/HIST_N;
+  histNote.textContent=`Most often: ${pts(mode/2)} (${c[mode].toLocaleString()} times) · Average: ${avg.toFixed(1)} points`;drawHist()}
+function runHist(){const id=++histJob;histNote.textContent='Running 2,000 tournaments…';hist=null;drawHist();
+  if(worker){worker.postMessage({id,field:FIELD,rr:RR});return}
+  // fallback: small chunks so the page never freezes
+  const c=new Array(15).fill(0);let i=1;
+  (function chunk(){if(id!==histJob)return;const end=Math.min(HIST_N,i+99);for(;i<=end;i++)c[Math.round(simulate(RR,i,0,true)*2)]++;
+    if(i>HIST_N)histDone(c);else setTimeout(chunk,0)})();
+}
 function drawHist(){
   const dpr=devicePixelRatio||1,W=hc.clientWidth,H=hc.clientHeight;if(hc.width!==Math.round(W*dpr)||hc.height!==Math.round(H*dpr)){hc.width=W*dpr;hc.height=H*dpr}
   hx.setTransform(dpr,0,0,dpr,0,0);hx.clearRect(0,0,W,H);if(!hist)return;
