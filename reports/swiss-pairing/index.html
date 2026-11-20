@@ -99,7 +99,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
       <button class="primary" id="play">▶ Watch the tournament</button>
       <button id="step">Next round</button>
       <label class="rating-box" for="rating">Rafael's rating
-        <input type="number" id="rating" min="100" max="2200" step="1" value="581" inputmode="numeric">
+        <input type="number" id="rating" min="100" max="2200" step="1" value="710" inputmode="numeric">
         <small id="rankOut"></small>
       </label>
     </div>
@@ -124,7 +124,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
     <div class="step"><div class="n">3</div><div><h3>Same points play each other</h3><p>Kids who keep losing meet kids who keep losing. Kids who keep winning meet each other. Soon everyone plays someone at their level.</p></div></div>
   </section>
 
-  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Type a different rating in the box to see what changes. The bar chart replays the tournament 2,000 times for that rating and counts Rafael's final points (a win is 1, a draw is ½). The gold bar is the tournament shown above.</p>
+  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026. Rafael starts at 710, his live rating on Glitchess after his Nov 15 tournament (the entry list still shows 581). The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Type a different rating in the box to see what changes. The bar chart replays the tournament 2,000 times for that rating and counts Rafael's final points (a win is 1, a draw is ½). The gold bar is the tournament shown above.</p>
 </div>
 
 <script>
@@ -190,11 +190,11 @@ const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 const cap=document.getElementById('cap'),scoreEl=document.getElementById('score');
 const playBtn=document.getElementById('play'),stepBtn=document.getElementById('step'),luckBtn=document.getElementById('luck');
 const slider=document.getElementById('rating'),rankOut=document.getElementById('rankOut');
-let RR=581, hist=null;
+let RR=710, hist=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const D=3.6, END=ROUNDS*D, RES=0.72;
 const YMIN=0, YMAX=2000;
-let seed=31, sim, t=END, playing=false, last=0, lastKey='';
+let seed=6, sim, t=END, playing=false, last=0, lastKey='';
 
 function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function size(){const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
