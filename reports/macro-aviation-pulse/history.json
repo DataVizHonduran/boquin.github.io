@@ -1,19 +1,5 @@
 [
   {
-    "ts": 1790488869,
-    "counts": {
-      "Brazil": 55,
-      "Mexico": 112,
-      "South Korea": 98,
-      "China": 688,
-      "UAE": 71,
-      "Qatar": 28,
-      "Saudi Arabia": 0,
-      "Turkey": 75,
-      "Kuwait / Bahrain": 41
-    }
-  },
-  {
     "ts": 1790512572,
     "counts": {
       "Brazil": 156,
@@ -3357,6 +3343,20 @@
       "Saudi Arabia": 0,
       "Turkey": 46,
       "Kuwait / Bahrain": 29
+    }
+  },
+  {
+    "ts": 1795138353,
+    "counts": {
+      "Brazil": 151,
+      "Mexico": 810,
+      "South Korea": 90,
+      "China": 645,
+      "UAE": 75,
+      "Qatar": 11,
+      "Saudi Arabia": 0,
+      "Turkey": 18,
+      "Kuwait / Bahrain": 17
     }
   }
 ]
