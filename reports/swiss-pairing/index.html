@@ -53,10 +53,13 @@ button.luck{background:var(--red);color:#fff;font-size:19px;padding:14px 16px}
 button{font-family:var(--display);font-weight:600;font-size:17px;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;background:var(--grid);color:var(--fg)}
 button.primary{background:var(--blue);color:#fff}
 button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.slider{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-weight:700;margin-top:8px}
-.slider input{width:100%;max-width:220px;accent-color:var(--blue)}
-.slider output{font-variant-numeric:tabular-nums;color:var(--blue);font-family:var(--display);font-size:20px}
-.slider small{color:var(--muted);font-weight:600;font-size:14px;width:100%}
+.rating-box{display:flex;flex-direction:column;gap:6px;font-weight:700;margin-top:8px}
+.rating-box input{width:100%;max-width:200px;font-family:var(--display);font-size:22px;font-weight:600;color:var(--blue);background:var(--surface);border:2px solid var(--grid);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
+.rating-box small{color:var(--muted);font-weight:600;font-size:14px}
+.hist-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;padding:4px 6px 0}
+.hist-head h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0}
+.hist-head p{margin:0;color:var(--muted);font-weight:600;font-size:15px}
+#h{height:300px}
 .score{display:grid;grid-template-columns:repeat(7,1fr) auto;gap:6px;align-items:stretch}
 .cell{border-radius:12px;background:var(--bg);text-align:center;padding:6px 2px;font-weight:800;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .cell b{display:block;font-family:var(--display);font-size:16px;font-weight:600}
@@ -95,9 +98,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
       <span id="tno" class="tno">Tournament #1</span>
       <button class="primary" id="play">▶ Watch the tournament</button>
       <button id="step">Next round</button>
-      <label class="slider" for="rating">Rafael's rating
-        <input type="range" id="rating" min="100" max="1900" step="1" value="581">
-        <output id="ratingOut">581</output>
+      <label class="rating-box" for="rating">Rafael's rating
+        <input type="number" id="rating" min="100" max="2200" step="1" value="581" inputmode="numeric">
         <small id="rankOut"></small>
       </label>
     </div>
@@ -110,6 +112,11 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 
   <div class="score" id="score"></div>
 
+  <div class="panel">
+    <div class="hist-head"><h2>2,000 pretend tournaments</h2><p id="histNote">Running…</p></div>
+    <canvas id="h" role="img" aria-label="Bar chart: how many of 2,000 simulated tournaments ended with each point total for Rafael."></canvas>
+  </div>
+
 
   <section class="how" aria-label="How Swiss pairing works">
     <div class="step"><div class="n">1</div><div><h3>Everyone plays 7 games</h3><p>Lose a game and you still play the next round. Nobody goes home early.</p></div></div>
@@ -117,7 +124,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
     <div class="step"><div class="n">3</div><div><h3>Same points play each other</h3><p>Kids who keep losing meet kids who keep losing. Kids who keep winning meet each other. Soon everyone plays someone at their level.</p></div></div>
   </section>
 
-  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Move the slider to try a different starting rating.</p>
+  <p class="note">The ratings are real: all 225 kids on the 2nd Grade entry list as of Nov 19, 2026, with Rafael at 581. The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Type a different rating in the box to see what changes. The bar chart replays the tournament 2,000 times for that rating and counts Rafael's final points (a win is 1, a draw is ½). The gold bar is the tournament shown above.</p>
 </div>
 
 <script>
@@ -182,7 +189,8 @@ function simulate(rafRating, seed){
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 const cap=document.getElementById('cap'),scoreEl=document.getElementById('score');
 const playBtn=document.getElementById('play'),stepBtn=document.getElementById('step'),luckBtn=document.getElementById('luck');
-const slider=document.getElementById('rating'),rOut=document.getElementById('ratingOut'),rankOut=document.getElementById('rankOut');
+const slider=document.getElementById('rating'),rankOut=document.getElementById('rankOut');
+let RR=581, hist=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const D=3.6, END=ROUNDS*D, RES=0.72;
 const YMIN=0, YMAX=2000;
@@ -201,7 +209,7 @@ function draw(){
   const disp=tok('--display'),body=tok('--body');
   const X=i=>L+(i+.5)*(W-L-R)/ROUNDS, Y=v=>T+(YMAX-v)/(YMAX-YMIN)*(H-T-B);
   ctx.clearRect(0,0,W,H);
-  const rafR=+slider.value, ry=Y(rafR);
+  const rafR=RR, ry=Y(rafR);
 
   // zones
   ctx.fillStyle=C.bsoft;ctx.fillRect(L,Y(rafR+100),W-L-R,Y(rafR-100)-Y(rafR+100));
@@ -216,7 +224,7 @@ function draw(){
   for(let i=0;i<ROUNDS;i++){ctx.fillStyle=C.muted;ctx.fillText(narrow?`R${i+1}`:`Round ${i+1}`,X(i),H-12)}
   // zone words
   ctx.textAlign='left';ctx.font=`600 ${narrow?12:14}px ${disp}`;
-  ctx.fillStyle=C.blue;ctx.textAlign='right';ctx.fillText('just right',W-R-6,Y(rafR+100)-6>T+10?Y(rafR+100)-6:Y(rafR-100)+16);ctx.textAlign='left';
+  ctx.fillStyle=C.blue;ctx.fillText('just right',L+6,Y(rafR-100)+14<H-B-4?Y(rafR-100)+14:Y(rafR+100)-6);
   ctx.fillStyle=C.muted;
   if(Y(rafR+100)-T>60)ctx.fillText('harder ↑',L+6,T+14);
   if(H-B-Y(rafR-100)>40)ctx.fillText('easier ↓',L+6,H-B-8);
@@ -306,9 +314,9 @@ function describe(d){
 const half=n=>(Math.floor(n)||(n%1?'':'0'))+(n%1?'½':'');
 const pts=n=>n===1||n===.5?`${half(n)} point`:`${half(n)} points`;
 function updateText(cur,p){
-  const res=cur<ROUNDS&&p>=RES, key=`${cur}-${res}-${sim.rounds.map(r=>r.pts).join('')}-${slider.value}`;
+  const res=cur<ROUNDS&&p>=RES, key=`${cur}-${res}-${sim.rounds.map(r=>r.pts).join('')}-${RR}`;
   if(key===lastKey)return;lastKey=key;
-  const rs=sim.rounds,rafR=+slider.value;
+  const rs=sim.rounds,rafR=RR;
   let html;
   if(cur>=ROUNDS){
     const s=sim.score,lateWins=rs.slice(3).filter(r=>r.win).length;
@@ -333,7 +341,30 @@ function updateText(cur,p){
   scoreEl.innerHTML=cells+`<div class="total">Points<b>${half(total)}</b></div>`;
 }
 
-function run(){sim=simulate(+slider.value,seed);rOut.textContent=slider.value;rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey=''}
+function run(){sim=simulate(RR,seed);rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey='';drawHist()}
+const hc=document.getElementById('h'),hx=hc.getContext('2d'),histNote=document.getElementById('histNote');
+function runHist(){histNote.textContent='Running 2,000 tournaments…';hist=null;drawHist();
+  setTimeout(()=>{const c=Array(15).fill(0);for(let i=1;i<=2000;i++)c[Math.round(simulate(RR,i).score*2)]++;hist=c;
+    const mode=c.indexOf(Math.max(...c)),avg=c.reduce((a,n,k)=>a+n*k/2,0)/2000;
+    histNote.textContent=`Most often: ${pts(mode/2)} (${c[mode].toLocaleString()} times) · Average: ${avg.toFixed(1)} points`;drawHist()},30)}
+function drawHist(){
+  const dpr=devicePixelRatio||1,W=hc.clientWidth,H=hc.clientHeight;if(hc.width!==Math.round(W*dpr)||hc.height!==Math.round(H*dpr)){hc.width=W*dpr;hc.height=H*dpr}
+  hx.setTransform(dpr,0,0,dpr,0,0);hx.clearRect(0,0,W,H);if(!hist)return;
+  const narrow=W<520,L=narrow?40:56,R=10,T=22,B=44,body=tok('--body'),muted=tok('--muted'),grid=tok('--grid'),blue=tok('--blue'),gold=tok('--gold'),fg=tok('--fg');
+  const max=Math.max(...hist),step=[50,100,200,250,500,1000].find(s=>max/s<=6)||1000,top=Math.ceil(max/step)*step;
+  const Y=v=>T+(1-v/top)*(H-T-B),bw=(W-L-R)/15;
+  hx.font=`700 ${narrow?11:12}px ${body}`;hx.textBaseline='middle';hx.textAlign='right';hx.strokeStyle=grid;hx.lineWidth=1;hx.fillStyle=muted;
+  for(let v=0;v<=top;v+=step){const y=Y(v);hx.beginPath();hx.moveTo(L,y);hx.lineTo(W-R,y);hx.stroke();hx.fillText(v.toLocaleString(),L-6,y)}
+  const cur=Math.round(sim.score*2);
+  hist.forEach((n,k)=>{const x=L+k*bw+bw*.12,w=bw*.76,y=Y(n);
+    hx.fillStyle=k===cur?gold:blue;hx.globalAlpha=k%2?.55:1;if(k===cur)hx.globalAlpha=1;
+    if(n){hx.beginPath();hx.roundRect?hx.roundRect(x,y,w,Y(0)-y,[4,4,0,0]):hx.rect(x,y,w,Y(0)-y);hx.fill()}hx.globalAlpha=1;
+    hx.textAlign='center';hx.textBaseline='alphabetic';
+    if(n&&(!narrow||k%2===0||n>max*.05)){hx.fillStyle=fg;hx.font=`700 ${narrow?10:12}px ${body}`;hx.fillText(n,x+w/2,y-5)}
+    if(k%2===0||!narrow){hx.fillStyle=muted;hx.font=`700 ${narrow?11:13}px ${body}`;hx.fillText(half(k/2),x+w/2,H-B+18)}});
+  hx.fillStyle=muted;hx.font=`700 ${narrow?11:13}px ${body}`;hx.textAlign='center';hx.fillText('Rafael\'s points at the end (out of 7)',L+(W-L-R)/2,H-6);
+  hx.save();hx.translate(12,T+(H-T-B)/2);hx.rotate(-Math.PI/2);hx.fillText('Tournaments',0,0);hx.restore();
+}
 function frame(ts){if(!playing)return;const dt=Math.max(0,Math.min(.05,(ts-last)/1000));last=ts;t+=dt;
   if(t>=END){t=END;playing=false;setPlay()}draw();if(playing)requestAnimationFrame(frame)}
 function setPlay(){playBtn.textContent=playing?'❚❚ Pause':(t>=END?'▶ Watch the tournament':'▶ Keep going')}
@@ -342,12 +373,14 @@ playBtn.onclick=()=>{if(playing){playing=false;setPlay()}else start()};
 stepBtn.onclick=()=>{playing=false;if(t>=END)t=0;const cur=Math.floor(t/D),p=(t-cur*D)/D;
   t=p<RES?cur*D+RES*D+.2:Math.min(END,(cur+1)*D+RES*D+.2);if(t>=(ROUNDS-1)*D+RES*D+.2&&cur>=ROUNDS-1)t=END;setPlay();draw()};
 let tCount=1;luckBtn.onclick=()=>{seed=(Math.random()*1e9)|0;run();t=0;document.getElementById('tno').textContent=`Tournament #${++tCount}`;start()};
-slider.oninput=()=>{playing=false;run();t=END;setPlay();draw()};
-addEventListener('resize',()=>{size();draw()});
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
-new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-size();run();draw();
-document.fonts&&document.fonts.ready.then(draw);
+function setRating(){const v=parseInt(slider.value,10);if(!(v>=100&&v<=2200)){slider.value=RR;return}
+  if(v===RR)return;RR=v;playing=false;run();t=END;setPlay();draw();runHist()}
+slider.addEventListener('change',setRating);slider.addEventListener('keydown',e=>{if(e.key==='Enter')setRating()});
+addEventListener('resize',()=>{size();draw();drawHist()});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{draw();drawHist()});
+new MutationObserver(()=>{draw();drawHist()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+size();run();draw();runHist();
+document.fonts&&document.fonts.ready.then(()=>{draw();drawHist()});
 </script>
 
 </body>
