@@ -1074,5 +1074,17 @@
             document.getElementById('nav-email-tooltip').textContent = u + ' at gmail';
         })();
     </script>
+    <script>
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest('a[href]');
+            if (!a || !window.goatcounter || !window.goatcounter.count) return;
+            var card = a.closest('.dashboard-card');
+            var h3 = card && card.querySelector('h3');
+            var label = (h3 ? h3.textContent.trim() + ' | ' : 'nav | ') + a.textContent.trim();
+            window.goatcounter.count({ path: a.getAttribute('href'), title: label, event: true });
+        });
+    </script>
+    <script data-goatcounter="https://boquin.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
