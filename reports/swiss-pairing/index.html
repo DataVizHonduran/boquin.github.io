@@ -51,12 +51,17 @@ canvas{display:block;width:100%;height:440px}
 button.luck{background:var(--red);color:#fff;font-size:19px;padding:14px 16px}
 .btns,.settings{display:flex;flex-direction:column;gap:10px}
 @media (max-width:760px){
-  .wrap{gap:16px;padding-block:20px 40px}
+  .wrap{gap:16px;padding-block:20px calc(96px + env(safe-area-inset-bottom,0px))}
+  .eyebrow{font-size:11px}
   .stage,.controls{display:contents}
-  .wrap>header{display:contents}.eyebrow,h1{order:0}h1{margin:-12px 0 0}.chart-panel{order:1}.lede{order:2}.btns{order:3}.caption{order:4}.score{order:5}.legend{order:6}.settings{order:7}.hist-panel{order:8}.how{order:9}.note{order:10}
-  .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .btns .luck,.btns .tno{grid-column:1/-1}.btns .tno{margin-top:-2px}
-  .btns button{font-size:16px;padding:12px 10px}.btns button.luck{font-size:19px;padding:14px}
+  .wrap>header{display:contents}.eyebrow,h1{order:0}h1{margin:-12px 0 0}.chart-panel{order:1}.caption{order:2}.score{order:3}.lede{order:4}.legend{order:5}.settings{order:6}.hist-panel{order:7}.how{order:8}.note{order:9}
+  .caption{min-height:0;font-size:18px;padding:0 2px}
+  /* buttons live in a bar pinned to the bottom of the screen, always in thumb reach */
+  .btns{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:8px;
+    padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
+    background:var(--surface);box-shadow:0 -1px 0 var(--grid),0 -8px 24px -12px rgba(10,20,50,.45)}
+  .btns .tno{display:none}
+  .btns button,.btns button.luck{font-size:15px;padding:13px 6px;line-height:1.15}
   .settings{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--surface);border-radius:16px;padding:14px}
   .settings label[for=pname]{grid-column:1/-1;order:-1}
   .settings .rating-box{margin-top:0}.settings .rating-box input,.settings .rating-box select{max-width:none}
@@ -413,7 +418,9 @@ function drawHist(){
 }
 function frame(ts){if(!playing)return;const dt=Math.max(0,Math.min(.05,(ts-last)/1000));last=ts;t+=dt;
   if(t>=END){t=END;playing=false;setPlay()}draw();if(playing)requestAnimationFrame(frame)}
-function setPlay(){playBtn.textContent=playing?'❚❚ Pause':(t>=END?'▶ Watch the tournament':'▶ Keep going')}
+const small=matchMedia('(max-width:760px)');
+function setPlay(){playBtn.textContent=playing?'❚❚ Pause':small.matches?'▶ Play':(t>=END?'▶ Watch the tournament':'▶ Keep going')}
+small.addEventListener('change',setPlay);
 function start(){if(t>=END)t=0;playing=true;setPlay();last=performance.now();requestAnimationFrame(frame)}
 playBtn.onclick=()=>{if(playing){playing=false;setPlay()}else start()};
 stepBtn.onclick=()=>{playing=false;if(t>=END)t=0;const cur=Math.floor(t/D),p=(t-cur*D)/D;
@@ -429,7 +436,7 @@ slider.addEventListener('change',setRating);slider.addEventListener('keydown',e=
 addEventListener('resize',()=>{size();draw();drawHist()});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{draw();drawHist()});
 new MutationObserver(()=>{draw();drawHist()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-setYMax();size();run();draw();runHist();
+setYMax();size();run();draw();runHist();setPlay();
 document.fonts&&document.fonts.ready.then(()=>{draw();drawHist()});
 </script>
 
