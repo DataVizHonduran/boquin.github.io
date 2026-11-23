@@ -1,6 +1,6 @@
 # 🏛️ Federal Reserve District Monitor — November 2026 (Month to Date)
 
-**Coverage Period:** Month to date: November 2026 (5 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
+**Coverage Period:** Month to date: November 2026 (6 articles) | **Districts:** NY, RIC, ATL, STL, DAL, SF, MIN
 
 ---
 
@@ -10,29 +10,34 @@
 
 **TO:** Investment Committee
 **FROM:** Senior Economist
-**DATE:** November 16, 2026
+**DATE:** November 23, 2026
 **RE:** Analysis of Recent Federal Reserve District Research
 
-I have reviewed the latest publications from the regional banks. While some entries are purely methodological, several provide critical insights into labor market frictions, systemic risk, and the efficacy of the central bank's toolkit.
+I have reviewed the latest research cycle from the Fed districts. While some entries are purely methodological, several papers provide critical signals regarding structural labor constraints and systemic risk. Here are the most analytically significant takeaways:
 
-1. **[NY] Can Workers Predict Job Finding and Job Loss?**
-This research highlights a disconnect between individual worker perceptions and aggregate labor market data, suggesting that "perceived" unemployment differs from "actual" unemployment. For our models, this implies that consumer sentiment and labor hoarding may be driven by psychological biases rather than hard data, potentially delaying the transmission of policy tightening to the real economy.
+1. **[NY] Foreign Trends and U.S. Labor Force Dynamics:** The research highlights a precarious convergence of near-zero working-age population growth and declining net immigration. This suggests a structural shift toward a permanent labor shortage, which will likely sustain upward pressure on nominal wages and constrain potential GDP growth regardless of monetary policy.
 
-2. **[NY] Has U.S. Monetary Policy Really Improved? A 150-Year Perspective**
-The authors question whether the "Great Moderation" was a result of superior policy architecture or simply more favorable exogenous economic conditions. If the perceived success of modern Fed frameworks is largely due to luck, we must discount the reliability of historical precedents when forecasting the Fed's ability to manage the current inflationary cycle.
+2. **[NY] Worker Predictions on Job Finding/Loss:** This analysis suggests a decoupling between aggregate labor statistics and individual worker perceptions. If workers are miscalculating their employment probabilities, we may see unexpected volatility in consumer spending and "precautionary saving" behaviors that defy standard macroeconomic models.
 
-3. **[NY] How Do Banking Supervisors Deal with Failing Banks?**
-This report examines the lag and efficacy of supervisory interventions in identifying failing institutions. It suggests that systemic failures often stem from supervisory gaps, signaling that we should maintain a higher risk premium on regional banks where supervisory oversight may be lagging behind rapid asset devaluation.
+3. **[NY] 150-Year Perspective on Monetary Policy:** This provocative piece questions whether the "Great Moderation" was a result of superior policy or simply favorable exogenous conditions. If the Fed’s perceived mastery of the business cycle is largely a product of luck, we should apply a higher risk premium to current forward guidance and expect more policy errors in the current volatile regime.
 
-4. **[STL] Risky College Admissions and the (Mis)Allocation of Talent**
-This analysis explores how the admissions process may lead to a misallocation of human capital. From a long-term macro perspective, this suggests a potential drag on productivity growth (TFP), as talent is not being optimally channeled into the most economically productive sectors.
+4. **[NY] Banking Supervision and Failing Banks:** The findings indicate that bank failures are often a failure of the supervisory process rather than sudden market shocks. This implies that "hidden" systemic risks may be more prevalent than reported, suggesting we should maintain a defensive posture on regional banking exposures.
 
-**Synthesis:** The current research suggests a troubling gap between institutional perception and reality, whether in labor markets, supervisory effectiveness, or the historical success of monetary policy. We should adopt a more skeptical stance toward "soft landing" narratives and increase our hedge against systemic banking volatility.
+5. **[STL] Risky College Admissions and Talent Misallocation:** While focused on education, this addresses the long-term efficiency of human capital allocation. Misallocation of talent at the entry level creates a drag on total factor productivity (TFP), limiting the economy's ability to grow out of debt through innovation.
+
+**Synthesis:** The overarching theme is a transition from a period of "lucky" stability to one of structural fragility, characterized by a shrinking labor supply and potential supervisory blind spots. We should pivot our models to account for higher structural inflation and increased systemic volatility in the financial sector.
 
 ---
 
 ## New York Fed (2nd District)
-**Content Type:** Liberty Street Economics Blog | **New:** 0 of 3
+**Content Type:** Liberty Street Economics Blog | **New:** 0 of 4
+
+### (cached) [What Do Foreign Trends Tell Us About Future U.S. Labor Force Dynamics?](https://libertystreeteconomics.newyorkfed.org/2026/11/what-do-foreign-trends-tell-us-about-future-u-s-labor-force-dynamics/)
+**Published:** 2026-11-23 | **Authors:** 
+
+The paper examines the potential contraction of the U.S. labor supply due to declining native-born population growth and reduced net immigration. It draws parallels with other advanced economies to forecast future labor force dynamics.
+
+**Tags:** labor markets · employment · GDP growth · international · regional economy
 
 ### (cached) [Can Workers Predict Job Finding and Job Loss?](https://libertystreeteconomics.newyorkfed.org/2026/11/can-workers-predict-job-finding-and-job-loss/)
 **Published:** 2026-11-16 | **Authors:** 
@@ -79,5 +84,5 @@ This paper explores how the uncertainty and risk associated with college admissi
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 5
-- Total cache size: 5 items
+- Already cached: 6
+- Total cache size: 6 items
