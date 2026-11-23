@@ -145,8 +145,8 @@ em.pn,.legend em{font-style:normal}
   <div class="score" id="score"></div>
 
   <div class="panel hist-panel">
-    <div class="hist-head"><h2>2,000 pretend tournaments</h2><p id="histNote">Running…</p></div>
-    <canvas id="h" role="img" aria-label="Bar chart: how many of 2,000 simulated tournaments ended with each point total for Rafael."></canvas>
+    <div class="hist-head"><h2>10,000 pretend tournaments</h2><p id="histNote">Running…</p></div>
+    <canvas id="h" role="img" aria-label="Bar chart: how many of 10,000 simulated tournaments ended with each point total for Rafael."></canvas>
   </div>
 
 
@@ -156,7 +156,7 @@ em.pn,.legend em{font-style:normal}
     <div class="step"><div class="n">3</div><div><h3>Same points play each other</h3><p>Kids who keep losing meet kids who keep losing. Kids who keep winning meet each other. Soon everyone plays someone at their level.</p></div></div>
   </section>
 
-  <p class="note">The ratings are real: every kid on the King Registration entry list for the chosen grade section, as of Nov 19, 2026. Rafael starts at 710, his live rating on Glitchess after his Nov 15 tournament (the entry list still shows 581). The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Type a different rating in the box to see what changes. The bar chart replays the tournament 2,000 times for that rating and counts Rafael's final points (a win is 1, a draw is ½). The gold bar is the tournament shown above.</p>
+  <p class="note">The ratings are real: every kid on the King Registration entry list for the chosen grade section, as of Nov 19, 2026. Rafael starts at 710, his live rating on Glitchess after his Nov 15 tournament (the entry list still shows 581). The games haven't been played yet, so who wins each one is decided by chance, weighted by rating, the way chess ratings predict. Opponent names are made up. Unrated kids count as 400. The field will grow until the event closes registration. Draws come from the ratings too: they are likelier when two kids are close in rating, and when both are stronger (about 4 games in 100 for two 600s, 13 in 100 for two 1800s). Type a different rating in the box to see what changes. The bar chart replays the tournament 10,000 times for that rating and counts Rafael's final points (a win is 1, a draw is ½). The gold bar is the tournament shown above.</p>
 </div>
 
 <script>
@@ -381,7 +381,7 @@ function updateText(cur,p){
 
 function run(){sim=simulate(RR,seed);rankOut.textContent=`Starts as #${sim.rank} of ${N} kids`;lastKey='';drawHist()}
 const hc=document.getElementById('h'),hx=hc.getContext('2d'),histNote=document.getElementById('histNote');
-const HIST_N=2000;let histJob=0,worker=null;
+const HIST_N=10000;let histJob=0,worker=null;
 try{const src=`const ROUNDS=${ROUNDS};const NAMES=[];let FIELD=[],N=0;${mulberry.toString()}\n${simulate.toString()}
 onmessage=e=>{const{id,field,rr}=e.data;FIELD=field;N=field.length+1;const c=new Array(15).fill(0);
 for(let i=1;i<=${HIST_N};i++)c[Math.round(simulate(rr,i,0,true)*2)]++;postMessage({id,c})}`;
@@ -391,7 +391,7 @@ for(let i=1;i<=${HIST_N};i++)c[Math.round(simulate(rr,i,0,true)*2)]++;postMessag
 }catch(e){worker=null}
 function histDone(c){hist=c;const mode=c.indexOf(Math.max(...c)),avg=c.reduce((a,n,k)=>a+n*k/2,0)/HIST_N;
   histNote.textContent=`Most often: ${pts(mode/2)} (${c[mode].toLocaleString()} times) · Average: ${avg.toFixed(1)} points`;drawHist()}
-function runHist(){const id=++histJob;histNote.textContent='Running 2,000 tournaments…';hist=null;drawHist();
+function runHist(){const id=++histJob;histNote.textContent='Running 10,000 tournaments…';hist=null;drawHist();
   if(worker){worker.postMessage({id,field:FIELD,rr:RR});return}
   // fallback: small chunks so the page never freezes
   const c=new Array(15).fill(0);let i=1;
