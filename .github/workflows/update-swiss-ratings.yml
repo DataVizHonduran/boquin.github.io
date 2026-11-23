@@ -1,0 +1,35 @@
+name: Update Swiss Tournament Ratings
+
+on:
+  schedule:
+    - cron: '0 11 * 11,12 *'  # Daily 11:00 UTC (6am ET), Nov–Dec; script no-ops after Dec 13, 2026
+  workflow_dispatch:
+
+concurrency:
+  group: push-to-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Refresh ratings
+        run: |
+          pip install -q requests
+          python scripts/update_swiss_ratings.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add reports/swiss-pairing/index.html
+          git diff --staged --quiet || (git commit -m "Update Swiss tournament ratings - $(date +'%Y-%m-%d') 🤖" && git pull --rebase --autostash && git push)
