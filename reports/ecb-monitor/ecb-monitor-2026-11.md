@@ -1,43 +1,36 @@
 # 🇪🇺 ECB & Eurozone Central Bank Monitor — November 2026 (Month to Date)
 
-**Coverage Period:** Month to date: November 2026 (22 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
+**Coverage Period:** Month to date: November 2026 (23 articles) | **Institutions:** ECB, DBB, BDF, BDI, BDE, DNB, CBI
 
 ---
 
 ## 🔦 Today's Most Interesting Insights
 
-**Internal Memo: Eurozone Research Briefing**
-**Date:** 2026-11-23
-**From:** Senior Economist (Eurozone Coverage)
-**To:** Investment Committee / Trading Desk
+Team, I have reviewed the latest research cycle from the ECB and the Deutsche Bundesbank (DBB). While there is a heavy emphasis on financial plumbing and supervisory data, four key papers stand out as critical for our macro and policy projections.
 
-Following a review of the latest research from the ECB and National Central Banks (NCBs), I have distilled the most analytically significant papers. While much of the output is academic, several pieces provide critical signals regarding the transmission of monetary policy, the structural risks of the "non-bank" sector, and the evolution of inflation forecasting.
+1. **[ECB] Monetary policy in times of high public debt:** This paper addresses the "fiscal dominance" risk, analyzing how high sovereign debt levels may constrain the ECB's ability to fight inflation without triggering fiscal instability. It is a critical read for our sovereign risk models, as it suggests a tighter correlation between monetary tightening and fiscal fragility in high-debt member states.
 
-1. **[ECB] Deep-π*: a neural network estimate of trend inflation**
-This paper introduces a machine-learning approach to identify the drivers of trend inflation rather than treating it as a latent random walk. For us, this is a game-changer for forecasting; if the ECB is shifting toward neural-network-based trend estimates, they may react more aggressively to structural shifts in inflation that traditional models miss.
+2. **[ECB] Deep-π*: a neural network estimate of trend inflation:** By moving away from simple random-walk models to a neural network approach, the ECB is attempting to better identify the structural drivers of trend inflation. This suggests the Governing Council is refining its "neutral" inflation target, which could lead to a shift in the terminal rate expectations if the trend is found to be structurally higher than 2%.
 
-2. **[ECB] Monetary policy, segmented capital markets and innovation**
-The research identifies a mechanism where contractionary policy disproportionately hurts innovation in segmented markets. This suggests that "higher for longer" doesn't just slow GDP—it risks a long-term erosion of Eurozone competitiveness by choking off R&D and capital investment in less-integrated regions.
+3. **[ECB] The macroeconomic effects of defence spending:** This study moves beyond the GDP multiplier to examine the qualitative impact of defense spending across the EU. As member states pivot toward permanent higher defense budgets, this research helps us quantify whether this spending is purely "crowding out" private investment or providing a genuine productivity boost.
 
-3. **[DBB] When nonbanks dampen and when they amplify: A yield-curve view of the nonbank lending channel**
-The Bundesbank highlights how non-bank financial intermediaries (NBFIs) can either mitigate or exacerbate the transmission of monetary policy depending on the yield curve's slope. This is critical for our duration positioning, as it suggests the "transmission lag" of ECB rate changes is non-linear and highly dependent on the health of the shadow banking sector.
+4. **[DBB] Tariffs, cohort redistribution, and the world real interest rate:** This paper explores the link between protectionist trade policies and the global natural rate of interest ($r^*$). Given the current geopolitical climate, the insight that tariffs can shift the global real rate is vital for our long-term yield curve projections and our assessment of "deglobalization" as an inflationary force.
 
-4. **[ECB] Monetary policy in times of high public debt**
-This piece addresses the "fiscal dominance" fear, analyzing how high sovereign debt levels constrain a central bank's ability to fight inflation. It signals a growing internal concern at the ECB that fiscal profligacy in member states could eventually force a compromise in the inflation target to prevent sovereign insolvency.
+5. **[ECB] Monetary policy, segmented capital markets and innovation:** The authors identify a mechanism where contractionary policy disproportionately hits innovation due to capital market segmentation. This implies that the "transmission lag" of ECB hikes may be more severe for the high-growth tech sector than for traditional industry, potentially dampening long-term Eurozone potential growth.
 
-5. **[ECB] The macroeconomic effects of defence spending: what impact beyond GDP?**
-Moving beyond simple output multipliers, this study examines the qualitative impact of the current defense ramp-up across the EU. It suggests that while defense spending boosts nominal GDP, it may crowd out more productive private investment, potentially lowering the long-term potential growth rate of the bloc.
-
-6. **[DBB] Anatomy of a safe asset: Bund market structure and reform**
-This analysis of the Bund market's plumbing is essential for our rates desk. By dissecting the structural vulnerabilities of the Eurozone's primary safe asset, the DBB is flagging potential liquidity frictions that could lead to volatility spikes in the sovereign curve during periods of stress.
-
-**Synthesis:**
-The collective research indicates a shift toward "granular" monitoring, using AI and non-traditional data to track inflation and financial stability. We are seeing an increasing preoccupation with the "non-bank" sector and fiscal-monetary tensions, suggesting the ECB is bracing for a regime where traditional policy levers are less effective due to structural fragmentation and high sovereign debt.
+**Synthesis:** The research indicates a shift toward integrating non-linear tools (ML/Neural Networks) to define inflation trends and a heightened preoccupation with the intersection of high public debt and monetary transmission. We should expect a policy framework that is increasingly sensitive to fiscal fragility and structural "shocks" from defense and trade policy.
 
 ---
 
 ## European Central Bank
-**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 15
+**Content Type:** Working Papers, Research Bulletin & Blog | **New:** 0 of 16
+
+### (cached) [Looking beyond the baseline: how scenario synthesis helps assess risks](https://www.ecb.europa.eu//press/blog/date/2026/html/ecb.blog20261124~6486644873.en.html)
+**Published:** 2026-11-24 | **Authors:** 
+
+The paper explores the use of scenario synthesis to move beyond baseline projections in risk assessment. It argues that integrating multiple plausible futures allows for a more robust evaluation of systemic vulnerabilities and policy resilience.
+
+**Tags:** financial stability · monetary policy · geopolitics · climate & transition · GDP growth
 
 ### (cached) [The geography of financial frictions](https://www.ecb.europa.eu//pub/pdf/scpwps/ecb.wp3312~6f0e0bfceb.en.pdf)
 **Published:** 2026-11-23 | **Authors:** 
@@ -200,5 +193,5 @@ This paper investigates the non-bank lending channel and how non-bank financial 
 
 ## Cache Update Summary
 - Items added: 0
-- Already cached: 22
-- Total cache size: 22 items
+- Already cached: 23
+- Total cache size: 23 items
