@@ -32,7 +32,7 @@ jobs:
             && python scripts/team_stats_to_table.py /tmp/team_stats.json /tmp/ps11_table.html \
             && python scripts/chess_club_stats.py \
             --school PS11 --data-url file:///tmp/ps11_table.html --x ck_rating --y uscf_rating \
-            --min-x 900 --z-thresh 1.5 \
+            --min-x 900 --z-thresh 1.5 --no-names \
             --out reports/chess-club/fragment.html; then
             {
               echo '<!DOCTYPE html>'

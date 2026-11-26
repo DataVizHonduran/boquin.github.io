@@ -334,7 +334,7 @@ svg.appendChild(el('path', {{ class: 'band-fill', d: bandPath }}));
 svg.appendChild(el('path', {{ class: 'reg-line', d: 'M ' + band.map(b => `${{sx(b.x)}},${{sy(b.yhat)}}`).join(' L ') }}));
 
 function showTip(ev, p, extra) {{
-  tooltip.innerHTML = `<div class="t-name">${{p.name}}</div><div class="t-row">${{xlabel}} ${{p.x}} · ${{ylabel}} ${{p.y}}</div>${{extra || ''}}`;
+  tooltip.innerHTML = `${{p.name ? '<div class="t-name">' + p.name + '</div>' : ''}}<div class="t-row">${{xlabel}} ${{p.x}} · ${{ylabel}} ${{p.y}}</div>${{extra || ''}}`;
   tooltip.style.opacity = 1;
   const wrapRect = svg.parentElement.getBoundingClientRect();
   tooltip.style.left = (ev.clientX - wrapRect.left + 12) + 'px';
@@ -360,18 +360,19 @@ outliers.forEach(p => {{
 
 
 def render_html(clean, outliers, band, xkey, ykey, *, title, subtitle, meta,
-                 xmin=None) -> str:
+                 xmin=None, no_names=False) -> str:
     xlabel = LABELS.get(xkey, xkey)
     ylabel = LABELS.get(ykey, ykey)
     data = {
-        "clean": [{"name": p["name"], "x": p[xkey], "y": p[ykey],
+        "clean": [{"name": "" if no_names else p["name"], "x": p[xkey], "y": p[ykey],
                    "hl": is_highlighted(p["name"])} for p in clean],
-        "outliers": [{"name": p["name"], "x": p[xkey], "y": p[ykey],
+        "outliers": [{"name": "" if no_names else p["name"], "x": p[xkey], "y": p[ykey],
                       "hl": is_highlighted(p["name"])} for p in outliers],
         "band": band,
     }
+    highlight_label = "Highlighted player" if no_names else "Rafael Boquin"
     highlight_legend = (
-        '<div class="legend-item"><span class="swatch-dot-highlight"></span> Rafael Boquin</div>'
+        f'<div class="legend-item"><span class="swatch-dot-highlight"></span> {highlight_label}</div>'
         if any(is_highlighted(p["name"]) for p in clean + outliers) else ""
     )
     fit = fit_linreg(clean, xkey, ykey)
@@ -407,6 +408,7 @@ def main():
     ap.add_argument("--min-x", type=float, default=None, help="Drop rows with x below this value")
     ap.add_argument("--min-y", type=float, default=None, help="Drop rows with y below this value")
     ap.add_argument("--z-thresh", type=float, default=1.5, help="Standardized-residual cutoff for outlier trim")
+    ap.add_argument("--no-names", action="store_true", help="Omit player names from tooltips/legend")
     ap.add_argument("--out", required=True, help="Output HTML path")
     args = ap.parse_args()
 
@@ -442,7 +444,7 @@ def main():
     out_html = render_html(
         clean, outliers, band, args.x, args.y,
         title=f"{xlabel} vs. {ylabel}", subtitle=subtitle, meta=meta,
-        xmin=args.min_x,
+        xmin=args.min_x, no_names=args.no_names,
     )
     with open(args.out, "w") as f:
         f.write(out_html)
