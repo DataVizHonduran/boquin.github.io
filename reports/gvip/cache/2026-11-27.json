@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-27",
+  "holdings_as_of": "2026-11-27",
+  "holdings": [
+    {
+      "rank": 1,
+      "ticker": "SGI",
+      "name": "Somnigroup International Inc.",
+      "weight": 2.22,
+      "shares": 175549
+    },
+    {
+      "rank": 2,
+      "ticker": "APG",
+      "name": "APi Group Corporation",
+      "weight": 2.21,
+      "shares": 245769
+    },
+    {
+      "rank": 3,
+      "ticker": "RVMD",
+      "name": "Revolution Medicines, Inc.",
+      "weight": 2.2,
+      "shares": 62963
+    },
+    {
+      "rank": 4,
+      "ticker": "COMP",
+      "name": "Compass, Inc.",
+      "weight": 2.18,
+      "shares": 1033100
+    },
+    {
+      "rank": 5,
+      "ticker": "ASND",
+      "name": "Ascendis Pharma A/S",
+      "weight": 2.13,
+      "shares": 38665
+    },
+    {
+      "rank": 6,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "weight": 2.1,
+      "shares": 29782
+    },
+    {
+      "rank": 7,
+      "ticker": "SPOT",
+      "name": "Spotify Technology S.A.",
+      "weight": 2.1,
+      "shares": 17175
+    },
+    {
+      "rank": 8,
+      "ticker": "ABVX",
+      "name": "ABIVAX Soci\u00c3\u00a9t\u00c3\u00a9 Anonyme",
+      "weight": 2.1,
+      "shares": 125662
+    },
+    {
+      "rank": 9,
+      "ticker": "UTHR",
+      "name": "United Therapeutics Corporation",
+      "weight": 2.1,
+      "shares": 17872
+    },
+    {
+      "rank": 10,
+      "ticker": "MELI",
+      "name": "MercadoLibre, Inc.",
+      "weight": 2.09,
+      "shares": 7186
+    },
+    {
+      "rank": 11,
+      "ticker": "MA",
+      "name": "Mastercard Incorporated",
+      "weight": 2.08,
+      "shares": 15878
+    },
+    {
+      "rank": 12,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "weight": 2.08,
+      "shares": 24637
+    },
+    {
+      "rank": 13,
+      "ticker": "NSC",
+      "name": "Norfolk Southern Corporation",
+      "weight": 2.07,
+      "shares": 31909
+    },
+    {
+      "rank": 14,
+      "ticker": "DHR",
+      "name": "Danaher Corporation",
+      "weight": 2.06,
+      "shares": 45699
+    },
+    {
+      "rank": 15,
+      "ticker": "UNP",
+      "name": "Union Pacific Corporation",
+      "weight": 2.05,
+      "shares": 34595
+    },
+    {
+      "rank": 16,
+      "ticker": "INTC",
+      "name": "Intel Corporation",
+      "weight": 2.05,
+      "shares": 189411
+    },
+    {
+      "rank": 17,
+      "ticker": "TLN",
+      "name": "Talen Energy Corporation",
+      "weight": 2.04,
+      "shares": 29207
+    },
+    {
+      "rank": 18,
+      "ticker": "BRK.B",
+      "name": "Berkshire Hathaway Inc.",
+      "weight": 2.04,
+      "shares": 17722
+    },
+    {
+      "rank": 19,
+      "ticker": "SPGI",
+      "name": "S&P Global Inc.",
+      "weight": 2.04,
+      "shares": 22280
+    },
+    {
+      "rank": 20,
+      "ticker": "NU",
+      "name": "Nu Holdings Ltd.",
+      "weight": 2.03,
+      "shares": 828599
+    },
+    {
+      "rank": 21,
+      "ticker": "FWONK",
+      "name": "Formula One Group",
+      "weight": 2.03,
+      "shares": 95541
+    },
+    {
+      "rank": 22,
+      "ticker": "AER",
+      "name": "AerCap Holdings N.V.",
+      "weight": 2.03,
+      "shares": 60651
+    },
+    {
+      "rank": 23,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "weight": 2.03,
+      "shares": 16773
+    },
+    {
+      "rank": 24,
+      "ticker": "LLY",
+      "name": "Eli Lilly and Company",
+      "weight": 2.03,
+      "shares": 7339
+    },
+    {
+      "rank": 25,
+      "ticker": "APH",
+      "name": "Amphenol Corporation",
+      "weight": 2.02,
+      "shares": 139290
+    }
+  ],
+  "performance": {
+    "price": 152.21,
+    "aum": 535788160,
+    "ret_1m": -6.94,
+    "ret_3m": -10.73,
+    "ret_ytd": -2.56,
+    "ret_1y": null,
+    "week52_low": 138.73,
+    "week52_high": 192.13,
+    "avg_volume": 9806,
+    "as_of": "2026-11-27"
+  },
+  "sectors": {
+    "realestate": 1.59,
+    "consumer_cyclical": 11.57,
+    "technology": 31.21,
+    "communication_services": 11.69,
+    "financial_services": 16.21,
+    "utilities": 4.33,
+    "industrials": 14.05,
+    "healthcare": 9.34
+  }
+}
